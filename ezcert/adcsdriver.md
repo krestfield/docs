@@ -6,25 +6,9 @@ nav_order: 2
 ---
 # ADCS Driver
 
-To interface with ADCS (Active Directory Certificate Services) 
+This component is the interface to ADCS (Active Directory Certificate Services) 
 
-The ADCS Driver 
-
-
-
-```java
-EzCertClient client = new EzCertClient("127.0.0.1", "username", "password");
-String b64CertData = client.requestCertP10(csr, "testca1");
-
-```
-
-
-
-`EzCertClient client = new EzCertClient("127.0.0.1", "username", "password");`
-
-`client.getCert()`
-
-
+As any driver can process requests to a CA you can install on several servers in the same, or different domains
 
 
 
@@ -34,19 +18,33 @@ String b64CertData = client.requestCertP10(csr, "testca1");
 - Windows Server 2019
 - .NET Framework 4.8
 
+The server hosting the driver must be in the same domain as the CA
 
-
+Ensure that port 4474 is open to wherever the database is hosted
 
 
 ## Installation
 
-Download the installer from [here](https://www.krestfield.com) 
+1. Download the installer from [here](https://www.krestfield.com) 
 
-Unzip onto a location on a supported server (see [Requirements](## Requirements)).  This server must be in the domain for the CA you wish to connect to.  
+2. Unzip onto a location on a supported server (see [Requirements](## Requirements)) 
 
-Run the .msi installer
+3. Run the .msi installer
 
-Ensure that port 4474 is open to wherever the database is hosted
+   
+
+## Configuration
+
+At this point, the agent is installed but needs to be configured to connect to the EzCert instance
+We do this by running a powershell script
+Note: This only has to be done on first install.  For upgrades (or if you are just re-installing) skip to step 10. 
+If you change the user the service is running under, or 
+
+   
+
+   
+
+
 
 
 

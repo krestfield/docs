@@ -8,9 +8,7 @@ has_children: true
 
 Making the issuance and management of certificates easy
 
-
-
-
+Release Date: 18th January 2021
 
 
 
@@ -29,14 +27,15 @@ Making the issuance and management of certificates easy
 ### Interfaces
 
 - Complete Restful API for all certificate management and administative operations
+- Web Management and User Consoles
 - PowerShell
 - .NET Interface
 - Java Interface
 
 
 
-```java
-EzCertClient client = new EzCertClient("127.0.0.1", "username", "password");
-String b64CertData = client.requestCertP10(csr, "testca1");
+### Plugins
 
-```
+- JKS Manager
+- IIS Manager
+

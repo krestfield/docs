@@ -1,12 +1,9 @@
-```
 ---
 layout: default
 title: ADCS Driver
 parent: EzCert
 nav_order: 2
 ---
-```
-
 # ADCS Driver
 
 To interface with ADCS (Active Directory Certificate Services) 

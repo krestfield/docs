@@ -1,3 +1,8 @@
+---
+layout: default
+title: Knowledge Base
+nav_order: 1
+---
 ## Welcome to the Krestfield Knowledge Base
 
 Here you can find information on products, integration guides, white papers, tips and tricks
@@ -19,4 +24,4 @@ Follow the links below for information on specific products or use the search op
 
 ### Support or Contact
 
-For more details on any of these products, contact [support](support@krestfield.com) 
+For more details on any of these products, contact support@krestfield.com

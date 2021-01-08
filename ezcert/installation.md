@@ -1,3 +1,9 @@
+---
+layout: default
+title: Windows Installation
+parent: EzCert
+nav_order: 1
+---
 # Windows Installation
 
  

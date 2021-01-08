@@ -11,10 +11,10 @@ nav_order: 3
 A Local Certificate Issuer enables you to issue certificates from an EzCert controlled CA
 
 A Certificate Issuer combines a CA (Certificate Authority) and Certificate Profile  
-  
+
   
 
-1. Create a Local CA Configuration  
+### 1. Create a Local CA Configuration  
    Select **Local CA** | **Configuration** from the menu
 
 <img src=".\images\new_localca_issuer_config.png" alt="image-20210108165700507" style="zoom:67%;" />
@@ -24,10 +24,10 @@ A Certificate Issuer combines a CA (Certificate Authority) and Certificate Profi
 <img src=".\images\new_localca_issuer_config2.png" alt="image-20210108165822066" style="zoom:70%;" />
 
    Enter details for *CA Name* and *Subject DN*.  Alter the algorithms and key sizes if required.  Click **Create**  
-   
+
    
 
-2. Create a Certificate Profile
+### 2. Create a Certificate Profile
 
    Select **Local CA** | **Profiles** from the menu
 
@@ -47,13 +47,13 @@ A Certificate Issuer combines a CA (Certificate Authority) and Certificate Profi
 
    Select the Enhanced Key Usages - these will be applied to the issued certificate  
 
-   See [RFC5280]([RFC 5280 - Internet X.509 Public Key Infrastructure Certificate and Certificate Revocation List (CRL) Profile (ietf.org)](https://tools.ietf.org/html/rfc5280)) for more details on key usages
+   See [RFC5280](https://tools.ietf.org/html/rfc5280) for more details on key usages
 
    Click **Add**  
-   
+
    
 
-3. Create a Certificate Issuer
+### 3. Create a Certificate Issuer
 
    Select **Certificate Issuers** from the menu
 
@@ -61,7 +61,7 @@ A Certificate Issuer combines a CA (Certificate Authority) and Certificate Profi
 
    Click **Add New Issuer**
 
-<img src="C:\Users\darre\Documents\_mystuff\development\_Krestfield Products\docs\ezcert\images\new_localca_issuer2.png" alt="image-20210108170947087" style="zoom:67%;" />
+<img src=".\images\new_localca_issuer2.png" alt="image-20210108170947087" style="zoom:67%;" />
 
    From the drop down select **Local CA** and click **Next**
 

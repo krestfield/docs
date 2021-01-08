@@ -175,13 +175,13 @@ Where ``[Your IP Address]`` is the address chosen during the installation e.g.
 
 You should see an error such as:
 
-<img src="C:\Users\darre\Documents\_mystuff\development\_Krestfield Products\docs\ezcert\images\sslconnectionerror.png" alt="image-20210108155429427" style="zoom:67%;" />
+<img src=".\images\sslconnectionerror.png" alt="image-20210108155429427" style="zoom:67%;" />
 
 This is because we have not yet configured a valid SSL certificate.  For now, click **Advanced** then click **Continue to 127.0.0.1 (unsafe)** 
 
 You should see the login screen:
 
-<img src="C:\Users\darre\Documents\_mystuff\development\_Krestfield Products\docs\ezcert\images\login.png" alt="image-20210108155637774" style="zoom:67%;" />
+<img src=".\images\login.png" alt="image-20210108155637774" style="zoom:67%;" />
 
 Enter the **username** and **password** for the First Admin User that you provided during the installation and click **Login**
 
@@ -203,15 +203,15 @@ For test purposes you may continue to use the provided SSL certificate. To enabl
 
 in order to open it:
 
-<img src="C:\Users\darre\Documents\_mystuff\development\_Krestfield Products\docs\ezcert\images\def_ssl_root.png" alt="image-20210108162250620" style="zoom:67%;" />
+<img src=".\images\def_ssl_root.png" alt="image-20210108162250620" style="zoom:67%;" />
 
 Click Install **Certificate**... and select **Current User**
 
-<img src="C:\Users\darre\Documents\_mystuff\development\_Krestfield Products\docs\ezcert\images\root_cert_store.png" alt="image-20210108162426401" style="zoom:67%;" />
+<img src=".\images\root_cert_store.png" alt="image-20210108162426401" style="zoom:67%;" />
 
 Select **Place all certificates in the following store** and browse to **Trusted Root Certification Authorities**, click **Next** and then **Finish**
 
-<img src="C:\Users\darre\Documents\_mystuff\development\_Krestfield Products\docs\ezcert\images\import_root_warning.png" alt="image-20210108162618663" style="zoom:67%;" />
+<img src=".\images\import_root_warning.png" alt="image-20210108162618663" style="zoom:67%;" />
 
 Click **Yes**
 
@@ -262,13 +262,13 @@ This service interfaces with your Microsoft ADCS instance.  More details on this
 
 Open the Windows Services snapin and search for the Krestfield EzCert Service:
 
-<img src="C:\Users\darre\Documents\_mystuff\development\_Krestfield Products\docs\ezcert\images\ezcert_service.png" alt="image-20210108160848515" style="zoom:80%;" />
+<img src=".\images\ezcert_service.png" alt="image-20210108160848515" style="zoom:80%;" />
 
 Attempt to restart this service and monitor to ensure it starts OK (press F5 to refresh the view). Note, it can take several seconds for the service to startup 
 
 Open the **Windows Event Viewer** and navigate to **Windows Logs** | **Application**
 
-<img src="C:\Users\darre\Documents\_mystuff\development\_Krestfield Products\docs\ezcert\images\event_viewer_ezcertservice.png" alt="image-20210108161039972" style="zoom:80%;" />
+<img src=".\images\event_viewer_ezcertservice.png" alt="image-20210108161039972" style="zoom:80%;" />
 
 
 

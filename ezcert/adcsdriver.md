@@ -46,5 +46,39 @@ If you change the user the service is running under, or
 
 
 
+## File Logging
+
+To enable more logging, set the following environment variable to true:
+
+``ADCS_DRIVER_FILE_LOGGING``
+
+e.g.  
+![image-20201222143624266](C:\Users\darre\Documents\_mystuff\development\_Krestfield Products\docs\ezcert\images\loggingenvvar.png)
+
+Log file will be written to:
+
+``Environment.SpecialFolder.CommonApplicationData \Krestfield\AdcsAgent``
+
+Which is here in Windows Server 2019
+
+``C:\ProgramData\Krestfield\AdcsAgent\log.txt``
+
+
+
+Note: This log provides debug level, verbose output and may be useful for tracing issues but the log file will continue to grow.  You should therefore, switch this level of logging off when not required
+
+ 
+
+## Threading
+
+By default, the driver creates a number of threads (typically 5) to process certificate requests. But this value can be tuned, if required
+
+To change this value, set the following environment variable to the number of threads required:  
+
+``ADCS_DRIVER_THREADS``
+
+e.g.  
+![image-20201222143722766](C:\Users\darre\Documents\_mystuff\development\_Krestfield Products\docs\ezcert\images\threadsenvvar.png) 
+
 
 

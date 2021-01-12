@@ -6,7 +6,7 @@ has_children: true
 ---
 # EzCert
 
-Making the issuance and management of certificates easy
+Enabling the automation of certificates and making management easy
 
 Release Date: 18th January 2021
 

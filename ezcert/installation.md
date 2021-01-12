@@ -36,7 +36,7 @@ You must have local Administrator privileges on the system
 
 Download the zip file from here: 
 
-https://krestfield.s3.eu-west-2.amazonaws.com/ezcert/v1.0.1/ezcert.zip  
+[https://krestfield.s3.eu-west-2.amazonaws.com/ezcert/v1.0.1/ezcert.zip](https://krestfield.s3.eu-west-2.amazonaws.com/ezcert/v1.0.1/ezcert.zip)  
 
 
 

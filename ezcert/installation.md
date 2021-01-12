@@ -1,3 +1,10 @@
+---
+layout: default
+title: Windows Installation
+parent: EzCert
+nav_order: 1
+---
+
 # Windows Installation
 
  
@@ -54,7 +61,7 @@ At the prompt type:
 
 Or, if you wish to produce the longer SHA-256 hash, type:
 
-``certutil -hashfile ezcert.zip sha1``
+``certutil -hashfile ezcert.zip sha256``
 
 E.g.
 

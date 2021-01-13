@@ -11,7 +11,9 @@ nav_order: 1
 
 The following steps outline the steps required to install the EzCert on a single system
 
-If the pre-requisites are in place, the entire installation should not take more than 10 minutes
+If the pre-requisites are in place, the entire installation should not take more than 10 minutes  
+
+If you don't want to read any details  right now and just want to quickly download to try things out - see the [Quick Installation Guide](quick_installation_guide.html)
 
 
 
@@ -74,9 +76,9 @@ CertUtil: -hashfile command completed successfully.
 
 Compare the hash value produced with the following checksums:
 
-SHA1: ``143e93265c1d9dac7c8a58119d7dfad1eaff838b``
+SHA1: ``080e45f71675bd3162c72f9542fea05e067cd710``
 
-SHA256: ``7916f6ae820e6f491ba00c71fbd8f1f7c0e6fcf0447bb3e8cc57753238234b74``
+SHA256: ``1d4344cbbafc2c1179506e290f989738665baf7e19e864d5af0e8d094022acb6``
 
 
 

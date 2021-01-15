@@ -5,7 +5,7 @@ parent: EzCert
 nav_order: 2
 ---
 
-# Quick Windows Installation
+# EzCert Quick Windows Installation
 
  
 

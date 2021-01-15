@@ -9,9 +9,13 @@ nav_order: 2
 
  
 
-If you want to get up and running quickly - just go through the following 10 steps
+If you want to get up and running quickly - just go through the 10 steps listed below  
 
-More detailed information can be found [here](.\installation.html) - including how to verify the download and troubleshooting. It is recommended that you read through this (when you have more time) and before you install EzCert on any production systems 
+Ensure you have .NET v4.8 installed and have the required Administrator privileges  
+
+You can install this on Windows Server 2016 or 2019 and also Windows 10. Although you can install the ADCS Driver component (to interface to a Microsoft CA) it will not function as it requires server based components. All other functions, including the internal CA and REST API will work fine
+
+More detailed information can be found [here](.\installation.html) - including how to verify the download and account details etc. It is recommended that you read through this (when you have more time) and before you install EzCert on any production systems 
 
 But for now...
 
@@ -19,9 +23,7 @@ But for now...
 
 1. [Click here to download](https://krestfield.s3.eu-west-2.amazonaws.com/ezcert/v1.0.1/ezcert.zip) and unzip on to the local drive
 
-2. Open a PowerShell as **Administrator** and navigate to the **.\install** directory of the unzipped folder
-
-   Run ``.\install.ps1``
+2. Open a PowerShell as **Administrator**, navigate to the **.\install** directory of the unzipped folder and run ``.\install.ps1``
 
 3. Say yes (**y**) to download java and the database binaries
 
@@ -41,4 +43,6 @@ But for now...
 
 
 
-To temporarily remove any browser TLS warnings, install this file ``.\ezcert\config\sslcerts\dbssl_root.cer`` into your local certificate trust store
+To temporarily remove any browser TLS warnings, install this file ``.\ezcert\config\sslcerts\dbssl_root.cer`` into the **Local Machine**'s  **Trusted Root Certification Authorities** store  
+
+If you hit any issues, see the troubleshooting guide [here](install_troubleshooting.html)

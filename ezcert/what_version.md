@@ -1,4 +1,11 @@
-# What Version am I Running
+---
+layout: default
+title: What Version of EzCert
+parent: EzCert
+nav_order: 10
+---
+
+# What Version of EzCert am I Running
 
 
 

@@ -86,7 +86,7 @@ Click this entry and select **Approve**
 
 
 
-Note that when configuring a Microsoft Certificate Issuer you must select the agent that you want to process requests for that CA
+Note that when configuring a Certificate Issuer for a Microsoft CA you must select the agent that you want to process requests for that CA
 
    
 
@@ -97,7 +97,7 @@ To enable more logging, set the following environment variable to true:
 ``ADCS_DRIVER_FILE_LOGGING``
 
 e.g.  
-![image-20201222143624266](C:\Users\darre\Documents\_mystuff\development\_Krestfield Products\docs\ezcert\images\loggingenvvar.png)
+![image-20201222143624266](.\images\loggingenvvar.png)
 
 And restart the Krestfield Adcs Driver from the services snapin
 
@@ -124,7 +124,7 @@ To change this value, set the following environment variable to the number of th
 ``ADCS_DRIVER_THREADS``
 
 e.g.  
-![image-20201222143722766](C:\Users\darre\Documents\_mystuff\development\_Krestfield Products\docs\ezcert\images\threadsenvvar.png) 
+![image-20201222143722766](.\images\threadsenvvar.png) 
 
 Restart the Krestfield Adcs Driver from the services snapin
 

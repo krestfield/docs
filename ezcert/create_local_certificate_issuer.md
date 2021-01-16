@@ -2,7 +2,7 @@
 layout: default
 title: Create a Local Certificate Issuer
 parent: EzCert
-nav_order: 3
+nav_order: 6
 ---
 # Create a Local Certificate Issuer
 
@@ -15,7 +15,7 @@ A Certificate Issuer combines a CA (Certificate Authority) and Certificate Profi
   
 
 ### 1. Create a Local CA Configuration  
-   Select **Local CA** | **Configuration** from the menu
+   Select **Local CA** > **Configuration** from the menu
 
 <img src=".\images\new_localca_issuer_config.png" alt="image-20210108165700507" style="zoom:67%;" />
 
@@ -29,7 +29,7 @@ A Certificate Issuer combines a CA (Certificate Authority) and Certificate Profi
 
 ### 2. Create a Certificate Profile
 
-   Select **Local CA** | **Profiles** from the menu
+   Select **Local CA** > **Profiles** from the menu
 
 <img src=".\images\new_localca_profiles.png" alt="image-20210108170056632" style="zoom: 67%;" />
 
@@ -77,7 +77,7 @@ The Certificate Issuer is now ready to issue certificates. However, you must fir
 
 
 
-See [Set User Permissions on a Certificate Issuer](set_user_permissions_on_cert_issuer.html)
+See [Set User Permissions on a Certificate Issuer](set_permissions_on_cert_issuer.html)
 
 
 

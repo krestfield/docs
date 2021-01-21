@@ -47,9 +47,7 @@ You must have local Administrator privileges on the system
 
 ### 1.  Download the Installer
 
-Download the zip file from here: 
-
-[https://krestfield.s3.eu-west-2.amazonaws.com/ezcert/v1.0.1/ezcert.zip](https://krestfield.s3.eu-west-2.amazonaws.com/ezcert/v1.0.1/ezcert.zip)  
+Contact support for a download link. If you have an FTP account it will be placed in your download area
 
 
 

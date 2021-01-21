@@ -36,13 +36,13 @@ Login with username: **admin** password: **password**
 
 The image comes pre-configured with a Local CA and profiles for TLS and Code Signing - more can be easily added  
 
-From the menu, choose **Request** | **DN Request**
+From the menu, choose **Request  > DN Request**
 
 <img src=".\images\image-20210121134446386.png" alt="image-20210121134446386" style="zoom:67%;" />
 
 Enter a value for the **DN** and enter a **password** (the issuer and CSR generator fields should be pre-populated for now). If you want to add any SANs (Subject Alternative Names, click the drop down and add). Then click **Request Certificate**  
 
-<img src="C:\Users\darre\Documents\_mystuff\development\_Krestfield Products\docs\ezcert\images\first_cert_issued.png" alt="image-20210121134641020" style="zoom:67%;" />
+<img src=".\images\first_cert_issued.png" alt="image-20210121134641020" style="zoom:67%;" />
 
 Click **Download PKCS12** and save the file. Then click **More** to view further details about the certificate  
 

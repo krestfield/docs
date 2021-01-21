@@ -2,7 +2,7 @@
 layout: default
 title: Get the Docker Image
 parent: EzCert
-nav_order: 15
+nav_order: 1
 ---
 # Get the Docker Image
 

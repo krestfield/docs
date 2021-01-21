@@ -8,7 +8,13 @@ has_children: true
 
 Enabling the automation of certificates and making management easy
 
-Release Date: 18th January 2021
+Get the Docker image:  
+
+> docker pull krestfield/ezcert 
+
+See [here](https://hub.docker.com/repository/docker/krestfield/ezcert) for more details
+
+
 
 
 
@@ -26,7 +32,7 @@ Release Date: 18th January 2021
 
 ### Interfaces
 
-- Complete Restful API for all certificate management and administative operations
+- Complete Restful API for all certificate management and administrative operations
 - Web Management and User Consoles
 - PowerShell
 - .NET Interface
@@ -36,6 +42,11 @@ Release Date: 18th January 2021
 
 ### Plugins
 
-- JKS Manager
-- IIS Manager
+- Several plugins will be made available in order to provide automation
+
+- Including IIS management for auto-renewal of TLS certificates (and management of bindings)
+
+- JKS keystore management
+
+  
 

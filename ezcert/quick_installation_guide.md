@@ -21,7 +21,7 @@ But for now...
 
  
 
-1. [Click here to download](https://krestfield.s3.eu-west-2.amazonaws.com/ezcert/v1.0.1/ezcert.zip) and unzip on to the local drive
+1. Obtain the download link from your FTP account or contact support@krestfield.com, download and unzip on to the local drive
 2. Open a PowerShell as **Administrator**, navigate to the **.\install** directory of the unzipped folder and run ``.\install.ps1``
 3. Say yes (**y**) to download java and the database binaries
 4. Enter a *password* for the **Database User Admin Account**

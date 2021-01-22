@@ -16,7 +16,7 @@ You can start a docker instance, create a CA and add the new root to your truste
 
 Alternatively, you can manage all your Microsoft CAs centrally, tracking all certificates for expiry, notifying users and making use of the automation to renew when expiring
 
-Need more info? Contact us at support@krestfield.com  
+Need more info? Contact us at <support@krestfield.com>  
 
-Or take a look at our website: https://www.krestfield.com/excert
+Or take a look at our website: <https://www.krestfield.com/ezcert>
 

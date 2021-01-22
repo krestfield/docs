@@ -21,6 +21,10 @@ But before any emails can be sent you must configure your email server settings.
 
 
 
+> If this is the first time you are testing emails - ensure you have created a new user or have updated the default admin user's email address. Otherwise emails will be sent to the default bogus email address 
+
+
+
 ### Server Settings
 
 The email server can be a local SMTP gateway or an internet provided service. This service should be able to provide the details required below  

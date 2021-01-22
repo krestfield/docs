@@ -14,7 +14,7 @@ The default *Certificates* view shows all certificates issued in the last day. Y
 
 For more advanced searches, click the Certificate Search bar:  
 
-![image-20210122133945462](C:\Users\darre\Documents\_mystuff\development\_Krestfield Products\docs\ezcert\images\search_bar.png)
+![image-20210122133945462](.\images\search_bar.png)
 
 Which will open the available search options:  
 
@@ -52,4 +52,4 @@ The resulting query is an **AND** of all items (not an **OR**). For example, if 
 
 ​      Check **Expiring between** and set the dates as follows
 
-![image-20210122135430648](C:\Users\darre\Documents\_mystuff\development\_Krestfield Products\docs\ezcert\images\expiring_2023.png)
+![image-20210122135430648](.\images\expiring_2023.png)

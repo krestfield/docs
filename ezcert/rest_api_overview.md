@@ -13,7 +13,7 @@ All functions (including all administrative operations) can be carried out via t
 
 ### Swagger
 
-The available REST API functions can be viewed using the Swagger UI as follows  
+The available REST API functions can be viewed using the Swagger UI as follows:  
 
   
 
@@ -37,19 +37,19 @@ Scroll down and all of the API methods should be presented
 
 
 
-### Try out the API
+### Trying out the API
 
 Scroll down to the **login-controller** and expand the tab. Click **Try it out**
 
-<img src="C:\Users\darre\Documents\_mystuff\development\_Krestfield Products\docs\ezcert\images\login_restapi.png" alt="image-20210121153238903" style="zoom: 67%;" />
+<img src=".\images\login_restapi.png" alt="image-20210121153238903" style="zoom: 67%;" />
 
 Enter values for the **username** and **password** and click **Execute**. Scroll down to the response:  
 
-<img src="C:\Users\darre\Documents\_mystuff\development\_Krestfield Products\docs\ezcert\images\login_restapi_result.png" alt="image-20210121153421520" style="zoom:67%;" />
+<img src=".\images\login_restapi_result.png" alt="image-20210121153421520" style="zoom:67%;" />
 
-Copy the value returned for *token*, scroll up to the top of the page and click <img src="C:\Users\darre\Documents\_mystuff\development\_Krestfield Products\docs\ezcert\images\auth_button.png" alt="image-20210121153547479" style="zoom:80%;" />
+Copy the value returned for *token*, scroll up to the top of the page and click <img src=".\images\auth_button.png" alt="image-20210121153547479" style="zoom:80%;" />
 
-<img src="C:\Users\darre\Documents\_mystuff\development\_Krestfield Products\docs\ezcert\images\authorise_window.png" alt="image-20210121153646947" style="zoom:67%;" />
+<img src=".\images\authorise_window.png" alt="image-20210121153646947" style="zoom:67%;" />
 
 Paste in the value for *token* copied from the response above and click **Authorize** then **Close**  
 

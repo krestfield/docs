@@ -62,7 +62,7 @@ Check this box if you want an email to be sent whenever a certificate is issued
 
 
 
-![image-20210122150749792](C:\Users\darre\Documents\_mystuff\development\_Krestfield Products\docs\ezcert\images\send_emails_on_issue.png)
+![image-20210122150749792](.\images\send_emails_on_issue.png)
 
 You can set the email subject and body templates of the emails that will be sent. You can use standard html tags in the body as well as the following additional tags:
 

@@ -1,91 +1,66 @@
-# Configuring the Server's SSL Certificates
+---
+layout: default
+title: Configuring the Server's SSL Certificates
+parent: EzCert
+nav_order: 4
+---
+# Configuring the Server's TLS Certificates
 
  
 
-Once installed, the system will be configured with a default SSL certificate  
+The system uses TLS server certificates to protect the UI and API end-points  
 
-This certificate is issued under a test CA with the subject ``CN=127.0.0.1``  
+Once installed, the system will be configured with a default SSL certificate issued under a test CA with the subject ``CN=127.0.0.1``  
 
-With this certificate in place, you will see errors such as:
-
-
+With this certificate in place, you will see warning when accessing via a browser and REST API calls may fail  
 
 
 
+You may temporarily, install the associated root certificate, located here:
+
+``[Install Dir]\config\sslcerts\dbssl_root.cer``
+
+into the Local Machines' **Trusted Root Certification Authorities** store. This will remove the obvious browser errors.  But this is a temporary measure and you should replace this certificate by following the steps below 
 
 
 
+### Create a New SSL Certificate
 
-Download the zip file and unzip to a location e.g. ``c:\program files\krestfield\ezcert``
+1. Ensure you have a **Certificate Issuer** configured which includes either an ADCS Template or Local CA Profile that supports SSL/TLS. If one has not yet been configured, refer to the [Create a Local Certificate Issuer](create_local_certificate_issuer.html) or [Create an ADCS Certificate Issuer](create_adcs_certificate_issuer.html) guides
+2. **Choose Request > DN Request** from the menu
 
-Open a command prompt as administrator and navigate to c:\certman\installers
+<img src=".\images\ssl_cert_req.png" alt="image-20210116155244109" style="zoom:67%;" />
 
-Type install.ps1 (or something)
+For **Subject DN** enter the server DNS name as the CN value. E.g. if your server is called ``myserver.com`` the DN would contain ``CN=myserver.com``  
 
-[this runs: msiexec.exe /l*v mdbinstall.log /qb /i mongodb-windows-x86_64-4.4.1-signed.msi ADDLOCAL="ServerNoService,Client" INSTALLLOCATION="C:\krestfieldcertman\mongodb"]
+Choose the **Issuer** and **CSR Generator** to process the request  
 
- 
+Click on **Subject Alternative Names** and add a DNS entry that matches the server name e.g. myserver.com  
 
-Install the database
+Enter a password and click Request Certificate  
 
-If you have an instance of MongoDB already installed (or available as Atlas) skip this step
+When the certificate has been issued, click Download PKCS12 and save the file to ``.\ezcert\config\sslcerts``  
 
-Double click mongodb-windows-x86_64-4.4.1-signed.msi
+You can choose any filename and password you like for this certificate. The initial filename is **tomcatssl.p12** with a temporary password of **temp1234!**  
 
-Select the option to install as a Windows Service
+If you reuse these values no other updates are required and the new SSL certificate will take effect once you restart the application  
 
-Set the location for the database files. Note, the installation reserves a folder for the database files ([install location]\database) which can be used
+If you have chosen a strong password and/or changed the filename, perform the following steps:  
 
- 
+1. Open ``.\ezcert\tomcat\conf\server.xml``
+2. Locate the following section:
+```xml
+    <Connector port="443"
+    	   address="0.0.0.0"
+	       scheme="https" secure="true"
+           SSLEnabled="true" clientAuth="false"
+           sslProtocol="TLS"
+           keystoreFile="C:/ezcert/config/sslcerts/tomcatssl.p12"
+           keystorePass="temp1234!" keystoreType="PKCS12"/>
+```
+3. Set **keystoreFile** to point to your new p12 file and set **keystorePass** to be the new password
+4. Save ``server.xml``
+5. Restart the application
 
-If the Mongo Compass window appears at the end of the installation, close it
 
- 
 
-### Configure the Database
-
-Open a command prompt as administrator
-
-Navigate to the mongodb installation bin folder e.g. C:\Program Files\MongoDB\Server\4.4\bin
-
-Type mongo and press Enter
-
-At the mongo shell, type:
-
-mongo 127.0.0.1/admin [certman install location]\createadmin.js
-
-e.g.
-
-mongo 127.0.0.1/admin “c:\certman\createadmin.js”
-
-and press Enter
-
-At the prompt 
-
-Enter password:
-
-Enter a strong password. This is the main user admin account for the database
-
- 
-
-At the prompt, type:
-
-​        net stop mongodb
-
- 
-
-C:\WINDOWS\system32>net stop mongodb
-
-The MongoDB Server (MongoDB) service is stopping.
-
-The MongoDB Server (MongoDB) service was stopped successfully.
-
- 
-
- 
-
-Now open a text editor as administrator and edit C:\Program Files\MongoDB\Server\4.4\bin\mongod.cfg
-
- 
-
- 

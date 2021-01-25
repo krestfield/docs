@@ -32,7 +32,7 @@ You must be an Administrator to perform this step. If you are not then you must 
 
 If you wish  to change *your ow*n permissions
 
-1. Click the ![image-20210109153916067](C:\Users\darre\Documents\_mystuff\development\_Krestfield Products\docs\ezcert\images\user_icon.png) icon and select **Profile**   
+1. Click the ![image-20210109153916067](.\images\user_icon.png) icon and select **Profile**   
 
 2. Select the issuers you wish to be able to manage certificate for  
 3. Click **Update**

@@ -1,6 +1,6 @@
 ---
 layout: default
-title: nCipher HSM - Integration
+title: nCipher HSM - Check the Configuration
 parent: EzSign
 nav_order: 24
 ---

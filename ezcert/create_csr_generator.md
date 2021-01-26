@@ -14,8 +14,8 @@ A CSR Generator is configured with an algorithm, the key size (or elliptic curve
 To create a CSR Generator:
 
 1. From the UI click on the **CSR Generators** menu item and click **New CSR Generator**  
-2. Provide a name for the generator and specify the algorithm, key size (or curve if ECDSA is chosen) and the hash algorithm
-<img src=".\images\csr_generator.png" alt="image-20210116150109796" style="zoom:67%;" /> 
+2. Provide a name for the generator and specify the algorithm, key size (or curve if ECDSA is chosen) and the hash algorithm  
+<img src=".\images\csr_generator.png" alt="image-20210116150109796" style="zoom:67%;" />   
 3. Click **Add**
 
 

@@ -34,10 +34,10 @@ Edit the ``server.properties`` file and add a new channel as shown below:
 ```properties
 channel.1.name=CHANNELNAME
 channel.1.enabled=true
-channel.1.tokenType=**PKCS11**
+channel.1.tokenType=PKCS11
 channel.1.token.password=
-channel.1.token.pkcs11.library=**C:/nCipher/nfast/toolkits/pkcs11/cknfast-64.dll**
-channel.1.token.pkcs11.slot=**1**
+channel.1.token.pkcs11.library=C:/nCipher/nfast/toolkits/pkcs11/cknfast-64.dll
+channel.1.token.pkcs11.slot=1
 channel.1.signature.hash=SHA256
 channel.1.signature.includeCerts=ALLEXCEPTROOT
 channel.1.signature.includeContent=false

@@ -1,3 +1,10 @@
+---
+layout: default
+title: EzSign Service - Silent Installation
+parent: EzSign
+nav_order: 25
+---
+
 # EzSign Service - Silent Install
 
 > Version 1.4

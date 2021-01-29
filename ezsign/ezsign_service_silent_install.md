@@ -32,8 +32,11 @@ Before installing EzSign, ensure that the following are in place:
 
 ### Installation
 
-1. Open or start a PowerShell instance as Administrator
-2. Run the following command
+* Step 1
+   Open or start a PowerShell instance as Administrator
+
+* Step 2
+Run the following command
 
 ```powershell
 msiexec /i EzSignServiceInstallerV1.4.msi /l*v /qn /norestart
@@ -46,7 +49,8 @@ Note: To create a log file of the installation, add the ``/l*v [Log File]`` swit
 msiexec /i EzSignServiceInstallerV1.4.msi /l*v C:\ezsign_install_log.txt /qn /norestart
 ```
 
-3. To Start the service after install, run:  
+* Step 3
+To Start the service after install, run:  
 ```powershell
 Start-Service "Krestfield EzSign Service"
 ```

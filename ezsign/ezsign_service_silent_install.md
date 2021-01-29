@@ -27,8 +27,8 @@ Before installing EzSign, ensure that the following are in place:
 * If you choose to use your own instance of Java, ensure it has been installed (Java 14 is bundled with the service but you may use any version from 8u241)
 * If you are storing your logs and/or keystore files in a location other than the defaults - ensure these folders have been created and the permissions on the folders are correct (to permit write from the service)
 * If re-using any previous EzSign property files, ensure they are available
-
-
+  
+  
 
 ### Installation
 
@@ -57,13 +57,16 @@ Start-Service "Krestfield EzSign Service"
 You can view the status of the service by running the following:  
 ```powershell
 PS C:\> Get-Service "Krestfield EzSign Service"
+```
 
+```powershell
 Status   Name               DisplayName
 ------   ----               -----------
 Running  Krestfield EzSi... Krestfield EzSign Service
 ```
-
   
+  
+
 
 ### Configuration
 

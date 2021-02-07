@@ -13,7 +13,7 @@ Follow the links below for information on specific products or use the search op
   - Our certificate manager, interfacing to Microsoft ADCS and other CAs providing a full Resful API and intuitive UI to make issuance, renewal and managmeent of certificates as easy as it should be
 - [EzSign](./ezsign/ezsign)
   - A digitial signature generation and verification server, interfacing to all popular HSMs
-- PkCloud
+- [PkCloud](./pkcloud/pkcloud)
   - Manage multiple EzSign services, as a service or on your own premises. Includes a Resful API and Web Based UI
 - OCSP Responder
   - Allows for rapid deployment of a responder in Windows environments with no need for IIS.  Intefaces directly with Microsoft ADCS

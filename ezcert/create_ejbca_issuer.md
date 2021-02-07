@@ -2,7 +2,7 @@
 layout: default
 title: Create an EJBCA Issuer
 parent: EzCert
-nav_order: 9
+nav_order: 7
 ---
 
 # Create an EJBCA Issuer

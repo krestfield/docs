@@ -1,11 +1,11 @@
 ---
 layout: default
-title: EJBCA Setup
+title: Create an EJBCA Issuer
 parent: EzCert
 nav_order: 9
 ---
 
-# EzCERT - EJBCA Setup
+# Create an EJBCA Issuer
 
 
 

@@ -23,9 +23,9 @@ Under ***RA Functions***, select **End Entity Profiles**
 
 Under ***Add Profile***, enter a name for the profile e.g. **EZCERT_PROFILE**, click **Add**, then select this profile from the list and click **Edit End Entity Profile**
 
-Remove any Subject DN Attributes as in this case, all will be provided by the CSR EzCERT generates. E.g.:
+Ensure that at least the **Common Name** subject attribute is present, but set as *modifiable* and *not required*:
 
-<img src=".\images\ejbca_ee_profile3.png" alt="image-20210206154210918" style="zoom:67%;" />
+<img src=".\images\ejbca_ee_profile3.png" alt="image-20210208114139733" style="zoom: 67%;" />
 
 
 

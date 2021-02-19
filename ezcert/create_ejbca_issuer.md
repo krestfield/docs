@@ -89,6 +89,14 @@ Note: You can obtain this serial number by choosing **Search** in the RA, then c
 
 
 
+From the administrative console (/adminweb), under **System Functions**, select Administrator Roles
+
+Locate the role (e.g. EzCERT RA Administrators) and select **Access Rules**
+
+For the *Role Template*, ensure it says **RA Administrators**, select it if not. Check CAs selected are as required and click **Save**
+
+
+
 ### 3. Certificate Profile
 
 Whichever profiles you wish to use with EzCERT - you must **check** the **Allow Subject DN Override by CSR** and **Allow Extension Override** options. For details on how to configure a sample profile for TLS, see [EJBCA - Sample TLS Certificate Profile](ejbca_sample_tls_profile.html)
@@ -186,6 +194,4 @@ The most likely cause is that the certificate included in the User KeyStore does
 <img src=".\images\ejbca_error3.png" alt="image-20210205170327789" style="zoom:80%;" />
 
 The Web Service URL is most likely protected with a TLS certificate that is not trusted.  Identify the CA that issued the TLS certificate and download its certificate chain as a JKS - then upload as outlined above
-
-
 

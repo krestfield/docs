@@ -8,8 +8,11 @@ nav_order: 19
 
 The settings can be viewed by selecting the **Settings > Settings** option on the menu
 
-<img src=".\images\settings.png" alt="image-20210122135921795" style="zoom:80%;" />
+<img src=".\images\settings.png" alt="image-20210222163700318" style="zoom:80%;" />
 
+* Private Key Retention Period
+  * If a user generates a certificate using the *Request DN* option, then EzCERT also generates the keys and CSR. This period defines for how long this data will be retained by the system
+  * Whilst the key data is retained the owner of the certificate can return to the system and download the certificate as a PKCS#12, JKS or PEM file. Once this period has expired, this data will be purged from the system and will no longer be available
 * API Key Total Lifetime
   * When a user logs in successfully, an authorisation token (or API key) is returned which the user (or user interface) uses to authenticate from then on
   * This value determines for how long that token/key can be used before it expires. When it expires a user will be required to re-authenticate - even if they are still using the system

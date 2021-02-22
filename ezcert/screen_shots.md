@@ -74,4 +74,5 @@ Emails can be sent on issue and also as reminders of upcoming expiry
 
 <img src=".\images\email_settings_ss.png" alt="image-20210222151615899" style="zoom:67%;" />
 
-Contact [support@krestfield.com] for more details
+Contact [Krestfield Support](support@krestfield.com) for more details
+

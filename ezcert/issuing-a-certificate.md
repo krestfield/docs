@@ -15,19 +15,29 @@ From the menu, select **Request**
 
 If you have already generated a CSR, choose **CSR Request**  
 
-If you want EzCERT to generate the request on your behalf and return a PKCS#12 file, choose **DN Request**  
+If you want EzCERT to generate the request on your behalf and return a PKCS#12 (JKS or PEM) file, choose **DN Request**  
+
+
 
 ---
 
 **CSR Request**  
 
-<img src=".\images\csr_request.png" alt="image-20210121192327033" style="zoom:67%;" />
+<img src=".\images\csr_request.png" alt="image-20210222160916572" style="zoom:67%;" />
 
 From the *Issuer to Process Request* drop down, select the issuer you want to issue this certificate  
 
 Click **Paste CSR** if you have copied the data or choose **Upload CSR** if you want to upload a file CSR  
 
+If you wish to add additional data to certificate, click **Click to add extra details**  
+
+You may then enter test as Extra Information (e.g. "This certificate resides on server srv44772") or additional emails. Any emails entered will also be sent the certificate on issuance and renewal reminders (if configured). Multiple email addresses must be comma separated e.g. user1@org.com,user2@org.com 
+
 Click **Request Certificate**
+
+
+
+
 
 ---
 
@@ -41,11 +51,15 @@ For *Issuer to Process Request*, choose the required issuer
 
 Choose a *CSR Generator* from the drop down  
 
-If you require any SANs (Subject Alternative Names) such as a DNS entry (as required for TLS certificates), click the drop down and enter the required SANs:
+If you wish to add additional data to certificate, click **Click to add extra details**  
+
+You may then enter test as Extra Information (e.g. "This certificate resides on server srv44772") or additional emails. Any emails entered will also be sent the certificate on issuance and renewal reminders (if configured). Multiple email addresses must be comma separated e.g. user1@org.com,user2@org.com  
+
+If you require any SANs (Subject Alternative Names) such as a DNS entry (as required for TLS certificates), click the drop down and add the required SANs:
 
 <img src=".\images\sans.png" alt="image-20210121192822632" style="zoom:67%;" />
 
-Enter a **password**. This password will protect the PKCS#12 file. Then click **Request Certificate**
+Enter a **password**. This password will protect the PKCS#12 (JKS or PEM) file. Then click **Request Certificate**
 
 ---
 
@@ -53,9 +67,14 @@ The certificate will be issued:
 
 <img src=".\images\cert_issued.png" alt="image-20210121193025891" style="zoom:67%;" />
 
-Click **Download PKCS12** to download. Note: If you do not download the PKCS12 file now you will not be able to come back and download it later. The PKCS12 file is not stored as all keys that were generated as part of the CSR generation process are deleted immediately the certificate is issued  
+You may then download the certificate, chain or PKCS#12 file. Alternatively, click **More** to display further details:
 
-You can then download the certificate or certificate chain (you will be able to do this at any time in the future) or click **More** for further certificate details
+<img src=".\images\download_options_ss.png" style="zoom:67%;" />
+
+From here you can download other formats as well as the CSR if required  
+Note: The PKCS#12, JKS and PEM options will only function whilst the key data is retained. This period is defined in the settings as the *Private Key Retention Period*  
+
+If this is set to 0 (zero), key data will not be retained though you will still be able to download the PKCS#12 file immediately following issuance
 
 
 

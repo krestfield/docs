@@ -19,11 +19,11 @@ Click **Add New User**
 
 <img src="./images/users1.png" alt="image-20210222210912906" style="zoom:80%;" />
 
-Enter a username, an email address (email address is mandatory)  and a password for the account  
+Enter a **username**, an **email address** (email address is mandatory)  and a **password** for the account  
 
-You may choose what team(s) to add the user to. Note that if no team is chosen, the user will be able to login but will be unable to request any certificates as Certificate Issuer permissions are managed at the team level  
+You may choose what team(s) to add the user to. Note that if no team is chosen, the user will be able to login but will be unable to request any certificates as *Certificate Issuer* permissions are managed at the team level  
 
-Click Add
+Click **Add**
 
 ---
 

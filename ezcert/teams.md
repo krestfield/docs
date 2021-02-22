@@ -19,7 +19,7 @@ You may add, remove or edit teams as per your requirements. However, generally, 
 
 This will enable you to quickly search and view users with administrative privileges on the system. If a user requires administrative access, they can then be added to this one team   
 
-
+---
 
 ### Add a Team
 
@@ -35,7 +35,7 @@ If you wish to make everyone in this team an administrator, select the **Adminis
 
 Click **Add**  
 
-
+---
 
 ### Add a User to a Team
 
@@ -52,7 +52,3 @@ Note that if a user is already a member of any teams their resulting permissions
 
 
 If a user is not a member of any Team, they will be able to logon to the system and view certificates but not request certificates nor make any changes to the system
-
-
-
-### 

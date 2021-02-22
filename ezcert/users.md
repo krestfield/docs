@@ -7,7 +7,7 @@ nav_order: 6
 
 # Users
 
-A user can authenticate via the UI or to the API (See [REST API]([rest_api_overview.html))  
+A user can authenticate via the UI or to the API (See [REST API](rest_api_overview.html))  
 A user account can be a member of a team and, via the team permissions, then has access to specific Certificate Issuers  
 
 Users may also be sent emails on certificate issuance and reminders when certificates are nearing expiry    

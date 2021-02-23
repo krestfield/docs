@@ -11,7 +11,7 @@ nav_order: 8
 
 
 
-This guide details how you set permissions for a user on a Certificate Issuer  
+This guide details how you set permissions for a user on a *Certificate Issuer*  
 
 A user that has permissions on an issuer is able to request and revoke certificates from that issuer  
 
@@ -21,22 +21,32 @@ You must be an Administrator to perform this step. If you are not then you must 
 
 
 
-1. Select **Users** from the menu
-2. Click the User from the list you wish to edit and click the **Edit** button  
-<img src=".\images\edit_user.png" alt="image-20210109163140050" style="zoom:67%;" />  
+Permissions on Certificate Issuers are granted via Teams. There are two options to gain the required permissions:
 
-3. Next to **Permitted Certificate Issuers**, select the issuers you wish this user to be able to manage certificates for  
-4. Click **Update**
+1. Add the user to a Team that already has the required *Certificate Issuer* configured
 
+   To add a user to an existing team, see the section *Add a User to a Team* [here](teams.html)
 
+2. Create a new team and then add the user to this team
 
-If you wish  to change *your ow*n permissions
+   See [here](teams.html) for details on how to create a new team
 
-1. Click the ![image-20210109153916067](.\images\user_icon.png) icon and select **Profile**   
-
-2. Select the issuers you wish to be able to manage certificate for  
-3. Click **Update**
+3. Update an existing Team to include the Certificate Issuer, then add the user to this team. Details on this are below:
 
 
 
-Settings are applied immediately. The updated user accounts will now have access to the certificate issuers and will be able to request and revoke certificates
+
+Click **Teams** from the menu
+
+<img src=".\images\teams3.png" alt="image-20210223091633663" style="zoom:67%;" />
+
+Click on the *team* you wish to update and click **Edit**
+
+<img src=".\images\teams4.png" alt="image-20210223091803503" style="zoom:67%;" />
+
+Select the required **Certificate Issuers** from the *Permitted Certificate Issuers* section and click **Update**
+
+Now any members of this team will be able to manage certificates (request and revoke) for the certificate issuers chosen  
+
+
+

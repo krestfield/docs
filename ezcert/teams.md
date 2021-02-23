@@ -51,4 +51,13 @@ Note that if a user is already a member of any teams their resulting permissions
 
 
 
+If you wish  to change *your ow*n permissions
+
+1. Click the ![image-20210109153916067](C:/Users/darre/Documents/_mystuff/development/_Krestfield Products/docs/ezcert/images/user_icon.png) icon and select **Profile**   
+
+2. Select the *Teams* you wish to be a member of 
+3. Click **Update**
+
+
+
 If a user is not a member of any Team, they will be able to logon to the system and view certificates but not request certificates nor make any changes to the system

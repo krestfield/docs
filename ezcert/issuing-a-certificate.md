@@ -31,7 +31,7 @@ Click **Paste CSR** if you have copied the data or choose **Upload CSR** if you 
 
 If you wish to add additional data to certificate, click **Click to add extra details**  
 
-You may then enter test as Extra Information (e.g. "This certificate resides on server srv44772") or additional emails. Any emails entered will also be sent the certificate on issuance and renewal reminders (if configured). Multiple email addresses must be comma separated e.g. user1@org.com,user2@org.com 
+You may then enter text as Extra Information (e.g. "This certificate resides on server srv44772") or additional emails. Any emails entered will also be sent the certificate on issuance and renewal reminders (if configured). Multiple email addresses must be comma separated e.g. user1@org.com,user2@org.com 
 
 Click **Request Certificate**
 
@@ -53,7 +53,7 @@ Choose a *CSR Generator* from the drop down
 
 If you wish to add additional data to certificate, click **Click to add extra details**  
 
-You may then enter test as Extra Information (e.g. "This certificate resides on server srv44772") or additional emails. Any emails entered will also be sent the certificate on issuance and renewal reminders (if configured). Multiple email addresses must be comma separated e.g. user1@org.com,user2@org.com  
+You may then enter text as Extra Information (e.g. "This certificate resides on server srv44772") or additional emails. Any emails entered will also be sent the certificate on issuance and renewal reminders (if configured). Multiple email addresses must be comma separated e.g. user1@org.com,user2@org.com  
 
 If you require any SANs (Subject Alternative Names) such as a DNS entry (as required for TLS certificates), click the drop down and add the required SANs:
 
@@ -72,15 +72,15 @@ You may then download the certificate, chain or PKCS#12 file. Alternatively, cli
 <img src=".\images\download_options_ss.png" style="zoom:67%;" />
 
 From here you can download other formats as well as the CSR if required  
-Note: The PKCS#12, JKS and PEM options will only function whilst the key data is retained. This period is defined in the settings as the *Private Key Retention Period*  
+Note: The PKCS#12, JKS and PEM options will only function whilst the key data is retained. This period is defined in the [settings](settings.html) as the *Private Key Retention Period*  
 
-If this is set to 0 (zero), key data will not be retained though you will still be able to download the PKCS#12 file immediately following issuance
+If this is set to 0 (zero), key data will not be retained, though you will still be able to download the PKCS#12 file immediately following issuance
 
 
 
 ### From PowerShell
 
-Obtain the EzCERT powershell module from the krestfield website or github  
+Obtain the EzCERT powershell module from the krestfield website or github. If unable to locate this, contact [support](mailto:support@krestfield.com)  
 
 If you are running on windows and have installed EzCERT locally, the module will be able to detect the API URL. If not, create a file called  
 

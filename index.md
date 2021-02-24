@@ -9,7 +9,7 @@ Here you can find information on products, integration guides, white papers, tip
 
 Follow the links below for information on specific products or use the search option above
 
-- [EzCert](./ezcert/ezcert)
+- [Certdog](./certdog/certdog)
   - Our certificate manager, interfacing to Microsoft ADCS and other CAs providing a full Resful API and intuitive UI to make issuance, renewal and managmeent of certificates as easy as it should be
 - [EzSign](./ezsign/ezsign)
   - A digitial signature generation and verification server, interfacing to all popular HSMs

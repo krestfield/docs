@@ -5,7 +5,7 @@ parent: Certdog
 nav_order: 11
 ---
 
-# certdog - Create a CSR Generator
+# Certdog - Create a CSR Generator
 
 A CSR Generator is required if you want certdog to generate CSRs on your behalf. If you will only be submitting pre-generated CSRs, you will not need a CSR Generator.  But if you wish to generate a certificate from a DN and download a PFX containing the certificate and associated keys, a CSR Generator is required  
 

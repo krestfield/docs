@@ -16,7 +16,7 @@ A web based front end that allows for system configuration and the management of
 
 It allows users and administrators to login and perform operations. Available operations are dependant on what privileges the logged in user has e.g. a standard user will not have any administrative (e.g. user management) operations available  
 
-The UI performs very little processing. All operations are handed off to the API meaning it is a lightweight component and this also means that everything that you can do via the UI can be done via the REST API  
+The UI performs very little processing. All operations are handed off to the API making it a lightweight component. This this also means that everything that you can do via the UI can be done via the REST API  
 
 
 
@@ -30,7 +30,7 @@ https://[servername]/certdog/api/swagger-ui.html
 
 E.g.
 
-[https://127.0.0.1/certdog/api/swagger-ui.html]
+[https://127.0.0.1/certdog/api/swagger-ui.html](https://127.0.0.1/certdog/api/swagger-ui.html)
 
 
 

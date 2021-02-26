@@ -53,11 +53,11 @@ Outgoing ports (by default these are 27017,27018 and 27019) from the servers (Se
 
 The main components can all easily be split across several servers for load-balancing and redundancy
 
-![image-20210226160951017](C:\Users\darre\Documents\_mystuff\development\_Krestfield Products\docs\certdog\images\deployment3.png)
+![image-20210226160951017](.\images\deployment3.png)
 
 The API can be placed in several different locations - as long as it can access the database (or an instance in the cluster)
 
-In the example above, there is a dedicated server hosting the API. You may wish to do this if you were to dedicate that instance to integration API calls e.g. from your own applications or scripts
+In the example above, there is a dedicated server hosting the API (Server 2). You may wish to do this if you were to dedicate that instance to integration API calls e.g. from your own applications or scripts
 
 The database can be clustered and hosted across multiple servers...or in the cloud
 
@@ -79,9 +79,9 @@ This could connect back to your on-premises CAs, via the ADCS agent and you coul
 
 ## Summary
 
-Deployment of certdog is flexible in order to fit in with any environment and options are not limited to those mentioned above  
+Deployment of certdog is flexible in order to fit in with any environment, options are not limited to those mentioned above  
 
-If you wish to discuss options with us, drop us a line at 
+If you wish to discuss your requirements with us, drop us a line at 
 
 [support@krestfield.com](mailto:support@krestfield.com)
 

@@ -35,13 +35,23 @@ Normally, the start scripts (e.g. ``.\start-certdog.ps1``) configure these varia
 If using another (e.g. shared) instance of Tomcat, these variables can be provided in the ``setenv.bat`` or ``setenv.sh`` file which should be placed in the ``[Tomcat Home]\bin`` directory. E.g.
 
 ```shell
-set spring_config_location=/opt/certdog/application.properties
+set spring_config_location=C:/certdog/application.properties
 set cmmasterpassword=somepassword
 ```
 
-Note that if the ``cmmasterpassword`` value starts with ``file:`` it will read the master password from the file referenced which can be more secure e.g.
+On Linux/Unix
+
 ```shell
-set cmmasterpassword=file:/opt/certdog/secure/masterpassword.txt
+export spring_config_location="/opt/certdog/application.properties"
+export cmmasterpassword="somepassword"
+```
+
+
+
+Note that if the ``cmmasterpassword`` value starts with ``file:`` it will read the master password from the file referenced which can be more secure e.g.
+
+```shell
+set cmmasterpassword=file:C:/certdog/secure/masterpassword.txt
 ```
 
 
@@ -56,12 +66,20 @@ It is recommended that a certificate from a trusted CA be used to secure the dat
 
 
 
-A complete ``setenv.bat``/``setenv.sh`` file could look like:
+A complete ``setenv.bat`` file could look like:
 
 ```shell
 set spring_config_location=/opt/certdog/application.properties
 set cmmasterpassword=file:/opt/certdog/secure/masterpassword.txt
 set JAVA_OPTS=%JAVA_OPTS% -Djavax.net.ssl.trustStore="/opt/certdog/config/sslcerts/dbssltrust.jks" -Djavax.net.ssl.trustStorePassword=password
+```
+
+``setenv.sh``:
+
+```shell
+export spring_config_location="/opt/certdog/application.properties"
+export cmmasterpassword="file:/opt/certdog/secure/masterpassword.txt"
+export JAVA_OPTS="$JAVA_OPTS -Djavax.net.ssl.trustStore="/opt/certdog/config/sslcerts/dbssltrust.jks -Djavax.net.ssl.trustStorePassword=password"
 ```
 
 

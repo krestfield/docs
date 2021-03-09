@@ -218,11 +218,29 @@ Entries are added to the Windows event log. With the ID (``eventLogId``) as spec
 
 ## Credentials
 
-The script requires the certdog credentials. That is the username and password of a user who has access to the Certificate Issuer  
+The script requires the certdog credentials. That is the username and password of a user who has access to the Certificate Issuer configured in certdog  
 
-These credentials can be saved by the script as secure strings which are tied to the user account on the machine running the script. This means that the ``-renew`` option can be run without requiring the username or password to be specified. And this is how the script will be called from the Scheduled Task
+These credentials can be saved by the script as secure strings which are tied to the user account on the machine running the script. This means that the ``-renew`` option can be run without requiring the username or password to be specified. And this is how the script will be called from the Scheduled Task  
+
+Note that for this to work, the account the scheduled task runs under must be the same as the account the scheduled task runs under. This could be your own account or a service account  
+
+If you wish to run the scheduled task under the LOCAL SYSTEM account you may use [pstools](https://docs.microsoft.com/en-us/sysinternals/downloads/pstools) to start a powershell as LOCAL SYSTEM, then set the credentials by running the following:
+
+```powershell
+.\certdog-iis.ps1 -setcreds
+```
+
+These will then be accessible by the LOCAL SYSTEM account
 
 
 
 ## Tips
 
+It is a good idea to test that the renewal actually works as expected. This is easy to confirm with certdog as we can create an internal CA with a short lifetime certificate profile  for testing. Then we can set the ``renewalDays`` period to be short and confirm everything works as expected  
+
+1. Create a local certificate issuer, if not already done so. See the guide [here](https://krestfield.github.io/docs/certdog/create_local_certificate_issuer.html). Create a profile which has a lifetime of 1 day
+2. Update the ``settings.json`` file and set ``renewalDays : 1`` and the ``certIssuerName`` to whatever you have called the certificate issuer
+3. Run ``certdog-iis.ps1 -new`` and create a new certificate, store the credentials and create a scheduled task
+4. The task, by default, should run that night (or early next morning). You can run the task on demand before this. Monitor the Event Log for events from source ``certdog`` and event ID's as configured in ``settings.json`` (these are 5280 and 5281 by default)
+5. If everything gets renewed OK you know the accounts etc. are all good
+6. Now update ``settings.json`` to point to the chosen Certificate Issuer and update the ``renewalDays`` to be a reasonable time before your certificates expire and you want them renewed

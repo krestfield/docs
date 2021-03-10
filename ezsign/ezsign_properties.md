@@ -17,7 +17,7 @@ Click [here](ezsign_sample_properties.html) to view a sample properties file
 
 
 
-### Server Properties
+## Server Properties
 
 The following settings dictate what ports and interfaces the server listens on and other settings that are relevant to the running server, rather than individual channels
 
@@ -40,7 +40,7 @@ The following settings dictate what ports and interfaces the server listens on a
 
 
 
-### Generic Channel Properties
+## Generic Channel Properties
 
 The properties file may have multiple channels specified. Each channel must have a number assigned e.g.
 
@@ -70,7 +70,7 @@ This number is represented by ``N`` in the following sections. There is no limit
 
 
 
-### PKCS11 Token Properties
+## PKCS11 Token Properties
 
 If  ``channel.N.tokenType=PKCS11`` is set then the following properties must also be configured. These are specific to the HSM being used and its configuration
 
@@ -83,7 +83,7 @@ If  ``channel.N.tokenType=PKCS11`` is set then the following properties must als
 
 
 
-### GoogleKMS Token Properties
+## GoogleKMS Token Properties
 
 If ``channel.N.tokenType=GOOGLEKMS`` is set then the following properties must also be configured. You will obtain these from your Google KMS configuration
 
@@ -98,7 +98,7 @@ If ``channel.N.tokenType=GOOGLEKMS`` is set then the following properties must a
 
 
 
-### Azure KeyVault Token Properties
+## Azure KeyVault Token Properties
 
 If ``channel.N.tokenType=AZUREKEYVAULT`` is set  then the following properties must also be configured. Refer to your Azure KeyVault configuration for details
 
@@ -111,7 +111,7 @@ If ``channel.N.tokenType=AZUREKEYVAULT`` is set  then the following properties m
 
 
 
-### PayShield Token Properties
+## PayShield Token Properties
 
 If ``channel.N.tokenType=HSM9000`` then the following properties must also be configured
 
@@ -156,7 +156,7 @@ There are various options when generating and verifying signatures. The followin
 
 
 
-### Revocation Checker Properties
+## Revocation Checker Properties
 
 The revocation check options are configured with the following settings. If nothing is specified, no revocation checking will be performed
 
@@ -174,7 +174,7 @@ If **ANY** is chosen, both the CRL and OCSP specific properties will be applied
 
 
 
-#### OCSP Specific Properties
+### OCSP Specific Properties
 
 if ``revocationChecker.type=OCSP`` then the following settings can be applied
 
@@ -204,7 +204,7 @@ if ``revocationChecker.type=OCSP`` then the following settings can be applied
 
 
 
-#### CRL Specific Properties
+### CRL Specific Properties
 
 if ``revocationChecker.type=CRL`` then the following settings can be applied
 

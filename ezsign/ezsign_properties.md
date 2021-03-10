@@ -19,6 +19,8 @@ Click [here](ezsign_sample_properties.html) to view a sample properties file
 
 ### Server Properties
 
+The following settings dictate what ports and interfaces the server listens on and other settings that are relevant to the running server, rather than individual channels
+
 | Property                             | Description                                                  | Example      |
 | ------------------------------------ | ------------------------------------------------------------ | ------------ |
 | server.bindIpAddress|The interface/IP Address the server will bind to. *If omitted the server will listen on all available interfaces*|10.100.15.32|
@@ -126,6 +128,8 @@ If ``channel.N.tokenType=HSM9000`` then the following properties must also be co
 
 ### Signature Generation and Verification Properties
 
+There are various options when generating and verifying signatures. The following settings also dictate what algorithms, key-sizes etc. that will be used when CSRs are generated
+
 | Property                             | Description                                                  | Example      |
 | ------------------------------------ | ------------------------------------------------------------ | ------------ |
 | channel.N.signature.algorithm|The signature key algorithm.  Possible values are: **RSA**, **ECDSA**. If RSA is chosen the keysize must also be specified. If elliptic curve (ECDSA) is chosen the curve must also be specified|RSA|
@@ -154,9 +158,28 @@ If ``channel.N.tokenType=HSM9000`` then the following properties must also be co
 
 ### Revocation Checker Properties
 
+The revocation check options are configured with the following settings. If nothing is specified, no revocation checking will be performed
+
 | Property                     | Description                                                  | Example      |
 | ---------------------------- | ------------------------------------------------------------ | ------------ |
 | channel.N.revocationChecker.type|The revocation checker type. Possible values: **NONE** - No revocation checking will be performed. **CRL** - CRLs will be used to check revocation. **OCSP** - OCSP will be used to check revocation. **ANY** - OCSP will be tried first.  If this fails (e.g. if there is no OCSP URL or if the server or status is unavailable) then CRL will be attempted|OCSP|
+
+If **NONE** is chosen as the revocation checker, no further settings are required  
+
+If **CRL** is chosen, refer to the CRL Specific Properties below  
+
+If **OCSP** is chosen, refer to the OCSP Specific Properties below  
+
+If **ANY** is chosen, both the CRL and OCSP specific properties will be applied
+
+
+
+#### OCSP Specific Properties
+
+if ``revocationChecker.type=OCSP`` then the following settings can be applied
+
+| Property                     | Description                                                  | Example      |
+| ---------------------------- | ------------------------------------------------------------ | ------------ |
 | channel.N.revocationChecker.ocsp. connectTimeoutSecs|If revocationChecker.type=OCSP then this determines the OCSP Server connection timeout.  *Defaults to 5 seconds*|5|
 | channel.N.revocationChecker.ocsp. readTimeoutSecs|If revocationChecker.type=OCSP then this determines the OCSP Server read timeout.  *Defaults to 5 seconds*|5|
 | channel.N.revocationChecker.ocsp.useDefaultUrl|If revocationChecker.type=OCSP then this determines whether the default URL (which must be specified) will always be used or, if false, the certificate's AIA extensions will be used to extract the OCSP URL|true|
@@ -178,6 +201,15 @@ If ``channel.N.tokenType=HSM9000`` then the following properties must also be co
 | channel.N.revocationChecker.ocsp.proxyAuthRequired|If useProxy=true and the server requires authentication set this to true and specify the username and password below|false|
 | channel.N.revocationChecker.ocsp.proxyUsername|If proxyAuthRequired=true set the *username* here|user1|
 | channel.N.revocationChecker.ocsp.proxyPassword|If proxyAuthRequired=true set the *password* here|password|
+
+
+
+#### CRL Specific Properties
+
+if ``revocationChecker.type=CRL`` then the following settings can be applied
+
+| Property                     | Description                                                  | Example      |
+| ---------------------------- | ------------------------------------------------------------ | ------------ |
 | channel.N.revocationChecker.crl.downloadFolder|The location to which CRL files will be downloaded and stored|/opt/ezsign/crl|
 | channel.N.revocationChecker.crl.forceDownload|Whether to force the download of the CRL for each request.|false|
 | channel.N.revocationChecker.crl.allowExpiredCrl|Whether to allow expired CRLs or not Note: This MUST only be used in extreme circumstances e.g. a live service outage  as a revoked certificate may be accepted|false|

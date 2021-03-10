@@ -244,3 +244,4 @@ It is a good idea to test that the renewal actually works as expected. This is e
 4. The task, by default, should run that night (or early next morning). You can run the task on demand before this. Monitor the Event Log for events from source ``certdog`` and event ID's as configured in ``settings.json`` (these are 5280 and 5281 by default)
 5. If everything gets renewed OK you know the accounts etc. are all good
 6. Now update ``settings.json`` to point to the chosen Certificate Issuer and update the ``renewalDays`` to be a reasonable time before your certificates expire and you want them renewed
+

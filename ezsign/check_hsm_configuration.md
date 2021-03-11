@@ -197,11 +197,17 @@ There was an error checking the HSM: Token Exception: PKCS#11 Token: There was a
 C:/Program Files (x86)/nCipher/nfast/toolkits/pkcs11/cknfast-32.dll
 ```
 
-I.e. this error:  
+I.e. an error such as:  
 
 ``There was an error loading the library: C:/Program Files (x86)/nCipher/nfast/toolkits/pkcs11/cknfast-32.dll Details: %1 is not a valid Win32 application.``
 
-This indicates that you are running a 64 bit JVM and attempting to load a 32 bit library - or vice versa. It could also indicate a corrupt library file  
+Or something similar such as:
+
+``no suitable image found``
+
+etc.
+
+This indicates that you are either running a 64 bit JVM and attempting to load a 32 bit library - or vice versa. It could also indicate a corrupt library file. If the file cannot be read at all, this may indicate a permissions issue   
 
   
 

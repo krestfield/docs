@@ -96,7 +96,7 @@ On Windows, start the **nFast Server** service
 
 ### HSM Test Tool
 
-If all looks OK, download the Krestfield HSM Test tool from [here](https://krestfield.s3.eu-west-2.amazonaws.com/trial/hsmtest.zip)
+If all looks OK, download the Krestfield HSM Test tool from **[here](https://krestfield.s3.eu-west-2.amazonaws.com/trial/hsmtest2.zip)**
 
  
 
@@ -179,3 +179,53 @@ channel.1.token.pkcs11.slot=1
 
 
 Should result in a successful HSM setup
+
+
+
+### Possible Errors
+
+If when running the test tool you see the following:  
+
+```
+Enter PKCS#11 library path > C:/Program Files (x86)/nCipher/nfast/toolkits/pkcs11/cknfast-32.dll
+Using C:/Program Files (x86)/nCipher/nfast/toolkits/pkcs11/cknfast-32.dll
+
+PKCS#11 Token: Loading the PKCS#11 library: C:/Program Files (x86)/nCipher/nfast/toolkits/pkcs11/cknfast-32.dll...
+Token Exception: PKCS#11 Token: There was an error loading the library: C:/Program Files (x86)/nCipher/nfast/toolkits/pkcs11/cknfast-32.dll Details: %1 is not a valid Win32 application.
+C:/Program Files (x86)/nCipher/nfast/toolkits/pkcs11/cknfast-32.dll
+There was an error checking the HSM: Token Exception: PKCS#11 Token: There was an error loading the library: C:/Program Files (x86)/nCipher/nfast/toolkits/pkcs11/cknfast-32.dll Details: %1 is not a valid Win32 application.
+C:/Program Files (x86)/nCipher/nfast/toolkits/pkcs11/cknfast-32.dll
+```
+
+I.e. an error such as:  
+
+``There was an error loading the library: C:/Program Files (x86)/nCipher/nfast/toolkits/pkcs11/cknfast-32.dll Details: %1 is not a valid Win32 application.``
+
+Or something similar such as:
+
+``no suitable image found``
+
+etc.
+
+This indicates that you are either running a 64 bit JVM and attempting to load a 32 bit library - or vice versa. It could also indicate a corrupt library file. If the file cannot be read at all, this may indicate a permissions issue   
+
+  
+
+  
+
+And if you see the following output:
+
+```
+Enter PKCS#11 library path > C:/Program Files (x86)/nCipher/nfast/toolkits/pkcs11/cknfast-64.dll
+Using C:/Program Files (x86)/nCipher/nfast/toolkits/pkcs11/cknfast-64.dll
+
+PKCS#11 Token: Loading the PKCS#11 library: C:/Program Files (x86)/nCipher/nfast/toolkits/pkcs11/cknfast-64.dll...
+Token Exception: PKCS#11 Token: There was an error loading the library: C:/Program Files (x86)/nCipher/nfast/toolkits/pkcs11/cknfast-64.dll Details: CKR_FUNCTION_FAILED
+There was an error checking the HSM: Token Exception: PKCS#11 Token: There was an error loading the library: C:/Program Files (x86)/nCipher/nfast/toolkits/pkcs11/cknfast-64.dll Details: CKR_FUNCTION_FAILED
+```
+
+I.e. this error:
+
+``There was an error loading the library: C:/Program Files (x86)/nCipher/nfast/toolkits/pkcs11/cknfast-64.dll Details: CKR_FUNCTION_FAILED``
+
+This indicates that your HSM is not setup correctly or the required services are not running (e.g. for nCipher if the hardserver is not running, you will see this error)

@@ -26,4 +26,5 @@ For other key stores, including the Thales PayShield and Software key stores, th
 
 
 
-For more information contact Krestfield Support: [support@krestfield.com](support@krestfield.com)
+For more information contact Krestfield Support: [support@krestfield.com](mailto:support@krestfield.com)
+

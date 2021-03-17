@@ -42,7 +42,7 @@ Before installing EzSign, ensure that the following are in place:
   Run the following command
 
   ```powershell
-  msiexec /i EzSignServiceInstallerV1.4.msi /l*v /qn /norestart
+  msiexec /i EzSignServiceInstallerV1.4.msi /qn /norestart
   ```
 
   This will perform the install without any interaction  
@@ -50,6 +50,10 @@ Before installing EzSign, ensure that the following are in place:
 
   ```powershell
   msiexec /i EzSignServiceInstallerV1.4.msi /l*v C:\ezsign_install_log.txt /qn /norestart
+  ```
+To install in a specific directory (other than ``C:\Program Files`` etc.), add the TARGETDIR switch, as follows:
+  ```powershell
+  msiexec /i EzSignServiceInstallerV1.4.msi TARGETDIR="E:\EzSignService" /qn /norestart
   ```
 
 * Step 3  

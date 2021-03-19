@@ -18,7 +18,7 @@ For more advanced searches, click the Certificate Search bar:
 
 Which will open the available search options:  
 
-<img src=".\images\search_options.png" alt="image-20210122134034640" style="zoom:67%;" />
+<img src=".\images\search_options.png" alt="image-20210319175222870" style="zoom:67%;" />
 
 Select the options you wish to search on. The top items (those with a check box beside them) will only be  included in the search if the check box is ticked  
 
@@ -53,3 +53,17 @@ The resulting query is an **AND** of all items (not an **OR**). For example, if 
 ​      Check **Expiring between** and set the dates as follows
 
 ![image-20210122135430648](.\images\expiring_2023.png)
+
+
+
+## Saving Searches
+
+If there is a particular search that you wish to easily recall, once configured, enter a name for this search and click Save:
+
+<img src=".\images\saving_searches1.png" alt="image-20210319175444785" style="zoom:67%;" />
+
+You may then select this search from the drop down list to populate the details
+
+<img src=".\images\saving_searches2.png" alt="image-20210319175550798" style="zoom:67%;" />
+
+If you wish one of these searches to be the initial search whenever you click Certificates, click the **Set as Default** button. This will then use this search by default

@@ -14,7 +14,9 @@ nav_order: 1
 
 A wide range of search options and the ability to save specific searches
 
-<img src=".\images\cert_search_ss.png" alt="image-20210222090831681" style="zoom:67%;" />
+<img src=".\images\cert_search_ss.png" alt="image-20210319174314375" style="zoom:67%;" />
+
+
 
 
 
@@ -30,7 +32,7 @@ View certificate details and history
 
 Request a certificate by providing a Distinguished Name
 
-<img src=".\images\dn_request_ss.png" alt="image-20210222091029876" style="zoom:67%;" />
+<img src=".\images\dn_request_ss.png" alt="image-20210319174524532" style="zoom:67%;" />
 
 
 

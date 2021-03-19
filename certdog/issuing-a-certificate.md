@@ -23,9 +23,11 @@ If you want certdog to generate the request on your behalf and return a PKCS#12 
 
 **CSR Request**  
 
-<img src=".\images\csr_request.png" alt="image-20210222160916572" style="zoom:67%;" />
+<img src=".\images\csr_request.png" alt="image-20210319174811059" style="zoom:67%;" />
 
 From the *Issuer to Process Request* drop down, select the issuer you want to issue this certificate  
+
+Select the team that this certificate will be associated with  
 
 Click **Paste CSR** if you have copied the data or choose **Upload CSR** if you want to upload a file CSR  
 
@@ -43,13 +45,15 @@ Click **Request Certificate**
 
 **DN Request**
 
-<img src=".\images\dn_request.png" alt="image-20210121192611044" style="zoom:67%;" />
+<img src=".\images\dn_request.png" alt="image-20210319174905496" style="zoom:67%;" />
 
 For the **Subject DN** enter the name required e.g. *CN=domain.com,O=organisation*  
 
 For *Issuer to Process Request*, choose the required issuer  
 
 Choose a *CSR Generator* from the drop down  
+
+For *Team*, select the team you wish this certificate to be associated with  
 
 If you wish to add additional data to certificate, click **Click to add extra details**  
 
@@ -122,7 +126,7 @@ Authenticated OK
 **Request a certificate** 
 
 ```powershell
-PS C:\temp> Request-Cert -dn "CN=mydomain.com,O=My Org" -caName "Certdog TLS Issuer" -csrGeneratorName "RSA 2048 CSR Generator" -subjectAltNames @('DNS:www.mydomain.com','DNS:www.mydomain2.com') -p12Password password | Format-List
+PS C:\temp> Request-Cert -dn "CN=mydomain.com,O=My Org" -caName "Certdog TLS Issuer" -csrGeneratorName "RSA 2048 CSR Generator" -subjectAltNames @('DNS:www.mydomain.com','DNS:www.mydomain2.com') -teamName "Test Team" -p12Password password | Format-List
 
 
 certId  : 6009da2a2c7b373bdc95bcbe
@@ -146,7 +150,7 @@ Below is an example using cURL to login and request a certificate:
 token=$(curl --header "Content-Type: application/json" --request POST --data '{"username":"admin","password":"password"}' --insecure https://127.0.0.1/certdog/api/login | jq -r '.token')
 
 # Request a P123
-p12Data=$(curl --data '{ "caName":"Certdog TLS Issuer", "dn":"CN=testcert.com", "csrGeneratorName":"RSA 2048 CSR Generator", "p12Password":"password" }' --header "Content-Type: application/json" --header "Authorization: Bearer $token" --request POST --insecure https://127.0.0.1/certdog/api/certs/request | jq -r '.p12Data')
+p12Data=$(curl --data '{ "caName":"Certdog TLS Issuer", "dn":"CN=testcert.com", "csrGeneratorName":"RSA 2048 CSR Generator", "p12Password":"password", "teamName":"Test Team" }' --header "Content-Type: application/json" --header "Authorization: Bearer $token" --request POST --insecure https://127.0.0.1/certdog/api/certs/request | jq -r '.p12Data')
 
 echo $p12Data
 ```

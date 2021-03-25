@@ -18,3 +18,17 @@ You can get certdog from the following locations:
 
 
 
+Certdog can also be installed on:
+
+* Linux
+
+* MacOS
+
+* Solaris
+
+[Contact us](mailto:support@krestfield.com) for setup instructions on these environments  
+
+  
+
+
+

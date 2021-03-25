@@ -11,7 +11,7 @@ A test instance of certdog is available here:
 
 <https://certdog.net>
 
-
+  
 
 Logon with these details:
 
@@ -23,7 +23,7 @@ Logon with these details:
 
 This account is a user account (so none of the administrative operations are available)  
 
-The account is shared so, all certificates will be visible  
+The account is shared so all certificates will be visible  
 
 
 

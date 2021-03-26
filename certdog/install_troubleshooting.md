@@ -35,7 +35,7 @@ When complete, open the services snapin and start the **Krestfield Certdog Servi
 
 ### Unable to start service
 
-During install, when attempting to start the services, if you see the following:
+During install, when attempting to start the certdog services, if you see the following:
 
 ```powershell
 Starting the service...
@@ -57,7 +57,7 @@ If the installation seemed to complete OK except for this, there is no need to r
 2. Run: ``start-certdog-service.ps1`` and enter the master password when prompted
 3. Run ``configure-adcs-service.ps1``
 
-Then locate and start the following services in the services snapin:
+Then locate and start the following services in the services snapin (if not running):
 
 * Krestfield Certdog Service
 

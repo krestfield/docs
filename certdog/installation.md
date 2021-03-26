@@ -140,6 +140,8 @@ PS C:\Program Files\Krestfield\certdog> cd install
 PS C:\Program Files\Krestfield\certdog\install> .\install.ps1
 ```
 
+(For the demo version run ``.\install-demo.ps1``)
+
 Note: If you see the message ``Do you want to run software from this untrusted publisher?`` type **A** to always run. The scripts are signed with a publicly trusted CA, but depending on your security settings, there may still be a requirement to recognise the signer
 
 
@@ -241,7 +243,7 @@ This is because we have not yet configured a valid SSL certificate.  For now, cl
 
 You should see the login screen:
 
-<img src=".\images\login.png" alt="image-20210108155637774" style="zoom:67%;" />
+<img src=".\images\login.png" alt="image-20210325144153311" style="zoom:67%;" />
 
 Enter the **username** and **password** for the First Admin User that you provided during the installation and click **Login**  
 

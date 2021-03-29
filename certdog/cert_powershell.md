@@ -1,6 +1,6 @@
 ---
 layout: default
-title: IIS PowerShell Script
+title: Cert PowerShell Script
 parent: Certdog
 nav_order: 13
 ---
@@ -33,7 +33,7 @@ The script can also create a scheduled task which will, by default, run every da
 
 ## Get the Script
 
-Take a look at the script [here](https://github.com/krestfield/certdog-cert) or download the official signed version from ***[ADD LOCATION OF SIGNED here]()***
+Take a look at the script [here](https://github.com/krestfield/certdog-cert) or download the official signed version from [here](https://krestfield.s3.eu-west-2.amazonaws.com/certdog/certdog-cert.zip)  
 
 You should have the following files:
 
@@ -237,7 +237,7 @@ Note that for this to work, the account the scheduled task runs under must be th
 If you wish to run the scheduled task under the LOCAL SYSTEM account you may use [pstools](https://docs.microsoft.com/en-us/sysinternals/downloads/pstools) to start a powershell as LOCAL SYSTEM, then set the credentials by running the following:
 
 ```powershell
-.\certdog-iis.ps1 -setcreds
+.\certdog-cert.ps1 -setcreds
 ```
 
 These will then be accessible by the LOCAL SYSTEM account
@@ -250,7 +250,7 @@ It is a good idea to test that the renewal actually works as expected. This is e
 
 1. Create a local certificate issuer, if not already done so. See the guide [here](https://krestfield.github.io/docs/certdog/create_local_certificate_issuer.html). Create a profile which has a lifetime of 1 day
 2. Update the ``settings.json`` file and set ``renewalDays : 1`` and the ``certIssuerName`` to whatever you have called the certificate issuer
-3. Run ``certdog-iis.ps1 -new`` and create a new certificate, store the credentials and create a scheduled task
+3. Run ``certdog-cert.ps1 -new`` and create a new certificate, store the credentials and create a scheduled task
 4. The task, by default, should run that night (or early next morning). You can run the task on demand before this. Monitor the Event Log for events from source ``certdog`` and event ID's as configured in ``settings.json`` (these are 5280 and 5281 by default)
 5. If everything gets renewed OK you know the accounts etc. are all good
 6. Now update ``settings.json`` to point to the chosen Certificate Issuer and update the ``renewalDays`` to be a reasonable time before your certificates expire and you want them renewed

@@ -72,10 +72,10 @@ The p12Data contains the keys and certificates, encrypted under the password pro
 ### Get the Certificate Details
 
 ```json
-GET https://certdog.net/certdog/api/certs/{{certId}}
+GET https://certdog.net/certdog/api/certs/608292ed7e87646928628cd2
 ```
 
-Where *certId* is that returned from the previous call
+Where 608292ed7e87646928628cd2 is the *certId* returned from the previous call
 
 Returns
 

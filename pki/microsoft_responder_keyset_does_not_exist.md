@@ -1,4 +1,9 @@
-
+---
+layout: default
+title: Microsoft Responder - Bad Signing Certificate
+parent: General PKI
+nav_order: 30
+---
 
 # Microsoft Online Responder - NTE_BAD_KEYSET
 

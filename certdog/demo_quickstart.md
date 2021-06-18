@@ -9,9 +9,7 @@ nav_order: 2
 
  
 
-## Installation
-
-<u>Pre-Requisites</u>
+## Pre-Requisites
 
 * .NET v4.8 runtime
 
@@ -24,7 +22,7 @@ If installing on Windows 10 and you require access to a Microsoft ADCS Certifica
 
 
 
-<u>Steps</u>
+## Download
 
 1. Download from [here](https://krestfield.s3.eu-west-2.amazonaws.com/certdog/certdogfree_v130_win.zip)
 
@@ -38,9 +36,11 @@ If installing on Windows 10 and you require access to a Microsoft ADCS Certifica
 
 2. Unzip to a location on your drive e.g. if you unzip to C:\ you will end up with a directory **C:\certdogfree** (but you can place this anywhere on your system)
 
-   
 
-3. Open a PowerShell as **Administrator**, navigate to the **certdogfree** directory and run:
+
+## Installation
+
+1. Open a PowerShell as **Administrator**, navigate to the **certdogfree** directory and run:
 
    ``.\install.ps1``
 
@@ -48,19 +48,19 @@ If installing on Windows 10 and you require access to a Microsoft ADCS Certifica
 
    
 
-4. At the prompt `Download java (y/n)?` Enter **y** 
+2. At the prompt `Download java (y/n)?` Enter **y** 
 
    
 
-5. A  the prompt `Download the database binaries (y/n)?` Enter **y**
+3. A  the prompt `Download the database binaries (y/n)?` Enter **y**
 
    
 
-6. In the **Database User Admin Account Setup** section, at the prompt `Please enter the password for this account:` enter a *password*
+4. In the **Database User Admin Account Setup** section, at the prompt `Please enter the password for this account:` enter a *password*
 
    
 
-7. In the **First Admin User Account Setup** section enter a *username*, *email* (this email will be used to send certificate renewal reminders - if configured) and *password* e.g.
+5. In the **First Admin User Account Setup** section enter a *username*, *email* (this email will be used to send certificate renewal reminders - if configured) and *password* e.g.
 
    ``Enter the username:`` **admin**  
    ``Enter the email address:`` **me@myemail.com**  
@@ -90,7 +90,7 @@ If installation was a success and no errors were observed, a browser should open
 
 
 
-Login with the *username* and *password* entered in step 7 above
+Login with the *username* and *password* entered in step 5 above
 
 
 

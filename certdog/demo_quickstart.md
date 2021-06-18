@@ -26,9 +26,9 @@ If installing on Windows 10 and you require access to a Microsoft ADCS Certifica
 
    File Hashes:
 
-   * SHA1: ``7ade6265b1c0e0a682afb90c899980293001ba65``
+   * SHA1: ``4b5400508cab684ce251fec6bdac76bc9f5bfde2``
 
-   * SHA256: ``7d15de7b2a22838efa028f50adfe17494b8e390e0fdfbd679a7dc763fb1f035b``
+   * SHA256: ``dae1c2aa331b355bda34bcc995725e8676ab393e3a58a8e4e82169c7dfb1e79c``
 
      
 

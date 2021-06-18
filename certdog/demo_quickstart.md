@@ -38,7 +38,7 @@ If installing on Windows 10 and you require access to a Microsoft ADCS Certifica
 
 ## Installation
 
-1. Open a PowerShell as **Administrator**, navigate to the **certdogfree** directory and run:
+1. Open a PowerShell as **Administrator**, navigate to the **certdogfree\install** directory and run:
 
    ``.\install.ps1``
 

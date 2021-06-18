@@ -174,7 +174,7 @@ You can now also issue certificates via the [REST API](https://127.0.0.1/certdog
 ## Further Options
 To allow the download of the PKCS#12 files (or JKS, PKCS#8) at a later time, from the menu, select **Settings > Settings**
 
-Set **Private Key Retention Period** to a value greater than zero
+Set **Private Key Retention Period** to a value greater than zero and click **Update**
 
 If you now issue a certificate its key will be retained for this period and can be downloaded with the certificate in PKCS#12, JKS or PKCS#8 formats
 

@@ -12,9 +12,7 @@ nav_order: 2
 ## Pre-Requisites
 
 * .NET v4.8 runtime
-
 * Administrator privileges  
-
 * Windows Server 2016/2019
 * Windows 10
 

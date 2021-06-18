@@ -36,7 +36,7 @@ If installing on Windows 10 and you require access to a Microsoft ADCS Certifica
 
      
 
-2. Unzip to a location on your drive e.g. if you unzip to C:\ you will end up with a directory **C:\certdogfree** (but  you can place this anywhere on your system)
+2. Unzip to a location on your drive e.g. if you unzip to C:\ you will end up with a directory **C:\certdogfree** (but you can place this anywhere on your system)
 
    
 
@@ -62,9 +62,11 @@ If installing on Windows 10 and you require access to a Microsoft ADCS Certifica
 
 7. In the **First Admin User Account Setup** section enter a *username*, *email* (this email will be used to send certificate renewal reminders - if configured) and *password* e.g.
 
-   ``Enter the username:`` **admin**
-   ``Enter the email address:`` **me@myemail.com**
-   ``Please enter the password:`` **password**
+   ``Enter the username:`` **admin**  
+   ``Enter the email address:`` **me@myemail.com**  
+   ``Please enter the password:`` **password**    
+
+This is the account you will first log on to the app with 
 
    
 
@@ -165,7 +167,9 @@ Your certificate will be issued from the CA you just created. It will include th
 
 3. Download the PKCS#12 if required  
 
-4. For further details, click **More**
+4. For further details, click **More**  
+
+You can now also issue certificates via the [REST API](https://127.0.0.1/certdog/api/swagger-ui.html), or by using the [.NET client](https://github.com/krestfield/certdog-dotnet-client) or the [Java client](https://github.com/krestfield/certdog-java-client). Use the [IIS Script](https://github.com/krestfield/certdog-iis) to automate IIS cert issuance and renewal or use the scripts to [manage windows machine certificates](https://github.com/krestfield/certdog-cert)
 
 
 

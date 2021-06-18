@@ -1,6 +1,6 @@
 ---
 layout: default
-title: Quick Windows Installation
+title: Free Version Installation and Setup
 parent: Certdog
 nav_order: 2
 ---

@@ -17,15 +17,15 @@ However, you manage your groups and user accounts, the requirement is that an ac
 
 Open the **Certificate Authority snapin**:
 
-<img src="C:\Users\darre\Documents\_mystuff\development\_Krestfield Products\docs\certdog\images\ca-snapin.png" alt="image-20210620101115322" style="zoom: 80%;" />
+<img src=".\images\ca-snapin.png" alt="image-20210620101115322" style="zoom: 80%;" />
 
 Select the **Certificate Templates** node, **right click** and choose **Manage**
 
-<img src="C:\Users\darre\Documents\_mystuff\development\_Krestfield Products\docs\certdog\images\manage-templates.png" alt="image-20210620103520718" style="zoom: 80%;" />
+<img src=".\images\manage-templates.png" alt="image-20210620103520718" style="zoom: 80%;" />
 
 Right click the **template** you wish to issue certificates from and select **Properties**
 
-<img src="C:\Users\darre\Documents\_mystuff\development\_Krestfield Products\docs\certdog\images\ca-template1.png" alt="image-20210620103822626" style="zoom: 80%;" />
+<img src=".\images\ca-template1.png" alt="image-20210620103822626" style="zoom: 80%;" />
 
 Select the **Security** tab and ensure that either the **user/service account** or the **group** (that the account is a member of) has the **Enroll** permission set. In the configuration shown above the *PKI_CERT_ISSUERS* group has the required permission. A service account (svc-certdog-ca) is a member of this group    
 
@@ -33,7 +33,7 @@ Click **OK**
 
 If this template is not already configured on the CA for issuance, back on the **Certificate Authority snapin**, right click the **Certificate Templates** node and select **New > Certificate Template to Issue**  
 
-<img src="C:\Users\darre\Documents\_mystuff\development\_Krestfield Products\docs\certdog\images\template-to-issue.png" alt="image-20210620104317315" style="zoom:80%;" />
+<img src=".\images\template-to-issue.png" alt="image-20210620104317315" style="zoom:80%;" />
 
 Select the **template** and click **OK**  
 

@@ -63,7 +63,7 @@ Enter a **Name** for this issuer - this will be the name referenced when request
 
 Enter the CA **Configuration**. This is the value returned for Config when ``certutil`` is run on a machine in the same domain as the CA. E.g. Opening a command prompt and typing ``certutil`` will return something like the following:  
 
-![image-20210620094957527](C:\Users\darre\Documents\_mystuff\development\_Krestfield Products\docs\certdog\images\ms-ca-certutil.png)
+![image-20210620094957527](.\images\ms-ca-certutil.png)
 
 
 In this case the value that would be entered for **Configuration** is ``IssuingCA.int.krestfield.com\Krestfield CA``  
@@ -80,7 +80,7 @@ Click the **Get Available Templates** button. A request for templates will now b
 
 If successful, the templates will be displayed. Select from the drop-down which template you wish to configure with this issuer  
 
-<img src="C:\Users\darre\Documents\_mystuff\development\_Krestfield Products\docs\certdog\images\msca-setup.png" alt="image-20210620095612254" style="zoom:67%;" />
+<img src=".\images\msca-setup.png" alt="image-20210620095612254" style="zoom:67%;" />
 
 For **Permitted Agents**, if running a single agent (i.e. the default) only one will be present and it will be selected. If you have multiple agents configured, select the agent(s) you wish to process the requests for this CA  
 

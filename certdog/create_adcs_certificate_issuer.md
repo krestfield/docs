@@ -12,11 +12,11 @@ This guide describes how to create a Certificate Issuer for a Microsoft ADCS (Ac
 
 A Certificate Issuer ties the following configuration items together, such that a user can then request certificates by just specifying the Issuer name:  
 
-1. A Credential
+1. A Credential  
    This is an account on the system. It may be a service account or a user account
-3. An ADCS Certificate Template
+3. An ADCS Certificate Template  
    This is the template on the ADCS system that you wish to obtain certificates from
-4. An ADCS Instance
+4. An ADCS Instance  
    The actual Microsoft CA instance that will issue the certificate
 
   

@@ -50,7 +50,7 @@ Once these items have been configured as a Certificate Issuer, users with permis
 
 ​     
 
-### 3. Create a Certificate Issuer
+### 2. Create a Certificate Issuer
 
    Select **Certificate Issuers** from the menu  
 
@@ -97,7 +97,7 @@ Click **Add**
 
 ---
 
-The Certificate Issuer is now ready to issue certificates. Selecting one of the Request options will now display the issuer as an option  
+The Certificate Issuer is now ready to issue certificates. Selecting one of the Request options will now display the issuer as a selection  
 
 If you do not see the Issuer as an option, check that you are a member of the Team that has access. See [here](teams.html) for more information on managing teams
 

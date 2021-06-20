@@ -28,9 +28,14 @@ Once these items have been configured as a Certificate Issuer, users with permis
 ### Pre-Requisites
 
 * You must have an instance of ADCS installed in a domain
+
 * The [ADCS Driver](adcsdriver.html) must be installed onto a machine in the same domain as the ADCS instance
-* You must have the correct credentials (username/password) for the Microsoft certificate template you wish to target. The template must be configured with the correct permissions to allow the credential to enrol for a certificate
+
+* You must have the correct credentials (username/password) for the Microsoft certificate template you wish to target  
+   
+   The template must be configured with the correct permissions to allow the credential to enrol for a certificate  
    For more information see [Setting Microsoft ADCS Template Permissions](setting_adcs_template_permissions.html)
+   
 * The ADCS Driver must be able to access the certdog database  
 
    If the certdog system is all installed on the same machine, this will be in place. If you have installed the ADCS Driver separately, you need to ensure that port 27017 (the default database port) is open. Refer to the [ADCS Driver](adcsdriver.html)  document for further details
@@ -49,7 +54,7 @@ Once these items have been configured as a Certificate Issuer, users with permis
 
    Select **Certificate Issuers** from the menu  
 
-<img src="C:\Users\darre\Documents\_mystuff\development\_Krestfield Products\docs\certdog\images\new_ms_issuer.png" alt="image-20210620094636154" style="zoom: 67%;" />
+<img src=".\images\new_ms_issuer.png" alt="image-20210620094636154" style="zoom: 67%;" />
 
    Click **Add New Issuer**  
 

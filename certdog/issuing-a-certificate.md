@@ -149,7 +149,7 @@ Below is an example using cURL to login and request a certificate:
 # First Login and Obtain the auth token
 token=$(curl --header "Content-Type: application/json" --request POST --data '{"username":"admin","password":"password"}' --insecure https://127.0.0.1/certdog/api/login | jq -r '.token')
 
-# Request a P123
+# Request a PKCS12
 p12Data=$(curl --data '{ "caName":"Certdog TLS Issuer", "dn":"CN=testcert.com", "csrGeneratorName":"RSA 2048 CSR Generator", "p12Password":"password", "teamName":"Test Team" }' --header "Content-Type: application/json" --header "Authorization: Bearer $token" --request POST --insecure https://127.0.0.1/certdog/api/certs/request | jq -r '.p12Data')
 
 echo $p12Data

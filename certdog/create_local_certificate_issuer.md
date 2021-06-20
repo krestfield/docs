@@ -15,11 +15,7 @@ A Certificate Issuer combines a CA (Certificate Authority) and Certificate Profi
   
 
 ### 1. Create a Local CA Configuration  
-   Select **Local CA** > **Configuration** from the menu
-
-<img src=".\images\new_ms_issuer.png" alt="Certificate Issuers" style="zoom:67%;" />
-
-   Click **Add New CA**
+   Select **Local CA** > **Configuration** from the menu and click **Add New CA**
 
 <img src=".\images\new-local-ca.png" alt="image-20210620112307746" style="zoom: 67%;" />
 
@@ -27,43 +23,43 @@ Complete the following details:
 
 <u>Main Certificate Authority Details</u>  
 
-* CA Name: Enter a name for this CA
+* **CA Name**: Enter a name for this CA
 
-* Type: You can create a Root CA (self-signed) or an Intermediate CA (if a Root CA has been configured). A complete hierarchy of CAs can be configured with no limit to the chain length  
+* **Type**: You can create a Root CA (self-signed) or an Intermediate CA (if a Root CA has been configured). A complete hierarchy of CAs can be configured with no limit to the chain length  
 
-* Issuer: If you select Intermediate CA in the option above, a list of available parent CAs (issuers) will be displayed. Select the CA to be the parent/issuer CA
+* **Issuer**: If you select Intermediate CA in the option above, a list of available parent CAs (issuers) will be displayed. Select the CA to be the parent/issuer CA
 
-* Subject DN: Enter the CA Distinguished Name
+* **Subject DN**: Enter the CA Distinguished Name
 
-* Lifetime: Specify the life of this CA. Note that if an Intermediate CA's lifetime is set to exceed that of the issuer, it will be automatically reduced to be equal to the issuers. I.e. you cannot issue an Intermediate CA with a longer life than its parent
+* **Lifetime**: Specify the life of this CA. Note that if an Intermediate CA's lifetime is set to exceed that of the issuer, it will be automatically reduced to be equal to the issuers. I.e. you cannot issue an Intermediate CA with a longer life than its parent
 
-* Algorithm: Select RSA or ECDSA as the algorithm used to generate the CA keys
+* **Algorithm**: Select RSA or ECDSA as the algorithm used to generate the CA keys
 
-* Key Size: If RSA is selected, set the CA key size
+* **Key Size**: If RSA is selected, set the CA key size
 
-* Curve: If ECDSA is selected, set the name for the elliptic curve
+* **Curve**: If ECDSA is selected, set the name for the elliptic curve
 
-* Hash Algorithm: Set the CA's hash algorithm
+* **Hash Algorithm**: Set the CA's hash algorithm
 
 Note that once the CA is configured the above options are fixed and cannot then be changed. You may delete and re-issue a CA but you cannot change its lifetime, algorithm etc.   
 
 <u>Extensions</u>  
 
-* CRL Distribution Points: Enter a URL (or list of URLs separated by commas). These locations will be included in the CRL Distribution Points extension of all certificates issued by this CA and relate to where the CRL issued by this CA can be obtained
-* AIA OCSP Locations: Enter a URL (or list of OCSP URLs separated by commas). These locations will be included in the AIA (Authority Information Access) extension of all certificates issued by this CA and relate to where the certificate status can be obtained via OCSP
-* AIA Issuer Cert Locations: Enter a URL (or list of URLs separated by commas). These locations will be included in the AIA (Authority Information Access) extension of all certificates issued by this CA and relate to where the CA certificate can be obtained
+* **CRL Distribution Points**: Enter a URL (or list of URLs separated by commas). These locations will be included in the CRL Distribution Points extension of all certificates issued by this CA and relate to where the CRL issued by this CA can be obtained
+* **AIA OCSP Locations**: Enter a URL (or list of OCSP URLs separated by commas). These locations will be included in the AIA (Authority Information Access) extension of all certificates issued by this CA and relate to where the certificate status can be obtained via OCSP
+* **AIA Issuer Cert Locations**: Enter a URL (or list of URLs separated by commas). These locations will be included in the AIA (Authority Information Access) extension of all certificates issued by this CA and relate to where the CA certificate can be obtained
 
 All of these options can be edited later  
 
 <u>CRL Generation</u>  
 
-* Generate CRLs: If you want this CA to generate CRLs, enable this option
+* **Generate CRLs**: If you want this CA to generate CRLs, enable this option
 
-* CRL Lifetime: This is the lifetime of the CRL i.e. the period between the Effective date and Next update values in the CRL
+* **CRL Lifetime**: This is the lifetime of the CRL i.e. the period between the Effective date and Next update values in the CRL
 
-* CRL Generation Period: This is how often you want the CRL to be generated. It must be less than the CRL Lifetime. For example, if the lifetime were set to 2 days, you may set this to 1 day so there is always a 1 day overlap
+* **CRL Generation Period**: This is how often you want the CRL to be generated. It must be less than the CRL Lifetime. For example, if the lifetime were set to 2 days, you may set this to 1 day so there is always a 1 day overlap
 
-* CRL Filename: This is the location the CRL file will be placed when generated
+* **CRL Filename**: This is the location the CRL file will be placed when generated
 
   
 

@@ -40,6 +40,8 @@ Once these items have been configured as a Certificate Issuer, users with permis
 
    If the certdog system is all installed on the same machine, this will be in place. If you have installed the ADCS Driver separately, you need to ensure that port 27017 (the default database port) is open. Refer to the [ADCS Driver](adcsdriver.html)  document for further details
 
+  
+
 
 
 ### 1. Create a Credential

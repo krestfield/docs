@@ -35,7 +35,7 @@ Complete the following details:
 
 * **Algorithm**: Select RSA or ECDSA as the algorithm used to generate the CA keys
 
-* **Key Size**: If RSA is selected, set the CA key size
+* **Key Size**: If RSA is selected, set the RSA key size
 
 * **Curve**: If ECDSA is selected, set the name for the elliptic curve
 
@@ -49,13 +49,11 @@ Note that once the CA is configured the above options are fixed and cannot then 
 * **AIA OCSP Locations**: Enter a URL (or list of OCSP URLs separated by commas). These locations will be included in the AIA (Authority Information Access) extension of all certificates issued by this CA and relate to where the certificate status can be obtained via OCSP
 * **AIA Issuer Cert Locations**: Enter a URL (or list of URLs separated by commas). These locations will be included in the AIA (Authority Information Access) extension of all certificates issued by this CA and relate to where the CA certificate can be obtained
 
-All of these options can be edited later  
-
 <u>CRL Generation</u>  
 
 * **Generate CRLs**: If you want this CA to generate CRLs, enable this option
 
-* **CRL Lifetime**: This is the lifetime of the CRL i.e. the period between the Effective date and Next update values in the CRL
+* **CRL Lifetime**: This is the lifetime of the CRL i.e. the period between the *Effective date* and *Next update* values in the CRL
 
 * **CRL Generation Period**: This is how often you want the CRL to be generated. It must be less than the CRL Lifetime. For example, if the lifetime were set to 2 days, you may set this to 1 day so there is always a 1 day overlap
 
@@ -65,13 +63,15 @@ All of these options can be edited later
 
 Click **Create**   
 
-The Extensions and CRL Generation options can be edited later if required  
+(The Extensions and CRL Generation options can be edited later if required)  
+
+  
 
   
 
 **Notes on the CRL Filename and CRL Distribution Points**  
 
-A CRL must be available at the location(s) specified in the CRL Distribution points. You must therefore ensure that the CRL generated at the location specified by CRL Filename is either the location the CDP references or is  copied to this location  
+A CRL must be available at the location(s) specified in the CRL Distribution points. You must therefore ensure that the CRL generated at the location specified by CRL Filename is either the location the CRL Distribution Point references, or is  copied to this location  
 
 One option is to use the certdog web server to host this CRL. To do this perform the following steps:  
 
@@ -95,7 +95,7 @@ This will result in the CRL being created at ``c:\certdog\tomcat\webapps\crl\ca.
 
 <img src=".\images\new_localca_profiles2.png" alt="image-20210620123244374" style="zoom: 67%;" />
 
-* And enter details for **Profile Name**
+* And enter a **Profile Name**
 
 * Select the **lifetime**.  This will be the lifetime of the issued certificate
 
@@ -104,6 +104,7 @@ This will result in the CRL being created at ``c:\certdog\tomcat\webapps\crl\ca.
 * Select the **Key Usages** - these will be applied to the issued certificate
 
 * Select the **Enhanced Key Usages** - these will be applied to the issued certificate  
+
 * If this is to be an OCSP certificate and you do not wish the status of this certificate to be checked. Set the **Include OCSP No Check** option
 
 See [RFC5280](https://tools.ietf.org/html/rfc5280) for more details on key usages  

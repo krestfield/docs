@@ -41,7 +41,7 @@ Obtain the IP address of the server's externally visible interface. This is the 
 
 
 
-1. Edit ``.\certdogfree\install\js\createreplicateset.js``
+Edit ``.\certdogfree\install\js\createreplicateset.js``
 
 Replace the default ``127.0.0.1`` IP Address with your server IP Address. For example, if your server IP was ``192.55.13.17`` the file would be updated from:
 
@@ -61,7 +61,7 @@ rs.status()
 
 Save the file  
 
-  
+<br>  
 
 2. Edit: ``cerdogfree\install\templates\mongod.template.nossl.cfg``
 
@@ -85,9 +85,9 @@ net:
 
 Save the file  
 
-  
+  <br>
 
-
+<hr>
 
 ### Re-Install the Database
 
@@ -99,7 +99,7 @@ At the prompt: ``Download the database binaries (y/n)? (Choose n if you have pre
 
 Continue through the prompts, entering the required details as for the original installation (note: the passwords do not need to match the original installation, all will be reset)  
 
-  
+<hr>
 
 ### Obtain the connection string
 
@@ -136,7 +136,7 @@ mongodb://certmanuser:bFhvqunuZRdvCZK@192.55.13.17/certman
 
 This string will be entered at the ADCS Driver next...
 
-
+<hr>
 
 ### Install the ADCS Agent on the new machine
 

@@ -33,7 +33,8 @@ From your certdog installation
 
    When prompted, choose **y** to continue	
 
-   
+<br>
+<hr>
 
 ### Edit Files with the new IP Address
 

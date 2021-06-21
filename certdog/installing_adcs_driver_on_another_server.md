@@ -128,7 +128,7 @@ We need the URI to configure the ADCS driver in the next step
 
 
 
-Extract the mongodb.uri part and replace the ``127.0.0.1`` IP address with your server's IP address. For example, if your server's IP address was ``192.55.13.17`` the string we want would be as follows:
+Extract the string after the equals sign and replace the ``127.0.0.1`` IP address with your server's IP address. For example, if your server's IP address was ``192.55.13.17`` the string we want would be as follows:
 
 ```
 mongodb://certmanuser:bFhvqunuZRdvCZK@192.55.13.17/certman

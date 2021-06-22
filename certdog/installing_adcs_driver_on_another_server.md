@@ -141,15 +141,27 @@ This string will be entered at the ADCS Driver next...
 
 ### Install the ADCS Agent on the new machine
 
-From the certdog installation, copy the ``.\install`` folder to the new server. It may be easier to zip up this folder, copy then unzip  
+Download the ADCS stand-alone Installer from [here](https://krestfield.s3.eu-west-2.amazonaws.com/certdog/adcsdriver_v120.zip)  
 
-On the new server, navigate to where you placed the files and run the installer:  ``.\install\bin\AdcsDriverInstaller.msi``
+Unzip to a file on the new server  
 
-Click Next through the installation
+Open a PowerShell window and navigate to ``[unzipped location]\adcsdriver\`` and run  
 
-Once installed, open a PowerShell window and navigate to ``.\install\`` and run ``.\configure-adcs-service.ps1``
+​	 ``.\install-certdog-adcs-service.ps1``  
+
+The following output will be shown:
 
 ```powershell
+PS C:\certdogfree\adcsdriver> .\install-certdog-adcs-service.ps1
+
+AD Certificate Services Agent
+-----------------------------
+
+Do you wish to install the ADCS agent on this machine (y/n)?: y
+
+Installing Adcs agent from C:\certdog\adcsdriver\AdcsDriverInstaller.msi
+Services installed OK
+
 Configure Adcs Service
 
 Enter the full database URL. E.g. 'mongodb://certmanuser:mypassword@localhost/certman'
@@ -160,10 +172,19 @@ Full Database URL:
 When prompted to enter the full database URL, enter the string we obtained in the step above e.g.
 
 ```powershell
-mongodb://certmanuser:bFhvqunuZRdvCZK@192.55.13.17/certman
+Full Database URL: mongodb://certmanuser:bFhvqunuZRdvCZK@192.55.13.17/certman
 ```
 
-  
+  The script will then continue:
+
+```powershell
+Starting the service...
+
+Service started OK
+If the database URL changes, re-run this script
+```
+
+
 
   
 

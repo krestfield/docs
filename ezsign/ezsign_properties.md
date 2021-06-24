@@ -67,6 +67,7 @@ This number is represented by ``N`` in the following sections. There is no limit
 | channel.N.tokenType|The token type: **SOFTWARE**, **PKCS11**, **HSM9000**, **GOOGLEKMS**, **AZUREKEYVAULT**|SOFTWARE|
 | channel.N.token.password|The token password required for all token types and will be used to encrypt key store objects. This must be set by running the ezsign-manange script. If tokenType=PKCS11 this is the PIN or Passphrase.  For nCipher devices this will be the operator smartcard passphrase|zijFhJ....vA==|
 | channel.N.defaultKeyLabel|Relates to symmetric channels only (type=SYM). Specifies the default AES key label to use if none is passed to the client|key1|
+| channel.N.saveObjectsToDisk |If this is true, files will not be written to the keystore folder. Use this option if you are passing properties to EzSign and managing key storage externally e.g. in a database|true|
 
 
 
@@ -126,7 +127,7 @@ If ``channel.N.tokenType=HSM9000`` then the following properties must also be co
 
 
 
-### Signature Generation and Verification Properties
+## Signature Generation and Verification Properties
 
 There are various options when generating and verifying signatures. The following settings also dictate what algorithms, key-sizes etc. that will be used when CSRs are generated
 

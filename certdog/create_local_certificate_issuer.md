@@ -17,28 +17,21 @@ A Certificate Issuer combines a CA (Certificate Authority) and Certificate Profi
 ### 1. Create a Local CA Configuration  
    Select **Local CA** > **Configuration** from the menu and click **Add New CA**
 
-<img src=".\images\new-local-ca.png" alt="image-20210620112307746" style="zoom: 67%;" />
+<img src=".\images\new-local-ca.png" alt="image-20210717121009648" style="zoom:80%;" />
 
 Complete the following details:  
 
 <u>Main Certificate Authority Details</u>  
 
 * **CA Name**: Enter a name for this CA
-
+* **Key Store**: Choose from the drop down they Key Store that will be used to generate and store this CA's keys
 * **Type**: You can create a Root CA (self-signed) or an Intermediate CA (if a Root CA has been configured). A complete hierarchy of CAs can be configured with no limit to the chain length  
-
 * **Issuer**: If you select Intermediate CA in the option above, a list of available parent CAs (issuers) will be displayed. Select the CA to be the parent/issuer CA
-
 * **Subject DN**: Enter the CA Distinguished Name
-
 * **Lifetime**: Specify the life of this CA. Note that if an Intermediate CA's lifetime is set to exceed that of the issuer, it will be automatically reduced to be equal to the issuers. I.e. you cannot issue an Intermediate CA with a longer life than its parent
-
 * **Algorithm**: Select RSA or ECDSA as the algorithm used to generate the CA keys
-
 * **Key Size**: If RSA is selected, set the RSA key size
-
 * **Curve**: If ECDSA is selected, set the name for the elliptic curve
-
 * **Hash Algorithm**: Set the CA's hash algorithm
 
 Note that once the CA is configured the above options are fixed and cannot then be changed. You may delete and re-issue a CA but you cannot change its lifetime, algorithm etc.   

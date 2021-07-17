@@ -47,32 +47,33 @@ Note that this setup must be performed on the certdog server itself - not on the
 
 Once setup the following pieces of information are required:
 
-* The PKCS#11 Library
+* **The PKCS#11 Library**
 
-  * This is the library providing the PKCS#11 interface. The full path is required. A typical example for an nCipher HSM's library is:
+  This is the library providing the PKCS#11 interface. The full path is required. A typical example for an nCipher HSM's library is:
 
-    ``C:\Program Files (x86)\nCipher\nfast\toolkits\pkcs11\cknfast-64.dll``
+  ``C:\Program Files (x86)\nCipher\nfast\toolkits\pkcs11\cknfast-64.dll``
 
-    ``/opt/nfast/toolkits/pkcs11/64/libcknfast.so``
+  ``/opt/nfast/toolkits/pkcs11/64/libcknfast.so``
 
-* The slot
+* **Slot**
 
-  * A PKCS#11 device can host many slots which may refer to partitions (on Luna HSMs) or cardsets (on nCipher HSMs). Each slot may use a different password. This will all be configured during the HSM setup so you just need to be sure your password matches with the slot you will reference
+  A PKCS#11 device can host many slots which may refer to partitions (on Luna HSMs) or cardsets (on nCipher HSMs). Each slot may use a different password. This will all be configured during the HSM setup so you just need to be sure your password matches with the slot you will reference
 
-* Password
+* **Password**
 
-  * This is the password used to authenticate to the HSM. It may be an operator cardset passphrase (in the case of nCipher) or a partition passphrase (in the case of Luna) or a combination of username and password as required for the AWS Cloud HSM (which requires the password in this format: ``username:password``)
+  This is the password used to authenticate to the HSM. It may be an operator cardset passphrase (in the case of nCipher) or a partition passphrase (in the case of Luna) or a combination of username and password as required for the AWS Cloud HSM (which requires the password in this format: ``username:password``)
 
-* Use Module Protection
+* **Use Module Protection**
 
-  * Some HSMs allow access without requiring a password. Access to the HSM should then be secured using other mechanisms (e.g. network layer security)
+  Some HSMs allow access without requiring a password. Access to the HSM should then be secured using other mechanisms (e.g. network layer security)
 <br><br>
 ### Google KMS
 
 To use a key ring in Google Cloud the following are required. These can be obtained/configured from your Google Cloud account:
 
 * **Project**
-  * This is the project ID as displayed in the Home dashboard:
+
+  This is the project ID as displayed in the Home dashboard:
 
 <img src=".\images\google_project.png" alt="image-20210717085402338" style="zoom:67%;" />
 
@@ -80,7 +81,7 @@ To use a key ring in Google Cloud the following are required. These can be obtai
 
 * **Key Ring Location**
 
-  You must have created a key ring from the **Security** | **Key management** section in Google Cloud
+  You must have created a key ring from the **Security** &#8594; **Key management** section in Google Cloud
 
   When created the location will be displayed (e.g. *us-west4*, *europe-west2* etc.)
 
@@ -95,7 +96,7 @@ To use a key ring in Google Cloud the following are required. These can be obtai
 
   This is the JSON credential string associated with a service account that has permissions to access the key ring
 
-  A service account can be created from the **IAM & Admin** | **Service Accounts** section. It is recommended that a dedicated service account is created for certdog
+  A service account can be created from the **IAM & Admin** &#8594; **Service Accounts** section. It is recommended that a dedicated service account is created for certdog
 
   The account must have the following roles:
 
@@ -208,11 +209,11 @@ You would now have created an account that can be configured in certdog to acces
 
 
 1. From the certdog application, login as an **Administrator**
-2. From the menu select, **Local CA** | **Key Stores**
+2. From the menu select, **Local CA** &#8594; **Key Stores**
 3. Click **Add New Key Store**
 4. Enter a **Name** for the Key Store. This can be anything you like and is used to reference it later  
 5. Select the **Key Store Type** from the drop down
-    <br><br>
+<br><br>
 ### Software
 <img src=".\images\keystores_software.png" alt="image-20210717115311825" style="zoom: 80%;" />
 

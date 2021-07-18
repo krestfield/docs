@@ -152,7 +152,11 @@ To do this, perform the following steps:
 
 5. At the prompt type the following to create a service principal called certdog (though you can name this whatever you want):
 
-    ```json
+```json
+az ad sp create-for-rbac -n certdog --skip-assignment
+```
+E.g.  
+```json
 az ad sp create-for-rbac -n certdog --skip-assignment
 The output includes credentials that you must protect. Be sure that you do not include these credentials in your code or check the credentials intoyour source control. For more information, see https://aka.ms/azadsp-cli
 'name' property in the output is deprecated and will be removed in the future. Use 'appId' instead. 
@@ -182,7 +186,7 @@ The output includes credentials that you must protect. Be sure that you do not i
 
 7. We must set the permissions on the key vault for this application. To do this, type the following at the shell:
 
-    ​```shell
+```shell
 export AZURE_CLIENT_ID=[value for appId returned above] 
 export AZURE_CLIENT_SECRET=[value returned for password above]
 export AZURE_TENANT_ID=[value returned for tenant above]
@@ -194,13 +198,13 @@ The [Key Vault Name] in this instance is not the full URI, but just the name. Fo
 
 For example:
 
-    ````shell
+```shell
 export AZURE_CLIENT_ID="fd94f971-ebd9-4a32-a56e-97427655429e"
 export AZURE_CLIENT_SECRET="nScc7-6T.gOI7.ugHawFRRoUbwUA_agrC-"
 export AZURE_TENANT_ID="36524c35-390b-4343-390b-36524c35707c"
 
 az keyvault set-policy --name certdog --spn $AZURE_CLIENT_ID --key-permissions delete get list create sign verify encrypt decrypt wrapKey unwrapKey --certificate-permissions get list
-````
+```
 
 
 

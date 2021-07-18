@@ -156,18 +156,18 @@ To do this, perform the following steps:
     az ad sp create-for-rbac -n certdog --skip-assignment
     ```
 E.g.  
-```json
-az ad sp create-for-rbac -n certdog --skip-assignment
-The output includes credentials that you must protect. Be sure that you do not include these credentials in your code or check the credentials intoyour source control. For more information, see https://aka.ms/azadsp-cli
-'name' property in the output is deprecated and will be removed in the future. Use 'appId' instead. 
-{
-	"appId": "fd94f971-ebd9-4a32-a56e-97427655429e", 
-	"displayName": "certdog",
-	"name" : "fd94f971-ebd9-4a32-a56e-97427655429e",
-	"password": "nScc7-6T.gOI7.ugHawFRRoUbwUA_agrC-",
-	"tenant": "36524c35-390b-4343-390b-36524c35707c"
-}
-```
+    ```json
+    az ad sp create-for-rbac -n certdog --skip-assignment
+    The output includes credentials that you must protect. Be sure that you do not include these credentials in your code or check the credentials intoyour source control. For more information, see https://aka.ms/azadsp-cli
+    'name' property in the output is deprecated and will be removed in the future. Use 'appId' instead. 
+    {
+        "appId": "fd94f971-ebd9-4a32-a56e-97427655429e", 
+        "displayName": "certdog",
+        "name" : "fd94f971-ebd9-4a32-a56e-97427655429e",
+        "password": "nScc7-6T.gOI7.ugHawFRRoUbwUA_agrC-",
+        "tenant": "36524c35-390b-4343-390b-36524c35707c"
+    }
+    ```
 
 6. Note the following items: 
    * appId

@@ -198,13 +198,13 @@ The [Key Vault Name] in this instance is not the full URI, but just the name. Fo
 
 For example:
 
-    ```shell
-    export AZURE_CLIENT_ID="fd94f971-ebd9-4a32-a56e-97427655429e"
-    export AZURE_CLIENT_SECRET="nScc7-6T.gOI7.ugHawFRRoUbwUA_agrC-"
-    export AZURE_TENANT_ID="36524c35-390b-4343-390b-36524c35707c"
+```shell
+export AZURE_CLIENT_ID="fd94f971-ebd9-4a32-a56e-97427655429e"
+export AZURE_CLIENT_SECRET="nScc7-6T.gOI7.ugHawFRRoUbwUA_agrC-"
+export AZURE_TENANT_ID="36524c35-390b-4343-390b-36524c35707c"
 
-    az keyvault set-policy --name certdog --spn $AZURE_CLIENT_ID --key-permissions delete get list create sign verify encrypt decrypt wrapKey unwrapKey --certificate-permissions get list
-    ```
+az keyvault set-policy --name certdog --spn $AZURE_CLIENT_ID --key-permissions delete get list create sign verify encrypt decrypt wrapKey unwrapKey --certificate-permissions get list
+```
 
 
 

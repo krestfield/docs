@@ -152,9 +152,9 @@ To do this, perform the following steps:
 
 5. At the prompt type the following to create a service principal called certdog (though you can name this whatever you want):
 
-```json
-az ad sp create-for-rbac -n certdog --skip-assignment
-```
+    ```shell
+    az ad sp create-for-rbac -n certdog --skip-assignment
+    ```
 E.g.  
 ```json
 az ad sp create-for-rbac -n certdog --skip-assignment

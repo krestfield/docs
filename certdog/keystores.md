@@ -17,7 +17,7 @@ Key Stores can be one of the following types:
 * Software
   * The CA keys will be secured using software based encryption and stored in the database  
 * PKCS#11
-  * An HSM (Hardware Security Module) that supports the PKCS#11 interface may be used to generate and store the CA keys. HSMs supported include:
+  * An HSM (Hardware Security Module) that supports the PKCS#11 interface may be used to generate and store the CA keys. Any HSM that supports the PKCS#11 interface may be used, but the following are specifically supported:
     * Thales Luna and DPoD (Data Protection on Demand)
     * nCipher
     * Utimaco
@@ -25,13 +25,13 @@ Key Stores can be one of the following types:
 * Azure Key Vault
   * A Key Vault in Azure can be used. Note: Certdog enforces HSM protection for keys and this is only supported on the Premium pricing tier
 * Google KMS
-  * A key ring in Google Cloud may be used for key storage. Again, certdog enforces HSM protection for these keys
+  * A key ring in Google Cloud may be used for key storage. Again, Certdog enforces HSM protection for these keys
 
   
 
 ## Obtaining Credentials and Settings
 
-Before you create a Key Store the required credentials must be obtained. These are dependant on what type of key store is being used
+Before you create a Key Store, the required credentials must be obtained. These are dependant on what type of key store is being used
 <br><br>
 
 ### Software  
@@ -45,7 +45,7 @@ The PKCS#11 interface makes use of a local library which interfaces to the HSM
 
 This library is provided by the HSM vendor and the setup of this (and any other required configuration) is vendor specific  
 
-Note that this setup must be performed on the certdog server itself - not on the client accessing the certdog server
+Note that this setup must be performed on the Certdog server itself - not on the client accessing the Certdog server
 
 Once setup, the following pieces of information are required:
 
@@ -63,7 +63,7 @@ Once setup, the following pieces of information are required:
 
 * **Password**
 
-  This is the password used to authenticate to the HSM. It may be an operator cardset passphrase (in the case of nCipher) or a partition passphrase (in the case of Luna) or a combination of username and password as required for the AWS Cloud HSM (which requires the password in this format: ``username:password``)
+  This is the password used to authenticate to the HSM. It may be an operator cardset passphrase (in the case of nCipher) or a partition passphrase (in the case of Thales Luna) or a combination of username and password as required by the AWS Cloud HSM (which requires the password in this format: ``username:password``)
 
 * **Use Module Protection**
 
@@ -84,22 +84,22 @@ To use a key ring in Google Cloud, the following are required. These can be obta
 
 * **Key Ring Location**
 
-  You must have created a key ring from the **Security** &#8594; **Key management** section in Google Cloud
+  You must have created a key ring from the **Security** &#8594; **Key management** section in *Google Cloud*
 
-  When created the location will be displayed (e.g. *us-west4*, *europe-west2* etc.)
+  When the key ring has been created the location will be displayed (e.g. *us-west4*, *europe-west2* etc.)
 
   Note that it is recommended that a dedicated key ring be assigned to Certdog as it will be creating and deleting keys within this key ring
 
 
 * **Key Ring Name**
 
-  The name you assigned to the key ring e.g. certdog
+  The name you assigned to the key ring e.g. *certdog*
 
 * **Key Ring Credentials**
 
   This is the JSON credential string associated with a service account that has permissions to access the key ring
 
-  A service account can be created from the **IAM & Admin** &#8594; **Service Accounts** section. It is recommended that a dedicated service account is created for certdog
+  A service account can be created from the **IAM & Admin** &#8594; **Service Accounts** section in the *Google Cloud Console*. It is recommended that a dedicated service account is created for Certdog
 
   The account must have the following roles:
 
@@ -107,16 +107,16 @@ To use a key ring in Google Cloud, the following are required. These can be obta
   * Cloud KMS CryptoKey Signer
   * Cloud KMS CryptoKey Public Key Viewer
 
-  To obtain the JSON credential, select the **Keys** section for the service account and select **Add Key**, choosing **JSON** as the Key type. Download the produced JSON file - it is the contents of this file that must be pasted into the **Key Ring Credentials** section
+  To obtain the JSON credential, select the **Keys** section for the service account and select **Add Key**, choosing **JSON** as the *Key type*. Download the produced JSON file - it is the contents of this file that must be pasted into the **Key Ring Credentials** section
 <br><br>
 
 ### Azure Key Vault  
 
-To use a Key Vault in Azure, the following are required. These can be obtained/configured from the Azure Portal:
+To use a Key Vault in Azure, the following are required. These can be obtained/configured from the *Azure Portal*:
 
 * **Key Vault Name**
 
-  This is the Vault URL as displayed on the vault's overview page, it is not the display name. I.e. in the example below the Key Vault Name required to be entered is: https://certdog.vault.azure.net
+  This is the Vault URL as displayed on the vault's overview page, it is not the display name. I.e. in the example below the *Key Vault Name* required to be entered is: **https://certdog.vault.azure.net**
 
 <img src=".\images\keyvault_name.png" alt="image-20210717092340973" style="zoom:80%;" />
 
@@ -130,7 +130,7 @@ To use a Key Vault in Azure, the following are required. These can be obtained/c
 
 * **Password**
 
-  Also referred to as the **client secret**
+  Also referred to as the **client secret** (the following will explain how to get this)
 
 
 
@@ -141,7 +141,7 @@ To do this, perform the following steps:
 1. If not done so already, create a **Key Vault** in the *Azure Portal*
 2. From the *Portal*, navigate to **Azure Active Directory** and select **App Registrations** from the left hand menu 
 3. From the top menu click **New registration** 
-   1. Provide a **name** for the application (e.g. certdog)
+   1. Provide a **name** for the application (e.g. *certdog*)
    2. Select the *supported account types*
    3. For the *Redirect URI (optional)* setting, choose **Web** and provide a **URL**. The URL does not need to be a real URL but must be formatted as a URL. For example, it could be: https://certdog.myorg.com 
 4. Next, open **Azure Cloud Shell** either by clicking the shell icon from the *Portal*:
@@ -156,7 +156,7 @@ To do this, perform the following steps:
     az ad sp create-for-rbac -n certdog --skip-assignment
     ```
 E.g.  
-    ```json
+    ```shell
     az ad sp create-for-rbac -n certdog --skip-assignment
     The output includes credentials that you must protect. Be sure that you do not include these credentials in your code or check the credentials intoyour source control. For more information, see https://aka.ms/azadsp-cli
     'name' property in the output is deprecated and will be removed in the future. Use 'appId' instead. 
@@ -170,21 +170,21 @@ E.g.
     ```
 
 6. Note the following items: 
-   * appId
+   * **appId**
    
      This is your **Key Vault Client ID**
    
-   * password
+   * **password**
    
-     This is the **password** 
+     This is the required **password** 
    
-   * tenant
+   * **tenant**
    
-     This should be the same value as displayed for Directory ID on the key vaults overview page and is the **Key Vault Tenant ID**
+     This should be the same value as displayed for *Directory ID* on the key vaults overview page and is the **Key Vault Tenant ID**
    
      
 
-7. We must set the permissions on the key vault for this application. To do this, type the following at the shell:
+7. We must now set the permissions on the key vault for this application. To do this, type the following at the shell:
 
     ```shell
     export AZURE_CLIENT_ID=[value for appId returned above] 
@@ -194,7 +194,7 @@ E.g.
     az keyvault set-policy --name [Key Vault Name] --spn $AZURE_CLIENT_ID --key-permissions delete get list create sign verify encrypt decrypt wrapKey unwrapKey –-certificate-permissions get list
     ```
 
-The [Key Vault Name] in this instance is not the full URI, but just the name. For example, if you had created a key vault called certdog. Its URI would be: https://certdog.vault.azure.net/ but the name required here would just be: *certdog*
+The [Key Vault Name] in this instance is not the full URI, but just the *name*. For example, if you had created a key vault called **certdog**. Its URI would be: https://certdog.vault.azure.net/ but the name required here would just be: **certdog**
 
 For example:
 
@@ -208,7 +208,7 @@ az keyvault set-policy --name certdog --spn $AZURE_CLIENT_ID --key-permissions d
 
 
 
-You would now have created an account that can be configured in certdog to access your key vault. 
+You would now have created an account that can be configured in Certdog to access your key vault. 
 
 <br>
 
@@ -233,7 +233,7 @@ Note that this password will be used to protect any keys created by Local CAs th
 
 <img src=".\images\keystores_pkcs11.png" alt="image-20210717115539161" style="zoom: 80%;" />
 
-Enter the **Password**, **PKCS#11 Library**, **HSM Model** and the **Slot** as per the details outlined above and click **Create**
+Enter the **Password**, **PKCS#11 Library**, **HSM Model** and choose the **Slot** as per the details outlined above and click **Create**
 <br><br>
 ### Google KMS
 

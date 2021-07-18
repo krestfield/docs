@@ -148,7 +148,7 @@ To do this, perform the following steps:
 
     ![image-20210717092702011](.\images\azure_shell.png)
 
-​		or by navigating to https://shell.azure.com/
+    ​		or by navigating to https://shell.azure.com/
 
 5. At the prompt type the following to create a service principal called certdog (though you can name this whatever you want):
 
@@ -194,7 +194,7 @@ The [Key Vault Name] in this instance is not the full URI, but just the name. Fo
 
 For example:
 
-````shell
+    ````shell
 export AZURE_CLIENT_ID="fd94f971-ebd9-4a32-a56e-97427655429e"
 export AZURE_CLIENT_SECRET="nScc7-6T.gOI7.ugHawFRRoUbwUA_agrC-"
 export AZURE_TENANT_ID="36524c35-390b-4343-390b-36524c35707c"

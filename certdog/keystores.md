@@ -17,7 +17,7 @@ Key Stores can be one of the following types:
 * Software
   * The CA keys will be secured using software based encryption and stored in the database  
 * PKCS#11
-  * A HSM (Hardware Security Module) that supports the PKCS#11 interface may be used to generate and store the CA keys. HSMs supported include
+  * An HSM (Hardware Security Module) that supports the PKCS#11 interface may be used to generate and store the CA keys. HSMs supported include:
     * Thales Luna and DPoD (Data Protection on Demand)
     * nCipher
     * Utimaco
@@ -47,15 +47,15 @@ This library is provided by the HSM vendor and the setup of this (and any other 
 
 Note that this setup must be performed on the certdog server itself - not on the client accessing the certdog server
 
-Once setup the following pieces of information are required:
+Once setup, the following pieces of information are required:
 
 * **The PKCS#11 Library**
 
   This is the library providing the PKCS#11 interface. The full path is required. A typical example for an nCipher HSM's library is:
 
-  ``C:\Program Files (x86)\nCipher\nfast\toolkits\pkcs11\cknfast-64.dll``
+  Windows: ``C:\Program Files (x86)\nCipher\nfast\toolkits\pkcs11\cknfast-64.dll``
 
-  ``/opt/nfast/toolkits/pkcs11/64/libcknfast.so``
+  Linux/Unix: ``/opt/nfast/toolkits/pkcs11/64/libcknfast.so``
 
 * **Slot**
 
@@ -72,7 +72,7 @@ Once setup the following pieces of information are required:
 
 ### Google KMS  
 
-To use a key ring in Google Cloud the following are required. These can be obtained/configured from your Google Cloud account:
+To use a key ring in Google Cloud, the following are required. These can be obtained/configured from your Google Cloud account:
 
 * **Project**
 
@@ -112,7 +112,7 @@ To use a key ring in Google Cloud the following are required. These can be obtai
 
 ### Azure Key Vault  
 
-To use a Key Vault in Azure the following are required. These can be obtained/configured from the Azure Portal:
+To use a Key Vault in Azure, the following are required. These can be obtained/configured from the Azure Portal:
 
 * **Key Vault Name**
 
@@ -126,7 +126,7 @@ To use a Key Vault in Azure the following are required. These can be obtained/co
 
 * **Key Vault Tenant ID**
 
-  This is also referred to as the **Directory ID** (see the green box in the screen shot above)
+  This is also referred to as the **Directory ID**. This value can be obtained from the overview page  (see the green box in the screen shot above) but it is also provided when we configure access to the key vault (see below)
 
 * **Password**
 
@@ -146,22 +146,22 @@ To do this, perform the following steps:
    3. For the *Redirect URI (optional)* setting, choose **Web** and provide a **URL**. The URL does not need to be a real URL but must be formatted as a URL. For example, it could be: https://certdog.myorg.com 
 4. Next, open **Azure Cloud Shell** either by clicking the shell icon from the *Portal*:
 
-![image-20210717092702011](C:\Users\darre\Documents\_mystuff\development\_Krestfield Products\docs\certdog\images\azure_shell.png)
+    ![image-20210717092702011](.\images\azure_shell.png)
 
 ​		or by navigating to https://shell.azure.com/
 
 5. At the prompt type the following to create a service principal called certdog (though you can name this whatever you want):
 
-```json
+    ```json
 az ad sp create-for-rbac -n certdog --skip-assignment
 The output includes credentials that you must protect. Be sure that you do not include these credentials in your code or check the credentials intoyour source control. For more information, see https://aka.ms/azadsp-cli
 'name' property in the output is deprecated and will be removed in the future. Use 'appId' instead. 
 {
 	"appId": "fd94f971-ebd9-4a32-a56e-97427655429e", 
 	"displayName": "certdog",
-    "name" : "fd94f971-ebd9-4a32-a56e-97427655429e",
+	"name" : "fd94f971-ebd9-4a32-a56e-97427655429e",
 	"password": "nScc7-6T.gOI7.ugHawFRRoUbwUA_agrC-",
-    "tenant": "36524c35-390b-4343-390b-36524c35707c"
+	"tenant": "36524c35-390b-4343-390b-36524c35707c"
 }
 ```
 
@@ -182,7 +182,7 @@ The output includes credentials that you must protect. Be sure that you do not i
 
 7. We must set the permissions on the key vault for this application. To do this, type the following at the shell:
 
-```shell
+    ​```shell
 export AZURE_CLIENT_ID=[value for appId returned above] 
 export AZURE_CLIENT_SECRET=[value returned for password above]
 export AZURE_TENANT_ID=[value returned for tenant above]

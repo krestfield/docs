@@ -23,7 +23,7 @@ Key Stores can be one of the following types:
     * Utimaco
     * AWS Cloud HSM
 * Azure Key Vault
-  * A Key Vault in Azure can be used. Note: Certdog enforces HSM protection for keys and this is only supported on the Premium pricing tier
+  * A Key Vault in Azure can be used. Note: Certdog enforces HSM protection for keys and this is only supported on the Key Vaults created in the *Premium* pricing tier (Certdog will not operate with *Standard* tier Key Vaults)
 * Google KMS
   * A key ring in Google Cloud may be used for key storage. Again, Certdog enforces HSM protection for these keys
 

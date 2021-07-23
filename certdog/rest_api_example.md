@@ -35,7 +35,13 @@ Returns:
 The *token* value returned must be added to the *Authorization* header of subsequent calls:
 
 ```json
-Authorization: Bearer {{token}}
+Authorization: Bearer {token}
+```
+
+e.g.
+
+```json
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9....sdUfWLrtZPRGiQSA
 ```
 
 

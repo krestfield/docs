@@ -9,9 +9,9 @@ nav_order: 12
 
 This client enables rapid integration with your .NET applications enabling the ability to obtain certificates from the certdog application  
 
-You can obtain the client from GitHub **here**  
+You can obtain the client from GitHub [here](https://github.com/krestfield/certdog-dotnet-client)  
 
-Or download a signed version of the dll from **here**
+Or download a signed version of the dll from [here](https://krestfield.s3.eu-west-2.amazonaws.com/certdog/certdognet.dll)
 
 
 
@@ -120,7 +120,6 @@ psexec -i -s cmd.exe
 A new command prompt will open - running under the LOCAL SYSTEM account  
 
 Now run the cmdkey steps above. This will result in these credentials being accessible by an application running under the LOCAL SYSTEM account
-
 
 
 

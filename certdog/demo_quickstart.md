@@ -92,7 +92,7 @@ Login with the *username* and *password* entered in step 5 above
 
 
 
-Note that a default TLS certificate is configured for 127.0.0.1. You can issue a new TLS certificate to replace this or temporarily install the root from here: ``.\certdog\config\sslcerts\dbssl_root.cer`` 
+Note that a default TLS certificate is configured for 127.0.0.1. You can issue a new TLS certificate to replace this or temporarily install the root from here: ``.\certdogfree\config\sslcerts\dbssl_root.cer`` 
 
 
 

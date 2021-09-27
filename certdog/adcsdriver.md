@@ -29,7 +29,7 @@ Ensure that port 27017 is open to wherever the database is hosted i.e. the serve
 
 ## Installation
 
-1. From the ``.\certdog\install\install`` directory, run:
+1. From the ``.\certdog\install`` directory, run:
    ``install-adcs-service.ps1``
    
 2. The installer will attempt to locate the database URL but if prompted, you must enter this
@@ -82,7 +82,7 @@ You should see an entry for the agent. It will be named the FQDN of the machine 
 
 Click this entry and select **Approve**  
 
- The agent will now be able to process requests
+The agent will now be able to process requests
 
 
 

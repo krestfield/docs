@@ -15,7 +15,7 @@ The following outlines the instructions for issuing a Sub CA from either an Ente
 
 ## Stand Alone Offline Root
 
-The following instructions will result in a CA certificate being issued using a default Microsoft template. The certificate will contain the *Basic Constraints* extension (as is required for a CA) but the *Key Usage* extension will not be marked as critical. If this is required, follow the steps in the [next section](#setthekeyusageascritical)
+The following instructions will result in a CA certificate being issued using a default Microsoft template. The certificate will contain the *Basic Constraints* extension (as is required for a CA) but the *Key Usage* extension will not be marked as critical. If this is required, follow the steps in the [next section](#set-the-key-usage-as-critical)
 
 <br>
 

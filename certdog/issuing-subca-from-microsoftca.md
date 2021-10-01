@@ -13,7 +13,11 @@ The following outlines the instructions for issuing a Sub CA from either an Ente
 
 <br>
 
-### Stand Alone Offline Root
+## Stand Alone Offline Root
+
+The following instructions will result in a CA certificate being issued using a default Microsoft template. The certificate will contain the *Basic Constraints* extension (as is required for a CA) but the *Key Usage* extension will not be marked as critical. If this is required, follow the steps in the [next section](#setthekeyusageascritical)
+
+<br>
 
 Copy the CSR that was generated from Certdog to the offline root machine and save it to a file e.g. ``c:\temp\certdog.csr``  
 
@@ -24,37 +28,37 @@ cd c:\temp
 C:\temp>certreq -attrib "CertificateTemplate:SubCA" certdog.csr
 ```
 
-This command tells the CA to use the default *SubCA* template which will add the required Basic Constraints and Key Usage extensions for a CA  
+This command submits the CSR to the CA and tells the CA to use the default *SubCA* template which will add the required Basic Constraints and Key Usage extensions for a CA  
 
 Note: If your policy module settings require you to manually issue the certificate, the request will be sitting in the *Pending Requests* folder of the CA. In this case, right click this pending request and select **All Tasks > Issue**  
 
-From the Issued Certificates folder, locate the issued certificate and download e.g. to ``c:\temp\certdog.cer``  
+From the *Issued Certificates* folder, locate the issued certificate and download e.g. to ``c:\temp\certdog.cer``  
 
 Also download the Root CA's certificate as this is also required for import into Certdog  
 
 <br>
 
-#### Set the Key Usage as Critical
+### Set the Key Usage as Critical
 
-You may notice that when the above is run the issued certificate does not have the Key Usage extension marked as critical  
+To issue the CA certificate with Key Usage marked as critical, perform the following:
 
-If this is required (and it is recommended), issue the certificate as follows  
+<br>
 
-In this case we need the CA to set the request as pending. To check this:
+We need the CA to set the request as pending. 
 
 From the Microsoft CA snapin, right click the CA, then select **Properties**  
 
-From the Properties windows, select the **Policy Module** tab
+From the *Properties* windows, select the **Policy Module** tab
 
 <img src=".\images\msca_policy.png" alt="image-20211001080648311" style="zoom:80%;" />
 
-Select the **Set the certificate request status to pending. The administrator must explicitly issue the certificate** option and click **OK** and **OK** again on the Properties window
+Select the **Set the certificate request status to pending. The administrator must explicitly issue the certificate** option and click **OK** and **OK** again on the *Properties* window
 
 <br>
 
 Next we need to tell the CA to use the key usage that is provided in the request rather than add its default extension (which results in the Key Usage being non-critical)
 
-  
+<br>
 
 On the CA machine, open a command prompt as Administrator and enter the following command:  
 
@@ -66,7 +70,7 @@ On the CA machine, open a command prompt as Administrator and enter the followin
 
 <br>
 
-Then we submit to the CA as before:
+Then we submit the request to the CA as before:
 
    ```powershell
    cd c:\temp
@@ -84,7 +88,7 @@ Create a new text file called ``c:\temp\keyusage.txt`` and populate with the fol
    03 02 01 86
    ```
 
-This is the ASN.1 encoded key usage - encoded as hexadecimal. The important part here is the last byte 0x86 which is 134 decimal. Key usage is encoded as a bit string, and if you set the bits for digitalSignature, KeyCertSign and cRLSign (1000 0110 = 134 = 0x86)
+This value is the ASN.1 encoded key usage - encoded as hexadecimal. The important part here is the last byte 0x86 (134 decimal). Key usage is encoded as a bit string, and if you set the bits for digitalSignature, KeyCertSign and cRLSign you get 1000 0110 which is 86 hexadecimal
 
 <br>
 
@@ -101,11 +105,17 @@ Where
    `1` indicates that this extension is to be marked as critical - this is the important part
    ``@keyusage.txt`` contains the content of the extension
 
-3. From the CA now issue the certificate from the pending container as above
+<br>
+
+From the CA, in the *Pending Requests* folder right click this request and select **All Tasks > Issue**  
+
+From the *Issued Certificates* folder, locate the issued certificate and download e.g. to ``c:\temp\certdog.cer``  
+
+Also download the Root CA's certificate as this is also required for import into Certdog  
 
 <br>
 
-### Enterprise CA 
+## Enterprise CA 
 
 From an Enterprise CA you can manipulate templates as required. Normally, the *Subordinate Certification Authority* template is used (often duplicated to your own requirements)
 
@@ -123,16 +133,16 @@ e.g.
 
 ```powershell
 C:\Windows\system32>certutil -catemplates -config "CA1.certdog.local\Certdog"
-CertdogSubordinateCertificationAuthority: Certdog Subordinate Certification Authority -- Auto-Enroll: Access is denied.
+CertdogSubCertAuthority: Certdog Sub Cert Authority -- Auto-Enroll: Access is denied.
 CertdogComputer: Certdog Computer -- Auto-Enroll: Access is denied.
 CertDog90DayTLS: CertDog 90 Day TLS -- Auto-Enroll: Access is denied.
 CertUtil: -CATemplates command completed successfully.
 ```
 
-Identify the Sub CA template which in this case is **CertdogSubordinateCertificationAuthority** and the run the same commands as for the offline CA above e.g.
+Identify the Sub CA template which in this case is **CertdogSubCertAuthority** and the run the same commands as for the offline CA above e.g.
 
 ```powershell
-c:\temp\certreq -attrib "CertificateTemplate:CertdogSubordinateCertificationAuthority" .\certdog.csr
+c:\temp\certreq -attrib "CertificateTemplate:CertdogSubCertAuthority" .\certdog.csr
 ```
 
 The certificate may be taken under submission (if your policy module is configured that way), so must be issued via the CA console. Otherwise, you will be prompted to save the issued certificate  

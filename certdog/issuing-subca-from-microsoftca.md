@@ -40,13 +40,13 @@ If this is required (and it is recommended), issue the certificate as follows
 
 In this case we need the CA to set the request as pending. To check this:
 
-1. From the Microsoft CA snapin, right click the CA, then select **Properties**  
+From the Microsoft CA snapin, right click the CA, then select **Properties**  
 
-2. From the Properties windows, select the **Policy Module** tab
+From the Properties windows, select the **Policy Module** tab
 
 <img src=".\images\msca_policy.png" alt="image-20211001080648311" style="zoom:80%;" />
 
-3. Select the **Set the certificate request status to pending. The administrator must explicitly issue the certificate** option and click **OK** and **OK** again on the Properties window
+Select the **Set the certificate request status to pending. The administrator must explicitly issue the certificate** option and click **OK** and **OK** again on the Properties window
 
 
 
@@ -76,7 +76,7 @@ Then we submit to the CA as before:
 
 Note the **RequestId** (which in the example above is 12) as we now need to update this request. We are going to add the Key Usage extension and mark it as critical 
 
-1. Create a new text file called ``c:\temp\keyusage.txt`` and populate with the following  
+Create a new text file called ``c:\temp\keyusage.txt`` and populate with the following  
 
    ```
    03 02 01 86
@@ -86,7 +86,7 @@ This is the ASN.1 encoded key usage - encoded as hexadecimal. The important part
 
 
 
-2. Save the file and run the following command from the prompt  
+Save the file and run the following command from the prompt  
 
    ```powershell
    c:\temp\certutil -setextension 12 2.5.29.15 1 @keyusage.txt

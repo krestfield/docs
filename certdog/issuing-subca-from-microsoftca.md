@@ -7,9 +7,11 @@ nav_order: 111
 
 # Issuing a Sub CA Certificate from a Microsoft CA
 
+<br>
+
 Certdog allows the generation of a CSR for a Sub CA which can then be signed by an existing CA  
 
-The following outlines the instructions for issuing a Sub CA from either an Enterprise or Stand-Alone Microsoft CA
+The following outlines the instructions for issuing a Sub CA from either an [Enterprise](#enterprise-ca) or [Stand-Alone](#stand-alone-offline-root) Microsoft CA
 
 <br>
 
@@ -44,7 +46,7 @@ To issue the CA certificate with Key Usage marked as critical, perform the follo
 
 <br>
 
-We need the CA to set the request as pending. 
+We need the CA to set the request as pending 
 
 From the Microsoft CA snapin, right click the CA, then select **Properties**  
 
@@ -56,11 +58,11 @@ Select the **Set the certificate request status to pending. The administrator mu
 
 <br>
 
-Next we need to tell the CA to use the key usage that is provided in the request rather than add its default extension (which results in the Key Usage being non-critical)
+Next we need to tell the CA to use the key usage that is provided in the request, rather than add its default extension (which results in the Key Usage being non-critical)
 
 <br>
 
-On the CA machine, open a command prompt as Administrator and enter the following command:  
+On the CA machine, open a command prompt as Administrator and run the following commands:  
 
    ```powershell
    certutil -setreg policy\editflags -EDITF_ADDOLDKEYUSAGE
@@ -70,7 +72,7 @@ On the CA machine, open a command prompt as Administrator and enter the followin
 
 <br>
 
-Then we submit the request to the CA as before:
+Then submit the request to the CA, specifying the default *SubCA* template:
 
    ```powershell
    cd c:\temp
@@ -80,30 +82,28 @@ Then we submit the request to the CA as before:
    Certificate request is pending: Taken Under Submission (0)
    ```
 
-Note the **RequestId** (which in the example above is 12) as we now need to update this request. We are going to add the Key Usage extension and mark it as critical 
+Note the **RequestId** (which in the example above is 12) as we now need to update this request. We are going to add the Key Usage extension and mark it as critical
 
-Create a new text file called ``c:\temp\keyusage.txt`` and populate with the following  
+<br> Create a new text file called ``c:\temp\keyusage.txt`` and populate with the following:  
 
-   ```
-   03 02 01 86
-   ```
+``03 02 01 86``
 
-This value is the ASN.1 encoded key usage - encoded as hexadecimal. The important part here is the last byte 0x86 (134 decimal). Key usage is encoded as a bit string, and if you set the bits for digitalSignature, KeyCertSign and cRLSign you get 1000 0110 which is 86 hexadecimal
+This value is the ASN.1 encoded key usage - encoded as hexadecimal. The important part here is the last byte 86 (which is 134 decimal). Key usage is encoded as a bit string, and if you set the bits for digitalSignature, KeyCertSign and cRLSign you get ``10000110`` which is 86 hexadecimal
 
 <br>
 
-Save the file and run the following command from the prompt  
+Save the file and run the following from the prompt:  
 
    ```powershell
-   c:\temp\certutil -setextension 12 2.5.29.15 1 @keyusage.txt
+   c:\temp>certutil -setextension 12 2.5.29.15 1 @keyusage.txt
    ```
 
 Where 
 
-   ``12`` Is the RequestId obtained from above
-   ``2.5.29.15`` is the OID of the key usage extension
-   `1` indicates that this extension is to be marked as critical - this is the important part
-   ``@keyusage.txt`` contains the content of the extension
+   ``12`` Is the RequestId obtained from above  
+   ``2.5.29.15`` is the OID of the key usage extension  
+   `1` indicates that this extension is to be marked as critical - this is the important part  
+   ``@keyusage.txt`` contains the content of the extension  
 
 <br>
 

@@ -11,11 +11,13 @@ Certdog allows the generation of a CSR for a Sub CA which can then be signed by 
 
 The following outlines the instructions for issuing a Sub CA from either an Enterprise or Stand-Alone Microsoft CA
 
+<br>
+
 ### Stand Alone Offline Root
 
-1. Copy the CSR that was generated from Certdog to the offline root machine and save it to a file e.g. ``c:\temp\certdog.csr``  
+Copy the CSR that was generated from Certdog to the offline root machine and save it to a file e.g. ``c:\temp\certdog.csr``  
 
-2. Open a command prompt as Administrator and run the following:  
+Open a command prompt as Administrator and run the following:  
 
 ```powershell
 cd c:\temp
@@ -24,13 +26,13 @@ C:\temp>certreq -attrib "CertificateTemplate:SubCA" certdog.csr
 
 This command tells the CA to use the default *SubCA* template which will add the required Basic Constraints and Key Usage extensions for a CA  
 
-Note: If your policy module settings require you to manually issue the certificate, it will be in the *Pending Requests* folder of the CA. In this case you need to right click this pending request and select **All Tasks > Issue**  
+Note: If your policy module settings require you to manually issue the certificate, the request will be sitting in the *Pending Requests* folder of the CA. In this case, right click this pending request and select **All Tasks > Issue**  
 
-3. From the Issued Certificates folder, locate the issued certificate and download e.g. to ``c:\temp\certdog.cer``  
+From the Issued Certificates folder, locate the issued certificate and download e.g. to ``c:\temp\certdog.cer``  
 
-4. Also download the Root CA's certificate as this is also required for import into Certdog  
+Also download the Root CA's certificate as this is also required for import into Certdog  
 
-
+<br>
 
 #### Set the Key Usage as Critical
 
@@ -48,7 +50,7 @@ From the Properties windows, select the **Policy Module** tab
 
 Select the **Set the certificate request status to pending. The administrator must explicitly issue the certificate** option and click **OK** and **OK** again on the Properties window
 
-
+<br>
 
 Next we need to tell the CA to use the key usage that is provided in the request rather than add its default extension (which results in the Key Usage being non-critical)
 
@@ -62,7 +64,7 @@ On the CA machine, open a command prompt as Administrator and enter the followin
    net start certsvc
    ```
 
-  
+<br>
 
 Then we submit to the CA as before:
 
@@ -84,7 +86,7 @@ Create a new text file called ``c:\temp\keyusage.txt`` and populate with the fol
 
 This is the ASN.1 encoded key usage - encoded as hexadecimal. The important part here is the last byte 0x86 which is 134 decimal. Key usage is encoded as a bit string, and if you set the bits for digitalSignature, KeyCertSign and cRLSign (1000 0110 = 134 = 0x86)
 
-
+<br>
 
 Save the file and run the following command from the prompt  
 
@@ -101,7 +103,7 @@ Where
 
 3. From the CA now issue the certificate from the pending container as above
 
-
+<br>
 
 ### Enterprise CA 
 

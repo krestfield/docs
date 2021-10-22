@@ -7,17 +7,23 @@ nav_order: 57
 
 # Retarget ADCS nCipher Keys to Certdog
 
-If your microsoft CA is using a SafeNet nCipher HSM to store its keys. These can be migrated to certdog by following the steps below  
+If your microsoft CA is using an SafeNet nCipher HSM to store its keys. These can be migrated to certdog by following the steps below  
 
-Essentially, the key is migrated from a the Microsoft application (mscapi/caping) to the pkcs11 application type thus allowing the PKCS#11 interface (which certdog uses) to make use of the keys
+Essentially, the key is migrated from a the Microsoft application (mscapi/caping) to the pkcs11 application type, thus allowing the PKCS#11 interface (which certdog uses) to make use of the keys
 
+<br>
 
+Obtain the CA cert e.g. ``ca.cer``
 
-Obtain the CA cert e.g. ca.cer
+Open a command prompt as Administrator and navigate to 
 
-From ``C:\Program Files (x86)\nCipher\nfast\bin>``
+``C:\Program Files (x86)\nCipher\nfast\bin>``
 
-Run ``nfkminfo -k``
+From the prompt run:
+
+``nfkminfo -k``
+
+E.g.
 
 ```
 C:\Program Files (x86)\nCipher\nfast\bin>nfkminfo -k
@@ -25,29 +31,33 @@ C:\Program Files (x86)\nCipher\nfast\bin>nfkminfo -k
 Key list - 27 keys
  AppName caping               Ident machine--d085239508f9d1890989497b38aef757494cf329
  AppName mscapi               Ident container-2c0afb5fd62d214dad1028bc6dfae81317d1b201
- AppName pkcs11               Ident uabdf7d24396411b3c58ba8332934d3d4739e1a119
  AppName pkcs11               Ident uac2dca1b681e776095cd902c81fb8d1ec4cd9b5c6
  AppName pkcs11               Ident uc7c99e43e627c3a62933bc1c16f559db862978952-06c70f2b0fa50c3799809248ffd5fcf9a740b169
- AppName pkcs11               Ident uc7c99e43e627c3a62933bc1c16f559db862978952-095c20a22841c399b1581dcd255468c24c8dafc4
 ...
 ```
 
 This displays the keys currently held on the HSM  
 
-The *AppName* specifies what interface was used to create the keys. In the example above we see caping, *mscapi* and *pkcs11*  
+The *AppName* specifies what interface was used to create the keys. In the example above we see *caping*, *mscapi* and *pkcs11*  
 
 ADCS keys are created using the *caping* application  
 
-<br>
+<br>
 
-To find the actual keys that are associated with the CA certificate we use the nCipher ``pub key-find.exe`` command, specifying the CA certificate (ca.cer):
+To find the actual keys that are associated with the CA certificate we use the nCipher command:
+
+``pub key-find.exe`` 
+
+passing it the CA certificate. It will then use the public key from the certificate to locate the keys held on the HSM
+
+E.g. 
 
 ```
 C:\Program Files (x86)\nCipher\nfast\bin>pubkey-find.exe c:\ca.cer
  input format cert
  nCore hash 6556fd4afee4c4db9c6d60e901b107bb34a8c82a
 
- name `Import Keys CA'
+ name `Krestfield Root CA'
  appname caping
  ident machine--d085239508f9d1890989497b38aef757494cf329
 ```
@@ -106,9 +116,9 @@ key generation parameters:
 A summary (as above) is displayed and you may then be prompted to enter your HSM passphrase (e.g. the operator smart card passphrase), depending on your HSM setup:
 
 ```
-Loading `test':
+Loading `caocs':
  Module 1: 0 cards of 1 read
- Module 1 slot 0: `test' #2
+ Module 1 slot 0: `caocs' #2
  Module 1 slot 0:- passphrase supplied - reading card
 Card reading complete.
 ```

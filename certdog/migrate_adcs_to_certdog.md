@@ -118,7 +118,7 @@ This indicates that either
 
 We need to extract the certificates from the Microsoft database and then imported into Certdog. This ensures that all previously issued certificates and their status (whether revoked or active) will be available in Certdog  
 
-[Follow the instructions here](import-adcs-database.html) on how to export and import the CA database
+[Follow the instructions here](import_adcs_database.html) on how to export and import the CA database
 
 <br>
 

@@ -85,7 +85,7 @@ During the import a Key Store will be created for this CA, with the name ``[CA N
 -keyStoreId 6131fe2fb6b0c54c13c59935
 ```
 
-You can also specify the following attributes at this point or they can be set later via the UI
+You can also specify the following attributes at this point, or they can be set later via the UI
 
 * -cdps
   * An array of CRL Distribution Points. 
@@ -104,5 +104,4 @@ You can also specify the following attributes at this point or they can be set l
   * The period between each CRL generation
 * -crlFilename
   * The local filename of the CRL
-
 

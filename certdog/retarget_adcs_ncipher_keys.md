@@ -1,13 +1,15 @@
 ---
 layout: default
-title: Retarget ADCS nCipher Keys
+title: Retarget ADCS nCipher Keys to Certdog Format
 parent: Certdog
 nav_order: 57
 ---
 
-# Retarget ADCS nCipher Keys to Certdog
+# Retarget ADCS nCipher Keys to Certdog Format (PKCS#11)
 
-If your microsoft CA is using an SafeNet nCipher HSM to store its keys. These can be migrated to certdog by following the steps below  
+If your microsoft CA is using a SafeNet nCipher HSM to store its keys. These keys can be migrated to the format supported by certdog, ready for import   
+
+With nCipher HSMs keys are separated by interface, such that those generated using CAPI/CNG are only available to that interface. Certdog uses the PKCS#11 interface so 
 
 Essentially, the key is migrated from a the Microsoft application (mscapi/caping) to the pkcs11 application type, thus allowing the PKCS#11 interface (which certdog uses) to make use of the keys
 

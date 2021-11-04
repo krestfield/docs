@@ -12,7 +12,7 @@ However, there are times when you need to migrate keys to another machine or exp
 
 While attempting to export you will see the following:
 
-<img src="./images/export_private_greyed_out.png" alt="image-20211104102655013" style="zoom:80%;" />
+<img src=".\images\export_private_greyed_out.png" alt="image-20211104102655013" style="zoom:80%;" />
 
 
 

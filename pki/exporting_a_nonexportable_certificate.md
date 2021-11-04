@@ -12,7 +12,7 @@ However, there are times when you need to migrate keys to another machine or exp
 
 While attempting to export you will see the following:
 
-<img src=".\images\export_private_greyed_out.png" alt="image-20211104102655013" style="zoom:80%;" />
+<img src="./images/export_private_greyed_out.png" alt="image-20211104102655013" style="zoom:80%;" />
 
 
 
@@ -64,13 +64,13 @@ Open a command prompt and navigate to`` [unzip location]\x64``
 
 We will start mimikatz:
 
-```powershell
+```
 mimikaz
 ```
 
  Then run the following commands:
 
-```powershell
+```
 crypto::capi
 privilege::debug
 crypto::cng
@@ -152,7 +152,7 @@ mimikatz # crypto::certificates /systemstore:local_machine /store:my /export
 
 Once you have the PFX file you require 
 
-* Remove the mimikatz tool from your system
+* Remove the mimikatz tool from your system (delete the directory)
 
 * Re-enable your anti-virus e.g. Microsoft Defender Real-time protection
 

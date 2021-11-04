@@ -19,7 +19,7 @@ You may choose to do this for reasons such as:
 
 * You wish to decommission an existing Microsoft CA but want to maintain a fall back as well as the ability to keep producing CRLs  
 
-* As a backup use for an existing Microsoft CA  
+* As a backup for an existing Microsoft CA  
 
 <br>
 
@@ -33,7 +33,7 @@ Migration can be achieved by following a few simple steps:
 
 ### Step 1: Import the CA Certificate and CA Keys
 
-If the CA to be imported is not a Root CA then the Root CA Certificate (and any other issuing CA Certificates must be imported first, as follows:  
+If the CA to be imported is not a Root CA then the Root CA Certificate (and any other issuing CA Certificates) must be imported first, as follows:  
 
 In Certdog, select **Certificates** from the menu 
 
@@ -45,15 +45,15 @@ Next we need to import the CA keys and certificate
 
 <u>Software Keys</u>
 
-Export the CA keys as a PFX and import into Certdog following the guide [here](migrate_ca_software_keys_to_certdog.html)  
+[Export the CA keys as a PFX and import into Certdog following the guide here](migrate_ca_software_keys_to_certdog.html)  
 
-If your keys are not marked as exportable, contact support who will be able to provide options for extracting the keys 
+If your keys are not marked as exportable, [see the guide here](https://krestfield.github.io/docs/pki/exporting_a_nonexportable_certificate.html) or contact support for options 
 
 <u>HSM Stored Keys</u>
 
-If your keys are stored on an EnTrust nCipher HSM, we need to re-target the keys (from the Microsoft CSP/CNG to PKCS11) as described [here](retarget_adcs_ncipher_keys.html)
+If your keys are stored on an EnTrust nCipher HSM, we first need to re-target the keys (from the Microsoft format - CSP/CNG to the certdog format - PKCS11) [as described here](retarget_adcs_ncipher_keys.html)
 
-Configure a PKCS#11 key store to reference the HSM. Follow the steps [here](keystores.html) to create the key store
+Configure a PKCS#11 key store to reference the HSM. [Follow the steps here](keystores.html) to create the key store
 
 <br>
 
@@ -109,8 +109,8 @@ There was an error importing the private key for certificate Krestfield CA1. No 
 
 This indicates that either 
 
-* The Key Store configured is not the same Key Store on which the CA keys were stored
-* The CA Key has not been migrated. Follow the guide [here](retarget_adcs_ncipher_keys) to do this
+* The Key Store configured is not the same Key Store/HSM on which the CA keys reside
+* The CA Key has not been migrated. [Follow the guide here](retarget_adcs_ncipher_keys) to do this
 * The Key does not reside on this HSM or Security World. If you are performing this on a new server to which you have copied the Security World, check all files in the ``Key Management Data\local`` folder are present (have been copied from the old server)
 
 <br>
@@ -119,7 +119,7 @@ This indicates that either
 
 We need to extract the certificates from the Microsoft database and then imported into Certdog. This ensures that all previously issued certificates and their status (whether revoked or active) will be available in Certdog  
 
-Follow the instructions [here](import-adcs-database.md) on how to export and import the CA database
+[Follow the instructions here](import-adcs-database.html) on how to export and import the CA database
 
 <br>
 
@@ -157,7 +157,7 @@ For the **Authority Information Access (AIA)** extension note all entries where 
 
 From Certdog, locate your imported Local CA by navigating to **Local CAs > CA Configuration** from the menu, then clicking your CA and click **View/Edit**  
 
-For each of the *Include in the online certificate status protocol (OCSP) extension* items add an entry for **AIA OCSP Locations**. Remember to comma separate each entry  
+For each of the *Include in the online certificate status protocol (OCSP) extension* items add an entry for **AIA OCSP Locations**. Remember to comma separate each entry e.g. ``http://server1.com/ocsp,http://server2.com/ocsp``  
 
 For each of the *Include in the AIA extension of issued certificates* items add an entry for **AIA Issuer Cert Locations**. Remember to comma separate each entry  
 

@@ -1,7 +1,7 @@
 ---
 layout: default
 title: Setting Microsoft ADCS Template Permissions
-parent: Certdog
+parent: General PKI
 nav_order: 7
 ---
 

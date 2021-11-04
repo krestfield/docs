@@ -4,10 +4,9 @@ title: Migrate ADCS to Certdog
 parent: Certdog
 nav_order: 56
 ---
-
-> Version 1.5+
-
 # Migrate an ADCS instance to Certdog
+
+> Applies to Certdog Version 1.5+
 
 An existing ADCS instance (Microsoft CA) can be migrated to Certdog. This can include the existing CA keys and all issued certificates  
 

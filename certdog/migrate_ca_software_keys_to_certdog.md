@@ -4,12 +4,9 @@ title: Migrate CA Software Keys to Certdog
 parent: Certdog
 nav_order: 59
 ---
-
-> Version 1.5+
-
 # Migrate CA Software Keys to Certdog
 
-
+> Applies to Certdog Version 1.5+
 
 Any CA that uses software keys that can be exported as a PFX/PKCS#12 file can be imported into Certdog  
 

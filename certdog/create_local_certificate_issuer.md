@@ -24,7 +24,7 @@ Complete the following details:
 <u>Main Certificate Authority Details</u>  
 
 * **CA Name**: Enter a name for this CA
-* **Key Store**: Choose from the drop down they Key Store that will be used to generate and store this CA's keys
+* **Key Store**: Choose from the drop down they Key Store that will be used to generate and store this CA's keys. See [here to create a key store](keystores.html)
 * **Type**: You can create a Root CA (self-signed) or an Intermediate CA (if a Root CA has been configured). A complete hierarchy of CAs can be configured with no limit to the chain length  
 * **Issuer**: If you select Intermediate CA in the option above, a list of available parent CAs (issuers) will be displayed. Select the CA to be the parent/issuer CA
 * **Subject DN**: Enter the CA Distinguished Name

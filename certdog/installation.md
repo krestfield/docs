@@ -78,9 +78,9 @@ CertUtil: -hashfile command completed successfully.
 
 Compare the hash value produced with the following checksums:
 
-SHA1: ``e759db6cb4e3f66656c0c1b120630295f1e2cd55``
+SHA1: ``f3c48db27738b5570ad7ffe35084231aaef0589b``
 
-SHA256: ``eeaab3196237b390e861cf5ab3c2abab51f70ba1d63069a40d97bc9852dc4e83``
+SHA256: ``a2d955e470c7d7702ebc31468de01a7a1ea7deb77239adcf301e33320feda42e``
 
 If they differ, the download is corrupt or has been altered. Attempt the download again, the file sizes should be over 100Mb. If hashes still don't match please contact support@krestfield.com 
 

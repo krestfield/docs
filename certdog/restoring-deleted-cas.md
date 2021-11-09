@@ -32,9 +32,9 @@ If a Local CA, Key Store or Certificate Issuer have been accidentally deleted, t
 
 <br> 
 
-<u>**REST API**</u>
+**<u>REST API</u>**
 
-For details calling the REST API [check here](rest_api_overview.html)
+For an example of calling the REST API [check here](rest_api_example.html)
 
 To obtain a list of the deleted Local CAs, login to obtain a JWT token then call:
 

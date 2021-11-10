@@ -19,7 +19,13 @@ Click **More**
 
 Within the certificate details view, Click **More Details** then click **Click to show revocation options**:  
 
-<img src=".\images\revoke_cert_details.png" alt="image-20210122125811949" style="zoom:67%;" /> 
+<img src=".\images\revoke_cert_details.png" alt="image-20211110170215078" style="zoom:80%;" /> 
+
+
+
+The following will appear:
+
+<img src=".\images\revoke_cert_details2.png" alt="image-20211110170301677" style="zoom:80%;" />
 
 For *Revocation Reason*, select the reason you are revoke this certificate and click the **Revoke This Certificate** button
 

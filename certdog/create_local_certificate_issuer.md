@@ -24,17 +24,38 @@ Complete the following details:
 <u>Main Certificate Authority Details</u>  
 
 * **CA Name**: Enter a name for this CA
+
 * **Key Store**: Choose from the drop down they Key Store that will be used to generate and store this CA's keys. See [here to create a key store](keystores.html)
-* **Type**: You can create a Root CA (self-signed) or an Intermediate CA (if a Root CA has been configured). A complete hierarchy of CAs can be configured with no limit to the chain length  
-* **Issuer**: If you select Intermediate CA in the option above, a list of available parent CAs (issuers) will be displayed. Select the CA to be the parent/issuer CA
+
+* **Type**: You can create a Root CA (self-signed) or an Intermediate CA. A complete hierarchy of CAs can be configured with no limit to the chain length 
+
+  If you choose Intermediate CA you also Shave the options:  **Local CA** or **External CA (Generate a CSR)**
+
+  Choose **Local CA** if  you want to issue this intermediate CA from an existing Local CA
+
+  Choose **External CA** if you want to generate a CSR for processing by an external CA - such as an existing Root CA (e.g. a Microsoft Root)
+
+* **Issuer**: If you select Intermediate CA and Local CA in the options above, a list of available parent CAs (issuers) will be displayed. Select the CA to be the parent/issuer CA
+
 * **Subject DN**: Enter the CA Distinguished Name
+
 * **Lifetime**: Specify the life of this CA. Note that if an Intermediate CA's lifetime is set to exceed that of the issuer, it will be automatically reduced to be equal to the issuers. I.e. you cannot issue an Intermediate CA with a longer life than its parent
+
+  Note that this option is not available if *External CA* was selected above since the issuing CA will determine this value when it issues the certificate
+
 * **Algorithm**: Select RSA or ECDSA as the algorithm used to generate the CA keys
+
 * **Key Size**: If RSA is selected, set the RSA key size
+
 * **Curve**: If ECDSA is selected, set the name for the elliptic curve
+
 * **Hash Algorithm**: Set the CA's hash algorithm
 
 Note that once the CA is configured the above options are fixed and cannot then be changed. You may delete and re-issue a CA but you cannot change its lifetime, algorithm etc.   
+
+<br>
+
+If you chose to *Issue From* an **External CA** above, the following options will not be available. This is because it will be the issuing CA will decide on these values when it issues the certificate
 
 <u>Extensions</u>  
 
@@ -54,13 +75,33 @@ Note that once the CA is configured the above options are fixed and cannot then 
 
   
 
+The above options (Extensions and CRL Generation) can be edited later if required)  
+
 Click **Create**   
 
-(The Extensions and CRL Generation options can be edited later if required)  
+If you chose to *Issue From* an **External CA** above, the option will be **Create CSR**    
 
-  
+<br>
 
-  
+### Processing a CSR from an External CA
+
+If an external CA will be issuing the certificate, after clicking *Create CSR*, select the created CA entry from the list and choose **View/Edit**
+
+<img src=".\images\int_ca_csr.png" alt="image-20211109215723096" style="zoom:80%;" />
+
+The status will be shown as *This CA is awaiting a response from a CSR*
+
+The CSR can be downloaded (or copied to the clipboard) for processing at the Issuing CA  
+
+Once the certificate has been issued, obtain the issuing CA certificate (e.g. the Root CA certificate) as well as the certificate issued from the CSR  
+
+Click the **Upload CA Certificate** button and navigate to the certificate issued from the CSR
+
+Click the **Upload Issuer Certificate** button and navigate to the issuing CA certificate (e.g. the Root CA certificate)
+
+Click **Accept**
+
+<br>
 
 **Notes on the CRL Filename and CRL Distribution Points**  
 
@@ -84,25 +125,9 @@ This will result in the CRL being created at ``c:\certdog\tomcat\webapps\crl\ca.
 
 ### 2. Create a Certificate Profile
 
-   Select **Local CA** > **Profiles** from the menu and click **Add New Profile**
+Select **Local CA** > **Profiles** from the menu and click **Add New Profile**
 
-<img src=".\images\new_localca_profiles2.png" alt="image-20210620123244374" style="zoom: 67%;" />
-
-* And enter a **Profile Name**
-
-* Select the **lifetime**.  This will be the lifetime of the issued certificate
-
-* If you wish SANs (Subject Alternative Names) that are provided in the CSR (Certificate Signing Request) to be included in any issued certificates, ensure the **Include SANs from CSR** option is checked  
-
-* Select the **Key Usages** - these will be applied to the issued certificate
-
-* Select the **Enhanced Key Usages** - these will be applied to the issued certificate  
-
-* If this is to be an OCSP certificate and you do not wish the status of this certificate to be checked. Set the **Include OCSP No Check** option
-
-See [RFC5280](https://tools.ietf.org/html/rfc5280) for more details on key usages  
-
-Click **Add**  
+See [Create a Local Certificate Profile](create_a_local_certificate_profile.html) for details on creating profiles
 
    
 

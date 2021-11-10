@@ -10,7 +10,7 @@ nav_order: 6
 
 A Local Certificate Issuer enables you to issue certificates from a certdog controlled CA
 
-A Certificate Issuer combines a CA (Certificate Authority) and Certificate Profile  
+A Certificate Issuer combines a Local CA (Certificate Authority) and a Certificate Profile  
 
 <br>  
 

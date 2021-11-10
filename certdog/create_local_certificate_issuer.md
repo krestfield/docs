@@ -29,11 +29,11 @@ Complete the following details:
 
 * **Type**: You can create a Root CA (self-signed) or an Intermediate CA. A complete hierarchy of CAs can be configured with no limit to the chain length 
 
-  If you choose Intermediate CA you also Shave the options:  **Local CA** or **External CA (Generate a CSR)**
+  If you choose Intermediate CA you also have the options:  **Local CA** or **External CA (Generate a CSR)**
 
   Choose **Local CA** if  you want to issue this intermediate CA from an existing Local CA
 
-  Choose **External CA** if you want to generate a CSR for processing by an external CA - such as an existing Root CA (e.g. a Microsoft Root)
+  Choose **External CA** if you want to generate a CSR for processing by an external CA - such as an existing Root CA (e.g. a Microsoft Root). See the section [Processing a CSR from an External CA](#processing-a-csr-from-an-external-ca) below for details on processing a request
 
 * **Issuer**: If you select Intermediate CA and Local CA in the options above, a list of available parent CAs (issuers) will be displayed. Select the CA to be the parent/issuer CA
 
@@ -41,7 +41,7 @@ Complete the following details:
 
 * **Lifetime**: Specify the life of this CA. Note that if an Intermediate CA's lifetime is set to exceed that of the issuer, it will be automatically reduced to be equal to the issuers. I.e. you cannot issue an Intermediate CA with a longer life than its parent
 
-  Note that this option is not available if *External CA* was selected above since the issuing CA will determine this value when it issues the certificate
+  Note that this option is not available if *External CA* was selected above, since the issuing CA will determine this value when it issues the certificate
 
 * **Algorithm**: Select RSA or ECDSA as the algorithm used to generate the CA keys
 
@@ -51,17 +51,25 @@ Complete the following details:
 
 * **Hash Algorithm**: Set the CA's hash algorithm
 
-Note that once the CA is configured the above options are fixed and cannot then be changed. You may delete and re-issue a CA but you cannot change its lifetime, algorithm etc.   
+Note that once the CA is configured, the above options are fixed and cannot then be changed. You may delete and re-issue a CA but you cannot change its lifetime, algorithm etc.   
 
 <br>
 
-If you chose to *Issue From* an **External CA** above, the following options will not be available. This is because it will be the issuing CA will decide on these values when it issues the certificate
+If you chose to *Issue From* an **External CA** above, the following options will not be available. This is because it will be the issuing CA that will decide on these values when it issues the certificate
 
 <u>Extensions</u>  
 
 * **CRL Distribution Points**: Enter a URL (or list of URLs separated by commas). These locations will be included in the CRL Distribution Points extension of all certificates issued by this CA and relate to where the CRL issued by this CA can be obtained
+
+  E.g. http://server1.com/crl/ca1.crl,http://server2.com/crl/ca1.crl
+
 * **AIA OCSP Locations**: Enter a URL (or list of OCSP URLs separated by commas). These locations will be included in the AIA (Authority Information Access) extension of all certificates issued by this CA and relate to where the certificate status can be obtained via OCSP
+
+  E.g. http://server1.com/ocsp
+
 * **AIA Issuer Cert Locations**: Enter a URL (or list of URLs separated by commas). These locations will be included in the AIA (Authority Information Access) extension of all certificates issued by this CA and relate to where the CA certificate can be obtained
+
+  E.g. https://server3.com/ca1/cacert.cer
 
 <u>CRL Generation</u>  
 
@@ -69,37 +77,15 @@ If you chose to *Issue From* an **External CA** above, the following options wil
 
 * **CRL Lifetime**: This is the lifetime of the CRL i.e. the period between the *Effective date* and *Next update* values in the CRL
 
-* **CRL Generation Period**: This is how often you want the CRL to be generated. It must be less than the CRL Lifetime. For example, if the lifetime were set to 2 days, you may set this to 1 day so there is always a 1 day overlap
+* **CRL Generation Period**: This is how often you want the CRL to be generated. It must be less than the CRL Lifetime (set above). For example, if the lifetime were set to 2 days, you may set this to 1 day so there is always a 1 day overlap
 
-* **CRL Filename**: This is the location the CRL file will be placed when generated
-
-  
+* **CRL Filename**: This is the local location where the CRL file will be placed when generated. See the [Notes on the CRL Filename and CRL Distribution Points](#notes-on-the-crl-filename-and-crl-distribution-points) section below for more details
 
 The above options (Extensions and CRL Generation) can be edited later if required)  
 
 Click **Create**   
 
 If you chose to *Issue From* an **External CA** above, the option will be **Create CSR**    
-
-<br>
-
-### Processing a CSR from an External CA
-
-If an external CA will be issuing the certificate, after clicking *Create CSR*, select the created CA entry from the list and choose **View/Edit**
-
-<img src=".\images\int_ca_csr.png" alt="image-20211109215723096" style="zoom:80%;" />
-
-The status will be shown as *This CA is awaiting a response from a CSR*
-
-The CSR can be downloaded (or copied to the clipboard) for processing at the Issuing CA  
-
-Once the certificate has been issued, obtain the issuing CA certificate (e.g. the Root CA certificate) as well as the certificate issued from the CSR  
-
-Click the **Upload CA Certificate** button and navigate to the certificate issued from the CSR
-
-Click the **Upload Issuer Certificate** button and navigate to the issuing CA certificate (e.g. the Root CA certificate)
-
-Click **Accept**
 
 <br>
 
@@ -155,3 +141,22 @@ Click **Add**
 
 If you wish to request a certificate by just providing a DN i.e. with certdog generating the CSR on your behalf, then a CSR Generator must be available.  See [Create a CSR Generator](create_csr_generator.html)
 
+<br>
+
+### Processing a CSR from an External CA
+
+If an external CA will be issuing the certificate, after clicking *Create CSR*, select the created CA entry from the list and choose **View/Edit**
+
+<img src=".\images\int_ca_csr.png" alt="image-20211109215723096" style="zoom:80%;" />
+
+The status will be shown as *This CA is awaiting a response from a CSR*
+
+The CSR can be downloaded (or copied to the clipboard) for processing at the Issuing CA  
+
+Once the certificate has been issued, obtain the issuing CA certificate (e.g. the Root CA certificate) as well as the certificate issued from the CSR  
+
+Click the **Upload CA Certificate** button and navigate to the certificate issued from the CSR
+
+Click the **Upload Issuer Certificate** button and navigate to the issuing CA certificate (e.g. the Root CA certificate)
+
+Click **Accept**

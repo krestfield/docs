@@ -22,13 +22,13 @@ If installing on Windows 10 and you require access to a Microsoft ADCS Certifica
 
 ## Download
 
-1. Download from [here](https://krestfield.s3.eu-west-2.amazonaws.com/certdog/certdogfree_v140_win.zip)
+1. Download from [here](https://krestfield.s3.eu-west-2.amazonaws.com/certdog/certdogfree_v150_win.zip)
 
    File Hashes:
 
-   * SHA1: ``9c44e13d2a115f07939ecf63d6ac8aabf62f6974``
+   * SHA1: ``8e8f4d37ede66640e98a624c45ce070da73979f1``
 
-   * SHA256: ``52192f8e339c2fae08a900a4a325296980d050de9a4162dd85d57739572cb6f2``
+   * SHA256: ``11bceddddb2cb39bfe3890e741edaaf487e5ef7f6bfc21cf460c0a7e07f34ac2``
 
      
 

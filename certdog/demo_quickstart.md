@@ -167,7 +167,7 @@ Your certificate will be issued from the CA you just created. It will include th
 
 4. For further details, click **More**  
 
-You can now also issue certificates via the [REST API](https://127.0.0.1/certdog/api/swagger-ui.html), or by using the [.NET client](https://github.com/krestfield/certdog-dotnet-client) or the [Java client](https://github.com/krestfield/certdog-java-client). Use the [IIS Script](https://github.com/krestfield/certdog-iis) to automate IIS cert issuance and renewal or use the scripts to [manage windows machine certificates](https://github.com/krestfield/certdog-cert)
+You can now also issue certificates via the [REST API](rest_api_overview.html), or by using the [.NET client](https://github.com/krestfield/certdog-dotnet-client) or the [Java client](https://github.com/krestfield/certdog-java-client). Use the [IIS Script](https://github.com/krestfield/certdog-iis) to automate IIS cert issuance and renewal or use the scripts to [manage windows machine certificates](https://github.com/krestfield/certdog-cert)
 
 
 

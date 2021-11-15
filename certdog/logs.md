@@ -37,7 +37,7 @@ This file is configured to rollover every day or when the file reaches 100Mb. Th
 
 ``[certdog install]\config\log4j2.xml``
 
-This file may be updated as required
+This file may be updated as required. Refer to the [log4j2.xml documentation](https://logging.apache.org/log4j/2.x/) for more information
 
 <br>
 

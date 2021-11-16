@@ -26,7 +26,7 @@ Although a certificate cannot be altered. The information that Certdog associate
   * Whether to prevent emails being sent when this certificate nears expiry (if configured)
 * Deletion
   * If the certificate is no longer required or created in error it may be deleted
-  * Note that this will not revoke the certificate! It will only remove it from the local store. If CRL or OCSP is in use revoke the certificate BEFORE deleting
+  * Note that this will not revoke the certificate! It will only remove it from the local store. If CRL or OCSP is in use, revoke the certificate BEFORE deleting
 
 <br>
 
@@ -36,11 +36,15 @@ These options are available from the *Certificate Details* view (From **Certific
 
 Click **Actions** to view the available options
 
+<br>
+
 If **Change Owner** or **Change Team** are selected you may select the new value from a drop down:
 
 <img src=".\images\change_cert_details3.png" alt="Change Owner" style="zoom:80%;" />
 
-Note that, if not an admin, you are restricted to selecting your team membership and users in those teams 
+Note that, if not an admin, you are restricted to selecting your team membership and only assigning to users in those teams 
+
+<br>
 
 To update *Extra Information* or *Additional Emails*, as you begin typing in these fields a *Click to Update* button will appear. Click when the updates are complete. The changes will be saved
 

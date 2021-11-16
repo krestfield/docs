@@ -26,8 +26,8 @@ Web: [https://www.krestfield.com](https://www.krestfield.com)
 
 > **Version 1.5.0**
 > **Release Date**: 15 November 2021
->
-> **Updates**
+
+**Updates**
 
 * The CA keys and certificates from existing ADCS (Microsoft CA) instances can now be migrated to Certdog, Including CAs using nCipher HSMs
 * Local CAs can now be configured with specific Path Length constraints
@@ -60,8 +60,8 @@ Web: [https://www.krestfield.com](https://www.krestfield.com)
 
 > **Version 1.4.1**
 > **Release Date**: 6 August 2021
->
-> **Updates**
+
+**Updates**
 
 * Logging can now also be directed to any log4j2 supported appender
 * Force delete of key stores and local CAs added
@@ -80,8 +80,8 @@ Web: [https://www.krestfield.com](https://www.krestfield.com)
 
 > **Version 1.4.0**
 > **Release Date**: 19 July 2021
->
-> **Updates**
+
+**Updates**
 
 * Local CAs can now utilise the follow key stores:
   * PKCS#11
@@ -105,8 +105,8 @@ Web: [https://www.krestfield.com](https://www.krestfield.com)
 
 > **Version 1.3.0**
 > **Release Date**: 17 June 2021
->
-> **Updates**
+
+**Updates**
 
 * You can now build a hierarchy of Local CAs - with any path length
 * Local CAs now produce CRLs
@@ -130,10 +130,9 @@ Web: [https://www.krestfield.com](https://www.krestfield.com)
 
 
 > **Version 1.2.0**
->
 > **Release Date**: 25 March 2021
->
-> **Updates**
+
+**Updates**
 
 * Users are now associated with teams
 * Administrators can decided whether users see own certs, team certs all all of them
@@ -153,10 +152,9 @@ Web: [https://www.krestfield.com](https://www.krestfield.com)
 
 
 > **Version 1.1.0**
->
 > **Release Date**: 15thFebruary 2021
->
-> **Updates**:
+
+**Updates**:
 
 * Support for PrimeKey's EJBCA Added
 * Private Keys can now be stored for a configurable length of time
@@ -182,7 +180,6 @@ Web: [https://www.krestfield.com](https://www.krestfield.com)
 
 
 > **Version 1.0.0**
->
 > **Release Date**: 22 January 2021
->
-> **Updates**: Initial Release
+
+**Updates**: Initial Release

@@ -5,9 +5,9 @@ parent: Certdog
 nav_order: 5000
 ---
 
-# Password Characters
+# Keystore Password Characters
 
-Passwords used within Certdog must be ASCII
+Keystore passwords used within Certdog must be ASCII
 
 <br>
 

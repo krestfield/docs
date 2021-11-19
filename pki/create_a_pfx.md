@@ -9,7 +9,7 @@ nav_order: 22
 
 Whilst Certdog allows for certificates to be provisioned as PFX files (as well as JKS and PEM). There are occasions when you need to generate a PFX file using standard Microsoft tooling  
 
-In this example, we will generate a CSR (marking it as exportable)
+In this example, we will generate a CSR (marking it as exportable), submit the request and obtain the certificate, then export as a PFX
 
 <br>
 
@@ -163,11 +163,11 @@ But in some cases no output is observed. As long as no errors are received, thin
 
 ### Export as a PFX
 
-You can now either open up mmc.exe, locate the issued certificate in the machine store and export
+You can now either open up ``mmc.exe``, locate the issued certificate in the machine store and export
 
 Or you can use PowerShell:  
 
-First get the certificate we imported. You can use the s
+First, we need to get the certificate we imported. You can use the subject name to locate this:
 
 ```powershell
 $certificate = Get-ChildItem -Path Cert:\LocalMachine\My\ | Where-Object {$_.Subject -match "server1.comp.org"}
@@ -175,19 +175,19 @@ $certificate = Get-ChildItem -Path Cert:\LocalMachine\My\ | Where-Object {$_.Sub
 
 Which should work OK if that's the only certificate you have with that name  
 
-Otherwise, we can also specify the Thumbprint - this was displayed when we accepted the certificate above:  
+Otherwise, we can also specify the *Thumbprint* - this was displayed when we accepted the certificate above:  
 
 ```powershell
 $certificate = Get-ChildItem -Path Cert:\LocalMachine\My\ | Where-Object {$_.Thumbprint -match "d11475aed31aa89f17d5720d311e0a3afaa68853"}
 ```
 
-Then, we set the password we will export under:
+Then, we set the password we will export the PFX under:
 
 ```powershell
 $password="strongpassword" | ConvertTo-SecureString -AsPlainText -Force
 ```
 
-And export it to a file:
+And then export the certificate and keys as a PFX to a file:
 
 ```powershell
 Export-PfxCertificate -Cert $certificate -FilePath cert.pfx -Password $password

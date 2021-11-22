@@ -55,7 +55,7 @@ The key items to edit here are:
 
 * MachineKeySet=true
 
-  * The keys will be stored in the Local Machine store. Certificates that are used by web servers or services will require the keys to be stored here
+  * The keys will be stored in the Local Machine store. Certificates that are used by web servers or services will require the keys to be stored here. But this doesn't really matter if your intention is to export the PFX for use elsewhere
 
 * HashAlgorithm
 
@@ -80,7 +80,7 @@ The key items to edit here are:
 
 * Extensions (Optional)
 
-  * Here you can specify extensions. In the example above we specify the ``2.5.29.17`` extension which refers to Subject Alternative Names
+  * Here you can specify extensions. In the example above we specify the ``2.5.29.17`` extension which refers to *Subject Alternative Names*
   * Specify the required SANS. Available options for SANs are:
     * DNS
     * EMail
@@ -124,7 +124,7 @@ Follow normal processes to obtain a certificate from your CSR. If you have privi
 certreq cert.csr
 ```
 
-If you didn't specify a template in the .inf file you can do so as follows:
+If you didn't specify a template in the .inf file, you can do so now, as follows:
 
 ```powershell
 certreq -attrib "CertificateTemplate:SubCA" cert.csr
@@ -132,7 +132,7 @@ certreq -attrib "CertificateTemplate:SubCA" cert.csr
 
 You will be prompted to choose the CA to send the request to
 
-The certificate will be issued. Download this to the same location as the .inf file. E.g. ``.\cert.cer``
+The certificate will be issued. Download this to the same location as the .inf file. E.g. ``cert.cer``
 
 <br>
 

@@ -19,7 +19,7 @@ To upgrade to a new version of Certdog you may
 * Perform an in-place upgrade
   * This option overwrites the existing installation with the new files but retains all of the data and settings
 
-
+<br>
 
 ## Option 1: Uninstall the old and Install the new version
 
@@ -46,23 +46,21 @@ With those from the new version's zip
 
 <br>
 
-### Steps
-
-**<u>STEP 1 Stop Certdog</u>**
+**<u>STEP 1 - Stop Certdog</u>**
 
 On Windows, open the services snapin and stop **Krestfield Certdog Service**
 
-On other OS's, either stop Tomcat or use the stop-certdog or stop-tomcat scripts  
+(On other OS's, either stop Tomcat or use the stop-certdog or stop-tomcat scripts)  
 
 
 
 On Windows, open the services snapin and stop **Krestfield Certdog Database**
 
-On other OS's, stop mongo using the command line option ``db.shutdownServer()``or service options ``service mongod stop`` 
+(On other OS's, stop mongo using the command line option ``db.shutdownServer()``or service options ``service mongod stop``) 
 
 <br>
 
-**<u>STEP 2 Backup</u>** 
+**<u>STEP 2 - Backup</u>** 
 
 Backup the following folder:
 
@@ -74,7 +72,7 @@ Also backup the database by following the guide [here](backup.html)
 
 <br>
 
-**<u>STEP 3 Delete Existing Files</u>**
+**<u>STEP 3 - Delete Existing Files</u>**
 
 From your existing installation, navigate to:
 
@@ -101,7 +99,7 @@ certdog#api.war
 
 <br>
 
-**<u>STEP 4</u>**
+**<u>STEP - 4</u>**
 
 Unzip the new version's media, navigate to this unzipped location here:
 
@@ -129,7 +127,7 @@ To your current installation here:
 
 <br>
 
-**<u>STEP 5</u>**
+**<u>STEP - 5</u>**
 
 Start Certdog
 
@@ -139,9 +137,11 @@ Start Certdog
 
 Attempt to login as per normal to Certdog  
 
-Confirm the version: From the menu select Settings then choosing the Settings sub menu
+Confirm the version as follows:  
 
-The System Information should display:
+From the menu select **Settings** then choosing the **Settings** sub menu
+
+The *System Information* should display:
 
 * UI Version
 * API Version

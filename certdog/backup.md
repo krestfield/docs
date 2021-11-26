@@ -9,7 +9,7 @@ nav_order: 30
 
 
 
-The certdog architecture means that the majority of data is stored within the database with very few static configuration options being stored outside of the database
+The certdog architecture means that the majority of data is stored within the database with very few static configuration options stored outside of this
 
 
 
@@ -60,7 +60,7 @@ If the server's files system (where certdog is running) is also backed up, ensur
 
 <br>
 
-This will restore the database to the state when the backup was taken and overwrite any changes that would have been made since then. A more granular approach can achieved using the mongodump and mongorestore tools
+This will restore the database to the state when the backup was taken and overwrite any changes that would have been made since then. A more granular approach can achieved using the mongodump and mongorestore tools...
 
 <br>
 
@@ -70,7 +70,9 @@ This will restore the database to the state when the backup was taken and overwr
 
 You may download and install the mongodb Database Tools as per [this guide ](https://docs.mongodb.com/database-tools/installation/installation/)
 
-Then use ``mongodump`` and ``mongorestore`` options to backup and restore  
+Then use the ``mongodump`` and ``mongorestore`` tools to backup and restore  
+
+There is no need to stop the database when running either of these commands  
 
 Refer to the mongodb documentation for full details, but the certdog database may be backed up by using a command such as the following:
 
@@ -78,7 +80,7 @@ Refer to the mongodb documentation for full details, but the certdog database ma
 mongodump --db certman --username certmanuser --password [db password] --archive=c:\dbbackups\bk1.zip --gzip --ssl --tlsInsecure
 ```
 
-The ``--db certman --username certmanuser`` are the default values for the database. The password for ``certmanuser `` can be obtained from your ``.\config\application.properties`` file
+The ``--db certman`` and ``--username certmanuser`` options are the default values for the database. The password for ``certmanuser `` can be obtained from your ``.\config\application.properties`` file
 
 In this example, the entire database contents will be stored to the ``bk1.zip`` file which is zipped due to the ``--gzip`` switch (leave out the ``--gzip`` switch to prevent compression)  
 
@@ -139,9 +141,9 @@ This folder contains some static configuration data (such as the database URL to
 
 You should backup this folder but these settings will change infrequently and so only need backing up after initial setup and whenever a change is made (to the application TLS certificates or database location)  
 
-If you carry out a machine or image backup, these settings will be retained together with that data anyway
+If you carry out a machine or image backup, ensure this folder is included in that backup
 
-
+<br>
 
 ### Logs
 
@@ -151,7 +153,7 @@ However, there are also the following file logs:
 
 <u>log4j2 Logs</u>
 
-If the log4j2 default settings are in use then the following folder will contain text based logs
+If the log4j2 default settings are in use, then the following folder will contain text based logs
 
 ```sh
 [certdog installation]\logs

@@ -7,22 +7,42 @@ nav_order: 20
 
 # Upgrading Certdog
 
- 
+ <br>
 
-If you already have an instance of Certdog running and wish to upgrade to a later version, the following steps may be followed  
+To upgrade to a new version of Certdog you may 
+
+* Simply uninstall the old and install the new version
+  * This will not retain any settings - you will end up with a new, blank installation of the later version
+  * This may be useful if you are building your configurations using automation and also do not need to retain any existing data (existing certificates)
+  * This may also be the best option for test instances when you just want to dispose of the old versions
+
+* Perform an in-place upgrade
+  * This option overwrites the existing installation with the new files but retains all of the data and settings
+
+
+
+## Option 1: Uninstall the old and Install the new version
+
+Follow the guide [here](uninstalling.html) to uninstall your existing installation
+
+If you wish to retain the data, in case of future use, follow the guide [here](backup.html) to backup
+
+Follow the guide [here](installation.html) to install the new version
 
 <br>
 
+## Option 2: In Place Upgrade
+
 ### Overview
 
-Essentially, we will backup the current installation then replace the following
+Essentially, we will backup the current installation then replace the following file and folder:
 
 ```
 [certdog installation]\tomcat\webapps\certdog#api.war
 [certdog installation]\tomcat\webapps\certdog#ui
 ```
 
-From the new version's zip
+With those from the new version's zip
 
 <br>
 
@@ -35,8 +55,6 @@ On Windows, open the services snapin and stop **Krestfield Certdog Service**
 On other OS's, either stop Tomcat or use the stop-certdog or stop-tomcat scripts  
 
 
-
-Stop the Database from running
 
 On Windows, open the services snapin and stop **Krestfield Certdog Database**
 

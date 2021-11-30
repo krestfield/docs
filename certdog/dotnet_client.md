@@ -52,8 +52,8 @@ For example, to obtain a certificate from the demo environment and save the resp
 List<String> sans = new List<String>();
 sans.Add("DNS:mydomain.com");
 
-String p12Base64Data = Certdog.GetCert("https://certdog.net/certdog/api", "Test TLS Issuer", "CN=mydoma.com", 
-    "RSA 2048 Gen", "password", sans, "certdogtestuser", "password");
+String p12Base64Data = Certdog.GetCert("https://certdog.net/certdog/api", "Certdog TLS", "CN=mydoma.com", 
+    "RSA2048 Generator", "password", sans, "certdogtest", "password");
 
 byte[] p12BinaryData = Convert.FromBase64String(p12Base64Data);
 using (BinaryWriter binWriter = new BinaryWriter(File.Open("C:\\temp\\test.pfx", FileMode.Create)))

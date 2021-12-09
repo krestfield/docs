@@ -102,7 +102,7 @@ When entering a DN, the country field (C) must be one of the following codes:
 | GT | Guatemala |
 | GG | Guernsey |
 | GN | Guinea |
-| GW | Guinea|Bissau |
+| GW | Guinea-Bissau |
 | GY | Guyana |
 | HT | Haiti |
 | HM | Heard Island & Mcdonald Islands |
@@ -228,7 +228,7 @@ When entering a DN, the country field (C) must be one of the following codes:
 | TJ | Tajikistan |
 | TZ | Tanzania |
 | TH | Thailand |
-| TL | Timor|Leste |
+| TL | Timor-Leste |
 | TG | Togo |
 | TK | Tokelau |
 | TO | Tonga |

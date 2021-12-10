@@ -31,9 +31,9 @@ Enter a **name** and optionally, a **description**
 
 Select the **Certificate Issuers** that you want to be available to members of this team 
 
-If you wish to make everyone in this team an administrator, select the **Administrator** option. Note that it is recommended that you create a separate Administrators team and add specific users into that team (as users can be members of multiple teams if required)  
+If you wish to make everyone in this team an administrator, select the **Administrator** option
 
-**Email Suppression**
+<br> **Email Suppression**
 
 When certificates are issued, they are associated with a Team. If your [email settings](email_settings.html) are set to send emails upon certificate issuance, an email is sent to the requestor whenever a certificate is issued. If you wish to prevent these emails being sent out for this team, check the **Suppress Cert Issued Emails** option
 
@@ -42,8 +42,6 @@ If you wish to prevent reminder emails being sent for certificates associated wi
 
 
 Click **Add**  
-
-<br>
 
 ---
 

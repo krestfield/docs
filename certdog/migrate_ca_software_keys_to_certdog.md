@@ -79,6 +79,20 @@ E.g.
 Import-LocalCAFromP12 -name "CA Import" -p12Filename msca.pfx -p12Password password
 ```
 
+If your password contains special characters that could intefere with standard PowerShell processing, wrap the password with quotes e.g.
+
+```powershell
+Import-LocalCAFromP12 -name "CA Import" -p12Filename msca.pfx -p12Password 'password'
+```
+
+Or you can enter the p12Password as a secure string, as follows:
+
+```powershell
+$password = Read-Host -assecurestring "Enter P12 Password"
+$p12Password = [System.Runtime.InteropServices.Marshal]::PtrToStringAuto([System.Runtime.InteropServices.Marshal]::SecureStringToBSTR($password))	
+Import-LocalCAFromP12 -name "CA Import" -p12Filename msca.pfx -p12Password $p12Password
+```
+
 During the import a Key Store will be created for this CA, with the name ``[CA Name] Key Store`` (e.g. ``CA Import Key Store``) and password being the ``[PFX/P12 Password]`` specified. However, you can also specify an existing Key Store using the ``-keyStoreId`` parameter e.g.
 
 ```

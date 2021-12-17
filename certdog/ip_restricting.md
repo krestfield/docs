@@ -76,7 +76,7 @@ Having multiple teams with lists of permitted IPs can get confusing. Consider cr
 
 <img src=".\images\permitted_ips2.png" alt="Permitted IPs Team" style="zoom:80%;" />
 
-Then make all users that require this restriction members of this team -  alongside other teams that provide them with access the the required Certificate Issuers
+Then make all users that require this restriction members of this team -  alongside other teams that provide them with access the required Certificate Issuers
 
 
 

@@ -27,6 +27,8 @@ Select **Teams** from the menu, click **Add New  Team**
 
 <img src=".\images\teams1.png" alt="New Team" style="zoom:80%;" />
 
+
+
 Enter a **name** and optionally, a **description**  
 
 Select the **Certificate Issuers** that you want to be available to members of this team 
@@ -38,6 +40,30 @@ If you wish to make everyone in this team an administrator, select the **Adminis
 When certificates are issued, they are associated with a Team. If your [email settings](email_settings.html) are set to send emails upon certificate issuance, an email is sent to the requestor whenever a certificate is issued. If you wish to prevent these emails being sent out for this team, check the **Suppress Cert Issued Emails** option
 
 If you wish to prevent reminder emails being sent for certificates associated with this team, check the **Suppress Expiry Reminder Emails** option
+
+<br>
+
+**Permitted IPs**
+
+If you wish to restrict members of this team from accessing by IP address. Enter the allowed IP addresses here  
+
+IP addresses can be:
+
+* Specific, individual addresses e.g. ``192.168.15.10``  
+
+* A range e.g. ``192.168.15.1-192.168.15.128``
+
+* Wildcarded e.g. ``192.168.15.*``
+
+These can be combined by separating with commas e.g.
+
+```
+192.168.15.10, 192.168.15.11, 10.15.116.1-10.15.116.128, 10.15.117.*
+```
+
+ Note, if the list is empty no restrictions are applied
+
+See [IP Address Restricting](ip_restricting.html) for more details
 
 
 

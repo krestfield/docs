@@ -9,7 +9,7 @@ nav_order: 55
 
 
 
-It is possible to restrict access to certdog via IP address filtering  
+It is possible to restrict access to certdog via IP address filtering. Both IPv4 and IPv6 addresses are supported  
 
 IP addresses are permitted or whitelisted (rather than denied) and these settings are managed at the *Team* level  
 
@@ -39,23 +39,22 @@ You may specify as many of each as you like to build your permitted IP string. E
 
 
 
-<u>**Note**</u>
+**Note**
 
 * If the list is empty - users will be able to access from any IP address. There will be no restrictions  
 
 * If any rules are in place, access from localhost is always permitted i.e. you cannot restrict access to certdog from the machine it is running on
-
-###   
+  
 
 ### Processing
 
-Users may be a member of one of more teams. For each team the permitted IP list is appended. For example, if a user is a member of Team A which has the following Permitted IPs set:
+Users may be a member of one of more teams. For each team the permitted IP list is concatenated. For example, if a user is a member of Team A which has the following Permitted IPs set:
 
 ```
 192.168.1.1-192.168.1.128
 ```
 
-And they are also a member of another team which has the Permitted IPs set as:
+And they are also a member of Team B which has the Permitted IPs set as:
 
 ```
 192.168.16.4, 192.168.16.5
@@ -67,7 +66,7 @@ Then the user may access certdog via any of the following IP addresses:
 192.168.1.1-192.168.1.128, 192.168.16.4, 192.168.16.5
 ```
 
-For example, if their IP address was: ``192.168.1.12`` they would be permitted access
+I.e. any IP address allowed from both teams. For example, if their IP address was: ``192.168.1.12`` they would be permitted access
 
 
 
@@ -77,11 +76,11 @@ Having multiple teams with lists of permitted IPs can get confusing. Consider cr
 
 <img src=".\images\permitted_ips2.png" alt="Permitted IPs Team" style="zoom:80%;" />
 
-Then make all users that require this restriction to this team -  alongside other teams that provide them with access the the required Certificate Issuers
+Then make all users that require this restriction members of this team -  alongside other teams that provide them with access the the required Certificate Issuers
 
 
 
-It is advised to create a single Administrator team and then add in all users requiring administration privileges to this team. You can therefore restrict administrators to specific IPs. For example, you may only want to allow administrators to be able to access the system from localhost. In this case simply set the Permitted IPs for the Administrator team - this can be any IP address (e.g. 127.0.0.1) as when any rules are set access from localhost is always permitted anyway
+It is advised to create a single Administrator team and then add in all users requiring administration privileges to that team. You can therefore restrict administrators to specific IPs. For example, you may only want to allow administrators to be able to access the system from localhost. In this case simply set the Permitted IPs for the Administrator team - this can be an IP address such as ``127.0.0.1`` as when any rules are set access from localhost is always permitted anyway
 
 
 

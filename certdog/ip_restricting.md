@@ -68,7 +68,7 @@ Then the user may access certdog via any of the following IP addresses:
 
 I.e. any IP address allowed from both teams. For example, if their IP address was: ``192.168.1.12`` they would be permitted access
 
-
+<br>
 
 ### Recommendations and Tips
 
@@ -76,12 +76,12 @@ Having multiple teams with lists of permitted IPs can get confusing. Consider cr
 
 <img src=".\images\permitted_ips2.png" alt="Permitted IPs Team" style="zoom:80%;" />
 
-Then make all users that require this restriction members of this team -  alongside other teams that provide them with access the required Certificate Issuers
+Then make all users that require this restriction members of this team -  alongside other teams that provide them with access to the required Certificate Issuers
 
-
+<br>
 
 It is advised to create a single Administrator team and then add in all users requiring administration privileges to that team. You can therefore restrict administrators to specific IPs. For example, you may only want to allow administrators to be able to access the system from localhost. In this case simply set the Permitted IPs for the Administrator team - this can be an IP address such as ``127.0.0.1`` as when any rules are set access from localhost is always permitted anyway
 
-
+<br>
 
 Set Permitted IPs carefully, it is quite easy to inadvertently lock users out. Remember that access from localhost is always permitted. Therefore, if all users are accidentally locked out, access certdog from the local machine to correct

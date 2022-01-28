@@ -7,162 +7,153 @@ nav_order: 20
 
 # Upgrading Certdog
 
- <br>
-
-To upgrade to a new version of Certdog you may 
-
-* Simply uninstall the old and install the new version
-  * This will not retain any settings - you will end up with a new, blank installation of the later version
-  * This may be useful if you are building your configurations using automation and also do not need to retain any existing data (existing certificates)
-  * This may also be the best option for test instances when you just want to dispose of the old versions
-
-* Perform an in-place upgrade
-  * This option overwrites the existing installation with the new files but retains all of the data and settings
+When upgrading to version 1.6 or above the following steps should be performed
 
 <br>
 
-## Option 1: Uninstall the old and Install the new version
+### Step 1: Stop the services
 
-Follow the guide [here](uninstalling.html) to uninstall your existing installation
+Open the services snapin and stop the following services:
 
-If you wish to retain the data, in case of future use, follow the guide [here](backup.html) to backup
+* Krestfield Cerdog Database
 
-Follow the guide [here](installation.html) to install the new version
+* Krestfield Cerdog Service
 
-<br>
+![Certdog Services](.\images\upgrade_services.png)
 
-## Option 2: In Place Upgrade
-
-### Overview
-
-Essentially, we will backup the current installation then replace the following file and folder:
-
-```
-[certdog installation]\tomcat\webapps\certdog#api.war
-[certdog installation]\tomcat\webapps\certdog#ui
-```
-
-With those from the new version's zip
+(To open the services snapin - click **Start**, type **services** and select the **Services App**)
 
 <br>
 
-**<u>STEP 1 - Stop Certdog</u>**
+### Step 2: Backup current installation
 
-On Windows, open the services snapin and stop **Krestfield Certdog Service**
+Rename or move your existing installation as we will be placing the new version at this location (if a rollback is required we will simply move the original folder back)
 
-(On other OS's, either stop Tomcat or use the stop-certdog or stop-tomcat scripts)  
+For example, rename the following folder:
 
+```powershell
+c:\certdog
+```
 
+to
 
-On Windows, open the services snapin and stop **Krestfield Certdog Database**
+```powershell
+c:\certdog.bak
+```
 
-(On other OS's, stop mongo using the command line option ``db.shutdownServer()``or service options ``service mongod stop``) 
+(If Windows complains that the folder cannot be renamed as it is in use, check that the services have stopped and there are no powershell, command prompts or file explorer windows open that are accessing the folder)
+
+Make a note of this new location e.g. ``c:\certdog.bak`` as it is required in step 4 below
 
 <br>
 
-**<u>STEP 2 - Backup</u>** 
+### Step 3: Extract the new version
 
-Backup the following folder:
+Download and extract the new version to the original location. For example:
 
-```
-[certdog installation]\tomcat\webapps
-```
-
-Also backup the database by following the guide [here](backup.html)
-
-<br>
-
-**<u>STEP 3 - Delete Existing Files</u>**
-
-From your existing installation, navigate to:
-
-```sh
-[certdog installation]\tomcat\webapps
-```
-
-It should look like this
-
-![File Structure](.\images\certdog_upgrade1.png)
-
-Delete the following folders
-
-```
-.\certdog#api
-.\certdog#ui
-```
-
-And delete the following file
-
-```
-certdog#api.war
+```powershell
+c:\certdog
 ```
 
 <br>
 
-**<u>STEP - 4</u>**
+### Step 4: Run the upgrade
 
-Unzip the new version's media, navigate to this unzipped location here:
+Open a PowerShell window as Administrator and navigate to your installations ``.\install`` folder e.g.
 
-```
-[new media location]\certdog\tomcat\webapps\
-```
-
-Copy the following folder:
-
-```
-.\certdog#ui
+```powershell
+c:\certdog\install
 ```
 
-And the following file:
+From the prompt, type ``.\upgrade.ps1`` and press **Enter**. E.g.
 
-```
-certdog#api.war
+```powershell
+PS C:\certdog\install> .\upgrade.ps1
+
+Krestfield Certdog Upgrade to Version 1.6 from 1.5
+==================================================
+
+End User Agreement (EULA)
+The EULA for this software can be obtained from the following location:
+https://krestfield.s3.eu-west-2.amazonaws.com/certdog/KrestfieldCertdogEULA.pdf
+
+By continuing and installing the software you accept the terms of this license agreement
+
+Type 'y' to accept and continue, any other key to reject: 
 ```
 
-To your current installation here:
+Download and examine the EULA referenced. If happy to accept, type ``y`` to proceed with the upgrade
 
-```
-[certdog installation]\tomcat\webapps
+```powershell
+Before proceeding ensure you have performed the following:
+
+  1. The following services have been stopped:
+     * Krestfield Certdog Database
+     * Krestfield CertDog Service
+  2. You have moved your current installation to a backup location
+     E.g. Rename C:\certdog to C:\certdog.bak
+  3. You have unzipped the new installer to the previous installed location E.g. C:\certdog
+  4. You are running this script from the new installation C:\certdog\install\upgrade.ps1
+
+For more information see: https://krestfield.github.io/docs/certdog/upgrading.html
+
+Enter the location of your backup (previous certdog installation) location (e.g. c:\certdog.bak): c:\certdog.bak
+
+Copying files from previous installation...
+482 File(s) copied
+83 File(s) copied
+1 File(s) copied
+8 File(s) copied
+Starting services...
+Starting database...
+Starting certdog...
+Upgrade Complete!
 ```
 
 <br>
 
-**<u>STEP - 5</u>**
+### Step 5: Upgrade the ADCS Driver
 
-Start Certdog
+If you are using the ADCS Driver to interface with the Microsoft CA. You should also perform the following steps:
 
-<br>
+* Start **Apps and Features**. Locate the **Certdog ADCS Driver** and select **Uninstall**
+* As an Administrator, run the ``AdcsDriverInstaller.msi``file from the ``\install\bin`` directory
 
-### Verification and Rollback
-
-Attempt to login as per normal to Certdog  
-
-Confirm the version as follows:  
-
-From the menu select **Settings** then choosing the **Settings** sub menu
-
-The *System Information* should display:
-
-* UI Version
-* API Version
-
-Verify these are as expected
+This will install the new version of the driver. No further action should be required
 
 <br>
 
-If a rollback is required, perform the following:
+<br>
 
-* Stop Certdog
+## Rollback
 
-* Replace the following folder:
+If anything fails or you wish to revert back to your previous version, perform the following:
 
+**Step 1**: Open the services snapin and stop the following services:
+
+* Krestfield Cerdog Database
+
+* Krestfield Cerdog Service
+
+**Step 2**: Either move of delete the current certdog installation folder (this will currently contain the upgraded installation) e.g. delete the following folder
+
+```powershell
+c:\certdog
 ```
-[certdog installation]\tomcat\webapps
+
+If you are just switching between versions - move the folder rather than delete - so it can be moved back to the installation location later
+
+**Step 3**: Move (or copy) your backed up installation folder to this location. For example, copy
+
+```powershell
+c:\certdog.bak
 ```
 
-* With the version backed up
+to
 
-* Restore the database as per the guide [here](backup.html)
+```powershell
+c:\certdog
+```
 
-* Start Certdog
+**Step 4**: Start the services
 

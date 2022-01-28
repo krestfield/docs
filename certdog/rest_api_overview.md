@@ -9,17 +9,17 @@ nav_order: 16
 
 All functions (including all administrative operations) can be carried out via the REST API  
 
+These functions are described in the Swagger UI  
+
+See [here for examples of calling the API](rest_api_example.html)
+
 
 
 ### Swagger
 
 The available REST API functions can be viewed using the Swagger UI as follows:  
 
-  
-
-
-
-Ensure that certdog is running. Open a browser and navigate to:  
+ <br> Ensure that certdog is running. Open a browser and navigate to:  
 
    https://*endpoint*/certdog/api/swagger-ui.html  
 

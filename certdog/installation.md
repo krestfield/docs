@@ -15,9 +15,7 @@ If the pre-requisites are in place, the entire installation should not take more
 
 If you don't want to read any details  right now and just want to quickly download to try things out - see the [Quick Installation Guide](quick_installation_guide.html)
 
-
-
-
+<br>
 
 ### Pre-requisites
 
@@ -30,7 +28,7 @@ The system may be installed on the following operating systems:
 
 * Windows 10 [^1]
 
-
+<br>
 
 The following components are required:
 
@@ -38,18 +36,18 @@ The following components are required:
 
 * Visual C++ Runtime (this will be installed by the installer if not present)
 
-
+<br>
 
 You must have local Administrator privileges on the system
 
-
+<br>
 
 
 ### 1.  Download the Installer
 
-Contact support for a download link. If you have an FTP account it will be placed in your download area
+Contact support for a download link. If you have an FTP account it will be placed in your download area  
 
-
+<br>
 
 ### 1.1 Verify the download
 
@@ -82,25 +80,37 @@ SHA1: ``4a0ec6c6e47cd34cea474f019bd274ef90e8fed5``
 
 SHA256: ``8c9e0724f6f68abe1054c142ec09688d9abe62d2757855bf69d1ddd81dc00c2d``
 
-
+<br>
 
 If they differ, the download is corrupt or has been altered. Attempt the download again, the file sizes should be over 100Mb. If hashes still don't match please contact support@krestfield.com 
 
+<br>
 
+If the hashes match then right click the file and choose **Properties**. Tick the **Unblock** option at the bottom of the dialog (if present) and click **OK**
+
+<img src=".\images\unblock_zip.png" alt="unblock" style="zoom:80%;" />
+
+<br>
 
 ### 1.2 Unzip
 
-Unzip this to a location on the target machine. You may wish to create a folder beneath ``C:\Program Files`` such as:
+Unzip this to a location on the target machine. E.g.
 
-``C:\Program Files\Krestfield``
+`````powershell
+c:\certdog
+`````
 
-But you can also create a folder anywhere on the file system (e.g. ``F:\apps``)
+But you can unzip to a location of your choice e.g.
 
-Unzip the contents of the download to this folder. This should result in a directory structure such as:
+```powershell
+f:\apps\certdog
+```
 
-``C:\Program Files\Krestfield\certdog`` or ``F:\apps\certdog``
+```powershell
+c:\program files\krestfield\certdog
+```
 
-
+<br>
 
 Open a PowerShell prompt as **Administrator** and navigate to this folder e.g.
 
@@ -109,10 +119,10 @@ Windows PowerShell
 Copyright (C) Microsoft Corporation. All rights reserved.
 
 PS C:\WINDOWS\system32> cd "C:\Program Files\Krestfield\certdog"
-PS C:\Program Files\Krestfield\certdog>
+PS C:\certdog>
 ```
 
-
+<br>
 
 Run ``dir`` and check the file structure looks something like the following:
 
@@ -126,31 +136,30 @@ d-----        06/01/2021     17:46                bin
 d-----        05/01/2021     16:01                config
 d-----        08/01/2021     11:27                install
 d-----        07/01/2021     15:22                java
+d-----        07/01/2021     15:22                logs
 d-----        06/01/2021     15:48                tomcat
 ```
 
 If you don't see the ``install`` directory, the unzipping process may have failed. Check that you have the correct permissions, then delete the *certdog* folder and attempt the unzip process again
 
-
+<br>
 
 ### 2. Run the Installer
 
 From the PowerShell prompt, navigate into the ``install`` directory and run the ``.\install.ps1`` script:
 
 ```powershell
-PS C:\Program Files\Krestfield\certdog> cd install
-PS C:\Program Files\Krestfield\certdog\install> .\install.ps1
+PS C:\certdog> cd install
+PS C:\certdog\install> .\install.ps1
 ```
-
-(For the demo version run ``.\install-demo.ps1``)
 
 Note: If you see the message ``Do you want to run software from this untrusted publisher?`` type **A** to always run. The scripts are signed with a publicly trusted CA, but depending on your security settings, there may still be a requirement to recognise the signer
 
-
+<br>
 
 If  your system does not have the Visual C++ Redistributable packages installed, this installer will begin. Complete this installation and when complete, return and re-start the ``.\install.ps1`` script
 
-
+<br>
 
 If  you do not have the .NET 4.8 Runtime installed, the installer will recognise this and end. Install the .NET 4.8 Runtime then restart the ``.\install.ps1`` script
 
@@ -159,59 +168,67 @@ If  you do not have the .NET 4.8 Runtime installed, the installer will recognise
 The installer will start and display some initial information. e.g.
 
 ```powershell
-Krestfield Certdog Setup Version 1.0
+Krestfield Certdog Setup Version 1.6
 ====================================
 
-This script will install the Certdog system on this machine
+End User Agreement (EULA)
+The EULA for this software can be obtained from the following location:
+https://krestfield.s3.eu-west-2.amazonaws.com/certdog/KrestfieldCertdogEULA.pdf
+By continuing and installing the software you accept the terms of this license agreement
+
+Type 'y' to accept and continue, any other key to reject:
 ...
 ```
 
+Download and read the EULA and if happy to accept the agreement, type ``y`` to proceed with the install
 
+<br>
 
 Follow the instructions to install the system, noting the following:
 
 1. In the first instance it is recommended that you install **all** required components (including java and the database binaries). These files are installed in the local directory and if required, can easily be removed later
    
 
-   I.e. when prompted with:
+   You will be prompted to enter details and passwords for several accounts, these are discussed in the [Accounts and Passwords](#accounts-and-passwords) section below
 
-   ``Download java (y/n)? (Choose n if you have previously downloaded):``  
-   Enter **y**   
-   
-   and when prompted with   
-   
-   ``Download the database binaries (y/n)? (Choose n if you have previously downloaded):``  
-   
-   Enter **y**
-   
-2. You will be prompted to enter details and passwords for several accounts, these are discussed in the [Accounts and Passwords](#accounts-and-passwords) section below
+2. You will be asked what interface and port you wish the system to be available on and the current available IP Addresses (as configured on your system) will be listed
 
-3. You will be asked what interface you wish the system to be available on and the current available IP Addresses (as configured on your system) will be listed
+    For a production system you should have an IP Address available which will be targeted via a DNS entry. For an initial test system the local loopback address (127.0.0.1) can be used and the port left at 443 (the default SSL port)
+    
+3. When prompted with ``Do you wish to install the ADCS agent on this machine``, choose ``y`` if you will be interfacing to a Microsoft CA (Active Directory Certificate Services). This component only operates on server based operating systems. It is not required if you will be using locally generated (internal to the certdog application) CAs
 
-    For a production system you should have an IP Address available which will be targeted via a DNS entry. For an initial test system the local loopback address (127.0.0.1) can be used
-
-
+    <br>
 
 There are many customisations and deployment options that can be applied including the separation of services across multiple machines, hosting on other containers, using shared databases and hosting fully or partially in the cloud. Contact support support@krestfield.com for more details
 
-
+<br>
 
 ### 3. Verify the Installation
 
-First, check the installation log files for any errors
+Sometimes the Certdog service takes a while to initialise. In the first instance check the Services snapin and search for the following services and check they are running
+
+* Krestfield Certdog Service 
+
+* Krestfield Certdog Database
+
+If not, attempt to start manually
+
+<br>
+
+If the services are not starting, check the installation log files for any errors
 
 * installlog.out
 * installlog.txt
 
 If no errors were shown during the installation these files should just contain audit information
 
-
+<br>
 
 From the PowerShell script, navigate to the ``..\bin`` folder and type ``.\is-db-running.ps1``:
 
 ```powershell
-PS C:\Program Files\Krestfield\certdog\install> cd ..\bin
-PS C:\Program Files\Krestfield\certdog\bin> .\is-db-running.ps1
+PS C:\certdog\install> cd ..\bin
+PS C:\certdog\bin> .\is-db-running.ps1
 Database is running
 ```
 
@@ -220,7 +237,7 @@ The message ``Database is running`` should be seen
 Then type, ``is-api-running.ps1``  
 
 ```powershell
-PS C:\Program Files\Krestfield\certdog\bin> .\is-api-running.ps1
+PS C:\certdog\bin> .\is-api-running.ps1
 Testing https://127.0.0.1/certdog/api...
 API is running
 ```
@@ -229,7 +246,7 @@ The message ``API is running`` should be seen
 
 If either the database or API are not running, see the Troubleshooting guide [here](install_troubleshooting.html)
 
-
+<br>
 
 Next, open a browser and navigate to ``https://[Your IP Address]/certdog/ui``
 
@@ -253,7 +270,7 @@ You should be logged in OK.  The initial view will be ***Certificates***, but at
 
 A successful login indicates that the installation was completed OK  
 
-
+<br>
 
 ### 4. SSL Configuration
 
@@ -279,7 +296,7 @@ If you now close the browser, re-open and navigate to https://127.0.0.1/excert/u
 
 Note: This is a test certificate and should not be trusted in a production environment. You should still continue to create a valid SSL certificate as described [here](configure_server_ssl.html)
 
-
+<br>
 
 ### Accounts and Passwords
 
@@ -295,11 +312,18 @@ During the installation you will be prompted for the following details:
 * Master Password
   * This account is used as the top level protection for other accounts. It is not stored in the clear on the system
   * You must enter this password when installing the **Application Service**
-  * Once entered, it should not be required again for this system but should be stored securely. If you start the application manually (not via the windows service) or wish to host the application on another container (e.g. on a shared Tomcat service), this password will be required
+  * Once entered, it should not be required again for this system but MUST be stored securely. If you start the application manually (not via the windows service) or wish to host the application on another container (e.g. on a shared Tomcat service), this password will be required
 
-
-
+<br>
 ### Windows Services
+
+**Database Service**  
+
+This service will be installed by the install script
+
+This service is the database and appears in the services snapin as **Krestfield Certdog Database**
+
+<br>
 
 **Application Service**  
 
@@ -311,9 +335,7 @@ This service starts and stops the system
 
 In the services snapin, this service is called **Krestfield Certdog Service**
 
-  
-
-**AD Certificate Services Agent**  
+<br>  **AD Certificate Services Agent**  
 
 This service interfaces with your Microsoft ADCS instance.  More details on this service can be found [here](adcsdriver.html)  
 
@@ -323,3 +345,174 @@ In the services snapin, this service is called **Krestfield Adcs Driver**
 
 
 [^1]: Windows 10 can not host the ADCS Driver. This component must be installed on a Server based operating system. See the ADCS Driver documentation for more information
+
+<br>
+
+<br>
+
+<hr>
+
+#### Sample Installation Output
+
+```powershell
+Krestfield Certdog Setup Version 1.6
+====================================
+
+End User Agreement (EULA)
+
+The EULA for this software can be obtained from the following location:
+
+https://krestfield.s3.eu-west-2.amazonaws.com/certdog/KrestfieldCertdogEULA.pdf
+
+By continuing and installing the software you accept the terms of this license agreement
+
+Type 'y' to accept and continue, any other key to reject: y
+
+
+Installing...
+
+This script will now install the Certdog system on this machine
+
+The following operations will be performed:
+  1. Install Java. This will install a local copy for Certdog's use only
+  2. Install and configure the database
+  3. Configure the application server
+  4. Install the Certdog Service
+  5. Install the Certdog ADCS (Active Directory Certificate Services) service
+       This is only required if you wish to interface to a Microsoft CA instance (ADCS)
+
+  Further documentation can be found here: https://krestfield.github.io/docs/certdog/certdog.html
+
+
+Download java (y/n)? (Choose n if you have previously downloaded): y
+Downloading java...Please wait (this may take several minutes)
+Checking hash...
+Hash verified OK
+java downloaded OK
+Unzipping...
+java unzipped OK
+Registering location..
+Java installation complete..
+
+
+Download the database binaries (y/n)? (Choose n if you have previously downloaded): y
+Downloading database...Please wait (this may take several minutes)
+Checking hash...
+Hash verified OK
+database downloaded OK
+Unzipping...
+database unzipped OK
+
+Database User Admin Account Setup
+---------------------------------
+
+This is the database administrator account
+It will be used to create other database users and configure their access
+Record this account's details as you may need it to manage user accounts in the future
+
+The username for this account is: certmanadmin
+
+You must provide a password
+Note that the password for this account cannot contain '@' or ':' characters
+
+Please enter the password for this account: ********
+Please confirm the password for this account: ********
+
+
+Configuring database...
+
+The Krestfield Certdog Database service is starting.
+The Krestfield Certdog Database service was started successfully.
+
+Configuring authorisation and restarting...
+
+The Krestfield Certdog Database service is stopping.
+The Krestfield Certdog Database service was stopped successfully.
+
+The Krestfield Certdog Database service is starting.
+The Krestfield Certdog Database service was started successfully.
+
+
+
+First Admin User Account Setup
+------------------------------
+
+This is the account for the first administrator
+
+This user will be able to login to the UI (or API) as an administrator and create other users
+
+Enter the username: krestfield
+Enter the email address: support@krestfield.com
+Please enter the password: ********
+Please confirm the password: ********
+
+Database and accounts have been configured
+
+If there are any issues, check the log files installlog.out and installlog.txt for errors
+
+You can re-run this script but should first reset the database by running reset-db.ps1
+
+
+The interface that the application will listen on must now be set
+For local testing the loopback (127.0.0.1) interface can be used
+If you want to access the UI and API from other machines, choose another interface/IP Address
+Or select all (0.0.0.0) to listen on all available interfaces
+
+Available interfaces
+--------------------
+  1. 10.0.2.4
+  2. 127.0.0.1
+  3. 0.0.0.0 (Listen on all)
+
+What interface do you wish the application to be available on (Enter 1 to 3): 2
+
+What port do you wish the application to listen on (443):
+
+Selected interface:  127.0.0.1:443
+
+Updating configuration...
+Configuration complete...
+
+
+Installing Application Service
+------------------------------
+
+Installing the Certdog Service from C:\certdog\install\bin\InstallCertdogService.msi
+Service installed OK
+
+Starting Certdog Service
+
+A Master Password is required to start this service the first time
+Store this password securely as it may be needed if changes are made to the configuration
+
+Please enter the master password: ********
+Please confirm the master password: ********
+
+Starting the service...
+
+Service started OK
+
+
+AD Certificate Services Agent
+-----------------------------
+
+Do you wish to install the ADCS agent on this machine (y/n)?: y
+
+Installing Adcs agent from C:\certdog\install\bin\AdcsDriverInstaller.msi
+Services installed OK
+
+Configure Adcs Service
+
+Starting the service...
+
+Service started OK
+If the database URL changes, re-run this script
+
+Checking Installation...
+Database is running
+Testing https://127.0.0.1/certdog/api...
+API is running
+
+Installation is complete
+```
+

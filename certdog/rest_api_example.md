@@ -1,15 +1,17 @@
 ---
 layout: default
-title: REST API Example
+title: REST API Examples
 parent: Certdog
 nav_order: 31
 ---
 
 
 
-# REST API Example
+# REST API Examples
 
-The following demonstrates how to make a simple API call to obtain a certificate as a PKCS#12
+The following demonstrate how to make a simple API calls to obtain certificates and view certificate details  
+
+For the full API refer to the documentation [here](rest_api_overview.html)
 
 ### Login
 
@@ -44,11 +46,15 @@ e.g.
 Authorization: Bearer eyJhbGciOiJIUzUxMiJ9....sdUfWLrtZPRGiQSA
 ```
 
-
-
-
+<br>
 
 ### Get a Cert as PKCS12
+
+Requests a certificate from the DN (Distinguished Name)  
+
+Certdog generates a CSR and issues the certificate from the CA issuer referred to by the caName parameter
+
+PKCS#12 data is returned as Base64 which contains the issued certificate and the generated private key
 
 ```json
 POST: https://certdog.net/certdog/api/certs/request
@@ -58,43 +64,90 @@ POST: https://certdog.net/certdog/api/certs/request
     "teamName" : "Test Team",
     "csrGeneratorName" : "RSA2048",
     "p12Password" : "password",
+    "subjectAltNames" : ["DNS:server1.com", "DNS:server2.com"],
+    "extraEmails" : ["certs@krestfield.com"],
     "extraInfo" : "Resides in datacentre 111"
 }
 ```
 
-Returns
+* **caName** is the Certificate Issuer as displayed in the UI
+* **dn** is the requested Distinguished Name
+* **teamName** must be provided if the authenticated user is a member of more than one team. If only a member of one team then the certificate will be associated with that team
+* **csrGeneratorName** the name of the CSR Generator
+* **p12Password** must be ASCII
+* **subjectAltNames** is optional. If required, supply as a string array. Types can be 
+  * **DNS** for a DNS entry e.g. "DNS:server2.com"
+  * **EMAIL** for an email address e.g. "EMAIL:certs@krestfield.com"
+  * **IP** for an IP Address e.g. "IP:192.44.17.221"
+  * **URI** for a URI address e.g. "URI:https://server2.com"
+* **extraEmails** is optional. If included these email addresses will also be sent reminder emails
+* **extraInfo** is optional
+
+<br>
+
+<u>Returns</u>
 
 ```json
 {
     "certId": "608292ed7e87646928628cd2",
+    "pemCert": "-----BEGIN CERTIFICATE-----MIIDVTCCA...RCMOT4=-----END CERTIFICATE-----\r\n",
     "p12Data": "MIINkQIBAzC...OIwsHbBgIDAYag"
 }
 ```
 
 The p12Data contains the keys and certificates, encrypted under the password provided in the call (p12Password), base64 encoded
 
+<br>
 
+### Get a Cert from a CSR
 
-### Get the Certificate Details
+Issues a certificate from the provided CSR data
 
 ```json
-GET https://certdog.net/certdog/api/certs/608292ed7e87646928628cd2
+POST: https://certdog.net/certdog/api/certs/requestp10
+{
+    "caName" : "Certdog TLS",
+    "teamName" : "Test Team",
+    "csr"  : ""-----BEGIN CERTIFICATE REQUEST-----MIIChz...XOM3c-----END CERTIFICATE REQUEST-----",
 ```
 
-Where 608292ed7e87646928628cd2 is the *certId* returned from the previous call
+* **caName** is the Certificate Issuer as displayed in the UI
+* **teamName** must be provided if the authenticated user is a member of more than one team. If only a member of one team then the certificate will be associated with that team
+* **csr** is the PEM CSR data or base64 encoded CSR data
+<br>
+<u>Returns</u>
+
+```json
+{
+    "certId": "61ee876f326d6e636e46306b",
+    "pemCert": "-----BEGIN CERTIFICATE-----MIIDVTCCA...RCMOT4=-----END CERTIFICATE-----\r\n"
+}
+```
+
+<br>
+
+### Get Certificate Details
+
+Returns the data stored for a certificate given the certificate ID (the *certId* returned from one of the previous calls)
+
+```json
+GET https://certdog.net/certdog/api/certs/61ee876f326d6e636e46306b
+```
 
 Returns
 
 ```json
 {
-    "id": "608292ed7e87646928628cd2",
-    "caId": "6081c3ba7e87646928628c6e",
-    "csrId": "608292ed7e87646928628cd1",
-    "pemCert": "-----BEGIN CERTIFICATE-----\nMIIDSDCCA...NnykrKqyy+wA==\n-----END CERTIFICATE-----\n",
-    "commonName": "server1.com",
-    "subjectDn": "CN=server1.com",
-    "issuerDn": "CN=Certdog Test CA, O=Krestfield",
-    "serialNumber": "23c64ca9f566ad2545c03ea9ed992cc4",
+    "id": "61f412f7778c854398f0c59d",
+    "caId": "61ef0c0edd22dc42704cf380",
+    "localCaId": "61ef0beedd22dc42704cf37c",
+    "csrId": "61f412f7778c854398f0c59c",
+    "pemCert": "-----BEGIN CERTIFICATE-----\r\nMIIDUzC...qPAISd\r\n-----END CERTIFICATE-----\r\n",
+    "commonName": "test1.server1.com",
+    "subjectDn": "CN=test1.server1.com, O=Krestfield, C=GB",
+    "issuerDn": "CN=Krestfield Issuing CA, O=Krestfield, C=GB",
+    "issuerCertId": "608292ed7e87646924626cd9",
+    "serialNumber": "2bb767253fe02946013f72d39e886b80",
     "signatureAlgorithm": "RSA",
     "hashAlgorithm": "SHA-256",
     "keyUsages": [
@@ -102,28 +155,44 @@ Returns
         "Key Encipherment"
     ],
     "enhancedKeyUsages": [
-        "Server Authentication",
-        "Client Authentication"
+        "Server Authentication"
     ],
     "subjectAlternativeNames": [],
-    "validFrom": "2021-03-23T09:27:09.000+0000",
-    "validTo": "2022-03-23T09:27:09.000+0000",
-    "validFromStr": "2021-03-23 09:27:09",
-    "validToStr": "2022-03-23 09:27:09",
-    "ownerUserId": "604ba413edd31279d221aa80",
-    "ownerUsername": "certdogtest",
-    "teamId": "604ba427edd31279d221aa82",
-    "status": 1,
+    "validFrom": "2022-01-28T15:59:51.000+00:00",
+    "validTo": "2023-01-28T15:59:51.000+00:00",
+    "validFromStr": "2022-01-28 15:59:51",
+    "validToStr": "2023-01-28 15:59:51",
+    "ownerUserId": "61ef0b76ae9da81f540b9eda",
+    "ownerUsername": "admin",
+    "teamId": "61ef0b780031e41d5c95453f",
+    "active": true,
+    "renewed": false,
+    "renewedByCertId": null,
+    "renewsCertId": null,
+    "revoked": false,
     "history": [
         {
-            "timestamp": "2021-03-23T09:27:09.159+0000",
+            "timestamp": "2022-01-28T15:59:51.541+00:00",
+            "timestampStr": "2022-01-28 15:59:51.541",
             "event": "created",
-            "details": "Certificate created by user certdogtest. The system generated a CSR on the user's behalf"
+            "details": "Certificate created by user admin. A CSR was provided"
         }
     ],
-    "extraDetails": "Resides in datacentre 111",
+    "extraDetails": null,
     "extraEmails": null,
-    "daysToExpiry": 364.99884
+    "trackExpiry": true,
+    "isCa": false,
+    "hasKeyData": false,
+    "imported": false,
+    "importTime": null,
+    "aias": [],
+    "cdps": [],
+    "thumbprint": "5e34950586d8d2d73d7f8245441bb72879d33790",
+    "policies": [],
+    "keySize": "2048",
+    "eccCurve": null,
+    "msTemplateName": null,
+    "daysToExpiry": 364.99988
 }
 ```
 

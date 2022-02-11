@@ -49,7 +49,9 @@ Make a note of this new location e.g. ``c:\certdog.bak`` as it is required in st
 
 ### Step 3: Extract the new version
 
-Download and extract the new version to the original location. For example:
+Download the new version as a zip file. Right click the zip file (e.g. ``certdog_v160.zip``), choose **Properties** and tick the **Unblock** check box (if present). Depending on your security settings, this will prevent several prompts when running the scripts  
+
+Extract the contents of the new zip file to the original location. For example:
 
 ```powershell
 c:\certdog
@@ -112,12 +114,22 @@ Upgrade Complete!
 
 <br>
 
+If a message such as the following is seen:
+
+```powershell
+The Krestfield CertDog Service service could not be started.
+```
+
+This may be because the service is taking longer than expected to start the first time. Wait a short period then attempt to access the URL (e.g. https://127.0.0.1/certdog) anyway. If running OK, then the upgrade has succeeded. 
+
+<br>
+
 ### Step 5: Upgrade the ADCS Driver
 
 If you are using the ADCS Driver to interface with the Microsoft CA. You should also perform the following steps:
 
 * Start **Apps and Features**. Locate the **Certdog ADCS Driver** and select **Uninstall**
-* As an Administrator, run the ``AdcsDriverInstaller.msi``file from the ``\install\bin`` directory
+* As an Administrator, run the ``AdcsDriverInstaller.msi``file from the ``\install\bin`` directory (e.g. ``c:\certdog\install\bin\AdcsDriverInstaller.msi``)
 
 This will install the new version of the driver. No further action should be required
 
@@ -141,7 +153,7 @@ If anything fails or you wish to revert back to your previous version, perform t
 c:\certdog
 ```
 
-If you are just switching between versions - move the folder rather than delete - so it can be moved back to the installation location later
+If you are just switching between versions or wish to retain the new instance - move or rename the folder (rather than delete) - so it can be moved back to the installation location later
 
 **Step 3**: Move (or copy) your backed up installation folder to this location. For example, copy
 
@@ -157,3 +169,4 @@ c:\certdog
 
 **Step 4**: Start the services
 
+<br>

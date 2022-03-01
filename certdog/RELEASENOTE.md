@@ -20,7 +20,7 @@ Web: [https://www.krestfield.com](https://www.krestfield.com)
 
 
 > **Version 1.6.0**
-> **Release Date**: 31 January 2022
+> **Release Date**: 14 February 2022
 >
 > **Updates**
 

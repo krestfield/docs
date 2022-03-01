@@ -74,11 +74,17 @@ eeaab3196237b390e861cf5ab3c2abab51f70ba1d63069a40d97bc9852dc4e83
 CertUtil: -hashfile command completed successfully.
 ```
 
-Compare the hash value produced with the following checksums:
+Compare the hash value produced with the following checksums:  
 
-SHA1: ``78a0043154aa973c888cce0165a9cc6125b13b86``
+* SHA1: ``f7362714a1989629b9ad84ecf37d962a7bde37ab``
 
-SHA256: ``21dd46dcd5bd270d5b9eab4aaa607e49ee22ad690c59caa3a136eef236acd865``
+* SHA256: ``39cc472becaa29a35600f640b7b4f6dc2aee9da96f7f41e19de81aea328e0b83``
+
+Free Version:  
+
+* SHA1: ``78a0043154aa973c888cce0165a9cc6125b13b86``
+
+* SHA256: ``21dd46dcd5bd270d5b9eab4aaa607e49ee22ad690c59caa3a136eef236acd865``
 
 <br>
 

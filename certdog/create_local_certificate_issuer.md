@@ -103,7 +103,7 @@ Once the CA is configured, the above options (main details and policies) are fix
 
   E.g. https://server3.com/ca1/cacert.cer
   
-  See [Configuring the AIA Issuer Cert Location](##configuring-the-aia-issuer-cert-location) below for more details on setting this value
+  See [Configuring the AIA Issuer Cert Location](#configuring-the-aia-issuer-cert-location) below for more details on setting this value
 
 <u>CRL Generation</u>  
 

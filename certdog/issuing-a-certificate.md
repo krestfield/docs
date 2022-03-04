@@ -45,9 +45,19 @@ Click **Request Certificate**
 
 **DN Request**
 
-<img src=".\images\dn_request.png" alt="image-20210319174905496" style="zoom:67%;" />
+
+
+<img src=".\images\dn_request2.png" alt="DN Request" style="zoom: 67%;" />
+
+
 
 For the **Subject DN** enter the name required e.g. *CN=domain.com,O=organisation*  
+
+If you wish to enter the domain components separately, click the ![image-20220304095027786](.\images\down_arrow.png)button and complete the fields:
+
+<img src=".\images\dn_fields.png" alt="DN Fields" style="zoom:80%;" />
+
+If you want the CN field to be automatically added as a DNS SAN (as required for TLS certificates), click the **Add as a DNS SAN** option
 
 For *Issuer to Process Request*, choose the required issuer  
 
@@ -73,7 +83,7 @@ The certificate will be issued:
 
 You may then download the certificate, chain or PKCS#12 file. Alternatively, click **More** to display further details:
 
-<img src=".\images\download_options_ss.png" style="zoom:67%;" />
+<img src=".\images\download_options_ss.png" alt="Download Options" style="zoom: 67%;" />
 
 From here you can download other formats as well as the CSR if required  
 Note: The PKCS#12, JKS and PEM options will only function whilst the key data is retained. This period is defined in the [settings](settings.html) as the *Private Key Retention Period*  

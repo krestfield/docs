@@ -85,8 +85,9 @@ You may then download the certificate, chain or PKCS#12 file. Alternatively, cli
 
 <img src=".\images\download_options_ss.png" alt="Download Options" style="zoom: 67%;" />
 
-From here you can download other formats as well as the CSR if required  
-Note: The PKCS#12, JKS and PEM options will only function whilst the key data is retained. This period is defined in the [settings](settings.html) as the *Private Key Retention Period*  
+From here you can download other formats  
+
+Note that the PKCS#12, JKS and PEM options will only function whilst the key data is retained. This period is defined in the [settings](settings.html) as the *Private Key Retention Period*  
 
 If this is set to 0 (zero), key data will not be retained, though you will still be able to download the PKCS#12 file immediately following issuance
 

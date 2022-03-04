@@ -55,7 +55,13 @@ Complete the following details:
 
 * **Path Length Constraint**: Set the path length constraint (that will appear in the *Basic Constraints* extension).
 
+  Note that this option is not available if *External CA* was selected above, since the issuing CA will determine this value when it issues the certificate
+
 <br>
+
+<br>
+
+If you chose to *Issue From* an **External CA** above, the following options (*Policies*, *Extensions* and *CRL Generation*) will not be available. This is because it will be the issuing CA that will decide on these values when it issues the certificate
 
 <u>Policies</u>  
 
@@ -85,10 +91,6 @@ Once the CA is configured, the above options (main details and policies) are fix
 
 <br>
 
-<br>
-
-If you chose to *Issue From* an **External CA** above, the following options (*Extensions* and *CRL Generation*) will not be available. This is because it will be the issuing CA that will decide on these values when it issues the certificate
-
 <u>Extensions</u>  
 
 * **AIA OCSP Locations**: Enter a URL (or list of OCSP URLs separated by commas). These locations will be included in the AIA (Authority Information Access) OCSP extension of all certificates issued by this CA and relate to where the certificate status can be obtained via OCSP
@@ -101,7 +103,7 @@ If you chose to *Issue From* an **External CA** above, the following options (*E
 
   E.g. https://server3.com/ca1/cacert.cer
   
-  See [Configuring the AIA Location](#configuring-the-aia-location) below for more details on setting this value
+  See [Configuring the AIA Issuer Cert Location](##configuring-the-aia-issuer-cert-location) below for more details on setting this value
 
 <u>CRL Generation</u>  
 

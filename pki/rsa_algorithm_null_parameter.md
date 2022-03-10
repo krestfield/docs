@@ -55,13 +55,13 @@ i.e. the NULL part is missing
 From a code perspective, using BouncyCastle libraries the correct form to obtain the Algorithm Identifier would be:
 
 ```
-AlgorithmIdentifier algId = new AlgorithmIdentifier(asn1Alg, DERNull.INSTANCE);
+AlgorithmIdentifier algId = new AlgorithmIdentifier(algorithmOid, DERNull.INSTANCE);
 ```
 
 But as the ``DerNull.INSTANCE`` parameter is optional, often it is missed, as follows:
 
 ```
-AlgorithmIdentifier algId = new AlgorithmIdentifier(asn1Alg);
+AlgorithmIdentifier algId = new AlgorithmIdentifier(algorithmOid);
 ```
 
 Resulting in an incorrectly specified Digest Information

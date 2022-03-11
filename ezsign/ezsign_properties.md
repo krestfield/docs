@@ -133,9 +133,9 @@ There are various options when generating and verifying signatures. The followin
 
 | Property                             | Description                                                  | Example      |
 | ------------------------------------ | ------------------------------------------------------------ | ------------ |
-| channel.N.signature.algorithm|The signature key algorithm.  Possible values are: **RSA**, **ECDSA**. If RSA is chosen the keysize must also be specified. If elliptic curve (ECDSA) is chosen the curve must also be specified|RSA|
+| channel.N.signature.algorithm|The signature key algorithm.  Possible values are: **RSA** and **ECDSA**. If RSA is chosen the keysize must also be specified. If elliptic curve (ECDSA) is chosen the curve must also be specified. See [here](ezsign-algorithms.html) for more details|RSA|
 | channel.N.signature.keySize|The RSA key (modulus) size in bits (**1024**, **2048**, **4096**, **8192**, **16384**, **32768**|2048|
-| channel.N.signature.ecc.curve|The named curve e.g. **secp192r1**, **secp224r1**, **secp256r1**, **secp384r1**, **secp521r1**, **secp256k1**, **secp256k1** or any name supported by the version of java or HSM being used|secp256r1|
+| channel.N.signature.ecc.curve|The named curve e.g. **secp192r1**, **secp224r1**, **secp256r1**, **secp384r1**, **secp521r1** or any name supported by the version of java or HSM being used|secp256r1|
 | channel.N.signature.hash|The hash that will be generated over the data to be signed before signing. Possible values: **SHA1**, **SHA256**, **SHA512**, **SHA3-224**, **SHA3-256**, **SHA3-384**, **SHA3-512**|SHA256|
 | channel.N.signature.type|The signature type to generate.  Options are: **PKCS7**, **RAW**. If RAW is chosen the signature will be PKCS#1 formatted if RSA is chosen|PKCS7|
 | channel.N.signature.includeCerts|What certificates to include in the signature.  Possible values: **ALL** – all certificates including the root will be included, **ALLEXCEPTROOT** – all certificates except the root will be included, **SIGNERONLY** – only the signer certificate will be included|ALLEXCEPTROOT|

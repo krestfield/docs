@@ -25,7 +25,7 @@ Before AD integration will operate you need to to configure the following inform
 
 * The Search Base
   * The level in the directory at which the users and groups that you want to reference are stored
-  * For example: ``OU=USERS,OU=PKI,DC=certdog,DC=local``
+  * For example: ``OU=PKI,DC=certdog,DC=local``
   * See the Locating the Search Base section below if you are unsure of what to put here
 
 
@@ -47,7 +47,7 @@ Other Info
 
 <br>
 
-To configure from the left hand menu, click **Settings** then **Active Directory Settings**
+To configure these settings, from the left hand menu, click **Settings** then **Active Directory Settings**
 
 <img src=".\images\ad_settings.png" alt="Active Directory Settings" style="zoom:80%;" />
 
@@ -57,7 +57,7 @@ Enter the required values and click **Update**
 
 ### Granting Permissions
 
-In Certdog, permissions to specific Certificate Issuers are granted via Teams. A Team is configured to allow access to issuers and users are made members of this Team  
+In Certdog, permissions to specific Certificate Issuers are granted via [Teams](teams.html). A Team is configured to allow access to issuers, users are then made members of this Team  
 
 To allow access for AD users, simply map the AD groups to the Certdog Teams  
 
@@ -67,7 +67,7 @@ The processing then completes as follows:
 2. Map the users AD Group Memberships to the Certdog Teams that have been configured with those Groups
 3. The user obtains the permissions and restrictions as imposed by those Teams
 
-Note that when an AD user authenticates their account will then appear in the Users list in Certdog. This will show what Certdog Teams the user is a member of (based on their AD group membership). None of the details for AD accounts can be managed via Certdog - they continue to be managed via Active Directory only  
+Note that when an AD user authenticates their account will then appear in the *Users* list in Certdog. This will show what Certdog Teams the user is a member of (based on their AD group membership). None of the details for AD accounts can be managed via Certdog - they continue to be managed via Active Directory only  
 
 <br>
 
@@ -92,7 +92,6 @@ You may get an idea of the search base that user accounts are in by running a Po
 ```
 PS C:\Windows\system32> Get-ADUser certdoguser
 
-
 DistinguishedName : CN=certdoguser,OU=USERS,OU=PKI,DC=certdog,DC=local
 Enabled           : True
 GivenName         :
@@ -111,7 +110,6 @@ Searching for the location of a specific group can be obtained by running: ``Get
 
 ```
 PS C:\Windows\system32> Get-AdGroup PKI_CERT_ISSUERS
-
 
 DistinguishedName : CN=PKI_CERT_ISSUERS,OU=GROUPS,OU=PKI,DC=certdog,DC=local
 GroupCategory     : Security
@@ -140,7 +138,12 @@ If you simply configure the URL to use LDAPS rather than LDAP authentication wit
 Checking the logs you will see an error such as the following
 
 ```
-There was an error communicating with the domain controller - unable to obtain groups from Active Directory. Search string was 'PKI'. Error was: simple bind failed: dc1.certdog.local:636; nested exception is javax.naming.CommunicationException: simple bind failed: dc1.certdog.local:636 [Root exception is javax.net.ssl.SSLHandshakeException: PKIX path building failed: sun.security.provider.certpath.SunCertPathBuilderException: unable to find valid certification path to requested target]
+There was an error communicating with the domain controller - unable to obtain groups from Active Directory.
+Search string was 'PKI'. Error was: simple bind failed: dc1.certdog.local:636; 
+nested exception is javax.naming.CommunicationException: simple bind failed: dc1.certdog.local:636 
+[Root exception is javax.net.ssl.SSLHandshakeException: 
+	PKIX path building failed: sun.security.provider.certpath.SunCertPathBuilderException: 
+	unable to find valid certification path to requested target]
 ```
 
 They key part being ``unable to find valid certification path to requested target`` which essentially means Certdog could not find the root certificate from which the LDAPS certificate was issued from  
@@ -151,9 +154,7 @@ To enable this trust, obtain the root certificate of the CA that issued the LDAP
 [Certdog Install]\config\sslcerts\root.cer
 ```
 
-  
-
-Open a command prompt and navigate to ``[Certdog Install]\config\sslcerts`` then run the following
+<br>Open a command prompt and navigate to ``[Certdog Install]\config\sslcerts`` then run the following:
 
 ```
 C:\certdog\config\sslcerts>..\..\java\jdk-17.0.2\bin\keytool -import -alias "Krestfield Root" -file root.cer -keystore dbssltrust.jks

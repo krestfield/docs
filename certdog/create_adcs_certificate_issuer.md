@@ -40,17 +40,17 @@ Once these items have been configured as a Certificate Issuer, users with permis
 
    If the certdog system is all installed on the same machine, this will be in place. If you have installed the ADCS Driver separately, you need to ensure that port 27017 (the default database port) is open. Refer to the [ADCS Driver](adcsdriver.html)  document for further details
 
-  
-
-
+<br>
 
 ### 1. Create a Credential
 
    Skip this step if you already have a credential created.  If not, follow the guide on creating a credential [here](credentials.html)  
 
-   The credential you create must be for an account that has permissions on the template. See [Setting Microsoft ADCS Template Permissions](setting_adcs_template_permissions.html)  
+   The credential you create must be for an account that has the correct permissions on the CA and template. See [Setting Microsoft ADCS Template Permissions](https://krestfield.github.io/docs/pki/setting_adcs_template_permissions.html)  
 
-​     
+   The account should also be a service account. See [here](https://krestfield.github.io/docs/certdog/configure_logon_as_a_service.html) for details on assigning the correct permissions for a service account  
+
+<br>
 
 ### 2. Create a Certificate Issuer
 

@@ -59,7 +59,7 @@ To also allow *Revoke*, perform the following:
 
 From the **Certificate Authority snapin** right click the **CA node** and click **Properties**
 
-Select the **Security** tab and click Add...
+Select the **Security** tab and click **Add...**
 
 Select the ``PKI_CERT_ISSUERS`` group and check *Allow* for **Issue and Manage Certificates**
 

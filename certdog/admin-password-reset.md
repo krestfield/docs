@@ -44,11 +44,11 @@ This will output the hashed version of the password:
 $2a$10$rPSQZhmM2wlTA6Ke29I85e14Q7GgXDX8iq2DNoDLI2GcqsbwcITVq
 ```
 
-Copy this value e.g. copy and paste into a text document for the time being, as will need it in the steps below
+Copy this value e.g. copy and paste into a text document for the time being, as we will need it in the steps below
 
 <br>
 
-Next navigate to:
+Next, navigate to:
 
 ```
 [certdog install]\mongodb\bin

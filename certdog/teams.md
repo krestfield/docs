@@ -9,15 +9,21 @@ nav_order: 8
 
 
 
-Teams group users and permissions together  
+Teams manage permissions to *Certificate Issuers*.  Users that are members of these teams inherit these permissions (in the same way as Groups and members of groups work in Active Directory)  
 
-A team manages the permissions for Certificate Issuers and dictates whether members are administrators or standard users  
+Teams can also restrict members from specific IP Addresses (or ranges of IP Addresses) and suppress email sending to its members  
 
-By default, one team exists called *Admin Team*  
+If the Team is marked as *Administrator* - all members of that team are Certdog Administrators  
 
-You may add, remove or edit teams as per your requirements. However, generally, it is advisable to maintain a single administrator team (rather than multiple) and have separate teams for specific Certificate Issuer access  
+Users can be members of multiple teams  
 
-This will enable you to quickly search and view users with administrative privileges on the system. If a user requires administrative access, they can then be added to this one team   
+By default, one team exists called *Admin Team* which is set as *Administrator*. The initial admin user is a member of this team meaning they can manage all aspects of the system  
+
+You may add, remove or edit teams as per your requirements and make users members of as many teams as required.  Generally, it is advisable to maintain a single administrator team (rather than multiple). A typical administrator team, as well as having the *Administrator* option set, may also restrict IP Addresses to localhost (127.0.0.1) or specific IP Addresses, meaning that administrators can only authenticate from the local machine or specific machines or networks, thus increasing security  
+
+If you have configured Active Directory (so that users can authenticate to Certdog with their domain accounts), then you can also map Active Directory groups to a team (see more below)  
+
+<br>
 
 ---
 
@@ -35,7 +41,31 @@ Select the **Certificate Issuers** that you want to be available to members of t
 
 If you wish to make everyone in this team an administrator, select the **Administrator** option
 
-<br> **Email Suppression**
+<br>
+
+**Active Directory Groups**
+
+If Active Directory has been configured you will also see the following option
+
+<img src=".\images\ad_groups1.png" alt="Active Directory Groups" style="zoom:80%;" />
+
+This is where you can map Active Directory groups to this team. For example, if your PKI certificate security staff were all members of an Active Directory group called PKI_CERT_MANAGERS then you could specify that group here. If this Team had the Administrator option checked, then all the PKI certificate security staff would be administrators in Certdog  
+
+To select a group, click **Click to add groups**:
+
+<img src=".\images\ad_groups2.png" alt="Search AD Groups" style="zoom:80%;" />
+
+The *Search for groups* pane will expand. Type part of the name of the group you wish to search for in the *Search Text* box and click **Search**. Select the required group in the list and click **Add**
+
+<img src=".\images\ad_groups3.png" alt="AD Group Selected" style="zoom:80%;" />
+
+The selected group is now mapped to this team  
+
+To remove a group mapping, simply select the group and click **Remove**
+
+<br>
+
+**Email Suppression**
 
 When certificates are issued, they are associated with a Team. If your [email settings](email_settings.html) are set to send emails upon certificate issuance, an email is sent to the requestor whenever a certificate is issued. If you wish to prevent these emails being sent out for this team, check the **Suppress Cert Issued Emails** option
 

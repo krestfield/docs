@@ -21,15 +21,29 @@ The available REST API functions can be viewed using the Swagger UI as follows:
 
  <br> Ensure that certdog is running. Open a browser and navigate to:  
 
-   https://*endpoint*/certdog/api/swagger-ui.html  
+​    https://*endpoint*/certdog/api/swagger-ui/index.html  
+
+Note: For versions before 1.7.0, it was located here:
+
+​    https://*endpoint*/certdog/api/swagger-ui.html  
+
+
+
+​     
 
 E.g.  
 
-   [https://127.0.0.1/certdog/api/swagger-ui.html](https://127.0.0.1/certdog/api/swagger-ui.html)  
+​    [https://127.0.0.1/certdog/api/swagger-ui/index.html](https://127.0.0.1/certdog/api/swagger-ui/index.html)  
+
+​    Previously: [https://127.0.0.1/certdog/api/swagger-ui.html](https://127.0.0.1/certdog/api/swagger-ui.html)  
+
+
 
 If you see something like the following: 
 
-<img src=".\images\swaggere_main.png" alt="image-20210121152518748" style="zoom:80%;" />
+<img src=".\images\swaggere_main.png" alt="Swagger API" style="zoom:80%;" />
+
+
 
 Then everything should be working OK  
 

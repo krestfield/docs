@@ -21,12 +21,12 @@ Before AD integration will operate you need to to configure the following inform
 
 * The Domain Controller URL
   * This is the URL to the domain controller e.g. ``ldap://dc1.org.com``, ``ldap://10.144.17.277``, ``ldaps://dc2.orgname.com``
-  * If using ldaps read the Using Ldaps section below
+  * If using ldaps read the [Using Ldaps](#using-ldaps) section below
 
 * The Search Base
   * The level in the directory at which the users and groups that you want to reference are stored
   * For example: ``OU=PKI,DC=certdog,DC=local``
-  * See the Locating the Search Base section below if you are unsure of what to put here
+  * See the [Locating the Search Base](#locating-the-search-base) section below if you are unsure of what to put here
 
 
 * A Credential
@@ -57,7 +57,7 @@ Enter the required values and click **Update**
 
 ### Granting Permissions
 
-In Certdog, permissions to specific Certificate Issuers are granted via [Teams](teams.html). A Team is configured to allow access to issuers, users are then made members of this Team  
+In Certdog, permissions to specific Certificate Issuers are granted via [Teams](teams.html). A Team is configured to allow access to issuers. Users are then made members of this Team  
 
 To allow access for AD users, simply map the AD groups to the Certdog Teams  
 
@@ -133,7 +133,7 @@ If we wanted to encompass all OUs within the directory we could just set the sea
 
 When using LDAPS (LDAP over SSL) the certificate issued to the Domain Controller must be trusted by Certdog. As Domain Controller certificates are usually issued by internal Microsoft CAs the root certificates will not be automatically trusted by Certdog  
 
-If you simply configure the URL to use LDAPS rather than LDAP authentication with AD accounts will fail and you will be unable to search for AD groups when configuring teams  
+If you simply configure the URL to use LDAPS (rather than LDAP), authentication with AD accounts will fail and you will be unable to search for AD groups when configuring teams  
 
 Checking the logs you will see an error such as the following
 

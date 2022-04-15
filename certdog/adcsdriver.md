@@ -4,27 +4,29 @@ title: ADCS Driver
 parent: Certdog
 nav_order: 5
 ---
-# Certdog ADCS Driver
+# Certdog ADCS (Microsoft CA) Driver
 
 This component is the interface to ADCS (Active Directory Certificate Services)  
 
-You have the option of installing this together with the other components but it can also be installed separately and/or on other machines 
+You have the option of installing this together with the other components but it can also be installed separately and/or on other machines  
 
-Multiple instances of the driver can be installed in the same domain
+Multiple instances of the driver can be installed in the same and different domains  
 
-
+<br>
 
 ## Requirements
 
-- Windows Server 2016
-- Windows Server 2019
+- Windows Server 2016, 2019
 - .NET Framework 4.8 Runtime
+- Service account(s)
 
-The server hosting the driver must be in the same domain as the Microsoft CA you wish to obtain certificates from
+The server hosting the driver must be in the same domain as the Microsoft CA you wish to obtain certificates from  
 
-Ensure that port 27017 is open to wherever the database is hosted i.e. the server hosting the database must allow incoming connections on port 27017 from the machine hosting the ADCS Driver. This is only required if the ADCS driver is being installed on a separate machine
+You will require a service account with the required permissions to access your Microsoft CA. See the [Service Account](#service-account) section below  
 
+If you are running multiple drivers or the driver is not installed on the same machine, ensure that port 27017 is open to wherever the database is hosted i.e. the server hosting the database must allow incoming connections on port 27017 from the machine hosting the ADCS Driver  
 
+<br>
 
 
 ## Installation
@@ -72,9 +74,31 @@ Into the **Local Machine** **Trusted Root Certification Authorities** store. The
 
 If this does not resolve the issue, check that the main server's 27017 port can be accessed from this location and the database URL entered is correct
 
+<br>
 
+## Service Account
 
-## Configuration
+Obtaining certificates from the Microsoft CA requires a domain account with the required permissions on the CA and template (see [here](https://krestfield.github.io/docs/pki/setting_adcs_template_permissions.html) for configuring permissions on the CA and templates)  
+
+This account should be a service account (with the *deny local logon* and *logon as a service* options set, configured with a non-expiring password)  
+
+You have two options when using this account:
+
+1. Configure as the Log On for the service itself
+   1. From the services snapin, locate the *Krestfield Adcs Driver* and set this account on the *Log On* tab
+2. Configure as a Credential in Certdog 
+
+If you configure on the service itself, when configuring a Microsoft CA certificate issuer in Certdog you will set the Credential to *No Credential (use local agent account)*  
+
+Otherwise, you specify the credential  
+
+See [here](https://krestfield.github.io/docs/certdog/create_adcs_certificate_issuer.html) for more details on configuring a Microsoft CA Issuer 
+
+<br>
+
+## Configuration in Certdog
+
+Once the service has been successfully installed to enable it for use within Certdog it must be approved as follows:  
 
 Login to the UI and select **Administration > Agents** from the menu  
 
@@ -82,15 +106,15 @@ You should see an entry for the agent. It will be named the FQDN of the machine 
 
 Click this entry and select **Approve**  
 
-The agent will now be able to process requests
+The agent will now be able to process requests  
 
-
+<br>
 
 Note that when configuring a Certificate Issuer for a Microsoft CA you must select the agent that you want to process requests for that CA
 
-   
+<br>   
 
-## File Logging
+## Additional File Logging
 
 To enable more logging, set the following environment variable to true:
 
@@ -113,11 +137,13 @@ Which is here in Windows Server 2019
 
 Note: This log provides debug level, verbose output and may be useful for tracing issues but the log file will continue to grow.  You should therefore, switch this level of logging off when not required
 
- 
+ <br>
 
 ## Threading
 
-By default, the driver creates a number of threads (typically 5) to process certificate requests. But this value can be tuned, if required
+By default, the driver creates a number of threads (typically 5) to process certificate requests and this value should not be changed  
+
+In some high volume/performance scenarios you may want to change or experiment with this value  
 
 To change this value, set the following environment variable to the number of threads required:  
 
@@ -126,5 +152,5 @@ To change this value, set the following environment variable to the number of th
 e.g.  
 ![image-20201222143722766](.\images\threadsenvvar.png) 
 
-Restart the Krestfield Adcs Driver from the services snapin
+Restart the Krestfield Adcs Driver from the services snapin  
 

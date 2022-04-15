@@ -11,7 +11,9 @@ nav_order: 10
 
 Certdog supports authentication of active directory users and the processing of group membership (including nested groups)  
 
-Active directory users do not need to be specifically added to Certdog. Their permissions are managed by their Active Directory group membership. To achieve this, the AD Groups must be configured against Teams in Certdog
+Active directory users do not need to be specifically added to Certdog. Their permissions are managed by their Active Directory group membership. To achieve this, the AD Groups must be configured against Teams in Certdog  
+
+Note that the machine hosting Certdog does not need to be a member of the domain but it does need to be able to reach the Domain Controller LDAP address. E.g. If you were running Certdog on Linux it could still be configured to recognise Active Directory users  
 
 <br>
 

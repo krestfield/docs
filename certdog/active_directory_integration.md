@@ -23,13 +23,20 @@ Before AD integration will operate you need to to configure the following inform
 
 * The Domain Controller URL
   * This is the URL to the domain controller e.g. ``ldap://dc1.org.com``, ``ldap://10.144.17.277``, ``ldaps://dc2.orgname.com``
+  * If you are not sure what this is, read the [Locating the Domain Controller](#locating-the-domain-controller) section below
   * If using ldaps read the [Using Ldaps](#using-ldaps) section below
-
-* The Search Base
-  * The level in the directory at which the users and groups that you want to reference are stored
-  * For example: ``OU=PKI,DC=certdog,DC=local``
+  
+* The User Search Base
+  * The level in the directory at which the users that you want to reference are stored
+  * For example: ``OU=USERS,OU=PKI,DC=certdog,DC=local``
   * See the [Locating the Search Base](#locating-the-search-base) section below if you are unsure of what to put here
+  
 
+
+* The Group Search Base
+  * The level in the directory at which the groups that you want to reference are stored
+  * For example: ``OU=GROUPS,OU=PKI,DC=certdog,DC=local``
+  * See the [Locating the Search Base](#locating-the-search-base) section below if you are unsure of what to put here
 
 * A Credential
   * This should be an AD account that has read-only permissions and should not have any other rights
@@ -51,7 +58,9 @@ Other Info
 
 To configure these settings, from the left hand menu, click **Settings** then **Active Directory Settings**
 
-<img src=".\images\ad_settings.png" alt="Active Directory Settings" style="zoom:80%;" />
+<img src=".\images\ad_settings.png" alt="image-Active Directory Settings" style="zoom:80%;" />
+
+
 
 Enter the required values and click **Update**
 
@@ -77,17 +86,65 @@ Note that when an AD user authenticates their account will then appear in the *U
 
 Follow the guide for creating a Username/Password [credential](credentials.html) specifying the account name as the Service Principal e.g. ``aduser@certdog.local``  
 
-This account should only have read permissions and ideally be configured as a Service Account that is denied local logon and whose password does not expire
+This account should only have read permissions and ideally be configured as a Service Account that is denied local logon and whose password does not expire  
+
+<br>
+
+### Locating the Domain Controller
+
+From the machine running Certdog open a Command Prompt and type the following:
+
+```
+echo %logonserver%
+```
+
+The hostname of the server will be displayed e.g.
+
+```
+\\KRESTDC007
+```
+
+To obtain the FQDN, ping the server as follows:
+
+```
+ping KRESTDC007
+```
+
+Which will show output such as:
+
+```
+Pinging krestdc007.krestfield.local [10.92.71.132] with 32 bytes of data:
+```
+
+From this information your Domain Controller URL will be 
+
+```
+ldap://krestdc007.krestfield.local
+```
+
+or
+
+```
+ldaps://krestdc007.krestfield.local
+```
+
+<br>
+
+Note that this is only one way to obtain the LDAP address. Your organisation may have many Domain Controllers and there may be a preferred DC to target for your environment
 
 <br>
 
 ### Locating the Search Base
 
-This can be the top level of your domain or reference a subsection (OU) of it
+You must set the user's and group's search bases. These are the locations in your directory that Certdog will search for those items  
 
-For example, if your organisation domain is someorg.com then the search base may be something like: ``DC=someorg,DC=com``  
+For small directories it is possible to set this as the base or top-level of your directory
 
-If your directory is large there will most likely be multiple OUs and divisions which you may wish to restrict the search space to. This will result in faster queries  
+For example, if your organisation domain is ``someorg.com`` then the search base may be: ``DC=someorg,DC=com``  
+
+This could be configured for both user and group search bases. This means whenever Certdog searches for a user or group it will start from that location. As directories grow this becomes inefficient and it is then better to target the specific OUs where these details are stored  
+
+<br>
 
 You may get an idea of the search base that user accounts are in by running a PowerShell command such as: ``Get-ADUser <username>`` on your own (or another known) account e.g.
 
@@ -108,6 +165,18 @@ UserPrincipalName : certdoguser@certdog.local
 
 In this example we can see that user accounts are stored here: ``OU=USERS,OU=PKI,DC=certdog,DC=local``
 
+<br>
+
+Note: If the ``Get-ADUser`` command is not found you may need to enable the *Active Directory PowerShell* feature
+
+Run the following to install:
+
+```
+Install-WindowsFeature RSAT-AD-PowerShell
+```
+
+<br>
+
 Searching for the location of a specific group can be obtained by running: ``Get-AdGroup <Group Name>`` e.g.
 
 ```
@@ -125,9 +194,29 @@ SID               : S-1-5-21-3549443890-123274070-2723549285-1106
 
 Groups are contained within ``OU=GROUPS,OU=PKI,DC=certdog,DC=local``  
 
-If the users and groups we are interested in for Certdog are all located here, we could set our search base to ``OU=PKI,DC=certdog,DC=local``    
+<br>
 
-If we wanted to encompass all OUs within the directory we could just set the search base to ``DC=certdog,DC=local``
+In the above examples you could then set your user base to:
+
+```
+OU=USERS,OU=PKI,DC=certdog,DC=local
+```
+
+And your group base to:
+
+```
+OU=GROUPS,OU=PKI,DC=certdog,DC=local
+```
+
+This would be the most efficient way but it would also be possible to set both bases to:
+
+```
+OU=PKI,DC=certdog,DC=local
+```
+
+<br>
+
+If there are any errors whilst performing searches for groups or authenticating to Active Directory, check the logs as these will contain more information than what is displayed via the UI. If you see errors such as ``Timelimit Exceeded`` you may increase the Time Limit but often this is due to inefficient searches being made. Consider restricting the search bases further to limit the amount of searching performed
 
 <br>
 

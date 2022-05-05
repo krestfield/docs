@@ -1,6 +1,6 @@
 ---
 layout: default
-title: Windows Installation
+title: Upgrading Certdog
 parent: Certdog
 nav_order: 20
 ---
@@ -15,9 +15,8 @@ When upgrading to version 1.6 or above the following steps should be performed
 
 Open the services snapin and stop the following services:
 
-* Krestfield Cerdog Database
-
 * Krestfield Cerdog Service
+* Krestfield Cerdog Database
 
 ![Certdog Services](.\images\upgrade_services.png)
 
@@ -131,7 +130,16 @@ If you are using the ADCS Driver to interface with the Microsoft CA. You should 
 * Start **Apps and Features**. Locate the **Certdog ADCS Driver** and select **Uninstall**
 * As an Administrator, run the ``AdcsDriverInstaller.msi``file from the ``\install\bin`` directory (e.g. ``c:\certdog\install\bin\AdcsDriverInstaller.msi``)
 
-This will install the new version of the driver. No further action should be required
+  This will install the new version of the driver  
+  
+
+If after the upgrade, the driver shows as unregistered in the Certdog UI, re-register as follows:    
+
+* Open a PowerShell window as Administrator and navigate to the ``.\install `` directory e.g. ``c:\certdog\install`` and run the following command:  ``.\configure-adcs-service.ps1``
+
+* Next, from Certdog, select the **Agents** menu and approve the agent  
+
+* For each of your Microsoft Certificate issuers, click **Edit** and select the Permitted Agents (which in most cases will just be the one agent)
 
 <br>
 

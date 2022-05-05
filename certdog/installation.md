@@ -174,7 +174,7 @@ If  you do not have the .NET 4.8 Runtime installed, the installer will recognise
 The installer will start and display some initial information. e.g.
 
 ```powershell
-Krestfield Certdog Setup Version 1.6
+Krestfield Certdog Setup Version 1.7
 ====================================
 
 End User Agreement (EULA)
@@ -192,11 +192,8 @@ Download and read the EULA and if happy to accept the agreement, type ``y`` to p
 
 Follow the instructions to install the system, noting the following:
 
-1. In the first instance it is recommended that you install **all** required components (including java and the database binaries). These files are installed in the local directory and if required, can easily be removed later
+1. You will be prompted to enter details and passwords for several accounts, these are discussed in the [Accounts and Passwords](#accounts-and-passwords) section below
    
-
-   You will be prompted to enter details and passwords for several accounts, these are discussed in the [Accounts and Passwords](#accounts-and-passwords) section below
-
 2. You will be asked what interface and port you wish the system to be available on and the current available IP Addresses (as configured on your system) will be listed
 
     For a production system you should have an IP Address available which will be targeted via a DNS entry. For an initial test system the local loopback address (127.0.0.1) can be used and the port left at 443 (the default SSL port)
@@ -349,8 +346,7 @@ In the services snapin, this service is called **Krestfield Adcs Driver**
 
 
 
-
-[^1]: Windows 10 can not host the ADCS Driver. This component must be installed on a Server based operating system. See the ADCS Driver documentation for more information
+[^1]: If installing on Windows 10 and you require access to a Microsoft ADCS Certificate Authority the RSAT (Remote Server Administration Tools) for Windows 10 are also required  
 
 <br>
 
@@ -379,18 +375,6 @@ Installing...
 
 This script will now install the Certdog system on this machine
 
-The following operations will be performed:
-  1. Install Java. This will install a local copy for Certdog's use only
-  2. Install and configure the database
-  3. Configure the application server
-  4. Install the Certdog Service
-  5. Install the Certdog ADCS (Active Directory Certificate Services) service
-       This is only required if you wish to interface to a Microsoft CA instance (ADCS)
-
-  Further documentation can be found here: https://krestfield.github.io/docs/certdog/certdog.html
-
-
-Download java (y/n)? (Choose n if you have previously downloaded): y
 Downloading java...Please wait (this may take several minutes)
 Checking hash...
 Hash verified OK
@@ -401,7 +385,6 @@ Registering location..
 Java installation complete..
 
 
-Download the database binaries (y/n)? (Choose n if you have previously downloaded): y
 Downloading database...Please wait (this may take several minutes)
 Checking hash...
 Hash verified OK

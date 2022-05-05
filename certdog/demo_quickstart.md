@@ -7,7 +7,7 @@ nav_order: 2
 
 # Certdog Free Installation and Setup
 
- 
+ <br>
 
 ## Pre-Requisites
 
@@ -18,23 +18,25 @@ nav_order: 2
 
 If installing on Windows 10 and you require access to a Microsoft ADCS Certificate Authority the RSAT (Remote Server Administration Tools) for Windows 10 are also required
 
-
+<br>
 
 ## Download
 
-1. Download from [here](https://krestfield.s3.eu-west-2.amazonaws.com/certdog/certdogfree_v160_win.zip)
+1. Download from [here](https://krestfield.s3.eu-west-2.amazonaws.com/certdog/certdogfree_v170.zip)
 
    File Hashes:
 
-   * SHA1: ``78a0043154aa973c888cce0165a9cc6125b13b86``
+   * SHA1: ``b9c471f55cb6e5d710e9e2ffb34f82b8c2506f9d``
 
-   * SHA256: ``21dd46dcd5bd270d5b9eab4aaa607e49ee22ad690c59caa3a136eef236acd865``
+   * SHA256: ``fc1a9f9d6a2ad451a1d379ecb2fefe74b1e910486d7e39335fbfb3c8871a5276``
 
      
 
-2. Unzip to a location on your drive e.g. if you unzip to C:\ you will end up with a directory **C:\certdogfree** (but you can place this anywhere on your system)
+2. Right click the zip file (e.g. ``certdogfree_v170.zip``), choose **Properties** and tick the **Unblock** check box (if present). Depending on your security settings, this will prevent several prompts when running the scripts  
 
+3. Unzip to a location on your drive e.g. if you unzip to ``C:\`` you will end up with a directory **C:\certdogfree** (but you can place this anywhere on your system)
 
+<br>
 
 ## Installation
 
@@ -44,97 +46,73 @@ If installing on Windows 10 and you require access to a Microsoft ADCS Certifica
 
    Note: if you do not have a component installed (VC++ runtime or the correct .NET version) the installer will halt at this point and prompt you to install these components
 
-   
+2. Accept the license agreement
 
-2. At the prompt `Download java (y/n)?` Enter **y** 
+3. In the **Database User Admin Account Setup** section, at the prompt `Please enter the password for this account:` enter a *password*
 
-   
-
-3. A  the prompt `Download the database binaries (y/n)?` Enter **y**
-
-   
-
-4. In the **Database User Admin Account Setup** section, at the prompt `Please enter the password for this account:` enter a *password*
-
-   
-
-5. In the **First Admin User Account Setup** section enter a *username*, *email* (this email will be used to send certificate renewal reminders - if configured) and *password* e.g.
+4. In the **First Admin User Account Setup** section enter a *username*, *email* (this email will be used to send certificate renewal reminders - if configured) and *password* e.g.
 
    ``Enter the username:`` **admin**  
    ``Enter the email address:`` **me@myemail.com**  
    ``Please enter the password:`` **password**    
 
-This is the account you will first log on to the app with 
+​       This is the account you will first log on to the app with    
 
-   
+5. In the **Available interfaces** section, choose **0.0.0.0 (Listen on all)** (or **127.0.0.1** if you want to limit to local machine access only) and accept the default port of 443 (but change this if required)
 
-8. In the **Available interfaces** section, choose **0.0.0.0 (Listen on all)** (or **127.0.0.1** if you want to limit to local machine access only)
-
-   
-
-9. In the **Installing Application Service** section, enter a password e.g.:
+6. In the **Installing Application Service** section, enter a password e.g.:
 
    ``Please enter the master password:`` **password**
-
-   
-
-10. At the prompt ``Do you wish to install the ADCS agent on this machine (y/n)?`` Enter **y**
+7. At the prompt ``Do you wish to install the ADCS agent on this machine (y/n)?`` Enter **y**
 
     Note: This is required if you wish to interface to Microsoft ADCS instances
 
-
+<br>
 
 If installation was a success and no errors were observed, a browser should open at https://127.0.0.1/certdog. If local restrictions disallow this, manually navigate to that address from your chosen browser
 
-
+<br>
 
 Login with the *username* and *password* entered in step 5 above
 
-
+<br>
 
 Note that a default TLS certificate is configured for 127.0.0.1. You can issue a new TLS certificate to replace this or temporarily install the root from here: ``.\certdogfree\config\sslcerts\dbssl_root.cer`` 
 
-
+<br>
 
 If you hit any issues, see the troubleshooting guide [here](install_troubleshooting.html)
 
-
+<br>
 
 ## Configuration
 
-
+<br>
 
 ### 1. Create a Local CA
 
-1. From the menu, select **Local CA > CA Configuration** and click **Add New CA**
+1. From the menu, select **Local CA > Key Stores** and click **Add New Key Store**. Choose a name (e.g. ``Software Key Store``), for the *Type* choose **Software** and enter a password
 
-2. Enter the details for a new Root CA - provide a **name**, **Subject DN** and **lifetime**, everything else can be left at the defaults. Note: CRL Distribution Points, AIA extensions and CRL generation options can be edited later, other settings (key size etc.) cannot (though you can generate new CAs with different settings)
+2. Select **Local CA > CA Configuration** and click **Add New CA**
 
-3. Click **Create**
+3. Enter the details for a new Root CA - provide a **name**, **Subject DN **(e.g. CN=Test Root CA) and **lifetime**, everything else can be left at the defaults. Note: CRL Distribution Points, AIA extensions and CRL generation options can be edited later, other settings (key size etc.) cannot (though you can generate new  Root CACAs with different settings)
+
+4. Click **Create**
 
 You can now Create more CAs (including Subordinate CAs) as required
 
-
+<br>
 
 
 ### 2. Create a Certificate Profile
 
 1. From the menu, select **Local CA > Profiles** and click **Add New Profile**
 
-2. Give the Profile a **name**, a **lifetime** and select **usages**. E.g. For a TLS certificate profile, select the following Key Usages:
-
-   * **digitalSignature**
-
-   * **keyEncipherment**
-
-3. And the following for Enhanced Key Usages:
-
-   * **serverAuth** 
+2. Give the Profile a **name** (e.g. TLS Profile), and select **TLS (Server Auth)** from the *Common Profiles*, you can leave the remaining settings at the default for now
 
 4. Click **Add**
 
-
-
+<br>
 
 ### 3. Create a Certificate Issuer
 
@@ -142,20 +120,20 @@ You can now Create more CAs (including Subordinate CAs) as required
 
 2. Select **Local CA** from the drop down and click **Next**
 
-3. Provide a **Name** for this issuer (this is the name you will reference when requesting certificates)
+3. Provide a **Name** for this issuer e.g. TLS Issuer (this is the name you will reference when requesting certificates)
 
 4. select the **Local *CA* Configuration** and the **Profile** created above
 
 5. Select the **Admin Team** and click **Add**
 
-
+<br>
 
 ### 4. Create a CSR Generator
 1. From the menu, select **CSR Generators** and click **New CSR Generator**
 
-2. Give the generator a **Name** and click **Add**
+2. Give the generator a **Name** (e.g. RSA) and click **Add**
 
-   
+<br>
 
 ### 5. Issue a Certificate
 1. Now select **Request > DN Request** from the menu
@@ -169,7 +147,7 @@ Your certificate will be issued from the CA you just created. It will include th
 
 You can now also issue certificates via the [REST API](rest_api_overview.html), or by using the [.NET client](https://github.com/krestfield/certdog-dotnet-client) or the [Java client](https://github.com/krestfield/certdog-java-client). Use the [IIS Script](https://github.com/krestfield/certdog-iis) to automate IIS cert issuance and renewal or use the scripts to [manage windows machine certificates](https://github.com/krestfield/certdog-cert)
 
-
+<br>
 
 ## Further Options
 To allow the download of the PKCS#12 files (or JKS, PKCS#8) at a later time, from the menu, select **Settings > Settings**

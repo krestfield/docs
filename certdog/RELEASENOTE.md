@@ -17,6 +17,49 @@ Support: [support@krestfield.com](mailto:support@krestfield.com)
 
 Web: [https://www.krestfield.com](https://www.krestfield.com)
 
+<br>
+
+> **Version 1.7.0**
+> **Release Date**: 5 May 2022
+
+**Updates**
+
+* Active Directory integration added to allow AD users to authenticate with permissions managed via AD group membership
+
+* Last login time and last IP address added to users
+
+* Users can be emailed an initial password for logon
+
+* A password policy can now be applied for local users
+
+* Admins can force users to change password on first use
+
+* EC curve secp256k1 removed as obsolete
+
+* Updated to support jdk17
+
+  
+
+**Security Updates**
+
+* SpringBoot updated to version 2.6.6 (CVE-2022-22965)
+* Log4J updated to version 2.17.2
+
+
+
+**Fixes** 
+
+* If you set a Credential for a Microsoft CA Issuer, you could not revert back to *No Credential* (if you decided to run the service under a specific account)
+
+* An error was thrown from the ADCS Agent when attempting to run under a service account  
+
+* Log search did not show a time stamp for log entries from the ADCS Agent (though were present when exported and in the main log view)
+
+  
+
+  
+---
+
 
 
 > **Version 1.6.0**

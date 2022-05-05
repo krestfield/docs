@@ -76,15 +76,15 @@ CertUtil: -hashfile command completed successfully.
 
 Compare the hash value produced with the following checksums:  
 
-* SHA1: ``f7362714a1989629b9ad84ecf37d962a7bde37ab``
+* SHA1: ``fc99d7b1a72a2e45809cc76817bb8461225ccfb2``
 
-* SHA256: ``39cc472becaa29a35600f640b7b4f6dc2aee9da96f7f41e19de81aea328e0b83``
+* SHA256: ``5067dc605828a9a2328d02fc38dd23c893687c2ac4eb751f03da5ab0525e99af``
 
 Free Version:  
 
-* SHA1: ``78a0043154aa973c888cce0165a9cc6125b13b86``
+* SHA1: ``b9c471f55cb6e5d710e9e2ffb34f82b8c2506f9d``
 
-* SHA256: ``21dd46dcd5bd270d5b9eab4aaa607e49ee22ad690c59caa3a136eef236acd865``
+* SHA256: ``fc1a9f9d6a2ad451a1d379ecb2fefe74b1e910486d7e39335fbfb3c8871a5276``
 
 <br>
 
@@ -124,7 +124,7 @@ Open a PowerShell prompt as **Administrator** and navigate to this folder e.g.
 Windows PowerShell
 Copyright (C) Microsoft Corporation. All rights reserved.
 
-PS C:\WINDOWS\system32> cd "C:\Program Files\Krestfield\certdog"
+PS C:\WINDOWS\system32> cd "C:\certdog"
 PS C:\certdog>
 ```
 
@@ -227,7 +227,7 @@ If no errors were shown during the installation these files should just contain 
 
 <br>
 
-From the PowerShell script, navigate to the ``..\bin`` folder and type ``.\is-db-running.ps1``:
+From the PowerShell prompt, navigate to the ``..\bin`` folder and type ``.\is-db-running.ps1``:
 
 ```powershell
 PS C:\certdog\install> cd ..\bin
@@ -251,11 +251,11 @@ If either the database or API are not running, see the Troubleshooting guide [he
 
 <br>
 
-Next, open a browser and navigate to ``https://[Your IP Address]/certdog/ui``
+Next, open a browser and navigate to ``https://[Your IP Address]/certdog``
 
 Where ``[Your IP Address]`` is the address chosen during the installation e.g.
 
-``https://127.0.0.1/certdog/ui``
+``https://127.0.0.1/certdog``
 
 You should see a warning such as:
 
@@ -338,7 +338,8 @@ This service starts and stops the system
 
 In the services snapin, this service is called **Krestfield Certdog Service**
 
-<br>  **AD Certificate Services Agent**  
+<br>
+**AD Certificate Services Agent**  
 
 This service interfaces with your Microsoft ADCS instance.  More details on this service can be found [here](adcsdriver.html)  
 
@@ -357,7 +358,7 @@ In the services snapin, this service is called **Krestfield Adcs Driver**
 #### Sample Installation Output
 
 ```powershell
-Krestfield Certdog Setup Version 1.6
+Krestfield Certdog Setup Version 1.7
 ====================================
 
 End User Agreement (EULA)

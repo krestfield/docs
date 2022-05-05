@@ -168,6 +168,17 @@ Expiry monitoring can be disabled for a specific certificate. This means no expi
 A Team can suppress *cert issued* and *cert expiring* emails. If a certificate is within a team that has one of both of these items checked, emails will not be sent for that certificate. See the [teams documentation](teams.html) for more information
 
 <br>
+### Password Reset Email Details
+
+If the *Generate random password and email* option is set for a user account then an email is sent containing the users logon details  
+
+The content and subject of this email can be set here:
+
+<img src=".\images\email_settings_password.png" alt="Reset Password Email" style="zoom:80%;" />
+
+Configure the email subject and body templates, utilising the available tags  
+
+<br>
 
 ### Additional Settings
 

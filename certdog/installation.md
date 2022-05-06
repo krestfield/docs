@@ -76,15 +76,15 @@ CertUtil: -hashfile command completed successfully.
 
 Compare the hash value produced with the following checksums:  
 
-* SHA1: ``fc99d7b1a72a2e45809cc76817bb8461225ccfb2``
+* SHA1: ``1b4846aaa36f05cc267cc7593dec11ba3e913260``
 
-* SHA256: ``5067dc605828a9a2328d02fc38dd23c893687c2ac4eb751f03da5ab0525e99af``
+* SHA256: ``31f9d0a7e4a6a7008bc0ef154b92b30cd7792e55e945901a14f8be782a83f431``
 
 Free Version:  
 
-* SHA1: ``b9c471f55cb6e5d710e9e2ffb34f82b8c2506f9d``
+* SHA1: ``70f513df4f526c9582f8623bb5e178af81218452``
 
-* SHA256: ``fc1a9f9d6a2ad451a1d379ecb2fefe74b1e910486d7e39335fbfb3c8871a5276``
+* SHA256: ``a1d9475c84baca8679fc3883fd1dbc5280951dace3a92d844555b04e01d9449e``
 
 <br>
 

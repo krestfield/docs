@@ -11,7 +11,21 @@ When upgrading to version 1.6 or above the following steps should be performed
 
 <br>
 
-### Step 1: Stop the services
+### Step 1: Download
+
+Download the installer zip and verify the hashes over the file as per:
+
+[Certdog Windows Installation](installation.html)
+
+[Certdog Free Installation and Setup](#demo_quickstart,html) 
+
+If the hashes match then right click the file and choose **Properties**. Tick the **Unblock** option at the bottom of the dialog (if present) and click **OK**
+
+<img src="C:\Users\darre\Documents\_mystuff\development\_Krestfield Products\docs\certdog\images\unblock_zip.png" alt="unblock" style="zoom:80%;" />
+
+
+
+### Step 2: Stop the services
 
 Open the services snapin and stop the following services:
 
@@ -24,7 +38,7 @@ Open the services snapin and stop the following services:
 
 <br>
 
-### Step 2: Backup current installation
+### Step 3: Backup current installation
 
 Rename or move your existing installation as we will be placing the new version at this location (if a rollback is required we will simply move the original folder back)
 
@@ -46,7 +60,7 @@ Make a note of this new location e.g. ``c:\certdog.bak`` as it is required in st
 
 <br>
 
-### Step 3: Extract the new version
+### Step 4: Extract the new version
 
 Download the new version as a zip file. Right click the zip file (e.g. ``certdog_v160.zip``), choose **Properties** and tick the **Unblock** check box (if present). Depending on your security settings, this will prevent several prompts when running the scripts  
 
@@ -58,7 +72,7 @@ c:\certdog
 
 <br>
 
-### Step 4: Run the upgrade
+### Step 5: Run the upgrade
 
 Open a PowerShell window as Administrator and navigate to your installations ``.\install`` folder e.g.
 
@@ -123,7 +137,7 @@ This may be because the service is taking longer than expected to start the firs
 
 <br>
 
-### Step 5: Upgrade the ADCS Driver
+### Step 6: Upgrade the ADCS Driver
 
 If you are using the ADCS Driver to interface with the Microsoft CA. You should also perform the following steps:
 

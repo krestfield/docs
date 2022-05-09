@@ -21,7 +21,7 @@ Download the installer zip and verify the hashes over the file as per:
 
 If the hashes match then right click the file and choose **Properties**. Tick the **Unblock** option at the bottom of the dialog (if present) and click **OK**
 
-<img src="C:\Users\darre\Documents\_mystuff\development\_Krestfield Products\docs\certdog\images\unblock_zip.png" alt="unblock" style="zoom:80%;" />
+<img src=".\images\unblock_zip.png" alt="unblock" style="zoom:80%;" />
 
 
 

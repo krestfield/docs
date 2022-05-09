@@ -23,7 +23,7 @@ If the hashes match then right click the file and choose **Properties**. Tick th
 
 <img src=".\images\unblock_zip.png" alt="unblock" style="zoom:80%;" />
 
-
+<br>
 
 ### Step 2: Stop the services
 
@@ -62,8 +62,6 @@ Make a note of this new location e.g. ``c:\certdog.bak`` as it is required in st
 
 ### Step 4: Extract the new version
 
-Download the new version as a zip file. Right click the zip file (e.g. ``certdog_v160.zip``), choose **Properties** and tick the **Unblock** check box (if present). Depending on your security settings, this will prevent several prompts when running the scripts  
-
 Extract the contents of the new zip file to the original location. For example:
 
 ```powershell
@@ -85,8 +83,8 @@ From the prompt, type ``.\upgrade.ps1`` and press **Enter**. E.g.
 ```powershell
 PS C:\certdog\install> .\upgrade.ps1
 
-Krestfield Certdog Upgrade to Version 1.6 from 1.5
-==================================================
+Krestfield Certdog Upgrade to Version 1.7
+=========================================
 
 End User Agreement (EULA)
 The EULA for this software can be obtained from the following location:

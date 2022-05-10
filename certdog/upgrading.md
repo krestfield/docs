@@ -17,7 +17,7 @@ Download the installer zip and verify the hashes over the file as per:
 
 [Certdog Windows Installation](installation.html)
 
-[Certdog Free Installation and Setup](demo_quickstart,html) 
+[Certdog Free Installation and Setup](demo_quickstart.html) 
 
 If the hashes match then right click the file and choose **Properties**. Tick the **Unblock** option at the bottom of the dialog (if present) and click **OK**
 

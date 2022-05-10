@@ -11,6 +11,7 @@ nav_order: 2
 
 ## Pre-Requisites
 
+* An internet connection (as additional components may be downloaded)
 * .NET v4.8 runtime
 * Administrator privileges  
 * Windows Server 2016/2019

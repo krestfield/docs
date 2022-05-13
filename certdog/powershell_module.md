@@ -48,13 +48,21 @@ Or just type ``login`` to be prompted
 Show available Certificate Issuers:
 
 ```powershell
-cas
+Get-Cas
 ```
 
 or
 
 ```powershell
-cas | Format-Table
+Get-Cas | Format-Table
+```
+
+<br>
+
+Show available CSR Generators:
+
+```powershell
+Get-CsrGenerators
 ```
 
 <br>

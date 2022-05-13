@@ -27,7 +27,7 @@ Import-Module .\certdog-module.psm1
 
 To view the available commands run:
 
-```
+```powershell
 Get-Command -Module certdog-module
 ```
 

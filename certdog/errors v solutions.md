@@ -75,11 +75,13 @@ Logon failure: the user has not been granted the requested logon type at this co
 
 <u>Solution</u>
 
-A service account should be used as a credential when accessing the Microsoft CA. The credential will normally be configured with the *Deny logon locally* and the *Logon as a service* user right assignments. If *Deny logon locally* is set but *Logon as a service* is not, this error will occur
+A service account should be used as a credential when accessing the Microsoft CA. The credential will normally be configured with the *Deny logon locally* and the *Logon as a service* user right assignments. If either *Deny logon locally* or *Logon as a service* are not set, this error will occur
 
 You may run ``rsop.msc`` to obtain the local policy settings and check the assignments for the group that the user is a member of
 
 Arrange for the correct permissions and assignments to be added to the user. See [here](https://krestfield.github.io/docs/certdog/configure_logon_as_a_service.html) for information on how to configure the account correctly   
+
+You may also try running the ADCS Agent service under this account and setting the credential in the Microsoft Certificate Issuer to be *No Credential (use local agent account)*. See [here](adcsdriver.html) for more details  
 
 
 

@@ -75,7 +75,7 @@ Logon failure: the user has not been granted the requested logon type at this co
 
 <u>Solution</u>
 
-A service account should be used as a credential when accessing the Microsoft CA. The credential will normally be configured with the *Deny logon locally* and the *Logon as a service* user right assignments. If either *Deny logon locally* or *Logon as a service* are not set, this error will occur
+A service account should be used as a credential when accessing the Microsoft CA. The credential should be configured with the *Deny logon locally* and the *Logon as a service* user right assignments. If either *Deny logon locally* or *Logon as a service* are not set, this error will occur
 
 You may run ``rsop.msc`` to obtain the local policy settings and check the assignments for the group that the user is a member of
 

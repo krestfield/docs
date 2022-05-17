@@ -104,17 +104,17 @@ By default, the ADCS Driver runs as service (called *Krestfield Adcs Driver*) un
 
 This account to be used to request the certificates is specified in Certdog as a Credential and when creating the [Certificate Issuer](https://krestfield.github.io/docs/certdog/create_adcs_certificate_issuer.html) you select this Credential from the drop down  
 
-The account must be a service account (configured with the *logon as a service* right and ideally also *deny local logon*) and must have the correct permissions on the CA and template in order to be able to obtain a certificate    
+The account must be a service account (configured with the *logon as a service* and *deny local logon* rights) and must have the correct permissions on the CA and template in order to be able to obtain a certificate    
 
 <br>
 
 **<u>2. Configure the ADCS Driver to run under a service account</u>**
 
-Alternatively you may configure the ADCS Driverto run under a specific account and configure your [Certificate Issuer](https://krestfield.github.io/docs/certdog/create_adcs_certificate_issuer.html) within Certdog to not specify a credential - but to use the account the local agent (i.e. the ADCS Service) is running under  
+Alternatively you may configure the ADCS Driver to run under a specific account and configure your [Certificate Issuer](https://krestfield.github.io/docs/certdog/create_adcs_certificate_issuer.html) within Certdog to not specify a credential - but to use the account the local agent (i.e. the ADCS Service) is running under  
 
 To configure the driver to run under another account, from the services snapin, locate the *Krestfield Adcs Driver* service and enter the details for the account on the *Log On* tab. You will need to enter the account's username and password at this point 
 
-This account must still be a service account (configured with the *logon as a service* right and ideally also *deny local logon*) and must have the correct permissions on the CA and template in order to be able to obtain a certificate    
+This account must still be a service account (configured with the *logon as a service* and *deny local logon* rights) and must have the correct permissions on the CA and template in order to be able to obtain a certificate    
 
 <br>
 

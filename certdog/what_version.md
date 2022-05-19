@@ -19,7 +19,7 @@ To obtain further details, select **Management > Settings** from the menu. Syste
 
 <img src=".\images\system_info.png" alt="image-20210111165904651" style="zoom:80%;" />
 
-
+<br>
 
 ### Database Version
 
@@ -44,9 +44,30 @@ replocal:PRIMARY>
 
 This will display the database version. In the example above this is **4.4.1**
 
-
+<br>
 
 ### ADCS Agent Version
+
+From *Add or remove program*s, search for **Certdog** under *Apps & features*  
+
+ Click on the **Certdog ADCS Driver** and the version should be displayed  
+
+Alternatively, from a PowerShell window, type the following:  
+
+```
+Get-WmiObject Win32_Product | select Name,Version
+```
+
+Which should then display something like the following:  
+
+```
+Name                                                           Version
+----                                                           -------
+Certdog ADCS Driver                                            1.5.0
+Microsoft Visual C++ 2019 X64 Additional Runtime - 14.28.29325 14.28.29325
+Microsoft Visual C++ 2019 X64 Minimum Runtime - 14.28.29325    14.28.29325
+Certdog Service                                                1.3.0
+```
 
 
 

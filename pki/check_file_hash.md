@@ -1,6 +1,6 @@
 ---
 layout: default
-title: Check File Hash
+title: Checking File Hashes
 parent: General PKI
 nav_order: 101
 ---

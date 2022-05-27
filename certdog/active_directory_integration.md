@@ -80,6 +80,8 @@ The processing then completes as follows:
 
 Note that when an AD user authenticates their account will then appear in the *Users* list in Certdog. This will show what Certdog Teams the user is a member of (based on their AD group membership). None of the details for AD accounts can be managed via Certdog - they continue to be managed via Active Directory only  
 
+If an AD user is not a member of any group mapped to a Team, they can still login to Certdog but will have no access to any Certificate Issuers. If the Setting *Users can see* is set to **All Certificates** then they will also be able to view certificates in the system but will not be able to carry out any operations on them
+
 <br>
 
 ### Configuring the Active Directory Credential
@@ -248,7 +250,7 @@ To enable this trust, obtain the root certificate of the CA that issued the LDAP
 <br>Open a command prompt and navigate to ``[Certdog Install]\config\sslcerts`` then run the following:
 
 ```
-C:\certdog\config\sslcerts>..\..\java\jdk-17.0.2\bin\keytool -import -alias "Krestfield Root" -file root.cer -keystore dbssltrust.jks
+C:\certdog\config\sslcerts>..\..\java\bin\keytool -import -alias "Krestfield Root" -file root.cer -keystore dbssltrust.jks
 ```
 
 Replace "Krestfield Root" with an alias for your root certificate (e.g. the certificate's common name)

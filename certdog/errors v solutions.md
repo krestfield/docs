@@ -153,9 +153,52 @@ Set the Krestfield ADCS Service to run under the Local System account and set th
 
 
 
+<hr>
+
+
+### Creating a CA using an AWS CloudHSM Key Store fails
+
+<u>Error Details</u>
+
+The AWS CloudHSM client has been configured on the machine and a key store configured in Certdog. When attempting to create a new CA, you see the following error:
+
+```
+There was an error creating the new CA. There was an error whilst creating the root CA: Signing Exception: There was an error generating the raw signature. Signing Exception: Signing error. Signing Exception: There was an error signing the data: CKR_FUNCTION_FAILED
+```
+
+Checking the CloudHSM log (on windows the default location is here ``C:\Program Files\Amazon\CloudHSM\cloudhsm-pkcs11.log.[timestamp]``)  you see errors such as:
+
+```
+2022-05-26T07:53:48.054Z ERROR [3908] ThreadId(3) [cloudhsm_pkcs11::sign::rsa_pkcs] Key 1310835 does not meet the availability requirements - The key must be available on at least 2 HSMs before being used.
+2022-05-26T07:53:48.054Z ERROR [3908] ThreadId(3) [cloudhsm_pkcs11::sign::C_SignInit] C_SignInit failed, returning 0x00000006
+```
+
+Then this is due to the default availability requirements being enabled on the CloudHSM client. Which (as the error message above indicates) requires that the key be available on at least 2 HSMs before being used  
+
+If you only have a single HSM configured this will never be the case
+
+<u>Solution</u>
+
+Switch off the key availability check as follows
 
 
 
+For Windows:
+
+Open a command prompt, as Administrator. Navigate to the bin directory (as below) and then run the following command:
+
+```
+C:\Program Files\Amazon\CloudHSM\bin>configure-pkcs11.exe --disable-key-availability-check
+```
+
+Restart the Certdog service
 
 
 
+For Linux, from a shell run the following:
+
+```
+sudo /opt/cloudhsm/bin/configure-pkcs11 --disable-key-availability-check
+```
+
+Restart the Tomcat service

@@ -61,7 +61,9 @@ The *Search for groups* pane will expand. Type part of the name of the group you
 
 The selected group is now mapped to this team  
 
-To remove a group mapping, simply select the group and click **Remove**
+To remove a group mapping, simply select the group and click **Remove**  
+
+Note: The *Domain Users* group (or whatever is configured as the Primary Group) will not be recognised. All AD users can login to Certdog once the AD Settings have been configured (even if they are not a member of any mapped groups), but they will not have access to any Certificate Issuers. To allow users to have permissions on certificate issuers, they must be added to a specific AD group (other than the primary, default group) which is mapped to a Team (as described above)
 
 <br>
 

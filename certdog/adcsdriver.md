@@ -118,7 +118,7 @@ This account must still be a service account (configured with the *logon as a se
 
 <br>
 
-<u>**1. Run under the LOCAL SYSTEM (Computer) account**</u>
+**<u>1. Run under the LOCAL SYSTEM (Computer) account</u>**
 
 The final option does not require a specific service account but this will only work correctly if your CA and template are configured to allow the Computer Account (where this ADCS Driver is running) to obtain certificates
 

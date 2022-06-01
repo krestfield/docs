@@ -247,6 +247,8 @@ To enable this trust, obtain the root certificate of the CA that issued the LDAP
 [Certdog Install]\config\sslcerts\root.cer
 ```
 
+(note: To determine what certificate the server is returning, you can run a tool such as openssl e.g. ``openssl s_client -connect dc1.organisation.com:636`` which will return server's ldaps certificate)
+
 <br>Open a command prompt and navigate to ``[Certdog Install]\config\sslcerts`` then run the following:
 
 ```

@@ -95,6 +95,7 @@ If ``channel.N.tokenType=GOOGLEKMS`` is set then the following properties must a
 | channel.N.token.googleKms.location|The location of the key ring e.g. europe-west2|global|
 | channel.N.token.googleKms.keyRing|The name of the key ring|ezsignkeys|
 | channel.N.token.googleKms.credentialFile|The JSON file containing the private key associated with the service account with permissions to the KMS|/opt/google/googlekms.json|
+| channel.N.token.googleKms.jsonCredentialString |The raw JSON text provided as a string (rather than a file as above). Note: supply one of jsonCredentialString or credentialFile. If both are provided credentialFile takes priority|{ "type": "service_account", "project_id": "pkcloud"....}|
 | channel.N.token.googleKms.keyImportVersion|If using imported keys that are not at version 1 set this to the version of the keys you use to be imported|1|
 
 

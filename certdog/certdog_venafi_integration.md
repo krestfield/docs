@@ -1,10 +1,16 @@
+---
+layout: default
+title: Certdog Venafi Integration
+parent: Certdog
+nav_order: 211
+---
 # Certdog Venafi Integration
 
-
+<br>
 
 Certdog can host multiple Certificate Authorities. Certificates from these CAs can then be managed via Venafi  
 
-
+<br>
 
 ## Pre-requisites
 
@@ -12,7 +18,7 @@ Certdog is installed and configured such that it is able to issue certificates
 
 There is connectivity between the Venafi server and the Certdog server. Venafi will make REST API calls to the Certdog server, by default these will be made over port 443 (TLS) so ensure that traffic is permitted from the Venafi server to the Certdog server over this port
 
-
+<br>
 
 ## Setup Steps
 

@@ -12,12 +12,14 @@ A Local Certificate Issuer enables you to issue certificates from a certdog cont
 
 A Certificate Issuer combines a Local CA (Certificate Authority) and a Certificate Profile  
 
+Before creating a CA you must have configured a Key Store. See [here](keystores.html) for instructions on how to create one
+
 <br>  
 
 ### 1. Create a Local CA Configuration  
    Select **Local CA** > **CA Configuration** from the menu and click **Add New CA**
 
-<img src=".\images\new-local-ca.png" alt="New Local CA" style="zoom:80%;" />
+<img src=".\images\new-local-ca.png" alt="Local CA" style="zoom:80%;" />
 
 
 
@@ -123,6 +125,12 @@ Once the CA is configured, the above options (main details and policies) are fix
 
 The above options (Extensions and CRL Generation) can be edited later if required)  
 
+<u>OCSP Services</u>
+
+* Check the **Create OCSP Server** box if you would like an OCSP responder to be configured for this CA
+
+* If you check this option, all items required for the operation of an OCSP responder will be created and there will be nothing more to do. However, you can always edit these settings from the OCSP Servers menu. See [here](ocsp.html) for more details
+
 Click **Create**   
 
 If you chose to *Issue From* an **External CA** above, the option will be **Create CSR**. See the section [Processing a CSR from an External CA](#processing-a-csr-from-an-external-ca) below for details on processing this CSR 
@@ -169,7 +177,7 @@ By default certdog runs a non-ssl (http) server to host CRLs. This is the standa
 
 When you enable the **Generate CRLs** option a default *CRL Distribution Point* URL and *CRL Filename* will be populated  
 
-If you do not wish to accept the defaults they can be changed but note the following:  
+If you do not wish to accept the defaults they can be changed, but note the following:  
 
 The *CRL Filename* and *CRL Distribution Points* entries must align. i.e. they must reference the same file and the location referenced by the *CRL Distribution Point* must be where the *CRL Filename* is served from  
 
@@ -211,7 +219,7 @@ http://certdog.krestfield.com/myca/ca1.crl
 
 <br>
 
-You also have the option of hosting the CRL on another host server. In this case, set your *CRL Filename* to a location of your choice and configure a scheduled task or similar to copy the generated CRL to your host. Just ensure that whatever the host resolves to is set as the *CRL Distribution Point*
+You also have the option of hosting the CRL on another host server. In this case, set your *CRL Filename* to a location of your choice and configure a scheduled task (or similar) to copy the generated CRL to your host. Just ensure that whatever the host resolves to is set as the *CRL Distribution Point*
 
 <br>
 
@@ -221,7 +229,7 @@ The AIA (Authority Information Access) Issuer Cert Location contains a URL (or s
 
 To reference the CA certificate, export the certificate and place it at a location that is available to all entities that will be relying on the certificates. This could be an external web site site or LDAP location  
 
-This can also be hosted on the certdog server itself (e.g. you could place the CA certificate ``ca1.cer`` at ``[certdog install]\tomcat\crlwebapps``). Then set the AIA Location to the URL that can access this location e.g. ``http://certdog.krestfield.com/myca/ca1.cer``
+This can also be hosted on the certdog server itself (e.g. you could place the CA certificate ``ca1.cer`` at ``[certdog install]\tomcat\myca``). Then set the AIA Location to the URL that can access this location e.g. ``http://certdog.krestfield.com/myca/ca1.cer``
 
 Note that the issuing certificate is not usually provided in this way for root CAs, as end systems should already have the root CA certificate installed in order to trust it  
 

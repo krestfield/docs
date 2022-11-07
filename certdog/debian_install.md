@@ -199,7 +199,7 @@ You can re-run the ``./configure.sh`` script. Before doing so, stop certdog (``.
 
 <br>
 
-Full Certdog Documentation can be founder here: [https://krestfield.github.io/docs/certdog/certdog.html](https://krestfield.github.io/docs/certdog/certdog.html)
+Full Certdog Documentation can be found here: [https://krestfield.github.io/docs/certdog/certdog.html](https://krestfield.github.io/docs/certdog/certdog.html)
 
 
 

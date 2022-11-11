@@ -57,7 +57,15 @@ Next, navigate to:
 And start the database shell by typing:
 
 ```
-mongo
+.\mongo.exe -tls
+```
+
+Note: For the free version the ``-tls`` may not be required
+
+If this fails, try running the following:
+
+```
+.\mongo.exe -tls -tlsAllowInvalidCertificates
 ```
 
 Now we authenticate against the admin database:

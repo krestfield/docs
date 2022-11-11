@@ -202,3 +202,59 @@ sudo /opt/cloudhsm/bin/configure-pkcs11 --disable-key-availability-check
 ```
 
 Restart the Tomcat service
+
+
+
+<hr/>
+
+### The Krestfield CertDog Service doesn't start
+
+<u>Error Details</u>
+
+The following message is seen whilst attempting to manually start the service
+
+```
+The Krestfield CertDog Service service on Local Computer started and then stopped. Some services stop automatically if they are not in use by other services or programs.
+```
+
+<u>Solution</u>
+
+Check the windows Event Log and navigate to Windows Logs, Application
+
+If you locate event ID 7172 with the following message:
+
+```
+Unable to start the system. No master password has been set. Run the set master password script
+```
+
+Open a PowerShell window as Administrator and navigate to ``[certdog installation]\install`` e.g. ``c:\certdog\install``
+
+Run the following command
+
+```
+.\start-certdog-service.ps1
+```
+
+When prompted enter the Master Secret/Password. This is the passphrase that would have initially been saved to ``MasterSecret.txt`` at installation
+
+
+
+<hr/>
+
+### Database Fails to Start after SSL Configuration
+
+<u>Error Details</u>
+
+The Krestfield Certdog Database service fails to start  
+
+This can happen after the database SSL certificate has been renewed
+
+Checking the log file here ``[certdog install]\mongodb\mongod.log`` there is an ``InvalidSSLConfiguration`` error, with message ``Failed to find PEM blob header`` e,g,:
+
+```
+{"t":{"$date":"2022-06-30T17:44:09.963+00:00"},"s":"F",  "c":"CONTROL",  "id":20574,   "ctx":"main","msg":"Error during global initialization","attr":{"error":{"code":140,"codeName":"InvalidSSLConfiguration","errmsg":"Failed to find PEM blob header: -----BEGIN CERTIFICATE-----"}}}
+```
+
+<u>Solution</u>
+
+The database is very sensitive to file formats. If the certificate PEM file (``[certdog install]\config\sslcerts\dbssl.pem``) was saved as UNICODE, the database will not read it correctly. Open the certificate file and save as UTF-8 using a suitable text editor

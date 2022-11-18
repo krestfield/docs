@@ -13,15 +13,7 @@ When upgrading to version 1.6 or above the following steps should be performed
 
 ### Step 1: Download
 
-Download the installer zip and verify the hashes over the file as per:
-
-[Certdog Windows Installation](installation.html)
-
-[Certdog Free Installation and Setup](demo_quickstart.html) 
-
-If the hashes match then right click the file and choose **Properties**. Tick the **Unblock** option at the bottom of the dialog (if present) and click **OK**
-
-<img src=".\images\unblock_zip.png" alt="unblock" style="zoom:80%;" />
+Download the new installer zip as per the details [given here](download-locations.html)
 
 <br>
 
@@ -83,8 +75,8 @@ From the prompt, type ``.\upgrade.ps1`` and press **Enter**. E.g.
 ```powershell
 PS C:\certdog\install> .\upgrade.ps1
 
-Krestfield Certdog Upgrade to Version 1.7
-=========================================
+Krestfield Certdog Upgrade Version 1.7 to Version 1.8
+=====================================================
 
 End User Agreement (EULA)
 The EULA for this software can be obtained from the following location:

@@ -23,7 +23,7 @@ nav_order: 400
 
 ## Download
 
-1. Download from [here](https://krestfield.s3.eu-west-2.amazonaws.com/certdog/certdogfree_v170.zip)
+1. Locate the file to download from [here](download-locations.html)
 
 2. Right click the zip file (e.g. ``certdogfree_v180.zip``), choose **Properties** and tick the **Unblock** check box (if present). Depending on your security settings, this will prevent several prompts when running the scripts  
 

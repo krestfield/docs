@@ -27,15 +27,15 @@ Contact [support](mailto:support@krestfield.com) for your download location
 
 Full Version:  
 
-* SHA1: ``1b4846aaa36f05cc267cc7593dec11ba3e913260``
+* SHA1: ``fe634549728b0c3199ec438ee0e25b49ac8d1dd7``
 
-* SHA256: ``31f9d0a7e4a6a7008bc0ef154b92b30cd7792e55e945901a14f8be782a83f431``
+* SHA256: ``4fed32c50aecbe64da969f90cf6c333e58c2bfdf7ce1a0bb1f086b62e23fef28``
 
 Free Version:  
 
-* SHA1: ``70f513df4f526c9582f8623bb5e178af81218452``
+* SHA1: ``269eebcdd7a72b892e493d1cc3d4da79345a798b``
 
-* SHA256: ``a1d9475c84baca8679fc3883fd1dbc5280951dace3a92d844555b04e01d9449e``
+* SHA256: ``bb1e801e7211853c211cfc67f3b5867ba4c83e402b15a63201900eec3f683902``
 
 <br>
 

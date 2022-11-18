@@ -7,13 +7,17 @@ nav_order: 1
 
 # Certdog Windows Installation
 
- 
+> From version: 1.8.0
+
+<br>
 
 The following steps outline the steps required to install the Certdog on a single system
 
 If the pre-requisites are in place, the entire installation should not take more than 10 minutes  
 
-If you don't want to read any details  right now and just want to quickly download to try things out - see the [Quick Installation Guide](quick_installation_guide.html)
+<br>
+
+If you don't want to read any details  right now and just want to quickly download to try things out - see the [Quick Installation Guide](quick_installation_guide.html) or the [Demo Quickstart](demo_quickstart.html) (which will install with default login details, for testing purposes)
 
 <br>
 
@@ -26,7 +30,9 @@ The system may be installed on the following operating systems:
 
 * Windows Server 2019
 
-* Windows 10 [^1]
+* Windows Server 2022
+
+* Windows 10/11 [^1]
 
 <br>
 
@@ -42,63 +48,18 @@ You must have local Administrator privileges on the system
 
 <br>
 
+It is recommended to install on a clean system. But if this is not possible the system must not already have an instance of MongoDB running as this will conflict with the standard installer. If you wish to use an existing MongoDB instance, contact support@krestfield.com for details
+
+
+
 
 ### 1.  Download the Installer
 
-Contact support for a download link. If you have an FTP account it will be placed in your download area  
+See [here](download-locations.htmls) for download locations
 
 <br>
 
-### 1.1 Verify the download
-
-To verify the downloaded file, perform the following operations:
-
-Open a command prompt or PowerShell window and navigate to the download location e.g.
-
-``C:\Users\myname\Downloads``
-
-At the prompt type:
-
-``certutil -hashfile certdog.zip sha1``
-
-Or, if you wish to produce the longer SHA-256 hash, type:
-
-``certutil -hashfile certdog.zip sha256``
-
-E.g.
-
-```powershell
-C:\temp\downloads>certutil -hashfile certdog.zip sha256
-SHA256 hash of c:\Users\myname\Downloads\certdog.zip:
-eeaab3196237b390e861cf5ab3c2abab51f70ba1d63069a40d97bc9852dc4e83
-CertUtil: -hashfile command completed successfully.
-```
-
-Compare the hash value produced with the following checksums:  
-
-* SHA1: ``1b4846aaa36f05cc267cc7593dec11ba3e913260``
-
-* SHA256: ``31f9d0a7e4a6a7008bc0ef154b92b30cd7792e55e945901a14f8be782a83f431``
-
-Free Version:  
-
-* SHA1: ``70f513df4f526c9582f8623bb5e178af81218452``
-
-* SHA256: ``a1d9475c84baca8679fc3883fd1dbc5280951dace3a92d844555b04e01d9449e``
-
-<br>
-
-If they differ, the download is corrupt or has been altered. Attempt the download again, the file sizes should be over 100Mb. If hashes still don't match please contact support@krestfield.com 
-
-<br>
-
-If the hashes match then right click the file and choose **Properties**. Tick the **Unblock** option at the bottom of the dialog (if present) and click **OK**
-
-<img src=".\images\unblock_zip.png" alt="unblock" style="zoom:80%;" />
-
-<br>
-
-### 1.2 Unzip
+### 1.1 Unzip
 
 Unzip this to a location on the target machine. E.g.
 
@@ -152,11 +113,49 @@ If you don't see the ``install`` directory, the unzipping process may have faile
 
 ### 2. Run the Installer
 
-From the PowerShell prompt, navigate into the ``install`` directory and run the ``.\install.ps1`` script:
+The installer may be run interactively, where you specify items as required. Or you may simply provide all of the required information as parameters to the script
+
+Whichever is chosen, the following information will be required:  
+
+* The Database User Admin Account Password
+  * This account is the main database administrator and is used by the installer to create the other initial database accounts required by the system
+  * You will not normally need to use this account on a day-to-day basis but you must retain the details  
+  * If you wish to manually configure the database later (for example if all user accounts were lost), these credentials will be required
+  * This can be entered when prompted or provided to the install script with the ``-dbAdminPassword`` parameter
+* First Admin User Details
+  * The account details for the first user that will log into the system,. They will be configured as an administrator
+  * As well as a username and password, you will be required to enter an email address. All certdog user accounts require an associated email address to which notifications from the system may be sent
+  * You may provide these details interactively or supply them as the following parameters to the script:``-firstAdminUsername``, ``-firstAdminPassword``, ``-firstAdminEmail``
+* Network Details
+  * The listening IP address and port number that the service will listen on
+  * These can be provided to the script using the ``listeningIpAddress`` and ``listeningPort`` parameters
+* Whether to install the ADCS Agent or not
+  * This can be provided as the following switch ``-installAdcsAgent``
+* Acceptance of the End User License Agreement
+  * This can be accepted by providing the following switch ``-acceptEula`` to the script
+
+<br>
+
+From the PowerShell prompt, navigate into the ``install`` directory and either just run the ``.\install.ps1`` script and follow the prompts:
 
 ```powershell
 PS C:\certdog> cd install
 PS C:\certdog\install> .\install.ps1
+```
+
+Or run with the required parameters:  
+
+```powershell
+.\install.ps1 -acceptEula -dbAdminPassword $dbPassword -firstAdminUsername $adminUsername -firstAdminEmail $adminEmail -firstAdminPassword $adminPassword -listeningIpAddress 0.0.0.0 -listeningPort 443 -installAdcsAgent
+```
+
+You can set the required parameters mentioned above as follows:
+
+```powershell
+$dbPassword='password'
+$adminUsername='admin'
+$adminEmail='admin@nowhere.com'
+$adminPassword='password'
 ```
 
 Note: If you see the message ``Do you want to run software from this untrusted publisher?`` type **A** to always run. The scripts are signed with a publicly trusted CA, but depending on your security settings, there may still be a requirement to recognise the signer
@@ -169,12 +168,12 @@ If  your system does not have the Visual C++ Redistributable packages installed,
 
 If  you do not have the .NET 4.8 Runtime installed, the installer will recognise this and end. Install the .NET 4.8 Runtime then restart the ``.\install.ps1`` script
 
-
+<br>
 
 The installer will start and display some initial information. e.g.
 
 ```powershell
-Krestfield Certdog Setup Version 1.7
+Krestfield Certdog Setup Version 1.8
 ====================================
 
 End User Agreement (EULA)
@@ -182,7 +181,6 @@ The EULA for this software can be obtained from the following location:
 https://krestfield.s3.eu-west-2.amazonaws.com/certdog/KrestfieldCertdogEULA.pdf
 By continuing and installing the software you accept the terms of this license agreement
 
-Type 'y' to accept and continue, any other key to reject:
 ...
 ```
 
@@ -190,19 +188,21 @@ Download and read the EULA and if happy to accept the agreement, type ``y`` to p
 
 <br>
 
-Follow the instructions to install the system, noting the following:
+If the script has been run without any parameters then follow the prompts when prompted  
 
-1. You will be prompted to enter details and passwords for several accounts, these are discussed in the [Accounts and Passwords](#accounts-and-passwords) section below
-   
-2. You will be asked what interface and port you wish the system to be available on and the current available IP Addresses (as configured on your system) will be listed
+If the script has been run with parameters the installer will run through the process without any prompting
 
-    For a production system you should have an IP Address available which will be targeted via a DNS entry. For an initial test system the local loopback address (127.0.0.1) can be used and the port left at 443 (the default SSL port)
-    
-3. When prompted with ``Do you wish to install the ADCS agent on this machine``, choose ``y`` if you will be interfacing to a Microsoft CA (Active Directory Certificate Services). This component only operates on server based operating systems. It is not required if you will be using locally generated (internal to the certdog application) CAs
+<br>
 
-    <br>
+At the end of installation you should see a message as follows:
 
-There are many customisations and deployment options that can be applied including the separation of services across multiple machines, hosting on other containers, using shared databases and hosting fully or partially in the cloud. Contact support support@krestfield.com for more details
+<img src=".\images\installer_end.png" alt="End of Installation" style="zoom:80%;" />
+
+Record the database administrator account details, including the username displayed and the password you provided (either interactively or as the ``-dbAdminPassword`` parameter)
+
+The Master Secret is a top level secret that is used to protect keys held within the system. It is initially saved to a file (as specified in the output). This file is encrypted under the current user's account to initially protect others from accessing it. However, it is **strongly recommended** that it is saved somewhere secure and the file removed
+
+You may need this secret if you re-install the main Certdog service, change the account the service runs under or attempt to start individual services manually. Normally, after install it is not required, but if lost any credentials stored within the system will be unrecoverable
 
 <br>
 
@@ -251,7 +251,7 @@ If either the database or API are not running, see the Troubleshooting guide [he
 
 <br>
 
-Next, open a browser and navigate to ``https://[Your IP Address]/certdog``
+Next, open a browser and navigate to ``https://[Your IP Address]/certdog``. Note: Internet Explorer is not supported
 
 Where ``[Your IP Address]`` is the address chosen during the installation e.g.
 
@@ -300,24 +300,6 @@ If you now close the browser, re-open and navigate to https://127.0.0.1/excert/u
 Note: This is a test certificate and should not be trusted in a production environment. You should still continue to create a valid SSL certificate as described [here](configure_server_ssl.html)
 
 <br>
-
-### Accounts and Passwords
-
-During the installation you will be prompted for the following details:
-
-* The Database User Admin Account
-  * This is the main database administrator account and is used by the installer to create the other initial database accounts required by the system
-  * You will not normally need to use this account on a day-to-day basis but you must retain the details (username as displayed and the password you enter)
-  * If you wish to manually configure the database later (for example if all user accounts were lost), these credentials will be required
-* First Admin User
-  * This is the first user that will log into the system, as an administrator. This will normally be your account
-  * As well as a username and password, you will be required to enter an email address. All certdog user accounts require an associated email address to which notifications from the system may be sent
-* Master Password
-  * This account is used as the top level protection for other accounts. It is not stored in the clear on the system
-  * You must enter this password when installing the **Application Service**
-  * Once entered, it should not be required again for this system but MUST be stored securely. If you start the application manually (not via the windows service) or wish to host the application on another container (e.g. on a shared Tomcat service), this password will be required
-
-<br>
 ### Windows Services
 
 **Database Service**  
@@ -358,7 +340,7 @@ In the services snapin, this service is called **Krestfield Adcs Driver**
 #### Sample Installation Output
 
 ```powershell
-Krestfield Certdog Setup Version 1.7
+Krestfield Certdog Setup Version 1.8
 ====================================
 
 End User Agreement (EULA)
@@ -505,4 +487,6 @@ API is running
 
 Installation is complete
 ```
+
+
 

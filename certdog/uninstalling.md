@@ -11,7 +11,25 @@ nav_order: 101
 
 The following steps outline the steps required to completely uninstall Certdog from a windows environment
 
-If a reset is required (to remove all data and revert to a blank state e.g. if the admin password were lost). Simply, run reset-db.ps1 
+If a reset is required (to remove all data and revert to a blank state e.g. if the admin password were lost). Simply, run ``reset-db.ps1`` 
+
+
+
+> From Version 1.8.0
+
+
+
+Open a **PowerShell** window as Administrator and navigate to the **.\install** folder within the certdog installation. Run: 
+
+**.\uninstall.ps1**
+
+Once the product has been uninstalled, you may remove all files by closing the PowerShell window and deleting the certdog folder (e.g. ``c:\certdog\``)
+
+
+
+
+
+> For Versions before 1.8.0
 
 
 

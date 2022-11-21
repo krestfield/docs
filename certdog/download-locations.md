@@ -47,7 +47,7 @@ For instructions on how to validate the file hashes over the download files, see
 
 Once the file has been downloaded, right click the file and choose **Properties**. Tick the **Unblock** option at the bottom of the dialog (if present) and click **OK**
 
-<img src="C:\Users\darre\Documents\_mystuff\development\_krestfield products\docs\certdog\images\unblock_zip.png" alt="unblock" style="zoom:80%;" />
+<img src=".\images\unblock_zip.png" alt="unblock" style="zoom:80%;" />
 
 
 

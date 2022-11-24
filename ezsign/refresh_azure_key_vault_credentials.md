@@ -61,7 +61,7 @@ All the settings should be the same as previously configured, except the passwor
 
 ## Set the new password in EzSign
 
-Now, start the ``ezsign-manage.sh`` utility, choose the Set Passwords option and set this password as the new Token password for the channel. Note that you must enter the password minus the quotes i.e. enter ``nScc7-6T.gOI7.ugHawFRRoUbwUA_agrC-`` and not ``"nScc7-6T.gOI7.ugHawFRRoUbwUA_agrC-"``  
+Now, start the ``ezsign-manage.sh`` utility, choose the **Set Passwords** option and set this password as the new Token password for the channel. Note that you must enter the password minus the quotes i.e. enter ``nScc7-6T.gOI7.ugHawFRRoUbwUA_agrC-`` and not ``"nScc7-6T.gOI7.ugHawFRRoUbwUA_agrC-"``  
 
 Restart the EzSign server and authentication to Azure should now complete OK
 

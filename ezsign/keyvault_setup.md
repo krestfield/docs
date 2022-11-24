@@ -57,7 +57,7 @@ Update the following properties:
 
 This is where EzSign stores its key components. When using an HSM of any kind, these components only ever contain references to keys stored on the HSMs  
 
-By default it is set to a relative path ../keystores which means if you run the commands from the ./bin directory this will get picked up ok. But if you call any jars directly then you must set this to the full path. This can point to [Install Dir]/EzSignServer/config/keystores or you can choose an alternative location. The account running the software must have write permissions on this folder and it must already exist  
+By default it is set to a relative path ``../keystores`` which means if you run the commands from the ``./bin`` directory this will get picked up ok. But if you call any jars directly then you must set this to the full path. This can point to ``[Install Dir]/EzSignServer/config/keystores`` or you can choose an alternative location. The account running the software must have write permissions on this folder and it must already exist  
 
 e.g.
 
@@ -79,7 +79,7 @@ channel.1.token.azureKeyVault.keyVault=[Key Vault URI]
 
 Where:  
 
-``channel.1.token.azureKeyVault.clientId`` is client ID/App ID of the client that has been registered in Azure. See the section Registering a Client Application below for an example on how to register a client  
+``channel.1.token.azureKeyVault.clientId`` is client ID/App ID of the client that has been registered in Azure. See the section  [Registering a Client Application](#registering-a-client-application) below for an example on how to register a client  
 
 ``channel.1.token.azureKeyVault.tenantId`` is the tenant ID of your Azure subscription
 
@@ -115,7 +115,7 @@ Next, open a terminal, shell or command prompt and navigate to
 and run:  
 
 ```
-ezsign-manage.bat ..\config\azurekv.properties  
+ezsign-manage.sh ../config/azurekv.properties
 ```
 
 Select option ``1. Set Passwords  ``
@@ -135,7 +135,7 @@ Keys that are already configured in the Key Vault can be imported into EzSign. N
 Navigate to 
 
 ```
-EzSignV4.1.0\EzSignServer\bin
+./EzSignV[Version]/EzSignServer/bin
 ```
 
  and edit 
@@ -200,8 +200,8 @@ Normally, EzSign is run as a server application called via the Krestfield Client
 
 However, if you choose to call the java directly, from your java application, add a reference to the following jar:
 
-```
-[EzSign Installation Dir]/EzSignV4.1.0/EzSignServer/lib/ezsign-4.1.0.jar  
+```powershell
+[EzSign Installation Dir]/EzSignV[Version]/EzSignServer/lib/ezsign-[Version].jar  
 ```
 
 
@@ -225,7 +225,7 @@ try {
 	// The password here is the master password. If you change this in the 
 	// configuration you must also change it here 
 	KEzSign ezSign = new KEzSign(propertiesFile, "password", 1); 
-	String channelName = "AzureKeyVault"; 
+	String channelName = "Azure"; 
 	
 	// hashedData is a SHA-256 hash of the original data 
 	// You can provide the raw data (and let EzSign hash it for you) but in production 
@@ -246,14 +246,15 @@ catch (KSigningException e)
 ```
 
 
+<br>
 
 ## Registering a Client Application 
 
-From the Azure Console navigate to Azure Active Directory and select App Registrations from the left hand menu  
+From the Azure Console navigate to **Azure Active Directory** and select **App Registrations** from the left hand menu  
 
-From the top menu click New registration  
+From the top menu click **New registration**  
 
-Provide a name for the application (e.g. ezsignhsm), select the supported account types and for the Redirect URI (optional) setting, choose Web and provide a URL. The URL does not need to be a real URL in this case E.g. it could be: http://ezsignhsm.myorg.com  
+Provide a name for the application (e.g. ezsignhsm), select the supported account types and for the **Redirect URI (optional)** setting, choose **Web** and provide a **URL**. The URL does not need to be a real URL in this case E.g. it could be: http://ezsignhsm.myorg.com  
 
 Open Azure Cloud Shell either by following a link from the console or by navigating to https://shell.azure.com/  
 
@@ -263,11 +264,7 @@ At the prompt, type:
 az ad sp create-for-rbac -n [App Name Registered] --skip-assignment
 ```
 
- 
-
-
-
-Where [App Name Registered] is the name you registered in the step above e.g. ezsignhsm
+ Where [App Name Registered] is the name you registered in the step above e.g. ezsignhsm
 
 ```json
 Changing "ezsignhsm" to a valid URI of "http://ezsignhsm", which is the required format used for service principal names 
@@ -288,6 +285,8 @@ Extract and retain the following:
   * Also referred to as the client secret. This must be configured as the token password in EzSign
 * tenant
   * This must be configured in EzSign as the ``channel.1.azureKeyVault.tenantId`` property
+
+<br>
 
 We need to configure these values as environment variables in the Azure Shell so we can set further permissions  
 
@@ -327,7 +326,7 @@ az keyvault set-policy --name ezsignhsm --spn $AZURE_CLIENT_ID --key-permissions
 
 You will get a stream of JSON output from this command. Verify it all looks correct for your requirements and adjust any other values as required  
 
-This operation can also be performed from the Azure console if preferred
+This operation can also be performed from the Azure console if preferred  
 
 Note: If you are using EzSign for signature generation and verification (including generation of CSRs) only the following key permissions are required:
 
@@ -369,9 +368,9 @@ The user, group or application 'appid=7f464c48-906f-462f-b0fd-79d904297ee8;oid=7
 
  This means that the registered application does not have the sign permission set on the Key Vault  
 
-Go to the **Key Vault**, under **Settings** select **Access policies** and under the drop down for **Key Permissions**, check the **Sign** permission  
+Go to the **Key Vault**, under **Settings** select **Access policies** and under the drop down for **Key Permissions**, check the **Sign** permission 
 
-If you see an error such as:
+<br>If you see an error such as:
 
 ```
 2022-11-24 10:31:40.391 [main] ERROR EzSignLog - Max retries 3 times exceeded. Error Details: AADSTS7000222: The provided client secret keys for app '7412f649-8e14-471f-bfc1-733b36a42705' are expired

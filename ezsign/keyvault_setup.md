@@ -53,7 +53,7 @@ Update the following properties:
 
 
 
-#### keyStoreDir  
+<u>keyStoreDir</u>  
 
 This is where EzSign stores its key components. When using an HSM of any kind, these components only ever contain references to keys stored on the HSMs  
 
@@ -67,7 +67,7 @@ keyStoreDir=/opt/ezsign/EzSignV4.1.0/EzSignServer/keystores
 
 <br>
 
-#### channel.1.token.azureKeyVault  
+<u>channel.1.token.azureKeyVault</u>  
 
 Set the following properties to the values that were obtained when the client was registered in Azure  
 
@@ -102,7 +102,7 @@ channel.1.signature.keyId=
 
 ```
 
-Note that none of the values are surrounded by quotes. Quotes are note required
+Note that none of the values are surrounded by quotes. Quotes are not required
 
 <br>
 

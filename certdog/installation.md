@@ -55,7 +55,7 @@ It is recommended to install on a clean system. But if this is not possible the 
 
 ### 1.  Download the Installer
 
-See [here](download-locations.htmls) for download locations
+See [here](download-locations.html) for download locations
 
 <br>
 

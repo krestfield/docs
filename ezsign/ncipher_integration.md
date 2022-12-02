@@ -52,7 +52,7 @@ The key points to note are:
 
 The channel number (e.g. channel.**1**) increments for every channel, so if you have any previous channels configured (which you wish to retain) then the number should be incremented (e.g. if you had settings for channel.1 already, then these settings would all start channel.**2**)  
 
-The ``tokenType`` is **PKCS11 ** 
+The ``tokenType`` is **PKCS11** 
 
 The ``token.password`` value should be blank for now, as we will set this later  
 

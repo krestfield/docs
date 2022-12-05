@@ -80,7 +80,8 @@ If  ``channel.N.tokenType=PKCS11`` is set then the following properties must als
 | channel.N.token.useModuleProtection|If an HSM normally requires a password to logon (such as some PKCS#11 tokens).  This can be overridden by setting this value to **true**.  This means the HSM will not be logged on to and only the module’s keys will be used (rather than an operator card set etc)|false|
 | channel.N.token.pkcs11.library|The full path to the PKCS11 library|/opt/nfast/toolkits/p11/ibcknfast.so|
 | channel.N.token.pkcs11.slot|The PKCS11 slot number | 0 |
-| channel.N.token.pkcs11.model | The particular HSM model. Options are:  **Generic**, **NCipher**, **Luna**, **AWSCloudHSM**, **Utimaco** | Utimaco |
+| channel.N.token.pkcs11.model | The particular HSM model. Options are:  **Generic**, **NCipher**, **Luna**, **AWSCloudHSM**, **Utimaco**, **Custom** | Utimaco |
+| channel.N.token.pkcs11.customTemplateClass | If the model above is **Custom**, then the class containing the customised templates must be specified here. See [here](https://krestfield.github.io/docs/ezsign/custom_pkcs11_templates.html) for more details.  Version 4.2.1 onwards | NewHsmTemplates |
 
 
 

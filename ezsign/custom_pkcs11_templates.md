@@ -28,7 +28,7 @@ Krestfield support can either develop this on your behalf or provide details on 
 
 <br>
 
-Once this file has been compiled, the resulting jar file (e.g. ``CustomHsm.jar``) must then be placed in the ``[EzSignInstall]]\EzSignServer\lib`` folder of the EzSign installation  
+Once this file has been compiled and packaged, the resulting jar file (e.g. ``CustomHsm.jar``) must then be placed in the ``[EzSignInstall]]\EzSignServer\lib`` folder of the EzSign installation  
 
 <br>
 

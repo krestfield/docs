@@ -66,7 +66,7 @@ $webClient.DownloadFile('https://krestfield.s3.eu-west-2.amazonaws.com/certdog/c
 Once download is complete, run the following to unzip:
 
 ```powershell
-Expand-Archive .\certdog.zip
+Expand-Archive .\certdog.zip -DestinationPath .
 ```
 
 This will expand to:

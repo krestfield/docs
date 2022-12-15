@@ -1,8 +1,8 @@
 ---
 layout: default
-title: ZZTESTCHILD
-parent: ZZTEST
+title: test2
+parent: test
 nav_order: 1
 ---
 
-# ZZTESTCHILD
+# test2

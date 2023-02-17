@@ -10,9 +10,42 @@ nav_order: 212
 
 <br>
 
-Certdog provides OCSP services for local CAs  
+Certdog can provide OCSP services for local CAs and external CAs (e.g. Microsoft AD CS)  
 
-When creating a Local CA, if you check the **Create OCSP Server** option an OCSP server will be created and configured  
+When using OCSP services for local CAs, certdog can create all components required. Users just need to select the **Create OCSP Server** option for a Local CA  
+
+When using OCSP services for external CAs, users must create the OCSP configuration manually, and this includes referencing the required CRL  
+
+<br>
+
+### Configuration for an Internal CA  
+
+From the Local CA (**Local CAs, CA Configuration** menu), simply check the **Create OCSP Server** option:
+
+<img src=".\images\enable_ocsp.png" alt="image-20230217154109764"  />
+
+Once **Add** (or **Update**) is clicked for the Local CA, the following will then be automatically generated:
+
+* An OCSP Server. You can view configured servers from the *OCSP Servers* menu item
+* A Certificate Profile. This profile will be configured to issue OCSP signing certificates
+* A Certificate Issuer. This will combine the profile above with the local CA - so that the CA is able to issue OCSP signing certificates
+* A User and a Team. The user will be a member of the team and the team will only have permissions to request certificates from the Certificate Issuer mentioned above. The user account will be used by the OCSP server to authenticate to Certdog and request a signing certificate
+
+With the above items in place an OCSP server will automatically obtain a signing certificate from the CA. This certificate will also be auto-renewed  
+
+Certificate status will be obtained from the internal database meaning this information will be up to date  
+
+You may edit the OCSP settings my clicking on the **OCSP Servers** menu then selecting the OCSP server (see below for details on the specific settings)
+
+<br>
+
+### Configuration for an External CA 
+
+For external CAs (e.g. a Microsoft AD CS instance) an OCSP server can be manually created. to do this from the OCSP Servers menu, click **Add New OCSP Server** then complete following the [OCSP Server Settings](#ocsp-server-settings) section below. The additional item to provide in this case is the CRL location  
+
+<br>
+
+### OCSP End Point (AIA)
 
 By default the OCSP server will be located at the following URL
 
@@ -20,18 +53,29 @@ By default the OCSP server will be located at the following URL
 http://[server name]/certdog/ocsp
 ```
 
-This is the value that should be added as the AIA OCSP Location for certificates issued from the CA. This value will be populated when you select the *Create OCSP Server* option  
+For example, if your certdog server is at https://certdog.krestfield.com then your OCSP end point would be
 
-When an OCSP server is created in this way the following are automatically generated:
+```
+http://certdog.krestfield.com/certdog/ocsp
+```
 
-* An OCSP Server. You can view configured servers from the Local CAs - OCSP Servers menu item
-* A Certificate Profile. This profile will be configured to issue OCSP signing certificates
-* A Certificate Issuer. This will combine the profile above with the local CA - so that the CA is able to issue OCSP signing certificates
-* A User and a Team. The user will be a member of the team and the team will only have permissions to request certificates from the Certificate Issuer mentioned above. The user account will be used by the OCSP server to authenticate to Certdog and request a signing certificate
+Note: The URL is not SSL protected (http rather than https). This is intentional as SSL protected OCSP end points are not often utilised (and not supported by many systems)  
 
-With the above items in place an OCSP server will automatically obtain a signing certificate from the CA. This certificate will be auto-renewed  
+If you do require an SSL protected end point, contact [krestfield support](mailto:support@krestfield.com)
 
-If you wish to create an OCSP server manually, or alter the default settings. Navigate to the **Local CAs, OCSP Servers** menu item. Click **Add New OCSP Server** to create a new server from scratch, or select an existing item and select **View/Edit**  
+You may have additional DNS settings that reference the certdog server e.g.
+
+```
+CNAME: status.pki.com -> certdog.krestfield.com
+```
+
+Which would mean your OCSP services could be contacted at:
+
+```
+http://status.pki.com/certdog/ocsp
+```
+
+Whatever location/URL you choose, this value must be added as the AIA OCSP Location for certificates issued from the CA. This value will be populated for you when you select the *Create OCSP Server* option for a Local CA, but if using an external CA this value must be set there
 
 <br>
 

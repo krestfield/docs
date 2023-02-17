@@ -68,4 +68,4 @@ The following items are then available
 
 Once all items have been entered, click **Add**
 
-This restriction can now be applied to a Certificate Issuer
+This restriction can now be applied to a [Certificate Issuer](certificate_issuers.html)

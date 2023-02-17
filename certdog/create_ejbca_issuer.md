@@ -11,7 +11,7 @@ nav_order: 7
 
 To configure certdog to be able to request certificates from EJBCA, the following is  required:
 
-* The Web Service option is enabled
+* The Web Service option is enabled in EJBCA
   * You can check this from Admin Web. Choose System Configuration then click the Protocol Configuration tab. the Web Service option should be *Enabled*
 * A User KeyStore
   * This is an end-entity certificate issued from EJBCA's current ManagementCA that is configured to have access to the RA administrative functions
@@ -157,7 +157,7 @@ From the certdog menu, select **Certificate Issuers** and select **Add New Issue
 
 For the *CA Type*, select **PrimeKey EJBCA** and click **Next**
 
-<img src=".\images\ejbca_config1.png" alt="image-20210205163525205" style="zoom:80%;" />
+<img src=".\images\ejbca_config1.png" alt="image-20230217140832416" style="zoom:80%;" />
 
 Enter the details as follows:
 
@@ -176,6 +176,10 @@ Enter the details as follows:
 * For EJBCA Issuing CA Name - this is the CA configured in EJBCA that you wish to issue certificates from
 
 * Then enter the **End Entity** and **Certificate Profile** names that you would have identified or created in steps 3 and 4 above
+
+* If you wish to restrict the DNs from certdog (this can also be done from EJBCA), select the DN Restriction here
+
+* Finally, select the Team(s) whose members will have access to this issuer
 
 * Click **Add**
 

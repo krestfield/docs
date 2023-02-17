@@ -258,3 +258,103 @@ Checking the log file here ``[certdog install]\mongodb\mongod.log`` there is an 
 <u>Solution</u>
 
 The database is very sensitive to file formats. If the certificate PEM file (``[certdog install]\config\sslcerts\dbssl.pem``) was saved as UNICODE, the database will not read it correctly. Open the certificate file and save as UTF-8 using a suitable text editor
+
+
+
+<hr/>
+
+### Get "CA does not have any certificates configured" when requesting a certificate
+
+<u>Error Details</u>
+
+The error message ``Error Generating Certificate``, ``Unable to process certificate request as the CA specified: IssuingCA1 does not have any certificates configured``   is displayed when attempting to request a certificate from a Microsoft CA  
+
+Checking the log you see an entry such as:
+
+```
+There was an error whilst attempting to retrieve the CA certificates from the CA. Unable to obtain certificates from the CA. CCertAdmin::GetCAProperty: Access is denied. 0x80070005 (WIN32: 5 ERROR_ACCESS_DENIED)
+```
+
+which is reported from the agent when the Certificate Issuer is configured
+
+
+
+<u>Solution</u>
+
+This is a permissions issue. The account used by the agent does not have the correct permissions on the CA. To rectify, follow the guide here: https://krestfield.github.io/docs/pki/setting_adcs_template_permissions.html and also ensure that the account has **Issue and Manage Certificates** and **Request Certificates** permissions on the CA itself (managed via Properties)
+
+One the permissions have been updated, delete the issuer and re-create. Check the logs for errors
+
+
+
+<hr/>
+
+### Using a PKCS11 token gives CKR_TOKEN_NOT_PRESENT or CKR_DEVICE_REMOVED
+
+<u>Error Details</u>
+
+After creating a PKCS11 Key Store, attempting to create a CA gives an error stating CKR_TOKEN_NOT_PRESENT e.g.
+
+```
+There was an error initialising: Token Exception: PKCS#11 Token: Unable to login to Token. CKR_DEVICE_REMOVED
+```
+
+
+
+
+
+<u>Solution</u>
+
+This usually means that the hardware device (e.g. HSM) is not currently online or may not been configured correctly for this server  
+
+Start the server (or re-connect)  
+
+Run the vendor tools to confirm the device has been configured correctly and allows this client (where Certdog is running) to access it. Also ensure that the PKCS11 interface has been configured  
+
+Ensure any environment variables have been set e.g. for Utimaco the ``CS_PKCS11_R3_CFG`` environment variable must be set. If you set this ensure you restart the services to pick up the change
+
+If after making changes the error still occurs, stop and start the Krestfield CertDog Service as underlying processes can cache failed attempts and this cache can only be cleared via a restart
+
+
+
+<hr/>
+
+### DN Restrictions do not restriction wildards in Common Name
+
+<u>Error Details</u>
+
+Configure a DN restriction to Deny Wilcard Domains but domains such as *.org.com are still permitted in the Common Name (CN) field
+
+<u>Solution</u>
+
+Domains are not restricted in the Common Name field as this field is not checked to validate domains (for TLS certificates), rather this processing is carried out on the Subject Alternative Name extension
+
+The CA Browser Forum Baseline Requirements have required the presence of the Subject Alternative Name extension since 2012, and use of the subject common name was deprecated in RFC 2818
+
+
+<hr/>
+
+### Cannot add wildcard IP Address to SAN
+
+<u>Error Details</u>
+
+Attempting to add a wildcard IP address to a SAN (such as \*.168.100.57) gives an error such as ``IP Address is invalid``  
+
+It is neither possible to restrict wildcarded IP Addresses from the DN Restrictions
+
+<u>Solution</u>
+
+IP Addresses must be specified explicitly and cannot contain a wildcard  
+
+RFC2818 states
+
+```
+In some cases, the URI is specified as an IP address rather than a 
+hostname. In this case, the iPAddress subjectAltName must be present  
+in the certificate and must exactly match the IP in the URI.
+```
+
+Note RFC6125 mentions that IP Addresses are out of scope as they are not reliable identifiers for application services
+
+It is recommended that DNS domain names are used in place of IP addresses  
+

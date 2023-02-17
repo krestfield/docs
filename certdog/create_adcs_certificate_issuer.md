@@ -87,13 +87,15 @@ Click the **Get Available Templates** button. A request for templates will now b
 
 If successful, the templates will be displayed. Select from the drop-down which template you wish to configure with this issuer  
 
-<img src=".\images\msca-setup.png" alt="image-20210620095612254" style="zoom:67%;" />
+<img src=".\images\msca-setup.png" alt="image-20230217133447989" style="zoom:67%;" />
 
 For **Permitted Agents**, if running a single agent (i.e. the default) only one will be present and it will be selected. If you have multiple agents configured, select the agent(s) you wish to process the requests for this CA  
 
 Note that the agent must be *approved* for it to appear. If no agent is shown, select Agents from the menu and approve the required agent  
 
-Finally, select the **team** that will have access to this Certificate Issuer. All members of this team will be able to request and revoke certificates from this issuer
+Select the **team** that will have access to this Certificate Issuer. All members of this team will be able to request and revoke certificates from this issuer
+
+Finally, if you wish to apply any DN restrictions to this issuer, select the DN Restriction from the drop down list. See [here](dn_restrictions.html) for details on configuring DN Restrictions
 
 Click **Add**  
 

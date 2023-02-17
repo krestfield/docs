@@ -19,7 +19,7 @@ Before creating a CA you must have configured a Key Store. See [here](keystores.
 ### 1. Create a Local CA Configuration  
    Select **Local CA** > **CA Configuration** from the menu and click **Add New CA**
 
-<img src=".\images\new-local-ca.png" alt="Local CA" style="zoom:80%;" />
+<img src=".\images\new-local-ca.png" alt="image-20230217134005647" style="zoom:67%;" />
 
 
 
@@ -99,7 +99,7 @@ Once the CA is configured, the above options (main details and policies) are fix
 
   E.g. http://server1.com/ocsp
 
-  Currently OCSP services can be provided by the Krestfield OCSP Responder. Later versions of Certdog will integrate the OCSP services
+  If the option Create OCSP Server is selected (see below) this field will be populated for you, but you can still adjust manually
 
 * **AIA Issuer Cert Locations**: Enter a URL (or list of URLs separated by commas). These locations will be included in the AIA (Authority Information Access) extension of all certificates issued by this CA and relate to where the CA certificate can be obtained
 
@@ -111,17 +111,19 @@ Once the CA is configured, the above options (main details and policies) are fix
 
 * **Generate CRLs**: If you want this CA to generate CRLs, enable this option
 
+* **CRL Filename**: Enter the name of the CRL filename e.g. rootca.crl
+
+* **CRL Lifetime**: This is the lifetime of the CRL i.e. the period between the *Effective date* and *Next update* values in the CRL
+
+* **CRL Generation Period**: This is how often you want the CRL to be generated. It must be less than the CRL Lifetime (set above). For example, if the lifetime were set to 2 days, you may set this to 1 day so there is always a 1 day overlap
+
 * **CRL Distribution Points**: Enter a URL (or list of URLs separated by commas). These locations will be included in the CRL Distribution Points extension of all certificates issued by this CA and relate to where the CRL issued by this CA can be obtained
 
   E.g. http://server1.com/crl/ca1.crl,http://server2.com/crl/ca1.crl
 
   This value will be pre-populated with a default URL hosted on the certdog server
 
-* **CRL Lifetime**: This is the lifetime of the CRL i.e. the period between the *Effective date* and *Next update* values in the CRL
-
-* **CRL Generation Period**: This is how often you want the CRL to be generated. It must be less than the CRL Lifetime (set above). For example, if the lifetime were set to 2 days, you may set this to 1 day so there is always a 1 day overlap
-
-* **CRL Filename**: This is the local location where the CRL file will be placed when generated. See the [Notes on the CRL Filename and CRL Distribution Points](#notes-on-the-crl-filename-and-crl-distribution-points) section below for more details
+* **CRL Local Path**: This is the local location where the CRL file will be placed when generated. See the [Notes on the CRL Filename and CRL Distribution Points](#notes-on-the-crl-filename-and-crl-distribution-points) section below for more details
 
 The above options (Extensions and CRL Generation) can be edited later if required)  
 
@@ -157,9 +159,11 @@ Click **Add New Issuer**
 
 From the drop down select **Local CA** and click **Next**
 
-<img src=".\images\new_localca_issuer3.png" alt="image-20210620124010018" style="zoom:67%;" />
+<img src=".\images\new_localca_issuer3.png" alt="image-20230217134433584" style="zoom:67%;" />
 
 Enter a **Name** and select the **Local Configuration** and **Certificate Profile** as just created from the drop downs  
+
+If required, select the DN Restriction. See [here](dn_restrictions.html) for more details on configuring DN restrictions
 
 Select the **Team**(s) that will be authorised to use this issuer. Members of these teams will be able to issue and revoke certificates  
 

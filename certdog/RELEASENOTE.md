@@ -19,6 +19,80 @@ Web: [https://www.krestfield.com](https://www.krestfield.com)
 
 <br>
 
+
+
+
+> **Version 1.9.0**
+> **Release Date**: 17 February 2023
+
+**Updates**
+
+* DN Restrictions added. Admins can restrict what DNs can be requested including denying wildcards
+* For Local CAs - CRL can now be specified as the filename (with CDP and local filename auto updating)
+* OCSP server supports other CAs if CRL location is provided
+* Now have the option to 'go to issuer cert' for all certificates
+
+
+
+**Security Updates**
+
+* None
+
+
+
+**Fixes** 
+
+* If you chose to download the issuer of a CA cert you would get the same CA certificate. Now get the correct issuer
+
+
+
+
+
+<hr>
+<br>
+
+
+> **Version 1.8.0**
+> **Release Date**: 21 November 2022
+
+**Updates**
+
+* Windows installer improved. Can now be run as a single PowerShell command
+* AD CS Agent updated (now version 1.5) to obtain CA certificates more reliably
+* AD users can now login with username, domain\username or username@domain
+* Principal Name can now be added as a SAN
+* Reverse DN option added to API for Local CAs for cases where the DN in a provided CSR is in reverse
+* OCSP server added for local CAs
+* P7 data now downloaded in PEM format (previously base64 with no headers)
+
+
+
+**Security Updates**
+
+* None
+
+
+
+**Fixes** 
+
+* If a certificate had expired it showed a negative value for days to expiry. Now shows expired information correctly
+
+* Local Root CA no longer displays AIA Cert Location, as this was redundant
+
+* Could not uncheck the add as a DNS SAN option
+
+* If a CA was imported the DN encoding between issued certificate and issuer could be different meaning some systems would not build a path. Issuer encoding is now duplicated in the issued certificate
+
+* OK button not enabled until name changed when adding a Microsoft Issuer
+
+
+
+
+
+<hr>
+<br>
+
+
 > **Version 1.7.0**
 > **Release Date**: 5 May 2022
 

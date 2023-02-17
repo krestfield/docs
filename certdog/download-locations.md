@@ -13,7 +13,7 @@ nav_order: 500
 
 ### Free Version
 
-The free version is available to download from [here](https://krestfield.s3.eu-west-2.amazonaws.com/certdog/certdogfree_v180.zip)
+The free version is available to download from [here](https://krestfield.s3.eu-west-2.amazonaws.com/certdog/certdogfree_v190.zip)
 
 <br>
 
@@ -27,15 +27,15 @@ Contact [support](mailto:support@krestfield.com) for your download location
 
 Full Version:  
 
-* SHA1: ``fe634549728b0c3199ec438ee0e25b49ac8d1dd7``
+* SHA1: ``03829a660ec0d5797e4397b4672c20833eabc633``
 
-* SHA256: ``4fed32c50aecbe64da969f90cf6c333e58c2bfdf7ce1a0bb1f086b62e23fef28``
+* SHA256: ``4f2078685d083aacb18c80f32c3b37441764c0d52e317f0a6ae1b044c58fc674``
 
 Free Version:  
 
-* SHA1: ``269eebcdd7a72b892e493d1cc3d4da79345a798b``
+* SHA1: ``09a7e149f01c04a6aef0d78d4c7123b87f18813f``
 
-* SHA256: ``bb1e801e7211853c211cfc67f3b5867ba4c83e402b15a63201900eec3f683902``
+* SHA256: ``9d19cb9b21d443d20c5e22453985e41603aa3f8a21c5f354399c70ce2974de6a``
 
 <br>
 

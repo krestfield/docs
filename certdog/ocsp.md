@@ -10,8 +10,6 @@ nav_order: 212
 
 <br>
 
-[TOC]
-
 Certdog can provide OCSP services for local CAs and external CAs (e.g. Microsoft AD CS)  
 
 When using OCSP services for local CAs, certdog can setup all of the components required to enable automatic issuance of an OCSP signing certificate, and retrieval of the certificate status. Users just need to select the **Create OCSP Server** option when creating (or editing) a Local CA  

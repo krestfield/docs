@@ -250,11 +250,17 @@ catch (KSigningException e)
 
 ## Registering a Client Application 
 
+A key vault is required to perform the following steps. The key vault must be in the *Premium* pricing tier as this is the only tier that supports HSM backed keys. This option is set at creation, so if your existing target Key Vault is on the *Standard* pricing tier you will need to create a new Key Vault
+
+We will register an application in Azure Active Directory, then create a service principal (SPN) for this application. This will provide us with authentication credentials. Finally we set a policy which allows this application to manage keys and certificates in our key vault
+
+<br>
+
 From the Azure Console navigate to **Azure Active Directory** and select **App Registrations** from the left hand menu  
 
 From the top menu click **New registration**  
 
-Provide a name for the application (e.g. ezsignhsm), select the supported account types and for the **Redirect URI (optional)** setting, choose **Web** and provide a **URL**. The URL does not need to be a real URL in this case E.g. it could be: http://ezsignhsm.myorg.com  
+Provide a name for the application (e.g. **ezsignhsm**) and click **Register**
 
 Open Azure Cloud Shell either by following a link from the console or by navigating to https://shell.azure.com/  
 
@@ -267,11 +273,9 @@ az ad sp create-for-rbac -n [App Name Registered] --skip-assignment
  Where [App Name Registered] is the name you registered in the step above e.g. ezsignhsm
 
 ```json
-Changing "ezsignhsm" to a valid URI of "http://ezsignhsm", which is the required format used for service principal names 
 { 
   "appId": "fd94f971-ebd9-4a32-a56e-97427655429e", 
   "displayName": "ezsignhsm", 
-  "name": "http://ezsignhsm", 
   "password": "nScc7-6T.gOI7.ugHawFRRoUbwUA_agrC-", 
   "tenant": "d10c2e35-390b-4343-9fb3-36524a35717c" 
 } 
@@ -292,6 +296,8 @@ We need to configure these values as environment variables in the Azure Shell so
 
 From the shell run the following commands:
 
+If using the Bash Shell:
+
 ``export AZURE_CLIENT_ID=[value for appId returned above]``
 
 e.g.
@@ -300,33 +306,23 @@ e.g.
 export AZURE_CLIENT_ID="fd94f971-ebd9-4a32-a56e-97427655429e"
 ```
 
-
-
-``export AZURE_CLIENT_SECRET=[value returned for password above]``
-
-e.g. 
+Or, if using PowerShell:
 
 ```
-export AZURE_CLIENT_SECRET="nScc7-6T.gOI7.ugHawFRRoUbwUA_agrC-"
+$AZURE_CLIENT_ID="fd94f971-ebd9-4a32-a56e-97427655429e"
 ```
 
-``export AZURE_TENANT_ID=[value returned for tenant above]``
 
-e.g. 
-
-```
-export AZURE_TENANT_ID="d10c2e35-390b-4343-9fb3-36524a35717c" 
-```
 
 Then run the following command (all on one line) to set the permissions for this application on the Key Vault: 
 
 ```
-az keyvault set-policy --name ezsignhsm --spn $AZURE_CLIENT_ID --key-permissions delete get list create sign verify encrypt decrypt wrap unwrap –-certificate-permissions get list
+az keyvault set-policy --name [key vault name] --spn $AZURE_CLIENT_ID --key-permissions delete get list create sign verify encrypt decrypt wrapKey unwrapKey --certificate-permissions get list
 ```
 
 You will get a stream of JSON output from this command. Verify it all looks correct for your requirements and adjust any other values as required  
 
-This operation can also be performed from the Azure console if preferred  
+This operation can also be performed from the Azure console, if preferred   
 
 Note: If you are using EzSign for signature generation and verification (including generation of CSRs) only the following key permissions are required:
 

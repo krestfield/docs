@@ -1,8 +1,8 @@
 ---
 layout: default
-title: Debian Installation
+title: Redhat Installation
 parent: Certdog
-nav_order: 200
+nav_order: 20
 ---
 
 # Certdog RedHat Installation

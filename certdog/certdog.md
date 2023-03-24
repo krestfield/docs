@@ -1,18 +1,26 @@
 ---
 layout: default
 title: Certdog
-nav_order: 2
+nav_order: 1
 has_children: true
 ---
 # Certdog
 
-certdog enables the almost instant issuance of certificates from the in-built Local CA, PrimeKey's EJBCA and Microsoft ADCS instances, providing automation and management  
+certdog is a CA (Certificate Authority) and Certificate Management system that can be deployed in minutes to Windows and Linux based operating systems  
 
-All operations can be automated via the REST API  
+It is able to host its own CAs - allowing for multiple hierarchies, providing both CRL and OCSP services
 
-certdog can be deployed as a container ([get the demo docker image](https://hub.docker.com/repository/docker/krestfield/certdog)), stand-alone or distributed across infrastructure on Windows, Linux and MacOS  
+It can also interface to your existing Microsoft AD CS or PrimeKey EJBCA instances
 
-Manage all your EJBCA and Microsoft CAs centrally, tracking all certificates for expiry, notifying users and making use of the automation to renew when expiring
+Certificates can be issued via the Console, REST API or PowerShell scripts. The REST API offers full certificate management and system management capabilities allowing for full automation
+
+Certificates are managed throughout their entire lifecycle, with configurable alerts when nearing expiry and the ability to renew
+
+<br>
+
+See the [YouTube channel here](https://www.youtube.com/@krestfield) for some examples of what can be achieved
+
+<br>
 
 Need more info? Contact us at <support@krestfield.com>  
 

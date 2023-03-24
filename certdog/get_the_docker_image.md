@@ -2,7 +2,7 @@
 layout: default
 title: Get the Docker Image
 parent: Certdog
-nav_order: 1
+nav_order: 5
 ---
 # Get the Docker Image
 

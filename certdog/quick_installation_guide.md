@@ -2,7 +2,7 @@
 layout: default
 title: Quick Windows Installation
 parent: Certdog
-nav_order: 2
+nav_order: 1
 ---
 
 # Certdog Quick Windows Installation

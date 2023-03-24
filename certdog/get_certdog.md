@@ -2,31 +2,29 @@
 layout: default
 title: Get the Dog
 parent: Certdog
-nav_order: 1
+nav_order: 2
 ---
 # Get the Dog
 
 
 
-You can get certdog from the following locations:
+Certdog can be downloaded for free and installed in minutes  
 
-[Docker](get_the_docker_image.html)
+[See here](download-locations.html) for the download locations
 
-[Windows Installation](https://krestfield.github.io/docs/certdog/installation.html)
+Quick, demo installation steps for Windows are [here](quick_installation_guide.html). Watch this on [YouTube](https://youtu.be/NPvVhcOhBb0)
 
-[Online Test Environment](online_environment.html)
+Further instructions can be found at the following locations:
+
+* [Windows Installation](installation.html)
+
+* [RedHat Installation](redhat_install.html)
 
 
 
-Certdog can also be installed on:
+Certdog can also be provided as a [Docker Image](get_the_docker_image.html)
 
-* Linux
 
-* MacOS
-
-* Solaris
-
-[Contact us](mailto:support@krestfield.com) for setup instructions on these environments  
 
   
 

@@ -12,7 +12,7 @@ It is able to host its own CAs - allowing for multiple hierarchies, providing bo
 
 It can also interface to your existing Microsoft AD CS or PrimeKey EJBCA instances
 
-Certificates can be issued via the Console, REST API or PowerShell scripts. The REST API offers full certificate management and system management capabilities allowing for full automation
+Certificates can be issued via the Console, REST API or PowerShell scripts. The REST API offers full certificate management and system management capabilities, allowing for full automation
 
 Certificates are managed throughout their entire lifecycle, with configurable alerts when nearing expiry and the ability to renew
 

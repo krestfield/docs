@@ -182,13 +182,21 @@ This section contains details about the OCSP signing certificate, including wher
 
 <u>Other Settings</u>
 
-<img src=".\images\ocsp7.png" alt="image-20230223094923501" style="zoom:80%;" />
+
+
+<img src=".\images\ocsp7.png" alt="Other Settings" style="zoom:80%;" />
 
 * Respect Number Once
   * If this is checked, if a Number Once value is provided in the OCSP request, that same value will be returned in the response. This option is often employed by clients to ensure that the OCSP response is freshly generated
 
 * Requests must be signed
   * If this option is checked then OCSP requests must be signed and will be rejected (with an Unauthorized response) otherwise
+
+* Return for Not Issued
+  * If an OCSP request is received for this CA but the serial number of the certificate has not been issued from this CA, here you can specify what to return in this instance. 
+  * If the OCSP responder is being used to provide responses for an external CA (such as Microsoft), it is unable to verify all issued serial numbers, so this option should be set to *Good*
+  * For internal CAs, this should be set to either *Revoked* or *Unknown*, depending on how your clients will cope with those responses e.g. if your clients will continue even if the response is *Unknown*, you may need to set the response to *Revoke* to force the client to reject the response
+  * Note that CAB Forum, compliance 2013-08-01 section 3.2.2.6 states *OCSP Responders SHALL NOT respond "Good" for Unissued Certificates*. Therefore, if you need to adhere to this requirement, ensure that *Good* is not set
 
 * Next Update Period
   * This is the time that will be added to the *Produced At* period of the OCSP response, and is essentially the validity of the response

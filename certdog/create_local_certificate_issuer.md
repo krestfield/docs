@@ -19,7 +19,7 @@ Before creating a CA you must have configured a Key Store. See [here](keystores.
 ### 1. Create a Local CA Configuration  
    Select **Local CA** > **CA Configuration** from the menu and click **Add New CA**
 
-<img src=".\images\new-local-ca.png" alt="image-20230217134005647" style="zoom:67%;" />
+<img src=".\images\new-local-ca.png" alt="image-20230414135649435" style="zoom:67%;" />
 
 
 
@@ -58,6 +58,9 @@ Complete the following details:
 * **Path Length Constraint**: Set the path length constraint (that will appear in the *Basic Constraints* extension).
 
   Note that this option is not available if *External CA* was selected above, since the issuing CA will determine this value when it issues the certificate
+  
+* **Sequential Serial Numbers**: If left unchecked, serial numbers are generated randomly and are ensured of uniqueness. They will not be predictable. If checked, serial numbers will be incremented by one for each certificate issued from this CA and are thus predictable. In this case the starting serial number will be randomly generated
+  
 
 <br>
 

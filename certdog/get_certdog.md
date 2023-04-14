@@ -2,7 +2,7 @@
 layout: default
 title: Get the Dog
 parent: Certdog
-nav_order: 3
+nav_order: 2
 ---
 # Get the Dog
 

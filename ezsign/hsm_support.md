@@ -9,7 +9,7 @@ nav_order: 40
 
 # EzSign Key Store and HSM Support
 
-> From version 4.1.3
+> From version 4.2.1
 
 Note: For previous versions contact [support](mailto:support@krestfield.com)
 
@@ -33,6 +33,9 @@ The following HSMs are supported via the [pkcs#11](http://docs.oasis-open.org/pk
   - ``token.pkcs11.model=Luna``
 - AWS CloudHSM
   - ``token.pkcs11.model=AWSCloudHSM``
+- Yubi HSM 2
+  - ``token.pkcs11.model=YubiHsm``
+
 
 
 
@@ -48,7 +51,7 @@ The following HSMs are supported via the [pkcs#11](http://docs.oasis-open.org/pk
 
   - Configured via the ``token.azureKeyVault`` properties  
 
-- Thales PayShield - *Deprecated*
+- Thales PayShield 9000 - *Deprecated*
 
   - Configured via the ``token.hsm9000`` properties
 

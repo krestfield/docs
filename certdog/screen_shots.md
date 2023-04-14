@@ -2,7 +2,7 @@
 layout: default
 title: Screen Shots
 parent: Certdog
-nav_order: 4
+nav_order: 12
 ---
 
 

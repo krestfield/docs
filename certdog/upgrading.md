@@ -2,7 +2,7 @@
 layout: default
 title: Upgrading Certdog
 parent: Certdog
-nav_order: 20
+nav_order: 10
 ---
 
 # Upgrading Certdog

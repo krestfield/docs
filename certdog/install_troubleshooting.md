@@ -2,7 +2,7 @@
 layout: default
 title: Installation Troubleshooting
 parent: Certdog
-nav_order: 3
+nav_order: 10
 ---
 
 # Certdog Installation Troubleshooting

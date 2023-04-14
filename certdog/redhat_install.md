@@ -2,7 +2,7 @@
 layout: default
 title: Redhat Installation
 parent: Certdog
-nav_order: 20
+nav_order: 6
 ---
 
 # Certdog RedHat Installation

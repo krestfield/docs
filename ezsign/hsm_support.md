@@ -25,18 +25,34 @@ The following HSMs are supported via the [pkcs#11](http://docs.oasis-open.org/pk
 
 - EnTrust nCipher nShield range
   - ``token.pkcs11.model=NCipher``
+
+    *Tested: nShield Connect 500+, nShield Edge*
+
 - Thales Luna range
   - ``token.pkcs11.model=Luna``
+
+    *Tested: Luna 6*
+
 - Utimaco
   - ``token.pkcs11.model=Utimaco``
+
+    *Tested: Utimaco simulator*
+
 - Thales DPoD Cloud HSM
   - ``token.pkcs11.model=Luna``
+
+    *Tested: Latest cloud HSM*
+
 - AWS CloudHSM
   - ``token.pkcs11.model=AWSCloudHSM``
+
+    *Tested: Latest cloud HSM*
+
 - Yubi HSM 2
+
   - ``token.pkcs11.model=YubiHsm``
 
-
+    *Tested: YubiHSM 2 FIPS*
 
 
 
@@ -55,9 +71,13 @@ The following HSMs are supported via the [pkcs#11](http://docs.oasis-open.org/pk
 
   - Configured via the ``token.hsm9000`` properties
 
+    *Tested: PayShield 9000*
+    
     
 
-Refer to the installation and configuration guide for details on setting up
+Refer to the installation and configuration guide for details on configuring EzSign for these key stores
+
+Note that the tested instances are confirmed. Backwards compatibility should be maintained by the vendors for the PKCS#11 interface for later versions
 
 
 

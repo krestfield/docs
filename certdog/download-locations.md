@@ -11,9 +11,15 @@ nav_order: 500
 
 <br>
 
-### Free Version
+### Free Version  
 
-The free version is available to download from [here](https://krestfield.s3.eu-west-2.amazonaws.com/certdog/certdogfree_v190.zip)
+Download the version for your OS:
+
+[Windows](https://krestfield.s3.eu-west-2.amazonaws.com/certdog/certdogfree_v190.zip)
+
+[RedHat](https://krestfield.s3.eu-west-2.amazonaws.com/certdog/redhat/certdog.tar.gz)
+
+[Debian](https://krestfield.s3.eu-west-2.amazonaws.com/certdog/debian/certdog.tar.gz)
 
 <br>
 
@@ -23,7 +29,7 @@ Contact [support](mailto:support@krestfield.com) for your download location
 
 <br>
 
-### File Hashes
+### Windows File Hashes
 
 Full Version:  
 

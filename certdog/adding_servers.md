@@ -83,13 +83,13 @@ From any additional servers, check you can access the primary server over port `
 telnet [primary hostname or IP Address] 27017
 ```
 
-And ensuring it connects. If it doesn't check the primary server's firewall settings - to allow incoming connections over port ``27017`` and that the additional servers are also allowing outgoing connections to the same
+And ensuring it connects. If it doesn't, check the primary server's firewall settings - to allow incoming connections over port ``27017`` and that the additional servers are also allowing outgoing connections to the same
 
 <br>
 
 **Configure Additional Server**
 
-On the second (or additional) server, install Certdog as normal or you may simply copy the entire certdog installation file from the primary server to this secondary  
+On the second (or additional) server, install Certdog as normal
 
 If a database is running on this server, stop the *Krestfield Certdog Service* service  
 

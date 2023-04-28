@@ -57,7 +57,23 @@ Editing a user also displays the last login time and IP address
 
 If the account is an Active Directory you will be unable to make any changes as all details are managed by Active Directory
 
+---
 
+### API Tokens
 
+API tokens can be issued from user accounts. These can then be supplied to applications that need to call the REST API and remove the need to first login with a username and password, as the token is simply supplied in the Authorization header element  
 
+To generate a new token, edit an existing user  
+
+Under *API Token*, set the validity required for the token then click **Generate Token**
+
+<img src="./images/image-20230428163650736.png" alt="image-20230428163650736" style="zoom:67%;" />
+
+A token will be generated. Click the token to copy and save the value. This value will only be displayed once and cannot be retrieved later if lost
+
+This value must then be included in the Authorization header when making REST API calls
+
+Note, it is linked with the user account so has the same permissions (access to Certificate Issuers) and restrictions (IP Addresses)  
+
+Tokens cannot be revoked individually. It is therefore advised that a specific API account be setup that can be disabled if required. This will prevent any valid API tokens from being used further
 

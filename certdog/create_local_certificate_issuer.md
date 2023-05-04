@@ -193,16 +193,18 @@ The *CRL Filename* and *CRL Distribution Points* entries must align. i.e. they m
 By default, CRLs are hosted on the filesystem here:  
 
 ```
-[certdog install]/tomcat/crlwebapps/crl
+[certdog install]/tomcat/crlwebapps/certdog#crl
 ```
 
-A file that is stored in this folder will be available via an http URL. For example, if your host server were referenced by ``certdog.krestfield.com`` and the file ``ca1.crl`` were placed in the ``crl`` folder then the URL it would be available at would be:  
+A file that is stored in this folder will be available via an http URL. For example, if your host server were referenced by ``certdog.krestfield.com`` and the file ``ca1.crl`` were placed in the ``certdog#crl`` folder then the URL it would be available at would be:  
 
 ```
-http://certdog.krestfield.com/crl/ca1.crl
+http://certdog.krestfield.com/certdog/crl/ca1.crl
 ```
 
 This would then be your *CRL Distribution Point*, that would be included in certificates so end systems could download the CRL  
+
+**Note**: Some systems fail to recognise the file system correctly, so check that the pre-populated file location is correct e.g. ensure the folder exists and is below the tomcat directory. If this is not the case, the web server will fail to serve the CRL
 
 <br>
 
@@ -221,7 +223,7 @@ And set the *CRL Filename* to then be
 Which would result in a *CRL Distribution Point* of  
 
 ```
-http://certdog.krestfield.com/myca/ca1.crl
+http://certdog.krestfield.com/certdog/crl/myca/ca1.crl
 ```
 
 <br>

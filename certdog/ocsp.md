@@ -136,6 +136,7 @@ This section contains details about the OCSP signing certificate, including wher
 * URL
   * This is the Certdog API URL that the OCSP server will use to request certificates. It will be of the form ``https://[certdog server]/certdog/api`` 
   * See [Operational Notes](#operational-notes) below for details as to why this is required
+  * Note: If running on a Linux machine or other where you are mapping external ports to internal ones, ensure you correct the URL. For example, if your local services are listening on port 1433 (routed from external port 443), the internal address should be https://127.0.0.1:1433/certdog/api rather than https://127.0.0.1/certdog/api
 * Certdog Username
 
   * This is the username of the account that has permissions to request the OCSP signing certificate. If the OCSP was created automatically, this user account would have been generated for you. If you wish to configure this yourself, use an account that has permissions on the Certificate Issuer which will provide the correct OCSP Signing certificates

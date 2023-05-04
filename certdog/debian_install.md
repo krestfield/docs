@@ -41,14 +41,19 @@ and ensure you connect and get the mongo db prompt. Type ``exit``, to exit the p
 
 ## Get Certdog
 
-1. Download Certdog from [here](https://krestfield.s3.eu-west-2.amazonaws.com/certdog/debian/certdog.tar.gz)
+1. Download Certdog from [here](https://krestfield.s3.eu-west-2.amazonaws.com/certdog/debian/certdogfreev190.tar.gz)
 
    File Hashes:
 
-   * SHA1: ``599a20f456cca88917656c28328c222c62309486``
+   * SHA1: ``edebedb0c5571603ce00b629c476f0832d3fbfad``
 
-   * SHA256: ``26ae73a46b7fb08cda5d10577972980a3de8c6f2963133d8c18dbf3f38dbda85``
+   * SHA256: ``28d0344832709a5f9b4691d041779f350ebec3202ebb7fe99f85afabf9b7eda3``
 
+e.g.
+
+```
+curl https://krestfield.s3.eu-west-2.amazonaws.com/certdog/debian/certdogfreev190.tar.gz --output certdog.tar.gz
+```
 
 <br>
 
@@ -193,13 +198,57 @@ Attempt to stop and start certdog using the ``./shutdown-certdog.sh`` and ``star
 
 Try restarting the database then restarting certdog  
 
-You can re-run the ``./configure.sh`` script. Before doing so, stop certdog (``./shutdown-certdog.sh``) 
 
-**NOTE**: If you re-run the ``./configure.sh`` script the database will be **wiped and any configuration made up until that point will be lost** so only re-run if having issues during the initial install. If you are having issues starting the server after it has already been up and running, then there is most likely another issue (rather than a failed install)
+
+To attempt a re-install, perform the following:
+
+Remove the created database and user from mongodb:
+
+Start the mongo shell:
+
+```
+mongosh
+```
+
+Then enter the following commands:
+
+```
+use certman
+show users
+db.dropUser("certmanuser")
+db.dropDatabase()
+```
+
+
+
+Remove the files created within the install:
+
+```
+cd
+cd ./certdog/config
+rm -f MASTERPASSWORD.txt
+rm -f application.properties
+rm -f ./pwd/*
+```
+
+
+
+Ensure no rogue processes are running, such as java:
+
+```
+ps -ef | grep "certdog/java"
+```
+
+And for each entry, kill the process, forcibly:
+
+```
+kill -9 [Process ID]
+```
+
+
+
+Then re-run the ``./configure.sh`` script
 
 <br>
 
 Full Certdog Documentation can be found here: [https://krestfield.github.io/docs/certdog/certdog.html](https://krestfield.github.io/docs/certdog/certdog.html)
-
-
-

@@ -148,6 +148,23 @@ Which indicates port 1443 is listening in all interfaces
 
 <br>
 
+Note that on Debian, iptables may not be persisted at reboots. After running the above commands you can persist the changes across reboots by installing the iptables-persistent package, as follows:
+
+```
+apt-get install iptables-persistent
+```
+
+If you need to make changes, first uninstall the package:
+
+```
+sudo apt-get remove iptables-persistent
+sudo apt-get purge iptables-persistent
+```
+
+Then make the iptables updates and re-install
+
+<br>
+
 Enable any other firewall rules that may be in place to allow ports 80 and 443 to the server e.g. in Azure Networking or AWS Security Groups
 
 <br>
@@ -187,6 +204,30 @@ To start and stop the mongo database you may use the following commands:
 sudo systemctl start mongod
 sudo systemctl stop mongod
 ```
+
+
+
+### Start on Boot
+
+To start the mongo database on boot, run the following command:
+
+```
+sudo systemctl enable mongod
+```
+
+To start certdog on boot, run the following command to start the crontab editor:
+
+```
+crontab -e
+```
+
+Then enter the following line (after the comments and any other cron entries):
+
+```
+@reboot /home/certdoguser/certdog/bin/start-certdog.sh
+```
+
+(replace the ``/home/certdoguser`` location with wherever your installation resides)
 
 <br>
 

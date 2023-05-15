@@ -20,6 +20,8 @@ Further instructions can be found at the following locations:
 
 * [RedHat Installation](redhat_install.html)
 
+* [Debian Installation](debian_install.html)
+
 
 
 Certdog can also be provided as a [Docker Image](get_the_docker_image.html)

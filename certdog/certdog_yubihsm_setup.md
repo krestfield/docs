@@ -8,7 +8,7 @@ nav_order: 212
 
 <br>
 
-From version 2.0 certdog supports the Yubi HSM 2. Here we outline the steps to configure certdog to use this device as a key store
+From version 1.10 certdog supports the Yubi HSM 2. Here we outline the steps to configure certdog to use this device as a key store
 
 <br>
 

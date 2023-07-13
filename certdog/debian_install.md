@@ -25,7 +25,7 @@ It is recommended that a separate, dedicated user be created which will run the 
 
 ## Install Mongo DB
 
-Follow the instructions to download and install Mongo DB Community Edition version 5.0.9 e.g.
+Follow the instructions linked below to download and install Mongo DB Community Edition. The Debian installation has been tested and confirmed to work with MongoDB Community Edition 5.0.9 and 6.0.7.
 
 https://www.mongodb.com/docs/manual/tutorial/install-mongodb-on-debian/
 

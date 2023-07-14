@@ -42,17 +42,25 @@ Select **Local CA** > **Profiles** from the menu and click **Add New Profile**
 
 * If this is to be an OCSP certificate and you do not wish the status of this certificate to be checked. Set the **Include OCSP No Check** option
 
+* If configured to do so, the CA will include the CDP (CRL Distribution Points) and OCSP AIA (Authority Information Access) URL extensions in every certificate it issues. If you do not want these extensions to be included in certificates issued from this profile, click the **Exclude CDP and OCSP URLs** option. This is often required when issuing OCSP signer certificates.
+
 * Select the **Include Basic Constraints** option if this extension is to be included in the issued certificate
 
   If this profile will be issuing Sub CA certificates, select the **Is CA** option. This indicates the issued certificate will be a Certificate Authority. For end-entity certificates leave the **Is CA** option as unchecked
 
   If the *Is CA* option is checked you may also select the **Path Length Constraint**. Select **None** if you do not want to impose any restrictions on the path length (number of CAs below this one in the chain). Otherwise, specify the path length. Note that a Path Length of 0 will mean the issued certificate cannot issue Sub CA certificates below it
 
-* To include policy information in the certificate click **Policies**:
+* To include policy information in the certificate, click **Policies**:
 
 <img src=".\images\policies1.png" alt="image-20211110075432818" style="zoom:80%;" />
 
 You may select a policy type of **OID Only**, **User Notice** or **CPS**. Select the required option, populate the required information (OID and either CPS location or User Notice) and click **Add**. You may add further policy entries as required
+
+* To include a custom extension in the certificate, click **Custom Extensions**:
+
+<img src="./images/image-20230714163253404.png" alt="Custom Extensions" style="zoom:80%;" />
+
+Enter the OID for the extension and the Base64 or ASCII hex encoded data. See [here](creating_custom_extensions.html) for details on how to obtain this data. Click **Set as Critical** if the extension is to be marked as critical and click **Add**. You may add further extensions as required
 
 <br>
 

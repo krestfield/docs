@@ -52,9 +52,9 @@ Open the certificate in an ASN1 editing tool e.g. [ASN.1 Editor](https://www.pki
 
 Locate the extension:
 
-<img src="./images/name_constraints_ext1.png" alt="image-20230511112703488" style="zoom:80%;" />
+<img src="./images/image-20230714165843508.png" alt="image-20230714165843508" style="zoom:80%;" />
 
-Edit the values as required  
+Edit the values in this editor as required  
 
 Now click on the **SEQUENCE** section:
 
@@ -62,7 +62,7 @@ Now click on the **SEQUENCE** section:
 
 And choose **Save selected node as...** and save to a file  
 
-Open this file using a HEX editor or similar that can convert binary data to an ASCII HEX string e.g. [Free Hex Editor Neo](https://www.hhdsoftware.com/free-hex-editor). In this tool you can simply select all, copy then paste the ASCII HEX text into a text editor  
+Open this file using a HEX editor or similar that can convert binary data to an ASCII HEX string e.g. [Free Hex Editor Neo](https://www.hhdsoftware.com/free-hex-editor). In this tool you can simply select all and copy  
 
-This data is you new extension's ASN.1 data and should be provided as the data element when adding a custom extension
+This data is your new extension's ASN.1 data and should be provided as the *Data* element when adding the custom extension  
 

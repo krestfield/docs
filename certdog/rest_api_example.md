@@ -13,6 +13,18 @@ The following demonstrate how to make a simple API calls to obtain certificates 
 
 For the full API refer to the documentation [here](rest_api_overview.html)
 
+
+
+The online version of the API documentation (available 8am - 8pm UK time) is available [here](https://certdog.net/certdog/api/swagger-ui/index.html)
+
+You may test against this version, using the following credentials:
+
+* Username: ``certdogtest``
+
+* Password: ``password``
+
+
+
 ### Login
 
 Before any operations can be performed a user must authenticate
@@ -45,6 +57,24 @@ e.g.
 ```json
 Authorization: Bearer eyJhbGciOiJIUzUxMiJ9....sdUfWLrtZPRGiQSA
 ```
+
+<br>
+
+To run this via the Swagger UI available [here](https://certdog.net/certdog/api/swagger-ui/index.html), perform the following:
+
+Locate the **login-controller** and click on the "**POST** ``/certdog/api/login``" entry. Click **Try it out**
+
+For password, replace ``"string"`` with ``"password"``. For username, replace ``"string"`` with ``"certdogtest"`` i.e.:
+
+<img src="./images/image-20230717095938562-1689584386402-1.png" alt="image-20230717095938562" style="zoom: 80%;" />
+
+Click the **Execute** button. In the *Server response* section below, you will see the token:
+
+<img src="./images/image-20230717100109248.png" alt="image-20230717100109248" style="zoom:67%;" />
+
+Copy the value for *token* (without the enclosing quotes), go to the top of the page and click **Authorize** and enter this value as the JWT (apiKey). Click **Authorize**, then **Close**.
+
+Now you can go to any of the other API calls and click **Try it out**. E.g. go to certificates-controller, click **GET** ``/certdog/api/certs`` and click **Execute**. This will return all certs in the system
 
 <br>
 

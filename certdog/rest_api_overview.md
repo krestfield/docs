@@ -27,7 +27,7 @@ Note: For versions before 1.7.0, it was located here:
 
 ​    https://*endpoint*/certdog/api/swagger-ui.html  
 
-
+The online version is available [here](https://certdog.net/certdog/api/swagger-ui/index.html). This test instance is available during 8am and 8pm UK time
 
 ​     
 
@@ -35,7 +35,9 @@ E.g.
 
 ​    [https://127.0.0.1/certdog/api/swagger-ui/index.html](https://127.0.0.1/certdog/api/swagger-ui/index.html)  
 
-​    Previously: [https://127.0.0.1/certdog/api/swagger-ui.html](https://127.0.0.1/certdog/api/swagger-ui.html)  
+​    (Previously: [https://127.0.0.1/certdog/api/swagger-ui.html](https://127.0.0.1/certdog/api/swagger-ui.html))
+
+
 
 
 

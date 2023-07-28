@@ -15,9 +15,9 @@ nav_order: 500
 
 Download the version for your OS:
 
-[Windows](https://krestfield.s3.eu-west-2.amazonaws.com/certdog/certdogfree_v190.zip)
+[Windows](https://krestfield.s3.eu-west-2.amazonaws.com/certdog/certdogfree_v1100.zip)
 
-[RedHat](https://krestfield.s3.eu-west-2.amazonaws.com/certdog/redhat/certdog.tar.gz)
+[RedHat](https://krestfield.s3.eu-west-2.amazonaws.com/certdog/redhat/certdogfree1100.tar.gz)
 
 [Debian](https://krestfield.s3.eu-west-2.amazonaws.com/certdog/debian/certdog.tar.gz)
 
@@ -33,15 +33,15 @@ Contact [support](mailto:support@krestfield.com) for your download location
 
 Full Version:  
 
-* SHA1: ``03829a660ec0d5797e4397b4672c20833eabc633``
+* SHA1: ``9da252cf4022751c4f46296d9ded63a49f8a3992``
 
-* SHA256: ``4f2078685d083aacb18c80f32c3b37441764c0d52e317f0a6ae1b044c58fc674``
+* SHA256: ``80ee13d233788a3e064bfce36ee442f471ccd99a34b62ac20822f223b3752e5c``
 
 Free Version:  
 
-* SHA1: ``09a7e149f01c04a6aef0d78d4c7123b87f18813f``
+* SHA1: ``9c3c7c1ad6e7e49c67444675f2d42d98d65f15af``
 
-* SHA256: ``9d19cb9b21d443d20c5e22453985e41603aa3f8a21c5f354399c70ce2974de6a``
+* SHA256: ``96810972063ce7aee8bf769fde5c2b0f453b434fc63dc1ea97140e9f001ff704``
 
 <br>
 

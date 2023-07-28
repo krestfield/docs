@@ -25,9 +25,15 @@ nav_order: 400
 
 1. Locate the file to download from [here](download-locations.html)
 
-2. Right click the zip file (e.g. ``certdogfree_v180.zip``), choose **Properties** and tick the **Unblock** check box (if present). Depending on your security settings, this will prevent several prompts when running the scripts  
+2. For Windows environments, right click the zip file (e.g. ``certdogfree_v1100.zip``), choose **Properties** and tick the **Unblock** check box (if present). Depending on your security settings, this will prevent several prompts when running the scripts  
 
 3. Unzip to a location on your drive e.g. if you unzip to ``C:\`` you will end up with a directory **C:\certdogfree** (but you can place this anywhere on your system)
+
+<br>
+
+For RedHat install instructions, see the steps [here](https://krestfield.github.io/docs/certdog/redhat_install.html)
+
+For Debian install instructions, see the steps [here](https://krestfield.github.io/docs/certdog/debian_install.html)
 
 <br>
 

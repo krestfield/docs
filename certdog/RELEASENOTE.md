@@ -1,10 +1,3 @@
----
-layout: default
-title: Release Note
-parent: Certdog
-nav_order: 10000
----
-
 # RELEASE NOTE
 
 ### Certdog - Certificate Management and Automation System
@@ -17,13 +10,48 @@ Support: [support@krestfield.com](mailto:support@krestfield.com)
 
 Web: [https://www.krestfield.com](https://www.krestfield.com)
 
+
+> **Version 1.10.0**
+> **Release Date**: 28th July 2023
+
+**Updates**
+
+* OCSP can now be configured to return unknown or revoked if certificate not issued by the CA
+
+* API updated to force CRL generation and return the CRL
+
+* CA serial numbers can now be configured to be sequential or random
+
+* Added support for Yubi HSM 2 as a key store
+
+* API tokens can now be issued for users, removing the need for applications to login with a username/password
+
+* There is now an option to omit CRL and OCSP AIA extensions in a certificate profile. For example, if the profile is to be used for OCSP signing
+
+* Custom extensions can now be added to certificate profiles
+
+* CAs can now be taken offline, preventing any processing until marked as online again
+
+* Cert issuers can now be configured to allow or deny DN requests
+
+* Cert issuers can now be configured to allow only specific CSR generators
+
+  
+
+**Security Updates**
+
+* Additional logging added indicating changes made to user accounts and teams
+* IP address restrictions enforced for every API call (previously only at logon) and can be updated dynamically
+
+
+
+<hr>
 <br>
 
 
 
-
 > **Version 1.9.0**
-> **Release Date**: 17 February 2023
+> **Release Date**: 23 February 2023
 
 **Updates**
 
@@ -88,10 +116,8 @@ Web: [https://www.krestfield.com](https://www.krestfield.com)
 
 
 
-
 <hr>
 <br>
-
 
 > **Version 1.7.0**
 > **Release Date**: 5 May 2022
@@ -131,15 +157,16 @@ Web: [https://www.krestfield.com](https://www.krestfield.com)
 
   
 
-  
+
 ---
+
 
 
 
 > **Version 1.6.0**
 > **Release Date**: 14 February 2022
->
-> **Updates**
+
+**Updates**
 
 * Certificate details now displays: key size (or curve name), thumbprint, policies, AIA and CDPs
 
@@ -198,8 +225,8 @@ Web: [https://www.krestfield.com](https://www.krestfield.com)
 
 > **Version 1.5.0**
 > **Release Date**: 15 November 2021
->
-> **Updates**
+
+**Updates**
 
 * The CA keys and certificates from existing ADCS (Microsoft CA) instances can now be migrated to Certdog, Including CAs using nCipher HSMs
 * Local CAs can now be configured with specific Path Length constraints
@@ -232,8 +259,8 @@ Web: [https://www.krestfield.com](https://www.krestfield.com)
 
 > **Version 1.4.1**
 > **Release Date**: 6 August 2021
->
-> **Updates**
+
+**Updates**
 
 * Logging can now also be directed to any log4j2 supported appender
 * Force delete of key stores and local CAs added
@@ -252,8 +279,8 @@ Web: [https://www.krestfield.com](https://www.krestfield.com)
 
 > **Version 1.4.0**
 > **Release Date**: 19 July 2021
->
-> **Updates**
+
+**Updates**
 
 * Local CAs can now utilise the follow key stores:
   * PKCS#11
@@ -277,8 +304,8 @@ Web: [https://www.krestfield.com](https://www.krestfield.com)
 
 > **Version 1.3.0**
 > **Release Date**: 17 June 2021
->
-> **Updates**
+
+**Updates**
 
 * You can now build a hierarchy of Local CAs - with any path length
 * Local CAs now produce CRLs
@@ -304,8 +331,8 @@ Web: [https://www.krestfield.com](https://www.krestfield.com)
 > **Version 1.2.0**
 >
 > **Release Date**: 25 March 2021
->
-> **Updates**
+
+**Updates**
 
 * Users are now associated with teams
 * Administrators can decided whether users see own certs, team certs all all of them
@@ -327,8 +354,8 @@ Web: [https://www.krestfield.com](https://www.krestfield.com)
 > **Version 1.1.0**
 >
 > **Release Date**: 15thFebruary 2021
->
-> **Updates**:
+
+**Updates**:
 
 * Support for PrimeKey's EJBCA Added
 * Private Keys can now be stored for a configurable length of time
@@ -356,5 +383,5 @@ Web: [https://www.krestfield.com](https://www.krestfield.com)
 > **Version 1.0.0**
 >
 > **Release Date**: 22 January 2021
->
-> **Updates**: Initial Release
+
+**Updates**: Initial Release

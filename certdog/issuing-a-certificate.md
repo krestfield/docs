@@ -154,6 +154,14 @@ Obtaining JSON data within shell scripts is messy. This example uses **jq** to c
 brew install jq
 ```
 
+On Ubuntu:
+
+```
+sudo apt install jq
+```
+
+
+
 Below is an example using cURL to login and request a certificate:
 
 ```bash

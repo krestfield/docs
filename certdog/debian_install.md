@@ -41,18 +41,16 @@ and ensure you connect and get the mongo db prompt. Type ``exit``, to exit the p
 
 ## Get Certdog
 
-1. Download Certdog from [here](https://krestfield.s3.eu-west-2.amazonaws.com/certdog/debian/certdogfreev190.tar.gz)
+1. Download Certdog from [here](https://krestfield.s3.eu-west-2.amazonaws.com/certdog/debian/certdogfreev1100.tar.gz)
 
-   File Hashes:
+   File Hash:
 
-   * SHA1: ``edebedb0c5571603ce00b629c476f0832d3fbfad``
-
-   * SHA256: ``28d0344832709a5f9b4691d041779f350ebec3202ebb7fe99f85afabf9b7eda3``
+   * SHA1: ``f53ebee154080b55c7939d3f90fff77c917ee6d4``
 
 e.g.
 
 ```
-curl https://krestfield.s3.eu-west-2.amazonaws.com/certdog/debian/certdogfreev190.tar.gz --output certdog.tar.gz
+curl https://krestfield.s3.eu-west-2.amazonaws.com/certdog/debian/certdogfreev1100.tar.gz --output certdog.tar.gz
 ```
 
 <br>
@@ -105,9 +103,16 @@ Other logs, including the mongodb, application (certdog.log) and startup/shutdow
 
 <br>
 
+If all is good you can navigate to the console from the same machine at: [https://127.0.0.1:1443](https://127.0.0.1:1443)
+
+---
+
 <br>
 
-By default the main certdog application listens on port 1443 on all interfaces and the CRL server on port 1480. To access over the standard ports (443 and 80) you must configure routes. For example:
+* The main certdog application listens on port 1443 (on all interfaces) 
+* The CRL (and OCSP) server listens on port 1480 (http)
+
+To enable access from an external server over the standard ports (443 and 80) you must configure routes. For example:
 
 ```
 sudo iptables -A PREROUTING -t nat -i eth0 -p tcp --dport 443 -j REDIRECT --to-port 1443
@@ -115,7 +120,9 @@ sudo iptables -A PREROUTING -t nat -i eth0 -p tcp --dport 80 -j REDIRECT --to-po
 sudo iptables-save
 ```
 
-This will redirect incoming traffic on port 443 to 1443 and port 80 to 1480
+This will redirect incoming traffic on port 443 to the internal 1443 port and port 80 to the internal 1480 port
+
+Note: If the ``iptables`` command is not available, you can install using ``sudo apt-get install iptables``
 
 <br>
 
@@ -134,6 +141,8 @@ To confirm that the application is listening on ports 1443 and 1480, you may use
 ```
 netstat -tuplen
 ```
+
+(Use: ``sudo apt install net-tools`` if ``netstat`` is not available)
 
 Which should show something like the following:
 
@@ -173,7 +182,13 @@ Enable any other firewall rules that may be in place to allow ports 80 and 443 t
 
 Open a browser and navigate to:
 
->  https://[Server Name or IP]/certdog
+If on the local machine:
+
+[https://127.0.0.1:1443](https://127.0.0.1:1443)
+
+From a remote machine (if you have routed 443 to 1443 as mentioned above):
+
+[https://[Server Name or IP]](https://[Server Name or IP])
 
 You will observe a browser SSL error which is due to the initial default SSL certificate. See [here](https://krestfield.github.io/docs/certdog/configure_server_ssl.html) to reconfigure the SSL certificate for your server. For now you may bypass the warning  
 

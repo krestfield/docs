@@ -50,6 +50,14 @@ $adminPassword = [System.Runtime.InteropServices.Marshal]::PtrToStringAuto([Syst
 Run the installation as follows:
 
 ```powershell
-.\install.ps1 -acceptEula -dbAdminPassword $dbPassword -firstAdminUsername $adminUsername -firstAdminEmail $adminEmail -firstAdminPassword $adminPassword -listeningIpAddress 0.0.0.0 -listeningPort 443 -installAdcsAgent
+.\install.ps1 `
+	-acceptEula ` 
+	-dbAdminPassword $dbPassword `
+	-firstAdminUsername $adminUsername `
+	-firstAdminEmail $adminEmail `
+	-firstAdminPassword $adminPassword `
+	-listeningIpAddress 0.0.0.0 `
+	-listeningPort 443 `
+	-installAdcsAgent
 ```
 

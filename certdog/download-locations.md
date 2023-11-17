@@ -19,7 +19,7 @@ Download the version for your OS:
 
 [RedHat](https://krestfield.s3.eu-west-2.amazonaws.com/certdog/redhat/certdogfree1100.tar.gz)
 
-[Debian](https://krestfield.s3.eu-west-2.amazonaws.com/certdog/debian/certdog.tar.gz)
+[Debian](https://krestfield.s3.eu-west-2.amazonaws.com/certdog/debian/certdogfreev1100.tar.gz)
 
 <br>
 

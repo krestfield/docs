@@ -287,5 +287,5 @@ Note that ``tls.trustStore.password`` must be set via the Management Utility. Ru
 
 
 
-When all items are configured, restart the EzSign daemon. Refer to [payShield 10k Support](payshield10k_support..html) for more information on setup and troubleshooting.
+When all items are configured, restart the EzSign daemon. Refer to [payShield 10k Support](payshield10k_support.html) for more information on setup and troubleshooting.
 

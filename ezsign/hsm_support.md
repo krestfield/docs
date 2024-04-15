@@ -67,11 +67,11 @@ The following HSMs are supported via the [pkcs#11](http://docs.oasis-open.org/pk
 
   - Configured via the ``token.azureKeyVault`` properties  
 
-- Thales PayShield 9000 - *Deprecated*
+- Thales payShield 10k
 
-  - Configured via the ``token.hsm9000`` properties
+  - Configured via the ``token.payShield`` properties
 
-    *Tested: PayShield 9000*
+    *Tested: payShield 10k*
     
     
 
@@ -80,9 +80,3 @@ Refer to the installation and configuration guide for details on configuring EzS
 Note that the tested instances are confirmed. Backwards compatibility should be maintained by the vendors for the PKCS#11 interface for later versions
 
 
-
-#### Thales PayShield Additional Notes
-
-Support for PayShield may be removed in future releases. Contact [support](mailto:support@krestfield.com) for more information
-
-PayShields may require additional licenses to support the RSA system. Specific commands must be enabled on the HSM - including ``EI`` and ``EW``

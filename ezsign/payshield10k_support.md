@@ -98,7 +98,7 @@ Note: If performing via the *Console* then **generate.rsa.host** needs to be aut
 
 ### TLS Configuration
 
-If you wish to secure the communications between EzSign and the payShield using TLS. Refer to the [payShield TLS Configuration](payshield_tls_configuration..html) guide.
+If you wish to secure the communications between EzSign and the payShield using TLS. Refer to the [payShield TLS Configuration](payshield_tls_configuration.html) guide.
 
   
 
@@ -126,14 +126,14 @@ The following properties are used to configure a payShield within EzSign:
   * If multiple LMKs are loaded you may specify the LMK ID (starts from **0** and increments)
 * useTls
   * If using TLS to communicate with the HSM, set this to true. Defaults to **false** if not set
-  * Refer to [payShield TLS Configuration](payshield_tls_configuration..html) for more detailed information on configuring TLS
+  * Refer to [payShield TLS Configuration](payshield_tls_configuration.html) for more detailed information on configuring TLS
 
 
 
 If ``useTls=true`` then the following may also need to be set:
 
 * tls.trustStore.filename
-  * If the certificate being used by the HSM is not trusted by the Java runtime, then you may need to provide a keystore containing the required CA certificate(s). Refer to [payShield TLS Configuration](payshield_tls_configuration..html) for information on how to construct this
+  * If the certificate being used by the HSM is not trusted by the Java runtime, then you may need to provide a keystore containing the required CA certificate(s). Refer to [payShield TLS Configuration](payshield_tls_configuration.html) for information on how to construct this
   * This property must contain the full path to the trust store file (e.g.`` /opt/stores/trust.jks``)
 * tls.trustStore.type
   * The Trust Store can be supplied as a JKS or PKCS12 file. Specify either **jks** or **pkcs12**
@@ -144,7 +144,7 @@ If ``useTls=true`` then the following may also need to be set:
     * The Trust Store is password protected. Use the Management Utility to configure this password - choosing the *Set TLS Trust Keystore Password* option
 
 
-  
+
 
 * tls.clientKeyStore.filename
 

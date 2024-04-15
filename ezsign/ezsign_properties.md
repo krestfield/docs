@@ -37,6 +37,12 @@ The following settings dictate what ports and interfaces the server listens on a
 | server.authCode|The passphrase used to encrypt messages between the client and server.  If set the client must pass the same string to the constructor.  If not set, messages will be sent in the clear (which may be OK if client and server are on the same machine or using a private network)|x55tHH#ih65W|
 | keyStoreDir |The folder beneath which all channel key stores will be held|/opt/ezsign/STORE|
 | log.level |The logging level.  The range is from 0 to 4 as follows: **0**: Logging is off, **1**: Only error messages will be logged, **2**: Errors and Warning messages will be logged, **3** : Errors, Warnings and Events will be logged, **4** : This is the debug level - all messages (as well as low level events) will be logged|4|
+| tls.trustStore.type |If using TLS to communicate with an HSM (such as the payShield) and you are supplying a custom trust store, this specifies the trust store type. Options are **jks** or **pkcs12**|jks|
+| tls.trustStore.filename |The full path to the truststore file|/opt/stores/payshield.jks|
+| tls.trustStore.password |The encrypted password that protects the trust store. Use the Management Utility to set this password|yjjWoLfE...Zlew==|
+| tls.clientKeyStore.type |If using TLS to communicate with an HSM (such as the payShield) and a client TLS certificate is required, this specifies the client store type. Options are **jks** or **pkcs12**|pkcs12|
+| tls.clientKeyStore.filename |The full path to the client keystore file|/opt/stores/client.jks|
+| tls.clientKeyStore.password |The encrypted password that protects the client key store. Use the Management Utility to set this password|FGchg3Kv...Ycsg==|
 
 
 
@@ -64,7 +70,7 @@ This number is represented by ``N`` in the following sections. There is no limit
 | channel.N.name|The name of the channel.  This will also be used as the folder name where the keys and certificates for this channel will be stored|CHAN1|
 | channel.N.type|The channel type: **PKI** or **SYM**. PKI channels can perform signature generation and verification SYM (symmetric) channels can perform encryption or decryption|PKI|
 | channel.N.enabled|If false, the channel is disabled and will not be loaded.  If missing, defaults to **true**|true|
-| channel.N.tokenType|The token type: **SOFTWARE**, **PKCS11**, **HSM9000**, **GOOGLEKMS**, **AZUREKEYVAULT**|SOFTWARE|
+| channel.N.tokenType|The token type: **SOFTWARE**, **PKCS11**, **PAYSHIELD** (or **HSM9000**), **GOOGLEKMS**, **AZUREKEYVAULT**|SOFTWARE|
 | channel.N.token.password|The token password required for all token types and will be used to encrypt key store objects. This must be set by running the ezsign-manange script. If tokenType=PKCS11 this is the PIN or Passphrase.  For nCipher devices this will be the operator smartcard passphrase|zijFhJ....vA==|
 | channel.N.defaultKeyLabel|Relates to symmetric channels only (type=SYM). Specifies the default AES key label to use if none is passed to the client|key1|
 | channel.N.saveObjectsToDisk |If this is true, files will not be written to the keystore folder. Use this option if you are passing properties to EzSign and managing key storage externally e.g. in a database|true|
@@ -116,16 +122,19 @@ If ``channel.N.tokenType=AZUREKEYVAULT`` is set  then the following properties m
 
 ## PayShield Token Properties
 
-If ``channel.N.tokenType=HSM9000`` then the following properties must also be configured
+If ``channel.N.tokenType=PAYSHIELD or HSM9000`` then the following properties must also be configured.
+
+Note properties named hsm9000 (e.g. ``channel.N.token.hsm9000.port``) are still supported but all new properties will use the ``payShield`` name.
 
 | Property                             | Description                                                  | Example      |
 | ------------------------------------ | ------------------------------------------------------------ | ------------ |
-| channel.N.token.hsm9000.ipAddress|The IP Address of the HSM9000|10.100.15.101|
-| channel.N.token.hsm9000.port|The port the HSM9000 listens on. Required if tokenType=HSM9000|1500|
-| channel.N.token.hsm9000.timeoutMs|The time to wait for a response from the HSM before failing. Required if tokenType=HSM9000|3000|
-| channel.N.token.hsm9000.headerLen|The HSM command header length. Required if tokenType=HSM9000|4|
-| channel.N.token.hsm9000.useVariantLmk|If the HSM has a variant LMK installed, set this to true. If not specified, defaults to false (meaning a KeyBlock LMK will be used)|false|
-| channel.N.token.hsm9000.lmkId|If the HSM has multiple LMKs loaded, set this to the LMK ID  that you wish EzSign to use.  Range 0-99. If not specified, the default LMK (as configured on the HSM) will be used|0|
+| channel.N.token.payShield.ipAddress |The IP Address of the HSM9000|10.100.15.101|
+| channel.N.token.payShield.port |The port the HSM9000 listens on. Required if tokenType=HSM9000|1500|
+| channel.N.token.payShield.timeoutMs |The time to wait for a response from the HSM before failing. Required if tokenType=HSM9000|3000|
+| channel.N.token.payShield.headerLen |The HSM command header length. Required if tokenType=HSM9000|4|
+| channel.N.token.payShield.useVariantLmk |If the HSM has a variant LMK installed, set this to true. If not specified, defaults to false (meaning a KeyBlock LMK will be used). Ensure this matches against the lmkId and port numbers (that usually map to specific LMKs)|false|
+| channel.N.token.payShield.lmkId |If the HSM has multiple LMKs loaded, set this to the LMK ID  that you wish EzSign to use.  Range 0-99. If not specified, the default LMK (as configured on the HSM) will be used|0|
+| channel.N.token.payShield.useTls |Whether communications between the client and HSM are protected using TLS. Options are **true** or **false**. If true then the **tls** server properties must also be set to configure the client key store (and optionally the trust store). See *Server Properties* above.|false|
 
 
 

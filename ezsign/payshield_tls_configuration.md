@@ -147,7 +147,7 @@ Do you wish to import another certificate? Y <Return>
 
 Or do this via the **payShield Manager**, as follows:
 
-Navigate to **Configuration** | **Host Settings** and choose the **TLS** tab. Click **Enable TLS** (if this option is not available you are not in Secure state).
+Navigate to **Configuration** > **Host Settings** and choose the **TLS** tab. Click **Enable TLS** (if this option is not available you are not in Secure state).
 
 Click **Import Host TLS Certificate** and import in the order mentioned above.
 

@@ -358,3 +358,15 @@ Note RFC6125 mentions that IP Addresses are out of scope as they are not reliabl
 
 It is recommended that DNS domain names are used in place of IP addresses  
 
+---
+
+
+
+### Unable to login
+
+Error Details
+
+A user is unable to login. If an admin is able to login still, check the logs for the failure reason. From the User's menu, select the user and either enter a new password or generate a random one and email.
+
+If the locked out user is the administrator. See [here](admin-password-reset.html) for how to reset the admin password manually.  
+

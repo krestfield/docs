@@ -26,6 +26,8 @@ If you have also lost this password and you have a support agreement in place, c
 
 ### Steps
 
+<u>For Microsoft Windows Deployments</u>
+
 Create the hashed password by navigating to:   
 
 ```
@@ -68,7 +70,27 @@ If this fails, try running the following:
 .\mongo.exe -tls -tlsAllowInvalidCertificates
 ```
 
-Now we authenticate against the admin database:
+
+
+<u>For Linux Deployments</u>
+
+Type:
+
+```
+.\mongosh
+```
+
+In the following steps. use the following hashed password:
+
+```
+$2a$10$GNiVPV88Zb/HKOt3NSnACufrPt4cj7XhpTB7oTkeRRnZQwbAMBeO.
+```
+
+
+
+<u>All Deployments</u>
+
+Authenticate against the admin database:
 
 ```
 use admin
@@ -89,16 +111,20 @@ You can skip this step - but this will confirm the account is present
 Now we will update the password for this user by providing the hashed password from above in the following command:
 
 ```
-db.users.updateOne({username:"admin"}, {$set:{ enabled:true, nextAllowedLogonTime:NumberLong(0), password:"$2a$10$rPSQZhmM2wlTA6Ke29I85e14Q7GgXDX8iq2DNoDLI2GcqsbwcITVq"}})
+db.users.updateOne({username:"admin"}, {$set:{ enabled:true, nextAllowedLogonTime:NumberLong("0"), password:"$2a$10$rPSQZhmM2wlTA6Ke29I85e14Q7GgXDX8iq2DNoDLI2GcqsbwcITVq"}})
 ```
 
 Exit from the shell by typing ``exit``  
 
 You should now be able to login using the new password  
 
+For Linux deployments, login with a password of ``password`` and immediately change via the UI
+
 <br>
 
 ### Complete Output
+
+<u>Windows Deployments</u>
 
 ```powershell
 C:\certdog\install\bin>java -jar SetDatabasePassword-1.0.jar h Password1234!!
@@ -111,18 +137,104 @@ MongoDB shell version v4.4.1
 connecting to: mongodb://127.0.0.1:27017/?compressors=disabled&gssapiServiceName=mongodb
 Implicit session: session { "id" : UUID("efc2c2a9-7cc8-47af-9fd9-343921ecf7ce") }
 MongoDB server version: 4.4.1
+
 replocal:PRIMARY> use admin
 switched to db admin
+
 replocal:PRIMARY> db.auth("certmanadmin")
 Enter password:
 1
+
 replocal:PRIMARY> use certman
 switched to db certman
+
 replocal:PRIMARY> db.users.find({username:"admin"})
-{ "_id" : ObjectId("6221f83e1e2f9ad7dd70cf56"), "email" : "admin@ased.com", "username" : "admin", "password" : "$2a$10$VEsIyJlN5MiZoXLsEe7GEesJuRDD9YhmymmKlERAq778mZaq5JOuG", "group" : "ADMIN", "enabled" : true, "teamsIds" : [ "6221f840876a2b78f10dd5c7" ], "numFailedLoginAttempts" : 0, "userMessage" : "Account access has been delayed as there were too many failed login attempts", "nextAllowedLogonTime" : NumberLong(0), "_class" : "com.krestfield.pki.certman.model.users.CertManUser" }
-replocal:PRIMARY> db.users.updateOne({username:"admin"}, {$set:{ enabled:true, nextAllowedLogonTime:NumberLong(0), password:"$2a$10$qWAWK96LjEXsftZDsQ4DdOXe3deZNfsV645OuyI2utC7d01UId6nC"}})
-{ "acknowledged" : true, "matchedCount" : 1, "modifiedCount" : 1 }
+
+[
+  {
+    _id: ObjectId('664767e1c9fc372734a26a13'),
+    email: 'certdog@example.com',
+    username: 'admin',
+    password: '$2a$10$KPF5U6zb.eYBo.6enTaT2ODg10r5ISnTdWmeidgVa0eG4EjGV/6wW',
+    group: 'ADMIN',
+    enabled: true,
+    teamsIds: [ '664767e1c9fc372734a26a14' ],
+    numFailedLoginAttempts: 0,
+    nextAllowedLogonTime: Long('0'),
+    accountType: 0,
+    lastLoginTime: ISODate('2024-05-23T16:20:13.397Z'),
+    lastLoginIpAddress: '127.0.0.1',
+    mustChangePassword: false,
+    _class: 'com.krestfield.pki.certman.model.users.CertManUser'
+  }
+]
+
+replocal:PRIMARY> db.users.updateOne({username:"admin"}, {$set:{ enabled:true, nextAllowedLogonTime:NumberLong("0"), password:"$2a$10$qWAWK96LjEXsftZDsQ4DdOXe3deZNfsV645OuyI2utC7d01UId6nC"}})
+
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 1,
+  modifiedCount: 0,
+  upsertedCount: 0
+}
+
 replocal:PRIMARY> exit
 bye
+```
+
+<u>Linux Deployments</u>
+
+```sh
+krestfield@debian $ mongosh
+Current Mongosh Log ID:	6650531891ea0a0fdea26a12
+Connecting to:		mongodb://127.0.0.1:27017/?directConnection=true&serverSelectionTimeoutMS=2000&appName=mongosh+2.2.6
+Using MongoDB:		7.0.9
+Using Mongosh:		2.2.6
+
+For mongosh info see: https://docs.mongodb.com/mongodb-shell/
+
+test> use admin
+switched to db admin
+
+admin> db.auth("certmanadmin")
+Enter password
+********************{ ok: 1 }
+
+admin> use certman
+switched to db certman
+
+certman> db.users.find({username:"admin"})
+
+[
+  {
+    _id: ObjectId('664767e1c9fc372734a26a13'),
+    email: 'certdog@example.com',
+    username: 'admin',
+    password: '$2a$10$KPF5U6zb.eYBo.6enTaT2ODg10r5ISnTdWmeidgVa0eG4EjGV/6wW',
+    group: 'ADMIN',
+    enabled: true,
+    teamsIds: [ '664767e1c9fc372734a26a14' ],
+    numFailedLoginAttempts: 0,
+    nextAllowedLogonTime: Long('0'),
+    accountType: 0,
+    lastLoginTime: ISODate('2024-05-23T16:20:13.397Z'),
+    lastLoginIpAddress: '127.0.0.1',
+    mustChangePassword: false,
+    _class: 'com.krestfield.pki.certman.model.users.CertManUser'
+  }
+]
+
+certman> db.users.updateOne({username:"admin"}, {$set:{enabled:true, nextAllowedLogonTime:NumberLong("0"), password:"$2a$10$rPSQZhmM2wlTA6Ke29I85e14Q7GgXDX8iq2DNoDLI2GcqsbwcITVq"}})
+
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 1,
+  modifiedCount: 0,
+  upsertedCount: 0
+}
+
+certman> exit
 ```
 

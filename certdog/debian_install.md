@@ -11,7 +11,7 @@ nav_order: 200
 
 ## Pre-Requisites
 
-* A Debian 11 (bullseye) installation. Note other versions may work but this version is confirmed
+* A Debian 11 or 12 installation. Note other versions may work but this version is confirmed
 
 * An account with sudo/root permissions
 
@@ -25,9 +25,9 @@ It is recommended that a separate, dedicated user be created which will run the 
 
 ## Install Mongo DB
 
-Follow the instructions linked below to download and install Mongo DB Community Edition. The Debian installation has been tested and confirmed to work with MongoDB Community Edition 5.0.9 and 6.0.7.
+Follow the instructions linked below to download and install Mongo DB Community Edition. The Debian installation has been tested and confirmed to work with MongoDB Community Edition 5, 6 and 7.
 
-https://www.mongodb.com/docs/manual/tutorial/install-mongodb-on-debian/
+[https://www.mongodb.com/docs/manual/tutorial/install-mongodb-on-debian/](https://www.mongodb.com/docs/manual/tutorial/install-mongodb-on-debian/)
 
 Confirm mongo DB is running by typing:
 
@@ -36,6 +36,15 @@ mongosh
 ```
 
 and ensure you connect and get the mongo db prompt. Type ``exit``, to exit the prompt
+
+If there issues starting mongodb, see here: [https://askubuntu.com/questions/823288/mongodb-loads-but-breaks-returning-status-14](https://askubuntu.com/questions/823288/mongodb-loads-but-breaks-returning-status-14)
+
+This mentions setting the correct permissions. E.g.
+
+```sh
+sudo chown -R mongodb:mongodb /var/lib/mongodb
+sudo chown mongodb:mongodb /tmp/mongodb-27017.sock
+```
 
 <br>
 

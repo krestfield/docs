@@ -16,7 +16,7 @@ Multiple instances of the driver can be installed in the same and different doma
 
 ## Requirements
 
-- Windows Server 2016, 2019
+- Windows Server 2019, 2022
 - .NET Framework 4.8 Runtime
 - A service account  
 

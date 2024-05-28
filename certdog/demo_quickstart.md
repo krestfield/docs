@@ -16,7 +16,7 @@ nav_order: 400
 * An internet connection (as additional components may be downloaded)
 * .NET v4.8 runtime
 * Administrator privileges  
-* Windows Server 2016/2019/2022
+* Windows Server 2019/2022
 * Windows 10/11
 
 <br>

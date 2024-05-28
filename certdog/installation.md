@@ -26,8 +26,6 @@ If you don't want to read any details  right now and just want to quickly downlo
 The system may be installed on the following operating systems:  
 
 
-* Windows Server 2016
-
 * Windows Server 2019
 
 * Windows Server 2022

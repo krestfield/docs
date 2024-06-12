@@ -31,9 +31,7 @@ The high-level steps are:
 
   
 
-The following Thales guide may also be followed:
-
-[payShield TLS Host Port V3_5-6-23](https://krestfield.s3.eu-west-2.amazonaws.com/support/ezsign/payshield/payShield%20TLS%20Host%20Port%20V3_5-6-23.pdf)
+The following guide (available from Thales) may also be followed: **payShield TLS Host Port V3_5-6-23.pdf**
 
 Although any CA can be used (it doesn't have to be an OpenSSL CA as specified in that tech note).
 

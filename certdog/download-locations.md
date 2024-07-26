@@ -31,13 +31,13 @@ Contact [support](mailto:support@krestfield.com) for your download location
 
 ### Windows File Hashes
 
-Full Version:  
+V1.11.1 Full Version:  
 
-* SHA1: ``9da252cf4022751c4f46296d9ded63a49f8a3992``
+* SHA1: ``f57cac2922b0a84b370d10f62f534be892b59972``
 
-* SHA256: ``80ee13d233788a3e064bfce36ee442f471ccd99a34b62ac20822f223b3752e5c``
+* SHA256: ``a8f5d269a949e9c39c1cf5bd68b1219e4445b5fd15a63625d80bb2a0976dc12f``
 
-Free Version:  
+V1.11.0 Free Version:  
 
 * SHA1: ``9c3c7c1ad6e7e49c67444675f2d42d98d65f15af``
 

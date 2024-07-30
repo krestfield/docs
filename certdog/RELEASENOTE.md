@@ -1,10 +1,3 @@
----
-layout: default
-title: Release Note
-parent: Certdog
-nav_order: 10000
----
-
 # RELEASE NOTE
 
 ### Certdog - Certificate Management and Automation System
@@ -16,6 +9,75 @@ Documentation: [https://krestfield.github.io/docs/certdog/certdog.html](https://
 Support: [support@krestfield.com](mailto:support@krestfield.com)
 
 Web: [https://www.krestfield.com](https://www.krestfield.com)
+
+> **Version 1.11.1**
+> **Release Date**: 26th July 2024
+
+
+
+**Updates**
+
+* None
+  
+
+**Security Updates**
+
+* None
+
+**Fixes** 
+
+* In certificate details, *Renewed By* and *Renews* links had stopped working 
+* Corrected revocation approval where approval notification appeared when none was required
+
+
+
+---
+
+
+
+
+> **Version 1.11.0**
+> **Release Date**: 24th May 2024
+
+
+
+**Updates**
+
+* Workflows are now available enabling breaks in processing of certificate requests and revocation requests. Approvals can now be requested as well as call outs to custom scripts
+
+* There are now options to set the key usage and enhanced Key usage extensions as critical or not
+
+* UI improvements
+
+  
+
+**Security Updates**
+
+* None
+
+
+
+**Fixes** 
+
+* Fix for UI error when the RSASSA-PSS algorithm was used
+
+* Corrected error when saving a search for certs expiring in, when status specifically set to Active
+
+* Fixed issue where you could not set CRL URL for an OCSP responder
+
+* Users can now view CA certificates. Previously you needed specific permissions to do this
+
+* Fixed issue where CSR check would show a thumbs up but be invalid
+
+* If a custom extension was marked critical, the critical part was not shown in the UI after saving (although still functioned correctly), this has now been corrected
+
+* When requesting a certificate, if you entered a SAN before the DN the request button was not enabled. Now operates correctly.
+
+  
+
+
+<hr>
+<br>
 
 
 > **Version 1.10.0**

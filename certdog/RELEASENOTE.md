@@ -1,3 +1,12 @@
+---
+layout: default
+title: Release Note
+parent: Certdog
+nav_order: 10000
+---
+
+
+
 # RELEASE NOTE
 
 ### Certdog - Certificate Management and Automation System

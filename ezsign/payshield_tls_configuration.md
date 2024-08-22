@@ -95,7 +95,7 @@ If you choose **Y** to save the CSR to a filename, you will be prompted to enter
 
 #### Step 2: Issuing a server side certificate from this CSR
 
-You can follow the [payShield TLS Host Port V3_5-6-23](https://krestfield.s3.eu-west-2.amazonaws.com/support/ezsign/payshield/payShield%20TLS%20Host%20Port%20V3_5-6-23.pdf) guide to create an openSSL CA but we created a Root CA in certdog and configured a Cert Issuer (that included this CA and a client/server SSL profile).
+You can follow the **payShield TLS Host Port V3_5-6-23.pdf** guide to create an openSSL CA but we created a Root CA in certdog and configured a Cert Issuer (that included this CA and a client/server SSL profile).
 
 The CSR generated above was then issued from this Root CA and named **payshield1.crt**. 
 
@@ -167,7 +167,7 @@ You can check that the server side certificate is working as expected using usin
 openssl s_client -connect 192.168.0.211:2500
 ```
 
-This should show the server certificate. You can also verify the client authentication part. Refer to the Thales guide here: [payShield TLS Host Port V3_5-6-23](https://krestfield.s3.eu-west-2.amazonaws.com/support/ezsign/payshield/payShield%20TLS%20Host%20Port%20V3_5-6-23.pdf) for more info.
+This should show the server certificate. You can also verify the client authentication part. Refer to the Thales guide: **payShield TLS Host Port V3_5-6-23.pdf** for more info.
 
 
 

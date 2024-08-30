@@ -193,9 +193,9 @@ public EzSignClient(String host,
 ```java
 public EzSignClient(String host, 
                     int port, 
-					int timeoutInMs, 
+                    int timeoutInMs, 
                     int readTimeoutInMs, 
-					String authCode)
+                    String authCode)
 ```
 
  
@@ -324,10 +324,10 @@ catch (KRevocationException revEx){
 ``` java
 public void verifySignature(String channelName, 
                             byte[] signature, 
-							byte[] contentBytes, 
+                            byte[] contentBytes, 
                             boolean dataIsDigest, 
                             boolean bypassRevocationCheck, 
-							boolean bypassPathBuild)
+                            boolean bypassPathBuild)
 ```
 
  If the values for ``bypassRevocationCheck`` and ``bypassPathBuild`` are both set to ``false`` the signature will be verified in the same way as the previous method.
@@ -377,7 +377,7 @@ If there are other certificates in the path that are not stored in the channel, 
  ```java
  public void verifySignature(String channelName, 
                              byte[] signature, 
- 							byte[] contentBytes, 
+                             byte[] contentBytes,
                              boolean dataIsDigest, 
                              X509Certificate signerCert)
  ```
@@ -416,9 +416,9 @@ This method accepts the signer certificate *as well as* other certificates in th
  public void verifySignature(String channelName, 
                              byte[] signature, 
                              byte[] contentBytes, 
- 							boolean dataIsDigest, 
+                             boolean dataIsDigest, 
                              X509Certificate signerCert, 
- 							X509Certificate[] otherCerts)
+                             X509Certificate[] otherCerts)
  ```
 
  
@@ -456,11 +456,11 @@ Use this method if you wish to bypass revocation checking (whether configured at
 ``` java
 public void verifySignature(String channelName, 
                             byte[] signature, 
-							byte[] contentBytes, 
+                            byte[] contentBytes, 
                             boolean dataIsDigest, 
-							X509Certificate signerCert, 
-							X509Certificate[] otherCerts,
-							boolean bypassRevocationCheck, 
+                            X509Certificate signerCert, 
+                            X509Certificate[] otherCerts, 
+                            boolean bypassRevocationCheck, 
                             boolean bypassPathBuild)
 ```
 

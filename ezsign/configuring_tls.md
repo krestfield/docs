@@ -23,7 +23,7 @@ You can configure the EzSign Server with a server side certificate only or you m
 * To add client side TLS you will also need a TLS certificate that includes the *Client Authentication* extended key usage 
 * It is possible to use same certificate for both client and server side TLS, in this case the certificate must have both the *Client Authentication* and *Server Authentication* extended key usage
 * The certificates can be packaged as either a PKCS12 or JKS file 
-* Ideally, both the server and client side certificate are issued from the same CA. If this is not the case you may need to trust both CA chains as outlined in the [3. Configure the JRE's Trust](#3.-configure-thecjre's-trust) below
+* Ideally, both the server and client side certificate are issued from the same CA. If this is not the case you may need to trust both CA chains as outlined in the [3. Configure the JRE's Trust](#3-configure-the-jre's-trust) below
 
 
 
@@ -121,9 +121,7 @@ You can add the trusted root (and any intermediate certificates), to the JRE's t
 ```shell
 keytool -import -trustcacerts -alias krestfieldroot -file root.cer -keystore "C:\Program Files\java\jdk-18.0.1.1\lib\security\cacerts"
 
-
 keytool -import -trustcacerts -alias krestfieldca -file ca.cer -keystore "C:\Program Files\java\jdk-18.0.1.1\lib\security\cacerts"
-
 ```
 
 4. The default password for the keystore is usually ``changeit`` 

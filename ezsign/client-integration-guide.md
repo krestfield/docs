@@ -21,9 +21,9 @@ For server side setup please refer to the *EzSign Installation and Configuration
 
  
 
- 
+ <br/>
 
-## JAR Files
+## JAR File
 
  
 
@@ -41,7 +41,9 @@ Where ``[installation folder]`` is the location the server was installed
 
  
 
-To make use of the signing, verification and encryption functions, add the ``ezsign-client-x.y.z.jar`` to your application’s class path. Alternatively, you can add the following maven dependency: 
+To make use of the signing, verification and encryption functions, add the ``ezsign-client-x.y.z.jar`` to your application’s class path.  
+
+Alternatively, you can add the following maven dependency: 
 
 ```xml
 <dependency>
@@ -55,7 +57,7 @@ To make use of the signing, verification and encryption functions, add the ``ezs
 
   
 
- 
+ <br/>
 
 ## Client API
 
@@ -65,7 +67,7 @@ To make use of the signing, verification and encryption functions, add the ``ezs
 
  All the client API calls are included in the ``EzSignClient`` class, which is included in the ``com.krestfield.ezsign`` package.  
 
-  
+  <br/>
 
 ### Constructor
 
@@ -110,7 +112,6 @@ Example:
 ```java
 import com.krestfield.ezsign;
  
-
 public class ClientTest
 {
    	public static void main(String[] args)
@@ -124,7 +125,7 @@ public class ClientTest
 
 To encrypt communications between the client and server, you may utilise TLS and/or an Authentication code.  
 
-
+<br/>
 
 <u>Using TLS</u>
 
@@ -132,13 +133,13 @@ To encrypt communications between the client and server, you may utilise TLS and
 
 EzSign supports server side TLS as well as client-server TLS.  
 
-If the server has been configured with a server side TLS certificate, in that the ``server.useTls`` has been set to ``true`` or the server is sitting behind a load-balancer that terminates TLS sessions for example, the ``EzSignClient`` constructor must also have the ``useTls()`` option set, for example:
+If the server has been configured with a server side TLS certificate (and the ``server.useTls`` has been set to ``true``) or the server is sitting behind a load-balancer that terminates TLS sessions for example, the ``EzSignClient`` constructor must also have the ``useTls()`` option set, for example:
 
 ```java
 EzSignClient client = new EzSignClient(“10.100.12.15”, 5656).useTls();
 ```
 
-The client will connect to the server over TLS.
+The client will now connect to the server over TLS.
 
 
 
@@ -147,7 +148,7 @@ If you wish to use client-server TLS, the client must make use of a client-side 
 ``useClientTls`` requires three parameters:
 
 * ``clientKeystoreFilename`` - The Keystore Filename
-  * This is the full path to the PKCS12 file
+  * This is the full path to the keystore file
 * ``clientKeystorePassword`` - The Keystore Password
   * This is the password that protects the keystore file
 * ``keyStoreType`` - The Keystore Type
@@ -171,11 +172,9 @@ EzSignClient client = new EzSignClient(
     .useClientTls("/opt/keystores/client.p12", "password", "PKCS12");
 ```
 
-The client will now attempt to connect to the server using TLS and will now also provide the certificate supplied in the specified keystore file.
+The client will now attempt to connect to the server using TLS and will now also provide the client authentication certificate supplied in the specified keystore file.
 
-
-
-
+<br/>
 
 <u>Using an Authentication Code</u>
 
@@ -207,7 +206,7 @@ There are no restrictions on what Authentication Code can be used, but a longer 
 
 The same Authentication Code must also be configured on the server. Refer to the Installation and Configuration Guide for details on how to configure this on the server.
 
- 
+ <br/>
 
 ### Generate Signature Methods
 
@@ -248,9 +247,7 @@ Example:
  byte[] signature = client.signData(“CHANNEL1”, dataToSign, false);
  ```
 
- 
-
- 
+ <br/>
 
 ### Verify PKCS#7 Signature Methods
 
@@ -359,9 +356,7 @@ This method throws the following exceptions:
 
 ​            There was another error
 
- 
-
-  
+<br/>
 
 ### Verify Raw Signature Methods
 
@@ -501,9 +496,7 @@ Note:
 
 If you wish to perform just the signature verification operation. Set ``bypassRevocationCheck`` and ``bypassPathBuild`` both to ``true`` and ``otherCerts`` to ``null``
 
-  
-
- 
+ <br/>
 
 ### Generate Random Number Methods
 
@@ -530,9 +523,7 @@ This method throws the following exceptions:
 
 ​            There was another error
 
-  
-
- 
+  <br/>
 
 ### Encrypt/Decrypt Methods
 
@@ -615,9 +606,7 @@ Example:
  // clearData will be equal to originalData i.e. “Hello”
  ```
 
- 
-
- 
+ <br/>
 
 ## Support
 

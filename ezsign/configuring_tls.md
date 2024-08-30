@@ -191,7 +191,7 @@ In order to update the client to use client TLS, the ``useClientTls()`` option i
 ``useClientTls`` requires three parameters:
 
 * ``clientKeystoreFilename`` - The Keystore Filename
-  * This is the full path to the PKCS12 file
+  * This is the full path to the keystore file
 * ``clientKeystorePassword`` - The Keystore Password
   * This is the password that protects the keystore file
 * ``keyStoreType`` - The Keystore Type

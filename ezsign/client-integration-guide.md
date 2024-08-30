@@ -226,17 +226,17 @@ Note: For large data sets, it is recommended to hash the data beforehand and pro
 
  This method throws the following exceptions: 
 
-* KSigningException
+* ``KSigningException``
+  * There was an error during the signing process 
 
-​            There was an error during the signing process 
 
-* KEzSignException
+* ``KEzSignException``
+  * There was an internal error, incorrect parameters or other error 
 
-​            There was an internal error, incorrect parameters or other error 
 
-* KEzSignConnectException
+* ``KEzSignConnectException``
+  * There was an error connecting to the server 
 
-​            There was an error connecting to the server 
 
  
 
@@ -272,25 +272,25 @@ The following methods are used to verify a PKCS#7 signature and will perform the
 
  This method throws the following exceptions:
 
-* KVerificationException
+* ``KVerificationException``
+  * There was an error during the verification process 
 
-​            There was an error during the verification process 
 
-* KPathException 
+* ``KPathException``
+  * There was a path building error 
 
-​            There was a path building error 
 
-* KRevocationException
+* ``KRevocationException``
+  * A certificate is revoked or there was an error during the revocation check process 
 
-​            A certificate is revoked or there was an error during the revocation check process 
 
-* KEzSignConnectException
+* ``KEzSignConnectException``
+  * There was an error connecting to the server  
 
-​            There was an error connecting to the server  
 
-* KEzSignException
+* ``KEzSignException``
+  * There was another error
 
-​            There was another error
 
  
 
@@ -336,25 +336,25 @@ public void verifySignature(String channelName,
 
 This method throws the following exceptions:
 
-* KVerificationException
+* ``KVerificationException``
+  * There was an error during the verification process
 
-​            There was an error during the verification process
 
-* KPathException 
+* ``KPathException``
+  * There was a path building error
 
-​            There was a path building error
 
-* KRevocationException
+* ``KRevocationException``
+  * A certificate is revoked or there was an error during the revocation check process
 
-​            A certificate is revoked or there was an error during the revocation check process
 
-* KEzSignConnectException
+* ``KEzSignConnectException``
+  * There was an error connecting to the server  
 
-​            There was an error connecting to the server  
 
-* KEzSignException
+* ``KEzSignException``
+  * There was another error
 
-​            There was another error
 
 <br/>
 
@@ -386,25 +386,25 @@ If there are other certificates in the path that are not stored in the channel, 
 
 This method throws the following exceptions:
 
-* KVerificationException
+* ``KVerificationException``
+  * There was an error during the verification process
 
-​            There was an error during the verification process
 
-* KPathException 
+* ``KPathException``
+  * There was a path building error
 
-​            There was a path building error
 
-* KRevocationException
+* ``KRevocationException``
+  * A certificate is revoked or there was an error during the revocation check process
 
-​            A certificate is revoked or there was an error during the revocation check process
 
-* KEzSignConnectException
+* ``KEzSignConnectException``
+  * There was an error connecting to the server 
 
-​            There was an error connecting to the server 
 
-* KEzSignException
+* ``KEzSignException``
+  * There was another error
 
-​            There was another error
 
   
 
@@ -425,25 +425,25 @@ This method accepts the signer certificate *as well as* other certificates in th
 
 This method throws the following exceptions:
 
-* KVerificationException
+* ``KVerificationException``
+  * There was an error during the verification process
 
-​            There was an error during the verification process
 
-* KPathException 
+* ``KPathException``
+  * There was a path building error
 
-​            There was a path building error
 
-* KRevocationException
+* ``KRevocationException``
+  * A certificate is revoked or there was an error during the revocation check process
 
-​            A certificate is revoked or there was an error during the revocation check process
 
-* KEzSignConnectException
+* ``KEzSignConnectException``
+  * There was an error connecting to the server 
 
-​            There was an error connecting to the server 
 
-* KEzSignException
+* ``KEzSignException``
+  * There was another error
 
-​            There was another error
 
  
 
@@ -468,25 +468,25 @@ public void verifySignature(String channelName,
 
 This method throws the following exceptions:
 
-* KVerificationException
+* ``KVerificationException``
+  * There was an error during the verification process
 
-​            There was an error during the verification process
 
-* KPathException 
+* ``KPathException``
+  * There was a path building error
 
-​            There was a path building error
 
-* KRevocationException
+* ``KRevocationException``
+  * A certificate is revoked or there was an error during the revocation check process
 
-​            A certificate is revoked or there was an error during the revocation check process
 
-* KEzSignConnectException
+* ``KEzSignConnectException``
+  * There was an error connecting to the server  
 
-​            There was an error connecting to the server  
 
-* KEzSignException
+* ``KEzSignException``
+  * There was another error
 
-​            There was another error
 
   
 
@@ -515,13 +515,11 @@ The number of random bytes specified will be returned
 
 This method throws the following exceptions:
 
-* KEzSignConnectException
+* ``KEzSignConnectException``
+  * There was an error connecting to the server 
 
-​            There was an error connecting to the server 
-
-* KEzSignException
-
-​            There was another error
+* ``KEzSignException``
+  * There was another error
 
   <br/>
 
@@ -551,17 +549,17 @@ This will encrypt the clear data contained in ``dataToEncrypt`` using the key re
 
 This method throws the following exceptions:
 
-* KEncipherException
+* ``KEncipherException``
+  * There was an error whilst encrypting the data     
 
-​            There was an error whilst encrypting the data     
 
-* KEzSignConnectException
+* ``KEzSignConnectException``
+  * There was an error connecting to the server 
 
-​            There was an error connecting to the server 
 
-* KEzSignException
+* ``KEzSignException``
+  * There was another error
 
-​            There was another error
 
  
 
@@ -583,17 +581,17 @@ This will decrypt data previously encrypted with the ``encryptData`` method usin
 
 This method throws the following exceptions:
 
-* KEncipherException
+* ``KEncipherException``
+  * There was an error whilst decrypting the data    
 
-​            There was an error whilst decrypting the data    
 
-* KEzSignConnectException
+* ``KEzSignConnectException``
+  * There was an error connecting to the server 
 
-​            There was an error connecting to the server 
 
-* KEzSignException
+* ``KEzSignException``
+  * There was another error
 
-​            There was another error
 
  
 

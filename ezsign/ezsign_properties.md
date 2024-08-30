@@ -37,12 +37,12 @@ The following settings dictate what ports and interfaces the server listens on a
 | server.authCode|The passphrase used to encrypt messages between the client and server.  If set the client must pass the same string to the constructor.  If not set, messages will be sent in the clear (which may be OK if client and server are on the same machine or using a private network)|x55tHH#ih65W|
 | keyStoreDir |The folder beneath which all channel key stores will be held|/opt/ezsign/STORE|
 | log.level |The logging level.  The range is from 0 to 4 as follows: **0**: Logging is off, **1**: Only error messages will be logged, **2**: Errors and Warning messages will be logged, **3** : Errors, Warnings and Events will be logged, **4** : This is the debug level - all messages (as well as low level events) will be logged|4|
-| tls.trustStore.type |If using TLS to communicate with an HSM (such as the payShield) and you are supplying a custom trust store, this specifies the trust store type. Options are **jks** or **pkcs12**|jks|
-| tls.trustStore.filename |The full path to the truststore file|/opt/stores/payshield.jks|
-| tls.trustStore.password |The encrypted password that protects the trust store. Use the Management Utility to set this password|yjjWoLfE...Zlew==|
-| tls.clientKeyStore.type |If using TLS to communicate with an HSM (such as the payShield) and a client TLS certificate is required, this specifies the client store type. Options are **jks** or **pkcs12**|pkcs12|
-| tls.clientKeyStore.filename |The full path to the client keystore file|/opt/stores/client.jks|
-| tls.clientKeyStore.password |The encrypted password that protects the client key store. Use the Management Utility to set this password|FGchg3Kv...Ycsg==|
+| tls.trustStore.filename |If using TLS to communicate with an HSM (such as the payShield) AND you are supplying a custom trust store (containing the trusted CA certificates), this specifies the full path to the trust store file. See [payShield TLS Configuration](payshield_tls_configuration.html) for more details|/opt/stores/payshield.jks|
+| tls.trustStore.type |This specifies the trust store type referenced above. Options are **jks** or **pkcs12**|jks|
+| tls.trustStore.password |The encrypted password that protects the trust store referenced above. Use the Management Utility to set this password|yjjWoLfE...Zlew==|
+| tls.clientKeyStore.filename |If the server is using server-side TLS this is the full path to the keystore file containing the TLS certificate. See [Configuring TLS](configuring_tls.html) for more details. If using a client TLS certificate to authenticate to a payShield HSM, this is the full path to the keystore file containing the client-authentication certificate. See [payShield TLS Configuration](payshield_tls_configuration.html) for more details.|/opt/stores/client.jks|
+| tls.clientKeyStore.type |This specifies the trust store type referenced above. Options are **jks** or **pkcs12**|pkcs12|
+| tls.clientKeyStore.password |The encrypted password that protects the key store referenced above. Use the Management Utility to set this password|FGchg3Kv...Ycsg==|
 
 
 

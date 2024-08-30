@@ -173,21 +173,28 @@ This should show the server certificate. You can also verify the client authenti
 
 ### Trusting SSL Certificates
 
-When you configure TLS, EzSign must trust the configured  TLS certificate. If this is not the case you will receive an error such as: 
+When you configure TLS, EzSign must trust the TLS certificates configured on the HSM. If this is not the case you will receive an error such as: 
 
 ```
 ...Token Exception: Failed to connect to HSM at IP Address/server: 192.168.0.211 port: 2500. Error: PKIX path building failed: sun.security.provider.certpath.SunCertPathBuilderException: unable to find valid certification path to requested target
 ```
 
-You can configure this trust on either of the following ways:
+You can configure this as follows:
+
+1. Obtain all the CA certificates in the chain as files (e.g. **root.crt**, **ca.crt**)
+2. These certificates must then be imported into the Trust Store. You can import into the Java Runtime's default trust store (i.e. the *cacerts* file) or you can create a custom trust store 
 
 
 
-#### Option 1: Add the CA certificate to Java's cacerts trust store
+It is usually preferred to follow option 1. But you can choose option 2 if the Java Runtime is shared between other applications (and you do not want those other applications to also trust these certificates) or you want to limit trust to specific certificates (the *cacerts* file will contain many other trusted certificates by default).
+
+
+
+#### Option 1: Add the CA certificate to the Java Runtimes cacerts trust store
 
 Locate the cacerts file location for the version of java being used to run EzSign. If using the bundled version, this will be located at:
 
-```
+```shell
 [EzSign Install Dir]/java/jdk-17.0.2/lib/security/cacerts
 ```
 
@@ -195,7 +202,7 @@ Otherwise, this file is normally located within the ``/lib/security`` folder of 
 
 Run the following command to import the Root CA certificate:
 
-```
+```shell
 keytool -import -trustcacerts -alias root -file root.cer -keystore cacerts
 ```
 
@@ -207,9 +214,9 @@ There is no need to set the EzSign ``tls.trustStore`` settings in this instance.
 
 #### Option 2: Create a custom trust store file
 
-Obtain all the CA certificates in the chain as files (e.g. **root.crt**)
+Decide on the location and name for the dedicated trust store file. E.g. this could be contained within the ``./keystores`` folder of the EzSign installation. In this example the trust store is named ``payshield.jks``
 
-Run the following command to import the root:
+Navigate to the location (e.g. ``./truststores``) and run the following command to import the root certificate:
 
 ```shell
 keytool -import -trustcacerts -alias root -file root.crt -keystore payshield.jks
@@ -217,15 +224,21 @@ keytool -import -trustcacerts -alias root -file root.crt -keystore payshield.jks
 
 You will be asked for a password and whether you want to trust this certificate. Enter a password (this will be required in the configuration later) and answer **YES**.
 
-If there are also intermediate CA certificates in your chain, run the following to import those certificates:
+The EzSign ``tls.trustStore`` settings must be configured to reference this key store (see the next section below).
+
+
+
+### 
+
+Note that if there are also intermediate CA certificates in your chain, these may also be imported into the trust stores using the same commands as above. Just ensure that a different alias is used. e.g.
 
 ```shell
-keytool -import -trustcacerts -alias ca -file ca.cer -keystore payshield.jks
+keytool -import -trustcacerts -alias ca -file ca.crt -keystore payshield.jks
 ```
 
-Entering the password again.
 
-The EzSign ``tls.trustStore`` settings must be configured to reference this key store (see below).
+
+
 
 
 
@@ -259,13 +272,11 @@ tls.clientKeyStore.filename=/opt/payshield/payshieldclient.p12
 tls.clientKeyStore.password=zijFhJ+BMAO8B3bYw9XD0AZlOYt4eYACY4zW9UXtZk2EC7hl+dgevA==
 ```
 
-Where the password provided is the password for the specified PKCS12 file, as generated above.  
-
-Note that ``tls.clientKeyStore.password`` must be set via the Management Utility. Run EzSign Manage and selecting the **Set TLS Client Keystore Password** option.
+Note that ``tls.clientKeyStore.password`` must be set via the *Management Utility* and is the same password for the PKCS12 file generated in the steps above. Run *EzSign Manage*, selecting the **Set TLS Client Keystore Password** option.
 
 
 
-If using a custom trust store the following properties need to be set:
+If using a custom trust store (i.e. *Option 2: Create a custom trust store file* above) the following properties also need to be set to use this custom store:
 
 * tls.trustStore.type
 * tls.trustStore.filename
@@ -279,9 +290,7 @@ tls.trustStore.filename=/opt/payshield/payshield.jks
 tls.trustStore.password=igjFhJ+H0MAO8bYw9XD0AZlOYt4eYACY4zW9UXt542EC7hl+egevV==
 ```
 
-Where the password provided is the password for the custom trust store JKS file, as generated above.  
-
-Note that ``tls.trustStore.password`` must be set via the Management Utility. Run EzSign Manage and selecting the **Set TLS Trust Keystore Password** option.
+Note that ``tls.trustStore.password`` must be set via the *Management Utility* and is the same password for the custom trust store JKS file, as generated above.  Run *EzSign Manage* and selecting the **Set TLS Trust Keystore Password** option.
 
 
 

@@ -123,9 +123,15 @@ keytool -import -trustcacerts -alias krestfieldroot -file root.cer -keystore "C:
 
 keytool -import -trustcacerts -alias krestfieldca -file ca.cer -keystore "C:\Program Files\java\jdk-18.0.1.1\lib\security\cacerts"
 ```
+``` shell
+## Note the cacerts file may be located within the JRE folder e.g.:
+C:\Program Files\java\jdk-18.0.1.1\jre\lib\security\cacerts
+## On UNIX here:
+/opt/java/jdk-18.0.1.1/jre/lib/security/cacerts
+```
 
 4. The default password for the keystore is usually ``changeit`` 
-4. Identify the java instance running the EzSign Server and update its cacerts file in the same way
+5. Identify the java instance running the EzSign Server and update its cacerts file in the same way
 
 
 
@@ -487,6 +493,12 @@ Error Details: Received fatal alert: bad_certificate
 
 This indicates that the server is expecting a client side TLS certificate but none (or an invalid certificate) was provided by the client. Ensure the client is accessing a PKCS12 or JKS file with the correct client-side TLS certificate and is using the ``useClientTls()`` option when created.
 
+This is often accompanied by the following server error message:
+
+```
+Error Details: null cert chain
+```
+
 
 
 
@@ -510,4 +522,8 @@ If your client TLS certificate does not have the correct Client Authentication e
 ```
 
 To resolve, re-issue the client TLS certificate with the correct enhanced key usage.
+
+
+
+
 

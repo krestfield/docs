@@ -1,4 +1,9 @@
-
+---
+layout: default
+title: EzSign Release Note
+parent: EzSign
+nav_order: 99
+---
 
 # RELEASE NOTE
 

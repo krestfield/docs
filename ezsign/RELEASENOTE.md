@@ -19,8 +19,9 @@ Web: [https://www.krestfield.com]
 
 
 ------------------------------------------------------------------------------
-> Version: 4.3.0
-> Release Date: 12 September  2024
+
+> **Version: 4.3.0**
+> **Release Date**: 12 September  2024
 
 Changes:
 * Server can now be configured with a server side TLS certificate to secure communications from the client.
@@ -29,8 +30,9 @@ Changes:
 
 
 ------------------------------------------------------------------------------
-> Version: 4.2.3
-> Release Date: 12 April 2024
+
+> **Version: 4.2.3**
+> **Release Date**: 12 April 2024
 
 Changes:
 * Thales payShield 10k support added including support for TLS.
@@ -39,8 +41,9 @@ Changes:
 
 
 ------------------------------------------------------------------------------
-> Version: 4.2.2
-> Release Date: 11 December 2023
+
+> **Version: 4.2.2**
+> **Release Date**: 11 December 2023
 
 Changes:
 * Update to relax the PKCS#7 signature's Encryption Algorithm checking, to allow sha256WithRSA etc. Extracting the signature part from this.
@@ -48,8 +51,9 @@ Changes:
 
 
 ------------------------------------------------------------------------------
-> Version: 4.2.1
-> Release Date: 06 January 2023
+
+> **Version: 4.2.1**
+> **Release Date:** 06 January 2023
 
 Changes:
 * Full support added for YubiHSM2
@@ -83,7 +87,7 @@ Fixes:
 
 
 ------------------------------------------------------------------------------
-> Version: 4.2.0
+> **Version: 4.2.0**
 > Release Date:  06 June 2022
 
 Changes:
@@ -98,8 +102,8 @@ Fixes:
 * None
 
 
-------------------------------------------------------------------------------
-> Version: 4.1.3
+---
+> **Version: 4.1.3**
 > Release Date: 04 February 2022
 
 Changes:
@@ -111,8 +115,9 @@ Changes:
 Fixes:
 * Log4J version upped to 2.17.1
   
-------------------------------------------------------------------------------
-> Version: 4.1.2
+------------------------------------------------------------------------------  
+
+> **Version: 4.1.2**
 > Release Date: 20 July 2020
 
 Changes:
@@ -124,9 +129,10 @@ Fixes:
 * Added backwards compatibility for setting issuer DN in PKCS#7 in order
   to support Thales SafeSign
   
-------------------------------------------------------------------------------
->  Version: 4.1.0
-> Release Date: 30 June 2020
+------------------------------------------------------------------------------  
+
+>  **Version: 4.1.0**
+> **Release Date**: 30 June 2020
 
 Changes:
 * Support for Google KMS added
@@ -135,9 +141,10 @@ Changes:
 Fixes:
 * None
   
-------------------------------------------------------------------------------
-> Version: 4.0.0
-> Release Date: 6 May 2020
+------------------------------------------------------------------------------  
+
+> **Version: 4.0.0**
+> **Release Date**: 6 May 2020
 
 Changes:
 

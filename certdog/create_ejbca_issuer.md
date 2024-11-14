@@ -37,7 +37,7 @@ Click **Enroll** and select Make New Request
 
 The above shows some initial default settings, but there may be specific certificate and end-user profiles configured for this purpose (that limit available options)
 
-Select **On server** 
+For Key-pair generation, select **On server**  
 
 Choose an **algorithm**. Note: With the default profiles, you have access to all algorithms, if unsure which to choose, consult with your security personnel, though **RSA 2048 bits** is a common choice
 
@@ -117,19 +117,21 @@ For an example on setting up an end-entity profile, see [EJBCA - Sample End Enti
 
 Before starting this, ensure you have the following:
 
-* The Web Services URL
-  * Usually something like: https://hostname:8443/ejbca/ejbcaws/ejbcaws
-
-* The user JKS file and its password
+* The **Web Services URL**
+  * This will be in this form: https://hostname/ejbca/ejbcaws/ejbcaws
+    * Note that the **ejbcaws** part is repeated
+  * E.g. https://ejbca.org.local/ejbca/ejbcaws/ejbcaws
+  
+* The **user JKS file** and its password
   * As created in step 1 above
 
-* The name of the CA you wish to issue certificates from
-* The name of the Certificate profile you wish to configure
+* The **name of the CA** you wish to issue certificates from e.g. Certdog Issuing CA
+* The name of the **Certificate profile** you wish to configure
 
-* The name of the End Entity profile you wish to configure
+* The name of the **End Entity profile** you wish to configure
 
-* If an un-trusted TLS certificate is used to protect the RA Web Services site, you will also need to download the JKS for the CA that issued this certificate
-  * This can be obtained by navigating to CA Certificates and CRLs in the RA and clicking on the JKS option in the Certificate chain column
+* If an un-trusted TLS certificate is used to protect the RA Web Services URL, you will also need to download the JKS for the CA that issued this certificate - this will be the **Trust KeyStore**
+  * This can be obtained by navigating to the **RA Web**, selecting **CA Certificates and CRLs** from the top menu then downloading the *Certificate chain* as **JKS** for the CA. You will need to provide a password that will protect this JKS - this will be required in the configuration below.
 
 
 
@@ -161,39 +163,58 @@ For the *CA Type*, select **PrimeKey EJBCA** and click **Next**
 
 Enter the details as follows:
 
-* Name: This is the name you will refer to this issuer, it has nothing to do with what has been configured in EJBCA and can be a name of your choice
+* **Name**: This is the name you will refer to this issuer, it has nothing to do with what has been configured in EJBCA and can be a name of your choice
+* **Web Services URL**: The EJBCA Web Services end point. E.g. https://hostname/ejbca/ejbcaws/ejbcaws
+* **Trust KeyStore**: Only required if the certdog system does not already trust the TLS certificate protecting the EJBCA end point. If required, browse to the JKS file downloaded from the RA Web.
+* **Trust KeyStore Credential**: Select the credential created in *Set Credentials* section above
+* **EJBCA Username**: Enter the username from step 1 above. I.e. the username of the end-entity
+* **User KeyStore**: Browse to the User KeyStore created in step 1
+* **User KeyStore Credential**: Select the credential created in the *Set Credentials* section above
+* **EJBCA Issuing CA Name**: This is the name of the CA configured in EJBCA that you wish to issue certificates from
+* **End Entity Profile Name**: The name of the end entity profile. See step 4 above.
+* **Certificate Profile Name** The name of the certificate profile. See step 3 above.
+* **DN Restriction**: If you wish to restrict the DNs from certdog (this can also be done from EJBCA), select the *DN Restriction* here
+* **Authorise Teams**: Finally, select the Team(s) whose members will have access to this issuer
 
-* Web Services URL: The EJBCA Web Services end point. E.g. https://hostname:8443/ejbca/ejbcaws/ejbcaws
-
-  If this end point is protected with a TLS certificate which is not trusted by the certdog system (and this will be the case if an initial EJBCA installation has just been performed), browse to the Trust KeyStore JKS file - this is the CA Certificate Chain file downloaded as JKS. If the ManagementCA issued the TLS certificate, then that is the CA you need to download the JKS file from
-
-* Select the credential created in the steps above for *Trust KeyStore Credential*
-
-* For EJBCA username, enter the username from step 1 above. I.e. the username of the end-entity
-
-* Browse to the User KeyStore and then select the credential containing the keystore password for *User KeyStore Credential*
-
-* For EJBCA Issuing CA Name - this is the CA configured in EJBCA that you wish to issue certificates from
-
-* Then enter the **End Entity** and **Certificate Profile** names that you would have identified or created in steps 3 and 4 above
-
-* If you wish to restrict the DNs from certdog (this can also be done from EJBCA), select the DN Restriction here
-
-* Finally, select the Team(s) whose members will have access to this issuer
-
-* Click **Add**
+Click **Add**
 
 
 
 If all is correct you will get a success confirmation. If any of the details or are incorrect you may get errors such as:
 
+
+
+<img src="./images/image-20241114144101711.png" alt="image-20241114144101711" style="zoom: 80%;" />
+
+Receiving a 403 error often indicates hitting the wrong URL or wrong path. 
+
+This may be due to entering an incomplete URL. Note: although the EJBCA Admin page (under Protocol Configuration) shows ``/ejbca/ejbcaws`` indicating a URL such as 
+
+``http://ejbca.krestfield.local/ejbca/ejbcaws`` 
+
+the full URL contains two ``ejbcaws`` entries. I.e. 
+
+``http://ejbca.krestfield.local/ejbca/ejbcaws/ejbcaws``
+
+
+
+
+
 <img src=".\images\ejbca_error1.png" alt="image-20210205165350575" style="zoom: 80%;" />
 
-This is most likely due to the User Key Store password being incorrect.  Reset the password in the credential and try again
+This error is most likely due to the User Key Store password being incorrect.  Reset the password in the credential and try again
 
-<img src=".\images\ejbca_error2png" alt="image-20210205165642593" style="zoom:80%;" />
+
+
+
+
+<img src=".\images\ejbca_error2.png" alt="image-20210205165642593" style="zoom:80%;" />
 
 The most likely cause is that the certificate included in the User KeyStore does not have RA Administrative permissions. Go back to EJBCA and check the Administrator Roles
+
+
+
+
 
 <img src=".\images\ejbca_error3.png" alt="image-20210205170327789" style="zoom:80%;" />
 

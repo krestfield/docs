@@ -170,7 +170,7 @@ Open a PowerShell window and navigate to where the script is located.
 Enter ``.\tls-scan.ps1`` and provide the required parameters then click Enter. E.g.:
 
 ```
-tls-scan.ps1 -certdogserver 127.0.0.1 -userid 1234 -teamid 5678 -ipstart 192.168.100.1 -ipend 192.168.100.255 -ports (443,80)
+tls-scan.ps1 -certdogserver 127.0.0.1 -userid 673de9bcfac0d02ac6ced94d -teamid 473df9bce6c0d02ac6cedd49 -ipstart 192.168.100.1 -ipend 192.168.100.255 -ports (443,80)
 Enter API Token: *******
 ```
 

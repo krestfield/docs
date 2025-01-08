@@ -106,7 +106,7 @@ Web: [https://www.krestfield.com](https://www.krestfield.com)
 
 ---
 
-> **Version 1.3.6
+> **Version 1.3.6**
 > **Release Date**: 30th November 2015
 
 

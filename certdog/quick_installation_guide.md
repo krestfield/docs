@@ -13,7 +13,7 @@ nav_order: 4
 
 See [here](download-locations.html) for download locations and instructions
 
-See [here](demo-quickstart.html) for the demo installation (which will install with a single command using default values for the admin user)
+See [here](demo_quickstart.html) for the demo installation (which will install with a single command using default values for the admin user)
 
 <br>
 

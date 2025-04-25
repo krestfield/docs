@@ -10,6 +10,7 @@ Here you can find information on products, integration guides, white papers, tip
 Follow the links below for information on specific products or use the search option above
 
 - [Certdog](./certdog/certdog)
+  
   - Our certificate manager, interfacing to Microsoft ADCS and other CAs providing a full Resful API and intuitive UI to make issuance, renewal and managmeent of certificates as easy as it should be
   
 - [EzSign](./ezsign/ezsign)
@@ -22,7 +23,7 @@ Follow the links below for information on specific products or use the search op
 - OCSP Responder
   - Allows for rapid deployment of a responder in Windows environments with no need for IIS.  Intefaces directly with Microsoft ADCS
   
-- CRL OCSP Monitoring
+- [CRL OCSP Monitoring](./ocsp-monitor/ocsp-monitor)
   - Monitor all your own and any external CRLs and OCSP responders that you may depend on. Get early notifications of potential issues
   
     

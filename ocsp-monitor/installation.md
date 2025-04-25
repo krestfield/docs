@@ -24,7 +24,7 @@ The system may be installed on the following operating systems:
 
 * Windows Server 2025
 
-* Windows 10/11 [^1]
+* Windows 10/11
 
 <br>
 
@@ -53,7 +53,7 @@ Double click the *SetupOCSPMonitor* msi file (e.g. **SetupOCSPMonitorV2.3.msi**)
 
 <img src="./images/image-20250425084431829.png" alt="image-20250425084431829" style="zoom:67%;" />
 
-Click **Next** throughout the screens
+Click **Next**  
 
 <img src="./images/image-20250425084444639.png" alt="image-20250425084444639" style="zoom:67%;" />
 

@@ -1,6 +1,6 @@
 ---
 layout: default
-title: Email Server Settings
+title: Proxy Settings
 parent: CRL OCSP Monitor
 nav_order: 6
 ---

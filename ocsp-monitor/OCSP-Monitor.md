@@ -1,24 +1,24 @@
 ---
 layout: default
 title: OCSP CRL Monitor
-nav_order: 2
+nav_order: 7
 has_children: true
 ---
 # OCSP CRL Monitor
 
-certdog is a CA (Certificate Authority) and Certificate Management system that can be deployed in minutes to Windows and Linux based operating systems  
+The Krestfield CRL OCSP Monitor tracks and monitors the health of your revocation checking end points, alerting you to issues before there is any impact to your services.  
 
-It is able to host its own CAs - allowing for multiple hierarchies, providing both CRL and OCSP services
+CRLs hosted on http and ldap end points can be monitored for validity, correctness, size and latency.  
 
-It can also interface to your existing Microsoft AD CS or PrimeKey EJBCA instances
+OCSP servers can be queried to exercise the full request/response process and check for validity, correct status and response times.  
 
-Certificates can be issued via the Console, REST API or PowerShell scripts. The REST API offers full certificate management and system management capabilities, allowing for full automation
+Real-time results can be viewed via the Management Console or via a generated web page.  Test case failures are reported via logs (text based and windows event), email alerts can also be sent and scripts can be executed ensuring that the relevant support staff are notified as soon as an issue is identified.  
 
-Certificates are managed throughout their entire lifecycle, with configurable alerts when nearing expiry and the ability to renew
+The Krestfield CRL OCSP Monitor is supported on the following operating systems:
 
-<br>
+·     Windows Server 2019 and 2022
 
-See the [YouTube channel here](https://www.youtube.com/@krestfield) for some examples of what can be achieved
+The server requires the .NET Framework version 4.8 or above
 
 <br>
 

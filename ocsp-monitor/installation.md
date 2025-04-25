@@ -1,11 +1,11 @@
 ---
 layout: default
-title: Windows Installation
+title: Installation
 parent: CRL OCSP Monitor
 nav_order: 1
 ---
 
-# CRL OCSP Monitor Installation
+# CRL OCSP Monitor - Installation
 
 <br>
 

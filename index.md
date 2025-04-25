@@ -23,7 +23,8 @@ Follow the links below for information on specific products or use the search op
 - OCSP Responder
   - Allows for rapid deployment of a responder in Windows environments with no need for IIS.  Intefaces directly with Microsoft ADCS
   
-- [CRL OCSP Monitoring](./ocsp-monitor/ocsp-monitor)
+- [CRL OCSP Monitor](./ocsp-monitor/ocsp-monitor)
+  
   - Monitor all your own and any external CRLs and OCSP responders that you may depend on. Get early notifications of potential issues
   
     

@@ -2,7 +2,7 @@
 layout: default
 title: Service Start Stop
 parent: CRL OCSP Monitor
-nav_order: 5
+nav_order: 3
 ---
 
 # CRL OCSP Monitor - Service Start Stop

@@ -2,7 +2,7 @@
 layout: default
 title: Windows Installation
 parent: CRL OCSP Monitor
-nav_order: 5
+nav_order: 1
 ---
 
 # CRL OCSP Monitor Installation

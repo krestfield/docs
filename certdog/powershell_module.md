@@ -100,5 +100,13 @@ Then save as a PFX
 Set-Content -Path C:\Downloads\powershell.pfx -Value $cert.p12Data
 ```
 
+<br>
+
+Find certificates expiring between dates:
+
+```powershell
+$certs = search -validToFrom "2026-05-02T11:00" -validToTo "2026-05-02T13:00"
+```
+
 
 

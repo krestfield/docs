@@ -169,7 +169,7 @@ In this example we can see that user accounts are stored here: ``OU=USERS,OU=PKI
 
 <br>
 
-Note: If the ``Get-ADUser`` command is not found you may need to enable the *Active Directory PowerShell* feature
+If the ``Get-ADUser`` command is not found you may need to enable the *Active Directory PowerShell* feature
 
 Run the following to install:
 

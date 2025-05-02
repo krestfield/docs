@@ -171,8 +171,8 @@ If  you do not have the .NET 4.8 Runtime installed, the installer will recognise
 The installer will start and display some initial information. e.g.
 
 ```powershell
-Krestfield Certdog Setup Version 1.8
-====================================
+Krestfield Certdog Setup Version 1.12
+=====================================
 
 End User Agreement (EULA)
 The EULA for this software can be obtained from the following location:
@@ -295,7 +295,11 @@ Finally, click **Yes**
 
 If you now close the browser, re-open and navigate to https://127.0.0.1/excert/ui the warnings should be gone
 
-Note: This is a test certificate and should not be trusted in a production environment. You should still continue to create a valid SSL certificate as described [here](configure_server_ssl.html)
+Note: This is a test certificate and should not be trusted in a production environment.  
+
+You should still continue to create a valid SSL certificate for the server, as described [here](configure_server_ssl.html)
+
+As well as a valid SSL certificate to protect the database traffic, as described [here](update_the_db_certificate.html)
 
 <br>
 ### Windows Services
@@ -337,9 +341,9 @@ In the services snapin, this service is called **Krestfield Adcs Driver**
 
 #### Sample Installation Output
 
-```powershell
-Krestfield Certdog Setup Version 1.8
-====================================
+```
+Krestfield Certdog Setup Version 1.12
+=====================================
 
 End User Agreement (EULA)
 

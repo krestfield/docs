@@ -45,7 +45,7 @@ Or just type ``login`` to be prompted
 
 ### Examples
 
-Show available Certificate Issuers:
+<u>Show available Certificate Issuers</u>
 
 ```powershell
 Get-Cas
@@ -59,7 +59,7 @@ Get-Cas | Format-Table
 
 <br>
 
-Show available CSR Generators:
+<u>Show available CSR Generators</u>
 
 ```powershell
 Get-CsrGenerators
@@ -67,7 +67,7 @@ Get-CsrGenerators
 
 <br>
 
-Request a certificate from a CSR (provided as a file):
+<u>Request a certificate from a CSR (provided as a file)</u>
 
 ```powershell
 Request-CertP10 -caName "Microsoft TLS" -csrFilename C:\Downloads\server22.certdog.local.csr
@@ -77,7 +77,7 @@ Where caName is the issuer name as configured within Certdog. This is the name t
 
 <br>
 
-Request a certificate from a CSR (provided as data within a variable):
+<u>Request a certificate from a CSR (provided as data within a variable)</u>
 
 ```powershell
 # Read the CSR data
@@ -88,7 +88,7 @@ Request-CertP10 -caName "Microsoft TLS" -csr $csrData
 
 <br>
 
-Request a certificate with Certdog creating the CSR:
+<u>Request a certificate with Certdog creating the CSR</u>
 
 ```powershell
 $cert = Request-Cert -dn "CN=PowerShell Test,C=GB" -caName "Microsoft TLS" -csrGeneratorName "RSA 2048 Generator" -p12Password "password"
@@ -102,7 +102,7 @@ Set-Content -Path C:\Downloads\powershell.pfx -Value $cert.p12Data
 
 <br>
 
-Find certificates expiring between dates:
+<u>Find certificates expiring between dates</u>
 
 ```powershell
 $certs = search -validToFrom "2026-05-02T11:00" -validToTo "2026-05-02T13:00"

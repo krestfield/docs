@@ -35,4 +35,4 @@ Follow the links below for information on specific products or use the search op
 
 For more details on any of these products, contact support@krestfield.com
 
-[krestfield.com](https://krestfield.com)
+[krestfield.com](https://krestfield.com){:target="_blank"}

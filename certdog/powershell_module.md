@@ -102,10 +102,44 @@ Set-Content -Path C:\Downloads\powershell.pfx -Value $cert.p12Data
 
 <br>
 
-<u>Find certificates expiring between dates</u>
+<u>Search for certificates</u>
+
+Search based on expiry dates:
 
 ```powershell
 $certs = search -validToFrom "2026-05-02T11:00" -validToTo "2026-05-02T13:00"
+```
+Search based on issued dates:
+
+```powershell
+$certs = search -validFromFrom "2026-05-02T11:00" -validFromTo "2026-05-10T13:00"
+```
+
+Search for all certificates that have "test" including in their DN:
+
+```powershell
+$certs = search -subjectDn "test"
+```
+
+Search for all certificates issued by CN=Certdog Test Issuing CA, O=Krestfield
+
+```
+$certs = search -issuerDn "CN=Certdog Test Issuing CA, O=Krestfield"
+```
+
+Find all active certificates:
+
+```powershell
+$certs = search -status "active"
+```
+
+Find all active certificates, issued in the last 30 days:
+
+```powershell
+$now = Get-Date
+$nowStr = $now.ToString("yyyy-MM-ddTHH:mm")
+$30daysAgoStr = $now.AddDays(-30).ToString("yyyy-MM-ddTHH:mm")
+$certs = search -validFromFrom $30daysAgoStr -validFromTo $nowStr -status "active"
 ```
 
 

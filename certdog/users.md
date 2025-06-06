@@ -61,19 +61,34 @@ If the account is an Active Directory you will be unable to make any changes as 
 
 ### API Tokens
 
+**Note**: Only Administrators can create tokens. However, users are able to revoke their own tokens.
+
 API tokens can be issued from user accounts. These can then be supplied to applications that need to call the REST API and remove the need to first login with a username and password, as the token is simply supplied in the Authorization header element  
 
 To generate a new token, edit an existing user  
 
 Under *API Token*, set the validity required for the token then click **Generate Token**
 
-<img src="./images/image-20230428163650736.png" alt="image-20230428163650736" style="zoom:67%;" />
+![image-20250606110241013](./images/image-20250606110241013.png)
 
-A token will be generated. Click the token to copy and save the value. This value will only be displayed once and cannot be retrieved later if lost
+A token will be generated. Click the token to copy and save the value
+
+Note: **This value will only be displayed once** and cannot be retrieved later if lost
 
 This value must then be included in the Authorization header when making REST API calls
 
 Note, it is linked with the user account so has the same permissions (access to Certificate Issuers) and restrictions (IP Addresses)  
 
-Tokens cannot be revoked individually. It is therefore advised that a specific API account be setup that can be disabled if required. This will prevent any valid API tokens from being used further
+<br>
 
+If a token is no longer required or has been compromised, it may be revoked  
+
+To do this, simply select the token from the list of *Current Tokens* and click Revoke. Click Yes to confirm revocation.
+
+<br>
+
+#### Users: Managing own Tokens
+
+Standard users are not able to generate their own API tokens. However, they can revoke existing tokens.  
+
+![image-20250606114930308](./images/image-20250606114930308.png)

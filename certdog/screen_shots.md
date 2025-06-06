@@ -10,6 +10,23 @@ nav_order: 12
 
 
 
+### Dashboard
+
+An overview of the certificate estate
+
+![image-20250605135056151](./images/image-20250605135056151.png)
+
+
+
+### Certificates
+
+Filter views of certificates
+
+
+![image-20250605164102861](./images/image-20250605164102861.png)
+
+
+
 ### Certificate Search
 
 A wide range of search options and the ability to save specific searches
@@ -18,13 +35,11 @@ A wide range of search options and the ability to save specific searches
 
 
 
-
-
 ### Certificate Details
 
 View certificate details and history
 
-<img src=".\images\cert_details2_ss.png" alt="image-20210222152427775" style="zoom:67%;" />
+![image-20250605140052284](./images/image-20250605140052284.png)
 
 
 

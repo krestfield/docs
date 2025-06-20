@@ -205,6 +205,10 @@ Login with the initial username and password as displayed at the end of the inst
 
 <br>
 
+Next follow the [Post Install Steps](post-Installation.html) to complete the initial configuration  
+
+
+
 ## Starting/Stopping
 
 In this folder:

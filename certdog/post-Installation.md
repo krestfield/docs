@@ -23,7 +23,7 @@ To set the *System URL*, from the menu click on **Settings** under *MANAGEMENT* 
 
 <img src="./images/image-20250620144045566.png" alt="image-20250620144045566" style="zoom:80%;" />
 
-Update the value for **System URL** to be the **DNS FQDN** at which certdog will be accessed externally. For example, often the server will have a DNS entry such as ``certdog.org.com`` and users would then access certdog via: ``https://certdog.org.com/certdog``. In this case System URL would be updated to that value, I.e. ``https://certdog.org.com/certdog``
+Update the value for **System URL** to be the URL containing the **DNS FQDN** at which certdog will be accessed externally. For example, often the server will have a DNS entry such as ``certdog.org.com`` and users would then access certdog via: ``https://certdog.org.com/certdog``. In this case System URL would be updated to that value, I.e. ``https://certdog.org.com/certdog``
 
 Click **Update** to save the setting
 
@@ -37,7 +37,7 @@ Initially a user will be logged out after 900 seconds and will then have to re-a
   * This is the total time a user can remain logged in for, assuming they do not exceed the API Key Inactive Timeout value below. E.g. if this were set to 3600 seconds, after 1 hour they would be logged out regardless of how often they interacted with the system
 
 * API Key Inactive Timeout
-  * This is the period of inactivity, after which a user will be logged out. E.g. if this were set to 300. If they do not interact with the system for 5 minutes, they will be logged out.
+  * This is the period of inactivity, after which a user will be logged out. E.g. if this were set to 300 the user will be logged out if they are inactive for 5 minutes
 
 Click **Update** once the chosen values have been set
 
@@ -47,9 +47,9 @@ Click **Update** once the chosen values have been set
 
 When a user creates a certificate using the DN Request option, certdog generates the CSR (Certificate Signing Request) and keys on behalf of the user  
 
-Certdog can not retain these keys - in which case the user must download the issued certificate immediately as a PKCS#12
+By default certdog does not store these keys - in which case the user must download the issued certificate immediately as a PKCS#12
 
-Or certdog can securely store the keys for a period, allowing the user to download the certificate and keys in  PKCS#12/PFX, JKS or PEM formats. After the prescribed time the keys will be deleted  
+However, certdog can securely store the keys for any period, allowing the user to download the certificate and keys in  PKCS#12/PFX, JKS or PEM formats for a time after generation. After the prescribed time period, the keys will be deleted  
 
 For example, you could give users an hour during which they may return to the system and download their issued keys/certificates
 
@@ -99,7 +99,7 @@ To configure email reminders, you need to configure the Email Server settings, t
 
 ## Update the Database SSL certificate
 
-The database listens on an SSL connection (in the full version - the demo version does not impose this). This is configured with a default certificate issued from a Krestfield test CA. This certificate should be one issued from your internal trusted CAs  
+The database listens on an SSL connection (the demo version does not impose this). This is configured with a default certificate issued from a Krestfield test CA. This certificate should be one issued from your internal trusted CAs  
 
 To update this certificate follow the steps below:
 

@@ -302,6 +302,13 @@ You should still continue to create a valid SSL certificate for the server, as d
 As well as a valid SSL certificate to protect the database traffic, as described [here](update_the_db_certificate.html)
 
 <br>
+
+## 5. Post Installation
+
+See [here for post installation](post-Installation.html) configuration steps
+
+<br>
+
 ### Windows Services
 
 **Database Service**  

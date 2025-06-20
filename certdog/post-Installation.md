@@ -21,7 +21,7 @@ If this is not done, certdog will default to 127.0.0.1 within these URLs
 
 To set the *System URL*, from the menu click on **Settings** under *MANAGEMENT* and then **Email Settings**:
 
-<img src="C:\Users\darre\AppData\Roaming\Typora\typora-user-images\image-20250620144045566.png" alt="image-20250620144045566" style="zoom:80%;" />
+<img src="./images/image-20250620144045566.png" alt="image-20250620144045566" style="zoom:80%;" />
 
 Update the value for **System URL** to be the **DNS FQDN** at which certdog will be accessed externally. For example, often the server will have a DNS entry such as ``certdog.org.com`` and users would then access certdog via: ``https://certdog.org.com/certdog``. In this case System URL would be updated to that value, I.e. ``https://certdog.org.com/certdog``
 

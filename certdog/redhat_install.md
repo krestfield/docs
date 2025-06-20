@@ -184,7 +184,7 @@ Note: CRLs and OCSP services will be available on port **1480**
 
 Follow the steps below to configure the firewall to forward the standard ports of 443 and 80 to these internal ports  
 
-Note that until you configure a trusted SSL certificate you will be presented with browser warnings when navigating to this address. See the [Final Configuration](#final-configuration) section below to configure a trusted SSL certificate  
+Note that until you configure a trusted SSL certificate you will be presented with browser warnings when navigating to this address. See the [Post Install](#post-install) section below to configure a trusted SSL certificate  
 
 <br>
 

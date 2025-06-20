@@ -184,7 +184,7 @@ Note: CRLs and OCSP services will be available on port **1480**
 
 Follow the steps below to configure the firewall to forward the standard ports of 443 and 80 to these internal ports  
 
-Note that until you configure a trusted SSL certificate you will be presented with browser warnings when navigating to this address. See the [Post Install](#post-install) section below to configure a trusted SSL certificate  
+Note that until you configure a trusted SSL certificate you will be presented with browser warnings when navigating to this address. See the [Post Install](#post-install) section below to configure this and other items
 
 <br>
 
@@ -212,7 +212,7 @@ Open a browser on the server and navigate to:
 
 https://127.0.0.1:1433/certdog
 
-Login with the initial username and password as displayed at the end of the installer. These are temporary credentials - as soon as you first login with these details you will be forced to set a new password
+Login with the initial username and password as displayed at the end of the installer. These are temporary credentials - as soon as you first login you will be forced to set a new password
 
 <br>
 
@@ -226,7 +226,7 @@ See the [Post Install Steps](post-Installation.html) to continue with the server
 
 #### To Reset the Database
 
-If an installation has failed it may have information in the database populated from the previous attempt. To reset this, perform the following:
+If an installation has failed, it may have information in the database populated from the previous attempt. To reset this, perform the following:
 
 Start the mongo shell:
 
@@ -247,7 +247,9 @@ exit
 
 #### CRL Locations
 
-The CA configuration will display the CRL Distribution Points URL as using port 1443. This port must either be updated to the default CRL port (1440). Or (and best practise) once the firewall rules are in place, remove the port entirely as the default port 80 will be the one used by external clients checking CRLs.
+The CA configuration will display the CRL Distribution Points URL as using port 1443. This port must either be updated to the default CRL port (1440). Or (and best practise) once the firewall rules are in place, remove the port entirely as the default port 80 will be the one used by external clients checking CRLs  
+
+If the System URL was not set and the URL is defaulting to 127.0.0.1, also update the server name  
 
 E.g. If CRL Distribution Points shows:
 
@@ -258,14 +260,14 @@ http://127.0.0.1:1443/certdog/crl/test.crl
 Update it as follows:
 
 ```
-http://127.0.0.1/certdog/crl/test.crl
+http://certdog.mysystem.com/certdog/crl/test.crl
 ```
 
 This is the value that will be embedded in certificates issued from the CA and the URL clients will therefore follow in order to obtain the CRL.
 
 <br>
 
-Also note that when initially accessing CRLs locally, until you forward the ports, the CRL will only be available at the 1440 port and not the 1443 port that may be displayed in the CA configuration.
+Also note that when initially accessing CRLs locally, until you forward the ports, the CRL will only be available at the 1440 port and not the 1443 port that may be displayed in the CA configuration
 
 To test the CRL can be downloaded you can run the following command:
 

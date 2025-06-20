@@ -214,7 +214,9 @@ https://127.0.0.1:1433/certdog
 
 Login with the initial username and password as displayed at the end of the installer. These are temporary credentials - as soon as you first login with these details you will be forced to set a new password
 
-Follow [the guide here](configure_server_ssl.html) to configure an SSL certificate
+<br>
+
+See the [Post Install Steps](post-Installation.html) to continue with the server configuration.
 
 <br>
 

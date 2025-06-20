@@ -17,7 +17,7 @@ Download the version for your OS:
 
 [Windows](https://krestfield.s3.eu-west-2.amazonaws.com/certdog/certdogfree_v1140.zip)
 
-[RedHat](https://krestfield.s3.eu-west-2.amazonaws.com/certdog/redhat/certdogfree1100.tar.gz)
+[RedHat](https://krestfield.s3.eu-west-2.amazonaws.com/certdog/redhat/certdogfree_v1140.tar.gz)
 
 [Debian](https://krestfield.s3.eu-west-2.amazonaws.com/certdog/debian/certdogfreev1100.tar.gz)
 
@@ -42,6 +42,16 @@ V1.14.0 Free Version:
 * SHA1: ``a478218e09e4de3be41b841b1b911611d8f4e537``
 
 * SHA256: ``832dbe19779f3ef6496e689979833c738eb45a91a754cf73fb43bce83a040916``
+
+<br>
+
+### RedHat File Hashes
+
+V1.14.0 Free Version:  
+
+* SHA1: ``7f06118d991cbca94df9afb3f3dfd39ede5f0885``
+
+* SHA256: ``17d7a2690b02a58aded2b2f562804616807fcc6f1dec9b353b56bd92b4635b60``
 
 <br>
 

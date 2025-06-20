@@ -202,7 +202,9 @@ A file that is stored in this folder will be available via an http URL. For exam
 http://certdog.krestfield.com/certdog/crl/ca1.crl
 ```
 
-This would then be your *CRL Distribution Point*, that would be included in certificates so end systems could download the CRL  
+This would then be your *CRL Distribution Point*, that would be included in certificates so end systems could download the CRL
+
+Note that this URL will default to 127.0.0.1 (e.g. ``http://127.0.0.1/certdog/crl/ca1.crl``)  until the System URL is updated in the Email Settings. Once this has been done the system will recognise the referenced URL and use it to populate items such as the CRL URLs correct.
 
 **Note**: Some systems fail to recognise the file system correctly, so check that the pre-populated file location is correct e.g. ensure the folder exists and is below the tomcat directory. If this is not the case, the web server will fail to serve the CRL
 

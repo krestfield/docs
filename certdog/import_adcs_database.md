@@ -26,8 +26,10 @@ You may wish to do this for reasons such as:
 Export the certificates from the Microsoft CA to a file by running the following script from a command prompt:
 
 ```powershell
-certutil -view -restrict "GeneralFlags>0" -out "CertificateTemplate,Disposition,Request.RevokedEffectiveWhen,Request.RevokedReason,Request.RawRequest,RawCertificate" > certs.txt
+certutil -config "server\ca name" -view -restrict "GeneralFlags>0" -out "CertificateTemplate,Disposition,Request.RevokedEffectiveWhen,Request.RevokedReason,Request.RawRequest,RawCertificate" > certs.txt
 ```
+
+(where ``server\ca name`` is the config entry for the selected CA, returned when running ``certutil`` with no parameters)
 
 Import this file into Certdog by running the following PowerShell script on the Certdog instance:
 
@@ -92,8 +94,10 @@ Open a command prompt as an Administrator
 We are going to export the certificates to a text file (in the example below this is called ``certs.txt``). Navigate to a location where you want to save this file and run the following command:
 
 ```powershell
-certutil -view -restrict "GeneralFlags>0" -out "CertificateTemplate,Disposition,Request.RevokedEffectiveWhen,Request.RevokedReason,Request.RawRequest,RawCertificate" > certs.txt
+certutil -config "server\ca name" -view -restrict "GeneralFlags>0" -out "CertificateTemplate,Disposition,Request.RevokedEffectiveWhen,Request.RevokedReason,Request.RawRequest,RawCertificate" > certs.txt
 ```
+
+To obtain the value for ``server\ca name``, from a command prompt run ``certutil`` and note the value for *Config* for the CA you wish to extract the certificates from  
 
 Extract the ``certs.txt`` file (or whatever you decided to call it) as this must then be transferred to the Certdog instance
 

@@ -107,7 +107,7 @@ End points may be provided as hostnames, IP addresses or a range of IP addresses
 
 ## Running the Script
 
-Download the PowerShell script from here and place in a suitable location on your chosen server.
+Download the PowerShell script from [here](https://krestfield.s3.eu-west-2.amazonaws.com/certdog/scripts/tls-scan.ps1) and place in a suitable location on your chosen server.
 
 Ensure you have the following information ready:
 

@@ -2,7 +2,7 @@
 layout: default
 title: Running a JKS Scan
 parent: Certdog
-nav_order: 118
+nav_order: 128
 ---
 # Running a JKS (Java Key Store) Scan
 

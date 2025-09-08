@@ -56,10 +56,11 @@ Once the application registration is complete, the Certdog API must be configure
 To do this, set the following properties in the `application.properties` configuration file.
 
 ```properties
-certdog.enable.oauth=true
 spring.security.oauth2.resourceserver.jwt.issuer-uri=<your-v2-issuer-uri>
 spring.security.oauth2.resourceserver.jwt.audiences=<your-audience-id>
 ```
+
+If `spring.security.oauth2.resourceserver.jwt.issuer-uri` is missing, OAuth will be disabled for the application.
 
 You can find `your-v2-issuer-uri` by taking the "Authority URL (Accounts in this organizational directory only" at the
 top of the "Endpoints" in the "Overview" section of your app registration.

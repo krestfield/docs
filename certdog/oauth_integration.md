@@ -62,7 +62,7 @@ spring.security.oauth2.resourceserver.jwt.audiences=<your-audience-id>
 
 If `spring.security.oauth2.resourceserver.jwt.issuer-uri` is missing, OAuth will be disabled for the application.
 
-You can find `your-v2-issuer-uri` by taking the "Authority URL (Accounts in this organizational directory only" at the
+You can find `your-v2-issuer-uri` by taking the "Authority URL (Accounts in this organizational directory only)" at the
 top of the "Endpoints" in the "Overview" section of your app registration.
 Note you must add `/v2.0` to the end of this URL to use the correct version.
 

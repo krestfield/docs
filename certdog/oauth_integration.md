@@ -112,3 +112,15 @@ None of the details for Entra ID accounts can be managed via Certdog - they cont
 
 If an Entra ID user is not a member of any group mapped to a Team, they can still login to Certdog but will have no access to any Certificate Issuers.
 If the Setting _Users can see_ is set to **All Certificates** then they will also be able to view certificates in the system but will not be able to carry out any operations on them.
+
+### Common Issues
+
+#### "No PKCE code verifier found in session storage, cannot complete OAuth login"
+
+The URL you use to access the website must match the redirect URIs configured in the UI's configuration and
+the Entra ID app registration.
+If these differ, you will be redirected to a different domain (redirecting from `localhost` to `127.0.0.1` or vice
+versa usually causes this problem), and so the required verifiers will be missing from session storage, causing this
+error.
+
+**Solution:** Ensure you use the same domain in all places, including when accessing the UI. 

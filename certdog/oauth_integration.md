@@ -12,6 +12,22 @@ Certdog supports authorization and authentication of users via OAuth 2.0 and OID
 Currently, the following provider(s) are supported:
 - Microsoft Entra ID (formerly Azure AD)
 
+## All Providers
+
+### Toggling OAuth
+
+OAuth support is controlled by the presence of the `spring.security.oauth2.resourceserver.jwt.issuer-uri`
+property in the `application.properties` file of the API, and the presence of the `oauth` section in the
+UI's `config.json` file.
+
+The API must be restarted for changes to `application.properties` to take effect.
+
+The UI will dynamically pick up changes to `config.json`, however, the configuration is
+stored locally and may also be cached by the browser, so to ensure the new configuration is
+loaded, you may need to clear the browser's cache and stored data for the site.
+This can be done through developer tools or the browser's settings.
+See your browser's documentation for details.
+
 ## Microsoft Entra ID
 
 Entra ID users do not have to be explicitly registered in Certdog.
@@ -113,14 +129,23 @@ None of the details for Entra ID accounts can be managed via Certdog - they cont
 If an Entra ID user is not a member of any group mapped to a Team, they can still login to Certdog but will have no access to any Certificate Issuers.
 If the Setting _Users can see_ is set to **All Certificates** then they will also be able to view certificates in the system but will not be able to carry out any operations on them.
 
-### Common Issues
+## Common Issues
 
-#### "No PKCE code verifier found in session storage, cannot complete OAuth login"
+### "No PKCE code verifier found in session storage, cannot complete OAuth login"
 
 The URL you use to access the website must match the redirect URIs configured in the UI's configuration and
-the Entra ID app registration.
+your provider's (e.g. your Entra ID app's) configuration.
 If these differ, you will be redirected to a different domain (redirecting from `localhost` to `127.0.0.1` or vice
 versa usually causes this problem), and so the required verifiers will be missing from session storage, causing this
 error.
 
-**Solution:** Ensure you use the same domain in all places, including when accessing the UI. 
+**Solution:** Ensure you use the same domain in all places, including when accessing the UI.
+
+### I've updated the OAuth configuration, but the changes don't seem to take effect
+
+The API must be restarted for changes made to the `application.properties` file to take effect.
+The UI will dynamically pick up changes, but the configuration is cached, so this may need to be cleared.
+
+See the *Toggling OAuth* section above for more details.
+
+**Solution:** Restart the API and clear the browser cache and stored data for the site.

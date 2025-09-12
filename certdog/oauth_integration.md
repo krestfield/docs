@@ -7,14 +7,276 @@ nav_order: 11
 
 # OAuth 2.0 and OIDC Integration
 
-Certdog supports authorization and authentication of users via OAuth 2.0 and OIDC services, and processing of group membership where available.
+Certdog supports authorization and authentication of users via OAuth 2.0 and OIDC services, including processing of group membership.
 
 Currently, the following provider(s) are supported:
 - Microsoft Entra ID (formerly Azure AD)
 
-## All Providers
+<br>
 
-### Toggling OAuth
+Details on how to enable this are given below. Enabling OAuth support does not disable the use of local or Active Directory accounts. I.e. all three authentication options can be enabled at the same time.
+
+<br>
+
+## Configuring OAuth
+
+To enable OAuth support you must:
+
+1. [Create an App Registration in Microsoft Entra ID](#create-an-app-registration-in-microsoft-entra-id)
+
+2. [Update the API properties file](#update-the-api-properties-file)
+
+3. [Update the UI config file](#update-the-ui-config-file)
+
+These steps are detailed in the next sections.
+
+<br>
+
+### Create an App Registration in Microsoft Entra ID
+
+From Azure, click on **Microsoft Entra ID** and navigate to **App registrations**
+
+<br>
+
+#### Create a New App Registration
+
+1. Click **+ New registration**
+
+2. Enter a name for the application, e.g. "Certdog"
+
+3. For *Supported account types* select **Accounts in this organizational directory only**
+
+4. Under *Redirect URI (optional)*, choose **Single-page application SPA** from the *Select a platform* drop down and enter the **Cert User Interface URL** in the form:
+
+​	``https://[certdog hostname]/certdog/ui/`` 
+
+​	E.g. if your instance is located at https://certdog.intserver.local the full URL to enter would be: 
+
+​	``https://certdog.intserver.local/certdog/ui/`` 
+
+7. Note this value as it is the **[REDIRECT-URI]** and will be required later
+8. Click **Register**
+
+<br>
+
+#### Expose the API
+
+1. From the new app registration, navigate to **Owners** (under *Manage*) and add your own account as an owner if not already listed
+
+8. From the new app registration, navigate to **Expose an API** and click the **Add** link to the right of *Application ID URI* and click Save accepting the default value for the Application ID URI
+
+9. Click **+ Add a scope** and for 
+
+   1. *Scope name* enter **Certdog.Access**
+
+   2. For *who can consent* select **Admins and users**
+
+   3. for *Admin consent display name* enter something like **Access the Certdog API**
+
+   4. for *Admin consent description* enter something like **Allows the app to access and modify certdog API data**
+
+10. Note the value beneath the *Scope name* text box:
+
+    <img src="./images/image-20250912165902693.png" alt="image-20250912165902693" style="zoom:80%;" />
+
+    E.g. ``api://12720666-5016-408f-8691-0565a23faa3b/Certdog.Access`` which is made up of the Application ID URL and the Scope name
+
+11. Note this value as it is the **[API-SCOPE]** and will be required later
+
+12. Click **Add scope**
+
+<br>
+
+#### Add Permissions
+
+1. Click **+ Add a permission**, select **My APIs** and select the name of the application (e.g. Certdog)
+
+8. Under Select permissions select Certdog.Access and click Add Permissions
+
+9. Click **+ Add a permission** again, select **Microsoft Graph**, then **Delegated permissions**
+
+10. Search for and select **openid** and **profile** then click **Add permissions**
+
+11. Click the **three dots** at the end of the *User.Read* permission uder *Microsoft Graph* and select **Remove permission**, then **Yes, remove**
+
+    The permissions should look like this:
+
+<img src="./images/image-20250912163322074.png" alt="image-20250912163322074" style="zoom:67%;" />
+
+<br>
+
+#### Enable the claims for user identification and group support
+
+1. From the app registration, navigate to **Token Configuration** (under *Manage*)
+19. Click **Add optional claim**, select **Access** and check **upn**. Click **Add**
+20. Click **Add groups claim**, select **Security groups**, then click **Add**
+
+
+
+#### Enable OAuth 2.0 Support
+
+1. From the app registration, navigate to **Manifest** (under *Manage*)
+19. Search for **accessTokenAcceptedVersion** and change the value from **null** to **2** and click **Save**
+
+<br>
+
+#### Obtain Required Values
+
+1. From the app registration, navigate to **Overview**
+
+2. Copy the value for Application (client) ID
+
+   E.g. ``e02d66e2-ae76-479c-8383-dbd209088538``
+
+3. This is the **[CLIENT-ID]** value we will need below
+
+   
+
+4. Copy the value for Application ID URI
+
+   E.g. ``api://e02d66e2-ae76-479c-8383-dbd209088538``
+
+5. And remove the ``api://`` part to just give the ID
+
+   E.g. ``e02d66e2-ae76-479c-8383-dbd209088538``
+
+6. This is the **[AUDIENCES]** value we will need below
+
+   
+
+7. From the top menu click on Endpoints
+
+8. Copy the value for **Authority URL (Accounts in this organizational directory only)**
+
+   E.g. ``https://login.microsoftonline.com/0d285301-66f1-496e-9915-2008a8603591`` 
+
+9. Add ``/v2.0`` to the end of this string e.g.
+
+   ``https://login.microsoftonline.com/0d285301-66f1-496e-9915-2008a8603591/v2.0``
+
+10. This is your **[ISSUER-URI]** value we will need below
+
+    
+
+11. The **[REDIRECT-URL]** should have been noted in the setup steps above 
+
+12. The **[API-SCOPE]** should also have been noted in the setup steps above
+
+<br>
+
+### Update the API properties file
+
+On the certdog server, open the ``application.properties`` file located here:
+
+``[certdog install]\config\application.properties``
+
+E.g.
+
+``c:\certdog\config\application.properties``
+
+Add in the following two lines, substituting in the values for [ISSUER-URI] and [AUDIENCES] as obtained above:
+
+```
+spring.security.oauth2.resourceserver.jwt.issuer-uri=[ISSUER-URI]
+spring.security.oauth2.resourceserver.jwt.audiences=[AUDIENCES]
+```
+
+E.g.
+
+```
+spring.security.oauth2.resourceserver.jwt.issuer-uri=https://login.microsoftonline.com/0d285301-66f1-496e-9915-2008a8603591/v2.0
+spring.security.oauth2.resourceserver.jwt.audiences=e02d66e2-ae76-479c-8383-dbd209088538
+```
+
+Save the file
+
+
+
+### Update the UI config file
+
+On the certdog server, open the ``config.json`` file located here:
+
+``[certdog install]\tomcat\webapps\certdog#ui\config.json``
+
+E.g.
+
+``C:\certdog\tomcat\webapps\certdog#ui\config.json``
+
+It will either contain a configuration such as:
+
+```
+{
+  "apiUrl" : "https://127.0.0.1/certdog/api/"
+}
+```
+
+Or one with placeholders already in place for the values we need. E.g.
+
+```
+{
+  "apiUrl" : "https://127.0.0.1/certdog/api/",
+  "oauth": {
+    "server": "[ISSUER-URI],
+    "clientId": "[CLIENT-ID]",
+    "redirectUri": "[REDIRECT-URL]",
+    "scope": "[API-SCOPE]"
+  }
+}
+
+```
+
+Populate this file with the values for [ISSUER-URI], [CLIENT-ID], [REDIRECT-URI] and [API-SCOPE] as gathered above.
+
+
+
+# WE ARE THIS FAR
+
+
+
+```
+{
+  "apiUrl" : "https://certdogtest/certdog/api/",
+  "oauth": {
+    "server": "https://login.microsoftonline.com/0d285301-66f1-496e-9915-2008a8603591/v2.0",
+    "clientId": "12720666-5016-408f-8691-0565a23faa3b",
+    "redirectUri": "https://certdogtest/certdog/ui/",
+    "scope": "api://12720666-5016-408f-8691-0565a23faa3b/Certdog.Access"
+  }
+}
+
+```
+
+
+
+
+
+
+
+
+
+```
+{
+  "oauth": {
+    "server": "[ISSUER-URI]",
+    "clientId": "[CLIENT-ID]",
+    "redirectUri": "[REDIRECT-URI]",
+    "scope": "<your-api-scope>"
+  }
+}
+```
+
+
+
+
+
+
+
+
+
+# BENS ORIGINAL BELOW
+
+
+
 
 OAuth support is controlled by the presence of the `spring.security.oauth2.resourceserver.jwt.issuer-uri`
 property in the `application.properties` file of the API, and the presence of the `oauth` section in the
@@ -22,9 +284,7 @@ UI's `config.json` file.
 
 The API must be restarted for changes to `application.properties` to take effect.
 
-The UI will dynamically pick up changes to `config.json`, however, the configuration is
-stored locally and may also be cached by the browser, so to ensure the new configuration is
-loaded, you may need to clear the browser's cache and stored data for the site.
+The UI will dynamically pick up changes to `config.json`, however, the configuration is stored locally and may also be cached by the browser, so to ensure the new configuration is loaded, you may need to clear the browser's cache and stored data for the site.
 This can be done through developer tools or the browser's settings.
 See your browser's documentation for details.
 

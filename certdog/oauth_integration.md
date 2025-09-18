@@ -281,11 +281,9 @@ E.g.
 
 ## Restart Certdog
 
-Restart certdog
-
 On windows open the Services snapin, locate and stop the **Krestfield Certdog Service**. When showing as not running Start the service.
 
-On Linux, run the ``./shutdown-certdog.sh`` script followed by the ``./start-certdog.sh` from the bin directory
+On Linux, run the ``./shutdown-certdog.sh`` script followed by the ``./start-certdog.sh`` from the bin directory
 
 <br>
 
@@ -297,9 +295,11 @@ Clearing of the cache is browser dependant but for Chrome, click the![image-2025
 
 ## Map Entra ID Groups to Certdog Teams
 
-Certdog will now be able to authenticate users using their Entra ID credentials. The permissions that those users have in Certdog are managed by mapping Entra ID Security Groups to Certdog teams.
+Before certdog will authenticate users (using their Entra ID credentials) they must be mapped to a certdog Team.
 
-Note that an Entra ID user who is not a member of any mapped groups can still login. They will just have no access to any Certificate Issuers.
+This will define what permissions the user has within certdog.
+
+This is achieved by mapping the users Security Groups to a one or more certdog Teams.
 
 <br>
 
@@ -438,4 +438,18 @@ In this case the certdog service is being accessed from https://certdog.org.loca
 When the configuration has been updated, the services must be restarted. If the same browser accessed certdog when the previous settings were enabled, it may cache some of the configuration. Effectively, this prevents the changes from being used.
 
 Ensure the Certdog Service has been restarted and the browser cache has been delete. Refer to the [Restart Certdog](#restart-certdog) above for details.
+
+<br>
+
+### Redirect back to Login screen after authentication
+
+This usually indicates that the authentication has failed at the certdog side. Check the logs (``[certdog install]\logs\certdog.log``). An entry such as the following:
+
+```
+[system] User with oid 'd1621529-1895-4245-bf3a-ba81d1cbcbf1' failed to authenticate via OAuth token, missing required claims.
+```
+
+Indicates that the user is not part of a group that has been mapped to a certdog Team. See section [Map Entra ID Groups to Certdog Teams](#map-entra-id-groups-to-certdog-teams) for details on how to do this.
+
+Or the App registrations in Entra ID are not including the correct claims. See [Enable the claims for user identification and group support](#enable-the-claims-for-user-identification-and-group-support) for details how to enable this.
 

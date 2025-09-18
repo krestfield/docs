@@ -7,6 +7,10 @@ nav_order: 11
 
 # OAuth 2.0 and OIDC Integration
 
+> This feature is available from certdog 1.15
+
+<br>
+
 Certdog supports authorization and authentication of users via OAuth 2.0 and OIDC services, including processing of group membership.
 
 Currently, the following provider(s) are supported:

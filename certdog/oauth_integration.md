@@ -14,13 +14,29 @@ Currently, the following provider(s) are supported:
 
 <br>
 
-Details on how to enable this are given below. Enabling OAuth support does not disable the use of local or Active Directory accounts. I.e. all three authentication options can be enabled at the same time.
+Enabling OAuth support does not disable the use of local or Active Directory accounts. I.e. all three authentication options can be enabled at the same time.
+
+Details on how to enable this with Entra ID are given below. The steps are detailed but still, some familiarity with Entra ID is needed. If in any doubt, contact [Krestfield Support](mailto:support@krestfield.com) who can assist with the setup process.
+
+<br>
+
+## Before Starting
+
+Access to Azure Entra ID is required, with permissions to create an App Registration. If another team manages that configuration, they can follow the [Create an App Registration in Microsoft Entra ID](#create-an-app-registration-in-microsoft-entra-id) instructions below and provide the required values (e.g. [REDIRECT-URI]) for importing into certdog.
+
+<br>
+
+Ensure that the correct URL has been configured for certdog (as described [here](post-Installation.html)) and ideally the final TLS certificates have been installed (as described [here](installation.html#4-ssl-configuration)).
+
+This is required as we will need to configure redirect URLs within Entra ID. These should be the final URLs that all users will access the system from. 
+
+When certdog is initially installed you may access at 127.0.0.1. But when completing the steps above you may configure a DNS entry to point to the certdog server. When you would access as something like https://certdog.domain.local. This would then be the URL to configure in the Entra ID settings below.
 
 <br>
 
 ## Configuring OAuth
 
-To enable OAuth support you must:
+To enable OAuth and OIDC support you must:
 
 1. [Create an App Registration in Microsoft Entra ID](#create-an-app-registration-in-microsoft-entra-id)
 
@@ -28,17 +44,25 @@ To enable OAuth support you must:
 
 3. [Update the UI config file](#update-the-ui-config-file)
 
+4. [Restart Certdog](#restart-certdog)
+
+5. [Map Entra ID Groups to Certdog Teams](#map-entra-id-groups-to-certdog-teams)
+
 These steps are detailed in the next sections.
 
 <br>
 
-### Create an App Registration in Microsoft Entra ID
+## Create an App Registration in Microsoft Entra ID
 
 From Azure, click on **Microsoft Entra ID** and navigate to **App registrations**
 
 <br>
 
 #### Create a New App Registration
+
+Ensure you have the correct hostname for the certdog server. E.g. https://certdog.intserver.local as discussed in the [Before Starting](#before-starting) section above.
+
+<br>
 
 1. Click **+ New registration**
 
@@ -54,14 +78,24 @@ From Azure, click on **Microsoft Entra ID** and navigate to **App registrations*
 
 ​	``https://certdog.intserver.local/certdog/ui/`` 
 
+NOTE: This MUST be the URL you will be accessing the certdog server from. If it is wrong, redirection after authentication will fail. 
+
 7. Note this value as it is the **[REDIRECT-URI]** and will be required later
 8. Click **Register**
 
 <br>
 
+If you will be accessing certdog from multiple URLs - in addition to the one set in Step 4 above. From the newly created app registration click on **Authentication** (under the *Manage* section). In the Single-page application section, click the Add URL link and enter any other possible URLs. E.g.
+
+<img src="./images/image-20250918151028673.png" alt="image-20250918151028673" style="zoom:80%;" />
+
+Click **Save**
+
+<br>
+
 #### Expose the API
 
-1. From the new app registration, navigate to **Owners** (under *Manage*) and add your own account as an owner if not already listed
+1. From the new app registration, navigate to **Owners** (under the *Manage* section) and add your own account as an owner if not already listed
 
 8. From the new app registration, navigate to **Expose an API** and click the **Add** link to the right of *Application ID URI* and click Save accepting the default value for the Application ID URI
 
@@ -91,13 +125,13 @@ From Azure, click on **Microsoft Entra ID** and navigate to **App registrations*
 
 1. Click **+ Add a permission**, select **My APIs** and select the name of the application (e.g. Certdog)
 
-8. Under Select permissions select Certdog.Access and click Add Permissions
+8. Under *Select permissions* select **Certdog.Access** and click **Add Permissions**
 
 9. Click **+ Add a permission** again, select **Microsoft Graph**, then **Delegated permissions**
 
 10. Search for and select **openid** and **profile** then click **Add permissions**
 
-11. Click the **three dots** at the end of the *User.Read* permission uder *Microsoft Graph* and select **Remove permission**, then **Yes, remove**
+11. Click the **three dots** at the end of the *User.Read* permission under *Microsoft Graph* and select **Remove permission**, then **Yes, remove**
 
     The permissions should look like this:
 
@@ -107,7 +141,7 @@ From Azure, click on **Microsoft Entra ID** and navigate to **App registrations*
 
 #### Enable the claims for user identification and group support
 
-1. From the app registration, navigate to **Token Configuration** (under *Manage*)
+1. From the app registration, navigate to **Token Configuration** (under the *Manage* section)
 19. Click **Add optional claim**, select **Access** and check **upn**. Click **Add**
 20. Click **Add groups claim**, select **Security groups**, then click **Add**
 
@@ -115,7 +149,7 @@ From Azure, click on **Microsoft Entra ID** and navigate to **App registrations*
 
 #### Enable OAuth 2.0 Support
 
-1. From the app registration, navigate to **Manifest** (under *Manage*)
+1. From the app registration, navigate to **Manifest** (under the *Manage* section)
 19. Search for **accessTokenAcceptedVersion** and change the value from **null** to **2** and click **Save**
 
 <br>
@@ -130,7 +164,7 @@ From Azure, click on **Microsoft Entra ID** and navigate to **App registrations*
 
 3. This is the **[CLIENT-ID]** value we will need below
 
-   
+   <br>
 
 4. Copy the value for Application ID URI
 
@@ -142,9 +176,9 @@ From Azure, click on **Microsoft Entra ID** and navigate to **App registrations*
 
 6. This is the **[AUDIENCES]** value we will need below
 
-   
+   <br>
 
-7. From the top menu click on Endpoints
+7. From the top menu click on **Endpoints**
 
 8. Copy the value for **Authority URL (Accounts in this organizational directory only)**
 
@@ -156,7 +190,7 @@ From Azure, click on **Microsoft Entra ID** and navigate to **App registrations*
 
 10. This is your **[ISSUER-URI]** value we will need below
 
-    
+    <br>
 
 11. The **[REDIRECT-URL]** should have been noted in the setup steps above 
 
@@ -164,7 +198,7 @@ From Azure, click on **Microsoft Entra ID** and navigate to **App registrations*
 
 <br>
 
-### Update the API properties file
+## Update the API properties file
 
 On the certdog server, open the ``application.properties`` file located here:
 
@@ -190,9 +224,9 @@ spring.security.oauth2.resourceserver.jwt.audiences=e02d66e2-ae76-479c-8383-dbd2
 
 Save the file
 
+<br>
 
-
-### Update the UI config file
+## Update the UI config file
 
 On the certdog server, open the ``config.json`` file located here:
 
@@ -204,15 +238,15 @@ E.g.
 
 It will either contain a configuration such as:
 
-```
+```json
 {
   "apiUrl" : "https://127.0.0.1/certdog/api/"
 }
 ```
 
-Or one with placeholders already in place for the values we need. E.g.
+Update the contents, as shown below, populating with the values for [ISSUER-URI], [CLIENT-ID], [REDIRECT-URI] and [API-SCOPE] as gathered above:
 
-```
+```json
 {
   "apiUrl" : "https://127.0.0.1/certdog/api/",
   "oauth": {
@@ -225,187 +259,179 @@ Or one with placeholders already in place for the values we need. E.g.
 
 ```
 
-Populate this file with the values for [ISSUER-URI], [CLIENT-ID], [REDIRECT-URI] and [API-SCOPE] as gathered above.
-
-
-
-# WE ARE THIS FAR
-
-
-
-```
-{
-  "apiUrl" : "https://certdogtest/certdog/api/",
-  "oauth": {
-    "server": "https://login.microsoftonline.com/0d285301-66f1-496e-9915-2008a8603591/v2.0",
-    "clientId": "12720666-5016-408f-8691-0565a23faa3b",
-    "redirectUri": "https://certdogtest/certdog/ui/",
-    "scope": "api://12720666-5016-408f-8691-0565a23faa3b/Certdog.Access"
-  }
-}
-
-```
-
-
-
-
-
-
-
-
-
-```
-{
-  "oauth": {
-    "server": "[ISSUER-URI]",
-    "clientId": "[CLIENT-ID]",
-    "redirectUri": "[REDIRECT-URI]",
-    "scope": "<your-api-scope>"
-  }
-}
-```
-
-
-
-
-
-
-
-
-
-# BENS ORIGINAL BELOW
-
-
-
-
-OAuth support is controlled by the presence of the `spring.security.oauth2.resourceserver.jwt.issuer-uri`
-property in the `application.properties` file of the API, and the presence of the `oauth` section in the
-UI's `config.json` file.
-
-The API must be restarted for changes to `application.properties` to take effect.
-
-The UI will dynamically pick up changes to `config.json`, however, the configuration is stored locally and may also be cached by the browser, so to ensure the new configuration is loaded, you may need to clear the browser's cache and stored data for the site.
-This can be done through developer tools or the browser's settings.
-See your browser's documentation for details.
-
-## Microsoft Entra ID
-
-Entra ID users do not have to be explicitly registered in Certdog.
-Their permissions are managed by their security group membership in Entra ID.
-To achieve this, the security groups must be configured against Teams in Certdog.
-
-### Initial Configuration
-
-Before editing the Certdog configuration, an application registration for Certdog must be made in the Entra ID tenant.
-
-1. Create a new App Registration
-   1. In the Entra admin centre, navigate to "Azure Entra ID" > "App registrations".
-   2. Click "New registration".
-   3. Enter a name for the application, e.g. "Certdog".
-   4. Set "Supported account types" to "Accounts in this organizational directory only".
-   5. Set "Redirect URI" to "SPA" and enter the URL of your UI.
-   6. Click "Register".
-   7. Under your new app registration, navigate to "Owners" and add yourself as an owner if not already listed.
-2. Expose Certdog as an API
-   1. Navigate to "Expose an API".
-   2. Click "Add" next to "Application ID URI" then "Save".
-   3. Click "Add a scope". Name the scope "Certdog.Access", set the consent option as desired,
-   and add a reasonable description such as "Access to Certdog". Click "Add scope".
-3. Enable the correct permissions for the API
-   1. Navigate to "API permissions".
-   2. Click "Add a permission", select "My APIs", then select your new app.
-   3. Select the "Certdog.Access" scope, then click "Add permissions".
-   4. Click "Add a permission" again, select "Microsoft Graph", then "Delegated permissions".
-   5. Search for and select "openid" and "profile" then click "Add permissions".
-   6. You can remove any other default permissions such as "User.Read".
-4. Enable the required claims for user identification and group support.
-   1. Under your new app registration, navigate to "Token configuration".
-   2. Click "Add optional claim", select "Access", check "upn", then click "Add".
-   If prompted, add the MS Graph profile permission to the API permissions, if not already added. 
-   3. Click "Add groups claim", select "Security groups", then click "Add".
-5. Enable OAuth 2.0 support
-   1. Navigate to "Manifest".
-   2. Under "api" change "requestedAccessTokenVersion" from `null` to `2`.
-   3. Click "Save".
-
-Once the application registration is complete, the Certdog API must be configured to use it.
-To do this, set the following properties in the `application.properties` configuration file.
-
-```properties
-spring.security.oauth2.resourceserver.jwt.issuer-uri=<your-v2-issuer-uri>
-spring.security.oauth2.resourceserver.jwt.audiences=<your-audience-id>
-```
-
-If `spring.security.oauth2.resourceserver.jwt.issuer-uri` is missing, OAuth will be disabled for the application.
-
-You can find `your-v2-issuer-uri` by taking the "Authority URL (Accounts in this organizational directory only)" at the
-top of the "Endpoints" in the "Overview" section of your app registration.
-Note you must add `/v2.0` to the end of this URL to use the correct version.
-
-You can find `your-audience-id` in the "Overview" section of your app registration as the identifier after "api://" in
-"Application ID URI".
-
-Finally, the Certdog UI must be configured to use the same application registration.
-To do this, add the following section to the `config.json` file under `<certdog-install-path>/tomcat/webapps/certdog#ui`.
+E.g.
 
 ```json
 {
+  "apiUrl" : "https://127.0.0.1/certdog/api/",
   "oauth": {
-    "server": "<your-v2-issuer-uri>",
-    "clientId": "<your-client-id>",
-    "redirectUri": "<your-redirect-uri>",
-    "scope": "<your-api-scope>"
+    "server": "https://login.microsoftonline.com/0d285301-66f1-496e-9915-2008a8603591/v2.0",
+    "clientId": "e02d66e2-ae76-479c-8383-dbd209088538",
+    "redirectUri": "https://127.0.0.1/certdog/ui/",
+    "scope": "api://12720666-5016-408f-8691-0565a23faa3b/Certdog.Access"
   }
 }
 ```
 
-`your-v2-issuer-uri` is the same as above.
+<br>
 
-To find `your-client-id`, copy the "Application (client) ID" from the "Overview" section of your app registration.
+## Restart Certdog
 
-To find `your-redirect-uri`, find the "Single-page application" section under the "Authentication" section.
+Restart certdog
 
-To find `your-api-scope`, copy the scope you created earlier, found under "Expose an API".
+On windows open the Services snapin, locate and stop the **Krestfield Certdog Service**. When showing as not running Start the service.
 
-### Granting Permissions
+On Linux, run the ``./shutdown-certdog.sh`` script followed by the ``./start-certdog.sh` from the bin directory
 
-In Certdog, permissions to specific Certificate Issuers are granted via [Teams](teams.html).
-A Team is configured to allow access to issuers.
-Users are then made members of this Team.
+<br>
 
-To allow access for Entra ID users, simply map the Entra ID security groups to the Certdog Teams.
-Make sure to use the Object ID of the security group, not the display name.
+If certdog has already been operating, any browsers used to access the system may have cached previous settings. This cache must be cleared or an alternative browser may be used (e.g. Chrome instead of Edge). 
 
-The processing then completes as follows:
+Clearing of the cache is browser dependant but for Chrome, click the![image-20250918133149933](./images/image-20250918133149933.png)menu and choose **Settings**. From the left menu select **Privacy and security**. Then click on **Delete browsing data**. Select **Cached images and files** and **Cookies and other site data**, then click **Delete data**. The keyboard combination of CTRL-SHIFT-DELETE can also be used to bring up the delete browsing data dialog.
 
-1. User authenticates with their Entra ID account
-2. Map the users OAuth Group Memberships to the Certdog Teams that have been configured with those Groups
-3. The user obtains the permissions and restrictions as imposed by those Teams
+<br>
 
-Note that when an Entra ID user authenticates their account will then appear in the Users list in Certdog.
+## Map Entra ID Groups to Certdog Teams
+
+Certdog will now be able to authenticate users using their Entra ID credentials. The permissions that those users have in Certdog are managed by mapping Entra ID Security Groups to Certdog teams.
+
+Note that an Entra ID user who is not a member of any mapped groups can still login. They will just have no access to any Certificate Issuers.
+
+<br>
+
+To create a group in Entra ID, from the *Microsoft Entra ID* service, click on **Groups** (under the Manage section). Click **New Group**.
+
+For *Group type*, select **Security**
+
+For *Group name* enter a name e.g. CERTDOG_ADMINS or CERTDOG_NETWORK_TEAM
+
+For *Group description*, optionally enter some descriptive text
+
+Under *Microsoft Entra roles can be assigned to the group*, select **No**
+
+For *Membership type*, select **Assigned**
+
+Under *Owners*, click the *No owners selected link* and optionally select an owner for the group
+
+Under *Members*, click the *No members selected link* and select the users to be members of this group. This can also be performed later - from  here or from a specific users's account. You can also include (nest) other groups within this group:
+
+<img src="./images/image-20250918112910723.png" alt="image-20250918112910723" style="zoom:80%;" />
+
+Click **Create**
+
+From the *Groups Overview* page, select **All groups** and click on the group just created:
+
+<img src="./images/image-20250918113045530.png" alt="image-20250918113045530" style="zoom:80%;" />
+
+Click the Copy Symbol ![image-20250918113235092](./images/image-20250918113235092.png) to the right of the **Object ID** value and retain. We now need to set this value in certdog.
+
+<br>
+
+Log into certdog using a local (or AD, if configured) administrator account. In this case you will have to navigate to:
+
+```http
+https://[certdog server]/certdog/ui/#/login
+```
+
+To bypass the OAuth process and login with a local account.  Note, if you miss this and log in via the OAuth mechanism, just log out and you will be taken back to the standard login screen.
+
+Navigate to Teams and either select an existing or create a new Team.
+
+You should now see options for Add OAuth Group. Paste in the **Object ID** we copied from the Group above and click **Add**.
+
+Make any other updates to the team as required and click **Add** (or Update for an existing team).
+
+<img src="./images/image-20250918114410888.png" alt="image-20250918114410888" style="zoom: 67%;" />
+
+Users that are a member of the team created in Entra ID will now have the permissions provided by that certdog team.
+
+<br>
+
+Note that when an Entra ID user authenticates, their account will then appear in the Users list in Certdog.
 This will show what Certdog Teams the user is a member of (based on their Entra ID group membership).
-None of the details for Entra ID accounts can be managed via Certdog - they continue to be managed via Entra ID only
+None of the details for Entra ID accounts can be managed via Certdog - they continue to be managed via Entra ID only.
 
-If an Entra ID user is not a member of any group mapped to a Team, they can still login to Certdog but will have no access to any Certificate Issuers.
-If the Setting _Users can see_ is set to **All Certificates** then they will also be able to view certificates in the system but will not be able to carry out any operations on them.
+<br>
+
+## Logging in Options
+
+Users with accounts in Entra ID should now be able to login to certdog. The Microsoft login process should take place whenever you navigate to the certdog URL or any links to it (e.g. to certificates) and will use SSO (Single Sign On) to allow access when previously logged in.
+
+There is still the option to login with a local or Active Directory account (if configured). By navigating to the specific login URL:
+
+```http
+https://[certdog server]/certdog/ui/#/login
+```
+
+Or by simply choosing the **Log Out** option from the user icon at the top of the screen. In both cases you will be presented with the login screen:
+
+<img src="./images/image-20250918115043674.png" alt="image-20250918115043674" style="zoom:67%;" />
+
+You may enter username and password details for local or AD users and click **Login**. You can still invoke the OAuth process from this screen by clicking the **OAuth** button.
+
+Clicking the **OAuth** button will always ask you to confirm what account you wish to use. This is intentional to allow the switching of accounts.
+
+
 
 ## Common Issues
 
-### "No PKCE code verifier found in session storage, cannot complete OAuth login"
+### Sorry, but we're having trouble signing you in
 
-The URL you use to access the website must match the redirect URIs configured in the UI's configuration and
-your provider's (e.g. your Entra ID app's) configuration.
-If these differ, you will be redirected to a different domain (redirecting from `localhost` to `127.0.0.1` or vice
-versa usually causes this problem), and so the required verifiers will be missing from session storage, causing this
-error.
+If you see the following error during login:
 
-**Solution:** Ensure you use the same domain in all places, including when accessing the UI.
+<img src="./images/image-20250918135348123.png" alt="image-20250918135348123" style="zoom:80%;" />
 
-### I've updated the OAuth configuration, but the changes don't seem to take effect
+This indicates that the redirectUrl value contained in the config.json file does not match the URL that certdog is being accessed via. OR that the redirect URL configured in the Entra ID App registration is not correct.
 
-The API must be restarted for changes made to the `application.properties` file to take effect.
-The UI will dynamically pick up changes, but the configuration is cached, so this may need to be cleared.
+To check which this is, perform the following:
 
-See the *Toggling OAuth* section above for more details.
+<br>
 
-**Solution:** Restart the API and clear the browser cache and stored data for the site.
+<u>Check the config.json file</u>
+
+On the certdog server, open the ``config.json`` file:
+
+```
+[certdog install]\tomcat\webapps\certdog#ui\config.json
+```
+
+It should look like something like the following:
+
+```json
+{
+  "apiUrl" : "https://127.0.0.1/certdog/api/",
+  "oauth": {
+    "server": "https://login.microsoftonline.com/0d285301-66f1-496e-9915-2008a8603591/v2.0",
+    "clientId": "12720666-5016-408f-8691-0565a23faa3b",
+    "redirectUri": "https://certdg.org.local/certdog/ui/",
+    "scope": "api://12720666-5016-408f-8691-0565a23faa3b/Certdog.Access"
+  }
+}
+```
+
+Check the value for ``redirectUrl`` and ensure it matches the URL you are accessing the certdog server with exactly. 
+
+In the case above it is set to ``https://certdg.org.local/certdog/ui/`` but it should be ``https://certdog.org.local/certdog/ui/``. 
+
+If different, save the file and restart as per the [Restart Certdog](#restart-certdog) above. 
+
+<br>
+
+<u>Check the Entra ID App Registration Redirect URL</u>
+
+Navigate to the **App registration** in Entra ID. Expand the *Manage* section and click on **Authentication**.
+
+Check the values for *Redirect URIs* under the *Single-page application* section:
+
+<img src="./images/image-20250918151822781.png" alt="image-20250918151822781" style="zoom:80%;" />
+
+In this case the certdog service is being accessed from https://certdog.org.local but the redirect URL only has an entry for https://certdogtest.org.local. Correct this and save the Authentication.
+
+<br>
+
+### After updating the OAuth configuration, the changes don't seem to take effect
+
+When the configuration has been updated, the services must be restarted. If the same browser accessed certdog when the previous settings were enabled, it may cache some of the configuration. Effectively, this prevents the changes from being used.
+
+Ensure the Certdog Service has been restarted and the browser cache has been delete. Refer to the [Restart Certdog](#restart-certdog) above for details.
+

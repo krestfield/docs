@@ -77,9 +77,9 @@ This is where you can map Entra ID groups to this team. For example, if your PKI
 
 To add, locate the required group in Entra ID and copy the ID. Paste this into the Add OAuth Group text box and click Add.
 
+![image-20250919171624119](./images/image-20250919171624119.png)
+
 See [here](oauth_integration.html#map-entra-id-groups-to-certdog-teams) for details on how to configure groups in Entra ID and obtain these IDs.
-
-
 
 <br>
 

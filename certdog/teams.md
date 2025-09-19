@@ -75,11 +75,13 @@ If OAuth has been configured you will also see the following option:
 
 This is where you can map Entra ID groups to this team. For example, if your PKI certificate security staff were all members of an Entra ID Security group called PKI_CERT_MANAGERS then you could specify that group here. If this Team had the Administrator option checked, then all the PKI certificate security staff would be administrators in Certdog
 
-To add, locate the required group in Entra ID and copy the ID. Paste this into the Add OAuth Group text box and click Add.
+To add, locate the required group in Entra ID and copy the ID. Paste this into the Add OAuth Group text box and click **Add**
 
 ![image-20250919171624119](./images/image-20250919171624119.png)
 
-See [here](oauth_integration.html#map-entra-id-groups-to-certdog-teams) for details on how to configure groups in Entra ID and obtain these IDs.
+To remove a group mapping, simply select the group and click **Remove**
+
+See [here](oauth_integration.html#map-entra-id-groups-to-certdog-teams) for details on how to configure groups in Entra ID and obtain these IDs
 
 <br>
 

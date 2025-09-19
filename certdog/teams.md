@@ -45,7 +45,7 @@ If you wish to make everyone in this team an administrator, select the **Adminis
 
 **Active Directory Groups**
 
-If Active Directory has been configured you will also see the following option
+If Active Directory has been configured you will also see the following option:
 
 <img src=".\images\ad_groups1.png" alt="Active Directory Groups" style="zoom:80%;" />
 
@@ -64,6 +64,22 @@ The selected group is now mapped to this team
 To remove a group mapping, simply select the group and click **Remove**  
 
 Note: The *Domain Users* group (or whatever is configured as the Primary Group) will not be recognised. All AD users can login to Certdog once the AD Settings have been configured (even if they are not a member of any mapped groups), but they will not have access to any Certificate Issuers. To allow users to have permissions on certificate issuers, they must be added to a specific AD group (other than the primary, default group) which is mapped to a Team (as described above)
+
+<br>
+
+**OAuth Groups**
+
+If OAuth has been configured you will also see the following option:
+
+![image-20250919171159968](./images/image-20250919171159968.png)
+
+This is where you can map Entra ID groups to this team. For example, if your PKI certificate security staff were all members of an Entra ID Security group called PKI_CERT_MANAGERS then you could specify that group here. If this Team had the Administrator option checked, then all the PKI certificate security staff would be administrators in Certdog
+
+To add, locate the required group in Entra ID and copy the ID. Paste this into the Add OAuth Group text box and click Add.
+
+See [here](oauth_integration.html#map-entra-id-groups-to-certdog-teams) for details on how to configure groups in Entra ID and obtain these IDs.
+
+
 
 <br>
 

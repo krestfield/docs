@@ -15,7 +15,7 @@ nav_order: 500
 
 Download the version for your OS:
 
-[Windows](https://krestfield.s3.eu-west-2.amazonaws.com/certdog/certdogfree_v1140.zip)
+[Windows](https://krestfield.s3.eu-west-2.amazonaws.com/certdog/certdogfree_v1150_win.zip)
 
 [RedHat](https://krestfield.s3.eu-west-2.amazonaws.com/certdog/redhat/certdogfree_v1140.tar.gz)
 
@@ -31,17 +31,17 @@ Contact [support](mailto:support@krestfield.com) for your download location
 
 ### Windows File Hashes
 
-V1.14.0 Full Version:  
+V1.15.0 Full Version:  
 
-* SHA1: ``f0b229de28423247965c325478bc12ee8412affb``
+* SHA1: ``eb4573f3796d6ab6443cb69b2aded2e68cb4d250``
 
-* SHA256: ``37e4441084fec6ed6a5ba255d1d7c1d6f85c8d36bec8bd910be07365e5ec6e32``
+* SHA256: ``477c2cf5322420ca09d604d3361532bdbf5de4ab30eb22124770b5232b677ab2``
 
-V1.14.0 Free Version:  
+V1.15.0 Free Version:  
 
-* SHA1: ``a478218e09e4de3be41b841b1b911611d8f4e537``
+* SHA1: ``a028048517155ba1510a7b18f473cfde7ac5f955``
 
-* SHA256: ``832dbe19779f3ef6496e689979833c738eb45a91a754cf73fb43bce83a040916``
+* SHA256: ``68ed1c90fd6837a33b6786f6b8734a9ef1a1cfd6a3302ce88b373b30e72ee66c``
 
 <br>
 

@@ -19,6 +19,98 @@ Support: [support@krestfield.com](mailto:support@krestfield.com)
 
 Web: [https://www.krestfield.com](https://www.krestfield.com)
 
+
+
+
+> **Version 1.15.0**
+> **Release Date**: 26th September 2025
+
+
+
+**Updates**
+
+* OAUTH support added so external IDPs (e.g. EntraID) can now be used for authentication
+* CSRs that do not contain a DN entry are now accepted, as long as they have a SAN
+
+**Security Updates**
+
+* All vulnerabilities in the UI now rectified
+
+**Fixes** 
+
+* Fix for when, in certain circumstances the UI would not navigate to the issuer (c20-160).
+
+
+
+
+
+
+---
+
+> **Version 1.14.0**
+> **Release Date**: 8th June 2025
+
+
+
+**Updates**
+
+* CAs can now be revoked from the CA (rather than the certificate only). This also disables the CA
+* A new Dashboard has been added
+* The main certificate view now also shows the certificate status
+  
+
+**Security Updates**
+
+* None
+
+
+**Fixes** 
+* Users can now revoke their own API tokens (but cannot create). This was preventing the user from viewing their own profile in some cases.
+* Introduced at V12 - OCSP server failed to renew certificate as was running a version behind main server. Now corrected.
+
+
+
+
+
+
+---
+
+
+
+
+
+> **Version 1.12.0**
+> **Release Date**: 8th May 2025
+
+
+
+**Updates**
+
+* Several internal improvements
+* API tokens can now be assigned labels and revoked
+* More certificate search options added to PowerShell module
+* User ID and Team IDs now available to copy from main screens
+
+**Security Updates**
+
+* Several components upgraded to the latest versions due to minor vulnerabilities detected
+
+**Fixes** 
+
+* Fixed UI issue when navigating to issuer and revoking. Where message would be incorrect
+* A custom extension marked critical was not always displayed as such in the UI (though it was set)
+* Fixed several certificate search issues
+* If an approval is required when requesting via a CSR a red dialog was shown. This is now grey
+* Only 10 SAN entries were being displayed in the UI. Now can display an unlimited number
+
+
+
+
+---
+
+
+
+
 > **Version 1.11.1**
 > **Release Date**: 26th July 2024
 

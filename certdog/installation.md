@@ -30,7 +30,9 @@ The system may be installed on the following operating systems:
 
 * Windows Server 2022
 
-* Windows 10/11 [^1]
+* Windows Server 2025
+
+* Windows 11 [^1]
 
 <br>
 

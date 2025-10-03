@@ -17,7 +17,7 @@ EzSign supports the Thales payShield 10k HSM for RSA PKI operations (sign, verif
 
 
 
-## Changes from version 4.2.2
+## Changes from version 4.4.0
 
 All properties are now named **payShield** e.g. ``channel.1.token.payShield.port`` although all properties available in previous versions still named **hsm9000** are still accepted.   
 
@@ -34,9 +34,27 @@ If **useTls** is **true** then the following server properties may also need to 
 
 These are discussed in the EzSign Configuration section below.
 
+<br>
 
+For versions **4.2.3** to **4.3.0** the available settings are:
 
+* channel.N.token.**hsm9000**.ipAddress
 
+* channel.N.token.**hsm9000**.port
+
+* channel.N.token.**hsm9000**.timeoutMs
+
+* channel.N.token.**hsm9000**.connectTimeoutMs
+
+* channel.N.token.**hsm9000**.headerLen
+
+* channel.N.token.**hsm9000**.useVariantLmk
+
+* channel.N.token.**hsm9000**.lmkId
+
+* channel.N.token.**payShield**.useTls
+
+<br>
 
 ## payShield Configuration
 

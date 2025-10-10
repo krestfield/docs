@@ -119,6 +119,16 @@ Then starting in this order:
 
 <br>
 
+**STEP 3: Configure the SSL Certificate on the Database**
+
+If using the ADCS Driver (i.e. interfacing to Microsoft CAs), ensure that the root and intermediate CA certificates that issued the new database certificate have been imported into the Windows store.
+
+You can obtain these by navigating to the issued certificate in STEP 1 and choosing the **Actions** - **Go To Issuer** option. Then downloading the certificates (ensuring you download all CA certificates, including the root) and importing into the Intermediate or Trusted Roots store (depending whether the certificate is a root CA or not). 
+
+<br>
+
+<br>
+
 ## Troubleshooting
 
 To confirm that an issue is certificate related, you may first disable TLS (temporarily), to ensure that without any certificates the connection to the database is OK. See [Disable TLS](#disable-tls) below.

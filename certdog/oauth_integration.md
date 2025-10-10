@@ -105,9 +105,11 @@ Click **Save**
 
 1. From the new app registration, navigate to **Owners** (under the *Manage* section) and add your own account as an owner if not already listed
 
+   <img src="./images/image-20250926081431396.png" alt="image-20250926081431396" style="zoom:67%;" />
+
 2. Next, navigate to **Expose an API** and click the **Add** link to the right of *Application ID URI* and click **Save** accepting the default value for the Application ID URI
 
-   <img src="./images/image-20250926081431396.png" alt="image-20250926081431396" style="zoom:67%;" />
+   
 
 3. Click **+ Add a scope** and for 
 
@@ -154,8 +156,8 @@ Click **Save**
 #### Enable the claims for user identification and group support
 
 1. From the app registration, navigate to **Token Configuration** (under the *Manage* section)
-19. Click **Add optional claim**, select **Access** and check **upn**. Click **Add**
-20. Click **Add groups claim**, select **Security groups**, then click **Add**
+19. Click **+ Add optional claim**, select **Access** and check **upn**. Click **Add**
+20. Click **+ Add groups claim**, select **Security groups**, then click **Add**
 
 <br>
 
@@ -255,7 +257,7 @@ It will contain a configuration similar to:
 
 ```json
 {
-  "apiUrl" : "https://127.0.0.1/certdog/api/"
+  "apiUrl" : "../api/"
 }
 ```
 
@@ -263,7 +265,7 @@ Update the contents, as shown below, by adding in the *oauth* section and popula
 
 ```json
 {
-  "apiUrl" : "https://127.0.0.1/certdog/api/",
+  "apiUrl" : "../api/",
   "oauth": {
     "server": "[ISSUER-URI]",
     "clientId": "[CLIENT-ID]",
@@ -434,7 +436,7 @@ It should look like something like the following:
 
 ```json
 {
-  "apiUrl" : "https://127.0.0.1/certdog/api/",
+  "apiUrl" : "../api/",
   "oauth": {
     "server": "https://login.microsoftonline.com/0d285301-66f1-496e-9915-2008a8603591/v2.0",
     "clientId": "12720666-5016-408f-8691-0565a23faa3b",

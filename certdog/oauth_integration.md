@@ -282,7 +282,7 @@ E.g.
 
 ```json
 {
-  "apiUrl" : "https://127.0.0.1/certdog/api/",
+  "apiUrl" : "../api/",
   "oauth": {
     "server": "https://login.microsoftonline.com/0d285301-66f1-496e-9915-2008a8603591/v2.0",
     "clientId": "e02d66e2-ae76-479c-8383-dbd209088538",

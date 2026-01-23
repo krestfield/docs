@@ -102,11 +102,11 @@ Essentially the properties file contains information about the IP Addresses and 
 
 For detailed information about the available properties, refer to the following:
 
-https://krestfield.github.io/docs/ezsign/ezsign_properties.html
+[EzSign Properties](ezsign_properties.html)
 
 A sample properties file can be found here:
 
-https://krestfield.github.io/docs/ezsign/ezsign_sample_properties.html 
+[EzSign Sample Properties](ezsign_sample_properties.html)
 
 <br>
 

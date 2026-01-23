@@ -17,7 +17,7 @@ Follow these links for instructions:
 
 [Components](ezsign_components.html)
 
-[Ezsign Server](ezsign_server.html)
+[EzSign Server](ezsign_server.html)
 
 [EzSign Client](ezsign_client.html)
 

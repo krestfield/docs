@@ -119,24 +119,29 @@ During signature verification, EzSign will perform the following operations:
 3.	Perform path checks
 4.	Check certificate revocation
 
-Step 1 performs the mathematical calculations over the signature data I.e. digesting the data, decryption and digest comparisons
+**Step 1** performs the mathematical calculations over the signature data I.e. digesting the data, decryption and digest comparisons
 
-Step 2 builds a path, using the certificates from the signature and certificates that may have been uploaded into the channel.  A trusted root must have been imported into the channel for this step to succeed as the path must terminate on a trusted root
+**Step 2** builds a path, using the certificates from the signature and certificates that may have been uploaded into the channel.  A trusted root must have been imported into the channel for this step to succeed as the path must terminate on a trusted root
 
 Each certificate is checked for time validity (the Valid From date is before the current time and the Valid To date after) and its signature is verified against the issuing certificates public key
 
-Step 3 then performs the following steps:
+**Step 3** then performs the following steps:
 
-1.	If the setting channel.N.verify.denyWeakCertificateHash is true, if any of the certificates in the path have a weak hash (anything weaker than SHA-2) they will be rejected
-2.	If the setting channel.N.verify.relaxAllCertExtensionChecks is true, no further checks will be performed on the path, if this setting is false (or not set at all), then the additional checks will be performed:
-1)	If the settings for key size (channel.N.verify.minKeySize and channel.N.verify.maxKeySize) are set, each certificate’s key size must be within these limits
-2)	The certificates must have the keyUsage extension and this must be marked as critical
-3)	Signer certificates must have the Digital Signature key usage set
-4)	If the setting channel.N.verify.nonRepudiationRequired is true, signer certificates must also have the Non Repudiation key usage set
-5)	For CA and Root CA certificates they must have the Key Cert Sign key usage set and if the setting channel.N.verify.caBasicConstraintsRequired is true, they must also have the Basic Constraints extension.  
-When Basic Constraints are checked the path length permitted will also be checked
-If the setting channel.N.verify.relaxRootCertExtensionChecks is true, these additional checks will not be carried out on root certificates.  This may be required if legacy root certificates are being used
-All the checks performed in Step 3 may be overridden by developing a custom path check class
+1.	If the setting ``channel.N.verify.denyWeakCertificateHash`` is *true*, if any of the certificates in the path have a weak hash (anything weaker than SHA-2) they will be rejected
+2.	If the setting ``channel.N.verify.relaxAllCertExtensionChecks`` is *true*, no further checks will be performed on the path, if this setting is false (or not set at all), then the additional checks will be performed:
+1. If the settings for key size (``channel.N.verify.minKeySize`` and ``channel.N.verify.maxKeySize``) are set, each certificate’s key size must be within these limits
+
+2. The certificates must have the *keyUsage* extension and this must be marked as critical
+
+3. Signer certificates must have the *Digital Signature* key usage set
+
+4. If the setting ``channel.N.verify.nonRepudiationRequired`` is *true*, signer certificates must also have the *Non Repudiation* key usage set
+
+5. For CA and Root CA certificates they must have the *Key Cert Sign* key usage set and if the setting ``channel.N.verify.caBasicConstraintsRequired`` is *true*, they must also have the *Basic Constraints* extension.  
+
+   When *Basic Constraints* are checked the path length permitted will also be checked
+   If the setting ``channel.N.verify.relaxRootCertExtensionChecks`` is *true*, these additional checks will not be carried out on root certificates.  This may be required if legacy root certificates are being used
+   All the checks performed in Step 3 may be overridden by developing a custom path check class
 
 <br>
 
@@ -145,8 +150,9 @@ All the checks performed in Step 3 may be overridden by developing a custom path
 Specific checks may be performed on certificate paths by developing a custom java class.  You may develop the custom class yourself following the details below, or Krestfield can develop one to your specific requirements.  Custom path checking may be required, if for example you wish to check a certificate has been registered, check custom extensions or any other specific certificate checks your system may require
 To create a custom path checker perform the following operations:
 
-1.	Create a Java project and add a reference to the ``ezsign-x.y.z.jar`` (located in the``EzSignServer/lib`` directory of the installation)
-2.	Create a new class (e.g. ``MyCustomPathChecker``) which implements the ``KPathCheckBase`` interface e.g.
+1. Create a Java project and add a reference to the ``ezsign-x.y.z.jar`` (located in the``EzSignServer/lib`` directory of the installation)
+
+2. Create a new class (e.g. ``MyCustomPathChecker``) which implements the ``KPathCheckBase`` interface e.g.
 
 ```java
 package com.myorg.ezsign.pathcheck;
@@ -173,7 +179,7 @@ public class MyCustomPathChecker implements KPathCheckBase
 }
 ```
 
-3.	Implement the loadProperties and check methods (see below), add the compiled class to the server classpath and reference this class in the server properties as follows:
+3. Implement the loadProperties and check methods (see below), add the compiled class to the server classpath and reference this class in the server properties as follows:
 
 ```
 channel.N.verify.pathCheckClass=com.myorg.ezsign.pathcheck.MyCustomPathChecker

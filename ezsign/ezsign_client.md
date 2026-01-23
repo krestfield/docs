@@ -22,3 +22,5 @@ The communications between the client and server can be protected by using:
 <br>
 For further details see the [Client Integration Guide](ezsign_client_integration_guide.html)
 
+For the .NET client. See the [.Net Client Integration Guide](ezsign_dotnet_client_integration_guide.html)
+

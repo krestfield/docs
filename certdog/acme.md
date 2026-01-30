@@ -23,7 +23,7 @@ From the menu, select **Interfaces** and then choose **ACME**
 
 Click **Add New ACME Service**:
 
-<img src="C:\Users\darre\AppData\Roaming\Typora\typora-user-images\image-20260129161210654.png" alt="image-20260129161210654" style="zoom: 67%;" />
+<img src=".\images\image-20260129161210654.png" alt="image-20260129161210654" style="zoom: 67%;" />
 
 * **Service Name**.  Enter a name. This can be anything to identify the service to the administrators. End users will not see this value
 * **Enabled**. This enables the service.  If this is un-checked clients will receive an error indicating that the service is disabled
@@ -74,11 +74,11 @@ If all has been created correctly, you should be able to open a Browser and navi
 
 To edit a service, click the service and choose **View/Edit**:
 
-<img src="C:\Users\darre\AppData\Roaming\Typora\typora-user-images\image-20260130093711174.png" alt="image-20260130093711174" style="zoom:67%;" />
+<img src=".\images\image-20260130093711174.png" alt="image-20260130093711174" style="zoom:67%;" />
 
 The information previously entered will be displayed and can be edited. Note that if *Auto Generate Credentials* option was previously set, the created *Team* and *User* IDs will now be displayed and can be viewed:
 
-<img src="C:\Users\darre\AppData\Roaming\Typora\typora-user-images\image-20260130093928572.png" alt="image-20260130093928572" style="zoom:67%;" />
+<img src=".\images\image-20260130093928572.png" alt="image-20260130093928572" style="zoom:67%;" />
 
 Click **Update** to save the new settings
 
@@ -106,11 +106,11 @@ Click **Yes** to confirm
 
 To view the ACME accounts that have been created for the service, from the ACME menu, select the service and choose **Manage Accounts**:
 
-<img src="C:\Users\darre\AppData\Roaming\Typora\typora-user-images\image-20260130105054907.png" alt="image-20260130105054907" style="zoom:67%;" />
+<img src=".\images\image-20260130105054907.png" alt="image-20260130105054907" style="zoom:67%;" />
 
 All accounts will be displayed:
 
-<img src="C:\Users\darre\AppData\Roaming\Typora\typora-user-images\image-20260130112207104.png" alt="image-20260130112207104" style="zoom:67%;" />
+<img src=".\images\image-20260130112207104.png" alt="image-20260130112207104" style="zoom:67%;" />
 
 The IP Address indicates the client IP address. The contact details are provided by the user when running the client. If EAB is used, the contact details are extract from the user that the initial EAB key are associated with (see External Account Binding below).
 
@@ -130,19 +130,19 @@ To enforce, from the ACME menu, select the service you wish to enforce EAB on, a
 
 Check the **External Account Binding Required** option and click **Update**
 
-<img src="C:\Users\darre\AppData\Roaming\Typora\typora-user-images\image-20260130133023329.png" alt="image-20260130133023329" style="zoom:67%;" />
+<img src=".\images\image-20260130133023329.png" alt="image-20260130133023329" style="zoom:67%;" />
 
 Back on the ACME Services page, click on the same service and choose **Manage EABs**:
 
-<img src="C:\Users\darre\AppData\Roaming\Typora\typora-user-images\image-20260130133619207.png" alt="image-20260130133619207" style="zoom:67%;" />
+<img src=".\images\image-20260130133619207.png" alt="image-20260130133619207" style="zoom:67%;" />
 
 To add a new EAB, click **Add...**
 
-<img src="C:\Users\darre\AppData\Roaming\Typora\typora-user-images\image-20260130133741622.png" alt="image-20260130133741622" style="zoom:67%;" />
+<img src=".\images\image-20260130133741622.png" alt="image-20260130133741622" style="zoom:67%;" />
 
 Search for and select the user this key is to be associated with and click **Create Key for User**:
 
-<img src="C:\Users\darre\AppData\Roaming\Typora\typora-user-images\image-20260130134459512.png" alt="image-20260130134459512" style="zoom:67%;" />
+<img src=".\images\image-20260130134459512.png" alt="image-20260130134459512" style="zoom:67%;" />
 
 The *EAB MAC Key* and *KID* will be displayed. Click to copy the values and securely transport to the user. Note: the EAB MAC Key can not be displayed again. If it is lost then the existing EAB must be deleted and the a new one created
 
@@ -154,7 +154,7 @@ The client will need to supply the *EAB MAC Key* and *KID* to their ACME client.
 
 From the ACME Services page, click on the service and choose **Manage EABs**:
 
-<img src="C:\Users\darre\AppData\Roaming\Typora\typora-user-images\image-20260130133619207.png" alt="image-20260130133619207" style="zoom:67%;" />
+<img src=".\images\image-20260130133619207.png" alt="image-20260130133619207" style="zoom:67%;" />
 
 Select the *KID* to delete and click **Delete**
 

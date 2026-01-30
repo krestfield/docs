@@ -19,7 +19,11 @@ Certdog needs to be told how it will be accessed externally so it can populate t
 
 If this is not done, certdog will default to 127.0.0.1 within these URLs  
 
-To set the *System URL*, from the menu click on **Settings** under *MANAGEMENT* and then **Email Settings**:
+To set the *System URL*, from the menu click on **Settings** under *MANAGEMENT*
+
+For version 1.16 onwards, select **Settings**
+
+For versions before 1.16, select **Email Settings**
 
 <img src="./images/image-20250620144045566.png" alt="image-20250620144045566" style="zoom:80%;" />
 

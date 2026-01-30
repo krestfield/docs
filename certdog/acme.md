@@ -11,9 +11,9 @@ nav_order: 1001
 
 <br>
 
-Certdog supports the ACME protocol ([RFC8555](https://datatracker.ietf.org/doc/html/rfc8555)) including External Account Binding (EAB).
+Certdog supports the ACME protocol ([RFC8555](https://datatracker.ietf.org/doc/html/rfc8555)) including External Account Binding (EAB)
 
-Multiple ACME end points can be created - each with a different configuration. This allows for multiple setups that may provide different certificate types from different CAs.
+Multiple ACME end points can be created - each with a different configuration. This allows for multiple setups that may provide different certificate types from different CAs
 
 <br>
 
@@ -28,9 +28,9 @@ Click **Add New ACME Service**:
 * **Service Name**.  Enter a name. This can be anything to identify the service to the administrators. End users will not see this value
 * **Enabled**. This enables the service.  If this is un-checked clients will receive an error indicating that the service is disabled
 * **Base URL**. This will be pre-populated using the servers [System URL](post-Installation.html#set-the-system-url). If that value has not been set or you need to alter this value (e.g. if the URL that clients will access uses a DNS address or goes via some load-balancer etc.), then update it here
-* **Alias**. This is the what will define the specific Directory URL for this service, that clients will initially target. It is simply appended to the URL to make it unique. It should not contain spaces
+* **Alias**. This is what will define the specific Directory URL for this service, that clients will initially target. It is simply appended to the URL to make it unique. It should not contain spaces
 * **Directory URL**. This is value will be calculated from the Base URL and Alias. This is the value should be provided to clients
-* **Local Certificate Issuer**. Choose from the drop down, the issuer from where certificates targeting this service should be issued  from.
+* **Local Certificate Issuer**. Choose from the drop down, the issuer from where certificates targeting this service should be issued  from
 * **API URL**. This will be pre-populated but should be the URL to the certdog API that will provide the certificates. If certdog is clustered then this may be different to what is automatically populated and should be updated manually
 * **Auto Generate Credentials**. If this is checked (the default), then a new user and team will be created, dedicated for this ACME service. All certificates issued from the service will be associated with this user and team. If this is unchecked then the Certdog Team ID and Certdog User ID fields will be made available and you can enter the values for an existing user and team
 * **Allow http-01 Challenges**. If checked allows the http-01 ACME challenge. Where the client will host a file containing the challenge that the server (certdog) then checks
@@ -112,13 +112,13 @@ All accounts will be displayed:
 
 <img src=".\images\image-20260130112207104.png" alt="image-20260130112207104" style="zoom:67%;" />
 
-The IP Address indicates the client IP address. The contact details are provided by the user when running the client. If EAB is used, the contact details are extract from the user that the initial EAB key are associated with (see External Account Binding below).
+The IP Address indicates the client IP address. The contact details are provided by the user when running the client. If EAB is used, the contact details are extract from the user that the initial EAB key are associated with (see External Account Binding below)
 
 <br>
 
 ## External Account Binding
 
-Use this if you want to pre-authorise clients, assigning the authorisation to an existing certdog user. Note that as an EAB key is associated with a user, the user must be present in certdog. The account can be local, Active Directory or Entra ID based.
+Use this if you want to pre-authorise clients, assigning the authorisation to an existing certdog user. Note that as an EAB key is associated with a user, the user must be present in certdog. The account can be local, Active Directory or Entra ID based
 
 When EAB is enabled, only clients with a valid Key and Key Identifier will be permitted to create an ACME account on the server. This setting is per service i.e. one ACME service endpoint may require EAB, whilst another may allow auto account creation with no pre-authorisation
 

@@ -200,9 +200,11 @@ At the end of installation you should see a message as follows:
 
 Record the database administrator account details, including the username displayed and the password you provided (either interactively or as the ``-dbAdminPassword`` parameter)
 
-The Master Secret is a top level secret that is used to protect keys held within the system. It is initially saved to a file (as specified in the output). This file is encrypted under the current user's account to initially protect others from accessing it. However, it is **strongly recommended** that it is saved somewhere secure and the file removed
+The Master Secret is a top level secret that is used to protect keys held within the system. It is initially saved to a file (as specified in the output). This file is encrypted under the current user's account to initially protect others from accessing it.  
 
-You may need this secret if you re-install the main Certdog service, change the account the service runs under or attempt to start individual services manually. Normally, after install it is not required, but if lost any credentials stored within the system will be unrecoverable
+This file **MUST** be securely backed up and it is **strongly recommended** that it is removed from the file system and saved somewhere secure
+
+You may need this secret if you re-install the main Certdog service, change the account the service runs under or attempt to start individual services manually. Normally, after install it is not required, but if lost all credentials stored within the system will be unrecoverable and must be re-configured
 
 <br>
 

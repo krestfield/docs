@@ -30,7 +30,7 @@ If you have the master password recorded, go to Option 1 below
 
 <br>
 
-If the master password has been lost the ALL sensitive credentials will be unavailable and will need to be re-entered. This includes all local accounts (including the initial admin user), key store passphrases and credentials
+If the master password has been lost the ALL sensitive credentials will be unavailable and will need to be re-entered. This includes key store passphrases and credentials
 
 If this is the case go to Option 2 below
 
@@ -54,11 +54,12 @@ Enter the master password when prompted
 
 This option can be a dramatic failure, requiring several steps to rectify. This is by design, as without this top level secret, no-one should be able to access any sensitive information
 
+Note that, certificates and any configuration data will not be lost
+
 To recover from this, we need to perform the following steps:
 
 1. Set a new Master Password
 2. Remove Previous Encryption Keys - to force the creation of new ones
-3. Reset the Admin account
 4. Reset all credentials and passphrases
 
 <br>
@@ -98,7 +99,7 @@ use certmanuser
 db.auth("certmanuser")
 ```
 
-Type in the **certmanuser** password. This would have been entered (and should have been recorded) at install. However, it is also available in the application.properties file e.g.
+Type in the **certmanuser** password. This would have been entered (and should have been recorded) at install. However, it is also available in the ``application.properties`` file e.g.
 
 ```
 spring.data.mongodb.uri=mongodb://certmanuser:T6Dy1fCK3D5K32HbOHZi@127.0.0.1/certman
@@ -116,6 +117,13 @@ Enter the following command
 
 ```
 db.settings.updateOne({version:"1.0"}, {$set:{encryptionKeyUnderMaster:""}})
+db.settings.updateOne({version:"1.0"}, {$set:{jwtSecretUnderMaster:""}})
+```
+
+For each of these you should see an output such as:
+
+```
+{ "acknowledged" : true, "matchedCount" : 1, "modifiedCount" : 1 }
 ```
 
 <br>
@@ -124,27 +132,12 @@ Now attempt to start the server. It should go through a process of creating new 
 
 <br>
 
-### Step 3 - Reset the Admin account
+### Step 3 - Reset all credentials and passphrases
 
-Follow the steps [here to reset the local admin account](admin-password-reset.html)
+Reset any Key Stores. If these are associated with a CA, then they CA must first be taken offline.  Then the password can be set. See [here](keystores.html) for details on keystores
 
-Once this has been performed you should be able to login with this account
-
-<br>
-
-### Step 4 - Reset all credentials and passphrases
-
-First, [reset the passwords of all local users](users.html).
-
-Then [reset the passwords of any key stores](keystores.html). Note: if you have also lost the passphrases for software key stores you cannot recover the keys. You will need to create new key stores.
-
-Then [reset any credentials](credentials.html)
+Then [reset the passwords of any credentials](credentials.html)
 
 You may also need to re-create any OCSP, ACME and SCEP services
 
-Certificates will not be lost. However, if any private keys were being retained, they will now be unavailable
-
-
-
-
-
+If using the AD CS driver. Go to **Agents** in the UI and delete any agents. From a PowerShell window, navigate to``.\install`` and run ``.\configure-adcs-services.ps1`` then wait for the agent to re-register in the UI. When it appears, select and click **Approve**.

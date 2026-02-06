@@ -1,12 +1,3 @@
----
-layout: default
-title: Release Note
-parent: Certdog
-nav_order: 10000
----
-
-
-
 # RELEASE NOTE
 
 ### Certdog - Certificate Management and Automation System
@@ -20,7 +11,53 @@ Support: [support@krestfield.com](mailto:support@krestfield.com)
 Web: [https://www.krestfield.com](https://www.krestfield.com)
 
 
+> **Version 1.16.0**
+> **Release Date**: 26th January 2026
 
+
+
+**Updates**
+
+* ACME interface added
+* SCEP interface added
+* System URL now resides in the main settings area
+* Get CRL API calls added
+
+**Security Updates**
+
+* None
+
+**Fixes** 
+
+* Fixed issue where a KeyVault CA failed to process a CSR 
+* Fixed issue where emails were not being sent
+
+<br>
+
+
+---
+
+> **Version 1.15.1**
+> **Release Date**: 9th October 2025
+
+
+
+**Updates**
+
+* None
+
+**Security Updates**
+
+* None
+
+**Fixes** 
+
+* Fix for when Idp returns empty number once.
+
+<br>
+
+
+---
 
 > **Version 1.15.0**
 > **Release Date**: 26th September 2025

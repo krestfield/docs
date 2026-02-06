@@ -7,6 +7,12 @@ nav_order: 11
 
 # Upgrading the Certdog Database
 
+DO NOT PERFORM THIS STEP ON VERSIONS 1.17 OR LATER
+
+Contact [Krestfield Support](mailto:support@krestfield.com) if you are unsure whether this step needs to be carried out
+
+<br>
+
 These instructions relate to versions 1.16 and earlier and result in a newer database being installed
 
 These steps MUST be carried out before upgrading from version 1.16 as all future versions utilise the later database formats

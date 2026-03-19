@@ -15,7 +15,7 @@ It provides the following key features:
 <br>
 ### Compliant Signature Generation and Verification
 
-The server produces PKCS#7 compliant signatures (RSA or Elliptic Curve), which include signed attributes and the certificate chain. The SHA-1, SHA-2 and SHA-3 suite of digest algorithms are supported
+The server produces PKCS#7 compliant signatures (RSA, Elliptic Curve or PQC algorithms), which include signed attributes and the certificate chain. The SHA-1, SHA-2 and SHA-3 suite of digest algorithms are supported
 
 The server performs full signature validation including path building and revocation checking, supporting both CRL and OCSP revocation checking
 
@@ -81,6 +81,7 @@ Algorithms:
 
 * RSA
 * ECDSA
+* ML-DSA
 * AES
 * SHA-2 and SHA-3 algorithms
 

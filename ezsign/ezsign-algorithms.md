@@ -19,7 +19,10 @@ The available algorithms in EzSign are:
 * ECDSA
 
   * This is the elliptic curve digital signature algorithm
-  
+
+* ML-DSA-44, ML-DSA-65, ML-DSA-87
+
+  * The PQC general purpose signature algorithms
 
   
 

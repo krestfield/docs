@@ -27,7 +27,7 @@ You will need the database admin password. This is the password that was entered
 
 The database must use a TLS connection. Note that, for free versions before 1.16, TLS was not enabled by default on the database
 
-To enable TLS stop the *Krestfield CertDog Service*, then edit ``[CERTDOG INSTALL]\config\application.properties``. At the top of the file, add ``?tls=true`` to the end of the ``spring.data.mongodb.uri``. For example, if you have:
+To enable TLS, stop the *Krestfield CertDog Service*, then edit ``[CERTDOG INSTALL]\config\application.properties``. At the top of the file, add ``?tls=true`` to the end of the ``spring.data.mongodb.uri``. For example, if you have:
 
 ```
 spring.data.mongodb.uri=mongodb://certmanuser:1TPEwGJ2h1CBcoG0suUX@127.0.0.1/certman
@@ -111,7 +111,13 @@ Navigate to ``[CERT DOG INSTALL]\install`` e.g.  ``C:\certdog\install`` and run:
 
 This script will ask for the database admin password
 
+<br>
 
+**<u>Note</u>**
+
+The script is unaware of what updates have been made to the TLS certificates. It replaces them all with versions it knows will operate correctly.  
+
+If you have have made changes to your TLS certificates - server or database, they are copied to: ``.\certdog\config\sslcerts.bak[TIMESTAMP]`` e.g. ``.\certdog\config\sslcerts.bak.20260226-1012`` and they must then be manually coped back to the ``.\sslcerts`` folder 
 
 <br>
 

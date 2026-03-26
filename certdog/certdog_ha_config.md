@@ -107,7 +107,7 @@ to:
 
 ```
 net:
-	bindIp: 127.0.0.1,[FQDN or IP Address]
+   bindIp: 127.0.0.1,[FQDN or IP Address]
 ```
 
 E.g. On node1 this would become:
@@ -150,7 +150,7 @@ From node1, open a PowerShell window and navigate to:
 Run the following command:
 
 ```powershell
-.\mongosh.exe <node2 FQDN or IP Address> -u certmanadmin -p <DB ADMIN PASSWORD> --tls --tlsAllowInvalidCertificates --authenticationDatabase admin
+.\mongosh.exe <node2 FQDN or IP Address> -u certmanadmin -p <DB ADMIN PASSWORD> -tls -tlsAllowInvalidCertificates -authenticationDatabase admin
 ```
 
 Where ``<node2 FQDN or IP Address>`` are the details of the other node (e.g. node2) and ``DB ADMIN PASSWORD`` is the password of the database admin (where username is always ``certmanadmin``)
@@ -223,7 +223,7 @@ SANS: ``IP:127.0.0.1, DNS:node1.krestfield.local, DNS:node2.krestfield.local, DN
 
 Enter a strong password and issue the certificate.
 
-Follow the [guide here](https://krestfield.github.io/docs/certdog/update_the_db_certificate.html) to set this as the new DB password.
+Follow the [guide here](https://krestfield.github.io/docs/certdog/update_the_db_certificate.html) to set this as the new DB certificate.
 
 
 

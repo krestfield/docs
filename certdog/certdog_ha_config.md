@@ -371,6 +371,14 @@ If using the AD CS driver with a Microsoft CA you will now have two drivers avai
 
 <br>
 
+If any other custom setup steps have been performed on node1 (e.g. OAUTH), then ensure those same settings are replicated across to node2.
+
+<br>
+
+If using email notifications, see [here](https://krestfield.github.io/docs/certdog/certdog_ha_config.html). This setting may be required if you notice multiple emails being sent. However, this is not always the case. This is a known issue and will be resolved such that multiple servers will handle this better.
+
+<br>
+
 
 
 ---

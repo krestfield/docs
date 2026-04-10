@@ -41,6 +41,16 @@ login -username [username] -password [password]
 
 Or just type ``login`` to be prompted
 
+
+
+Alternatively, provide an API key:
+
+```
+Set-ApiToken -token [API Token]
+```
+
+See [here](https://krestfield.github.io/docs/certdog/users.html#api-tokens) for details on obtaining an API token
+
 <br>
 
 ### Examples

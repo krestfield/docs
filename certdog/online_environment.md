@@ -29,7 +29,7 @@ The account is shared so all certificates will be visible
 
 You can also direct any scripts or REST API calls to:
 
-<https://certdog.net/certdog/api>  
+<https://certdog.net/certdog/api/swagger-ui/index.html>  
 
 
 

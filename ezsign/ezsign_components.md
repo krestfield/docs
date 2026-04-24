@@ -10,7 +10,7 @@ nav_order: 3
 
 The EzSign product consists of the following individual components:
 
-### [The EzSign Server](ezsign_server.htm)
+### [The EzSign Server](ezsign_server.html)
 
 The processing engine which manages the keys, HSMs and performs the signature generation and verification
 

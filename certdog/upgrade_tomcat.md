@@ -60,7 +60,18 @@ A backup of the previous Tomcat installation is located at: C:\certdog\install\.
 
 ### Rollback
 
-If any errors do occur then the upgrade may be rolled back. To do this, stop the certdog service. Delete the ``.\certdog\tomcat`` folder. Note the backup location (e.g. ``C:\certdog\install\..\tomcat.bak.20260421-1252``) and simply rename to ``.\certdog\tomcat``
+If any errors do occur then the upgrade may be rolled back. To do this, stop the certdog service. Delete the ``.\certdog\tomcat`` folder. Note the backup location that was output from the script e.g. 
+```powershell
+C:\certdog\install\..\tomcat.bak.20260421-1252
+```
+
+Note that in this example, this relates to: ``C:\certdog\tomcat.bak.20260421-1252``
+
+Rename to ``.\certdog\tomcat`` e.g. 
+
+```powershell
+C:\certdog\tomcat.bak.20260421-1252 --> C:\certdog\tomcat
+```
 
 Start the certdog service.
 
@@ -68,5 +79,5 @@ Start the certdog service.
 
 ### Cleanup
 
-When satisfied that the installation is all working correctly you may delete the backup of the old Tomcat files. These are copied to the location output by the script e.g. ``C:\certdog\install\..\tomcat.bak.20260421-1252``
+When satisfied that the installation is all working correctly you may delete the backup of the old Tomcat files. These are copied to the location output by the script e.g. ``C:\certdog\tomcat.bak.20260421-1252``
 

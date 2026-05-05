@@ -56,6 +56,8 @@ Tomcat upgrade complete.
 A backup of the previous Tomcat installation is located at: C:\certdog\install\..\tomcat.bak.20260421-1252
 ```
 
+Note that the previous Tomcat version is backed up to a timestamped folder mentioned in the output.
+
 <br>
 
 ### Rollback
@@ -79,5 +81,19 @@ Start the certdog service.
 
 ### Cleanup
 
-When satisfied that the installation is all working correctly you may delete the backup of the old Tomcat files. These are copied to the location output by the script e.g. ``C:\certdog\tomcat.bak.20260421-1252``
+When satisfied that the installation is all working correctly you may delete the backup of the old Tomcat files. 
+
+Locate the backup location e.g.
+
+```
+C:\certdog\tomcat.bak.20260421-1252
+```
+
+and delete
+
+You may also delete the downloaded temporary store located here:
+
+```
+C:\certdog\tomcat.new
+```
 

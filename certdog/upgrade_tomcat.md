@@ -90,10 +90,3 @@ C:\certdog\tomcat.bak.20260421-1252
 ```
 
 and delete
-
-You may also delete the downloaded temporary store located here:
-
-```
-C:\certdog\tomcat.new
-```
-

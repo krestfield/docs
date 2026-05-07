@@ -17,7 +17,33 @@ Support: [support@krestfield.com](mailto:support@krestfield.com)
 
 Web: [https://www.krestfield.com]
 
+<br>
 
+------------------------------------------------------------------------------
+> Version: 4.5.0
+> Release Date: 24 April 2026
+
+Changes:
+* PQC (Post Quantum Cryptography) algorithms (ML-DSA-44, ML-DSA-65, ML-DSA-87) added. These algorithms currently operate for software tokens only. 
+
+* CMS (Cryptographic Message Syntax) processing for ML-DSA adheres to RFC 9882.
+* Google KMS tokens can now choose to store keys in HSM or SOFTWARE.
+
+Fixes:
+* Addressed: CVE-2026-5588 (https://nvd.nist.gov/vuln/detail/CVE-2026-5588)  
+<br>
+
+------------------------------------------------------------------------------
+> Version: 4.4.0
+> Release Date: 23 January 2026
+
+Changes:
+* None
+
+Fixes:
+* Dependencies updated to latest versions to remove reported vulnerabilities  
+  <br>
+  
 ------------------------------------------------------------------------------
 
 > **Version: 4.3.0**
@@ -115,7 +141,7 @@ Changes:
 Fixes:
 * Log4J version upped to 2.17.1
   
-------------------------------------------------------------------------------  
+------------------------------------------------------------------------------
 
 > **Version: 4.1.2**
 > Release Date: 20 July 2020
@@ -129,7 +155,7 @@ Fixes:
 * Added backwards compatibility for setting issuer DN in PKCS#7 in order
   to support Thales SafeSign
   
-------------------------------------------------------------------------------  
+------------------------------------------------------------------------------
 
 >  **Version: 4.1.0**
 > **Release Date**: 30 June 2020
@@ -141,7 +167,7 @@ Changes:
 Fixes:
 * None
   
-------------------------------------------------------------------------------  
+------------------------------------------------------------------------------
 
 > **Version: 4.0.0**
 > **Release Date**: 6 May 2020

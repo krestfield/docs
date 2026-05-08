@@ -58,6 +58,8 @@ Populate the following settings
 
 **System URL**
 
+*From version 1.17 onwards this has been moved to [Settings](settings.html)*
+
 In order for the [CERTURL] tag to be correct, you must enter a value for **System URL**. This must be the server name and location a user would use to access the system  
 
 The server name will be the DNS name and the location will usually be **/certdog** but this can be changed depending on how you host the system  

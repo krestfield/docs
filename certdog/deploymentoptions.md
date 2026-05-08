@@ -11,13 +11,14 @@ nav_order: 21
 certdog can be deployed on
 
 * Windows Server 2016
-
 * Windows Server 2019
-* Windows 10
-
-* Mac OS
-
+* Windows Server 2025
+* Windows 11
 * Linux (including RedHat, Debian and Ubuntu)
+* A Docker Image
+* A Kubernetes Cluster
+
+<br>
 
 However, the ADCS agent (the interface to the Microsoft CA) can only be deployed on the Windows Server platforms
 
@@ -33,7 +34,7 @@ There are several options available when deploying certdog, the simplest is to i
 
 This is the default installation and if the host is in the same domain as your Microsoft CA, then the ADCS Agent will be able to access it. Other CAs (e.g. PrimeKey EJBCA) will also be accessible as long as network rules allow  
 
-
+<br>
 
 ### Single Server - Multiple ADCS Instances
 
@@ -47,7 +48,7 @@ For each domain, an ADCS agent would be deployed onto a server that is in the sa
 
 Outgoing ports (by default these are 27017,27018 and 27019) from the servers (Server 1 and Server 2) would need to be opened to the Linux host
 
-
+<br>
 
 ### Multi Server Load Balanced
 
@@ -61,7 +62,9 @@ In the example above, there is a dedicated server hosting the API (Server 2). Yo
 
 The database can be clustered and hosted across multiple servers...or in the cloud
 
+For steps to configure a setup such as this, see [here](certdog_ha_config.html)
 
+<br>
 
 ### Cloud and On Premises
 

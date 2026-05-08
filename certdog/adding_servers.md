@@ -11,9 +11,13 @@ nav_order: 131
 
 You may add additional servers to the base configuration for redundancy or load-balancing  
 
-The Certdog architecture essentially consists of Certdog Servers (offering API and UI access) and a database  
+The Certdog architecture essentially consists of Certdog Servers (offering API, services such as ACME and UI access) and a database  
 
 The database may be replicated to provide redundancy or you may simply add additional Certdog servers to point to the same database. For example, you may have a large server hosting the database and simply wish to add additional Certdog servers that are accessible from other networks  
+
+<br>
+
+**Note: As of version 1.16, the following steps have been superseded by the steps detailed [here](certdog_ha_config.html).**
 
 <br>
 

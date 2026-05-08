@@ -8,13 +8,39 @@ nav_order: 19
 
 The settings can be viewed by selecting the **Settings > Settings** option on the menu
 
-<img src=".\images\settings.png" alt="Settings" style="zoom:80%;" />
+<img src="./images/image-20260508152306222.png" alt="image-20260508152306222" style="zoom:67%;" />
+<br>
+
+* System URL
+
+  * In order for the URLs to be correct (as sent out in emails/notifications and used by services such as ACME), you must enter a value for **System URL**. This must be the server name and location a user would use to access the system
+
+  * The server name will be the DNS name and by default, the location will be **/certdog** (but this can be changed depending on how you host the system)
+
+  * As an example, on initial setup you may access the login page here:
+
+    https://127.0.0.1/certdog/ui/#/login
+
+  * In this case you would set the *System URL* to be:
+
+    https://127.0.0.1/certdog
+
+  * Later, when you configure your DNS entries, you may access the server at:
+
+    https://pki.krestfield.local/certdog/ui/#/login
+
+  * So now the *System URL* would be:
+
+    https://pki.krestfield.local/certdog
+
+<br>
 
 * Private Key Retention Period
+
   * If a user generates a certificate using the *Request DN* option, then certdog also generates the keys and CSR. This period defines for how long this data will be retained by the system
-  
+
   * Whilst the key data is retained the owner of the certificate can return to the system and download the certificate as a PKCS#12, JKS or PEM file. Once this period has expired, this data will be purged from the system and will no longer be available
-  
+
 
 <br>
 
@@ -26,6 +52,13 @@ The settings can be viewed by selecting the **Settings > Settings** option on th
     * All Certificates. Users can see all certificates in the system
 
   * Note that even if users can see the certificates, they can only download keys associated with a certificate (PKCS#12, JKS, PEM etc.) they are the owner
+
+<br>
+
+* PowerShell Processor
+  * When PowerShell scripts are executed by Workflows, this is the command that will be used to run those scripts. Usually powershell.exe will be available on Windows systems but if this is not in the path available to Certdog, or installed somewhere else, you may provide the exact location here e.g. ``C:\modules\powershell.exe``
+* Shell Processor
+  * When Certdog is running on a Linux based OS, this is the shell processor that will be used to run the shell scripts. This could be changed to another shell e.g. bash if preferred
 
 <br>
 

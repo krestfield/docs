@@ -255,7 +255,7 @@ The options are:
 
 If you wish certain individuals/teams to be emailed should the test case fail, check the **Send an Email** checkbox
 
-The Email Settings must also be set for this to operate. See the section below on Email Server Settings for details on how to configure this 
+The Email Settings must also be set for this to operate. See the [Email Server Settings](email-server.html) for details on how to configure this 
 
 You can then specify the recipients by clicking the **Recipients** button. The following dialog will appear:
 

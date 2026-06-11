@@ -13,6 +13,8 @@ This is configured in the **Settings > Email Settings** section
 
 Refer to [Email Settings](email_settings.html) for more information on configuring the emails  
 
+Note: From version 1.17 expiry reminders can also be configured from [Workflows](workflows.html). Via workflows, emails may also be sent, but other actions (such as sending Teams messages or running scripts) can also be performed
+
 
 
 ### Reminder Days

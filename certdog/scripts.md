@@ -83,40 +83,47 @@ Therefore, the scripts will only have the same permissions as those accounts. Ho
 
 <br>
 
-When uploading scripts be sure to examine contents and satisfy yourself that the script will be safe to run. Especially if uploading one not developed by trusted parties. The purpose of scripts being uploaded in this way is intentional, to force a review and prevent external scripts being tampered with or swapped.
+When uploading scripts be sure to examine contents and satisfy yourself that the script will be safe to run. Especially if uploading one not developed by trusted parties. The purpose of scripts being uploaded in this way is intentional, to force a review and prevent external scripts being tampered with or swapped
 
 <br>
 
 When a script is specified in a Workflow, several parameters may be passed, e.g.
 
-* [APITOKEN]
+* ``[APITOKEN]``
   * A temporary API authentication token that will enable the script 
-
-* [CERTDATAB64]
+* ``[CERTDATAB64]``
   * The certificate data in Base64 format (without any header and footer)
-
-* [CERTSUBJECT]
+* ``[CERTSUBJECT]``
   * The DN of the certificate
-
-
-(See [Parameters](parameters.html) for the full list)
 
 etc.
 
-The script can accept these parameters using variables. E.g. in PowerShell, this can be accomplished as follows:
+(See [Parameters](parameters.html) for the full list)
+
+<br>
+
+For example, if our PowerShell script accepted the following parameters:
 
 ```powershell
-param  (
-    [Parameter(Mandatory = $true)]
-    [string]$apiToken,
-    [Parameter(Mandatory = $true)]
-    [string]$certDataB64,
-    [Parameter(Mandatory = $true)]
-    [string]$certSubject
+param (
+    [Parameter(Mandatory = $true]
+    [string]$certId,
+    [Parameter(Mandatory = $true]
+    [string]$certSubject,
+    [Parameter(Mandatory = $true]
+    [string]$caller
 )
 ```
 
+These parameters could be passed in the correct order. e.g. ``[CERTID] [CERTSUBJECT] "Workflows"``
+
+Alternatively parameter names can also be specified, in which case the order would not matter e.g. ``-certId [CERTID] -caller "Workflows" -certSubject [CERTSUBJECT]``
+
+See [Workflows](workflows.html) for more information on configuring scripts to run as part of a workflow
 
 
 
+
+
+<br>
 

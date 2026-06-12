@@ -181,11 +181,28 @@ If **Run Script** is selected, you can select the pre-loaded script to execute. 
 
 Choose the script from the Script dropdown
 
-For Arguments, select from the **Available Tags** (clicking will copy to the clipboard) and paste into the **Arguments** list. See [parameters](parameters.html) for more details on the available parameters. These values will be passed directly to the script in the order they are specified. For PowerShell scripts you can pass just the values, in the correct order e.g.
+For Arguments, select from the **Available Tags** (clicking will copy to the clipboard) and paste into the **Arguments** list. See [parameters](parameters.html) for more details on the available tags. Tags are substituted for the actual values when processing. For example, ``[CERTSUBJECT]`` will be substituted for the subject of certificate being processed e.g. ``CN=cert1,O=org,C=gb``
+
+These values will be passed directly to the script in the order they are specified
+
+For example, if our PowerShell script accepted the following parameters:
+
+```powershell
+param (
+    [Parameter(Mandatory = $true]
+    [string]$certId,
+    [Parameter(Mandatory = $true]
+    [string]$certSubject,
+    [Parameter(Mandatory = $true]
+    [string]$caller
+)
+```
+
+They could be passed in the correct order. e.g.
 
 <img src="./images/image-20260611132812159.png" alt="image-20260611132812159" style="zoom:80%;" />
 
-Or also specify the parameter names e.g.
+Or the parameter names could also be specified, in which case the order would not matter e.g.
 
 <img src="./images/image-20260611132910179.png" alt="image-20260611132910179" style="zoom:80%;" />
 
@@ -251,8 +268,6 @@ For Template, select from:
     ]
   }
   ```
-
-  
 
 * **Microsoft Teams Adaptive Card**
 

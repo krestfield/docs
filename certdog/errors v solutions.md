@@ -435,3 +435,38 @@ So the complete line is as follows:
 Save the file
 
 Restart the **Krestfield CertDog Service**
+
+<br>
+
+---
+
+<br>
+
+### Forbidden when accessing from remote machine 
+
+When accessing from another server (e.g. via an IP address), you see a screen such as:
+
+<img src="./images/image-20260618093617386.png" alt="image-20260618093617386" style="zoom:80%;" />
+
+With the message "You do not have permissions to view the current page"
+
+Or continue to get messages such as "There was a network level error while attempting to obtain data. The API may be down or there is a problem connecting to the API"  
+
+This could be due to a Browser cache issue. This will occur if the same browser has been used to access other instances or you have recently moved from accessing via https://127.0.0.1 to the full URL (e.g. https://certdog.pkiservers.local)  
+
+To rectify, clear the browser cache
+
+From Chrome, click the three dots (top-right), click **Delete browsing data**. Select **Cookies and other site data** and **Cached images and files** then **Delete data** 
+
+For a more granular approach, press F12 to bring up the developer tools. Choose the Application tab and navigate to Storage - Local Storage and then select the URL:
+
+<img src="./images/image-20260618095425492.png" alt="image-20260618095425492"  />
+
+In the right hand pane, select **config** and press **Delete**. Now attempt to navigate back to the certdog page
+
+
+
+
+
+
+

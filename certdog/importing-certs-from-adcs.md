@@ -2,7 +2,7 @@
 layout: default
 title: Importing Certificates from ADCS
 parent: Certdog
-nav_order: 211
+nav_order: 2110
 ---
 
 # Importing Certificates from AD CS
@@ -11,7 +11,7 @@ nav_order: 211
 
 <br>
 
-Certificates issued from Active Directory Certificate Services can continually be pulled into the certdog database using the Scripts functionaity.
+Certificates issued from Active Directory Certificate Services can continually be pulled into the certdog database using the Scripts functionality.
 
 <br>
 
@@ -37,7 +37,7 @@ and click **Add**
 
 <br>
 
-From the Tasks menu, click Add New Task
+From the **Tasks** menu, click **Add New Task**
 
 ![image-20260703141623787](./images/image-20260703141623787.png)
 

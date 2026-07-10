@@ -123,7 +123,7 @@ If you have have made changes to your TLS certificates - server or database, the
 
 ### Troubleshooting
 
-If you see an error such as
+If the script does not complete and you see an error such as
 
 ```
 Database dump failed. Exiting.
@@ -135,7 +135,7 @@ Verify that you meet the pre-requisites mentioned at the top of this page
 
 <br>
 
-The script outputs the following files:
+The script outputs the following files (located in the ``.\certdog\install`` folder:
 
 * upgradedblog.txt
 
@@ -145,4 +145,77 @@ Any errors during the process will be available in these files
 
 <br>
 
-If the upgrade does fail and cannot be recovered, rollback the installation by stopping the services and re-instating the backed up files. Once restored, re-start the services
+---
+
+If the script completes OK but the system is unavailable, check if the following services are running:
+
+* Krestfield Certdog Service
+
+* Krestfield CertDog Database
+
+If these are not running. First attempt to start the *Krestfield Certdog Database* service. If this still won't start perform the following:
+
+Navigate to ``.\certdog\mongodb\bin`` and open ``mongod.cfg``
+
+```yaml
+...
+net:
+   bindIp: 127.0.0.1
+   port: 27017
+   tls:
+        mode: requireTLS
+        certificateKeyFile: C:\certdog\mongodb\..\config\sslcerts\dbssl.pem
+        CAFile: C:\certdog\mongodb\..\config\sslcerts\dbssl_root.pem
+        CAFile: C:\certdog\mongodb\..\config\sslcerts\dbssl_root.pem
+		allowConnectionsWithoutCertificates: true
+setParameter:
+   enableLocalhostAuthBypass: false
+replication:
+   replSetName: replocal
+security:
+   authorization: "enabled"
+   clusterAuthMode: x509
+   clusterAuthMode: x509   
+```
+
+If you see any duplicate lines, remove the duplicates. For example, in this example, there are duplicates for ``CAFile``:        
+
+```
+        CAFile: C:\certdog\mongodb\..\config\sslcerts\dbssl_root.pem
+        CAFile: C:\certdog\mongodb\..\config\sslcerts\dbssl_root.pem
+```
+
+ and ``clusterAuthMode``:
+
+```
+   clusterAuthMode: x509
+   clusterAuthMode: x509  
+```
+
+So remove the duplicate items so there is only one ``CAFile``:
+
+```
+        CAFile: C:\certdog\mongodb\..\config\sslcerts\dbssl_root.pem
+```
+
+and one ``clusterAuthMode``:
+
+```
+   clusterAuthMode: x509
+```
+
+Do this for any other duplicates found.
+
+Save the ``mongod.cfg`` file and attempt to restart the services in this order:
+
+1. Krestfield Certdog Service
+
+2. Krestfield CertDog Database
+
+<br>
+
+---
+
+<br>
+
+If the upgrade does fail and cannot be recovered, rollback the installation by stopping the services and re-instating the backed up files (as carried out in the Backup section above). Once restored, re-start the services

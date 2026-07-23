@@ -11,7 +11,7 @@ nav_order: 200
 
 ## Pre-Requisites
 
-* A Debian 11 or 12 installation. Note other versions may work but this version is confirmed
+* A Debian 13 installation. Note other versions may work but this version is confirmed
 
 * An account with sudo/root permissions
 
@@ -25,9 +25,9 @@ It is recommended that a separate, dedicated user be created which will run the 
 
 ## Install Mongo DB
 
-Follow the instructions linked below to download and install Mongo DB Community Edition. The Debian installation has been tested and confirmed to work with MongoDB Community Edition 5, 6 and 7.
+Follow the instructions linked below to download, install, and run Mongo DB Community Edition. The Debian installation has been tested and confirmed to work with MongoDB Community Edition 8.0.
 
-[https://www.mongodb.com/docs/manual/tutorial/install-mongodb-on-debian/](https://www.mongodb.com/docs/manual/tutorial/install-mongodb-on-debian/)
+[https://www.mongodb.com/docs/v8.0/tutorial/install-mongodb-on-debian/](https://www.mongodb.com/docs/v8.0/tutorial/install-mongodb-on-debian/)
 
 Confirm mongo DB is running by typing:
 
@@ -37,29 +37,20 @@ mongosh
 
 and ensure you connect and get the mongo db prompt. Type ``exit``, to exit the prompt
 
-If there issues starting mongodb, see here: [https://askubuntu.com/questions/823288/mongodb-loads-but-breaks-returning-status-14](https://askubuntu.com/questions/823288/mongodb-loads-but-breaks-returning-status-14)
-
-This mentions setting the correct permissions. E.g.
-
-```sh
-sudo chown -R mongodb:mongodb /var/lib/mongodb
-sudo chown mongodb:mongodb /tmp/mongodb-27017.sock
-```
-
 <br>
 
 ## Get Certdog
 
-1. Download Certdog from [here](https://krestfield.s3.eu-west-2.amazonaws.com/certdog/debian/certdogfreev1100.tar.gz)
+1. Download Certdog from [here](https://krestfield.s3.dualstack.eu-west-2.amazonaws.com/certdog/debian/certdog-deb-v1.17.tar.gz)
 
    File Hash:
 
-   * SHA1: ``f53ebee154080b55c7939d3f90fff77c917ee6d4``
+   * SHA1: ``283bd8912ce143fa2cc27a4eec86bd4cc7e4a207``
 
 e.g.
 
-```
-curl https://krestfield.s3.eu-west-2.amazonaws.com/certdog/debian/certdogfreev1100.tar.gz --output certdog.tar.gz
+```shell
+curl https://krestfield.s3.dualstack.eu-west-2.amazonaws.com/certdog/debian/certdog-deb-v1.17.tar.gz --output certdog.tar.gz
 ```
 
 <br>
@@ -112,11 +103,15 @@ Other logs, including the mongodb, application (certdog.log) and startup/shutdow
 
 <br>
 
-If all is good you can navigate to the console from the same machine at: [https://127.0.0.1:1443](https://127.0.0.1:1443)
+If all is good you can navigate to the console from the same machine at: [https://127.0.0.1:1443](https://127.0.0.1:1443) -  **NOTE the 1443 port**
+
+Accept any TLS browser errors that will be present which will occur due to the default, initial TLS certificate.
 
 ---
 
 <br>
+
+#### Allowing External Access over Standard Ports
 
 * The main certdog application listens on port 1443 (on all interfaces) 
 * The CRL (and OCSP) server listens on port 1480 (http)
@@ -259,7 +254,7 @@ Then enter the following line (after the comments and any other cron entries):
 
 <br>
 
-## Troubleshooting
+## Troubleshooting/Re-install
 
 Examine the log files as mentioned above  to see if anything obvious appears  
 
@@ -283,7 +278,6 @@ Then enter the following commands:
 
 ```
 use certman
-show users
 db.dropUser("certmanuser")
 db.dropDatabase()
 ```

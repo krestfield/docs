@@ -280,6 +280,7 @@ Then enter the following commands:
 use certman
 db.dropUser("certmanuser")
 db.dropDatabase()
+exit
 ```
 
 
@@ -310,7 +311,7 @@ kill -9 [Process ID]
 
 
 
-Then re-run the ``./configure.sh`` script
+Then from the ``install`` directory, re-run the ``./configure.sh`` script
 
 <br>
 

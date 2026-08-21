@@ -51,7 +51,37 @@ The following information must then be entered:
 
 Click **Add**
 
-The script will now be available as an optional script in [Workflows](workflows.html)
+The script will now be available as an optional script in [Workflows](workflows.html) and [Tasks](tasks.html)
+
+<br>
+
+### Logging
+
+Output from scripts is written to the local text log (.e.g. c:/certdog/logs/ezsign.log). For example, the following PowerShell:
+
+```powershell
+Write-Host "-- Import from ADCS Starting --------------------"
+Write-Host "   Importing 56 certificates from scca1.cromer.org\CA1..."
+Write-Host "-------------------------------------------------"
+```
+
+Would result in the following log entries in the text logs:
+
+```
+2026-07-02 10:03:00.013 DEBUG certdogapi - [system] Running Task 'Import from ADCS'.
+2026-07-02 10:03:00.037 DEBUG certdogapi - [system] Running script 'Import from ADCS'. Command: powershell.exe -File C:\certdog\scripts\57892009024066169511.ps1 -apiToken [APITOKEN] -apiUrl https://cd.cromer.org/certdog/api/
+2026-07-02 10:03:00.287 DEBUG certdogapi - Script 'Import from ADCS' exited with code '0' output:
+-- Import from ADCS Starting --------------------
+   Importing 56 certificates from scca1.cromer.org\CA1...
+------------------------------------------------
+```
+
+The log entries available via the UI (and API) contain fewer details (not the script output), to avoid clutter. E.g.
+
+```
+2026-07-02 10:03:00 Running Task 'Import from ADCS'.
+2026-07-02 10:03:00 Running script 'Import from ADCS'. Command: powershell.exe -File C:\certdog\scripts\57892009024066169511.ps1 -apiToken [APITOKEN] -apiUrl https://cd.cromer.org/certdog/api/
+```
 
 <br>
 

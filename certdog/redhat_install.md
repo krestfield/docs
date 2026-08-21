@@ -177,7 +177,7 @@ sudo systemctl stop mongod
 By default, certdog will be available on ``127.0.0.1`` on port **1443** e.g.:
 
 ```sh
-https://127.0.0.1:1433/certdog
+https://127.0.0.1:1443/certdog
 ```
 
 Note: CRLs and OCSP services will be available on port **1480**
@@ -210,7 +210,7 @@ Note that this port forwarding may not work from the local machine but should be
 
 Open a browser on the server and navigate to:
 
-https://127.0.0.1:1433/certdog
+https://127.0.0.1:1443/certdog
 
 Login with the initial username and password as displayed at the end of the installer. These are temporary credentials - as soon as you first login you will be forced to set a new password
 
@@ -272,7 +272,7 @@ Also note that when initially accessing CRLs locally, until you forward the port
 To test the CRL can be downloaded you can run the following command:
 
 ```
-wget http://127.0.0.1:1440/certdog/crl/test.crl
+wget http://127.0.0.1:1480/certdog/crl/test.crl
 ```
 
 <br>

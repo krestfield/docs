@@ -31,27 +31,19 @@ Contact [support](mailto:support@krestfield.com) for your download location
 
 ### Windows File Hashes
 
-V1.15.0 Full Version:  
+V1.17.0 Full Version:  
 
-* SHA1: ``eb4573f3796d6ab6443cb69b2aded2e68cb4d250``
-
-* SHA256: ``477c2cf5322420ca09d604d3361532bdbf5de4ab30eb22124770b5232b677ab2``
-
-V1.15.0 Free Version:  
-
-* SHA1: ``a028048517155ba1510a7b18f473cfde7ac5f955``
-
-* SHA256: ``68ed1c90fd6837a33b6786f6b8734a9ef1a1cfd6a3302ce88b373b30e72ee66c``
+* SHA1: ``6bcbb01bab4151823b4b0be6941fe06e32ad407b``
+* SHA256: ``566a0766278b4f189b7bbf0fd53bfea8d7a18184bd8f834db1eda0ae597f78fb``
 
 <br>
 
-### RedHat File Hashes
+### Linux (RedHat and Debian) File Hashes
 
-V1.14.0 Free Version:  
+V1.17.0 Full Version:  
 
-* SHA1: ``7f06118d991cbca94df9afb3f3dfd39ede5f0885``
-
-* SHA256: ``17d7a2690b02a58aded2b2f562804616807fcc6f1dec9b353b56bd92b4635b60``
+* SHA1: ``1beae7825a9010fbec09b1b68d08b192a3aac1ee``
+* SHA256: ``7ea9059af294dfb9a2cfdb95e64009a4a7ed55d3e84fa2f8dba5325959e7e8e4``
 
 <br>
 

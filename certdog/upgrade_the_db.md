@@ -153,7 +153,9 @@ If the script completes OK but the system is unavailable, check if the following
 
 * Krestfield CertDog Database
 
-If these are not running. First attempt to start the *Krestfield Certdog Database* service. If this still won't start perform the following:
+If running, restart the *Krestfield Certdog Database*, followed by the *Krestfield Certdog Service*.
+
+If they were not running. First attempt to start the services in the same order. If they fail to start perform the following:
 
 Navigate to ``.\certdog\mongodb\bin`` and open ``mongod.cfg``
 

@@ -41,16 +41,16 @@ and ensure you connect and get the mongo db prompt. Type ``exit``, to exit the p
 
 ## Get Certdog
 
-1. Download Certdog from [here](https://krestfield.s3.dualstack.eu-west-2.amazonaws.com/certdog/debian/certdog-deb-v1.17.tar.gz)
+1. Download Certdog from [here](https://krestfield.s3.dualstack.eu-west-2.amazonaws.com/certdog/debian/certdog-free-linux-v1.17.tar.gz)
 
    File Hash:
 
-   * SHA1: ``283bd8912ce143fa2cc27a4eec86bd4cc7e4a207``
+   * SHA1: ``7a41f27bac3a8cad97336f0866831948f76b9a47``
 
 e.g.
 
 ```shell
-curl https://krestfield.s3.dualstack.eu-west-2.amazonaws.com/certdog/debian/certdog-deb-v1.17.tar.gz --output certdog.tar.gz
+curl https://krestfield.s3.dualstack.eu-west-2.amazonaws.com/certdog/debian/certdog-free-linux-v1.17.tar.gz --output certdog.tar.gz
 ```
 
 <br>

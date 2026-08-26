@@ -8,7 +8,7 @@ nav_order: 19
 
 The settings can be viewed by selecting the **Settings > Settings** option on the menu
 
-<img src="./images/image-20260508152306222.png" alt="image-20260508152306222" style="zoom:67%;" />
+![image-20260826141226879](./images/image-20260826141226879.png)
 <br>
 
 * System URL
@@ -53,12 +53,23 @@ The settings can be viewed by selecting the **Settings > Settings** option on th
 
   * Note that even if users can see the certificates, they can only download keys associated with a certificate (PKCS#12, JKS, PEM etc.) they are the owner
 
+* Can Revoke Others
+  * Only available if *Teams Certificates* or *All Certificates* are chosen for *Users can see*
+  * With this option switched off, users can only revoke their own certificates, regardless of whether they can view their teams or all certificates. When checked, they are also permitted the revoke any certificates they have visibility of
+
 <br>
 
 * PowerShell Processor
   * When PowerShell scripts are executed by Workflows, this is the command that will be used to run those scripts. Usually powershell.exe will be available on Windows systems but if this is not in the path available to Certdog, or installed somewhere else, you may provide the exact location here e.g. ``C:\modules\powershell.exe``
 * Shell Processor
   * When Certdog is running on a Linux based OS, this is the shell processor that will be used to run the shell scripts. This could be changed to another shell e.g. bash if preferred
+* Script Path
+  * The location on the file system, relative to the installation where the scripts will temporarily be written to when being executed
+  * If Certdog is running on a read-only file system (e.g. in a kubernetes setup), you may need to update this to point to another mounted volume
+* Approval Limit
+  * The number of seconds a script is allowed to block for when it is used as an approval. After this limit, the API will create an *approval* to be approved or rejected by the script when it is finished instead of processing the request immediately
+* Time Limit
+  * The total number of seconds a script can run for before it is forcibly ended by Certdog
 
 <br>
 

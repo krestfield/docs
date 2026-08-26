@@ -9,7 +9,7 @@ nav_order: 1003
 
 <br>
 
-Workflows can execute scripts and pass parameters
+Tasks and Workflows can execute scripts and pass parameters
 
 Emails and Webhooks can also be passed parameters
 

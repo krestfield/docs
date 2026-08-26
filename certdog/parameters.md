@@ -24,6 +24,9 @@ These available parameters are listed below
   * This enables the script to authenticate to the certdog API
   * The API token will be generated from the user account that has made the request. E.g. if a user called ``certdoguser`` has requested a certificate, an API token will be generated from this account allowing the script to have the same privileges as ``certdoguser``
 
+* **[APIURL]**
+  * The Certdog API URL (formed by joining the system URL with `/api/`)
+  * You do not need this if you are using the PowerShell module, as the API URL is configured with the same value automatically. However, is required if you call the REST API directly
 * **[CERTID]**
   * The internal ID of the certificate
   * This uniquely identifies the certificate within the system, enabling scripts or other systems to make calls (e.g. using the REST API), specifying this ID to retrieve the certificate

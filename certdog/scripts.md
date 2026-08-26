@@ -7,13 +7,13 @@ nav_order: 1003
 
 # Scripts
 
-> This feature is available from certdog 1.17
+> This feature is available from Certdog 1.17
 
 <br>
 
-Certdog supports the running of scripts as part of a [Workflow](workflows.html)
+Certdog supports the running of scripts as part of [Workflows](workflows.html) and [Tasks](tasks.html)
 
-Scripts can be used to carry out operations post certificate processing (request, issuance, revocation etc.), or act as approvers, making decisions on whether certificates may be issued or revoked
+Scripts can be used to carry out operations post certificate processing (request, issuance, revocation etc.), or act as approvers, making decisions on whether certificates may be issued or revoked. Or run regular tasks.
 
 Some examples of usage include:
 
@@ -23,6 +23,10 @@ Some examples of usage include:
 
 * Push certificate data to another system or database
 
+* Synchronising an AD CS database with the Certdog inventory
+
+* Generating weekly reports
+
 Scripts can be Shell (Linux) or PowerShell (Windows/Linux) and must be uploaded prior to being specified in a Workflow
 
 <br>
@@ -31,7 +35,7 @@ Scripts can be Shell (Linux) or PowerShell (Windows/Linux) and must be uploaded 
 
 From the menu, select **Scripts** and then click **Add New Script**:
 
-<img src="./images/image-20260611134600493.png" alt="image-20260611134600493" style="zoom: 67%;" />
+<img src="./images/image-20260826145820778.png" alt="image-20260826145820778" style="zoom: 67%;" />
 
 The following information must then be entered:
 
@@ -40,8 +44,6 @@ The following information must then be entered:
 * **Description**. Enter a description (optional)
 
 * **Script Type**. Choose either Shell or PowerShell. This determines what the script will be run with. In the [Settings](settings.html) menu, there are entries for *PowerShell Processor* and *Shell Processor* which are set to *powershell.exe* and *sh* by default, but these can be updated if required
-
-* **Requires PowerShell Module**. If the *Script Type* is **PowerShell**, this option is available. When checked the [Certdog PowerShell module](powershell_module.html) will be made available to the running script enabling the script to make use of the module's functions in order to call back into certdog. When specifying in a workflow, the ``[APITOKEN]`` is usually also passed to the script, allowing the script to authenticate to the certdog API
 
 * **Upload Script**. If the script resides on disk, click **Choose file** to navigate to this script, alternatively the script can be typed/pasted in to the *Script* section
 
@@ -97,7 +99,7 @@ Clicking on a script will preview the script contents as well as provide the **V
 
 To delete, click **Delete**. To edit click **View/Edit**:
 
-<img src="./images/image-20260611141355221.png" alt="image-20260611141355221" style="zoom: 67%;" />
+<img src="./images/image-20260826150021516.png" alt="image-20260826150021516" style="zoom:67%;" />
 
 The script may be edited directly in the *Script* section or a new script uploaded.
 
@@ -107,20 +109,20 @@ When done, click **Update**
 
 ### Notes on Developing Scripts
 
-Scripts will be run by the same account that is running the Certdog service. In Windows this will, by default be LOCAL SYSTEM, on Linux this will be whatever account has been configured to run the service
+Whether activated via a Workflow or Task, scripts will be run by the same account that is running the Certdog service. In Windows this will, by default be LOCAL SYSTEM (the account the Certdog Service is running under). On Linux this will be whatever account has been configured to run the service
 
-Therefore, the scripts will only have the same permissions as those accounts. However, the LOCAL SYSTEM account is highly privileged
-
-<br>
-
-When uploading scripts be sure to examine contents and satisfy yourself that the script will be safe to run. Especially if uploading one not developed by trusted parties. The purpose of scripts being uploaded in this way is intentional, to force a review and prevent external scripts being tampered with or swapped
+Therefore, the scripts will only have the same permissions as those accounts
 
 <br>
 
-When a script is specified in a Workflow, several parameters may be passed, e.g.
+When uploading scripts be sure to examine contents and satisfy yourself that the script will be safe to run before committing. Especially if uploading one not developed by trusted parties. The purpose of scripts being uploaded in this way is intentional, to force a review and prevent scripts from being tampered with or swapped (e.g. if they were held on the file system)
+
+<br>
+
+When a script is specified in a Workflow or Task, several parameters may be passed. E.g.
 
 * ``[APITOKEN]``
-  * A temporary API authentication token that will enable the script 
+  * A temporary API authentication token that will enable the script to authenticate back to the Certdog API (directly or via the Certdog PowerShell module), enabling it to obtain additional information (or make updates, if permissions allow)
 * ``[CERTDATAB64]``
   * The certificate data in Base64 format (without any header and footer)
 * ``[CERTSUBJECT]``
@@ -128,7 +130,7 @@ When a script is specified in a Workflow, several parameters may be passed, e.g.
 
 etc.
 
-(See [Parameters](parameters.html) for the full list)
+What parameters are available depend on if running as a Script or Workflow. See [Parameters](parameters.html) for the full list
 
 <br>
 
@@ -149,11 +151,31 @@ These parameters could be passed in the correct order. e.g. ``[CERTID] [CERTSUBJ
 
 Alternatively parameter names can also be specified, in which case the order would not matter e.g. ``-certId [CERTID] -caller "Workflows" -certSubject [CERTSUBJECT]``
 
-See [Workflows](workflows.html) for more information on configuring scripts to run as part of a workflow
+See [Workflows](workflows.html) for more information on configuring scripts to run as part of a workflow and [Scripts](scripts.html) for running regular tasks
 
+<br>
 
+You can also use the [Certdog PowerShell Module](powershell_module.html) within a script. The module is always written to the `scripts` folder before a PowerShell script is run, so you can import the module using a relative path.
 
+```powershell
+param(
+    [Parameter(Mandatory = $true)]
+    [string] $ApiToken
+)
 
+Import-Module .\certdog-module.psm1
+
+Set-ApiToken -authToken $ApiToken
+...
+```
+
+By default, the API URL is formed by adding `/api/` onto the system URL, and this is written to a configuration file picked up by the PowerShell module so does not need to be explicitly specified when using the PowerShell module. However, it is also available as a parameter (e.g. when calling the REST API directly) or can be provided explicitly
+
+When using the PowerShell module you can override this URL as described in the [Certdog PowerShell Module](powershell_module.html) documentation. E.g.
+
+```powershell
+Set-ApiUrl -url "https://path/to/your/api/"
+```
 
 <br>
 

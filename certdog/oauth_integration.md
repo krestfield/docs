@@ -15,6 +15,7 @@ Certdog supports authorization and authentication of users via OAuth 2.0 and OID
 
 Currently, the following provider(s) are supported:
 - Microsoft Entra ID (formerly Azure AD)
+- Keycloak
 
 <br>
 

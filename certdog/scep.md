@@ -13,7 +13,9 @@ nav_order: 1002
 
 Certdog supports the SCEP protocol ([RFC8894](https://datatracker.ietf.org/doc/html/rfc8894)) 
 
-Multiple SCEP end points can be created - each with a different configuration. This allows for multiple setups that may provide different certificate types from different CAs
+Multiple SCEP end points can be created - each with a different configuration. This allows for multiple setups that may provide different certificate types from different CAs.
+
+Only RSA issuers are supported currently.
 
 <br>
 
@@ -131,6 +133,27 @@ Click **Yes** to confirm
 
 <br>
 
+## Handling Unauthorised Requests
+
+When the **Allow Unauthorised Requests** setting is disabled, Certdog will deny any SCEP request without a valid token or a trusted certificate
+
+You can optionally allow processing of unauthorised requests by toggling the **Allow Unauthorised Requests** setting, as described above. By default, this will allow all unauthorised requests, without any further checks or form of approval 
+
+To add extra checks or require approval in Certdog, you can use [Workflows](workflows.html). When creating a SCEP server, you have the option of enabling **Auto Create Workflow** if unauthorised requests are allowed. This will create a workflow which matches the SCEP service's user, and requires all certificate requests to be approved by an admin
+
+You can edit the auto-created workflow after the SCEP service is created, or you can create your own workflow instead. You may want to consider the following when using workflows with SCEP:
+
+- The workflows will not update when the SCEP server is updated - if you change the user, the workflow may no longer match SCEP requests
+- To prevent a certificate from being issued, you need to use a workflow action capable of interrupting the request. Currently, this includes **Obtain Approval** and **Run Script** with **Use As Approval** enabled
+- The auto created workflow only matches against the user, so it is advised to use a separate user specifically for SCEP when you are using the default workflow
+- If you want to be as specific as possible, you can match against the user, team, and issuer used by the SCEP server
+
+When **Allow Unauthorised Requests** is enabled, pre-authorised requests (those using secrets or trusted certificates) indicate to Certdog that workflows which could interrupt this request should be bypassed. For added security, a user must be explicitly given the ability by checking the **Can Bypass Interruptible Workflows** option. The auto-created user for SCEP has this option enabled, but if you are using your own user, you must enable it yourself. If this is not enabled for the SCEP user, all pre-authorised requests will also go through the workflows, often preventing them from being issued or requiring approval for all of them
+
+This does mean that you cannot run interruptible (obtain approval or script-as-approval) workflows on pre-authorised requests when **Allow Unauthorised Requests** is enabled. There may be alternative solutions depending on your use case. For example, if you can use two different aliases, you can split your SCEP server into two parts - one for authorised requests, and one for unauthorised requests
+
+<br>
+
 ## Managing Secrets
 
 Secrets are used to allow new clients to request certificates, and optionally can be required for renewing certificates too.
@@ -201,3 +224,30 @@ Select the certificate to be deleted and click **Delete**
 
 <br>
 
+## Troubleshooting
+
+Some common issue(s) are listed below to help if you are having problems with your SCEP server.
+
+If none of these fix your issue, please contact support for help.
+
+<br>
+
+### Authorised Requests Still Require Approvals
+
+You may notice requests being marked for approval or denied despite trusted certificates or shared secrets being accepted by the SCEP server.
+
+This can happen if your SCEP user does not have the required permissions to bypass workflows, resulting in all requests (even authorised requests) getting stopped by the workflow which flags them for approval.
+
+To fix this, select **Users** from the menu, select your user, click **View/Edit**, check **Can Bypass Interruptible Workflows**, and then click "Update".
+
+<br>
+
+### Unauthorised Requests Do Not Require Approvals
+
+When the **Allow Unauthorised Requests** option is enabled by itself, all requests will be accepted. You must rely on Workflows to capture unauthorised requests if you want to use approvals or run further checks.
+
+When **Auto Create Workflow** is enabled, a Workflow is created which matches the SCEP user and requires approval from any admin.
+
+If no such Workflow exists, or it is configured incorrectly, you can create one or update the current one to run on **Certificate Requested**, match your SCEP user, and use **Obtain Approval** as its action.
+
+<br>

@@ -20,6 +20,58 @@ Support: [support@krestfield.com](mailto:support@krestfield.com)
 Web: [https://www.krestfield.com](https://www.krestfield.com)
 
 
+<br>
+
+> **Version 1.17.0**
+> **Release Date**: 7th September 2026
+
+
+
+**Updates**
+
+* ML-DSA (44, 65 and 87) algorithms added. Supported in software and PKCS#11 tokens.
+* ACME tokens now renew dynamically and can be manually refreshed.
+* System URL now resides in the main settings area.
+* Get CRL API calls added.
+* Managed scripts. These can be run as part of workflows or as regular Tasks. Have the ability to utilise the powershell module and can be provided with an API key to call back into the certdog API.
+* Workflows expanded. Now support many more triggers, send Teams messages as well as Emails and can run managed scripts. They can also obtain request approval via a managed script (e.g. verifying a requested fqdn is registered in DNS).
+* Tasks. These can run regular tasks (such as CA sync or TLS scan) by calling a managed script.
+* WebHooks can be used to call out to other services such as Service Management, JIRA etc. from Workflows.
+* Service now starts faster.
+* Clicking on dashboard widgets now takes you to that certificate view.
+* Can now be deployed as a Kubernetes cluster, separating out all components (CRL, OCSP, ACME, SCEP, API, UI and DB).
+* Improvements made to scheduled tasks (e.g. sending of emails) so now handled better in high-availability setups.
+* CRLs for internal CAs can now be downloaded and re-generated from the console.
+* There is now an option to allow users to revoke any certificates they can see, depending on settings.
+* Support for Crypto4A HSM added.
+
+**Security Updates**
+
+* CVE-2026-5588 (vulnerability in Bouncy Castle library) resolved.
+* SpringBoot vulnerabilities resolved:
+  * CVE-2026-40973, CVE-2026-40975, CVE-2026-40977
+
+* Multiple Tomcat vulnerabilities resolved (present in versions prior to 10.1.55):
+
+
+**Fixes** 
+
+* Approval rejection didn't URL encode reason.
+* ACME and SCEP aliases now disallow spaces and check for trailing slashes in URLs.
+* Long log entries hid the last three columns.
+* Corrected encoding of ACME EAB key.
+* Conflict when saved searches had the same name resolved.
+* Dashboard would show certs expiring if they had been renewed.
+* An expired CA could still issue a certificate.
+* Resolved where an API token with the same name could not be created for another user.
+* Newlines for ACME returned certs now consistent for all CAs.
+* OCSP ML-DSA signatures corrected.
+
+<br>
+
+
+---
+
 > **Version 1.16.0**
 > **Release Date**: 26th January 2026
 

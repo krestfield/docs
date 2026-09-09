@@ -7,7 +7,11 @@ nav_order: 10
 
 # Upgrading Certdog
 
-When upgrading to version 1.6 or above the following steps should be performed
+<br>
+
+**NOTE: When upgrading from versions up to 1.16 to version 1.17, please first update the database as described [here](upgrade_the_db.html)**  
+
+This must be carried out before the steps below are followed. This is a one-time operation for the update to version 1.17
 
 <br>
 

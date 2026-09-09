@@ -25,9 +25,19 @@ You will need the database admin password. This is the password that was entered
 
 <br>
 
-The database must use a TLS connection. Note that, for free versions before 1.16, TLS was not enabled by default on the database
+The database must use a TLS connection. If you are using the full version, TLS is enabled by default. 
 
-To enable TLS, stop the *Krestfield CertDog Service*, then edit ``[CERTDOG INSTALL]\config\application.properties``. At the top of the file, add ``?tls=true`` to the end of the ``spring.data.mongodb.uri``. For example, if you have:
+For the free version before 1.16, this was not enabled. 
+
+To verify, check the ``[CERTDOG INSTALL]\config\application.properties`` file and locate the line starting ``spring.data.mongodb.uri``. If this ends with ``tls=true`` then TLS is in use  
+
+If the URL ends with ``certman`` only, then carry out the following steps to enable TLS, otherwise skip to the next section (Backup)
+
+<br>
+
+<u>To Enable TLS</u>
+
+Stop the *Krestfield CertDog Service*, then edit ``[CERTDOG INSTALL]\config\application.properties``. At the top of the file, add ``?tls=true`` to the end of the ``spring.data.mongodb.uri``. For example, if you have:
 
 ```
 spring.data.mongodb.uri=mongodb://certmanuser:1TPEwGJ2h1CBcoG0suUX@127.0.0.1/certman
@@ -101,21 +111,35 @@ Backup the current installation by copying the entire install folder. E.g. if th
 
 ### Upgrade the database
 
+<u>Obtain the Script</u>
+
+Obtain the ``upgrade-db.ps1`` script. This will be available in the ``[CERTDOG INSTALL]\install`` folder of versions 1.16 onwards  
+
+If you are intending to upgrade from version 1.16, then first obtain the latest certdog version (e.g. version 1.17) and extract the latest script from that media
+
+Alternatively, the latest version of the script is also available [here](https://krestfield.s3.dualstack.eu-west-2.amazonaws.com/certdog/scripts/upgrade-db.zip)  
+
+Wherever the script is obtained from, place it in the current installations ``[CERTDOG INSTALL]\install`` folder e.g.  ``C:\certdog\install`` 
+
+<br>
+
+<u>Run the Script</u>
+
 Open a PowerShell window as administrator
 
-Navigate to ``[CERT DOG INSTALL]\install`` e.g.  ``C:\certdog\install`` and run:
+Navigate to ``[CERTDOG INSTALL]\install`` e.g.  ``C:\certdog\install`` and run:
 
 ```
 .\upgrade-db.ps1
 ```
 
-This script will ask for the database admin password
+This script will ask for the database admin password then perform the update
 
 <br>
 
 **<u>Note</u>**
 
-The script is unaware of what updates have been made to the TLS certificates. It replaces them all with versions it knows will operate correctly.  
+The script is unaware of what updates have been made to the TLS certificates. It replaces them all with versions it knows will operate correctly  
 
 If you have have made changes to your TLS certificates - server or database, they are copied to: ``.\certdog\config\sslcerts.bak[TIMESTAMP]`` e.g. ``.\certdog\config\sslcerts.bak.20260226-1012`` and they must then be manually coped back to the ``.\sslcerts`` folder 
 
@@ -153,7 +177,7 @@ If the script completes OK but the system is unavailable, check if the following
 
 * Krestfield CertDog Database
 
-If running, restart the *Krestfield Certdog Database*, followed by the *Krestfield Certdog Service*.
+If running, restart the *Krestfield Certdog Database*, followed by the *Krestfield Certdog Service*
 
 If they were not running. First attempt to start the services in the same order. If they fail to start perform the following:
 
@@ -208,11 +232,10 @@ and one ``clusterAuthMode``:
 
 Do this for any other duplicates found.
 
-Save the ``mongod.cfg`` file and attempt to restart the services in this order:
+Save the ``mongod.cfg`` file and attempt to start the services in this order:
 
-1. Krestfield Certdog Service
-
-2. Krestfield CertDog Database
+1. Krestfield CertDog Database
+2. Krestfield Certdog Service
 
 <br>
 
@@ -220,4 +243,4 @@ Save the ``mongod.cfg`` file and attempt to restart the services in this order:
 
 <br>
 
-If the upgrade does fail and cannot be recovered, rollback the installation by stopping the services and re-instating the backed up files (as carried out in the Backup section above). Once restored, re-start the services
+If the upgrade does fail and cannot be recovered, rollback the installation by stopping the services and re-placing the install with the backed up files (as carried out in the Backup section above). Once restored, re-start the services

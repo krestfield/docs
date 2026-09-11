@@ -50,7 +50,7 @@ You may add other fields if required (``O, OU, C`` etc.)
 
 <u>Subject Alternative Names</u>
 
-For the Subject Alternative Names, add the [Datanase Server FQDN] as a DNS entry and any other DNS or IP Address entries as required. 
+For the Subject Alternative Names, add the [Database Server FQDN] as a DNS entry and any other DNS or IP Address entries as required. 
 
 If you will continue to access the database locally at ``127.0.0.1`` ensure that is added as a **IP Address SAN**
 

@@ -195,21 +195,41 @@ Type ``exit`` to close the shell.
 
 ### 3. Update the DB Certificates
 
+<u>Certificate Requirements</u>
+
 There are some additional certificate requirements when forming a cluster. They are:
 
-* The certificates must have both the *Client Authentication* and *Server Authentication* Enhanced Key Attributes.
+* The certificates must have both the *Client Authentication* and *Server Authentication* Enhanced Key Attributes
 
-* They must have the *Digital Signature* and *Key Encipherment* Key Usages.
+* They must have the *Digital Signature* and *Key Encipherment* Key Usages
 
-A single certificate can be issued and deployed to each of the database nodes or separate certificates issued. The certificate DN can be anything but if separate certificates are used, their O, OU and DC components must match (if present). These requirements can be found in the [Mongo DB documentation](https://www.mongodb.com/docs/manual/tutorial/configure-x509-member-authentication/#certificate-requirements).
+* All certificates in the cluster must have a non-empty value for at least one of the following DN components: 
 
-* The certificate(s) must have *Subject Alternative Names* matching the DB hosts it is protecting.
+  * O (Organisation)
+  * OU (Organisational Unit)
+  * DC (Domain Component
+
+  Also, these must be the same across all certificates in the cluster. The CN field can be anything you choose. 
+
+  For example: if node1's certificate DN is ``CN=node1,O=Krestfield`` then node2's certificate has to also include ``O=Krestfield`` e.g. the full DN for node 2 could be: ``CN=node2,O=Krestfield``
+
+* The certificate(s) must have *Subject Alternative Names* (SANs) matching the DB host(s) it is protecting
+
+A single certificate can be issued, including all servers in the cluster within its SANs but the DN must include one of the DN components mentioned above. E.g. a single certificate could include:
+
+​	DN: CN=Mongo Cluster,O=Krestfield
+
+​	SANs: DNS:node1.krestfield.local, DNS:node2.krestfield.local, DNS:node3.krestfield.local
+
+These certificate requirements can be found in the [Mongo DB documentation](https://www.mongodb.com/docs/manual/tutorial/configure-x509-member-authentication/#certificate-requirements)
 
 <br>
 
-In this example, we will issue a single certificate, deploy to node1 then copy to the other nodes.
+<u>Issuing a Certificate</u>
 
-Note: If issuing from a Certdog CA, then a profile created from the *TLS (Client and Server Auth)* common profile can be used. 
+In this example, we will issue a single certificate, deploy to node1 then copy to the other nodes
+
+Note: If issuing from a Certdog CA, then a profile created from the *TLS (Client and Server Auth)* common profile can be used 
 
 Ensure the CA this certificate is issued from is trusted by all machines in the cluster
 
@@ -221,9 +241,9 @@ DN: ``CN=Database Cluster,O=My Org,C=GB`` (but can be anything you choose)
 
 SANS: ``IP:127.0.0.1, DNS:node1.krestfield.local, DNS:node2.krestfield.local, DNS: node3.krestfield.local`` - ensuring the FQDNs match the names of your servers
 
-Enter a strong password and issue the certificate.
+Enter a strong password and issue the certificate
 
-Follow the [guide here](https://krestfield.github.io/docs/certdog/update_the_db_certificate.html) to set this as the new DB certificate.
+Follow the [guide here](https://krestfield.github.io/docs/certdog/update_the_db_certificate.html) to set this as the new DB certificate. This will create the files ``dbssl.pem``, ``dbssl_root.pem`` and update ``dbssl_trust.jks``
 
 
 
@@ -235,13 +255,13 @@ From node1, copy the following files located in ``.\certdog\config\tlscerts\`` :
 
 * dbssl_trust.jks
 
-To node2 and node3 at the same location.
+To node2 and node3 at the same location
 
 <br>
 
 ### 4. Prepare the primary
 
-Next, we configure node1 as the primary.
+Next, we configure node1 as the primary
 
 Open a PowerShell window and navigate to:
 
@@ -297,7 +317,7 @@ rs.status();
 db.revokeRolesFromUser("certmanadmin", [{ role: "clusterAdmin", db: "admin" }]);
 ```
 
-There may be errors seen in the output at this time that can be ignored until we configure the secondary nodes.
+There may be errors seen in the output (concerning connectivity to the other nodes) at this time that can be ignored until we configure the secondary nodes.
 
 For an example of output see Appendix A - Primary DB Output below.
 
@@ -367,15 +387,15 @@ This will leave node1 and node2 as the Certdog instances providing the API and U
 
 <br>
 
-If using the AD CS driver with a Microsoft CA you will now have two drivers available. Register them both and allow both to be used by the Certificate Issuer.
+If using the AD CS driver with a Microsoft CA you will now have two drivers available. Register them both and allow both to be used by the Certificate Issuer
 
 <br>
 
-If any other custom setup steps have been performed on node1 (e.g. OAUTH), then ensure those same settings are replicated across to node2.
+If any other custom setup steps have been performed on node1 (e.g. OAUTH), then ensure those same settings are replicated across to node2
 
 <br>
 
-If using email notifications, see [here](https://krestfield.github.io/docs/certdog/certdog_ha_config.html). This setting may be required if you notice multiple emails being sent. However, this is not always the case. This is a known issue and will be resolved such that multiple servers will handle this better.
+If using email notifications, see [here](https://krestfield.github.io/docs/certdog/certdog_ha_config.html). This setting may be required if you notice multiple emails being sent. However, this is not always the case. This is a known issue and will be resolved such that multiple servers will handle this better
 
 <br>
 

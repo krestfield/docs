@@ -150,7 +150,7 @@ From node1, open a PowerShell window and navigate to:
 Run the following command:
 
 ```powershell
-.\mongosh.exe <node2 FQDN or IP Address> -u certmanadmin -p <DB ADMIN PASSWORD> -tls -tlsAllowInvalidCertificates -authenticationDatabase admin
+.\mongo.exe <node2 FQDN or IP Address> -u certmanadmin -p <DB ADMIN PASSWORD> -tls -tlsAllowInvalidCertificates -authenticationDatabase admin
 ```
 
 Where ``<node2 FQDN or IP Address>`` are the details of the other node (e.g. node2) and ``DB ADMIN PASSWORD`` is the password of the database admin (where username is always ``certmanadmin``)
@@ -160,7 +160,7 @@ Note we are bypassing TLS certificate checks with the ``-tlsAllowInvalidCertific
 e.g.
 
 ```powershell
-..\mongodb\bin> .\mongosh.exe node2.krestfield.local -u certmanadmin -p complexpassword -tls -tlsAllowInvalidCertificates -authenticationDatabase admin
+..\mongodb\bin> .\mongo.exe node2.krestfield.local -u certmanadmin -p complexpassword -tls -tlsAllowInvalidCertificates -authenticationDatabase admin
 ```
 
 Note that the same DB Admin password should have been used for all installations. If this is not the case, ensure that the correct ``<DB ADMIN PASSWORD>`` is used for the instance being targetted.
@@ -272,7 +272,7 @@ Open a PowerShell window and navigate to:
 Run the following command to start the mongo shell:
 
 ```powershell
-.\mongosh.exe node1.krestfield.local -u certmanadmin -p complexpassword -tls -tlsAllowInvalidCertificates -authenticationDatabase admin
+.\mongo.exe node1.krestfield.local -u certmanadmin -p complexpassword -tls -tlsAllowInvalidCertificates -authenticationDatabase admin
 ```
 
 Then run the following commands:

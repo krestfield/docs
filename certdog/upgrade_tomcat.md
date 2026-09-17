@@ -60,6 +60,40 @@ Note that the previous Tomcat version is backed up to a timestamped folder menti
 
 <br>
 
+If you do not have an internet connection from this server, the script will report the following:
+
+```
+An error occurred during the download of tomcat. You can try again or manually download
+
+To manually install the files:
+  Download the zip file from here: https://krestfield.s3.dualstack.eu-west-2.amazonaws.com/certdog/components/tomcat.zip
+  Unzip the downloaded file to here: C:\Program Files\Krestfield\certdog\bin\..\tomcat.new
+  Then continue with the setup
+```
+
+Manually download the zip from the location given from a system that has an internet connection and copy to this server
+
+Create a new folder called ``tomcat.new`` within the certdog installation, so you have a folder like this ``.\certdog\tomcat.new`` and unzip the file here. This should result in a file structure like this:
+
+```
+.\certdog\tomcat.new\tomcat
+						.\bin
+						.\conf
+						.\crlwebapps
+						...
+```
+
+Re-run the script as before. This time is should report:
+
+```
+New Tomcat files already downloaded
+Continue using Tomcat files found at tomcat.new (y/n)? : y
+```
+
+And continue with the upgrade
+
+<br>
+
 ### Rollback
 
 If any errors do occur then the upgrade may be rolled back. To do this, stop the certdog service. Delete the ``.\certdog\tomcat`` folder. Note the backup location that was output from the script e.g. 

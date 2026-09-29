@@ -113,6 +113,8 @@ Whether activated via a Workflow or Task, scripts will be run by the same accoun
 
 Therefore, the scripts will only have the same permissions as those accounts
 
+The scripts execute under the LOCAL SYSTEM account and therefore inherit its restricted environment. Because the SYSTEM PATH is limited, any calls to external utilities or components may require fully qualified paths. Failures arising from incomplete PATH resolution may appear as scripts running successfully for an interactive user but failing when executed within certdog
+
 <br>
 
 When uploading scripts be sure to examine contents and satisfy yourself that the script will be safe to run before committing. Especially if uploading one not developed by trusted parties. The purpose of scripts being uploaded in this way is intentional, to force a review and prevent scripts from being tampered with or swapped (e.g. if they were held on the file system)

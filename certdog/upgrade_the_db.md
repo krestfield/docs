@@ -145,6 +145,12 @@ If you have have made changes to your TLS certificates - server or database, the
 
 <br>
 
+<u>Validating</u>
+
+Once complete, ensure that all operations, including logging on and requesting certificates are operating correctly. Restart the AD CS Driver is this is in use. This component must trust the database certificate and will fail to connect back if any of the replaced certificates are untrusted.
+
+<br>
+
 ### Troubleshooting
 
 If the script does not complete and you see an error such as
@@ -166,6 +172,34 @@ The script outputs the following files (located in the ``.\certdog\install`` fol
 * upgradedblog.out
 
 Any errors during the process will be available in these files
+
+<br>
+
+---
+
+The script completes but after a restart, certificates can not be issued from the Microsoft CA. You see errors relating to Timeouts e.g. 
+
+```
+There was a network level error (timeout) while attempting to obtain data
+```
+
+The logs may show entries such as: 
+
+```
+A request was sent to the CA but there was a problem obtaining the response. 408 REQUEST_TIMEOUT "The request to obtain the certificate from the CA agent timed out"
+```
+
+This will most likely be caused by the certificate changes made by the upgrade script.
+
+If you have changed the default database certificates, then replace these as per: [Update the Database Certificate](https://krestfield.github.io/docs/certdog/update_the_db_certificate.html)
+
+Alternatively, ensure that the following certificate:
+
+```
+.\certdog\config\sslcerts\tls_root.cer
+```
+
+Is added to the Trusted Root Certificates store, then restart the *Krestfield Adcs Driver* service
 
 <br>
 

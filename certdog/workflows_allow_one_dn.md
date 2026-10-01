@@ -25,7 +25,7 @@ By manipulating the script parameters, this could be varied to:
 
 The script used in this demo can be downloaded from GitHub here:
 
-https://github.com/krestfield/certdog-scripts/tree/main/renew-revoke-duplicate-certs
+[https://github.com/krestfield/certdog-scripts/tree/main/renew-revoke-duplicate-certs](https://github.com/krestfield/certdog-scripts/tree/main/renew-revoke-duplicate-certs)
 
 Place this in a suitable location. e.g. ``c:\certdog\scripts``
 
@@ -39,13 +39,15 @@ As the script will be searching for certificates across users and changing the c
 
 Obtain the Microsoft SysInternals PsExec tool from here: 
 
-https://learn.microsoft.com/en-us/sysinternals/downloads/psexec
+[https://learn.microsoft.com/en-us/sysinternals/downloads/psexec](https://learn.microsoft.com/en-us/sysinternals/downloads/psexec)
 
 Unzip and copy somewhere in your path (or update your system path)
 
 <br>
 
-In certdog, navigate to an Admin account (this cannot be the account you are logged in with) and create an API key as described here: https://krestfield.github.io/docs/certdog/users.html#api-tokens
+In certdog, navigate to an Admin account (this cannot be the account you are logged in with) and create an API key as described here: 
+
+[https://krestfield.github.io/docs/certdog/users.html#api-tokens](https://krestfield.github.io/docs/certdog/users.html#api-tokens)
 
 <br>
 
@@ -97,7 +99,7 @@ This prevents any other user from even accessing the file. The contents are encr
 
 ## 3. Upload the Script
 
-From the Scripts menu, upload the script downloaded in step 1 and give it a name e.g. *Manage Certs by DN*. See here for more details on Scripts: https://krestfield.github.io/docs/certdog/scripts.html
+From the Scripts menu, upload the script downloaded in step 1 and give it a name e.g. *Manage Certs by DN*. See here for more details on Scripts: [https://krestfield.github.io/docs/certdog/scripts.html](https://krestfield.github.io/docs/certdog/scripts.html)
 
 <br>
 

@@ -411,6 +411,22 @@ Clicking the **OAuth** button will always ask you to confirm what account you wi
 
 <br>
 
+## Mapping alternative User ID claims
+
+By default, the ``upn`` claim (as used by Azure) is used to identify the user.  This claim will contain the username used by certdog  
+
+If your IDP uses a different claim (e.g. ``userPrincipalName``) then add the following to the ``.\certdog\config\application.properties`` file:
+
+```
+oauth.username.claim=userPrincipalName
+```
+
+(substitute ``userPrincipalName`` for whatever claim your IDP uses)  
+
+Restart the certdog service
+
+<br>
+
 ## Common Issues
 
 ### Sorry, but we're having trouble signing you in

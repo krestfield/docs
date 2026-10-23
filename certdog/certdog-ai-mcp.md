@@ -54,6 +54,57 @@ The following information is also required:
 
 <br>
 
+## TLS Configuration
+
+Clude and the MCP server must trust the TLS certificates presented by the certdog API end point  
+
+If the TLS certificate are issued from a trusted root that is already included within the local java trust store then no additional arguments are required. In this case the following argument (as shown in the examples below):
+
+```properties
+-Djavax.net.ssl.trustStoreType=Windows-ROOT
+```
+
+Can be removed
+
+On windows machines, if the trusted roots are not present in the java trust store, but are present in the windows trusted root store, then the following argument:
+
+```properties
+-Djavax.net.ssl.trustStoreType=Windows-ROOT
+```
+
+Will pick them up and the connection to the MCP server will be allowed. This is often the default case and has been included in the samples below  
+
+However, on other systems (linux etc), or where the root certificates have not been imported, then the trusted store (containing the TLS root) must be provided as a pkcs#12 or JKS file.  For example, if the default certdog certificates were still in use, the following arguments would be required:
+
+``` properties
+-Djavax.net.ssl.trustStore=C:/certdog/config/sslcerts/dbtrust.jks
+-Djavax.net.ssl.trustStorePassword=...
+-Djavax.net.ssl.trustStoreType=JKS
+```
+
+If the trusted certificates were included in a pkcs#12 store:
+
+```properties
+-Djavax.net.ssl.trustStore=C:/certdog/config/sslcerts/truststore.p12
+-Djavax.net.ssl.trustStorePassword=...
+```
+
+<br>
+
+These changes will alter the configuration set below. E.g. if the JKS file were used then the ``args`` section below would look something like this:
+
+```properties
+"args": [
+        "-Djavax.net.ssl.trustStore=C:/certdog/config/sslcerts/dbtrust.jks",
+        "-Djavax.net.ssl.trustStorePassword=somepassword",
+        "-Djavax.net.ssl.trustStoreType=JKS",
+        "-jar",
+        "{MCP JAR PATH}"
+      ]
+```
+
+<br>
+
 ## Setup with Claude Desktop
 
 Note that Java 21 or later is required. This must be configured on the environment (via JAVA_HOME and path settings) so that Claude Desktop picks up the correct version when starting

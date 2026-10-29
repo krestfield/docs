@@ -1103,17 +1103,18 @@ Reload the server's configuration with the server control tool, or restart the s
 
 ## REST API Users
 
-The users that may call the REST API are held in a users file, set by ``server.restapi.usersFile`` in the server properties.  Each user has roles and/or permissions and one or more credentials:
+The users that may call the REST API are held in a users file, set by ``server.restapi.usersFile`` in the server properties.  Each user has one or more roles and one or more credentials:
 
 - **API tokens** - the client sends the token as ``Authorization: Bearer <token>``.  Only a hash of the token is stored
 - **Client certificates** - the client authenticates with the certificate over TLS.  The certificate must be issued by a CA in ``server.restapi.tls.trustStore``
 
-Permissions take the form ``operation:channel/NAME`` e.g. ``sign:channel/SIGNING`` or ``verify:channel/*``.  The operations are ``sign``, ``verify``, ``verify.bypass``, ``encrypt``, ``decrypt``, ``random`` or ``*`` for all.  A role is a named set of permissions that can be assigned to users
+Permissions take the form ``operation:channel/NAME`` e.g. ``sign:channel/SIGNING`` or ``verify:channel/*``.  The operations are ``sign``, ``verify``, ``verify.bypass``, ``encrypt``, ``decrypt``, ``random`` or ``*`` for all.  A role is a named set of permissions.  A user's permissions are those of their roles: permissions cannot be assigned to a user directly, so create a role for each set of permissions and assign it to the users that need it
 
-The ``status`` permission, given on its own without a channel, allows the server status (``/v1/status``) to be read.  This returns the server's details and the number of calls made since it started, for monitoring.  It is only granted by ``status`` or by ``*`` on its own, so give it to a dedicated monitoring user rather than to applications e.g.
+The ``status`` permission, given on its own without a channel, allows the server status (``/v1/status``) to be read.  This returns the server's details and the number of calls made since it started, for monitoring.  It is only granted by ``status`` or by ``*`` on its own, so put it in its own role for a dedicated monitoring user rather than in the applications' roles e.g.
 
 ```
-ezsign-manage.sh ../config/serverconfig.properties users add monitor -d "Monitoring" -p status
+ezsign-manage.sh ../config/serverconfig.properties roles set monitor -p status
+ezsign-manage.sh ../config/serverconfig.properties users add monitoring -d "Monitoring" -r monitor
 ```
 
 <br>
@@ -1154,27 +1155,26 @@ Choose **option 17** to manage the users file.  If the users file does not exist
    4.  Enable or disable user
    5.  Delete user
    6.  Set user roles
-   7.  Set user permissions
-   8.  Add API token to user
-   9.  Add certificate to user
-   10. Remove token or certificate from user
+   7.  Add API token to user
+   8.  Add certificate to user
+   9.  Remove token or certificate from user
   
-   11. List roles
-   12. Add or change role
-   13. Delete role
+   10. List roles
+   11. Add or change role
+   12. Delete role
   
-   14. Save changes and sign
-   15. Sign users file
-   16. Discard unsaved changes
-   17. Revert to a previous version
-   18. Back
+   13. Save changes and sign
+   14. Sign users file
+   15. Discard unsaved changes
+   16. Revert to a previous version
+   17. Back
   
   Command:
 ```
 
 Changes are checked as they are made and kept in memory until saved.  After each option the results are displayed until a key is pressed
 
-To add a role, choose **option 12**:
+A user's permissions come from their roles, so add the roles first.  To add a role, choose **option 11**:
 
 ```
   Role name: signer
@@ -1192,14 +1192,10 @@ To add a user, choose **option 3**:
   Description (optional): Finance system
   Available roles: signer
   Roles, comma separated (- for none, enter to keep none): signer
-  Permissions are operation:channel/NAME, e.g. sign:channel/FINANCE or verify:channel/*
-  Operations: sign, verify, verify.bypass, encrypt, decrypt, random or * for all
-  Use status on its own to allow the server status (/v1/status) to be read, e.g. by a monitoring user
-  Additional permissions, comma separated (- for none, enter to keep none): 
-  User finance-app added. Add an API token (8) or certificate (9) so the user can authenticate
+  User finance-app added. Add an API token (7) or certificate (8) so the user can authenticate
 ```
 
-To add an API token to a user, choose **option 8**.  The token is displayed once and is not stored, so it must be copied and given to the client securely:
+To add an API token to a user, choose **option 7**.  The token is displayed once and is not stored, so it must be copied and given to the client securely:
 
 ```
   User number or id: finance-app
@@ -1214,7 +1210,7 @@ To add an API token to a user, choose **option 8**.  The token is displayed once
   It can be used once the changes are saved, signed and loaded by the server.
 ```
 
-To add a client certificate to a user, choose **option 9**.  Load the certificate file (PEM or DER) and choose how the server is to recognise it:
+To add a client certificate to a user, choose **option 8**.  Load the certificate file (PEM or DER) and choose how the server is to recognise it:
 
 ```
   User number or id: finance-app
@@ -1243,14 +1239,13 @@ To view a user, choose **option 2**:
   Description: Finance system
   Enabled:     yes
   Roles:       signer
-  Permissions: none
-  Effective:   sign:channel/SIGNING, verify:channel/SIGNING
+  Permissions: sign:channel/SIGNING, verify:channel/SIGNING
   Credentials:
     1. API token (sha256 e31548e43cc8a401...) - production (created 2026-10-29)
     2. Certificate SHA-256 b900c1aa36266fef... - finance app cert
 ```
 
-To save the changes, choose **option 14**.  The current users file is backed up, the new file is written with its version increased by one and you are offered to sign it with the admin key:
+To save the changes, choose **option 13**.  The current users file is backed up, the new file is written with its version increased by one and you are offered to sign it with the admin key:
 
 ```
   Saved ../config/users.json (version 1)
@@ -1266,7 +1261,7 @@ To save the changes, choose **option 14**.  The current users file is backed up,
 
 The signature is written to ``users.json.sig``.  Then reload the server's users with the server control tool, or restart the server
 
-**Option 17** lists the backups of previous versions and restores the one chosen.  The restored file is saved as a new version, because the server refuses a signed users file with a lower version than the one it has loaded.  The current file is backed up first, so a revert can itself be undone
+**Option 16** lists the backups of previous versions and restores the one chosen.  The restored file is saved as a new version, because the server refuses a signed users file with a lower version than the one it has loaded.  The current file is backed up first, so a revert can itself be undone
 
 <br>
 
@@ -1301,7 +1296,7 @@ The users file is not signed. The server will not load it until it is signed (us
 Reload the server's users with the server control tool, or restart the server, to apply the change
 ```
 
-Roles are given with ``-r`` and permissions with ``-p``, both of which may be repeated.  Add ``--disabled`` to add the user disabled
+Roles are given with ``-r``, which may be repeated.  The user's permissions are those of their roles.  Add ``--disabled`` to add the user disabled
 
 To add an API token to a user:
 
@@ -1380,8 +1375,7 @@ User:        finance-app
 Description: Finance system
 Enabled:     NO
 Roles:       signer
-Permissions: none
-Effective:   sign:channel/SIGNING, verify:channel/SIGNING
+Permissions: sign:channel/SIGNING, verify:channel/SIGNING
 Credentials:
   1. API token (sha256 305867b4440d3924...) - production (created 2026-10-29)
   2. API token (sha256 a0ef89bee4e21b32...) - batch (created 2026-10-29)
@@ -1446,10 +1440,9 @@ The full set of users and roles commands is:
 ```
 users list [--json]
 users show <user> [--json]
-users add <user> [-d <description>] [-r <role>]... [-p <permission>]... [--disabled]
+users add <user> [-d <description>] [-r <role>]... [--disabled]
 users enable|disable|delete <user>
 users set-roles <user> [-r <role>]...
-users set-permissions <user> [-p <permission>]...
 users add-token <user> [-l <label>]
 users add-cert <user> -c <certFile> [-m sha256|sha1|issuer-serial|subject-issuer|subject] [-l <label>]
 users remove-credential <user> <number>

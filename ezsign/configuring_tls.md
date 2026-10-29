@@ -148,6 +148,8 @@ In order to update the client to use TLS, the ``useTls()`` option is required. E
 
 The client will now attempt to connect to the server using TLS.  
 
+From client version 4.6.0, the client checks that the server's certificate is valid for the host name (or IP Address) used to connect, so the certificate must include a matching SAN as described in the [Requirements](#requirements) section. The CA certificates to trust may also be supplied with the ``useTrustStore()`` option instead of updating the JRE's ``cacerts`` file. See the [Client Integration Guide](ezsign_client_integration_guide.html) for details
+
 
 
 ## Client Side TLS Configuration

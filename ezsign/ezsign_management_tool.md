@@ -1110,6 +1110,12 @@ The users that may call the REST API are held in a users file, set by ``server.r
 
 Permissions take the form ``operation:channel/NAME`` e.g. ``sign:channel/SIGNING`` or ``verify:channel/*``.  The operations are ``sign``, ``verify``, ``verify.bypass``, ``encrypt``, ``decrypt``, ``random`` or ``*`` for all.  A role is a named set of permissions that can be assigned to users
 
+The ``status`` permission, given on its own without a channel, allows the server status (``/v1/status``) to be read.  This returns the server's details and the number of calls made since it started, for monitoring.  It is only granted by ``status`` or by ``*`` on its own, so give it to a dedicated monitoring user rather than to applications e.g.
+
+```
+ezsign-manage.sh ../config/serverconfig.properties users add monitor -d "Monitoring" -p status
+```
+
 <br>
 
 ### Signing the Users File
@@ -1174,6 +1180,7 @@ To add a role, choose **option 12**:
   Role name: signer
   Permissions are operation:channel/NAME, e.g. sign:channel/FINANCE or verify:channel/*
   Operations: sign, verify, verify.bypass, encrypt, decrypt, random or * for all
+  Use status on its own to allow the server status (/v1/status) to be read, e.g. by a monitoring user
   Permissions, comma separated (- for none, enter to keep none): sign:channel/SIGNING,verify:channel/SIGNING
   Role signer set to sign:channel/SIGNING, verify:channel/SIGNING
 ```
@@ -1187,6 +1194,7 @@ To add a user, choose **option 3**:
   Roles, comma separated (- for none, enter to keep none): signer
   Permissions are operation:channel/NAME, e.g. sign:channel/FINANCE or verify:channel/*
   Operations: sign, verify, verify.bypass, encrypt, decrypt, random or * for all
+  Use status on its own to allow the server status (/v1/status) to be read, e.g. by a monitoring user
   Additional permissions, comma separated (- for none, enter to keep none): 
   User finance-app added. Add an API token (8) or certificate (9) so the user can authenticate
 ```

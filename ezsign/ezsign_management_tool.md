@@ -8,6 +8,10 @@ nav_order: 5
 
 <br>
 
+> Note: The command line interface (CLI) option and REST API Users configuration are only available in version 4.6.0 onwards
+
+<br>
+
 The Management utility enables the following operations:
 
 - Setting of Token Passwords
@@ -161,6 +165,8 @@ Select Channel Number (1. SIGNING):
 <br>
 
 ### Starting the CLI
+
+> Available in versions 4.6.0 onwards
 
 To run an operation from the command line, give the command after the properties file.  For example, to list the channels:
 

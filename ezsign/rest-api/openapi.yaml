@@ -1,0 +1,1082 @@
+openapi: 3.1.0
+
+info:
+  title: EzSign Server REST API
+  version: 4.6.0
+  summary: Sign, verify, encrypt, decrypt and generate random data using EzSign channels
+  description: |
+    The EzSign Server REST API offers the same operations as the EzSign socket interface over HTTPS and JSON.
+
+    ## Channels
+
+    Every operation is carried out on a **channel**, configured on the server. A PKI channel signs and verifies
+    data; a SYM channel encrypts and decrypts data. Both can generate random data. The keys, algorithms and
+    certificates used are set by the channel's configuration, not by the request.
+
+    ## Authentication
+
+    Every request except `GET /v1/health` must be authenticated, with either:
+
+    * **An API token**, sent as `Authorization: Bearer <token>`. When the header is present the token is used,
+      even if a client certificate is also presented.
+    * **A TLS client certificate**, presented when the connection is made. The certificate must be issued by a
+      CA in the server's `server.restapi.tls.trustStore` and be registered to a user in the users file.
+
+    ## Users, roles and permissions
+
+    The users are held in the users file (`server.restapi.usersFile`), managed with ezsign-manage. A user's
+    permissions are those of their roles. A permission takes the form `operation:channel/NAME`, where the
+    operation is `sign`, `verify`, `verify.bypass`, `encrypt`, `decrypt` or `random` (or `*` for all) and the
+    channel name may contain `*` wildcards, e.g. `sign:channel/FINANCE` or `verify:channel/*`.
+
+    `status`, on its own without a channel, allows the server status to be read. It is only granted by `status`
+    or by `*` on its own.
+
+    ## Binary values
+
+    Data, signatures and certificates are sent and returned as base64 (standard alphabet, with padding)
+    strings. Certificates are base64 encoded DER.
+
+    ## Errors
+
+    Errors return a JSON body with a code and a message, e.g.
+
+    ```json
+    { "error": { "code": "FORBIDDEN", "message": "User finance-app does not have the sign permission on channel HR" } }
+    ```
+
+    | HTTP | Code | Meaning |
+    | --- | --- | --- |
+    | 400 | `INVALID_REQUEST` | The request body or channel name is not valid |
+    | 401 | `UNAUTHORIZED` | No credential, or the API token or client certificate is not recognised |
+    | 403 | `FORBIDDEN` | The user does not hold the permission, or the client address is not allowed |
+    | 404 | `NOT_FOUND` | The path does not exist |
+    | 405 | `METHOD_NOT_ALLOWED` | The wrong HTTP method was used. The `Allow` header gives the right one |
+    | 413 | `REQUEST_TOO_LARGE` | The body is larger than `server.restapi.maxRequestSize` (default 10 MB) |
+    | 415 | `UNSUPPORTED_MEDIA_TYPE` | The `Content-Type` is not `application/json` |
+    | 422 | `VERIFICATION_FAILED`, `PATH_VALIDATION_FAILED`, `REVOCATION_CHECK_FAILED` | The signature did not verify |
+    | 422 | `ENCRYPTION_FAILED`, `DECRYPTION_FAILED` | The data could not be encrypted or decrypted |
+    | 500 | `SIGNING_FAILED` | The data could not be signed |
+    | 500 | `OPERATION_FAILED` | The operation failed, e.g. the channel does not exist or is the wrong type |
+    | 500 | `INTERNAL_ERROR` | An unexpected error. See the server log |
+    | 503 | `BUSY` | All EzSign instances are busy. Retry later |
+
+    Every response has an `X-Transaction-Id` header. The same ID is written to the server log, so a request can
+    be traced from the client to the server.
+
+    Permissions are checked before the request body is read or the channel is looked up, so a request for a
+    channel the user is not permitted returns 403 whether or not the channel exists.
+  contact:
+    name: Krestfield Support
+    email: support@krestfield.com
+
+servers:
+  - url: https://{host}:{port}
+    description: The EzSign server's REST API (server.restapi.port)
+    variables:
+      host:
+        default: localhost
+        description: The EzSign server's host name, which must match the server's TLS certificate
+      port:
+        default: "8443"
+        description: The REST API port (server.restapi.port)
+
+security:
+  - apiToken: []
+  - clientCertificate: []
+
+tags:
+  - name: Signing
+    description: PKI channel operations
+  - name: Encryption
+    description: SYM channel operations
+  - name: Random
+    description: Random data, on any channel
+  - name: Server
+    description: Health, identity and status
+
+paths:
+  /v1/channels/{channel}/sign:
+    post:
+      tags: [Signing]
+      operationId: sign
+      summary: Sign data
+      description: |
+        Signs the data with the channel's signing key. The signature is a PKCS#7 (CMS) signature or a raw
+        signature, as configured for the channel.
+
+        For large data, hash it first and send the hash with `isDigest` set to `true`. The hash algorithm must
+        match the channel's configured digest algorithm.
+
+        Requires the `sign` permission on the channel.
+      parameters:
+        - $ref: '#/components/parameters/Channel'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SignRequest'
+            example:
+              data: SGVsbG8gV29ybGQ=
+              isDigest: false
+      responses:
+        '200':
+          description: The signature
+          headers:
+            X-Transaction-Id:
+              $ref: '#/components/headers/TransactionId'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SignResponse'
+              example:
+                signature: MIIGxQYJKoZIhvcNAQcCoIIGtjCCBrICAQExDzANBglghkgBZQMEAgEFADALBgkqhkiG9w0BBwE...
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '413':
+          $ref: '#/components/responses/RequestTooLarge'
+        '415':
+          $ref: '#/components/responses/UnsupportedMediaType'
+        '500':
+          description: |
+            The data could not be signed (`SIGNING_FAILED`), or the operation failed (`OPERATION_FAILED`), e.g.
+            the channel does not exist or is not a PKI channel
+          headers:
+            X-Transaction-Id:
+              $ref: '#/components/headers/TransactionId'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                error:
+                  code: SIGNING_FAILED
+                  message: There was an error signing the data. The private key could not be found
+        '503':
+          $ref: '#/components/responses/Busy'
+
+  /v1/channels/{channel}/verify:
+    post:
+      tags: [Signing]
+      operationId: verify
+      summary: Verify a signature
+      description: |
+        Verifies a signature, building the certificate path and checking revocation as configured for the
+        channel.
+
+        * **PKCS#7** (`signatureType` `pkcs7`, the default): the signer certificate is taken from the signature.
+          Send the signed `content` if the signature is detached.
+        * **Raw** (`signatureType` `raw`): send the `content` and the `signerCert`, plus any `otherCerts` in the
+          path that are not held by the channel.
+
+        A signature that does not verify returns 422 with `verified` set to `false`.
+
+        Requires the `verify` permission on the channel. Setting `bypassRevocationCheck` or `bypassPathBuild`
+        also requires the `verify.bypass` permission on the channel.
+      parameters:
+        - $ref: '#/components/parameters/Channel'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/VerifyRequest'
+            examples:
+              pkcs7:
+                summary: A PKCS#7 signature over the content
+                value:
+                  signature: MIIGxQYJKoZIhvcNAQcCoIIGtjCCBrICAQExDzANBglghkgBZQMEAgEFADALBgkqhkiG9w0BBwE...
+                  content: SGVsbG8gV29ybGQ=
+              raw:
+                summary: A raw signature with its signer certificate
+                value:
+                  signature: Qm9ndXMgc2lnbmF0dXJl...
+                  content: SGVsbG8gV29ybGQ=
+                  signatureType: raw
+                  signerCert: MIIDdzCCAl+gAwIBAgIUQ...
+      responses:
+        '200':
+          description: The signature verified
+          headers:
+            X-Transaction-Id:
+              $ref: '#/components/headers/TransactionId'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VerifyResponse'
+              example:
+                verified: true
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '413':
+          $ref: '#/components/responses/RequestTooLarge'
+        '415':
+          $ref: '#/components/responses/UnsupportedMediaType'
+        '422':
+          description: |
+            The signature did not verify (`VERIFICATION_FAILED`), the certificate path could not be built or
+            validated (`PATH_VALIDATION_FAILED`), or a certificate is revoked or its revocation status could not be
+            checked (`REVOCATION_CHECK_FAILED`)
+          headers:
+            X-Transaction-Id:
+              $ref: '#/components/headers/TransactionId'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VerifyFailedResponse'
+              example:
+                verified: false
+                error:
+                  code: VERIFICATION_FAILED
+                  message: The signature is not valid
+        '500':
+          $ref: '#/components/responses/OperationFailed'
+        '503':
+          $ref: '#/components/responses/Busy'
+
+  /v1/channels/{channel}/encrypt:
+    post:
+      tags: [Encryption]
+      operationId: encrypt
+      summary: Encrypt data
+      description: |
+        Encrypts the data with an AES key held by the channel, using AES CBC with PKCS#5 padding. A random IV is
+        created for each request and returned as the first 16 bytes of the result.
+
+        Requires the `encrypt` permission on the channel.
+      parameters:
+        - $ref: '#/components/parameters/Channel'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EncipherRequest'
+            example:
+              data: SGVsbG8gV29ybGQ=
+              keyLabel: key1
+      responses:
+        '200':
+          description: The IV followed by the encrypted data
+          headers:
+            X-Transaction-Id:
+              $ref: '#/components/headers/TransactionId'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DataResponse'
+              example:
+                data: 3q2+7wABAgMEBQYHCAkKC5Dz1xVq2tWv0iN6aQ8fQyM=
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '413':
+          $ref: '#/components/responses/RequestTooLarge'
+        '415':
+          $ref: '#/components/responses/UnsupportedMediaType'
+        '422':
+          description: |
+            The data could not be encrypted (`ENCRYPTION_FAILED`), e.g. no key label was given and the channel has
+            no default key
+          headers:
+            X-Transaction-Id:
+              $ref: '#/components/headers/TransactionId'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                error:
+                  code: ENCRYPTION_FAILED
+                  message: No key label was passed to the encryptData method but no defaultKeyId was defined.  Unable to encrypt data
+        '500':
+          $ref: '#/components/responses/OperationFailed'
+        '503':
+          $ref: '#/components/responses/Busy'
+
+  /v1/channels/{channel}/decrypt:
+    post:
+      tags: [Encryption]
+      operationId: decrypt
+      summary: Decrypt data
+      description: |
+        Decrypts data returned by `encrypt` (the IV followed by the encrypted data) with the same key.
+
+        Requires the `decrypt` permission on the channel.
+      parameters:
+        - $ref: '#/components/parameters/Channel'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EncipherRequest'
+            example:
+              data: 3q2+7wABAgMEBQYHCAkKC5Dz1xVq2tWv0iN6aQ8fQyM=
+              keyLabel: key1
+      responses:
+        '200':
+          description: The decrypted data
+          headers:
+            X-Transaction-Id:
+              $ref: '#/components/headers/TransactionId'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DataResponse'
+              example:
+                data: SGVsbG8gV29ybGQ=
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '413':
+          $ref: '#/components/responses/RequestTooLarge'
+        '415':
+          $ref: '#/components/responses/UnsupportedMediaType'
+        '422':
+          description: |
+            The data could not be decrypted (`DECRYPTION_FAILED`), e.g. the wrong key was used or the data was
+            changed
+          headers:
+            X-Transaction-Id:
+              $ref: '#/components/headers/TransactionId'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                error:
+                  code: DECRYPTION_FAILED
+                  message: There was an error decrypting the data. Given final block not properly padded
+        '500':
+          $ref: '#/components/responses/OperationFailed'
+        '503':
+          $ref: '#/components/responses/Busy'
+
+  /v1/channels/{channel}/random:
+    post:
+      tags: [Random]
+      operationId: random
+      summary: Generate random data
+      description: |
+        Generates random bytes using the channel's key store (e.g. the HSM).
+
+        Requires the `random` permission on the channel.
+      parameters:
+        - $ref: '#/components/parameters/Channel'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RandomRequest'
+            example:
+              numBytes: 32
+      responses:
+        '200':
+          description: The random bytes
+          headers:
+            X-Transaction-Id:
+              $ref: '#/components/headers/TransactionId'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DataResponse'
+              example:
+                data: q0Jm8sYcZlbL3m2v5f3cOq5i0Zbqk0bq9m2l1oP0w3Q=
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '413':
+          $ref: '#/components/responses/RequestTooLarge'
+        '415':
+          $ref: '#/components/responses/UnsupportedMediaType'
+        '500':
+          $ref: '#/components/responses/OperationFailed'
+        '503':
+          $ref: '#/components/responses/Busy'
+
+  /v1/health:
+    get:
+      tags: [Server]
+      operationId: health
+      summary: Check the REST API is running
+      description: Needs no authentication, so can be used by load balancers and monitoring.
+      security: []
+      responses:
+        '200':
+          description: The REST API is running
+          headers:
+            X-Transaction-Id:
+              $ref: '#/components/headers/TransactionId'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HealthResponse'
+              example:
+                status: ok
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '405':
+          $ref: '#/components/responses/MethodNotAllowed'
+
+  /v1/whoami:
+    get:
+      tags: [Server]
+      operationId: whoami
+      summary: Show the authenticated user
+      description: |
+        Returns the user the credential belongs to, how they authenticated and their permissions (those of their
+        roles). Useful to check a client's configuration. Any authenticated user can call it.
+      responses:
+        '200':
+          description: The authenticated user
+          headers:
+            X-Transaction-Id:
+              $ref: '#/components/headers/TransactionId'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WhoAmIResponse'
+              example:
+                id: finance-app
+                authMethod: apiToken
+                permissions: ['sign:channel/FINANCE', 'verify:channel/*']
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '405':
+          $ref: '#/components/responses/MethodNotAllowed'
+
+  /v1/status:
+    get:
+      tags: [Server]
+      operationId: status
+      summary: Read the server status and statistics
+      description: |
+        Returns the server's details, both interfaces and the number of calls made on each channel since the
+        server started. Counts are not kept when the server restarts. Times are the server's local time.
+
+        Requires the `status` permission. Give it to a monitoring user's role rather than to applications.
+      responses:
+        '200':
+          description: The server status
+          headers:
+            X-Transaction-Id:
+              $ref: '#/components/headers/TransactionId'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StatusResponse'
+              example:
+                serverStatus: running
+                serverVersion: 4.6.0
+                serverHostName: ezsign01
+                serverIpAddress: 192.168.50.112
+                processId: 58592@ezsign01
+                propertiesFile: /opt/ezsign/config/serverconfig.properties
+                serverStartTime: '2026-10-29 08:15:22'
+                serverUptime: 3 hours, 25 minutes
+                serverUptimeSeconds: 12300
+                lastReloadTime: null
+                serverTime: '2026-10-29 11:40:22'
+                javaVersion: 1.8.0_341
+                javaVendor: Oracle Corporation
+                osName: Linux 5.15.0
+                heapUsedMB: 34
+                heapMaxMB: 3040
+                threads: 11
+                totalCalls: 233
+                totalSuccess: 230
+                totalFailures: 3
+                callsPerSecond: 0.02
+                callsLastMinute: 9
+                callsPerSecondLastMinute: 0.15
+                unknownChannelCalls: 0
+                interfaces:
+                  socket:
+                    enabled: true
+                    running: true
+                    port: 5656
+                    bindAddress: ALL
+                    tls: false
+                    instances: 4
+                    busyInstances: 0
+                    calls: 120
+                    success: 119
+                    failures: 1
+                    busy: 0
+                    refusedAddress: 0
+                  rest:
+                    enabled: true
+                    running: true
+                    port: 8443
+                    bindAddress: ALL
+                    tls: true
+                    clientCertificates: optional
+                    instances: 4
+                    busyInstances: 1
+                    usersFile:
+                      version: 12
+                      users: 5
+                      signatureRequired: true
+                    calls: 113
+                    success: 111
+                    failures: 2
+                    requests: 140
+                    unauthorised: 2
+                    forbidden: 1
+                    busy: 0
+                    badRequests: 0
+                channels:
+                  ENCRYPTION:
+                    type: SYM
+                    enabled: true
+                    encryptCalls: 100
+                    encryptSuccess: 99
+                    encryptFailures: 1
+                    encryptAverageMs: 3.2
+                    decryptCalls: 90
+                    decryptSuccess: 90
+                    decryptFailures: 0
+                    decryptAverageMs: 2.9
+                    randomCalls: 0
+                    randomSuccess: 0
+                    randomFailures: 0
+                    randomAverageMs: 0.0
+                    lastCallTime: '2026-10-29 11:40:01'
+                  SIGNING:
+                    type: PKI
+                    enabled: true
+                    signCalls: 10
+                    signSuccess: 9
+                    signFailures: 1
+                    signAverageMs: 41.5
+                    verifyCalls: 12
+                    verifySuccess: 10
+                    verifyFailures: 2
+                    verifyAverageMs: 12.0
+                    randomCalls: 0
+                    randomSuccess: 0
+                    randomFailures: 0
+                    randomAverageMs: 0.0
+                    lastCallTime: '2026-10-29 11:39:55'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '405':
+          $ref: '#/components/responses/MethodNotAllowed'
+
+components:
+  securitySchemes:
+    apiToken:
+      type: http
+      scheme: bearer
+      description: |
+        An API token issued by ezsign-manage (`users add-token`), sent as `Authorization: Bearer <token>`. Only the
+        token's SHA-256 hash is stored by the server.
+    clientCertificate:
+      type: mutualTLS
+      description: |
+        A TLS client certificate issued by a CA in `server.restapi.tls.trustStore` and registered to a user
+        (`users add-cert`). `server.restapi.tls.clientAuth` must be `optional` or `required`.
+
+  parameters:
+    Channel:
+      name: channel
+      in: path
+      required: true
+      description: |
+        The channel name, as configured on the server (`channel.N.name`). Percent-encode any characters that are
+        not allowed in a URL path, e.g. a space as `%20`. 1 to 128 characters, not containing `/`, `\`, `*` or
+        control characters.
+      schema:
+        type: string
+        minLength: 1
+        maxLength: 128
+      example: SIGNING
+
+  headers:
+    TransactionId:
+      description: The transaction ID of the request, also written to the server log
+      schema:
+        type: string
+      example: '4963794784449164'
+
+  responses:
+    BadRequest:
+      description: |
+        The request is not valid (`INVALID_REQUEST`): the body is not a JSON object, a required field is missing,
+        a field has the wrong type or is not valid base64, a certificate cannot be read, or the channel name is
+        not valid
+      headers:
+        X-Transaction-Id:
+          $ref: '#/components/headers/TransactionId'
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+          example:
+            error:
+              code: INVALID_REQUEST
+              message: data is required
+    Unauthorized:
+      description: |
+        No credential was presented, or the API token or client certificate is not registered to an enabled user
+        (`UNAUTHORIZED`). The server log gives the reason. The response has a `WWW-Authenticate: Bearer` header
+      headers:
+        X-Transaction-Id:
+          $ref: '#/components/headers/TransactionId'
+        WWW-Authenticate:
+          schema:
+            type: string
+          example: Bearer realm="ezsign"
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+          example:
+            error:
+              code: UNAUTHORIZED
+              message: The API token was not recognised
+    Forbidden:
+      description: |
+        The user does not hold the permission for the operation on the channel, or the client's address is not
+        in `server.restapi.allowedSourceIpAddresses` (`FORBIDDEN`)
+      headers:
+        X-Transaction-Id:
+          $ref: '#/components/headers/TransactionId'
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+          example:
+            error:
+              code: FORBIDDEN
+              message: User finance-app does not have the sign permission on channel HR
+    MethodNotAllowed:
+      description: The wrong HTTP method was used (`METHOD_NOT_ALLOWED`). The `Allow` header gives the right one
+      headers:
+        X-Transaction-Id:
+          $ref: '#/components/headers/TransactionId'
+        Allow:
+          schema:
+            type: string
+          example: GET
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+          example:
+            error:
+              code: METHOD_NOT_ALLOWED
+              message: Only GET is supported for this resource
+    RequestTooLarge:
+      description: The request body is larger than `server.restapi.maxRequestSize` (`REQUEST_TOO_LARGE`)
+      headers:
+        X-Transaction-Id:
+          $ref: '#/components/headers/TransactionId'
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+          example:
+            error:
+              code: REQUEST_TOO_LARGE
+              message: The request body exceeds the maximum size of 10485760 bytes
+    UnsupportedMediaType:
+      description: The `Content-Type` is not `application/json` (`UNSUPPORTED_MEDIA_TYPE`)
+      headers:
+        X-Transaction-Id:
+          $ref: '#/components/headers/TransactionId'
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+          example:
+            error:
+              code: UNSUPPORTED_MEDIA_TYPE
+              message: The Content-Type must be application/json
+    OperationFailed:
+      description: |
+        The operation failed (`OPERATION_FAILED`), e.g. the channel does not exist, is disabled or is the wrong
+        type for the operation, or an unexpected error occurred (`INTERNAL_ERROR`)
+      headers:
+        X-Transaction-Id:
+          $ref: '#/components/headers/TransactionId'
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+          example:
+            error:
+              code: OPERATION_FAILED
+              message: The requested channel name of NOSUCH does not exist or has been disabled
+    Busy:
+      description: |
+        All the EzSign instances are busy (`BUSY`). Retry the request later, or increase
+        `server.restapi.threadPoolSize`
+      headers:
+        X-Transaction-Id:
+          $ref: '#/components/headers/TransactionId'
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+          example:
+            error:
+              code: BUSY
+              message: All instances are busy and the total wait time of 1000ms has been exceeded
+
+  schemas:
+    Base64:
+      type: string
+      contentEncoding: base64
+      description: Base64 encoded binary data
+
+    SignRequest:
+      type: object
+      required: [data]
+      properties:
+        data:
+          $ref: '#/components/schemas/Base64'
+          description: The data to sign, or its hash if `isDigest` is `true`
+        isDigest:
+          type: boolean
+          default: false
+          description: Whether `data` is a hash of the data rather than the data itself
+
+    SignResponse:
+      type: object
+      required: [signature]
+      properties:
+        signature:
+          $ref: '#/components/schemas/Base64'
+          description: The signature (PKCS#7 or raw, as configured for the channel)
+
+    VerifyRequest:
+      type: object
+      required: [signature]
+      properties:
+        signature:
+          $ref: '#/components/schemas/Base64'
+          description: The signature to verify
+        content:
+          $ref: '#/components/schemas/Base64'
+          description: |
+            The signed data, or its hash if `isDigest` is `true`. Required for a raw signature and for a detached
+            PKCS#7 signature
+        isDigest:
+          type: boolean
+          default: false
+          description: Whether `content` is a hash of the data rather than the data itself
+        signatureType:
+          type: string
+          enum: [pkcs7, raw]
+          default: pkcs7
+          description: The type of signature
+        signerCert:
+          $ref: '#/components/schemas/Base64'
+          description: The signer's certificate (base64 DER). Required when `signatureType` is `raw`
+        otherCerts:
+          type: array
+          items:
+            $ref: '#/components/schemas/Base64'
+          description: |
+            Other certificates in the signer's path (base64 DER) that are not held by the channel. Raw signatures
+            only
+        bypassRevocationCheck:
+          type: boolean
+          default: false
+          description: Skip the revocation check. Requires the `verify.bypass` permission
+        bypassPathBuild:
+          type: boolean
+          default: false
+          description: Skip building and validating the certificate path. Requires the `verify.bypass` permission
+
+    VerifyResponse:
+      type: object
+      required: [verified]
+      properties:
+        verified:
+          type: boolean
+          const: true
+
+    VerifyFailedResponse:
+      type: object
+      required: [verified, error]
+      properties:
+        verified:
+          type: boolean
+          const: false
+        error:
+          $ref: '#/components/schemas/Error'
+
+    EncipherRequest:
+      type: object
+      required: [data]
+      properties:
+        data:
+          $ref: '#/components/schemas/Base64'
+          description: The data to encrypt, or the data returned by `encrypt` to decrypt
+        keyLabel:
+          type: string
+          description: The label of the AES key. If omitted, the channel's default key (`channel.N.defaultKeyLabel`) is used
+
+    RandomRequest:
+      type: object
+      required: [numBytes]
+      properties:
+        numBytes:
+          type: integer
+          minimum: 1
+          maximum: 65536
+          description: The number of random bytes to generate
+
+    DataResponse:
+      type: object
+      required: [data]
+      properties:
+        data:
+          $ref: '#/components/schemas/Base64'
+
+    HealthResponse:
+      type: object
+      required: [status]
+      properties:
+        status:
+          type: string
+          const: ok
+
+    WhoAmIResponse:
+      type: object
+      required: [id, authMethod, permissions]
+      properties:
+        id:
+          type: string
+          description: The user id
+        authMethod:
+          type: string
+          enum: [apiToken, certificate]
+          description: How the user authenticated
+        permissions:
+          type: array
+          items:
+            type: string
+          description: The user's permissions, from their roles
+
+    Error:
+      type: object
+      required: [code, message]
+      properties:
+        code:
+          type: string
+          enum:
+            - INVALID_REQUEST
+            - UNAUTHORIZED
+            - FORBIDDEN
+            - NOT_FOUND
+            - METHOD_NOT_ALLOWED
+            - REQUEST_TOO_LARGE
+            - UNSUPPORTED_MEDIA_TYPE
+            - VERIFICATION_FAILED
+            - PATH_VALIDATION_FAILED
+            - REVOCATION_CHECK_FAILED
+            - ENCRYPTION_FAILED
+            - DECRYPTION_FAILED
+            - SIGNING_FAILED
+            - OPERATION_FAILED
+            - INTERNAL_ERROR
+            - BUSY
+          description: The error code. See the table in the introduction
+        message:
+          type: string
+          description: A description of the error
+
+    ErrorResponse:
+      type: object
+      required: [error]
+      properties:
+        error:
+          $ref: '#/components/schemas/Error'
+
+    StatusResponse:
+      type: object
+      properties:
+        serverStatus:
+          type: string
+          enum: [running, stopped]
+          description: Whether the server's interfaces are running
+        serverVersion:
+          type: string
+        serverHostName:
+          type: [string, 'null']
+        serverIpAddress:
+          type: [string, 'null']
+        processId:
+          type: string
+          description: The process ID and host, as reported by Java (pid@host)
+        propertiesFile:
+          type: string
+          description: The server properties file
+        serverStartTime:
+          type: string
+          description: When the server started (yyyy-MM-dd HH:mm:ss)
+        serverUptime:
+          type: string
+          description: The time since the server started, e.g. "3 hours, 25 minutes"
+        serverUptimeSeconds:
+          type: integer
+        lastReloadTime:
+          type: [string, 'null']
+          description: When the configuration was last reloaded, or null if it has not been
+        serverTime:
+          type: string
+          description: The server's current time
+        javaVersion:
+          type: string
+        javaVendor:
+          type: string
+        osName:
+          type: string
+        heapUsedMB:
+          type: integer
+        heapMaxMB:
+          type: [integer, 'null']
+        threads:
+          type: integer
+        totalCalls:
+          type: integer
+          description: Operations called on both interfaces since the server started
+        totalSuccess:
+          type: integer
+        totalFailures:
+          type: integer
+        callsPerSecond:
+          type: number
+          description: The average since the server started
+        callsLastMinute:
+          type: integer
+        callsPerSecondLastMinute:
+          type: number
+        unknownChannelCalls:
+          type: integer
+          description: Calls naming a channel that does not exist
+        interfaces:
+          type: object
+          properties:
+            socket:
+              $ref: '#/components/schemas/SocketInterfaceStatus'
+            rest:
+              $ref: '#/components/schemas/RestInterfaceStatus'
+        channels:
+          type: object
+          description: The channels in the properties file, by name
+          additionalProperties:
+            $ref: '#/components/schemas/ChannelStatus'
+
+    InterfaceStatus:
+      type: object
+      properties:
+        enabled:
+          type: boolean
+        running:
+          type: boolean
+        port:
+          type: integer
+        bindAddress:
+          type: string
+          description: The address the interface listens on, or ALL when no bind address is set
+        tls:
+          type: boolean
+        instances:
+          type: integer
+          description: The number of EzSign instances serving the interface
+        busyInstances:
+          type: integer
+        calls:
+          type: integer
+          description: Operations called on the interface
+        success:
+          type: integer
+        failures:
+          type: integer
+        busy:
+          type: integer
+          description: Requests refused because all instances were busy
+
+    SocketInterfaceStatus:
+      allOf:
+        - $ref: '#/components/schemas/InterfaceStatus'
+        - type: object
+          properties:
+            refusedAddress:
+              type: integer
+              description: Connections refused because the address is not in server.allowedSourceIpAddresses
+
+    RestInterfaceStatus:
+      allOf:
+        - $ref: '#/components/schemas/InterfaceStatus'
+        - type: object
+          properties:
+            clientCertificates:
+              type: [string, 'null']
+              enum: [none, optional, required, null]
+              description: server.restapi.tls.clientAuth, or null without TLS
+            usersFile:
+              type: object
+              properties:
+                version:
+                  type: integer
+                users:
+                  type: integer
+                signatureRequired:
+                  type: boolean
+            requests:
+              type: integer
+              description: Every REST request, including health and status checks and refused requests
+            unauthorised:
+              type: integer
+            forbidden:
+              type: integer
+            badRequests:
+              type: integer
+
+    ChannelStatus:
+      type: object
+      description: |
+        The channel's type, whether it is enabled, and for each operation `<op>Calls`, `<op>Success`,
+        `<op>Failures` and `<op>AverageMs`, where `<op>` is `sign`, `verify`, `encrypt`, `decrypt` or `random`.
+        The operations for the channel's type are always shown (PKI: sign, verify and random; SYM: encrypt,
+        decrypt and random), plus any other operation that has been called on it.
+      properties:
+        type:
+          type: string
+          enum: [PKI, SYM]
+          description: The channel type. A channel with no type configured is a PKI channel
+        enabled:
+          type: boolean
+        lastCallTime:
+          type: [string, 'null']
+      additionalProperties:
+        type: number

@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>EzSign REST API Reference</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swagger-ui-dist@5.17.14/swagger-ui.css">
+  <style>
+    body { margin: 0; background: #fff; }
+    .back { font-family: sans-serif; font-size: 14px; padding: 12px 20px 0; max-width: 1460px; margin: 0 auto; box-sizing: border-box; }
+    .back a { color: #3b4151; }
+  </style>
+</head>
+<body>
+  <div class="back"><a href="../ezsign_rest_api.html">&larr; EzSign REST API guide</a> &middot; <a href="openapi.yaml" download>Download openapi.yaml</a></div>
+  <div id="swagger-ui"></div>
+  <script src="https://cdn.jsdelivr.net/npm/swagger-ui-dist@5.17.14/swagger-ui-bundle.js"></script>
+  <script>
+    window.ui = SwaggerUIBundle({
+      url: 'openapi.yaml',
+      dom_id: '#swagger-ui',
+      deepLinking: true,
+      docExpansion: 'list',
+      defaultModelsExpandDepth: 0,
+      // Reference only: the EzSign server does not allow browser requests from other sites, and a browser cannot
+      // easily present a client certificate. Use Postman or the EzSign client to call the API
+      supportedSubmitMethods: []
+    });
+  </script>
+</body>
+</html>

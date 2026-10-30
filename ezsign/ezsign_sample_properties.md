@@ -361,7 +361,9 @@ channel.1.verify.relaxAllCertExtensionChecks=false
 # have failed, a warning is logged. All default to false
 
 # Accept critical extensions that are not processed (e.g. policy
-# constraints). Or list the OIDs to accept in allowedCriticalExtensions
+# constraints). Or list the OIDs to accept in allowedCriticalExtensions.
+# Listed extensions are still not processed, the certificate is just
+# no longer rejected for carrying them
 channel.1.verify.relaxCriticalExtensionChecks=false
 #channel.1.verify.allowedCriticalExtensions=
 
@@ -369,7 +371,8 @@ channel.1.verify.relaxCriticalExtensionChecks=false
 channel.1.verify.relaxNameConstraints=false
 
 # Accept a signer whose extended key usage does not permit signing.
-# allowedExtendedKeyUsages replaces the default list of OIDs
+# allowedExtendedKeyUsages replaces the default list of OIDs (shown
+# below), so to add a purpose, keep the defaults and append it
 channel.1.verify.relaxExtendedKeyUsageChecks=false
 #channel.1.verify.allowedExtendedKeyUsages=2.5.29.37.0,1.3.6.1.5.5.7.3.4,1.3.6.1.5.5.7.3.3,1.3.6.1.5.5.7.3.36,1.3.6.1.4.1.311.10.3.12,1.2.840.113583.1.1.5
 

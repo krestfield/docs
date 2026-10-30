@@ -56,6 +56,8 @@ ezsign-manage.sh ../config/serverconfig.properties
 
 (On Windows run ``ezsign-manage.bat``)
 
+The script runs the tool with all the jars in the ``EzSignServer/lib`` folder. To run the tool on another machine (e.g. with a copy of the properties file and key stores), copy the ``bin`` and ``lib`` folders. If copying individual jars, from version 4.6.0 the tool needs: ``ezsign``, ``ezsign-client-utils``, ``ezsign-users`` and ``ezsign-manage``. If ``ezsign-users`` is missing, a warning is printed when the tool starts and the REST API users commands will fail
+
 Once the script starts you will be asked to enter the Master Password before being able to proceed
 
 <br>

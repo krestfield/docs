@@ -59,4 +59,15 @@ The account used to run the server must have permissions to access the ``EzSignS
 
 Client applications must be able to access the jar files located in the ``EzSignClient/lib`` folder
 
+<br>
+
+### The lib folder and upgrades
+
+The server scripts (including the Management Tool scripts) load **every** jar in the ``EzSignServer/lib`` folder. If two jars contain the same class at different versions, either copy may be loaded, which shows later as an error such as ``NoSuchMethodError`` or ``NoClassDefFoundError``. To avoid this:
+
+* When upgrading, **replace** the whole ``EzSignServer/lib`` folder with the new one rather than copying the new jars into it, so no jar from the old version is left behind
+* Do not copy other jars into ``EzSignServer/lib``. In particular the EzSign client jar (from ``EzSignClient/lib``) is for client applications and is not needed by the server
+
+From version 4.6.0 the server and the Management Tool check for this when they start. Each class found in more than one jar with different contents is logged as an error by the server (and printed as a warning by the Management Tool), naming the jars, so the out of date jar can be removed. By default the server still starts; set ``server.failOnClasspathConflicts=true`` to stop it starting instead. The server also logs the EzSign version and the jar it was loaded from
+
 For nCipher HSMs the account running the server must have access to the nCipher ``kmdata/local`` folder. This is usually achieved by adding the user to the ``nfast`` group

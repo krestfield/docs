@@ -116,6 +116,11 @@ server.maxMessageSize=67108864
 # encrypted with the master password. Set this with the Management Tool
 #server.ctrl.authCode=
 
+# If true, the server will not start if a class is in more than one jar
+# in the lib folder with different contents (e.g. an old jar left behind
+# after an upgrade). These are always logged as errors. Defaults to false
+server.failOnClasspathConflicts=false
+
 # Whether the socket interface (used by the EzSign client) is started
 # Set to false if only the REST API is used. Defaults to true
 server.socketapi.enabled=true

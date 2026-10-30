@@ -25,11 +25,13 @@ The following settings dictate what ports and interfaces the server listens on a
 | ------------------------------------ | ------------------------------------------------------------ | ------------ |
 | server.bindIpAddress|The interface/IP Address the server will bind to. *If omitted the server will listen on all available interfaces*|10.100.15.32|
 | server.port|The port the server will listen on|5656|
-| server.allowedSourceIpAddresses|A comma separated list of IP Addresses which can connect to the server. *If omitted any client can connect*|10.100.15.40,10.100.15.41|
+| server.allowedSourceIpAddresses|A comma separated list of IP Addresses (IPv4 or IPv6) which can connect to the server. *If omitted or empty any client can connect*|10.100.15.40,10.100.15.41|
 | server.threadPoolSize|The pool size that will be created at start up and used to process requests.  *If omitted, defaults to 1*|5|
 | server.waitTimeoutIfAllBusy|The maximum time to wait for a thread to become free.  If all instances in the thread pool are busy the server will wait this number of milliseconds before returning an error. *If omitted, defaults to 1000 (i.e. 1 second)*|1000|
 | server.waitForMessageTimeout|The maximum time to wait for a message to be sent following connection. This should be increased if there are connection issues under load. *If omitted, defaults to 1000 (i.e. 1 second)*|1000|
-| server.logMessages| If false, the received and sent messages will not be logged. If encrypting sensitive data, set this to false to  prevent cleartext being sent to the log file. *If omitted defaults to true* |true|
+| server.logMessages| If true, the received and sent messages are logged. These can contain the data being signed, encrypted or decrypted, so only set this to true when needed. *If omitted defaults to false (true before version 4.6.0)* |false|
+| server.maxMessageSize|The longest message accepted from a client, in characters. Longer messages are refused with an error. Set to 0 for no limit. *If omitted defaults to 67108864 (about 48MB of data)* (from version 4.6.0)|67108864|
+| server.tls.protocols|If server.useTls is true, the TLS protocols enabled. *If omitted the Java defaults are used* (from version 4.6.0)|TLSv1.3,TLSv1.2|
 | server.ctrl.bindIpAddress|The interface/IP Address the *control* server will bind to. *If omitted the server will listen on all available interfaces*|127.0.0.1|
 | server.ctrl.port|The port the control server will listen on|5657|
 | server.ctrl.allowedSourceIpAddresses|A comma separated list of IP Addresses which can connect to the control server. *If omitted no client can connect*|10.100.15.40,10.100.15.41|

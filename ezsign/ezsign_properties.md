@@ -31,10 +31,14 @@ The following settings dictate what ports and interfaces the server listens on a
 | server.waitForMessageTimeout|The maximum time to wait for a message to be sent following connection. This should be increased if there are connection issues under load. *If omitted, defaults to 1000 (i.e. 1 second)*|1000|
 | server.logMessages| If true, the received and sent messages are logged. These can contain the data being signed, encrypted or decrypted, so only set this to true when needed. *If omitted defaults to false (true before version 4.6.0)* |false|
 | server.maxMessageSize|The longest message accepted from a client, in characters. Longer messages are refused with an error. Set to 0 for no limit. *If omitted defaults to 67108864 (about 48MB of data)* (from version 4.6.0)|67108864|
+| server.socketapi.enabled|If false, the socket interface (used by the EzSign client) is not started, e.g. when only the REST API is used. At least one of the socket interface and the REST API must be enabled. *If omitted defaults to true* (from version 4.6.0)|true|
+| server.useTls|If true, clients must connect to the socket interface over TLS. The server's TLS certificate and key are set with tls.clientKeyStore.filename, type and password. See [Configuring TLS](configuring_tls.html). *If omitted defaults to false*|false|
+| server.useClientTls|If true (and server.useTls is true), clients must also present a TLS client certificate. Client certificates are checked against tls.trustStore.filename, which should hold only the CA(s) that issue client certificates. If no trust store is set, Java's default trust store (cacerts) is used and a warning is logged. *If omitted defaults to false*|false|
 | server.tls.protocols|If server.useTls is true, the TLS protocols enabled. *If omitted the Java defaults are used* (from version 4.6.0)|TLSv1.3,TLSv1.2|
 | server.ctrl.bindIpAddress|The interface/IP Address the *control* server will bind to. *If omitted the server will listen on all available interfaces*|127.0.0.1|
 | server.ctrl.port|The port the control server will listen on|5657|
 | server.ctrl.allowedSourceIpAddresses|A comma separated list of IP Addresses which can connect to the control server. *If omitted no client can connect*|10.100.15.40,10.100.15.41|
+| server.ctrl.authCode|The passphrase used to encrypt messages sent to the control server, encrypted with the master password. Set this with the Management Tool. If set, the control client must use the same passphrase. *If omitted, control messages are sent in the clear*|yjjWoLfE...Zlew==|
 | server.ctrl.logStatusMessages|By default the server will log every status request message sent to the control interface.  If regular monitoring is in place this can fill logs.  Set this value to false to switch off this logging. *Defaults to true*|true|
 | server.authCode|The passphrase used to encrypt messages between the client and server.  If set the client must pass the same string to the constructor.  If not set, messages will be sent in the clear (which may be OK if client and server are on the same machine or using a private network)|x55tHH#ih65W|
 | keyStoreDir |The folder beneath which all channel key stores will be held|/opt/ezsign/STORE|
@@ -45,6 +49,35 @@ The following settings dictate what ports and interfaces the server listens on a
 | tls.clientKeyStore.filename |If the server is using server-side TLS this is the full path to the keystore file containing the TLS certificate. See [Configuring TLS](configuring_tls.html) for more details. If using a client TLS certificate to authenticate to a payShield HSM, this is the full path to the keystore file containing the client-authentication certificate. See [payShield TLS Configuration](payshield_tls_configuration.html) for more details.|/opt/stores/client.jks|
 | tls.clientKeyStore.type |This specifies the trust store type referenced above. Options are **jks** or **pkcs12**|pkcs12|
 | tls.clientKeyStore.password |The encrypted password that protects the key store referenced above. Use the Management Utility to set this password|FGchg3Kv...Ycsg==|
+
+<br>
+
+## REST API Properties
+
+From version 4.6.0 the server can also offer a REST API. These settings configure it. See [REST API](ezsign_rest_api.html) for details
+
+| Property                             | Description                                                  | Example      |
+| ------------------------------------ | ------------------------------------------------------------ | ------------ |
+| server.restapi.enabled|Enables the REST API. *If omitted defaults to false*|true|
+| server.restapi.port|The port the REST API listens on. Required if the REST API is enabled|8443|
+| server.restapi.bindIpAddress|The interface/IP Address the REST API will bind to. *If omitted the REST API will listen on all available interfaces*|10.100.15.32|
+| server.restapi.allowedSourceIpAddresses|A comma separated list of IP Addresses (IPv4 or IPv6) which can connect to the REST API. *If omitted any client can connect*|10.100.15.40,10.100.15.41|
+| server.restapi.threadPoolSize|The number of requests processed at once. *If omitted, server.threadPoolSize is used*|5|
+| server.restapi.waitTimeoutIfAllBusy|The time in milliseconds to wait for a free instance before returning 503 (busy). *If omitted, server.waitTimeoutIfAllBusy is used*|1000|
+| server.restapi.maxRequestSize|The largest request body accepted, in bytes. *If omitted defaults to 10485760 (10MB)*|10485760|
+| server.restapi.usersFile|The users file, which holds the users that may call the REST API, their API tokens or certificates and their roles. Managed with the [Management Tool](ezsign_management_tool.html). Required if the REST API is enabled|/opt/ezsign/users.json|
+| server.restapi.usersFile.signerCerts|A comma separated list of admin certificate files. If set, the users file must be signed by one of these certificates, so it cannot be changed without an admin's key. *If omitted the users file is not signed*|/opt/ezsign/admin1.pem,/opt/ezsign/admin2.pem|
+| server.restapi.stateFile|Written by the server to record the trusted admin certificates, so a change to them between restarts is reported. *If omitted defaults to ezsign-rest-state.properties*|/opt/ezsign/ezsign-rest-state.properties|
+| server.restapi.logRequests|If true, one line is logged per request (the user, operation, channel, result and time taken). Request bodies are never logged. *If omitted defaults to true*|true|
+| server.restapi.useTls|If true, the REST API uses HTTPS. Only set this to false for testing. *If omitted defaults to true*|true|
+| server.restapi.tls.keyStore.filename|The key store holding the REST API's TLS certificate and private key. Required if useTls is true|/opt/ezsign/rest-tls.p12|
+| server.restapi.tls.keyStore.type|The key store type: **PKCS12** or **JKS**. *If omitted defaults to PKCS12*|PKCS12|
+| server.restapi.tls.keyStore.password|The password for the key store, encrypted with the master password. Set this with the Management Tool|FGchg3Kv...Ycsg==|
+| server.restapi.tls.trustStore.filename|A trust store holding only the CA(s) that issue client certificates. Client certificates are only checked against this trust store, never Java's cacerts file. *If omitted client certificates cannot be used*|/opt/ezsign/client-ca.p12|
+| server.restapi.tls.trustStore.type|The trust store type: **PKCS12** or **JKS**. *If omitted defaults to PKCS12*|PKCS12|
+| server.restapi.tls.trustStore.password|The password for the trust store, encrypted with the master password. Set this with the Management Tool|yjjWoLfE...Zlew==|
+| server.restapi.tls.clientAuth|Whether clients present a TLS certificate: **none**, **optional** (a certificate or an API token can be used) or **required**. *If omitted defaults to optional if a trust store is set, otherwise none*|optional|
+| server.restapi.tls.protocols|The TLS protocols enabled. *If omitted defaults to TLSv1.3,TLSv1.2*|TLSv1.3,TLSv1.2|
 
 <br>
 
@@ -204,8 +237,8 @@ if ``revocationChecker.type=OCSP`` then the following settings can be applied
 
 | Property                     | Description                                                  | Example      |
 | ---------------------------- | ------------------------------------------------------------ | ------------ |
-| channel.N.revocationChecker.ocsp. connectTimeoutSecs|If revocationChecker.type=OCSP then this determines the OCSP Server connection timeout.  *Defaults to 5 seconds*|5|
-| channel.N.revocationChecker.ocsp. readTimeoutSecs|If revocationChecker.type=OCSP then this determines the OCSP Server read timeout.  *Defaults to 5 seconds*|5|
+| channel.N.revocationChecker.ocsp.connectTimeoutSecs|If revocationChecker.type=OCSP then this determines the OCSP Server connection timeout.  *Defaults to 5 seconds*|5|
+| channel.N.revocationChecker.ocsp.readTimeoutSecs|If revocationChecker.type=OCSP then this determines the OCSP Server read timeout.  *Defaults to 5 seconds*|5|
 | channel.N.revocationChecker.ocsp.useDefaultUrl|If revocationChecker.type=OCSP then this determines whether the default URL (which must be specified) will always be used or, if false, the certificate's AIA extensions will be used to extract the OCSP URL|true|
 | channel.N.revocationChecker.ocsp.defaultUrl|If useDefaultUrl is true the default URL must be specified in this property|https://ocsp.server.com|
 | channel.N.revocationChecker.ocsp.signRequest|If true, the OCSP request will also be signed|true|

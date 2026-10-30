@@ -99,7 +99,102 @@ server.waitForMessageTimeout=1000
 # Whether to log all received and returned messages
 # If encrypting sensitive data, set this to false to prevent cleartext being
 # sent to the log file
+# Defaults to false (true before version 4.6.0)
 server.logMessages=false
+
+# The longest message accepted from a client, in characters. Longer
+# messages are refused with an error. 0 means no limit
+# Defaults to 67108864 (about 48MB of data)
+server.maxMessageSize=67108864
+
+# The passphrase used to encrypt messages between the client and server,
+# encrypted with the master password. Set this with the Management Tool
+# If omitted messages are sent in the clear
+#server.authCode=
+
+# The passphrase used to encrypt messages sent to the control server,
+# encrypted with the master password. Set this with the Management Tool
+#server.ctrl.authCode=
+
+# Whether the socket interface (used by the EzSign client) is started
+# Set to false if only the REST API is used. Defaults to true
+server.socketapi.enabled=true
+
+# Whether clients must connect over TLS. If true, the server's TLS
+# certificate is set with tls.clientKeyStore.filename, type and password
+# Defaults to false
+server.useTls=false
+
+# If server.useTls is true, whether clients must also present a TLS client
+# certificate. These are checked against tls.trustStore.filename
+# Defaults to false
+server.useClientTls=false
+
+# If server.useTls is true, the TLS protocols enabled
+# If omitted the Java defaults are used
+#server.tls.protocols=TLSv1.3,TLSv1.2
+
+###############################################################################
+# REST API
+# From version 4.6.0 the server can also offer a REST API
+###############################################################################
+
+# Enables the REST API. Defaults to false
+server.restapi.enabled=false
+
+# The port the REST API listens on
+server.restapi.port=8443
+
+# The IP Address the REST API binds to. If omitted, all interfaces
+#server.restapi.bindIpAddress=127.0.0.1
+
+# A comma separated list of IP addresses permitted to connect
+# If omitted any client can connect
+#server.restapi.allowedSourceIpAddresses=127.0.0.1
+
+# The number of requests processed at once and the time (milliseconds) to
+# wait for a free instance before returning 503 (busy)
+# If omitted server.threadPoolSize and server.waitTimeoutIfAllBusy are used
+#server.restapi.threadPoolSize=5
+#server.restapi.waitTimeoutIfAllBusy=1000
+
+# The largest request body in bytes. Defaults to 10485760
+server.restapi.maxRequestSize=10485760
+
+# The users file holding the users, their API tokens or certificates and
+# their roles. Managed with the Management Tool
+server.restapi.usersFile=/var/ezsign/users.json
+
+# If set, the users file must be signed by one of these admin certificates
+#server.restapi.usersFile.signerCerts=/var/ezsign/admin1.pem,/var/ezsign/admin2.pem
+
+# Written by the server to record the trusted admin certificates
+# Defaults to ezsign-rest-state.properties
+#server.restapi.stateFile=/var/ezsign/ezsign-rest-state.properties
+
+# Log one line per request. Request bodies are never logged. Defaults to true
+server.restapi.logRequests=true
+
+# Use HTTPS. Only set to false for testing. Defaults to true
+server.restapi.useTls=true
+
+# The REST API's TLS certificate and key. The password is encrypted with
+# the master password using the Management Tool
+server.restapi.tls.keyStore.filename=/var/ezsign/rest-tls.p12
+server.restapi.tls.keyStore.type=PKCS12
+server.restapi.tls.keyStore.password=FGchg3Kv...Ycsg==
+
+# Only the CA(s) that issue client certificates
+#server.restapi.tls.trustStore.filename=/var/ezsign/client-ca.p12
+#server.restapi.tls.trustStore.type=PKCS12
+#server.restapi.tls.trustStore.password=
+
+# none, optional or required. Defaults to optional with a trust store,
+# otherwise none
+#server.restapi.tls.clientAuth=optional
+
+# The TLS protocols enabled. Defaults to TLSv1.3,TLSv1.2
+#server.restapi.tls.protocols=TLSv1.3,TLSv1.2
 
 
 ###############################################################################
@@ -350,6 +445,28 @@ channel.1.revocationChecker.ocsp.checkOcspSigningCertUsage=true
 # If ommitted this will not be checked
 channel.1.revocationChecker.ocsp.maxProducedAtAgeMins=4
 
+# An OCSP response without a nextUpdate time is only accepted for this
+# number of minutes after its thisUpdate time. 0 accepts any age
+# Defaults to 60
+channel.1.revocationChecker.ocsp.maxAgeWithoutNextUpdateMins=60
+
+# If true, a random nonce is sent with each OCSP request and the response
+# must contain it. Only set if the OCSP responder supports nonces
+# Defaults to false
+channel.1.revocationChecker.ocsp.includeNonce=false
+
+# The OCSP server connection and read timeouts in seconds
+# Default to 5
+channel.1.revocationChecker.ocsp.connectTimeoutSecs=5
+channel.1.revocationChecker.ocsp.readTimeoutSecs=5
+
+# If true, only the end-entity certificate is checked for revocation
+channel.1.revocationChecker.ocsp.onlyCheckEndEntity=false
+
+# If true, a response signed by another trusted certificate (rather than
+# the issuer or a certificate it issued, as RFC 6960 requires) is accepted
+channel.1.revocationChecker.ocsp.relaxSigningPath=false
+
 # If true, when sending an OCSP request, if SSL/TLS
 # is used and the SSL certificate is not specifically trusted, setting
 # this to true will still permit the connection
@@ -404,6 +521,18 @@ channel.1.revocationChecker.crl.allowExpiredCrl=false
 # If allowExpiredCrl=true then the number of days expiry that will be permitted
 channel.1.revocationChecker.crl.allowExpiredCrlForDays=5
 
+# If true, a CRL is accepted when its issuer certificate does not have the
+# CRL sign key usage (a warning is logged). Defaults to false
+channel.1.revocationChecker.crl.relaxCrlSignCheck=false
+
+# If true, only the end-entity certificate is checked for revocation
+channel.1.revocationChecker.crl.onlyCheckEndEntity=false
+
+# The timeouts for connecting to the server and reading a CRL, in seconds
+# Default to 5 and 30
+channel.1.revocationChecker.crl.connectTimeoutSecs=5
+channel.1.revocationChecker.crl.readTimeoutSecs=30
+
 # If true, when downloading a CRL, if SSL/TLS
 # is used and the SSL certificate is not specifically trusted, setting
 # this to true will still permit the connection
@@ -424,7 +553,7 @@ channel.1.revocationChecker.crl.proxyPort=8080
 channel.1.revocationChecker.crl.proxyAuthRequired=true
 
 # If proxyAuthRequired=true set the username here
-channel.1.revocationChecker.ocsp.proxyUsername=user1
+channel.1.revocationChecker.crl.proxyUsername=user1
 
 # If proxyAuthRequired=true set the password here
 channel.1.revocationChecker.crl.proxyPassword=password

@@ -125,36 +125,39 @@ During signature verification, EzSign will perform the following operations:
 
 Each certificate is checked for time validity (the Valid From date is before the current time and the Valid To date after) and its signature is verified against the issuing certificates public key
 
-**Step 3** then performs the following steps:
+**Step 3** then performs the following checks:
 
-1.	If the setting ``channel.N.verify.denyWeakCertificateHash`` is *true*, if any of the certificates in the path have a weak hash (anything weaker than SHA-2) they will be rejected
-2.	If the setting ``channel.N.verify.relaxAllCertExtensionChecks`` is *true*, no further checks will be performed on the path, if this setting is false (or not set at all), then the additional checks will be performed:
-1. If the settings for key size (``channel.N.verify.minKeySize`` and ``channel.N.verify.maxKeySize``) are set, each certificate’s key size must be within these limits
+1. If the setting ``channel.N.verify.denyWeakCertificateHash`` is *true*, any certificate in the path with a weak hash (anything weaker than SHA-2) is rejected
 
-2. The certificates must have the *keyUsage* extension and this must be marked as critical
+2. If the setting ``channel.N.verify.relaxAllCertExtensionChecks`` is *true*, none of the checks below are performed. If it is false (or not set), the following checks are performed:
 
-3. Signer certificates must have the *Digital Signature* key usage set
+   * **Key size** - each certificate's key size must be within ``channel.N.verify.minKeySize`` and ``channel.N.verify.maxKeySize``
+   * **Signer key usage** - the signer certificate must have the *keyUsage* extension, marked critical, with *Digital Signature* set. If ``channel.N.verify.nonRepudiationRequired`` is *true* (the default), *Non Repudiation* must also be set
+   * **CA key usage** - CA and root certificates must have the *keyUsage* extension with *Key Cert Sign* set
+   * **CA basic constraints** - if ``channel.N.verify.caBasicConstraintsRequired`` is *true* (the default), CA and root certificates must have the *Basic Constraints* extension, marked critical, with CA set, and the path length it allows is checked
 
-4. If the setting ``channel.N.verify.nonRepudiationRequired`` is *true*, signer certificates must also have the *Non Repudiation* key usage set
+   From version 4.6.0 these checks are also performed:
 
-5. For CA and Root CA certificates they must have the *Key Cert Sign* key usage set and if the setting ``channel.N.verify.caBasicConstraintsRequired`` is *true*, they must also have the *Basic Constraints* extension.  
+   * **Critical extensions** - a certificate (other than the root) must not have a critical extension that EzSign does not process, such as policy constraints or a private extension, as RFC 5280 requires
+   * **Name constraints** - the subject name, email addresses and subject alternative names of each certificate must meet the name constraints of the CA certificates above it
+   * **Extended key usage** - if the signer certificate has the extended key usage extension, it must contain a purpose that permits signing (by default any extended key usage, email protection, code signing or document signing). A signer certificate without the extension is not restricted
+   * **CA signer** - the signer certificate must not be a CA certificate, unless it is self-signed
 
-   When *Basic Constraints* are checked the path length permitted will also be checked
-   If the setting ``channel.N.verify.relaxRootCertExtensionChecks`` is *true*, these additional checks will not be carried out on root certificates.  This may be required if legacy root certificates are being used
+   If the setting ``channel.N.verify.relaxRootCertExtensionChecks`` is *true*, none of these checks are carried out on the root certificate. This may be required if legacy root certificates are being used
 
-From version 4.6.0 the following checks are also performed. Each can be relaxed on its own with the setting shown. When a relaxed check would have failed, the certificate is accepted and a warning is logged, so the logs show what has been accepted
+From version 4.6.0, when CRLs are checked (Step 4), the certificate that issued the CRL must also have the *CRL Sign* key usage
 
-6. A certificate (other than the root) must not have a critical extension that EzSign does not process, such as policy constraints or a private extension (``channel.N.verify.relaxCriticalExtensionChecks``, or list the extensions to accept in ``channel.N.verify.allowedCriticalExtensions``)
+Each of the checks added in version 4.6.0 can be relaxed on its own, without turning off all the checks with ``relaxAllCertExtensionChecks``. When a relaxed check would have failed, the certificate is accepted and a warning is logged, so the logs show what has been accepted. When a check fails, the error names the setting that would allow it
 
-7. The subject name, email addresses and subject alternative names of each certificate must meet the name constraints of the CA certificates above it (``channel.N.verify.relaxNameConstraints``)
+| Check | Setting to relax it | Narrower alternative |
+| --- | --- | --- |
+| Critical extensions | ``channel.N.verify.relaxCriticalExtensionChecks=true`` | List the extension OIDs to accept in ``channel.N.verify.allowedCriticalExtensions`` |
+| Name constraints | ``channel.N.verify.relaxNameConstraints=true`` | |
+| Extended key usage | ``channel.N.verify.relaxExtendedKeyUsageChecks=true`` | Set the purposes (OIDs) that permit signing in ``channel.N.verify.allowedExtendedKeyUsages``. This replaces the default list |
+| CA signer | ``channel.N.verify.relaxCaSignerCheck=true`` | |
+| CRL issuer's CRL Sign key usage | ``channel.N.revocationChecker.crl.relaxCrlSignCheck=true`` | Also relaxed by ``relaxAllCertExtensionChecks`` |
 
-8. If the signer certificate has the extended key usage extension, it must contain a purpose that permits signing, e.g. email protection or document signing (``channel.N.verify.relaxExtendedKeyUsageChecks``, or change the list with ``channel.N.verify.allowedExtendedKeyUsages``)
-
-9. The signer certificate must not be a CA certificate (``channel.N.verify.relaxCaSignerCheck``)
-
-10. When CRLs are checked, the CRL issuer's certificate must have the *CRL Sign* key usage (``channel.N.revocationChecker.crl.relaxCrlSignCheck``)
-
-   All the checks performed in Step 3 may be overridden by developing a custom path check class
+All the checks performed in Step 3 may be overridden by developing a custom path check class (see below)
 
 #### The risks of relaxing these checks
 

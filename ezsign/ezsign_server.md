@@ -141,7 +141,32 @@ Each certificate is checked for time validity (the Valid From date is before the
 
    When *Basic Constraints* are checked the path length permitted will also be checked
    If the setting ``channel.N.verify.relaxRootCertExtensionChecks`` is *true*, these additional checks will not be carried out on root certificates.  This may be required if legacy root certificates are being used
+
+From version 4.6.0 the following checks are also performed. Each can be relaxed on its own with the setting shown. When a relaxed check would have failed, the certificate is accepted and a warning is logged, so the logs show what has been accepted
+
+6. A certificate (other than the root) must not have a critical extension that EzSign does not process, such as policy constraints or a private extension (``channel.N.verify.relaxCriticalExtensionChecks``, or list the extensions to accept in ``channel.N.verify.allowedCriticalExtensions``)
+
+7. The subject name, email addresses and subject alternative names of each certificate must meet the name constraints of the CA certificates above it (``channel.N.verify.relaxNameConstraints``)
+
+8. If the signer certificate has the extended key usage extension, it must contain a purpose that permits signing, e.g. email protection or document signing (``channel.N.verify.relaxExtendedKeyUsageChecks``, or change the list with ``channel.N.verify.allowedExtendedKeyUsages``)
+
+9. The signer certificate must not be a CA certificate (``channel.N.verify.relaxCaSignerCheck``)
+
+10. When CRLs are checked, the CRL issuer's certificate must have the *CRL Sign* key usage (``channel.N.revocationChecker.crl.relaxCrlSignCheck``)
+
    All the checks performed in Step 3 may be overridden by developing a custom path check class
+
+#### The risks of relaxing these checks
+
+These checks follow RFC 5280. Relaxing them may be needed where certificates were not issued to the standard, but the decision and its risks are then the customer's:
+
+* **Critical extensions** - the CA marked the extension critical because the certificate must not be used by software that does not understand it. Accepting it ignores whatever restriction it carries
+* **Name constraints** - a CA restricted to certain names (e.g. one organisation's domain) could issue certificates for any name and they would be accepted
+* **Extended key usage** - certificates issued for another purpose, such as TLS server or client certificates, would be accepted as signers. The private keys of such certificates are often held with weaker protection
+* **CA signer** - a CA key that signs documents is used for more than issuing certificates, and a signature cannot be told apart from a CA operation
+* **CRL sign** - a CRL signed by a key not authorised for it would be trusted, so revocation information could be wrong
+
+Where possible, prefer the narrowest setting, e.g. list the one extension in ``allowedCriticalExtensions`` or the one extra purpose in ``allowedExtendedKeyUsages`` rather than relaxing the whole check
 
 <br>
 

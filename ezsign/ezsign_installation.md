@@ -63,6 +63,8 @@ Client applications must be able to access the jar files located in the ``EzSign
 
 ### The lib folder and upgrades
 
+When upgrading to version 4.6, see also [Upgrading to EzSign 4.6](ezsign_upgrading_to_4.6.html) for the changes you are most likely to notice
+
 The server scripts (including the Management Tool scripts) load **every** jar in the ``EzSignServer/lib`` folder. If two jars contain the same class at different versions, either copy may be loaded, which shows later as an error such as ``NoSuchMethodError`` or ``NoClassDefFoundError``. To avoid this:
 
 * When upgrading, **replace** the whole ``EzSignServer/lib`` folder with the new one rather than copying the new jars into it, so no jar from the old version is left behind

@@ -192,17 +192,9 @@ A response without a next update time was accepted at any age, so an old respons
 channel.1.revocationChecker.ocsp.maxAgeWithoutNextUpdateMins=240
 ```
 
-**OCSP responses signed by a certificate that is not trusted**
+**OCSP responses signed directly by the issuing CA are now accepted**
 
-```
-Validation of the OCSP signer certificate failed as a valid issuer could not be found. The wrong certificate may be signing the response. ...
-```
-
-Before 4.6.0 a fallback accepted the OCSP signer certificate without checking it was trusted. This has been removed. The response must be signed by the CA that issued the certificate being checked, or by a certificate that CA issued (RFC 6960). If your responder's certificate is issued by another trusted CA (e.g. a root CA, as with some IdenTrust responders), set:
-
-```
-channel.1.revocationChecker.ocsp.relaxSigningPath=true
-```
+Before 4.6.0, a response signed by the CA that issued the certificate being checked (rather than by a separate OCSP responder certificate) was refused because of a bug in the comparison, unless ``relaxSigningPath=true`` was set. These responses are now accepted, as RFC 6960 allows. No action is needed. If you set ``relaxSigningPath=true`` only to work around this, you can now remove it
 
 **ignoreSSLErrors now only applies to that channel**
 

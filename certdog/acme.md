@@ -23,7 +23,7 @@ From the menu, select **Interfaces** and then choose **ACME**
 
 Click **Add New ACME Service**:
 
-<img src=".\images\image-20260129161210654.png" alt="image-20260129161210654" style="zoom: 67%;" />
+![image-20261104125800398](./images/image-20261104125800398.png)
 
 * **Service Name**.  Enter a name. This can be anything to identify the service to the administrators. End users will not see this value
 * **Enabled**. This enables the service.  If this is un-checked clients will receive an error indicating that the service is disabled

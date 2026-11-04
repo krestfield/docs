@@ -379,7 +379,7 @@ channel.1.verify.relaxNameConstraints=false
 # allowedExtendedKeyUsages replaces the default list of OIDs (shown
 # below), so to add a purpose, keep the defaults and append it
 channel.1.verify.relaxExtendedKeyUsageChecks=false
-#channel.1.verify.allowedExtendedKeyUsages=2.5.29.37.0,1.3.6.1.5.5.7.3.4,1.3.6.1.5.5.7.3.3,1.3.6.1.5.5.7.3.36,1.3.6.1.4.1.311.10.3.12,1.2.840.113583.1.1.5
+#channel.1.verify.allowedExtendedKeyUsages=2.5.29.37.0,1.3.6.1.5.5.7.3.4,1.3.6.1.5.5.7.3.3,1.3.6.1.5.5.7.3.36,1.3.6.1.4.1.311.10.3.12,1.2.840.113583.1.1.5,1.3.6.1.5.5.7.3.1,1.3.6.1.5.5.7.3.2
 
 # Accept a CA certificate as the signer
 channel.1.verify.relaxCaSignerCheck=false

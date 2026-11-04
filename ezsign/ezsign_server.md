@@ -186,15 +186,21 @@ accepts them, while any other unknown critical extension is still rejected. This
 * If the signer certificate does not have the extended key usage extension, it is accepted and the list is not used
 * If it has the extension, at least one of its purposes must be in the list, otherwise the certificate is rejected (or if ``relaxExtendedKeyUsageChecks=true``, accepted with a warning)
 
-The default list is: any extended key usage (2.5.29.37.0), email protection (1.3.6.1.5.5.7.3.4), code signing (1.3.6.1.5.5.7.3.3), document signing (1.3.6.1.5.5.7.3.36), Microsoft document signing (1.3.6.1.4.1.311.10.3.12) and Adobe authentic documents trust (1.2.840.113583.1.1.5)
+The default list is: any extended key usage (2.5.29.37.0), email protection (1.3.6.1.5.5.7.3.4), code signing (1.3.6.1.5.5.7.3.3), document signing (1.3.6.1.5.5.7.3.36), Microsoft document signing (1.3.6.1.4.1.311.10.3.12), Adobe authentic documents trust (1.2.840.113583.1.1.5), TLS server authentication (1.3.6.1.5.5.7.3.1) and TLS client authentication (1.3.6.1.5.5.7.3.2). Server and client authentication are included because EzSign also verifies signatures made for authentication, which are often made with these certificates
 
-Setting ``allowedExtendedKeyUsages`` **replaces** the default list, it does not add to it. For example, a signer certificate with the purposes client authentication and server authentication is rejected by default. To also accept client authentication certificates, list the defaults plus client authentication (1.3.6.1.5.5.7.3.2):
+Setting ``allowedExtendedKeyUsages`` **replaces** the default list, it does not add to it. For example, a signer certificate with only the time stamping purpose (1.3.6.1.5.5.7.3.8) is rejected by default. To also accept time stamping certificates, list the defaults plus time stamping:
 
 ```
-channel.1.verify.allowedExtendedKeyUsages=2.5.29.37.0,1.3.6.1.5.5.7.3.4,1.3.6.1.5.5.7.3.3,1.3.6.1.5.5.7.3.36,1.3.6.1.4.1.311.10.3.12,1.2.840.113583.1.1.5,1.3.6.1.5.5.7.3.2
+channel.1.verify.allowedExtendedKeyUsages=2.5.29.37.0,1.3.6.1.5.5.7.3.4,1.3.6.1.5.5.7.3.3,1.3.6.1.5.5.7.3.36,1.3.6.1.4.1.311.10.3.12,1.2.840.113583.1.1.5,1.3.6.1.5.5.7.3.1,1.3.6.1.5.5.7.3.2,1.3.6.1.5.5.7.3.8
 ```
 
-The certificate is then accepted because client authentication is in the list. With ``relaxExtendedKeyUsageChecks=true`` it would also be accepted, but with a warning, as would a certificate with any other purpose
+The certificate is then accepted because time stamping is in the list. With ``relaxExtendedKeyUsageChecks=true`` it would also be accepted, but with a warning, as would a certificate with any other purpose
+
+The list can also be made stricter. For example, a channel that only verifies document signatures can refuse TLS server and client certificates by leaving them out:
+
+```
+channel.1.verify.allowedExtendedKeyUsages=2.5.29.37.0,1.3.6.1.5.5.7.3.4,1.3.6.1.5.5.7.3.3,1.3.6.1.5.5.7.3.36,1.3.6.1.4.1.311.10.3.12,1.2.840.113583.1.1.5
+```
 
 All the checks performed in Step 3 may be overridden by developing a custom path check class (see below)
 
@@ -204,7 +210,7 @@ These checks follow RFC 5280. Relaxing them may be needed where certificates wer
 
 * **Critical extensions** - the CA marked the extension critical because the certificate must not be used by software that does not understand it. Accepting it ignores whatever restriction it carries
 * **Name constraints** - a CA restricted to certain names (e.g. one organisation's domain) could issue certificates for any name and they would be accepted
-* **Extended key usage** - certificates issued for another purpose, such as TLS server or client certificates, would be accepted as signers. The private keys of such certificates are often held with weaker protection
+* **Extended key usage** - certificates issued for another purpose (e.g. time stamping or OCSP signing) would be accepted as signers. TLS server and client authentication certificates are accepted by default; where a channel only verifies document signatures, consider leaving them out of ``allowedExtendedKeyUsages``, as their private keys are often held with weaker protection (e.g. on web servers)
 * **CA signer** - a CA key that signs documents is used for more than issuing certificates, and a signature cannot be told apart from a CA operation
 * **CRL sign** - a CRL signed by a key not authorised for it would be trusted, so revocation information could be wrong
 

@@ -56,22 +56,22 @@ server.failOnClasspathConflicts=true
 
 <br>
 
-## Signer certificates with the client authentication (or another non-signing) extended key usage
+## Signer certificates with an extended key usage that does not permit signing
 
 **What you see**
 
 ```
-The signer certificate CN=... has the extended key usages [1.3.6.1.5.5.7.3.2], none of which is allowed for signing. Allowed are [...] (set with allowedExtendedKeyUsages). Set relaxExtendedKeyUsageChecks=true to allow this
+The signer certificate CN=... has the extended key usages [1.3.6.1.5.5.7.3.8], none of which is allowed for signing. Allowed are [...] (set with allowedExtendedKeyUsages). Set relaxExtendedKeyUsageChecks=true to allow this
 ```
 
-**Why** - RFC 5280 (section 4.2.1.12) says that if a certificate has the extended key usage extension, it must only be used for the purposes listed. Client authentication (``1.3.6.1.5.5.7.3.2``) is for TLS client authentication, and server authentication (``1.3.6.1.5.5.7.3.1``) for TLS servers, not for signing. Some CAs issue certificates with only these purposes that are then used for signing (e.g. smart card certificates). Version 4.6.0 rejects them. Certificates without the extended key usage extension are not affected
+**Why** - RFC 5280 (section 4.2.1.12) says that if a certificate has the extended key usage extension, it must only be used for the purposes listed. Version 4.6.0 rejects a signer certificate whose purposes do not include one that EzSign accepts, e.g. a certificate with only time stamping (``1.3.6.1.5.5.7.3.8``) or OCSP signing (``1.3.6.1.5.5.7.3.9``). Certificates without the extended key usage extension are not affected
 
-The purposes accepted by default are: any extended key usage, email protection, code signing, document signing, Microsoft document signing and Adobe authentic documents trust
+The purposes accepted by default are: any extended key usage, email protection, code signing, document signing, Microsoft document signing, Adobe authentic documents trust, and TLS server authentication (``1.3.6.1.5.5.7.3.1``) and client authentication (``1.3.6.1.5.5.7.3.2``). Server and client authentication certificates are accepted because EzSign also verifies signatures made for authentication, so certificates with only these purposes continue to work after upgrading
 
-**What to do** - preferably, have the certificates reissued with a signing purpose. Otherwise, add the purpose to the accepted list. The setting **replaces** the default list, so include the defaults as well. For example, to also accept client authentication:
+**What to do** - preferably, have the certificates reissued with a purpose that permits signing. Otherwise, add the purpose to the accepted list. The setting **replaces** the default list, so include the defaults as well. For example, to also accept time stamping:
 
 ```
-channel.1.verify.allowedExtendedKeyUsages=2.5.29.37.0,1.3.6.1.5.5.7.3.4,1.3.6.1.5.5.7.3.3,1.3.6.1.5.5.7.3.36,1.3.6.1.4.1.311.10.3.12,1.2.840.113583.1.1.5,1.3.6.1.5.5.7.3.2
+channel.1.verify.allowedExtendedKeyUsages=2.5.29.37.0,1.3.6.1.5.5.7.3.4,1.3.6.1.5.5.7.3.3,1.3.6.1.5.5.7.3.36,1.3.6.1.4.1.311.10.3.12,1.2.840.113583.1.1.5,1.3.6.1.5.5.7.3.1,1.3.6.1.5.5.7.3.2,1.3.6.1.5.5.7.3.8
 ```
 
 Or, to accept any extended key usage (a warning is logged each time a certificate would have been rejected):

@@ -8,7 +8,7 @@ nav_order: 5
 
 <br>
 
-> Note: The command line interface (CLI) option and REST API Users configuration are only available in version 4.6.0 onwards
+> Note: The configuration UI, the command line interface (CLI) option and REST API Users configuration are only available in version 4.6.0 onwards
 
 <br>
 
@@ -33,12 +33,13 @@ The Management utility enables the following operations:
 
 <br>
 
-The tool can be run in two ways:
+The tool can be run in three ways:
 
 - As an interactive menu, where each operation is chosen from a list and the details are prompted for
 - As a command line tool (CLI), where each operation is a single command. This is useful for scripts, automation and remote sessions
+- As a browser-based configuration UI, which also edits the rest of the server's configuration (see [The Configuration UI](#the-configuration-ui))
 
-Both carry out the same operations on the same files.  Each section below describes the menu option and then the same operation via the CLI
+All carry out the same operations on the same files.  Each section below describes the menu option and then the same operation via the CLI
 
 <br>
 
@@ -55,6 +56,12 @@ ezsign-manage.sh ../config/serverconfig.properties
 ```
 
 (On Windows run ``ezsign-manage.bat``)
+
+To start the configuration UI instead, pass ``ui`` (see [The Configuration UI](#the-configuration-ui)):
+
+```
+ezsign-manage.sh ui -config ../config/serverconfig.properties
+```
 
 The script runs the tool with all the jars in the ``EzSignServer/lib`` folder. To run the tool on another machine (e.g. with a copy of the properties file and key stores), copy the ``bin`` and ``lib`` folders. If copying individual jars, from version 4.6.0 the tool needs: ``ezsign``, ``ezsign-client-utils``, ``ezsign-users`` and ``ezsign-manage``. If ``ezsign-users`` is missing, a warning is printed when the tool starts and the REST API users commands will fail
 
@@ -304,6 +311,127 @@ To set a default for every session, remove the comment from the ``EZSIGN_CONFIG`
 **Output and Exit Codes**
 
 Results (such as lists and CSRs) are written to the standard output and messages to the standard error, so the results can be captured or redirected.  The exit code is 0 on success.  Anything else is an error, with the reason given on the standard error
+
+<br>
+
+## The Configuration UI
+
+The configuration UI is a browser-based editor for the whole server configuration.  As well as everything the menu and CLI can do, it edits the server, REST API, Control Interface and channel settings, checking each value as it is entered, and shows the changes before they are saved
+
+<br>
+
+### Starting the UI
+
+```
+ezsign-manage.sh ui -config ../config/serverconfig.properties
+```
+
+(On Windows run ``ezsign-manage.bat``)
+
+```
+EzSign configuration UI
+
+  Open this link in a browser on this machine (it can be used once):
+
+  http://127.0.0.1:52417/?s=Zk3v...
+
+  Stops when the UI is closed, after 60 minutes without activity, or with Ctrl+C.
+```
+
+Open the link in a browser.  The link can only be used once, so a copy of it cannot be used by anyone else.  The UI only listens on ``127.0.0.1``, so it can only be reached from the same machine.  To use a browser on another machine, forward the port over SSH as the tool describes, e.g.
+
+```
+ssh -N -L 52417:127.0.0.1:52417 user@ezsign-server
+```
+
+Then open the link in the browser on that machine.  Use ``-port`` to keep the same port each time
+
+| Option | Description |
+|--------|-------------|
+| -config | The properties file to open.  If omitted, the UI asks for the file |
+| -port | The port to listen on.  *If omitted a free port is used* |
+| -lock | Ask for the master password again after this many minutes without activity.  *If omitted defaults to 15* |
+| -idle | Stop after this many minutes without activity.  *If omitted defaults to 60* |
+| -bind | The address to listen on.  *If omitted defaults to 127.0.0.1*.  Only change this if you understand the risk: anyone who can reach the address and obtains the link can change the configuration |
+
+The UI stops when the browser tab is closed, after the idle time, with **Stop**, or with Ctrl+C
+
+<br>
+
+### Opening a Configuration
+
+The first screen asks for the properties file (with **Browse** to find it, and the files opened recently) and the master password.  **New configuration** creates a new properties file with a new master password and a set of starting values, ready for the REST API to be configured
+
+Changes are held in the UI until they are saved, so nothing is written to the properties file until **Review & save** is used
+
+<br>
+
+### The Sections
+
+The menu on the left contains the following:
+
+**Overview**
+
+A summary of the configuration: the channels, the token types used, the errors and warnings found, and the result of the last verification.  It also shows whether the running server can be reached through its Control Interface, with **Reload** to have the server apply the saved configuration
+
+<br>
+
+**Server settings**
+
+The settings that apply to the whole server, such as the key store folder, the log level and the TLS key stores used to connect to HSMs
+
+<br>
+
+**REST API**
+
+The REST API listener: its address and port, TLS, client certificate authentication, the users file and the admin certificates that sign it
+
+<br>
+
+**Socket API (Legacy)**
+
+The socket listener used by the EzSign Java and .NET clients before the REST API
+
+<br>
+
+**Control Interface**
+
+The interface used by the server control tool and by the UI to check the status of the server and reload it: its address, port, the addresses allowed to connect and the authentication code
+
+<br>
+
+**Channels**
+
+The list of channels, with options to add, duplicate, enable, disable and delete them.  Each channel has tabs for its settings:
+
+- **General** - the channel's name, type and whether it is enabled
+- **Token** - where the keys are held (software, PKCS#11 HSM, payShield, Google KMS or Azure Key Vault) and the token password.  For PKCS#11, **Detect slots** lists the slots the library reports
+- **Signature**, **Verification** and **Revocation** - how the channel signs and verifies, and how certificates are checked for revocation
+- **Keys & certificates** - the keys and certificates in the channel's token: generating CSRs, importing certificates and chains, importing existing HSM keys, setting the signing key, and generating and deleting AES keys
+
+<br>
+
+**Other properties**
+
+Properties that are not shown elsewhere, such as properties the UI does not recognise.  A property with a misspelt name, which the server would ignore, is reported with the option to rename it
+
+<br>
+
+**REST API users**
+
+The users file: the users, their API tokens and certificates, and the roles that give them their permissions.  The **Signature & history** tab signs the file with the admin key and lists the previous versions, any of which can be restored.  See [EzSign REST API Users File](rest_api_users_properties.html) for the format of the file
+
+<br>
+
+**Review changes**
+
+The changes that have not been saved, grouped by section and showing the old and new values, together with any errors and warnings.  The configuration cannot be saved while it has errors.  When saving, the properties file is backed up first, and the server can be reloaded so the changes take effect.  Changes to the listeners' addresses, ports and TLS need the server to be restarted
+
+<br>
+
+**Verify configuration**
+
+Loads the chosen channels as the server would, logging in to their tokens, and reports whether each one would start.  This finds problems such as a wrong token password or a missing key before the server is restarted.  Verification only runs when requested, as it connects to the HSMs
 
 <br>
 

@@ -196,6 +196,20 @@ channel.1.revocationChecker.ocsp.maxAgeWithoutNextUpdateMins=240
 
 Before 4.6.0, a response signed by the CA that issued the certificate being checked (rather than by a separate OCSP responder certificate) was refused because of a bug in the comparison, unless ``relaxSigningPath=true`` was set. These responses are now accepted, as RFC 6960 allows. No action is needed. If you set ``relaxSigningPath=true`` only to work around this, you can now remove it
 
+**OCSP responders must have the OCSP Signing purpose**
+
+```
+The OCSP response was signed by ..., which is not the issuing CA and does not have the 'OCSP Signing' extended key usage, so it is not authorised to sign OCSP responses (RFC 6960). To accept it, set the checkOcspSigningCertUsage property to 'false'
+```
+
+A response signed by a certificate other than the issuing CA (a delegated responder, or one accepted with ``relaxSigningPath=true``) was accepted whatever its purpose, so any certificate the CA had issued could sign responses for the CA's other certificates. RFC 6960 requires the responder's certificate to have the OCSP Signing extended key usage (id-kp-OCSPSigning), and this is now checked by default. Responses signed by the issuing CA itself are not affected. Delegated OCSP responders that follow RFC 6960 have this purpose, so no action is normally needed. If a responder you rely on does not, the best fix is to have its certificate reissued. Otherwise:
+
+```
+channel.1.revocationChecker.ocsp.checkOcspSigningCertUsage=false
+```
+
+Before 4.6.0, setting ``checkOcspSigningCertUsage=true`` also refused responses signed by the issuing CA itself. It no longer does
+
 **ignoreSSLErrors now only applies to that channel**
 
 Before 4.6.0, ``ignoreSSLErrors=true`` on an OCSP or CRL checker changed the TLS settings for the whole Java process, so it also (silently) applied to every other HTTPS connection, including other channels. It now only applies to that checker's own connections. If another channel's OCSP or CRL downloads start failing with TLS certificate errors after the upgrade, they were relying on this side effect: set ``ignoreSSLErrors`` on that channel too, or better, trust the server's certificate
@@ -240,3 +254,9 @@ These do not need any action, but may be noticed:
 ## Signatures created by 4.6.0
 
 RSA signatures now include the NULL parameter in the signature algorithm, as RFC 3370 requires (it had been left out since an earlier change). All standard verifiers accept both forms, and EzSign continues to verify signatures created by earlier versions. No action is needed
+
+**ML-DSA signatures follow RFC 9882**
+
+ML-DSA PKCS#7 signatures are now made as RFC 9882 describes: the signature is over the signed attributes themselves (or, without signed attributes, the content) rather than over their hash. They can now be verified by other software, and EzSign verifies ML-DSA signatures made by other software. ML-DSA signatures made by earlier versions are still accepted (a warning is logged) unless ``channel.N.verify.acceptLegacyMlDsaSignatures=false``. Note that other software, and EzSign 4.5.x, cannot verify the new signatures until it supports RFC 9882 as well
+
+An ML-DSA channel with ``signature.includeSignedAttribs=false`` signs the content itself, so it can no longer sign a digest (``isDigest=true``). Include signed attributes, which is the default, to sign digests

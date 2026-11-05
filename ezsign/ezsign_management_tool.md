@@ -1111,7 +1111,7 @@ Reload the server's configuration with the server control tool, or restart the s
 
 ## REST API Users
 
-The users that may call the REST API are held in a users file, set by ``server.restapi.usersFile`` in the server properties.  Each user has one or more roles and one or more credentials:
+The users that may call the REST API are held in a users file, set by ``server.restapi.usersFile`` in the server properties.  The format of the file and of its signature is described in [EzSign REST API Users File](rest_api_users_properties.html).  Each user has one or more roles and one or more credentials:
 
 - **API tokens** - the client sends the token as ``Authorization: Bearer <token>``.  Only a hash of the token is stored
 - **Client certificates** - the client authenticates with the certificate over TLS.  The certificate must be issued by a CA in ``server.restapi.tls.trustStore``

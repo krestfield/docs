@@ -322,7 +322,7 @@ channel.1.signature.includeCerts=ALL
 
 # If true, signed attributes containing signing time, content type
 # and message digest will be included in the signature
-channel.1.signature.includeSignedAttributes=true
+channel.1.signature.includeSignedAttribs=true
 
 # Whether to include the content within the signature or not
 channel.1.signature.includeContent=false

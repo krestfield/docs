@@ -35,9 +35,12 @@ The Management utility enables the following operations:
 
 The tool can be run in three ways:
 
-- As an interactive menu, where each operation is chosen from a list and the details are prompted for
-- As a command line tool (CLI), where each operation is a single command. This is useful for scripts, automation and remote sessions
-- As a browser-based configuration UI, which also edits the rest of the server's configuration (see [The Configuration UI](#the-configuration-ui))
+- **As an interactive menu**
+  - Where each operation is chosen from a list and the details are prompted for
+- **As a command line tool (CLI)**
+  - Where each operation is a single command. This is useful for scripts, automation and remote sessions
+- **As a browser-based configuration UI**
+  - Which also edits the rest of the server's configuration (see [The Configuration UI](#the-configuration-ui))
 
 All carry out the same operations on the same files.  Each section below describes the menu option and then the same operation via the CLI
 
@@ -328,6 +331,14 @@ ezsign-manage.sh ui -config ../config/serverconfig.properties
 
 (On Windows run ``ezsign-manage.bat``)
 
+Or
+
+```
+ezsign-manage.sh ui 
+```
+
+To be prompted for the properties file. The following will be displayed:
+
 ```
 EzSign configuration UI
 
@@ -344,11 +355,11 @@ Open the link in a browser.  The link can only be used once, so a copy of it can
 ssh -N -L 52417:127.0.0.1:52417 user@ezsign-server
 ```
 
-Then open the link in the browser on that machine.  Use ``-port`` to keep the same port each time
+Then open the link in the browser on that machine.  Note that a free port is calculated. Use the ``-port`` option to choose a specific port. The list of available options is below:
 
 | Option | Description |
 |--------|-------------|
-| -config | The properties file to open.  If omitted, the UI asks for the file |
+| -config | The properties file to open.  *If omitted, the UI asks for the file* |
 | -port | The port to listen on.  *If omitted a free port is used* |
 | -lock | Ask for the master password again after this many minutes without activity.  *If omitted defaults to 15* |
 | -idle | Stop after this many minutes without activity.  *If omitted defaults to 60* |
@@ -357,78 +368,103 @@ Then open the link in the browser on that machine.  Use ``-port`` to keep the sa
 The UI stops when the browser tab is closed, after the idle time, with **Stop**, or with Ctrl+C
 
 <br>
-
 ### Opening a Configuration
 
-The first screen asks for the properties file (with **Browse** to find it, and the files opened recently) and the master password.  **New configuration** creates a new properties file with a new master password and a set of starting values, ready for the REST API to be configured
+<img src="./images/image-20261105133732926.png" alt="image-20261105133732926" style="zoom:80%;" />
+
+If no properties file has been specified. the first screen asks for the properties file (with **Browse** to find it, and the files opened recently) and the master password.  **New configuration** creates a new properties file with a new master password and a set of starting values, ready for the server to be configured
 
 Changes are held in the UI until they are saved, so nothing is written to the properties file until **Review & save** is used
 
 <br>
-
 ### The Sections
 
 The menu on the left contains the following:
 
 **Overview**
 
+![image-20261105133845515](./images/image-20261105133845515.png)
+
 A summary of the configuration: the channels, the token types used, the errors and warnings found, and the result of the last verification.  It also shows whether the running server can be reached through its Control Interface, with **Reload** to have the server apply the saved configuration
 
 <br>
-
 **Server settings**
+
+![image-20261105134009322](./images/image-20261105134009322.png)
 
 The settings that apply to the whole server, such as the key store folder, the log level and the TLS key stores used to connect to HSMs
 
 <br>
-
 **REST API**
+
+![image-20261105134020248](./images/image-20261105134020248.png)
 
 The REST API listener: its address and port, TLS, client certificate authentication, the users file and the admin certificates that sign it
 
 <br>
-
 **Socket API (Legacy)**
 
 The socket listener used by the EzSign Java and .NET clients before the REST API
 
 <br>
-
 **Control Interface**
 
 The interface used by the server control tool and by the UI to check the status of the server and reload it: its address, port, the addresses allowed to connect and the authentication code
 
 <br>
-
 **Channels**
 
-The list of channels, with options to add, duplicate, enable, disable and delete them.  Each channel has tabs for its settings:
-
-- **General** - the channel's name, type and whether it is enabled
-- **Token** - where the keys are held (software, PKCS#11 HSM, payShield, Google KMS or Azure Key Vault) and the token password.  For PKCS#11, **Detect slots** lists the slots the library reports
-- **Signature**, **Verification** and **Revocation** - how the channel signs and verifies, and how certificates are checked for revocation
-- **Keys & certificates** - the keys and certificates in the channel's token: generating CSRs, importing certificates and chains, importing existing HSM keys, setting the signing key, and generating and deleting AES keys
+![image-20261105134200176](./images/image-20261105134200176.png)
 
 <br>
 
+The list of channels, with options to add, duplicate, enable, disable and delete them.  Each channel has tabs for its settings:
+<br>
+- **General**
+
+![image-20261105134653626](./images/image-20261105134653626.png)
+
+  The channel's name, type and whether it is enabled
+
+<br>
+- **Token** 
+
+![image-20261105134518381](./images/image-20261105134518381.png)
+
+where the keys are held (software, PKCS#11 HSM, payShield, Google KMS or Azure Key Vault) and the token password.  For PKCS#11, **Detect slots** lists the slots the library reports
+
+<br>
+- **Signature**, **Verification** and **Revocation**
+
+![image-20261105134415024](./images/image-20261105134415024.png)
+
+How the channel signs and verifies, and how certificates are checked for revocation
+
+<br>
+- **Keys & certificates**
+
+![image-20261105134257696](./images/image-20261105134257696.png)
+
+The keys and certificates in the channel's token: generating CSRs, importing certificates and chains, importing existing HSM keys, setting the signing key, and generating and deleting AES keys
+
+<br>
 **Other properties**
 
 Properties that are not shown elsewhere, such as properties the UI does not recognise.  A property with a misspelt name, which the server would ignore, is reported with the option to rename it
 
 <br>
-
 **REST API users**
+
+![image-20261105134932407](./images/image-20261105134932407.png)
 
 The users file: the users, their API tokens and certificates, and the roles that give them their permissions.  The **Signature & history** tab signs the file with the admin key and lists the previous versions, any of which can be restored.  See [EzSign REST API Users File](rest_api_users_properties.html) for the format of the file
 
 <br>
-
 **Review changes**
 
 The changes that have not been saved, grouped by section and showing the old and new values, together with any errors and warnings.  The configuration cannot be saved while it has errors.  When saving, the properties file is backed up first, and the server can be reloaded so the changes take effect.  Changes to the listeners' addresses, ports and TLS need the server to be restarted
 
 <br>
-
 **Verify configuration**
 
 Loads the chosen channels as the server would, logging in to their tokens, and reports whether each one would start.  This finds problems such as a wrong token password or a missing key before the server is restarted.  Verification only runs when requested, as it connects to the HSMs

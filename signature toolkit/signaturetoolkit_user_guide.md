@@ -77,13 +77,9 @@ You must have local Administrator privileges on the system to install.
 
 Double click the *SignatureToolkit* msi file (e.g. **SignatureToolkit-2.0.0-x64.msi**)
 
-*[Screenshot placeholder: images/install-welcome.png - the Welcome page of the Setup Wizard]*
+![image-20261112160852791](./images/image-20261112160852791.png)
 
-Click **Next**
-
-*[Screenshot placeholder: images/install-folder.png - the Destination Folder page]*
-
-Accept the default folder, or click **Change...** to choose another, and click **Next**
+Click **Next**, accept the default folder, or click **Change...** to choose another, and click **Next**
 
 Click **Install**, and then **Finish** once the installation completes
 
@@ -109,7 +105,7 @@ The installer will:
 
 Start the tool by double clicking the desktop icon, or by starting **Signature Toolkit** from the programs list.
 
-*[Screenshot placeholder: images/start-screen.png - the main window before a file has been opened]*
+<img src="./images/image-20261112161023057.png" alt="image-20261112161023057" style="zoom:80%;" />
 
 To open a file, do any of the following:
 
@@ -155,7 +151,7 @@ If you have a signature as text (for example, copied from an email, a log file o
 
 Click **Import** on the toolbar, or choose **File** > **Import Base64 or PEM...**
 
-*[Screenshot placeholder: images/import.png - the Import Signature window]*
+![image-20261112161143945](./images/image-20261112161143945.png)
 
 Paste the data into the window (or click **Paste**) and click **Import**.
 
@@ -167,7 +163,7 @@ PEM, Base64 and hexadecimal data are accepted. PEM headers, line breaks and URL 
 
 Once a file has been opened, the main window is split into two panes.
 
-*[Screenshot placeholder: images/main-window.png - the main window with a signature loaded, showing the tree on the left and details on the right]*
+![image-20261112161207157](./images/image-20261112161207157.png)
 
 The left hand pane displays the items contained within the signature file as a tree. As specified in the SignedData type (RFC 5652), this may include:
 
@@ -211,7 +207,7 @@ Signatures and certificates that use the post-quantum **ML-DSA** and **SLH-DSA**
 
 When such an algorithm is selected (for example, the *Signature Algorithm* item beneath a signer) the details pane also shows the algorithm family, the standard it is defined in, the parameter set, the NIST security category and the expected public key and signature sizes.
 
-*[Screenshot placeholder: images/pqc-algorithm.png - the Signature Algorithm item selected for an ML-DSA signature]*
+![image-20261112161257735](./images/image-20261112161257735.png)
 
 <br>
 
@@ -219,7 +215,7 @@ When such an algorithm is selected (for example, the *Signature Algorithm* item 
 
 The Data Viewer displays a chosen item of data so that it can be easily viewed, converted and saved.
 
-*[Screenshot placeholder: images/data-viewer.png - the Data Viewer window]*
+![image-20261112161502328](./images/image-20261112161502328.png)
 
 To view the whole signature file, click **View Data** on the toolbar or choose **View** > **Signature Data...**
 
@@ -264,7 +260,7 @@ To open the Type Converter either:
 
 * Run it from the Windows Start menu: *Krestfield* > *Signature Toolkit* > **Type Converter**
 
-*[Screenshot placeholder: images/type-converter.png - the Type Converter window with the 'This looks like Base64' prompt showing]*
+![image-20261112161555639](./images/image-20261112161555639.png)
 
 Either paste or type data into the window, click **Open...** to load a file from disk, or simply drag a file onto the tool.
 
@@ -292,7 +288,7 @@ Certificates shown in the left hand pane may be viewed by selecting the certific
 
 * Right clicking the certificate and choosing **View Certificate...**
 
-*[Screenshot placeholder: images/view-certificate.png - a certificate selected in the tree, with the View Certificate button highlighted]*
+![image-20261112161828020](./images/image-20261112161828020.png)
 
 Choosing any of these options will bring up the Microsoft Windows certificate viewer where all certificate details will be displayed.
 
@@ -314,7 +310,7 @@ Alternatively choose the **View** > **Certificate Path...** menu item.
 
 To display the path of a specific certificate, select it in the tree and click the **Certificate path** button at the top right of the details pane.
 
-*[Screenshot placeholder: images/certificate-path.png - the Certificate Path window showing a complete path]*
+![image-20261112161849153](./images/image-20261112161849153.png)
 
 <br>
 
@@ -356,7 +352,7 @@ Signatures may be verified by clicking **Verify** on the toolbar, or by choosing
 
 The result will be displayed:
 
-*[Screenshot placeholder: images/verify-result.png - the Signature Verification window showing valid signatures]*
+![image-20261112162023413](./images/image-20261112162023413.png)
 
 The window lists each signer together with the result, the signature algorithm, the signing time and whether the signer's certificate was within its validity period.
 
@@ -386,7 +382,7 @@ A detached signature does not contain the content that was signed. To verify it,
 
 When verifying a detached signature the following window is displayed:
 
-*[Screenshot placeholder: images/supply-content.png - the Supply Signed Content window]*
+![image-20261112162115935](./images/image-20261112162115935.png)
 
 Either:
 
@@ -418,7 +414,7 @@ A signature may be generated by clicking **Generate Signature** on the toolbar, 
 
 The following window will be shown:
 
-*[Screenshot placeholder: images/generate-signature.png - the Generate Signature window]*
+![image-20261112162228930](./images/image-20261112162228930.png)
 
 <br>
 
@@ -521,7 +517,7 @@ Certificates can also be saved automatically every time a file is opened. See [O
 
 Choose **Tools** > **Options...** to change the following settings:
 
-*[Screenshot placeholder: images/options.png - the Options window]*
+![image-20261112162312277](./images/image-20261112162312277.png)
 
 * **Save all certificates to a folder whenever a signature is opened**  
   When ticked, the certificates from every file opened are saved to the folder specified
@@ -594,9 +590,9 @@ If the Certificate Path Display cannot find some certificates, or reports that a
 
 To view what certificates are currently in the store do the following:
 
-Press the **Windows** key, type ``certmgr.msc`` and press **Enter**. This opens the certificate manager for the current user.
+Press the **Windows** key, type ``certmgr.msc`` or ``certlm.msc`` (to view Machine certificates) and press **Enter**. This opens the certificate manager for the current user.
 
-*[Screenshot placeholder: images/certmgr.png - the Windows certificate manager showing the Trusted Root Certification Authorities store]*
+![image-20261112162558976](./images/image-20261112162558976.png)
 
 You may navigate between the folders to inspect what certificates are stored. For a path to be reported as trusted, the issuing root certificate must be held within the *Trusted Root Certification Authorities* store. Certificates of intermediate CAs are held within the *Intermediate Certification Authorities* store.
 

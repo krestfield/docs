@@ -358,7 +358,19 @@ The window lists each signer together with the result, the signature algorithm, 
 
 Select a signer to see the detail of what was checked in the lower part of the window. If a signature could not be verified, the reason is given here. Click **Copy details** to copy this information to the clipboard.
 
+If there is an error with the signature a results pane is displayed:
+
+![image-20261113091712644](./images/image-20261113091712644.png)
+
+This view, will display likely causes for the signature failure assisting with any analysis.
+
+
+
 Click **Certificate path...** to display the certificate path of the selected signer.
+
+![image-20261113092055105](./images/image-20261113092055105.png)
+
+This view also shows the location of the certificate - whether provided with the signature or being obtained from the Machines trusted root store.
 
 <br>
 

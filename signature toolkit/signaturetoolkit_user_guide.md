@@ -310,7 +310,7 @@ Alternatively choose the **View** > **Certificate Path...** menu item.
 
 To display the path of a specific certificate, select it in the tree and click the **Certificate path** button at the top right of the details pane.
 
-![image-20261112161849153](./images/image-20261112161849153.png)
+![image-20261113092055105](./images/image-20261113092055105.png)
 
 <br>
 
@@ -368,13 +368,9 @@ This view, will display likely causes for the signature failure assisting with a
 
 Click **Certificate path...** to display the certificate path of the selected signer.
 
-![image-20261113092055105](./images/image-20261113092055105.png)
-
-This view also shows the location of the certificate - whether provided with the signature or being obtained from the Machines trusted root store.
-
 <br>
 
-**Note**: Verification confirms that the signature is cryptographically valid, that is, that the content has not been altered and was signed with the key belonging to the signer's certificate. It does not check whether the certificate is trusted or has been revoked. Use the [Certificate Path Display](#certificate-path-display) to inspect the certificate chain.
+**Note**: Verification confirms that the signature is cryptographically valid, that is, that the content has not been altered and was signed with the key belonging to the signer's certificate. It does not check whether the certificate is trusted in the environment it is intended for or has been revoked. Use the [Certificate Path Display](#certificate-path-display) to inspect the certificate chain.
 
 <br>
 

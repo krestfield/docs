@@ -25,7 +25,7 @@ Follow the links below for information on specific products or use the search op
 
   - Monitor all your own and any external CRLs and OCSP responders that you may depend on. Get early notifications of potential issues
 
-- [Signature Toolkit](./ocsp-monitor/signature%20toolkit)
+- [Signature Toolkit](./signature%20toolkit/signaturetoolkit_user_guide)
 
   - Create, verify and analyse PKCS#7/CMS based signatures. Supports PQC algorithms.
 

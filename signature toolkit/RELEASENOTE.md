@@ -31,6 +31,10 @@ Web: [https://www.krestfield.com](https://www.krestfield.com)
 * Signatures can now be generated using a certificate and key held in a PKCS#12 (.pfx / .p12) file, as well as from the Windows certificate store
 * Added ECDSA and RSASSA-PSS signature generation, and a choice of binary (DER), PEM or Base64 output
 * Detached signatures can be verified by supplying the signed content or its digest
+* Signature verification now reports problems as well as the result. The signature algorithm identifier parameters are checked (NULL must be present for RSA and absent for ML-DSA, SLH-DSA and ECDSA), along with the signed attributes, the signer's certificate and weak algorithms. Where a signature is otherwise valid this is stated
+* When a signature fails verification the reason is given together with the probable causes
+* A verification report can be copied or saved for each signature
+* The certificate path display shows whether each certificate came from the signature or from the Windows certificate store
 * X.509 certificate files (.cer, .crt, .pem, .der) can be opened directly
 * Timestamps, counter signatures, certificate extensions and public key details are now displayed
 * The ASN.1 view is now built in and names the object identifiers it recognises
@@ -51,7 +55,7 @@ Web: [https://www.krestfield.com](https://www.krestfield.com)
 
 **Changes**
 
-* Verifying a signature checks that it is cryptographically valid. Certificate trust is no longer evaluated as part of verification; use the Certificate Path display to inspect the certificate chain
+* A signature whose certificate path is incomplete or untrusted is no longer reported as failing verification. The signature itself is verified, and the state of the certificate path is reported alongside as a warning
 * Issuer certificates are no longer downloaded from AIA (Authority Information Access) locations when building certificate paths
 
 

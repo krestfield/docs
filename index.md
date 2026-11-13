@@ -17,10 +17,8 @@ Follow the links below for information on specific products or use the search op
 
   - A digitial signature generation and verification server, interfacing to all popular HSMs
 
-- [PkCloud](./pkcloud/pkcloud)
-  - Manage multiple EzSign services, as a service or on your own premises. Includes a Resful API and Web Based UI
-
 - OCSP Responder
+
   - Allows for rapid deployment of a responder in Windows environments with no need for IIS.  Intefaces directly with Microsoft ADCS
 
 - [CRL OCSP Monitor](./ocsp-monitor/ocsp-monitor)

@@ -230,14 +230,6 @@ The hash used in raw RSA signatures was not checked before. It is now checked as
 channel.1.verify.denyWeakSignatureHash=false
 ```
 
-**PKCS#7 data with no signers**
-
-```
-The signature does not contain any signers
-```
-
-A PKCS#7 structure with no signers (such as a ``.p7b`` certificate bundle) was reported as a verified signature. It is now refused. This cannot be switched off
-
 <br>
 
 ## Server and socket interface changes
@@ -251,12 +243,3 @@ These do not need any action, but may be noticed:
 
 <br>
 
-## Signatures created by 4.6.0
-
-RSA signatures now include the NULL parameter in the signature algorithm, as RFC 3370 requires (it had been left out since an earlier change). All standard verifiers accept both forms, and EzSign continues to verify signatures created by earlier versions. No action is needed
-
-**ML-DSA signatures follow RFC 9882**
-
-ML-DSA PKCS#7 signatures are now made as RFC 9882 describes: the signature is over the signed attributes themselves (or, without signed attributes, the content) rather than over their hash. They can now be verified by other software, and EzSign verifies ML-DSA signatures made by other software. ML-DSA signatures over hashed signed attributes, as made by earlier versions and by other systems that do not adhere to RFC 9882, are still accepted (a warning is logged) unless ``channel.N.verify.acceptLegacyMlDsaSignatures=false`` (shown as *Accept hashed ML-DSA signatures* in the configuration UI). Note that other software, and EzSign 4.5.x, cannot verify the new signatures until it supports RFC 9882 as well
-
-An ML-DSA channel with ``signature.includeSignedAttribs=false`` signs the content itself, so it can no longer sign a digest (``isDigest=true``). Include signed attributes, which is the default, to sign digests

@@ -135,6 +135,20 @@ To confirm that an issue is certificate related, you may first disable TLS (temp
 
 <br>
 
+**The database certificate has expired**
+
+If the database certificate has expired, the Krestfield Certdog Database service will not start and ``mongod.log`` will contain:
+
+```
+"s":"F",  "c":"NETWORK",  "id":50755, ... "msg":"The provided SSL certificate is expired or not yet valid."
+```
+
+The certdog logs (``[certdog install]\logs\certdog.log``) will show ``CertificateExpiredException: NotAfter: <date>``, giving the date the certificate expired.
+
+As certdog needs the database to issue a new certificate, first [Disable TLS](#disable-tls), start certdog and issue the new certificate, then re-enable TLS as described in [Re-enable TLS](#re-enable-tls).
+
+<br>
+
 If the service does not start. Attempt a restart again ensuring that the stop and start order is carried out correctly.
 
 <br>
@@ -292,17 +306,48 @@ Once any changes have been made ensure that services are restarted.
 
 ## Disable TLS
 
-To temporarily disable TLS, do the following:
+TLS on the database can be disabled temporarily. For example:
 
-Stop all certdog services.
+- The database TLS certificate (``[certdog install]\config\sslcerts\dbssl.pem``) has **expired**, so the database will not start. As certdog needs the database to issue a replacement certificate, disabling TLS lets you start certdog, issue the new certificate (STEP 1 above), then re-enable TLS
+- To confirm whether an issue is certificate related
 
-First take a backup then edit the following file:
+If the database is bound to ``127.0.0.1`` only (the default - see the note at the top of this page), running without TLS for a short time is low risk as the database cannot be reached from outside the server.
+
+<br>
+
+**Three changes are required. If any one of them is missed, the database or the certdog service will not start:**
+
+1. Comment out the ``tls:`` section in ``mongod.cfg``
+2. Comment out the ``clusterAuthMode: x509`` line in ``mongod.cfg``
+3. Remove ``?tls=true`` from the database URI in ``application.properties``
+
+<br>
+
+### 1. Stop the services
+
+Open the Services snapin and stop the services in this order:
+
+1. Krestfield Adcs Driver
+2. Krestfield Certdog Service
+3. Krestfield Certdog Database
+
+<br>
+
+### 2. Edit mongod.cfg
+
+First take a backup, then edit the following file:
 
 ```
-.\certdog\mongodb\bin\mongod.cfg
+[certdog install]\mongodb\bin\mongod.cfg
 ```
 
-And comment out using the ``#`` character (or delete) the ``tls:`` section, so the file looks like this:
+Make the following changes, using the ``#`` character at the start of each line:
+
+- Comment out the ``tls:`` line **and every line below it** that belongs to that section (``mode``, ``certificateKeyFile``, ``CAFile`` if present and ``allowConnectionsWithoutCertificates``)
+- Comment out the ``clusterAuthMode: x509`` line under ``security:`` (if present)
+- Do **not** comment out the ``security:`` or ``authorization: "enabled"`` lines. Certdog still logs in to the database with a username and password, so authorization must stay enabled
+
+The file should then look similar to this. Your paths may differ and your file may contain other lines - leave any other lines as they are:
 
 ```
 systemLog:
@@ -311,8 +356,6 @@ systemLog:
    logAppend: true
 storage:
    dbPath: C:\certdog\mongodb\dbfiles
-   journal:
-      enabled: true
 processManagement:
    pidFilePath: C:\certdog\mongodb\mongod.pid 
 net:
@@ -321,6 +364,7 @@ net:
 #   tls:
 #        mode: requireTLS
 #        certificateKeyFile: C:\certdog\mongodb\..\config\sslcerts\dbssl.pem
+#        CAFile: C:\certdog\mongodb\..\config\sslcerts\dbssl_root.pem
 #        allowConnectionsWithoutCertificates: true
 setParameter:
    enableLocalhostAuthBypass: false
@@ -328,17 +372,126 @@ replication:
    replSetName: replocal
 security:
    authorization: "enabled"
+#   clusterAuthMode: x509
 ```
 
 Save the file.
 
-Next, backup then edit the following file:
+<br>
+
+**Why clusterAuthMode must also be commented out**
+
+``clusterAuthMode: x509`` tells the database to authenticate replica set members using their TLS certificates. This requires TLS to be enabled. If TLS is disabled but this line is left in place, the database will refuse to start.
+
+In this case the database may stop before it opens its log file, so **nothing new is written to** ``mongod.log``. The Services snapin will simply report:
 
 ```
-.\certdog\config\application.properties
+Windows could not start the Krestfield Certdog Database service on Local Computer.
+Error 1053: The service did not respond to the start or control request in a timely fashion.
 ```
 
-Locate the mongodb.uri and remove the ``?tls=true`` part from the end. E.g. the line will look like this:
+Running the database from a console (see [Check the database starts](#check-the-database-starts) below) will display the actual error.
+
+<br>
+
+**Notes on editing mongod.cfg**
+
+This file is in YAML format, which is strict about layout:
+
+- Use spaces only. Never use tab characters
+- Do not change the indentation of any lines you are not commenting out
+- Save the file in UTF-8 (or ANSI) format, not Unicode
+
+Older installations may not have the ``CAFile`` or ``clusterAuthMode`` lines. If they are not present, there is nothing to change for them.
+
+<br>
+
+### 3. Check the database starts
+
+Before starting the Windows service, start the database from a console. Any error will then be displayed on screen.
+
+Ensure the **Krestfield Certdog Database** service is stopped, then open a PowerShell window as Administrator and run:
+
+```powershell
+cd [certdog install]\mongodb\bin
+.\mongod.exe --config .\mongod.cfg
+```
+
+As the database logs to a file, very little (or nothing) is displayed when it starts successfully. The command keeps running until you stop it.
+
+- **If the command keeps running**, the database has started OK. Leave it running and carry out the checks below from a second PowerShell window. Then press **Ctrl+C** to stop it
+- **If the command exits straight away**, the database has failed to start. Note the error that is displayed and check the [log entries](#log-entries-to-look-for) below
+
+<br>
+
+<u>Check the database is listening</u>
+
+In a second PowerShell window, run:
+
+```powershell
+Test-NetConnection 127.0.0.1 -Port 27017
+```
+
+The output should include:
+
+```
+TcpTestSucceeded : True
+```
+
+(If your database uses a different address or port, use the values from the ``net:`` section of ``mongod.cfg``.)
+
+<br>
+
+<u>Check the database is accepting connections without TLS</u>
+
+If ``mongosh.exe`` is present in ``[certdog install]\mongodb\bin``, you can connect using the same credentials as certdog. Copy the URI from the ``spring.data.mongodb.uri`` line in ``application.properties`` (without ``?tls=true``) and run:
+
+```powershell
+cd [certdog install]\mongodb\bin
+.\mongosh.exe "mongodb://certmanuser:<password>@127.0.0.1/certman" --eval "db.runCommand({ping: 1})"
+```
+
+The output should include:
+
+```
+{ ok: 1 }
+```
+
+This confirms that the database is running without TLS and that the certdog credentials are accepted.
+
+<br>
+
+<u>Check the database log</u>
+
+Open ``[certdog install]\mongodb\mongod.log`` (the path is set by ``systemLog: path:`` in ``mongod.cfg``) and look at the most recent entries. You can do this from PowerShell:
+
+```powershell
+Get-Content "C:\certdog\mongodb\mongod.log" -Tail 50
+```
+
+A successful start includes an entry such as:
+
+```
+{"t":{"$date":"..."},"s":"I",  "c":"NETWORK",  "id":23016,   "ctx":"listener","msg":"Waiting for connections","attr":{"port":27017,"ssl":"off"}}
+```
+
+``"ssl":"off"`` confirms that TLS is now disabled.
+
+See [Log entries to look for](#log-entries-to-look-for) below for the entries that indicate a problem.
+
+Once the checks are complete, stop the console database with **Ctrl+C**.
+
+<br>
+
+### 4. Edit application.properties
+
+First take a backup, then edit the following file:
+
+```
+[certdog install]\config\application.properties
+```
+
+Locate the ``spring.data.mongodb.uri`` line and remove the ``?tls=true`` part from the end. E.g. the line will look like this:
 
 ```
 spring.data.mongodb.uri=mongodb://certmanuser:eZAqMcOcVu58RLdoyBb9@127.0.0.1/certman?tls=true
@@ -350,8 +503,76 @@ After editing, like this:
 spring.data.mongodb.uri=mongodb://certmanuser:eZAqMcOcVu58RLdoyBb9@127.0.0.1/certman
 ```
 
+Change nothing else on this line. If the URI has other options after the ``?`` (e.g. ``?tls=true&replicaSet=replocal``), remove only ``tls=true`` and keep the other options.
+
 Save the file.
 
 <br>
 
-Start the services, ensuring the database service is started first.
+### 5. Start the services and check certdog
+
+Start the services in this order:
+
+1. Krestfield Certdog Database
+2. Krestfield Certdog Service
+3. Krestfield Adcs Driver
+
+The certdog service can take a few minutes to start fully.
+
+Then check that:
+
+- All three services show as **Running** in the Services snapin
+- You can log in to certdog from a browser
+- The latest entries in ``[certdog install]\logs\certdog.log`` and ``[certdog install]\tomcat\logs\catalina.YYYY-MM-DD.log`` do not contain ``MongoTimeoutException`` or ``Timed out while waiting for a server``
+
+<br>
+
+### Log entries to look for
+
+The tables below list the entries most commonly seen in each log, and what they mean.
+
+<u>Database log: [certdog install]\mongodb\mongod.log</u>
+
+To list only errors (``"s":"E"``) and fatal errors (``"s":"F"``), run:
+
+```powershell
+Select-String -Path "C:\certdog\mongodb\mongod.log" -Pattern '"s":"F"','"s":"E"' | Select-Object -Last 20
+```
+
+| Entry | Meaning |
+| --- | --- |
+| ``"msg":"Waiting for connections"`` with ``"ssl":"off"`` | The database started OK without TLS |
+| ``"msg":"Waiting for connections"`` with ``"ssl":"on"`` | The database started OK but TLS is still enabled. Check the ``tls:`` section in ``mongod.cfg`` is fully commented out and that you edited the file used by the service |
+| ``"msg":"The provided SSL certificate is expired or not yet valid."`` | TLS is still enabled and the certificate has expired. The ``tls:`` section has not been commented out (or a different ``mongod.cfg`` is being used) |
+| ``"codeName":"InvalidSSLConfiguration"`` | TLS is enabled but the certificate file cannot be read. See [Database Fails to Start after SSL Configuration](errors%20v%20solutions.html) |
+| No new entries after a failed start | The database stopped before opening its log, usually because of a configuration error. Check that ``clusterAuthMode: x509`` is commented out and that the file has no tabs or indentation errors. Run the database from a console (step 3) to see the error |
+
+<br>
+
+<u>Certdog logs: [certdog install]\logs\certdog.log and [certdog install]\tomcat\logs\catalina.YYYY-MM-DD.log</u>
+
+All of the following appear inside a ``Timed out while waiting for a server`` message. The ``caused by`` part shows the reason:
+
+| Entry | Meaning |
+| --- | --- |
+| ``java.net.ConnectException: Connection refused`` | The database is not running. Check the database first (step 3) |
+| ``CertificateExpiredException: NotAfter: ...`` or ``(certificate_expired)`` | Certdog connected using TLS and the database certificate has expired. The date shown is when the certificate expired |
+| ``SSLHandshakeException`` (any other reason) | Certdog is still trying to connect using TLS. Check ``?tls=true`` has been removed from ``application.properties`` |
+| ``PKIX path building failed`` | TLS is enabled and certdog does not trust the database certificate. See [Troubleshooting](#troubleshooting) above |
+| ``Exception authenticating`` or ``Authentication failed`` | The database is running, but the username or password in the URI is wrong. Check the ``spring.data.mongodb.uri`` line was not changed apart from removing ``?tls=true`` |
+
+<br>
+
+### Re-enable TLS
+
+Once a new database certificate has been issued and installed (STEPs 1 - 3 at the top of this page):
+
+1. Stop the services in the order given above
+2. Restore your backups of ``mongod.cfg`` and ``application.properties`` (or undo the edits). Ensure the ``tls:`` section, the ``clusterAuthMode: x509`` line and ``?tls=true`` are all restored
+3. Start the services in the order given above
+4. Check ``mongod.log`` contains ``"msg":"Waiting for connections"`` with ``"ssl":"on"``
+5. Check you can log in to certdog. If the certdog service does not start, search ``catalina.YYYY-MM-DD.log`` for ``PKIX path building failed`` and see [Troubleshooting](#troubleshooting) above
+
+<br>
+
+To avoid the database certificate expiring unexpectedly in future, note its expiry date. You may also want to choose a longer validity period for the new certificate.

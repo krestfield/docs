@@ -263,6 +263,30 @@ The database is very sensitive to file formats. If the certificate PEM file (``[
 
 <hr/>
 
+### Database Fails to Start - Certificate Expired
+
+<u>Error Details</u>
+
+The Krestfield Certdog Database service fails to start. The Krestfield Certdog Service then also fails, as it cannot connect to the database
+
+Checking the log file here ``[certdog install]\mongodb\mongod.log`` there is an entry with the message ``The provided SSL certificate is expired or not yet valid`` e.g.:
+
+```
+{"t":{"$date":"2026-11-18T10:56:42.902+01:00"},"s":"F",  "c":"NETWORK",  "id":50755,   "ctx":"thread1","msg":"The provided SSL certificate is expired or not yet valid."}
+```
+
+The certdog log (``[certdog install]\logs\certdog.log``) may also contain ``CertificateExpiredException: NotAfter: <date>``, showing when the certificate expired
+
+<u>Solution</u>
+
+The database TLS certificate (``[certdog install]\config\sslcerts\dbssl.pem``) has expired. As certdog needs the database to issue a new certificate, TLS must be disabled temporarily, a new certificate issued, then TLS re-enabled
+
+Follow the steps in [Updating the Database SSL Certificate - Disable TLS](update_the_db_certificate.html#disable-tls). Note that the ``clusterAuthMode: x509`` line in ``mongod.cfg`` must be commented out as well as the ``tls:`` section, otherwise the database will still fail to start
+
+
+
+<hr/>
+
 ### Get "CA does not have any certificates configured" when requesting a certificate
 
 <u>Error Details</u>

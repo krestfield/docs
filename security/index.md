@@ -24,7 +24,6 @@ Each advisory states which products and versions are affected, which are **not**
 | [CVE-2026-89425 (Jackson)](cve-2026-89425.html) | EzSign (before 4.6.0, Azure Key Vault only) | High | Fixed in EzSign 4.6.0 | 19th November 2026 |
 | [CVE-2026-58062 (Bouncy Castle)](cve-2026-58062.html) | EzSign (before 4.6.0) | Critical | Not exploitable | 19th November 2026 |
 | [CVE-2026-49844 (Log4j)](cve-2026-49844.html) | EzSign (before 4.6.0) | Medium | Not exploitable | 19th November 2026 |
-| [CVE-2021-44228 (Log4Shell)](cve-2021-44228.html) | EzSign | Critical | Resolved | 29th December 2021 |
 
 <br>
 

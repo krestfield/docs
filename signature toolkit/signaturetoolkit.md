@@ -14,5 +14,5 @@ Graphical viewing and verifying of digital signatures - essential for developers
 
 Need more info? Contact us at <support@krestfield.com>  
 
-Or take a look at [our website](https://www.krestfield.com/ezsign-tool)
+Or take a look at [our website](https://www.krestfield.com/signature-toolkit)
 

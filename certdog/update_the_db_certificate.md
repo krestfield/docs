@@ -315,11 +315,12 @@ If the database is bound to ``127.0.0.1`` only (the default - see the note at th
 
 <br>
 
-**Three changes are required. If any one of them is missed, the database or the certdog service will not start:**
+**The following changes are required. If any one of them is missed, the database, the certdog service or the ADCS Driver will not start or connect:**
 
 1. Comment out the ``tls:`` section in ``mongod.cfg``
 2. Comment out the ``clusterAuthMode: x509`` line in ``mongod.cfg``
 3. Remove ``?tls=true`` from the database URI in ``application.properties``
+4. If the ADCS Driver is installed (i.e. you issue certificates from Microsoft CAs), run ``configure-adcs-service.ps1`` so that the driver uses the new (non-TLS) database URI. Restarting the driver service on its own is **not** enough
 
 <br>
 
@@ -509,21 +510,56 @@ Save the file.
 
 <br>
 
-### 5. Start the services and check certdog
+### 5. Start the database and certdog services
 
 Start the services in this order:
 
 1. Krestfield Certdog Database
 2. Krestfield Certdog Service
-3. Krestfield Adcs Driver
 
 The certdog service can take a few minutes to start fully.
 
 Then check that:
 
-- All three services show as **Running** in the Services snapin
+- Both services show as **Running** in the Services snapin
 - You can log in to certdog from a browser
 - The latest entries in ``[certdog install]\logs\certdog.log`` and ``[certdog install]\tomcat\logs\catalina.YYYY-MM-DD.log`` do not contain ``MongoTimeoutException`` or ``Timed out while waiting for a server``
+
+<br>
+
+### 6. Update the ADCS Driver
+
+**This step is only required if the ADCS Driver (Krestfield Adcs Driver service) is installed.**
+
+The ADCS Driver does not read ``application.properties`` when it starts. The database URI is passed to the driver when it is configured, and the driver stores it securely. If the driver is simply restarted it will continue to use the old URI (ending ``?tls=true``) and will fail to connect to the database.
+
+To pass the new URI to the driver, open a PowerShell window as Administrator and run the ``configure-adcs-service.ps1`` script **from the install directory**:
+
+```powershell
+cd [certdog install]\install
+.\configure-adcs-service.ps1
+```
+
+The script:
+
+- Reads the ``spring.data.mongodb.uri`` value from ``..\config\application.properties``. This is why it must be run from the ``install`` directory, and after ``application.properties`` has been edited (step 4)
+- Stops the Krestfield Adcs Driver service (if it is running) and starts it again, passing it the new URI
+
+If the script cannot find ``application.properties`` (e.g. because it was run from a different directory), it will ask you to enter the full database URL. In that case, enter the ``spring.data.mongodb.uri`` value from ``application.properties``, without ``?tls=true``.
+
+When successful, the script displays:
+
+```
+Service started OK
+```
+
+Then check that:
+
+- The **Krestfield Adcs Driver** service shows as **Running** in the Services snapin
+- In certdog, under **Administration > Agents**, the agent for this server is listed and approved. If it shows as un-approved, approve it and re-select it as a *Permitted Agent* on each Microsoft CA Certificate Issuer, as described in [Registering the Service](adcsdriver.html#registering-the-service)
+- A test certificate can be issued from a Microsoft CA
+
+See [ADCS Driver](adcsdriver.html#registering-the-service) for more details on this script.
 
 <br>
 
@@ -563,15 +599,92 @@ All of the following appear inside a ``Timed out while waiting for a server`` me
 
 <br>
 
+<u>ADCS Driver</u>
+
+If ``configure-adcs-service.ps1`` reports ``Unable to start the service``, or the agent does not appear in certdog:
+
+- Check the Windows **Application** event log for errors from the ADCS Driver
+- For more detail, enable the driver's file log by setting the ``ADCS_DRIVER_FILE_LOGGING`` environment variable to ``true`` and restarting the Krestfield Adcs Driver service. The log is written to ``C:\ProgramData\Krestfield\AdcsAgent\log.txt``. See [Additional File Logging](adcsdriver.html#additional-file-logging). Switch this logging off again afterwards as the file will keep growing
+
+The most common cause is that the driver is still using the old URI. Re-run ``configure-adcs-service.ps1`` from the ``install`` directory, after checking ``application.properties`` has been updated.
+
+<br>
+
 ### Re-enable TLS
 
-Once a new database certificate has been issued and installed (STEPs 1 - 3 at the top of this page):
+Once certdog is running without TLS, issue the new database certificate and switch the database, certdog and the ADCS Driver back to TLS.
 
-1. Stop the services in the order given above
-2. Restore your backups of ``mongod.cfg`` and ``application.properties`` (or undo the edits). Ensure the ``tls:`` section, the ``clusterAuthMode: x509`` line and ``?tls=true`` are all restored
-3. Start the services in the order given above
-4. Check ``mongod.log`` contains ``"msg":"Waiting for connections"`` with ``"ssl":"on"``
-5. Check you can log in to certdog. If the certdog service does not start, search ``catalina.YYYY-MM-DD.log`` for ``PKIX path building failed`` and see [Troubleshooting](#troubleshooting) above
+<br>
+
+<u>1. Issue and install the new certificate</u>
+
+Follow STEP 1 at the top of this page to issue the new certificate from certdog, then run ``set-dbsslcert.ps1`` as described in STEP 2.
+
+``set-dbsslcert.ps1`` only updates the certificate files (``dbssl.pem``, ``dbssl_root.pem`` and ``dbssltrust.jks`` in ``[certdog install]\config\sslcerts``). It does not change ``mongod.cfg`` or ``application.properties``, and the new certificate is not used until TLS is re-enabled below. You do not need to restart the services when the script prompts you to. Continue with the next steps instead.
+
+If you use the ADCS Driver, also import the root and intermediate CA certificates that issued the new certificate into the Windows certificate stores, as described in STEP 3. The ADCS Driver will not be able to connect to the database over TLS if it does not trust the new certificate.
+
+<br>
+
+<u>2. Stop the services</u>
+
+Stop the services in this order:
+
+1. Krestfield Adcs Driver
+2. Krestfield Certdog Service
+3. Krestfield Certdog Database
+
+<br>
+
+<u>3. Restore mongod.cfg</u>
+
+Restore your backup of ``[certdog install]\mongodb\bin\mongod.cfg``, or remove the ``#`` characters added in step 2 of [Disable TLS](#disable-tls). Ensure that:
+
+- The ``tls:`` section is restored (``tls:``, ``mode``, ``certificateKeyFile``, ``CAFile`` if present and ``allowConnectionsWithoutCertificates``)
+- The ``clusterAuthMode: x509`` line is restored under ``security:``
+- The indentation matches the original file and no tab characters have been added
+
+<br>
+
+<u>4. Restore application.properties</u>
+
+Restore your backup of ``[certdog install]\config\application.properties``, or add ``?tls=true`` back to the end of the ``spring.data.mongodb.uri`` line. E.g.:
+
+```
+spring.data.mongodb.uri=mongodb://certmanuser:eZAqMcOcVu58RLdoyBb9@127.0.0.1/certman?tls=true
+```
+
+<br>
+
+<u>5. Check the database starts with TLS</u>
+
+As in step 3 of [Disable TLS](#disable-tls), you can first start the database from a console (``.\mongod.exe --config .\mongod.cfg`` from ``[certdog install]\mongodb\bin``) to confirm it starts, then press **Ctrl+C**.
+
+``mongod.log`` should now contain ``"msg":"Waiting for connections"`` with ``"ssl":"on"``. You can also browse to ``https://127.0.0.1:27017`` and check that the certificate shown is the new one (see [Troubleshooting](#troubleshooting)).
+
+<br>
+
+<u>6. Start the database and certdog services</u>
+
+Start the services in this order:
+
+1. Krestfield Certdog Database
+2. Krestfield Certdog Service
+
+Check you can log in to certdog. If the certdog service does not start, search ``catalina.YYYY-MM-DD.log`` and ``certdog.log`` for ``PKIX path building failed`` and see [Troubleshooting](#troubleshooting) above.
+
+<br>
+
+<u>7. Update the ADCS Driver</u>
+
+If the ADCS Driver is installed, run ``configure-adcs-service.ps1`` again, so that the driver uses the TLS URI (ending ``?tls=true``):
+
+```powershell
+cd [certdog install]\install
+.\configure-adcs-service.ps1
+```
+
+This also starts the Krestfield Adcs Driver service. Check the service is running, the agent is approved under **Administration > Agents** and that a test certificate can be issued from a Microsoft CA. If the driver cannot connect, check that the CA certificates were imported into the Windows stores (step 1 above) and see the [ADCS Driver](#log-entries-to-look-for) log checks above.
 
 <br>
 

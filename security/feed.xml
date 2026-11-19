@@ -1,0 +1,24 @@
+---
+layout: null
+permalink: /security/feed.xml
+---
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+<channel>
+  <title>Krestfield Security Advisories</title>
+  <link>{{ site.url }}{{ site.baseurl }}/security/</link>
+  <atom:link href="{{ site.url }}{{ site.baseurl }}/security/feed.xml" rel="self" type="application/rss+xml"/>
+  <description>Security advisories for Krestfield products</description>
+  <language>en-gb</language>
+  {% assign advisories = site.pages | where: "parent", "Security Advisories" | sort: "last_modified" | reverse %}
+  {% for p in advisories %}
+  <item>
+    <title>{{ p.title | xml_escape }}</title>
+    <link>{{ site.url }}{{ site.baseurl }}{{ p.url }}</link>
+    <guid isPermaLink="false">{{ p.url }}#{{ p.last_modified | date: "%Y%m%d" }}</guid>
+    <pubDate>{{ p.last_modified | date_to_rfc822 }}</pubDate>
+    <description>{{ p.summary | xml_escape }}</description>
+  </item>
+  {% endfor %}
+</channel>
+</rss>

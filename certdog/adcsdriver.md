@@ -138,6 +138,10 @@ On initial install the ADCS Driver will be configured with the required settings
 
 But, if the account the driver is running under changes, the agent will lose these details (as they are protected under the account the service runs under)  
 
+The script must also be re-run if the database URL changes. For example, when TLS is temporarily disabled on the database (i.e. ``?tls=true`` is removed from ``spring.data.mongodb.uri`` in ``application.properties``) and again when it is re-enabled. Restarting the driver service alone does not pick up the new URL. See [Updating the Database SSL Certificate - Disable TLS](update_the_db_certificate.html#disable-tls)
+
+The script reads the database URL from ``..\config\application.properties``, so it must be run from the ``install`` directory. If it cannot find this file, it will prompt for the full database URL
+
 To reset, perform the following:
 
 * Open a PowerShell window as Administrator and navigate to the ``.\install `` directory e.g. ``c:\certdog\install`` and run the following command:  ``.\configure-adcs-service.ps1``

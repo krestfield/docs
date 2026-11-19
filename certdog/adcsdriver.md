@@ -177,7 +177,7 @@ To enable more logging, set the following environment variable to true:
 ``ADCS_DRIVER_FILE_LOGGING``
 
 e.g.  
-![image-20201222143624266](.\images\loggingenvvar.png)
+![image-20201222143624266](./images/loggingenvvar.png)
 
 And restart the Krestfield Adcs Driver from the services snapin
 
@@ -206,7 +206,7 @@ To change this value, set the following environment variable to the number of th
 ``ADCS_DRIVER_THREADS``
 
 e.g.  
-![image-20201222143722766](.\images\threadsenvvar.png) 
+![image-20201222143722766](./images/threadsenvvar.png) 
 
 Restart the Krestfield Adcs Driver from the services snapin  
 

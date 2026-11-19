@@ -28,7 +28,7 @@ Open the services snapin and stop the following services:
 * Krestfield Cerdog Service
 * Krestfield Cerdog Database
 
-![Certdog Services](.\images\upgrade_services.png)
+![Certdog Services](./images/upgrade_services.png)
 
 (To open the services snapin - click **Start**, type **services** and select the **Services App**)
 

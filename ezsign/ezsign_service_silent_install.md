@@ -102,7 +102,7 @@ The files that may need to be copied are:
 
   But can be anywhere on the file system. You can view their location from the the configuration utility:  
 
-![image-20210129154805057](.\images\image-20210129154805057.png)
+![image-20210129154805057](./images/image-20210129154805057.png)
 
 * Keystore files
 

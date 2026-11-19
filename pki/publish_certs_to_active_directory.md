@@ -47,7 +47,7 @@ CertUtil: -dsPublish command completed successfully.
 
 Once complete the certificate (rootca.cer) will be published to the *Trusted Root Certification Authorities* folder of the *Local Computer* store for all machines that are a member of the domain e.g.
 
-![image-20220324160409079](.\images\publishedcert.png)
+![image-20220324160409079](./images/publishedcert.png)
 
  <br>
 

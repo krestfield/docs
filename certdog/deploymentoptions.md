@@ -54,7 +54,7 @@ Outgoing ports (by default these are 27017,27018 and 27019) from the servers (Se
 
 The main components can all easily be split across several servers for load-balancing and redundancy
 
-![image-20210226160951017](.\images\deployment3.png)
+![image-20210226160951017](./images/deployment3.png)
 
 The API can be placed in several different locations - as long as it can access the database (or an instance in the cluster)
 

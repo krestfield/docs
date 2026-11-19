@@ -15,7 +15,7 @@ Documentation: [https://krestfield.github.io/docs/ezsign/ezsign.html](https://kr
 
 Support: [support@krestfield.com](mailto:support@krestfield.com)
 
-Web: [https://www.krestfield.com]
+Web: [https://www.krestfield.com](https://www.krestfield.com)
 
 <br>
 

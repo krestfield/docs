@@ -327,6 +327,6 @@ EzSign documentation: [https://krestfield.github.io/docs/ezsign/ezsign.html](htt
 Support contact options:
 
 - Email: **support@krestfield.com**
-- Web: **[https://www.krestfield.com/support](https://www.krestfield.com/support?utm_source=copilot.com)**
+- Web: **[https://www.krestfield.com/support](https://www.krestfield.com/support)**
 
 For Silver and Gold Support customers, the dedicated telephone support number may also be used

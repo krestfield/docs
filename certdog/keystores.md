@@ -17,7 +17,7 @@ Key Stores can be one of the following types:
 * [Software](#software)
 
   * The CA keys will be secured using software based encryption and stored in the database  
-* [PKCS#11](#pkcs#11)
+* [PKCS#11](#pkcs11)
   * An HSM (Hardware Security Module) that supports the PKCS#11 interface may be used to generate and store the CA keys. Any HSM that supports the PKCS#11 interface may be used, but the following are specifically supported:
     * Thales Luna and DPoD (Data Protection on Demand)
     * nCipher
@@ -243,7 +243,7 @@ This can also be configured from the command line.
 
 1. Next, open **Azure Cloud Shell** (this example is using a bash shell) either by clicking the shell icon from the *Portal*:
 
-    ![image-20210717092702011](.\images\azure_shell.png)
+    ![image-20210717092702011](./images/azure_shell.png)
 
     or by navigating to https://shell.azure.com/
 

@@ -34,9 +34,9 @@ There is connectivity between the Venafi server and the Certdog server. Venafi w
 
   In the example below, the *venafi* user will be a member of the *Venafi Team* and this team will have *TLS Certs* configured as a Permitted Certificate Issuer:   
 
-![image-20220823163146962](.\images\image-20220823163146962.png)
+![image-20220823163146962](./images/image-20220823163146962.png)
 
-![image-20220823163310851](.\images\image-20220823163310851.png)
+![image-20220823163310851](./images/image-20220823163310851.png)
 
 * Verify that you can authenticate to Certdog with the venafi username and password (e.g. by logging on via the UI or REST API)  
 
@@ -60,7 +60,7 @@ Now configure a *Username Credential* in Venafi, supplying the user details crea
 
 Next, configure an *Adaptable CA* template:  
 
-![image-20220823155035674](.\images\image-20220823155035674.png)
+![image-20220823155035674](./images/image-20220823155035674.png)
 
 Give the template a name and select the *Username Credential* just created  
 
@@ -70,13 +70,13 @@ For *Profile String*, enter the **Certificate Issuer name** (e.g. **TLS Certs**)
 
 For the *PowerShell Script*, click the down arrow and a script named **certdog** should be present. Select this
 
-![image-20220823160926682](.\images\image-20220823160926682.png)
+![image-20220823160926682](./images/image-20220823160926682.png)
 
 Initially at least, select **Enable Debug Logging** as this will help troubleshoot any issues  
 
 Click the **Validate** button. If all is good, you should get dialog as follows
 
-![image-20220823161936225](.\images\image-20220823161936225.png)
+![image-20220823161936225](./images/image-20220823161936225.png)
 
 Click **OK** then **Save**
 

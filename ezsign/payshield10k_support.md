@@ -268,5 +268,5 @@ This error indicates that the HSM's TLS server certificate is not trusted by EzS
 ...Token Exception: Failed to connect to HSM at IP Address/server: 192.168.0.211 port: 2500. Error: an established connection was aborted by the software in your host machine
 ```
 
-This is seen when the client TLS certificate is not configured, not trusted or not being accepted by the HSM due to a configuration issue. Refer to the [payShield TLS Configuration](payshield_tls_configuration..html) guide to set the client certificate correctly.
+This is seen when the client TLS certificate is not configured, not trusted or not being accepted by the HSM due to a configuration issue. Refer to the [payShield TLS Configuration](payshield_tls_configuration.html) guide to set the client certificate correctly.
 

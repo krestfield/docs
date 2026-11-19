@@ -53,7 +53,7 @@ Click **Request Certificate**
 
 For the **Subject DN** enter the name required e.g. *CN=domain.com,O=organisation*  
 
-If you wish to enter the domain components separately, click the ![image-20220304095027786](.\images\down_arrow.png)button and complete the fields:
+If you wish to enter the domain components separately, click the ![image-20220304095027786](./images/down_arrow.png)button and complete the fields:
 
 <img src=".\images\dn_fields.png" alt="DN Fields" style="zoom:80%;" />
 

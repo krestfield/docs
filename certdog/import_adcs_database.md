@@ -67,9 +67,9 @@ We then need to decide how to organise the certificates that will be imported. C
 
 It may be beneficial to allocate all imported certificates to a new Team or even allocate them to a specific user. Whether creating new or using existing the target user and team must be created before the import can take place
 
-You can read how to manage teams [here](teams.md)
+You can read how to manage teams [here](teams.html)
 
-You can read how to manage users [here](users.md)
+You can read how to manage users [here](users.html)
 
 The import into Certdog itself will require an Certdog administrator account
 

@@ -82,7 +82,7 @@ From your existing installation, navigate to:
 
 It should look like this
 
-![File Structure](.\images\certdog_upgrade1.png)
+![File Structure](./images/certdog_upgrade1.png)
 
 Delete the following folders
 

@@ -348,4 +348,4 @@ A quick check of a production server:
 
 Need more info? Contact us at [support@krestfield.com](mailto:support@krestfield.com)  
 
-Or take a look at [our website](https://www.krestfield.com/ezsign-tool)
+Or take a look at [our website](https://www.krestfield.com/ezsign)

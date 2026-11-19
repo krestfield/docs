@@ -8,13 +8,13 @@ nav_order: 18
 
 The default *Certificates* view shows all certificates issued in the last day. You can perform some filtering and searching by using the header options:  
 
-![image-20210122133824835](.\images\search_headings.png)
+![image-20210122133824835](./images/search_headings.png)
 
 
 
 For more advanced searches, click the Certificate Search bar:  
 
-![image-20210122133945462](.\images\search_bar.png)
+![image-20210122133945462](./images/search_bar.png)
 
 Which will open the available search options:  
 
@@ -52,7 +52,7 @@ The resulting query is an **AND** of all items (not an **OR**). For example, if 
 
 ​      Check **Expiring between** and set the dates as follows
 
-![image-20210122135430648](.\images\expiring_2023.png)
+![image-20210122135430648](./images/expiring_2023.png)
 
 
 

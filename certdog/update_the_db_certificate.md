@@ -391,7 +391,7 @@ Windows could not start the Krestfield Certdog Database service on Local Compute
 Error 1053: The service did not respond to the start or control request in a timely fashion.
 ```
 
-Running the database from a console (see [Check the database starts](#check-the-database-starts) below) will display the actual error.
+Running the database from a console (see [Check the database starts](#3-check-the-database-starts) below) will display the actual error.
 
 <br>
 

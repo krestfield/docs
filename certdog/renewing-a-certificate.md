@@ -11,7 +11,7 @@ nav_order: 12
 
 From the *Certificate Details* view select **Actions** then click **Renew Now**:
 
-![image-20211110171015934](.\images\renew_cert1.png)
+![image-20211110171015934](./images/renew_cert1.png)
 
 
 

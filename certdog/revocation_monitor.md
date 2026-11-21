@@ -46,7 +46,7 @@ The tiles at the top show how many monitors there are, how many are passing, fai
 
 Each monitor is listed with its status, type, target URL, how often it runs, when it was last checked, its last response time and its response times over the last 24 hours. Use **Search**, **Type** and **Status** to filter the list
 
-Select a monitor to:
+Click a monitor (anywhere on its row) to show its actions:
 
 * **Run now** - run the check straight away
 * **History** - view its history (see [Monitoring History](#monitoring-history))
@@ -248,7 +248,7 @@ From **Local CAs**, choose **CA Configuration**, select the CA and choose **Edit
 
 ## Monitoring History
 
-Select a monitor and choose **History** (or click its name):
+From the Revocation Monitors page, click the monitor and choose **History**:
 
 <img src="./images/revmon_history.png" alt="Monitor history" style="zoom:67%;" />
 

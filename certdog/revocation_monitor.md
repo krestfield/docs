@@ -338,7 +338,7 @@ Each monitor raises **one** notification, which follows its state:
 
 Each update shows as unread again. The notification is removed when the monitor is deleted or when its notifications are turned off
 
-ADD SCREEN SHOT OF THE NOTIFICATION BELL SHOWING A REVOCATION MONITOR NOTIFICATION
+<img src="./images/image-20261121135823186.png" alt="image-20261121135823186" style="zoom: 80%;" />
 
 <br>
 

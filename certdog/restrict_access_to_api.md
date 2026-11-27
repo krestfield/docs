@@ -1,8 +1,8 @@
 ---
 layout: default
 title: Restrict Access to the API
-parent: Certdog
-nav_order: 550
+parent: Users & Security
+grand_parent: Certdog
 ---
 
 # Restrict Access to the API

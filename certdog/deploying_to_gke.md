@@ -1,8 +1,9 @@
 ---
 layout: default
 title: Deploying to GKE
-parent: Certdog
-nav_order: 1102
+parent: Containers & Kubernetes
+nav_order: 50
+grand_parent: Certdog
 ---
 
 # Deploying Certdog to Google Kubernetes Engine

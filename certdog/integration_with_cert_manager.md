@@ -1,8 +1,9 @@
 ---
 layout: default
 title: Integration with cert-manager
-parent: Certdog
-nav_order: 1111
+parent: Containers & Kubernetes
+nav_order: 70
+grand_parent: Certdog
 ---
 
 # Integration with cert-manager

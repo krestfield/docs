@@ -1,8 +1,9 @@
 ---
 layout: default
 title: Demo QuickStart Setup Guide
-parent: Certdog
-nav_order: 400
+parent: Getting Started
+nav_order: 20
+grand_parent: Certdog
 ---
 
 # Demo QuickStart Setup Guide

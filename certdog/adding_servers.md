@@ -1,8 +1,9 @@
 ---
 layout: default
 title: Adding Additional Servers
-parent: Certdog
-nav_order: 131
+parent: Installation
+nav_order: 90
+grand_parent: Certdog
 ---
 
 # Adding Additional Servers

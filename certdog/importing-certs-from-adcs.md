@@ -1,8 +1,8 @@
 ---
 layout: default
 title: Importing Certificates from ADCS
-parent: Certdog
-nav_order: 2110
+parent: Migrating from ADCS
+grand_parent: Certdog
 ---
 
 # Importing Certificates from AD CS

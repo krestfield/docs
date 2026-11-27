@@ -1,8 +1,8 @@
 ---
 layout: default
 title: Key Stores
-parent: Certdog
-nav_order: 5
+parent: Certificate Issuers
+grand_parent: Certdog
 ---
 # Key Stores
 

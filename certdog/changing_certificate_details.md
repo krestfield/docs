@@ -1,8 +1,8 @@
 ---
 layout: default
 title: Changing Certificate Details
-parent: Certdog
-nav_order: 13
+parent: Using Certdog
+grand_parent: Certdog
 ---
 
 # Changing Certificate Details

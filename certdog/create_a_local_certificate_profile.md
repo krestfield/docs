@@ -1,8 +1,8 @@
 ---
 layout: default
 title: Create a Local Certificate Profile
-parent: Certdog
-nav_order: 6
+parent: Certificate Issuers
+grand_parent: Certdog
 ---
 # Create a Local Certificate Profile
 

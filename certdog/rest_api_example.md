@@ -1,8 +1,8 @@
 ---
 layout: default
 title: REST API Examples
-parent: Certdog
-nav_order: 31
+parent: API & Automation
+grand_parent: Certdog
 ---
 
 

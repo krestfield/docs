@@ -1,8 +1,8 @@
 ---
 layout: default
 title: Certificate Expiry Reminders
-parent: Certdog
-nav_order: 21
+parent: Configuration
+grand_parent: Certdog
 ---
 
 # Certificate Expiry Reminders

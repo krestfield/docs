@@ -1,8 +1,9 @@
 ---
 layout: default
 title: Upgrading Tomcat
-parent: Certdog
-nav_order: 111
+parent: Upgrading
+nav_order: 50
+grand_parent: Certdog
 ---
 
 # Upgrading Tomcat

@@ -8,3 +8,6 @@ search:
   # Index each ### heading as its own search result, so results link
   # straight to the relevant section (e.g. individual errors)
   heading_level: 3
+
+# Sort pages without a nav_order alphabetically, ignoring case
+nav_sort: case_insensitive

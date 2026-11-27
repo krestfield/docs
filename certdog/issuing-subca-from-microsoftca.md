@@ -1,8 +1,8 @@
 ---
 layout: default
 title: Issuing Sub CA from Microsoft CA
-parent: Certdog
-nav_order: 111
+parent: Using Certdog
+grand_parent: Certdog
 ---
 
 # Issuing a Sub CA Certificate from a Microsoft CA

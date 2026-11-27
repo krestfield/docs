@@ -1,8 +1,8 @@
 ---
 layout: default
 title: Renewing a Certificate
-parent: Certdog
-nav_order: 12
+parent: Using Certdog
+grand_parent: Certdog
 ---
 
 # Renewing a Certificate

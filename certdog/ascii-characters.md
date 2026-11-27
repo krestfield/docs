@@ -1,8 +1,8 @@
 ---
 layout: default
 title: ASCII Characters
-parent: Certdog
-nav_order: 5000
+parent: Troubleshooting
+grand_parent: Certdog
 ---
 
 # Keystore Password Characters

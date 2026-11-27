@@ -1,7 +1,8 @@
 ---
 layout: default
 title: What Version of Certdog
-parent: Certdog
+parent: Administration
+grand_parent: Certdog
 ---
 
 # What Version of Certdog am I Running

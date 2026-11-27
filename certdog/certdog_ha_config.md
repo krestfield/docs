@@ -1,8 +1,9 @@
 ---
 layout: default
 title: High Availability Configuration
-parent: Certdog
-nav_order: 1200
+parent: Installation
+nav_order: 100
+grand_parent: Certdog
 ---
 
 # High Availability Configuration

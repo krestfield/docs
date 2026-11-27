@@ -1,8 +1,8 @@
 ---
 layout: default
 title: PowerShell Module
-parent: Certdog
-nav_order: 33
+parent: API & Automation
+grand_parent: Certdog
 ---
 
 # PowerShell Module

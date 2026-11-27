@@ -1,8 +1,8 @@
 ---
 layout: default
 title: MCP AI Setup
-parent: Certdog
-nav_order: 30
+parent: API & Automation
+grand_parent: Certdog
 ---
 
 <br>

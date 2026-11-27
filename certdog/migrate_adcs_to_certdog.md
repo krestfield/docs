@@ -1,8 +1,8 @@
 ---
 layout: default
 title: Migrate ADCS to Certdog
-parent: Certdog
-nav_order: 56
+parent: Migrating from ADCS
+grand_parent: Certdog
 ---
 # Migrate an ADCS instance to Certdog
 

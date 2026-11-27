@@ -1,8 +1,8 @@
 ---
 layout: default
 title: Import ADCS Database
-parent: Certdog
-nav_order: 58
+parent: Migrating from ADCS
+grand_parent: Certdog
 ---
 
 # Import the ADCS Database into Certdog

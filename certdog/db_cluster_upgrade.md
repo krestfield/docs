@@ -1,8 +1,9 @@
 ---
 layout: default
 title: Database Cluster Upgrade
-parent: Certdog
-nav_order: 1201
+parent: Upgrading
+nav_order: 40
+grand_parent: Certdog
 ---
 
 # Database Cluster Upgrade

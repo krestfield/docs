@@ -1,8 +1,8 @@
 ---
 layout: default
 title: Revoking a Certificate
-parent: Certdog
-nav_order: 17
+parent: Using Certdog
+grand_parent: Certdog
 ---
 
 # Revoking a Certificate

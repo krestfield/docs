@@ -1,8 +1,9 @@
 ---
 layout: default
 title: Installing ADCS on Another Machine
-parent: Certdog
-nav_order: 60
+parent: Installation
+nav_order: 70
+grand_parent: Certdog
 ---
 
 # Installing the ADCS Agent on another machine

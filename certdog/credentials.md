@@ -1,8 +1,8 @@
 ---
 layout: default
 title: Credentials
-parent: Certdog
-nav_order: 7
+parent: Configuration
+grand_parent: Certdog
 ---
 
 # Credentials

@@ -1,8 +1,8 @@
 ---
 layout: default
 title: Change Listening IP Address
-parent: Certdog
-nav_order: 14
+parent: Users & Security
+grand_parent: Certdog
 ---
 
 

@@ -1,8 +1,8 @@
 ---
 layout: default
 title: Create a CSR Generator
-parent: Certdog
-nav_order: 11
+parent: Certificate Issuers
+grand_parent: Certdog
 ---
 
 # Certdog - Create a CSR Generator

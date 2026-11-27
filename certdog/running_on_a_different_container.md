@@ -1,8 +1,9 @@
 ---
 layout: default
 title: Running on a different container
-parent: Certdog
-nav_order: 15
+parent: Containers & Kubernetes
+nav_order: 20
+grand_parent: Certdog
 ---
 
 # Running on a different container

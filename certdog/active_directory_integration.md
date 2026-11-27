@@ -1,8 +1,8 @@
 ---
 layout: default
 title: Active Directory Integration
-parent: Certdog
-nav_order: 10
+parent: Users & Security
+grand_parent: Certdog
 ---
 
 # Active Directory Integration

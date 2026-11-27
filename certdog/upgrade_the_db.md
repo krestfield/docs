@@ -1,8 +1,9 @@
 ---
 layout: default
 title: Upgrading The Database
-parent: Certdog
-nav_order: 11
+parent: Upgrading
+nav_order: 30
+grand_parent: Certdog
 ---
 
 # Upgrading the Certdog Database

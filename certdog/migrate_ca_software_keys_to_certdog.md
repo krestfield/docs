@@ -1,8 +1,8 @@
 ---
 layout: default
 title: Migrate CA Software Keys to Certdog
-parent: Certdog
-nav_order: 59
+parent: Migrating from ADCS
+grand_parent: Certdog
 ---
 # Migrate CA Software Keys to Certdog
 

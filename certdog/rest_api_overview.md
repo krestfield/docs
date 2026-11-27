@@ -1,8 +1,8 @@
 ---
 layout: default
 title: REST API
-parent: Certdog
-nav_order: 16
+parent: API & Automation
+grand_parent: Certdog
 ---
 
 # The Certdog REST API

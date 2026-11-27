@@ -1,8 +1,8 @@
 ---
 layout: default
 title: Teams
-parent: Certdog
-nav_order: 8
+parent: Users & Security
+grand_parent: Certdog
 ---
 
 # Teams

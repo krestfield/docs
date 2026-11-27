@@ -1,8 +1,8 @@
 ---
 layout: default
 title: EST
-parent: Certdog
-nav_order: 1003
+parent: Protocols
+grand_parent: Certdog
 ---
 
 # EST

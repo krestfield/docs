@@ -1,8 +1,8 @@
 ---
 layout: default
 title: Issuing a Certificate
-parent: Certdog
-nav_order: 11
+parent: Using Certdog
+grand_parent: Certdog
 ---
 
 # Issuing a Certificate

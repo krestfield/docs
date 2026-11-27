@@ -1,8 +1,8 @@
 ---
 layout: default
 title: IP Restricting
-parent: Certdog
-nav_order: 55
+parent: Users & Security
+grand_parent: Certdog
 ---
 
 # IP Address Restricting

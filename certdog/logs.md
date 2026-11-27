@@ -1,8 +1,8 @@
 ---
 layout: default
 title: Logs
-parent: Certdog
-nav_order: 200
+parent: Administration
+grand_parent: Certdog
 ---
 
 # Logs

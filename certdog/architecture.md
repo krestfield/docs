@@ -1,8 +1,9 @@
 ---
 layout: default
 title: Architecture
-parent: Certdog
-nav_order: 20
+parent: Getting Started
+nav_order: 30
+grand_parent: Certdog
 ---
 # Certdog Architecture
 

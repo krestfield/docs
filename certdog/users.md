@@ -1,8 +1,8 @@
 ---
 layout: default
 title: Users
-parent: Certdog
-nav_order: 6
+parent: Users & Security
+grand_parent: Certdog
 ---
 
 # Users

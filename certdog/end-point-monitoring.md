@@ -1,8 +1,8 @@
 ---
 layout: default
 title: End Point Monitoring
-parent: Certdog
-nav_order: 1445
+parent: Discovery & Monitoring
+grand_parent: Certdog
 ---
 
 <br>

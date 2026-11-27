@@ -1,8 +1,8 @@
 ---
 layout: default
 title: Certdog Errors and Solutions
-parent: Certdog
-nav_order: 2000
+parent: Troubleshooting
+grand_parent: Certdog
 ---
 
 # Certdog Errors and Solutions

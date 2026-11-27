@@ -1,8 +1,8 @@
 ---
 layout: default
 title: DN Restrictions
-parent: Certdog
-nav_order: 111
+parent: Configuration
+grand_parent: Certdog
 ---
 
 # Certdog - DN Restrictions

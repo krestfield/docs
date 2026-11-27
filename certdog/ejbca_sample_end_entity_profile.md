@@ -1,8 +1,8 @@
 ---
 layout: default
 title: EJBCA - End Entity Profile Setup
-parent: Certdog
-nav_order: 11
+parent: Certificate Issuers
+grand_parent: Certdog
 ---
 
 # EJBCA - End Entity Profile Setup  

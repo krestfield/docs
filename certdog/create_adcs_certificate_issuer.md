@@ -1,8 +1,8 @@
 ---
 layout: default
 title: Create an ADCS Certificate Issuer
-parent: Certdog
-nav_order: 6
+parent: Certificate Issuers
+grand_parent: Certdog
 ---
 # Create an ADCS Certificate Issuer
 

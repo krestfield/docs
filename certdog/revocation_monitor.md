@@ -1,8 +1,8 @@
 ---
 layout: default
 title: Revocation Monitor
-parent: Certdog
-nav_order: 213
+parent: Discovery & Monitoring
+grand_parent: Certdog
 ---
 
 # Revocation Monitor

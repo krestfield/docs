@@ -1,8 +1,9 @@
 ---
 layout: default
 title: Get the Dog
-parent: Certdog
-nav_order: 3
+parent: Getting Started
+nav_order: 10
+grand_parent: Certdog
 ---
 # Get the Dog
 

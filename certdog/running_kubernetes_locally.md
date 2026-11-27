@@ -1,8 +1,9 @@
 ---
 layout: default
 title: Running on Kubernetes Locally
-parent: Certdog
-nav_order: 1101
+parent: Containers & Kubernetes
+nav_order: 40
+grand_parent: Certdog
 ---
 
 # Running Certdog on Kubernetes Locally

@@ -1,8 +1,8 @@
 ---
 layout: default
 title: Retarget ADCS nCipher Keys to Certdog Format
-parent: Certdog
-nav_order: 57
+parent: Migrating from ADCS
+grand_parent: Certdog
 ---
 
 # Retarget ADCS nCipher Keys to Certdog Format (PKCS#11)

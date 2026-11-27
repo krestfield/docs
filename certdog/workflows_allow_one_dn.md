@@ -1,8 +1,8 @@
 ---
 layout: default
 title: Workflows - Allow One DN
-parent: Certdog
-nav_order: 1444
+parent: Configuration
+grand_parent: Certdog
 ---
 
 <br>

@@ -1,8 +1,9 @@
 ---
 layout: default
 title: ADCS Driver
-parent: Certdog
-nav_order: 5
+parent: Installation
+nav_order: 60
+grand_parent: Certdog
 ---
 # Certdog ADCS (Microsoft CA) Driver
 

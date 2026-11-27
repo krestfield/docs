@@ -1,8 +1,9 @@
 ---
 layout: default
 title: Windows Installation
-parent: Certdog
-nav_order: 5
+parent: Installation
+nav_order: 20
+grand_parent: Certdog
 ---
 
 # Certdog Windows Installation

@@ -1,8 +1,9 @@
 ---
 layout: default
 title: Add Databases Indexes
-parent: Certdog
-nav_order: 300
+parent: Upgrading
+nav_order: 60
+grand_parent: Certdog
 ---
 
 # Add Database Indexes

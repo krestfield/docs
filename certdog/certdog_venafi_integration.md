@@ -1,8 +1,8 @@
 ---
 layout: default
 title: Certdog Venafi Integration
-parent: Certdog
-nav_order: 211
+parent: API & Automation
+grand_parent: Certdog
 ---
 # Certdog Venafi Integration
 

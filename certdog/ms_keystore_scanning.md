@@ -1,8 +1,8 @@
 ---
 layout: default
 title: Running a Microsoft Cert Store Scan
-parent: Certdog
-nav_order: 17
+parent: Discovery & Monitoring
+grand_parent: Certdog
 ---
 # Running a Microsoft Cert Store Scan
 

@@ -1,8 +1,8 @@
 ---
 layout: default
 title: Available Parameters
-parent: Certdog
-nav_order: 1003
+parent: API & Automation
+grand_parent: Certdog
 ---
 
 # Available Parameters

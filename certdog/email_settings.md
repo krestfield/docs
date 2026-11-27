@@ -1,8 +1,8 @@
 ---
 layout: default
 title: Email Settings
-parent: Certdog
-nav_order: 20
+parent: Configuration
+grand_parent: Certdog
 ---
 # Email Settings
 

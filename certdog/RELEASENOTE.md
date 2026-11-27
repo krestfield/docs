@@ -2,7 +2,7 @@
 layout: default
 title: Release Note
 parent: Certdog
-nav_order: 10000
+nav_order: 900
 ---
 
 

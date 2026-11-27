@@ -1,8 +1,8 @@
 ---
 layout: default
 title: Configuring the Server's SSL Certificates
-parent: Certdog
-nav_order: 11
+parent: Users & Security
+grand_parent: Certdog
 ---
 # Configuring the Server's TLS Certificates
 

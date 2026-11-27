@@ -1,8 +1,9 @@
 ---
 layout: default
 title: Get the Docker Image
-parent: Certdog
-nav_order: 5
+parent: Containers & Kubernetes
+nav_order: 10
+grand_parent: Certdog
 ---
 # Get the Docker Image
 

@@ -1,8 +1,8 @@
 ---
 layout: default
 title: Workflows
-parent: Certdog
-nav_order: 151
+parent: Configuration
+grand_parent: Certdog
 ---
 
 # Certdog - Workflows

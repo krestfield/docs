@@ -1,8 +1,8 @@
 ---
 layout: default
 title: DotNet Client
-parent: Certdog
-nav_order: 12
+parent: API & Automation
+grand_parent: Certdog
 ---
 
 # Certdog DotNet Client

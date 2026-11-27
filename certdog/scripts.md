@@ -1,8 +1,8 @@
 ---
 layout: default
 title: Scripts
-parent: Certdog
-nav_order: 1003
+parent: API & Automation
+grand_parent: Certdog
 ---
 
 # Scripts

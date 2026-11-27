@@ -1,8 +1,9 @@
 ---
 layout: default
 title: Windows Uninstall
-parent: Certdog
-nav_order: 101
+parent: Installation
+nav_order: 110
+grand_parent: Certdog
 ---
 
 # Uninstalling Certdog (Windows)

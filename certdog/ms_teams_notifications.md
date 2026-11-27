@@ -1,8 +1,8 @@
 ---
 layout: default
 title: MS Teams Notifications
-parent: Certdog
-nav_order: 1301
+parent: Configuration
+grand_parent: Certdog
 ---
 
 # Sending MS Teams Notifications

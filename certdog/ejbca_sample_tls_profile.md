@@ -1,8 +1,8 @@
 ---
 layout: default
 title: EJBCA TLS Certificate Profile Setup
-parent: Certdog
-nav_order: 10
+parent: Certificate Issuers
+grand_parent: Certdog
 ---
 
 # EJBCA - TLS Certificate Profile Setup  

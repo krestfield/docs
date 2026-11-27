@@ -1,8 +1,8 @@
 ---
 layout: default
 title: Administrator Password Reset
-parent: Certdog
-nav_order: 100
+parent: Administration
+grand_parent: Certdog
 ---
 # Administrator Password Reset
 

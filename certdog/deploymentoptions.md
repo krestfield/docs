@@ -1,8 +1,9 @@
 ---
 layout: default
 title: Deployment Options
-parent: Certdog
-nav_order: 21
+parent: Getting Started
+nav_order: 40
+grand_parent: Certdog
 ---
 # Deployment Options
 

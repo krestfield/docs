@@ -1,8 +1,8 @@
 ---
 layout: default
 title: OCSP
-parent: Certdog
-nav_order: 212
+parent: Protocols
+grand_parent: Certdog
 ---
 # OCSP
 

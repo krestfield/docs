@@ -1,8 +1,8 @@
 ---
 layout: default
 title: Backup
-parent: Certdog
-nav_order: 30
+parent: Administration
+grand_parent: Certdog
 ---
 
 # Backup

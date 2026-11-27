@@ -1,8 +1,8 @@
 ---
 layout: default
 title: Updating the Database SSL Certificate
-parent: Certdog
-nav_order: 130
+parent: Users & Security
+grand_parent: Certdog
 ---
 
 # Updating the Database SSL Certificate

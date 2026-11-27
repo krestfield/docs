@@ -1,8 +1,8 @@
 ---
 layout: default
 title: Tasks
-parent: Certdog
-nav_order: 1010
+parent: Using Certdog
+grand_parent: Certdog
 ---
 
 # Tasks

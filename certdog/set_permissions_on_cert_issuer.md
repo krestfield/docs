@@ -1,8 +1,8 @@
 ---
 layout: default
 title: Set Permissions on a Certificate Issuer
-parent: Certdog
-nav_order: 8
+parent: Certificate Issuers
+grand_parent: Certdog
 ---
 
 

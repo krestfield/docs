@@ -2,7 +2,8 @@
 layout: default
 title: Certificate Issuers
 parent: Certdog
-nav_order: 69
+nav_order: 50
+has_children: true
 ---
 
 # Certificate Issuers

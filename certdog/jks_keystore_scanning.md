@@ -1,8 +1,8 @@
 ---
 layout: default
 title: Running a JKS Scan
-parent: Certdog
-nav_order: 128
+parent: Discovery & Monitoring
+grand_parent: Certdog
 ---
 # Running a JKS (Java Key Store) Scan
 

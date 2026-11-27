@@ -1,8 +1,8 @@
 ---
 layout: default
 title: Settings
-parent: Certdog
-nav_order: 19
+parent: Configuration
+grand_parent: Certdog
 ---
 # Certdog Settings
 

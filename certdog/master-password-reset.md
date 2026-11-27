@@ -1,8 +1,8 @@
 ---
 layout: default
 title: Master Password Reset
-parent: Certdog
-nav_order: 101
+parent: Administration
+grand_parent: Certdog
 ---
 # Master Password Reset
 

@@ -1,8 +1,9 @@
 ---
 layout: default
 title: Manually Upgrading
-parent: Certdog
+parent: Upgrading
 nav_order: 20
+grand_parent: Certdog
 ---
 
 # Manually Upgrading Certdog

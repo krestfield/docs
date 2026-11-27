@@ -1,8 +1,8 @@
 ---
 layout: default
 title: Change your password
-parent: Certdog
-nav_order: 1001
+parent: Using Certdog
+grand_parent: Certdog
 ---
 
 # How to Change your Password

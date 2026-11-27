@@ -1,8 +1,8 @@
 ---
 layout: default
 title: Running a TLS Scan
-parent: Certdog
-nav_order: 16
+parent: Discovery & Monitoring
+grand_parent: Certdog
 ---
 # Running a TLS Scan
 

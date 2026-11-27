@@ -1,8 +1,8 @@
 ---
 layout: default
 title: SCEP
-parent: Certdog
-nav_order: 1002
+parent: Protocols
+grand_parent: Certdog
 ---
 
 # SCEP

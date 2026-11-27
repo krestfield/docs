@@ -1,8 +1,8 @@
 ---
 layout: default
 title: OCSP for SafeSign
-parent: Certdog
-nav_order: 213
+parent: Protocols
+grand_parent: Certdog
 ---
 
 # Configuring OCSP for SafeSign/Safetronic

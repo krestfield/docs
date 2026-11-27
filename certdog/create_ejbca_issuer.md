@@ -1,8 +1,8 @@
 ---
 layout: default
 title: Create an EJBCA Issuer
-parent: Certdog
-nav_order: 7
+parent: Certificate Issuers
+grand_parent: Certdog
 ---
 
 # Create an EJBCA Issuer

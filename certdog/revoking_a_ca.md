@@ -1,8 +1,8 @@
 ---
 layout: default
 title: Revoking a CA
-parent: Certdog
-nav_order: 117
+parent: Using Certdog
+grand_parent: Certdog
 ---
 
 # Revoking a CA

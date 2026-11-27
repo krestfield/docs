@@ -1,8 +1,8 @@
 ---
 layout: default
 title: Creating Custom Extensions
-parent: Certdog
-nav_order: 111
+parent: Certificate Issuers
+grand_parent: Certdog
 ---
 
 # Creating Custom Extensions Data

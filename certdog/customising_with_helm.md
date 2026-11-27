@@ -1,8 +1,9 @@
 ---
 layout: default
 title: Customising with Helm
-parent: Certdog
-nav_order: 1110
+parent: Containers & Kubernetes
+nav_order: 60
+grand_parent: Certdog
 ---
 
 # Customising Certdog on Kubernetes with Helm

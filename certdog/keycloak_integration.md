@@ -1,8 +1,8 @@
 ---
 layout: default
 title: Keycloak OAuth 2.0 and OIDC Integration
-parent: Certdog
-nav_order: 11
+parent: Users & Security
+grand_parent: Certdog
 ---
 
 # Keycloak OAuth 2.0 and OIDC Integration

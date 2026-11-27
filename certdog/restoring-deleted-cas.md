@@ -1,8 +1,8 @@
 ---
 layout: default
 title: Restoring Deleted CAs
-parent: Certdog
-nav_order: 110
+parent: Using Certdog
+grand_parent: Certdog
 ---
 
 # Restoring Deleted CAs

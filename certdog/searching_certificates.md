@@ -1,8 +1,8 @@
 ---
 layout: default
 title: Searching Certificates
-parent: Certdog
-nav_order: 18
+parent: Using Certdog
+grand_parent: Certdog
 ---
 # Searching Certificates
 

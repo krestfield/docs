@@ -1,8 +1,9 @@
 ---
 layout: default
 title: Download Locations
-parent: Certdog
-nav_order: 500
+parent: Getting Started
+nav_order: 70
+grand_parent: Certdog
 ---
 
 

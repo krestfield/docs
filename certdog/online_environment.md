@@ -1,8 +1,9 @@
 ---
 layout: default
 title: Online Environment
-parent: Certdog
-nav_order: 7
+parent: Getting Started
+nav_order: 60
+grand_parent: Certdog
 ---
 
 # Online Environment

@@ -1,8 +1,8 @@
 ---
 layout: default
 title: ACME
-parent: Certdog
-nav_order: 1001
+parent: Protocols
+grand_parent: Certdog
 ---
 
 # ACME

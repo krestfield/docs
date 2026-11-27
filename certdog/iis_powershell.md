@@ -1,8 +1,8 @@
 ---
 layout: default
 title: IIS PowerShell Script
-parent: Certdog
-nav_order: 13
+parent: API & Automation
+grand_parent: Certdog
 ---
 
 # Certdog IIS PowerShell Script

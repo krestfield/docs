@@ -2,7 +2,8 @@
 layout: default
 title: Getting Started
 parent: Certdog
-nav_order: 6
+nav_order: 10
+has_children: true
 ---
 
 # Certdog - Getting Started

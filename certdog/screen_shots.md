@@ -1,8 +1,9 @@
 ---
 layout: default
 title: Screen Shots
-parent: Certdog
-nav_order: 12
+parent: Getting Started
+nav_order: 50
+grand_parent: Certdog
 ---
 
 

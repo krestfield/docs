@@ -1,8 +1,9 @@
 ---
 layout: default
 title: Deploying to Kubernetes
-parent: Certdog
-nav_order: 1100
+parent: Containers & Kubernetes
+nav_order: 30
+grand_parent: Certdog
 ---
 
 # Deploying Certdog to Kubernetes

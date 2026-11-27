@@ -1,8 +1,9 @@
 ---
 layout: default
 title: Post Installation
-parent: Certdog
-nav_order: 600
+parent: Installation
+nav_order: 50
+grand_parent: Certdog
 ---
 
 # Certdog Post Installation Configuration

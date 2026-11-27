@@ -1,8 +1,9 @@
 ---
 layout: default
 title: Configuring Logon as a Service
-parent: Certdog
-nav_order: 133
+parent: Installation
+nav_order: 80
+grand_parent: Certdog
 ---
 
 

@@ -1,8 +1,9 @@
 ---
 layout: default
 title: Debian Installation
-parent: Certdog
-nav_order: 200
+parent: Installation
+nav_order: 40
+grand_parent: Certdog
 ---
 
 # Certdog Debian Installation <br>

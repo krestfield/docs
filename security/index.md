@@ -1,7 +1,7 @@
 ---
 layout: default
 title: Security Advisories
-nav_order: 9
+nav_order: 90
 has_children: true
 permalink: /security/
 ---

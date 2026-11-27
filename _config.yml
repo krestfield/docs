@@ -3,3 +3,8 @@ title: [Krestfield Knowledge]
 description: [All product guides and documents]
 color_scheme: krestfield
 logo: "/assets/images/krestfield.png"
+search_enabled: true
+search:
+  # Index each ### heading as its own search result, so results link
+  # straight to the relevant section (e.g. individual errors)
+  heading_level: 3

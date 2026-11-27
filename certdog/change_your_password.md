@@ -1,7 +1,7 @@
 ---
 layout: default
 title: Change your password
-parent: certdog
+parent: Certdog
 nav_order: 1001
 ---
 

@@ -1,8 +1,7 @@
 ---
 layout: default
 title: What Version of Certdog
-parent: certdog
-nav_order: Certdog
+parent: Certdog
 ---
 
 # What Version of Certdog am I Running

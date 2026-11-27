@@ -1,8 +1,9 @@
 ---
 layout: default
 title: nCipher HSM - Using Module Protection
-parent: EzSign
-nav_order: 170
+parent: HSMs & Key Stores
+nav_order: 50
+grand_parent: EzSign
 ---
 
 

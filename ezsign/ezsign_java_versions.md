@@ -1,8 +1,9 @@
 ---
 layout: default
 title: EzSign - Java Versions
-parent: EzSign
-nav_order: 200
+parent: Overview
+nav_order: 70
+grand_parent: EzSign
 ---
 
 

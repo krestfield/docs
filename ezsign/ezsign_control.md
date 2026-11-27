@@ -1,8 +1,9 @@
 ---
 layout: default
 title: EzSign - Control
-parent: EzSign
-nav_order: 70
+parent: Overview
+nav_order: 40
+grand_parent: EzSign
 ---
 # EzSign Control
 

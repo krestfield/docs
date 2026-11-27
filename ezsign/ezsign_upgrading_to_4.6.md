@@ -1,8 +1,9 @@
 ---
 layout: default
 title: EzSign - Upgrading to 4.6
-parent: EzSign
-nav_order: 330
+parent: Installation & Upgrading
+nav_order: 60
+grand_parent: EzSign
 ---
 
 # Upgrading to EzSign 4.6

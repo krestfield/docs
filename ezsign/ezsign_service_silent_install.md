@@ -1,8 +1,9 @@
 ---
 layout: default
 title: EzSign Service - Silent Installation
-parent: EzSign
-nav_order: 160
+parent: Installation & Upgrading
+nav_order: 40
+grand_parent: EzSign
 ---
 
 # EzSign Service - Silent Install

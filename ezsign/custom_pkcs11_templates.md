@@ -1,8 +1,9 @@
 ---
 layout: default
 title: Custom PKCS#11 Templates
-parent: EzSign
-nav_order: 260
+parent: HSMs & Key Stores
+nav_order: 20
+grand_parent: EzSign
 ---
 
 

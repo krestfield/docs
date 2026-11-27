@@ -1,8 +1,9 @@
 ---
 layout: default
 title: nCipher HSM - Check the Configuration
-parent: EzSign
-nav_order: 140
+parent: HSMs & Key Stores
+nav_order: 30
+grand_parent: EzSign
 ---
 
 

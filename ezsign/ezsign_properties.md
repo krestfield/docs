@@ -1,8 +1,9 @@
 ---
 layout: default
 title: EzSign Properties
-parent: EzSign
-nav_order: 80
+parent: Server Configuration
+nav_order: 10
+grand_parent: EzSign
 ---
 
 # EzSign Properties

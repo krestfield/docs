@@ -1,8 +1,9 @@
 ---
 layout: default
 title: Thales PayShield Error Codes
-parent: EzSign
-nav_order: 210
+parent: HSMs & Key Stores
+nav_order: 90
+grand_parent: EzSign
 ---
 
 # Thales PayShield Error Codes

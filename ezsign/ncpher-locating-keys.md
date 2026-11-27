@@ -1,8 +1,9 @@
 ---
 layout: default
 title: nCipher HSM - Locating Keys
-parent: EzSign
-nav_order: 250
+parent: HSMs & Key Stores
+nav_order: 60
+grand_parent: EzSign
 ---
 
 # Locating Keys on nCipher HSMs

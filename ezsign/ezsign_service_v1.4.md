@@ -1,8 +1,9 @@
 ---
 layout: default
 title: EzSign Service - version 1.4
-parent: EzSign
-nav_order: 180
+parent: Installation & Upgrading
+nav_order: 50
+grand_parent: EzSign
 ---
 
 # EzSign Service - Version 1.4

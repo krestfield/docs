@@ -1,8 +1,9 @@
 ---
 layout: default
 title: EzSign - TLS Configuration
-parent: EzSign
-nav_order: 290
+parent: Server Configuration
+nav_order: 30
+grand_parent: EzSign
 ---
 
   

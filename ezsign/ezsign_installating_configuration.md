@@ -1,8 +1,9 @@
 ---
 layout: default
 title: EzSign - Installation & Configuration
-parent: EzSign
+parent: Installation & Upgrading
 nav_order: 10
+grand_parent: EzSign
 ---
 
 

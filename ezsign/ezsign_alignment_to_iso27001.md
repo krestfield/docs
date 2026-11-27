@@ -1,8 +1,8 @@
 ---
 layout: default
 title: EzSign - Alignment to ISO 27001
-parent: EzSign
-nav_order: 320
+parent: Security & Compliance
+grand_parent: EzSign
 ---
 
 # EzSign Alignment to ISO 27001

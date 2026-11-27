@@ -1,8 +1,9 @@
 ---
 layout: default
 title: EzSign Service Guide
-parent: EzSign
-nav_order: 190
+parent: Installation & Upgrading
+nav_order: 30
+grand_parent: EzSign
 ---
 
 # EzSign Service Guide

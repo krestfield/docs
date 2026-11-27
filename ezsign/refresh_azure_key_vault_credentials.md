@@ -1,8 +1,9 @@
 ---
 layout: default
 title: Refresh Azure Key Vault Credentials
-parent: EzSign
-nav_order: 280
+parent: HSMs & Key Stores
+nav_order: 110
+grand_parent: EzSign
 ---
 
 # Refresh Azure Key Vault Credentials

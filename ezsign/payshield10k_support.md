@@ -1,8 +1,9 @@
 ---
 layout: default
 title: EzSign - payShield 10k Support
-parent: EzSign
-nav_order: 270
+parent: HSMs & Key Stores
+nav_order: 70
+grand_parent: EzSign
 ---
 
 

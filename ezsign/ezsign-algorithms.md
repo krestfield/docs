@@ -1,8 +1,9 @@
 ---
 layout: default
 title: EzSign Algorithms
-parent: EzSign
-nav_order: 310
+parent: Overview
+nav_order: 60
+grand_parent: EzSign
 ---
 
 

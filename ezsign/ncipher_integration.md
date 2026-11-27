@@ -1,8 +1,9 @@
 ---
 layout: default
 title: nCipher HSM - Integration
-parent: EzSign
-nav_order: 150
+parent: HSMs & Key Stores
+nav_order: 40
+grand_parent: EzSign
 ---
 
 

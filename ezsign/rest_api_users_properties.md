@@ -1,8 +1,9 @@
 ---
 layout: default
 title: EzSign REST API Users File
-parent: EzSign
-nav_order: 110
+parent: Integration & APIs
+nav_order: 40
+grand_parent: EzSign
 ---
 
 # EzSign REST API Users File

@@ -1,8 +1,9 @@
 ---
 layout: default
 title: EzSign - Google KMS Configuration
-parent: EzSign
-nav_order: 220
+parent: HSMs & Key Stores
+nav_order: 120
+grand_parent: EzSign
 ---
 # Google KMS Configuration
 

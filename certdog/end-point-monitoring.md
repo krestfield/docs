@@ -262,4 +262,4 @@ The body follows this format:
 
 <br>
 
-This call can be tested and expirmented from the Swagger UI (accessed by clicking **API** - bottom right of the certdog UI)
+This call can be tested and experimented with from the Swagger UI (accessed by clicking **API** - bottom right of the certdog UI)

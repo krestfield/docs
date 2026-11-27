@@ -57,7 +57,7 @@ The following information is also required:
 
 ## TLS Configuration
 
-Clude and the MCP server must trust the TLS certificates presented by the certdog API end point  
+Claude and the MCP server must trust the TLS certificates presented by the certdog API end point  
 
 If the TLS certificate are issued from a trusted root that is already included within the local java trust store then no additional arguments are required. In this case the following argument (as shown in the examples below):
 

@@ -84,7 +84,7 @@ Changes:
 Changes:
 * Full support added for YubiHSM2
 * Internal changes made to support Java 17 and later
-* Several dependancies updated to latest versions, including Bouncy Castle, Google KMS and Log4j 
+* Several dependencies updated to latest versions, including Bouncy Castle, Google KMS and Log4j 
 * Custom PKCS11 templates added to increase HSM support
 * ezsign-manage improvements
 
@@ -315,14 +315,14 @@ Fixes:
 Changes:
 * Symmetric encryption (AES) support added for PKCS#11 and Software tokens
 * Basic Constraints checking now also checks the path length for any violation
-* PKCS#11 operations can now run in parrallel, improving performance up to 10x
+* PKCS#11 operations can now run in parallel, improving performance up to 10x
 * ClientUtils methods expanded
 * Updates to start/stop and management scripts
 * Server properties can now be passed as system parameters
 * Client server connectivity improved
 
 Fixes:
-* When two CA certificates had the same DN and issuer, path building occaisionally failed (when the wrong CA was selected and final validation failed)
+* When two CA certificates had the same DN and issuer, path building occasionally failed (when the wrong CA was selected and final validation failed)
   
 ------------------------------------------------------------------------------
 > Version: 1.5

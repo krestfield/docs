@@ -48,7 +48,7 @@ The default container used by Certdog is Apache Tomcat. This outputs several log
 
 The most useful in debugging Certdog related issues is the ``catalina.* `` log file (e.g. catalina.out or catalina.2021-12-22.log etc)
 
-Refer to Tomcat documentation should you wish to configure this logging furter
+Refer to Tomcat documentation should you wish to configure this logging further
 
 
 

@@ -52,7 +52,7 @@ Further details of the available properties can be found in the sample below. Fo
 # The IP Address that the control listener will bind to
 server.ctrl.bindIpAddress=127.0.0.1
 
-# A comma seperated list of IP addresses that the control server
+# A comma separated list of IP addresses that the control server
 # will permit to send control messages
 # Set this to local host (127.0.0.1) to ensure that only the same server can
 # send control messages
@@ -76,7 +76,7 @@ server.port=5656
 # If this is commented out/missing the server will bind to all interfaces
 #server.bindIpAddress=127.0.0.1
 
-# A comma seperated list of IP addresses that the server
+# A comma separated list of IP addresses that the server
 # will permit to send messages
 # Set this to local host (127.0.0.1) to ensure that only the same server can
 # send messages
@@ -293,7 +293,7 @@ channel.1.token.hsm9000.useVariantLmk=true
 channel.1.token.hsm9000.lmkId=1
 
 # The token password required for all token types
-# This must be set by running the ezsign-manange script
+# This must be set by running the ezsign-manage script
 # If tokenType=SOFTWARE this is used to encrypt the keys and certificates only
 # If tokenType=PKCS11 this is the PIN or Passphrase, for nCipher devices this will be
 # the operator smartcard passphrase
@@ -329,7 +329,7 @@ channel.1.signature.includeSignedAttribs=true
 channel.1.signature.includeContent=false
 
 # The key which will be used to generate the signature
-# This can be set by running the ezsign-manange script
+# This can be set by running the ezsign-manage script
 channel.1.signature.keyId=15723e16cd89401
 
 # To override the default path checker with a custom version, specify the
@@ -434,7 +434,7 @@ channel.1.revocationChecker.ocsp.defaultUrl=https://ocsp.server.co.uk
 channel.1.revocationChecker.ocsp.signRequest=true
 
 # The signing key used to sign the OCSP requests if signReques=true
-# This can be set by running the ezsign-manange script
+# This can be set by running the ezsign-manage script
 channel.1.revocationChecker.ocsp.signingKeyId=1557ca2b4ba3283
 
 # The hash used in the OCSP request signature generation
@@ -451,7 +451,7 @@ channel.1.revocationChecker.ocsp.checkOcspSigningCertUsage=true
 # (indicated in the producedAt field) is more than this number of 
 # minutes in the past i.e. this is the maximum lifetime allowed
 # for an OCSP response
-# If ommitted this will not be checked
+# If omitted this will not be checked
 channel.1.revocationChecker.ocsp.maxProducedAtAgeMins=4
 
 # An OCSP response without a nextUpdate time is only accepted for this

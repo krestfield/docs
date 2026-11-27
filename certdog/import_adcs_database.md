@@ -14,7 +14,7 @@ You may wish to do this for reasons such as:
 
 * To benefit from a simplified search and query of the certificates
 
-* To use Certdogs certificate expiry monitoring and alerting capability
+* To use Certdog's certificate expiry monitoring and alerting capability
 
 * As a backup of certificates stored 
 
@@ -217,7 +217,7 @@ We will be using the ``import-adcs-certs.ps1`` script to import the certificates
 
     ``Certificate Template: "1.3.6.1.4.1.311.21.8.5713573.4140818.2442627.4655406.2487952.157.15198871.15916228" Test Web Server``
 
-  * You only ned to specify the name ``Test Web Server`` and not the OID value
+  * You only need to specify the name ``Test Web Server`` and not the OID value
 
   * If this parameter is not provided - all certificates will be imported
 

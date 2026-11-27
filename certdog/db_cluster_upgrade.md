@@ -148,7 +148,7 @@ mongosh.exe mongodb://certmanadmin@node1.krestfield.local/admin?tls=true
 
 Enter the database admin password when prompted
 
-*Note: If you see the message ``MongoNetworkError: unable to get local issuer certificate`` this usually indicates that the certificates protecting the DB end points - as configured in the ``tls`` sectrion of the ``mongod.cfg`` file - are not fully trusted. Ensure the root and intermediate certificates are included in the local machines store. Alternatively, to ignore this message, at the end of the connection string replace ``tls=true`` with ``tls=true&tlsAllowInvalidCertificates=true``*
+*Note: If you see the message ``MongoNetworkError: unable to get local issuer certificate`` this usually indicates that the certificates protecting the DB end points - as configured in the ``tls`` section of the ``mongod.cfg`` file - are not fully trusted. Ensure the root and intermediate certificates are included in the local machines store. Alternatively, to ignore this message, at the end of the connection string replace ``tls=true`` with ``tls=true&tlsAllowInvalidCertificates=true``*
 
 If the prompt shows:
 

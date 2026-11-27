@@ -82,7 +82,7 @@ This script will configure the provided certificate as the databases TLS certifi
 Run this script to renew or replace the database TLS certificate
 
 You will need the ID of the certificate (issued from Certdog) to successfully run this script
-You can obtain this ID by vewing the certificate details in Certdog. Under Technical details
+You can obtain this ID by viewing the certificate details in Certdog. Under Technical details
 click the value beside Certificate ID to copy this ID to the clipboard
 See: https://krestfield.github.io/docs/certdog/update_the_db_certificate.html for more details
 

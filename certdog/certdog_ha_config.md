@@ -165,7 +165,7 @@ e.g.
 ..\mongodb\bin> .\mongo.exe node2.krestfield.local -u certmanadmin -p complexpassword -tls -tlsAllowInvalidCertificates -authenticationDatabase admin
 ```
 
-Note that the same DB Admin password should have been used for all installations. If this is not the case, ensure that the correct ``<DB ADMIN PASSWORD>`` is used for the instance being targetted.
+Note that the same DB Admin password should have been used for all installations. If this is not the case, ensure that the correct ``<DB ADMIN PASSWORD>`` is used for the instance being targeted.
 
 This should connect with output as shown below:
 

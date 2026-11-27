@@ -424,7 +424,7 @@ Or the master password can be stored within a file, and the filename them passed
 ezsign-daemon-start.sh server.properties -f masterpassfile.txt
 ```
 
-Where``masterpassfile.txt`` is the file containing the master password
+Where ``masterpassfile.txt`` is the file containing the master password
 
 Finally, the master password may be set within the environment variable ``EZMASTERPASS``, in which case no password parameter is required when calling the start script e.g.
 

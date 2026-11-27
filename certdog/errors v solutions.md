@@ -344,11 +344,11 @@ If after making changes the error still occurs, stop and start the Krestfield Ce
 
 <hr/>
 
-### DN Restrictions do not restriction wildards in Common Name
+### DN Restrictions do not restrict wildcards in Common Name
 
 <u>Error Details</u>
 
-Configure a DN restriction to Deny Wilcard Domains but domains such as *.org.com are still permitted in the Common Name (CN) field
+Configure a DN restriction to Deny Wildcard Domains but domains such as *.org.com are still permitted in the Common Name (CN) field
 
 <u>Solution</u>
 

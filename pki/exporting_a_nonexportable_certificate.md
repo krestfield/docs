@@ -50,7 +50,7 @@ You can still check the status of the download by right-clicking the zip and cli
 
 <img src="./images/mimikatz_warning.png" alt="image-20211104102429561" style="zoom:80%;" />
 
-Follow the link to find out more about mimkatz. You may see a page as follows which provides more information:
+Follow the link to find out more about Mimikatz. You may see a page as follows which provides more information:
 
 <img src="./images/mimikatz_ms_info.png" alt="image-20211104110408227" style="zoom:80%;" /> 
 

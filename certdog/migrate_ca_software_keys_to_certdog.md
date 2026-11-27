@@ -79,7 +79,7 @@ E.g.
 Import-LocalCAFromP12 -name "CA Import" -p12Filename msca.pfx -p12Password password
 ```
 
-If your password contains special characters that could intefere with standard PowerShell processing, wrap the password with quotes e.g.
+If your password contains special characters that could interfere with standard PowerShell processing, wrap the password with quotes e.g.
 
 ```powershell
 Import-LocalCAFromP12 -name "CA Import" -p12Filename msca.pfx -p12Password 'password'

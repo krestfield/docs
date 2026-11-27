@@ -132,7 +132,7 @@ Relate to certificates.  Note that one of the entries (highlighted above) contai
 
 This indicates that this is the signing certificate - the certificate which is associated with the public (.pub file) and private (.priv file) key pair with the same name  
 
-The other files may relate to other certificates (e.g. intermedaite CA and root CA certificates) that would have also been imported  
+The other files may relate to other certificates (e.g. intermediate CA and root CA certificates) that would have also been imported  
 
  
 

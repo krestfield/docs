@@ -65,7 +65,7 @@ Save the file
 
 <br>  
 
-2. Edit: ``cerdogfree\install\templates\mongod.template.nossl.cfg``
+2. Edit: ``certdogfree\install\templates\mongod.template.nossl.cfg``
 
 Replace the default ``127.0.0.1`` bindIp address with ``0.0.0.0``. E.g.   
 

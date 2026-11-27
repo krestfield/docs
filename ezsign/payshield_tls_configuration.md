@@ -1,6 +1,6 @@
 ---
 layout: default
-title: EzSign - payShield TLS Configuration
+title: payShield TLS Configuration
 parent: HSMs & Key Stores
 nav_order: 80
 grand_parent: EzSign

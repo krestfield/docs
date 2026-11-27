@@ -1,6 +1,6 @@
 ---
 layout: default
-title: EzSign Service Guide
+title: Windows Service Guide
 parent: Installation & Upgrading
 nav_order: 30
 grand_parent: EzSign

@@ -1,6 +1,6 @@
 ---
 layout: default
-title: EzSign - Client
+title: Client
 parent: Overview
 nav_order: 30
 grand_parent: EzSign

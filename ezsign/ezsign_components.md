@@ -1,6 +1,6 @@
 ---
 layout: default
-title: EzSign - Components
+title: Components
 parent: Overview
 nav_order: 10
 grand_parent: EzSign

@@ -1,6 +1,6 @@
 ---
 layout: default
-title: EzSign Sample Properties
+title: Sample Properties
 parent: Server Configuration
 nav_order: 20
 grand_parent: EzSign

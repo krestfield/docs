@@ -1,6 +1,6 @@
 ---
 layout: default
-title: EzSign - KeyVault Setup
+title: KeyVault Setup
 parent: HSMs & Key Stores
 nav_order: 100
 grand_parent: EzSign

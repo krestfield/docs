@@ -1,6 +1,6 @@
 ---
 layout: default
-title: EzSign - HSM Support
+title: HSM Support
 parent: HSMs & Key Stores
 nav_order: 10
 grand_parent: EzSign

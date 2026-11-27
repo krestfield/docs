@@ -1,6 +1,6 @@
 ---
 layout: default
-title: EzSign Release Note
+title: Release Note
 parent: EzSign
 nav_order: 900
 ---

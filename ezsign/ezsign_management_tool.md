@@ -1,6 +1,6 @@
 ---
 layout: default
-title: EzSign - Management Tool
+title: Management Tool
 parent: Overview
 nav_order: 50
 grand_parent: EzSign

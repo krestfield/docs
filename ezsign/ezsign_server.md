@@ -1,6 +1,6 @@
 ---
 layout: default
-title: EzSign - Server
+title: Server
 parent: Overview
 nav_order: 20
 grand_parent: EzSign

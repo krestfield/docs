@@ -1,6 +1,6 @@
 ---
 layout: default
-title: EzSign Service - version 1.4
+title: Windows Service - Version 1.4
 parent: Installation & Upgrading
 nav_order: 50
 grand_parent: EzSign

@@ -1,6 +1,6 @@
 ---
 layout: default
-title: EzSign - REST API
+title: REST API
 parent: Integration & APIs
 nav_order: 30
 grand_parent: EzSign

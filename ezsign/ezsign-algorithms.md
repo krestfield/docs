@@ -1,6 +1,6 @@
 ---
 layout: default
-title: EzSign Algorithms
+title: Algorithms
 parent: Overview
 nav_order: 60
 grand_parent: EzSign

@@ -1,6 +1,6 @@
 ---
 layout: default
-title: Certdog YubiHSM 2 Configuration
+title: YubiHSM 2 Configuration
 parent: Certificate Issuers
 grand_parent: Certdog
 ---

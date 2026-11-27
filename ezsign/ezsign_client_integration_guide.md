@@ -1,6 +1,6 @@
 ---
 layout: default
-title: EzSign - Client Integration Guide
+title: Client Integration Guide
 parent: Integration & APIs
 nav_order: 10
 grand_parent: EzSign

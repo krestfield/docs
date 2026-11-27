@@ -1,6 +1,6 @@
 ---
 layout: default
-title: EzSign - .NET Client Integration Guide
+title: .NET Client Integration Guide
 parent: Integration & APIs
 nav_order: 20
 grand_parent: EzSign

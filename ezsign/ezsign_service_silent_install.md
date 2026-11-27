@@ -1,6 +1,6 @@
 ---
 layout: default
-title: EzSign Service - Silent Installation
+title: Windows Service - Silent Installation
 parent: Installation & Upgrading
 nav_order: 40
 grand_parent: EzSign

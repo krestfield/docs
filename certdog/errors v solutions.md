@@ -1,6 +1,6 @@
 ---
 layout: default
-title: Certdog Errors and Solutions
+title: Errors and Solutions
 parent: Troubleshooting
 grand_parent: Certdog
 ---

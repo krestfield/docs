@@ -1,6 +1,6 @@
 ---
 layout: default
-title: Certdog Venafi Integration
+title: Venafi Integration
 parent: API & Automation
 grand_parent: Certdog
 ---

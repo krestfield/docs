@@ -2,7 +2,7 @@
 layout: default
 title: EzSign Release Note
 parent: EzSign
-nav_order: 99
+nav_order: 340
 ---
 
 # RELEASE NOTE

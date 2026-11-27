@@ -2,7 +2,7 @@
 layout: default
 title: Publishing Certs to Active Directory
 parent: General PKI
-nav_order: 61
+nav_order: 60
 ---
 
 

@@ -2,7 +2,7 @@
 layout: default
 title: EzSign - Components
 parent: EzSign
-nav_order: 3
+nav_order: 30
 ---
 # EzSign Components
 

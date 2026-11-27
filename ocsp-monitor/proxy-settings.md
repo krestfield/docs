@@ -2,7 +2,7 @@
 layout: default
 title: Proxy Settings
 parent: CRL OCSP Monitor
-nav_order: 6
+nav_order: 70
 ---
 
 # CRL OCSP Monitor - Proxy Settings

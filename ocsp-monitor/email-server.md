@@ -2,7 +2,7 @@
 layout: default
 title: Email Server Settings
 parent: CRL OCSP Monitor
-nav_order: 5
+nav_order: 50
 ---
 
 # CRL OCSP Monitor - Email Server Settings

@@ -2,7 +2,7 @@
 layout: default
 title: EzSign - Control
 parent: EzSign
-nav_order: 6
+nav_order: 70
 ---
 # EzSign Control
 

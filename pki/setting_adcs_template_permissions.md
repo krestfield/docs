@@ -2,7 +2,7 @@
 layout: default
 title: Setting Microsoft ADCS CA and Template Permissions
 parent: General PKI
-nav_order: 7
+nav_order: 10
 ---
 
 # Setting Microsoft ADCS CA and Template Permissions

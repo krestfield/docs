@@ -2,7 +2,7 @@
 layout: default
 title: EzSign - Server
 parent: EzSign
-nav_order: 4
+nav_order: 40
 ---
 # EzSign Server
 

@@ -2,7 +2,7 @@
 layout: default
 title: Setting up Microsoft Teams Alerts
 parent: CRL OCSP Monitor
-nav_order: 10
+nav_order: 100
 ---
 
 # Setting up Microsoft Teams Alerts

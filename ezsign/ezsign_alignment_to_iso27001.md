@@ -2,7 +2,7 @@
 layout: default
 title: EzSign - Alignment to ISO 27001
 parent: EzSign
-nav_order: 97
+nav_order: 320
 ---
 
 # EzSign Alignment to ISO 27001

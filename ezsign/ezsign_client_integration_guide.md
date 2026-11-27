@@ -2,7 +2,7 @@
 layout: default
 title: EzSign - Client Integration Guide
 parent: EzSign
-nav_order: 11
+nav_order: 90
 ---
 
 # Client Integration Guide

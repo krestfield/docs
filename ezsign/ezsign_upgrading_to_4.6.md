@@ -2,7 +2,7 @@
 layout: default
 title: EzSign - Upgrading to 4.6
 parent: EzSign
-nav_order: 98
+nav_order: 330
 ---
 
 # Upgrading to EzSign 4.6

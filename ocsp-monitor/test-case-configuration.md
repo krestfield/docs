@@ -2,7 +2,7 @@
 layout: default
 title: Test Case Configuration
 parent: CRL OCSP Monitor
-nav_order: 2
+nav_order: 20
 ---
 
 # CRL OCSP Monitor - Test Case Configuration

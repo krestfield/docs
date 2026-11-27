@@ -2,7 +2,7 @@
 layout: default
 title: Certificate DNs
 parent: General PKI
-nav_order: 41
+nav_order: 40
 ---
 
 # Certificate DNs

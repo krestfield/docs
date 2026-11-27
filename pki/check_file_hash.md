@@ -2,7 +2,7 @@
 layout: default
 title: Checking File Hashes
 parent: General PKI
-nav_order: 101
+nav_order: 80
 ---
 
 # Checking File Hashes

@@ -2,7 +2,7 @@
 layout: default
 title: Export a non-exportable certificate
 parent: General PKI
-nav_order: 51
+nav_order: 50
 ---
 # Exporting a non-exportable certificate (Microsoft)
 

@@ -2,7 +2,7 @@
 layout: default
 title: Create a PFX
 parent: General PKI
-nav_order: 22
+nav_order: 20
 ---
 
 # Create a PFX

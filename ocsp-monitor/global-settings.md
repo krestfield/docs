@@ -2,7 +2,7 @@
 layout: default
 title: Global Settings
 parent: CRL OCSP Monitor
-nav_order: 7
+nav_order: 80
 ---
 
 # CRL OCSP Monitor - Global Settings

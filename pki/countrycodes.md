@@ -2,7 +2,7 @@
 layout: default
 title: Country Codes
 parent: General PKI
-nav_order: 2000
+nav_order: 90
 ---
 # ISO 3166 Country Codes
 

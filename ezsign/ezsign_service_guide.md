@@ -2,7 +2,7 @@
 layout: default
 title: EzSign Service Guide
 parent: EzSign
-nav_order: 27
+nav_order: 190
 ---
 
 # EzSign Service Guide

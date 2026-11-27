@@ -2,7 +2,7 @@
 layout: default
 title: EzSign Properties
 parent: EzSign
-nav_order: 10
+nav_order: 80
 ---
 
 # EzSign Properties

@@ -2,7 +2,7 @@
 layout: default
 title: EzSign Service - version 1.4
 parent: EzSign
-nav_order: 26
+nav_order: 180
 ---
 
 # EzSign Service - Version 1.4

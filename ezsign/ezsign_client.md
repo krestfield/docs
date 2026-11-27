@@ -2,7 +2,7 @@
 layout: default
 title: EzSign - Client
 parent: EzSign
-nav_order: 5
+nav_order: 50
 ---
 # EzSign Client
 

@@ -2,7 +2,7 @@
 layout: default
 title: Viewing Logs
 parent: CRL OCSP Monitor
-nav_order: 5
+nav_order: 60
 ---
 
 # CRL OCSP Monitor - Viewing Logs

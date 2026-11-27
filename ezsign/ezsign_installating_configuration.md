@@ -2,7 +2,7 @@
 layout: default
 title: EzSign - Installation & Configuration
 parent: EzSign
-nav_order: 2
+nav_order: 10
 ---
 
 

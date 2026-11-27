@@ -140,7 +140,8 @@ These are each discussed further below
 When **Obtain Approval** is selected, the *Approval From* options are:
 
 * **Any Admin**
-  * If this option is chosen, any Administrator will be able to approve the request
+  * If this option is chosen, any Administrator (a member of a team with the *Global Admin* role) will be able to approve the request
+  * From version 1.18, this option is only available for existing workflows that already use it (it is shown as *Any Admin (legacy)*). For new workflows, choose **Team** and select the teams whose members should approve (for example your administrator team, or a team with the *Request Approver* role)
 
 * **User**
   * Click **Select Users** and select one or more Users who can approve the request
@@ -151,6 +152,8 @@ When **Obtain Approval** is selected, the *Approval From* options are:
 Note: That that the same user cannot approve their own requests, even if they meet the approval criteria. For example if an Administrator makes a request and approval is set to be from *Any Administrator*, another Administrator must still approve  
 
 Approvers will be sent an email asking for their approval. Your approval requests and requests you are able to approve are available from the Approvals menu
+
+Note that to approve or reject requests, approvers must also have a role that permits this (e.g. *User*, *Request Approver* or *Global Admin*). See [Roles](roles.html)
 
 <u>Run Script</u>
 

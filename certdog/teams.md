@@ -7,17 +7,24 @@ grand_parent: Certdog
 
 # Teams
 
-Teams manage permissions to *Certificate Issuers*.  Users that are members of these teams inherit these permissions (in the same way as Groups and members of groups work in Active Directory)  
+Teams manage what users can do in certdog. Users that are members of these teams inherit the team's permissions (in the same way as Groups and members of groups work in Active Directory)  
+
+A team defines:
+
+* The **Roles** of its members. Roles define which operations members can carry out e.g. request certificates, approve requests or configure Certificate Issuers. See [Roles](roles.html)
+* The **Permitted Certificate Issuers**. The *Certificate Issuers* members can use  
 
 Teams can also restrict members from specific IP Addresses (or ranges of IP Addresses) and suppress email sending to its members  
 
-If the Team is marked as *Administrator* - all members of that team are Certdog Administrators  
+If the Team has the *Global Admin* role, all members of that team are Certdog Administrators and can manage all aspects of the system  
+
+Note: Prior to version 1.18, a team was either marked as *Administrator* or not. From version 1.18, *Administrator* teams have the *Global Admin* role and other teams have the *User* role. See [Roles](roles.html#upgrading-from-117)  
 
 Users can be members of multiple teams  
 
-By default, one team exists called *Admin Team* which is set as *Administrator*. The initial admin user is a member of this team meaning they can manage all aspects of the system  
+By default, one team exists called *Admin Team* which has the *Global Admin* role. The initial admin user is a member of this team meaning they can manage all aspects of the system  
 
-You may add, remove or edit teams as per your requirements and make users members of as many teams as required.  Generally, it is advisable to maintain a single administrator team (rather than multiple). A typical administrator team, as well as having the *Administrator* option set, may also restrict IP Addresses to localhost (127.0.0.1) or specific IP Addresses, meaning that administrators can only authenticate from the local machine or specific machines or networks, thus increasing security  
+You may add, remove or edit teams as per your requirements and make users members of as many teams as required.  Generally, it is advisable to maintain a single administrator team (rather than multiple). A typical administrator team, as well as having the *Global Admin* role, may also restrict IP Addresses to localhost (127.0.0.1) or specific IP Addresses, meaning that administrators can only authenticate from the local machine or specific machines or networks, thus increasing security  
 
 If you have configured Active Directory (so that users can authenticate to Certdog with their domain accounts), then you can also map Active Directory groups to a team (see more below)  
 
@@ -27,13 +34,27 @@ If you have configured Active Directory (so that users can authenticate to Certd
 
 Select **Teams** from the menu, click **Add New  Team**
 
-<img src=".\images\teams1.png" alt="New Team" style="zoom:80%;" />
+<img src="./images/teams_edit.png" alt="New Team" style="zoom:80%;" />
 
 Enter a **name** and optionally, a **description**  
 
-Select the **Certificate Issuers** that you want to be available to members of this team 
+**Roles**
 
-If you wish to make everyone in this team an administrator, select the **Administrator** option
+Select the **Roles** for members of this team from the *Add a role...* list. A team must have at least one role. New teams start with the *User* role, which can be removed once another role has been added. To remove a role, click the **x** next to it  
+
+If you wish to make everyone in this team an administrator, add the **Global Admin** role  
+
+The *Effective permissions* panel shows what members of the team will be able to do with the selected roles combined, including the [Additional Permissions](roles.html#additional-permissions) (what certificates they can see, whether they can revoke others' certificates and whether they can bypass workflows):
+
+<img src="./images/teams_roles.png" alt="Team Roles" style="zoom:80%;" />
+
+Note that if a user is a member of several teams, their permissions are combined across all of those teams. See [Combining Roles](roles.html#combining-roles)  
+
+Click **Manage roles** to view or create roles. See [Roles](roles.html)  
+
+**Permitted Certificate Issuers**
+
+Select the **Certificate Issuers** that you want to be available to members of this team. The certificate permissions in the team's roles (e.g. requesting or revoking certificates) only apply to these issuers  
 
 **Active Directory Groups**
 
@@ -41,7 +62,7 @@ If Active Directory has been configured you will also see the following option:
 
 <img src=".\images\ad_groups1.png" alt="Active Directory Groups" style="zoom:80%;" />
 
-This is where you can map Active Directory groups to this team. For example, if your PKI certificate security staff were all members of an Active Directory group called PKI_CERT_MANAGERS then you could specify that group here. If this Team had the Administrator option checked, then all the PKI certificate security staff would be administrators in Certdog  
+This is where you can map Active Directory groups to this team. For example, if your PKI certificate security staff were all members of an Active Directory group called PKI_CERT_MANAGERS then you could specify that group here. If this Team had the Global Admin role, then all the PKI certificate security staff would be administrators in Certdog  
 
 To select a group, click **Click to add groups**:
 
@@ -63,7 +84,7 @@ If OAuth has been configured you will also see the following option:
 
 ![image-20250919171159968](./images/image-20250919171159968.png)
 
-This is where you can map Entra ID groups to this team. For example, if your PKI certificate security staff were all members of an Entra ID Security group called PKI_CERT_MANAGERS then you could specify that group here. If this Team had the Administrator option checked, then all the PKI certificate security staff would be administrators in Certdog
+This is where you can map Entra ID groups to this team. For example, if your PKI certificate security staff were all members of an Entra ID Security group called PKI_CERT_MANAGERS then you could specify that group here. If this Team had the Global Admin role, then all the PKI certificate security staff would be administrators in Certdog
 
 To add, locate the required group in Entra ID and copy the ID. Paste this into the Add OAuth Group text box and click **Add**
 
@@ -117,11 +138,25 @@ Select the teams from the *Teams* list. Multiple teams may be selected (in windo
 
 Note that if a user is already a member of any teams their resulting permissions will be displayed beside *Current Certificate Issuers*. This view is only updated once the user has been added to a team (it will not change as you select the teams from the list)  
 
-If you wish  to change *your ow*n permissions
+If you wish  to change *your ow*n permissions (Global Admins only - other users that manage users and teams cannot change their own team memberships)
 
 1. Click the ![image-20210109153916067](./images/user_icon.png) icon and select **Profile**   
 
 2. Select the *Teams* you wish to be a member of 
 3. Click **Update**
 
-If a user is not a member of any Team, they will be able to logon to the system and view certificates but not request certificates nor make any changes to the system
+If a user is not a member of any Team, they are given the *User* role (as in previous versions). As they have no *Permitted Certificate Issuers*, they will be able to logon to the system and view certificates but not request certificates nor make any changes to the system  
+
+---
+
+### Who can Manage Teams
+
+Global Admins can manage all teams. Users with a role that includes the Teams end points (e.g. the *User Manager* role) can also manage teams, with some restrictions. For example, they cannot change a team they are a member of or a team that has the *Global Admin* role. See [Identity & Access](roles.html#identity--access)  
+
+---
+
+### REST API
+
+The roles of a team are given by the team's ``roleIds`` (the IDs of the roles). These can be set when adding or updating a team via the REST API (``POST /admin/teams/add`` or ``PATCH /admin/teams/{id}/update``). See [Roles](roles.html#rest-api)  
+
+The team's ``internalGroup`` value (``ADMIN`` or ``USER``) is still returned and accepted for compatibility with applications written for previous versions. It is ``ADMIN`` when the team has the Global Admin role

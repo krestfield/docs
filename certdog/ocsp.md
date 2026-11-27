@@ -28,7 +28,7 @@ Once **Add** (or **Update**) is clicked for the Local CA, the following will the
 * An OCSP Server. You can view configured servers from the *OCSP Servers* menu item
 * A Certificate Profile. This profile will be configured to issue OCSP signing certificates
 * A Certificate Issuer. This will combine the profile above with the local CA - so that the CA is able to issue OCSP signing certificates
-* A User and a Team. The user will be a member of the team and the team will only have permissions to request certificates from the Certificate Issuer mentioned above. The user account will be used by the OCSP server to authenticate to certdog and request a signing certificate
+* A User and a Team. The user will be a member of the team and the team will only have permissions to request certificates from the Certificate Issuer mentioned above. The user account will be used by the OCSP server to authenticate to certdog and request a signing certificate. The team is given the built-in *OCSP Service* role, which only permits requesting and renewing certificates. See [Service Roles](roles.html#service-roles)
 
 With the above items in place an OCSP server will automatically obtain a signing certificate from the CA. This certificate will also be auto-renewed  
 

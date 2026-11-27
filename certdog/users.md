@@ -9,7 +9,7 @@ grand_parent: Certdog
 
 A user can authenticate via the UI or to the API (See [REST API](rest_api_overview.html))  
 
-A user account can be a member of a team and, via the team permissions, then has access to specific Certificate Issuers  
+A user account can be a member of one or more teams and, via the team, has the permissions of the team's [Roles](roles.html) and access to the team's *Permitted Certificate Issuers*  
 
 The management of Active Directory users remains with Active Directory - you cannot edit those accounts here, although when an AD user logs in, their account will show up in the list of users  
 
@@ -17,7 +17,7 @@ Users may also be sent emails on certificate issuance and reminders when certifi
 
 ---
 ### Creating a User Account
-As an administrator, select **Users** from the menu  
+As an administrator (or a user whose role permits managing users e.g. *User Manager*), select **Users** from the menu  
 
 Click **Add New User**  
 
@@ -31,7 +31,7 @@ See [Email Settings](email_settings.html) to edit the message that is sent to th
 
 You can also just set a password manually and also have the option at any time of selecting the **Force change at next login**
 
-Choose the team(s) to add the user to. Note that if no team is chosen, the user will be able to login but will be unable to request any certificates as *Certificate Issuer* permissions are managed at the team level  
+Choose the team(s) to add the user to. What the user can do is determined by the [Roles](roles.html) of these teams. Note that if no team is chosen, the user will be able to login but will be unable to request any certificates as *Certificate Issuer* permissions are managed at the team level  
 
 Click **Add**  
 
@@ -55,11 +55,27 @@ Editing a user also displays the last login time and IP address
 
 If the account is an Active Directory you will be unable to make any changes as all details are managed by Active Directory
 
+**Can Bypass Interruptible Workflows**
+
+This option allows the user to bypass interruptible [workflows](workflows.html) when calling the API. It is kept for compatibility with previous versions. From version 1.18 it is preferable to allow this in a role (see [Additional Permissions](roles.html#additional-permissions)) so it applies to all members of a team. A user can bypass interruptible workflows if this option is set on their account or if any of their roles allow it
+
+**Users Managed by non-Administrators**
+
+Users with a role that permits managing users (e.g. *User Manager*) but who are not *Global Admins* cannot:
+
+* Change their own account (other than via their own profile e.g. changing their password)
+* Add users to, or remove users from, teams they are a member of or teams that have the *Global Admin* role
+* Update, reset the password of, disable, delete or create API tokens for *Global Admin* users
+
+There must always be at least one enabled Global Admin. The last enabled Global Admin cannot be disabled or deleted  
+
+See [Identity & Access](roles.html#identity--access) for more details
+
 ---
 
 ### API Tokens
 
-**Note**: Only Administrators can create tokens. However, users are able to revoke their own tokens.
+**Note**: Only Administrators (or users whose role permits creating API tokens e.g. *User Manager*) can create tokens. However, users are able to revoke their own tokens.
 
 API tokens can be issued from user accounts. These can then be supplied to applications that need to call the REST API and remove the need to first login with a username and password, as the token is simply supplied in the Authorization header element  
 
@@ -75,7 +91,9 @@ Note: **This value will only be displayed once** and cannot be retrieved later i
 
 This value must then be included in the Authorization header when making REST API calls
 
-Note, it is linked with the user account so has the same permissions (access to Certificate Issuers) and restrictions (IP Addresses)  
+Note, it is linked with the user account so has the same permissions (the roles and Certificate Issuers of the user's teams) and restrictions (IP Addresses)  
+
+Because a token allows the holder to act as the user, users that are not *Global Admins* cannot create tokens for *Global Admin* users
 
 If a token is no longer required or has been compromised, it may be revoked  
 

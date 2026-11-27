@@ -3,6 +3,8 @@ layout: default
 title: Signature Toolkit
 nav_order: 30
 has_children: true
+icon: document
+tagline: PKCS#7 / CMS signatures
 ---
 # Signature Toolkit
 

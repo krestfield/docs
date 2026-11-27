@@ -5,6 +5,8 @@ nav_order: 90
 has_children: true
 permalink: /security/
 keywords: ["vulnerability", "CVE", "advisory", "security bulletin"]
+icon: shield
+tagline: Vulnerability notices
 ---
 
 # Security Advisories

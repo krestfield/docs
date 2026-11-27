@@ -3,6 +3,8 @@ layout: default
 title: CRL OCSP Monitor
 nav_order: 40
 has_children: true
+icon: pulse
+tagline: CRL and OCSP monitoring
 ---
 # CRL OCSP Monitor
 

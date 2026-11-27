@@ -1,0 +1,73 @@
+# Krestfield branding and links used by the theme's header, footer and sidebar.
+
+company: Krestfield Limited
+tagline: PKI, certificate management and digital signing software.
+website: https://www.krestfield.com
+
+logo_on_dark: /assets/images/krestfield-wordmark-white.svg
+apple_touch_icon: /assets/images/apple-touch-icon.png
+
+# Links on the right of the top bar. `button: true` shows a link as an outlined button.
+header_links:
+  - title: Support
+    url: https://www.krestfield.com/support
+  - title: krestfield.com
+    url: https://www.krestfield.com
+    button: true
+
+# Box under "On this page" in the right-hand column
+help:
+  title: Need help?
+  text: Our engineers can help with installation, integration and troubleshooting.
+  link: Contact support
+  url: https://www.krestfield.com/support
+
+footer_columns:
+  - title: Products
+    links:
+      - title: Certdog
+        url: https://www.krestfield.com/certdog
+      - title: EzSign
+        url: https://www.krestfield.com/ezsign
+      - title: Signature Toolkit
+        url: https://www.krestfield.com/signature-toolkit
+      - title: CRL OCSP Monitor
+        url: https://www.krestfield.com/crlocspmonitor
+  - title: Documentation
+    links:
+      - title: Certdog
+        url: /certdog/certdog.html
+      - title: EzSign
+        url: /ezsign/ezsign.html
+      - title: General PKI
+        url: /pki/general_pki.html
+      - title: Security advisories
+        url: /security/
+  - title: Company
+    links:
+      - title: About us
+        url: https://www.krestfield.com/aboutus
+      - title: Blog
+        url: https://www.krestfield.com/blog
+      - title: Contact
+        url: https://www.krestfield.com/contact
+  - title: Support
+    links:
+      - title: support@krestfield.com
+        url: mailto:support@krestfield.com
+      - title: Support
+        url: https://www.krestfield.com/support
+      - title: Certdog downloads
+        url: /certdog/download-locations.html
+
+# Icons available: youtube, facebook, x
+social:
+  - name: YouTube
+    url: https://www.youtube.com/krestfield
+    icon: youtube
+  - name: Facebook
+    url: https://www.facebook.com/krestfield
+    icon: facebook
+  - name: X
+    url: https://x.com/Krestfield1
+    icon: x

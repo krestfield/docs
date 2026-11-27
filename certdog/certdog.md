@@ -3,6 +3,8 @@ layout: default
 title: Certdog
 nav_order: 10
 has_children: true
+icon: certificate
+tagline: Certificate management
 ---
 # Certdog
 

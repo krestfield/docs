@@ -3,6 +3,8 @@ layout: default
 title: EzSign
 nav_order: 20
 has_children: true
+icon: signature
+tagline: Signing and encryption server
 ---
 # EzSign
 

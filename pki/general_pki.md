@@ -3,6 +3,8 @@ layout: default
 title: General PKI
 nav_order: 80
 has_children: true
+icon: book
+tagline: Guides and reference
 ---
 
 # General PKI

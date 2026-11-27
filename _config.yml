@@ -7,12 +7,24 @@ plugins:
 title: Krestfield Knowledge
 description: All product guides and documents
 color_scheme: krestfield
-logo: "/assets/images/krestfield.png"
+logo: "/assets/images/krestfield-wordmark.svg"
 search_enabled: true
 search:
   # Index each ### heading as its own search result, so results link
   # straight to the relevant section (e.g. individual errors)
   heading_level: 3
+  # Ctrl+K (Cmd+K on a Mac) jumps to the search box
+  focus_shortcut_key: "k"
 
 # Sort pages without a nav_order alphabetically, ignoring case
 nav_sort: case_insensitive
+
+# Language of the pages (British English)
+lang: en-GB
+
+# "Edit this page on GitHub" link at the foot of each page
+gh_edit_repository: "https://github.com/krestfield/docs"
+gh_edit_branch: "gh-pages"
+
+# Code blocks get a copy button
+enable_copy_code_button: true

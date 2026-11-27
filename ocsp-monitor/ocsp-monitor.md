@@ -8,7 +8,7 @@ tagline: CRL and OCSP monitoring
 ---
 # CRL OCSP Monitor
 
-> This product has been replaced the [Revocation Monitor functionality now available in certdog]([Revocation Monitor - Certdog | Krestfield Knowledge](https://krestfield.github.io/docs/certdog/revocation_monitor.html))
+> This product has been replaced by the [Revocation Monitor functionality now available in certdog](../certdog/revocation_monitor.html)
 >
 > Existing customers will be offered a certdog license as a replacement from 2027
 

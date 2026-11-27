@@ -1,6 +1,6 @@
 ---
 layout: landing
-title: Knowledge Base
+title: Home
 nav_order: 1
 hero:
   eyebrow: Krestfield Documentation

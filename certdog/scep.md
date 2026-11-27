@@ -52,7 +52,7 @@ Click **Add New SCEP Service**:
 
 * **Certdog API URL**: This will be pre-populated but should be the URL to the certdog API that will provide the certificates. If certdog is clustered then this may be different to what is automatically populated and should be updated manually
 
-* **Auto Generate Credentials**. If this is checked (the default), then a new user and team will be created, dedicated for this SCEP service. All certificates issued from the service will be associated with this user and team. If this is unchecked then the Certdog Team ID and Certdog User ID fields will be made available and you can enter the values for an existing user and team
+* **Auto Generate Credentials**. If this is checked (the default), then a new user and team will be created, dedicated for this SCEP service. All certificates issued from the service will be associated with this user and team. If this is unchecked then the Certdog Team ID and Certdog User ID fields will be made available and you can enter the values for an existing user and team. The created team is given the built-in *SCEP Service* role. If you use an existing team, it must have a role that permits the calls the SCEP server makes (e.g. the *SCEP Service* role). See [Service Roles](roles.html#service-roles)
 
 <br>
 
@@ -239,6 +239,8 @@ You may notice requests being marked for approval or denied despite trusted cert
 This can happen if your SCEP user does not have the required permissions to bypass workflows, resulting in all requests (even authorised requests) getting stopped by the workflow which flags them for approval.
 
 To fix this, select **Users** from the menu, select your user, click **View/Edit**, check **Can Bypass Interruptible Workflows**, and then click "Update".
+
+Alternatively, from version 1.18, create a role with **Bypass Interruptible Workflows** set (see [Roles](roles.html#additional-permissions)) and add it to the SCEP user's team.
 
 <br>
 

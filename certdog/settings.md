@@ -53,9 +53,16 @@ The settings can be viewed by selecting the **Settings > Settings** option on th
 
   * Note that even if users can see the certificates, they can only download keys associated with a certificate (PKCS#12, JKS, PEM etc.) they are the owner
 
+  * From version 1.18 this can also be set per role (see [Roles](roles.html#additional-permissions)). Roles set to *Use global setting* (the default) use this value
+
 * Can Revoke Others
   * Only available if *Teams Certificates* or *All Certificates* are chosen for *Users can see*
   * With this option switched off, users can only revoke their own certificates, regardless of whether they can view their teams or all certificates. When checked, they are also permitted the revoke any certificates they have visibility of
+  * From version 1.18 this can also be set per role (see [Roles](roles.html#additional-permissions)). Roles set to *Use global setting* (the default) use this value
+
+* Enforce Role Separation
+  * Off by default. When switched on, users whose teams give them *Identity & Access* permissions (managing users, teams, roles or Active Directory settings) together with any other permissions are refused access. Global Admins are not affected
+  * See [Roles](roles.html#identity--access) for more details
 
 <br>
 
@@ -89,7 +96,7 @@ The settings can be viewed by selecting the **Settings > Settings** option on th
 <br>
 
   * Failed Login Attempts
-    * This setting determines how many failed logins are permitted before before the account is locked (for standard user accounts) or starts to out be levied with a delay (for Administrator accounts)
+    * This setting determines how many failed logins are permitted before before the account is locked (for standard user accounts) or starts to out be levied with a delay (for Administrator accounts i.e. members of a team with the *Global Admin* role)
 
   * Locked Admin Account Delay
     * This setting applies to Administrator accounts only. Administrator accounts do not get locked out completely but they start to experience delays between logon attempts. This is the delay period that is applied after an Administrator account fails to logon after *Failed Login Attempts*

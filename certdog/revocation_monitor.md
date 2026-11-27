@@ -344,7 +344,7 @@ Each update shows as unread again. The notification is removed when the monitor 
 
 ## The Dashboard
 
-Administrators see the Revocation Monitor on the certdog **Dashboard**: a summary of passing and failing monitors, and the status of each monitor over the last 24 hours (one square per hour), with what expires next and recent changes:
+Administrators (and users whose roles permit viewing revocation monitors e.g. *CA Manager* or *Auditor*) see the Revocation Monitor on the certdog **Dashboard**: a summary of passing and failing monitors, and the status of each monitor over the last 24 hours (one square per hour), with what expires next and recent changes:
 
 <img src="./images/revmon_dashboard.png" alt="Revocation monitoring on the Dashboard" style="zoom:67%;" />
 

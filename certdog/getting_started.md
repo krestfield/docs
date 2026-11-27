@@ -41,7 +41,7 @@ Issue a certificate as [described here](issuing-a-certificate.html)
 
 Consider how you want users to authenticate to the system. You can use:
 
-* [Local Users](users.html), and manage permissions via [Teams](teams.html)
+* [Local Users](users.html), and manage permissions via [Teams](teams.html) and [Roles](roles.html)
 * [Integrate with Active Directory](active_directory_integration.html)
 * [Use OAuth 2.0 and OIDC with Azure EntraID](oauth_integration.html)
 

@@ -17,7 +17,7 @@ A user that has permissions on an issuer is able to request and revoke certifica
 
 
 
-You must be an Administrator to perform this step. If you are not then you must request that an Administrator update your account with the required permissions, as detailed below
+You must be an Administrator (or have a role that permits managing teams e.g. *User Manager*) to perform this step. If you are not then you must request that an Administrator update your account with the required permissions, as detailed below
 
 
 
@@ -46,7 +46,7 @@ Click on the *team* you wish to update and click **Edit**
 
 Select the required **Certificate Issuers** from the *Permitted Certificate Issuers* section and click **Update**
 
-Now any members of this team will be able to manage certificates (request and revoke) for the certificate issuers chosen  
+Now any members of this team will be able to manage certificates for the certificate issuers chosen. What they can do with those certificates (e.g. request, renew or revoke) is determined by the team's [Roles](roles.html)  
 
 
 

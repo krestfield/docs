@@ -390,7 +390,7 @@ The log.txt file contains errors and event information from the run. The failed-
 
 See here: [https://krestfield.github.io/docs/certdog/teams.html](https://krestfield.github.io/docs/certdog/teams.html) for details on how to add a new team.  
 
-Do not set the team to be an Administrator and there is no need to specify any Certificate Issuers. The Team will not need any specific permissions.
+Do not give the team the *Global Admin* role and there is no need to specify any Certificate Issuers. The Team will not need any specific permissions.
 
 See here: [https://krestfield.github.io/docs/certdog/users.html](https://krestfield.github.io/docs/certdog/users.html) for details on how to add a new user. Add this user to the team created above. 
 

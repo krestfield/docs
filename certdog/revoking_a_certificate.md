@@ -21,8 +21,6 @@ Within the certificate details view, Click **More Details** then click **Click t
 
 <img src=".\images\revoke_cert_details.png" alt="image-20211110170215078" style="zoom:80%;" /> 
 
-
-
 The following will appear:
 
 <img src=".\images\revoke_cert_details2.png" alt="image-20211110170301677" style="zoom:80%;" />

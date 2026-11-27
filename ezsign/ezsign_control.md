@@ -7,8 +7,6 @@ grand_parent: EzSign
 ---
 # EzSign Control
 
-<br>
-
 The Control utility connects to the running server on the specified control port and enables the live monitoring of the server status (running or stopped), the pausing and resuming of the server and the ability to alter the logging level whilst the server is running
 
 Run the ``ezsign-server-ctrl`` script to start the EzSign Control utility
@@ -44,15 +42,11 @@ To obtain the running status of the server:
 ezsign-server-ctrl 127.0.0.1 5657 status
 ```
 
-
-
 To pause the server:
 
 ```
 ezsign-server-ctrl 127.0.0.1 5657 pause
 ```
-
-
 
 To resume the server
 
@@ -60,21 +54,14 @@ To resume the server
 ezsign-server-ctrl 127.0.0.1 5657 resume
 ```
 
-
-
 To shut down the server process
 
 ```
 ezsign-server-ctrl 127.0.0.1 5657 stopdaemon
 ```
 
-
-
 To change the log level
 
 ```
 ezsign-server-ctrl 127.0.0.1 5657 loglevel=3
 ```
-
-
-

@@ -9,8 +9,6 @@ keywords: ["OCSP responder", "revocation status", "RFC 6960"]
 
 > From version: 1.8.0
 
-<br>
-
 Certdog can provide OCSP services for local CAs and external CAs (e.g. Microsoft AD CS)  
 
 When using OCSP services for local CAs, certdog can setup all of the components required to enable automatic issuance of an OCSP signing certificate, and retrieval of the certificate status. Users just need to select the **Create OCSP Server** option when creating (or editing) a Local CA  
@@ -18,8 +16,6 @@ When using OCSP services for local CAs, certdog can setup all of the components 
 When using OCSP services for external CAs, users must create the OCSP configuration manually 
 
 The OCSP signing certificate can be obtained automatically from a CA that certdog connects to, or, from version 1.18.0, issued by an external CA that certdog is not connected to (see [Signing Certificate from an External CA](#signing-certificate-from-an-external-ca)). This allows certdog to provide OCSP services for CAs it does not control
-
-<br>
 
 ### Configuration for an Internal CA  
 
@@ -40,8 +36,6 @@ Certificate status will be obtained from the internal database meaning this info
 
 You may edit the OCSP settings my clicking on the **OCSP Servers** menu then selecting the OCSP server (see [OCSP Server Settings](#ocsp-server-settings) for the specific settings)
 
-<br>
-
 ### Configuration for an External CA 
 
 For external CAs (e.g. a Microsoft AD CS instance) an OCSP server must be manually created. to do this from the OCSP Servers menu, click **Add New OCSP Server** then complete following the [OCSP Server Settings](#ocsp-server-settings) section below  
@@ -51,13 +45,9 @@ The OCSP signing certificate can be obtained in one of two ways:
 * **Managed CA (certdog issuer)** - if the CA is configured in certdog as a Certificate Issuer, the OCSP server obtains its signing certificate through certdog and renews it automatically
 * **External CA (Generate a CSR)** - if certdog is not connected to the CA, certdog generates a CSR, you have the certificate issued by the CA, and then import it. See [Signing Certificate from an External CA](#signing-certificate-from-an-external-ca)
 
-<br>
-
 ### OCSP Server Settings
 
 The following settings are available for each OCSP Server
-
-<br>
 
 <img src=".\images\ocsp1.png" alt="image-20230223092728625" style="zoom:80%;" />
 
@@ -66,15 +56,11 @@ The following settings are available for each OCSP Server
 * Enabled
   * If not enabled the OCSP server will not process any OCSP requests. Unauthorized will be returned
 
-<br>
-
 <u>Status Source Location</u>
 
 This is where the information about the certificate status (good or revoked) will be obtained. Options are to retrieve from the internal database (for local CAs) or from CRL files
 
 This can be set to one of the following
-
-<br>
 
 **Local CA (database)**
 
@@ -89,8 +75,6 @@ Note: This option is not available when the signing certificate is obtained from
 * Local CA
 
   Select the local CA from the drop down list
-
-<br>
 
 **Local CRL File**
 
@@ -113,8 +97,6 @@ If you choose this option you must then set the following options
 
   Click Browse.. to navigate to this certificate. This file can be uploaded from your local machine and does not need to reside on the certdog server
 
-<br>
-
 **CRL URL**
 
 Obtain status from a CRL hosted at an http address
@@ -134,8 +116,6 @@ If you choose this option you must then set the following options
   The certificate of the CA that this OCSP server is providing information for
 
   Click Browse.. to navigate to this certificate. This file can be uploaded from your local machine and does not need to reside on the certdog server
-
-<br>
 
 <u>Signing Certificate Details</u>
 
@@ -179,8 +159,6 @@ The following settings apply when the signing certificate is from a **Managed CA
   * This option is only visible once a certificate has been issued
   * If this option is checked, the current OCSP signing certificate will be renewed at the next expiry check (which by default is every minute) whether it is currently expiring or not. Check this option if you have made changes to the certificate details such as Certificate Issuer or Signing Cert DN and wish to force a renewal 
 
-<br>
-
 <u>Key Store and Signing Algorithm Details</u>
 
 <img src=".\images\ocsp6.png" alt="image-20230223094839265" style="zoom:80%;" />
@@ -197,11 +175,7 @@ The following settings apply when the signing certificate is from a **Managed CA
 * Hash Algorithm
   * This is the hash algorithm that will be used when signing OCSP responses and not the algorithm that will be included in the signing certificate (as this is dictated by the issuing CA). Some systems require a specific hashing algorithm to be configured
 
-<br>
-
 <u>Other Settings</u>
-
-
 
 <img src=".\images\ocsp7.png" alt="Other Settings" style="zoom:80%;" />
 
@@ -223,13 +197,9 @@ The following settings apply when the signing certificate is from a **Managed CA
 * Time Skew
   * If there are any clock deviations between clients and the OCSP Server, you may set this value to allow a time skew (in seconds). E.g. if you set this value to 5 then the produced at date of the OCSP response will be NOW minus 5 seconds and the response's expiry date (Next Update) will be EXPIRY TIME plus 5 seconds
 
-<br>
-
 ### Signing Certificate from an External CA
 
 > From version: 1.18.0
-
-<br>
 
 If certdog is not connected to the CA that the OCSP server provides status for, the OCSP signing certificate can be issued by that CA from a CSR that certdog generates. The certificate is then imported into certdog and the OCSP server signs responses with it
 
@@ -238,8 +208,6 @@ Note the following:
 * The status must come from the CA's CRL (**Local CRL File** or **CRL URL**). **Local CA (database)** is not available, as a Local CA issues its OCSP signing certificate automatically. If **External CA** is selected while the status source is Local CA (database), the status source is changed to CRL URL
 * The certificate is not renewed automatically. Before it expires, generate a new CSR and import the new certificate (see [Renewing the Certificate](#renewing-the-certificate) below). The certdog log records a warning when the certificate is nearing expiry
 * The key is generated in the Key Store selected in the [Key Store and Signing Algorithm Details](#ocsp-server-settings) section, using the Algorithm, Key Size or Curve set there. Set these before generating the CSR
-
-<br>
 
 <u>Generating the CSR</u>
 
@@ -267,8 +235,6 @@ The certificate issued by the CA should:
 
 The CSR remains on the OCSP server's page until a certificate is accepted, so you can return to it later. If you change the Key Store or algorithm settings while waiting for the certificate, the CSR is discarded and a new one must be generated
 
-<br>
-
 <u>Accepting the Certificate</u>
 
 1. Edit the OCSP server and click **Upload Certificate**. Select the certificate issued by the CA. This may be:
@@ -293,28 +259,20 @@ The CSR remains on the OCSP server's page until a certificate is accepted, so yo
 
 The certificate is imported into certdog (and is available from the **Current Signing Certificate** link) and the OCSP server begins signing responses with it once it reloads its configuration. If an issuer certificate was required, it is included in OCSP responses so that clients can verify the signing certificate
 
-<br>
-
 <u>Renewing the Certificate</u>
 
 Certificates from an external CA are not renewed automatically. To replace the certificate, edit the OCSP server and click **Generate New CSR**, then follow the steps above. The current certificate continues to be used until the new certificate is accepted
-
-<br>
 
 <u>Changing the Signing Certificate Source</u>
 
 * Changing from **Managed CA** to **External CA**: the current signing certificate continues to be used until a certificate from the external CA is accepted
 * Changing from **External CA** to **Managed CA**: the certdog URL, username, password and Certificate Issuer must be provided. A new certificate is obtained from the Certificate Issuer at the next check. The imported certificate is used until then
 
-<br>
-
 ### Operational Notes
 
 Although they run on the same server by default, OCSP Servers run independently of certdog. This is to allow for the OCSP Server to run on a separate machine to the certdog instances. E.g. you may wish to run your OCSP servers in a more accessible environment and load-balance
 
 It is for this reason that the certdog URL, Username and Password need to be set above - as the certdog instance providing the certificates may not always be on the same machine. These are not required when the signing certificate is from an External CA, as the OCSP server does not request it
-
-<br>
 
 ### OCSP End Point (AIA)
 
@@ -347,8 +305,6 @@ http://status.pki.com/certdog/ocsp
 ```
 
 Whatever location/URL you choose, this value must be added as the AIA OCSP Location for certificates issued from the CA. This value will be populated for you when you select the *Create OCSP Server* option for a Local CA, but if using an external CA this value must be set there
-
-<br>
 
 ### OCSP Certificate Profile
 

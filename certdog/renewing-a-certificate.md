@@ -7,13 +7,9 @@ grand_parent: Certdog
 
 # Renewing a Certificate
 
-
-
 From the *Certificate Details* view select **Actions** then click **Renew Now**:
 
 ![image-20211110171015934](./images/renew_cert1.png)
-
-
 
 Depending on how the certificate was originally generated you will be taken to either the CSR or DN renewal page:
 
@@ -28,4 +24,3 @@ Click **Renew Certificate**
 The new certificate will contain a field *Renews Certificate* when viewed in *Certificate Details*. Click this **ID** to navigate to the certificate that was renewed
 
 The renewed certificate will contain a field *Renewed By* which may also be selected
-

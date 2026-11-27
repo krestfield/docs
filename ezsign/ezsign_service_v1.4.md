@@ -8,8 +8,6 @@ grand_parent: EzSign
 
 # EzSign Service - Version 1.4
 
-
-
 ### Updates from V1.3
 
 * Bundles a supported java runtime
@@ -20,4 +18,3 @@ grand_parent: EzSign
 * SHA-3 and ECDSA support added
 * PayShield support improved
   * Support for Key Block and Variant LMKs added and the ability to choose which LMK to use
-

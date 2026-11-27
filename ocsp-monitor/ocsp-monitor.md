@@ -24,9 +24,6 @@ The Krestfield CRL OCSP Monitor is supported on the following operating systems:
 
 The server requires the .NET Framework version 4.8 or above
 
-<br>
-
 Need more info? Contact us at <support@krestfield.com>  
 
 Or take a look at our website: <https://www.krestfield.com/ocsp-monitor>
-

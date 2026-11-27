@@ -6,19 +6,13 @@ grand_parent: Certdog
 ---
 # Certdog Venafi Integration
 
-<br>
-
 Certdog can host multiple Certificate Authorities. Certificates from these CAs can then be managed via Venafi  
-
-<br>
 
 ## Pre-requisites
 
 Certdog is installed and configured such that it is able to issue certificates  
 
 There is connectivity between the Venafi server and the Certdog server. Venafi will make REST API calls to the Certdog server, by default these will be made over port 443 (TLS) so ensure that traffic is permitted from the Venafi server to the Certdog server over this port
-
-<br>
 
 ## Setup Steps
 
@@ -39,8 +33,6 @@ There is connectivity between the Venafi server and the Certdog server. Venafi w
 ![image-20220823163310851](./images/image-20220823163310851.png)
 
 * Verify that you can authenticate to Certdog with the venafi username and password (e.g. by logging on via the UI or REST API)  
-
-<br>
 
 #### Venafi Steps
 
@@ -104,8 +96,6 @@ If you have several Venafi engines capable of processing the script, the log fil
 
 You may also examine the logs from Certdog itself which may give more information about the error  
 
-<br>
-
 ### Alternative Teams
 
 If you want to use an existing user account and that user is a member of more than one team, edit the **Certdog.ps1** script, setting the ``$global:teamName`` variable to be the team you wish to be associated with certificates issued from Venafi e.g.:
@@ -115,14 +105,3 @@ $global:teamName = "Venafi Team"
 ```
 
 The updated script must then be re-copied to the Venafi engines
-
-<br>
-
-
-
-
-
-
-
-
-

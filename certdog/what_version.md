@@ -8,8 +8,6 @@ keywords: ["version number", "check version", "which version"]
 
 # What Version of Certdog am I Running
 
-
-
 ### UI and API Versions
 
 From the main user interface, when logged in you will see the version displayed in the footer:
@@ -19,8 +17,6 @@ From the main user interface, when logged in you will see the version displayed 
 To obtain further details, select **Management > Settings** from the menu. System Information will be displayed as follows:
 
 <img src=".\images\system_info.png" alt="image-20210111165904651" style="zoom:80%;" />
-
-<br>
 
 ### Database Version
 
@@ -45,8 +41,6 @@ replocal:PRIMARY>
 
 This will display the database version. In the example above this is **4.4.1**
 
-<br>
-
 ### ADCS Agent Version
 
 From *Add or remove program*s, search for **Certdog** under *Apps & features*  
@@ -69,6 +63,3 @@ Microsoft Visual C++ 2019 X64 Additional Runtime - 14.28.29325 14.28.29325
 Microsoft Visual C++ 2019 X64 Minimum Runtime - 14.28.29325    14.28.29325
 Certdog Service                                                1.3.0
 ```
-
-
-

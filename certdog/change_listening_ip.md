@@ -5,7 +5,6 @@ parent: Users & Security
 grand_parent: Certdog
 ---
 
-
 # Change Listening IP Address
 
 This document details how to configure the application so that the UI and API are accessible on either a specific IP address or all available IP addresses
@@ -35,8 +34,3 @@ This document details how to configure the application so that the UI and API ar
    ``[Install Location]\bin\stop-tomcat.ps1``
 
    ``[Install Location]\bin\start-tomcat.ps1``
-
-
-
-
-

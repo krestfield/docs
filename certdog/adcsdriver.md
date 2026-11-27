@@ -14,8 +14,6 @@ You have the option of installing this together with the other components but it
 
 Multiple instances of the driver can be installed in the same and different domains  
 
-<br>
-
 ## Requirements
 
 - Windows Server 2019, 2022
@@ -27,9 +25,6 @@ The server hosting the driver must be in the same domain as the Microsoft CA you
 You will normally require a service account with the required permissions to access your Microsoft CA. See the [Service Account](#service-account) section below  
 
 If you are running multiple drivers or the driver is not installed on the same machine, ensure that port 27017 is open to wherever the database is hosted i.e. the server hosting the database must allow incoming connections on port 27017 from the machine hosting the ADCS Driver  
-
-<br>
-
 
 ## Installation
 
@@ -76,8 +71,6 @@ Into the **Local Machine** **Trusted Root Certification Authorities** store. The
 
 If this does not resolve the issue, check that the main server's 27017 port can be accessed from this location and the database URL entered is correct
 
-<br>
-
 ### Upgrading
 
 * Start **Apps and Features**. Locate the **Certdog ADCS Driver** and select **Uninstall**
@@ -88,8 +81,6 @@ If this does not resolve the issue, check that the main server's 27017 port can 
 
 If after the upgrade, the driver shows as *unregistered* in the Certdog UI (under the *Agents* menu), re-register following the steps in [Registering the service](#registering-the-service) below
 
-<br>
-
 ## Service Account
 
 The Microsoft CA requires that the certificate requestor has the required permissions on the CA and certificate template in order to be issued with a certificate  
@@ -97,8 +88,6 @@ The Microsoft CA requires that the certificate requestor has the required permis
 See [here](https://krestfield.github.io/docs/pki/setting_adcs_template_permissions.html) for details around configuring permissions on the CA and templates  
 
 To configure these permissions on the ADCS Driver, you have the following options:
-
-<br>
 
 **<u>1. Configure a Credential from within Certdog</u>**
 
@@ -108,8 +97,6 @@ This account to be used to request the certificates is specified in Certdog as a
 
 The account must be a service account (configured with the *logon as a service* and *deny local logon* rights) and must have the correct permissions on the CA and template in order to be able to obtain a certificate    
 
-<br>
-
 **<u>2. Configure the ADCS Driver to run under a service account</u>**
 
 Alternatively you may configure the ADCS Driver to run under a specific account and configure your [Certificate Issuer](https://krestfield.github.io/docs/certdog/create_adcs_certificate_issuer.html) within Certdog to not specify a credential - but to use the account the local agent (i.e. the ADCS Service) is running under  
@@ -117,8 +104,6 @@ Alternatively you may configure the ADCS Driver to run under a specific account 
 To configure the driver to run under another account, from the services snapin, locate the *Krestfield Adcs Driver* service and enter the details for the account on the *Log On* tab. You will need to enter the account's username and password at this point 
 
 This account must still be a service account (configured with the *logon as a service* and *deny local logon* rights) and must have the correct permissions on the CA and template in order to be able to obtain a certificate    
-
-<br>
 
 **<u>1. Run under the LOCAL SYSTEM (Computer) account</u>**
 
@@ -128,11 +113,7 @@ In this case the Krestfield Adcs Driver service remains running under LOCAL SYST
 
 This means the ADCS Driver will make requests to the CA based on the account it is running under, which is the LOCAL SYSTEM (Computer) account
 
-<br>
-
 If you switch between these options (e.g. you decide to specify a credential within Certdog rather than run the service under a service account) the agent must be re-registered (see below)
-
-<br>
 
 ### Registering the Service
 
@@ -152,8 +133,6 @@ To reset, perform the following:
 
 * If you have existing Microsoft CA Certificate Issuers configured, for each one, click **Edit** and re-select the *Permitted Agents* (which in most cases will just be the one agent that was just approved)
 
-<br>
-
 ## Configuration in Certdog
 
 Once the service has been successfully installed to enable it for use within Certdog it must be approved as follows:  
@@ -166,11 +145,7 @@ Click this entry and select **Approve**
 
 The agent will now be able to process requests  
 
-<br>
-
 Note that when configuring a Certificate Issuer for a Microsoft CA you must select the agent that you want to process requests for that CA
-
-<br>
 
 ## Additional File Logging
 
@@ -191,11 +166,7 @@ Which is here in Windows Server 2019
 
 ``C:\ProgramData\Krestfield\AdcsAgent\log.txt``
 
-
-
 Note: This log provides debug level, verbose output and may be useful for tracing issues but the log file will continue to grow.  You should therefore, switch this level of logging off when not required
-
- <br>
 
 ## Threading
 
@@ -211,10 +182,3 @@ e.g.
 ![image-20201222143722766](./images/threadsenvvar.png) 
 
 Restart the Krestfield Adcs Driver from the services snapin  
-
- <br>
-
-
-
-
-

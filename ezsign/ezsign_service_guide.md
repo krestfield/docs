@@ -8,8 +8,6 @@ grand_parent: EzSign
 
 # EzSign Service Guide
 
-<br>
-
 # Introduction
 
 The **Krestfield EzSign Service** is a Windows Service that enables the management of multiple EzSign Server instances on the following Windows Server operating systems:
@@ -18,14 +16,10 @@ The **Krestfield EzSign Service** is a Windows Service that enables the manageme
 - Windows Server 2019
 - Windows Server 2025
 
-<br>
-
 # Prerequisites
 
 - **.NET Framework 4.8.1** or later
 - **Optional:** Java 8u241 or later. A Java runtime is bundled with the installer, but alternative Java installations may be used
-
-<br>
 
 # Updates from Previous Version
 
@@ -35,8 +29,6 @@ EzSign Service Installer v1.5 now includes:
 - Java **JDK 26**
 
 No additional components are required except the .NET runtime. Alternative EzSign or Java installations may still be used if preferred
-
-<br>
 
 # Installation
 
@@ -54,8 +46,6 @@ You will be guided through the installation steps, including selecting the insta
 C:\Program Files\Krestfield\EzSign Service\
 ```
 
-<br>
-
 EzSign components are installed under:
 
 ```
@@ -68,14 +58,10 @@ Management scripts are located at:
 [Install Location]\EzSign\EzSignServer\bin
 ```
 
-<br>
-
 After completing the wizard, the following components will be installed:
 
 - **EzSign Service Config** (management utility)
 - **Krestfield EzSign Service** (Windows Service)
-
-<br>
 
 # Using Previous Settings
 
@@ -87,15 +73,13 @@ To make use of any previous configurations, ensure that you copy across the Serv
 
 As well as the previous EzSign server configuration files (.properties files) and key store contents
 
-<br> If using an HSM, this must be configured as per previous instances and if any keys are stored on the HSM they must still be available to the EzSign instances. For nCipher Security World’s this will involve copying the remote file system from any old locations/servers to the new
+If using an HSM, this must be configured as per previous instances and if any keys are stored on the HSM they must still be available to the EzSign instances. For nCipher Security World’s this will involve copying the remote file system from any old locations/servers to the new
 
  If you have customised the logging, either replace, or update the log configuration file here:
 
 ```
 [Installation Directory]\EzSign\EzSignServer\logconf\log4j2.xml
 ```
-
-<br>
 
 # Configuration
 
@@ -106,8 +90,6 @@ Launch **EzSign Service Config** from the Start Menu or desktop shortcut
 The utility displays existing server configurations and allows you to add, edit, rename, or delete EzSign Server instances
 
 ![image-20261014144034606](./images/image-20261014144034606.png)
-
-<br>
 
 ## Adding a New Server
 
@@ -121,31 +103,23 @@ The utility displays existing server configurations and allows you to add, edit,
 
    ![image-20261014144108393](./images/image-20261014144108393.png)
 
-<br>
-
 ## Configuration Fields
 
 * Enabled
   * If checked, the server will start automatically when the EzSign Service starts
 
-<br>
-
 * Java Location
 
   - Automatically populated if `JAVA_HOME` is set
   
-  
   - Otherwise, browse to the Java installation directory
   - To use the bundled Java, select: ``[Install Location]\EzSign\EzSignServer\java\jdk-26.0.1``
-
 
   - EzSign Lib Folder
 
 * - Defaults to the installed EzSign library folder
 
   - May be updated to point to another EzSign installation
-
-<br>
 
 * Server IP Address
 
@@ -165,8 +139,6 @@ The utility displays existing server configurations and allows you to add, edit,
 
   - Must be unique and unused
 
-<br>
-
 * EzSign Properties File
 
   - Path to the server’s `.properties` configuration file
@@ -179,15 +151,11 @@ The utility displays existing server configurations and allows you to add, edit,
 
   - Defaults to the installation log directory
 
-<br>
-
 * EzSign Master Password
 
   - Required master password for the server
 
   - Defaults to `"password"` in test configurations
-
-<br>
 
 Click **Apply** to save changes. A message will confirm:
 
@@ -195,25 +163,15 @@ Click **Apply** to save changes. A message will confirm:
 
 Additional Servers may be added, listening on different interfaces and ports if required, all of which will be managed by the Service
 
-<br>
-
 To edit a Server, click the **Update** button, make the required changes and then click **Apply**. Note, any updates made will not come in to effect until the Service is restarted. To cancel updating (and revert to the settings before the update button was pressed), click **Cancel**
-
-<br>
 
 If you wish to rename a Server, click the **Server Rename** button:  ![image-20261014145258380](./images/image-20261014145258380.png)                            
 
-<br>
-
 To delete a Server, select the Server to delete and click the **Delete** button:  ![image-20261014145307859](./images/image-20261014145307859.png)
-
-<br>
 
 # Starting the Service
 
 To start the Service, click the **Start Service** button: ![image-20261014145350627](./images/image-20261014145350627.png)    
-
-
 
 Alternatively, start the EzSign Service directly from the Windows Services snapin
 
@@ -224,8 +182,6 @@ The Service will begin start up:
 This can take several seconds…
 
 ![image-20261014145421161](./images/image-20261014145421161.png)
-
- 
 
 Once the Service has started the status displayed in the bottom left will change from:
 
@@ -243,8 +199,6 @@ To
 
 ![image-20261014145507485](./images/image-20261014145507485.png)
 
- 
-
 Note, if a server takes longer to start (e.g. if it is configured with many threads or it needs to log on to HSMs) you may see the status **Server Starting**
 
 ![image-20261014145701738](./images/image-20261014145701738.png)
@@ -259,8 +213,6 @@ To stop the Service and stop all Servers, click the **Stop Service** button: ![i
 
 ![image-20261014145732511](./images/image-20261014145732511.png)
 
- <br>
-
 # Operation
 
 The configuration utility simply sets the properties for each EzSign *Server* instance and starts or stops the EzSign Service. It also monitors the state of the Service and the state of each of the EzSign Servers (running or stopped)
@@ -274,8 +226,6 @@ Every ten seconds the Service will contact each of the EzSign Server instances a
 This process will continue until the Service is stopped. During the shutdown process all EzSign Server instances will also be stopped
 
 Note that, by default, the Service runs under the local SYSTEM account. Therefore, if the configuration utility is run under a local user account, ensure that the folders and files configured will also be accessible by the Service
-
-<br>
 
 # Troubleshooting
 
@@ -303,25 +253,17 @@ The Server Log file can be opened by clicking the button next to the Server Log 
 
 This will display the full Server log which includes all errors and events
 
- <br>
-
 Service details may be available in the **Service Text log** located here:
 
 ```
 C:\ProgramData\Krestfield\EzSignService\Servicelog.txt
 ```
 
- 
-
 Which can also be opened by clicking the **View Service Log** button: ![image-20261014150852848](./images/image-20261014150852848.png)  
 
  This log will indicate if a Server is failing to start and when a restart has been attempted. But the reason for the failure should be evident in the other logs
 
-<br>
-
 # Support
-
-<br>
 
 EzSign documentation: [https://krestfield.github.io/docs/ezsign/ezsign.html](https://krestfield.github.io/docs/ezsign/ezsign.html?utm_source=copilot.com)
 

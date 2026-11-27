@@ -9,8 +9,6 @@ grand_parent: Certdog
 
 > This feature is available from Certdog 1.17
 
-<br>
-
 Certdog supports the running of scripts as part of [Workflows](workflows.html) and [Tasks](tasks.html)
 
 Scripts can be used to carry out operations post certificate processing (request, issuance, revocation etc.), or act as approvers, making decisions on whether certificates may be issued or revoked. Or run regular tasks.
@@ -28,8 +26,6 @@ Some examples of usage include:
 * Generating weekly reports
 
 Scripts can be Shell (Linux) or PowerShell (Windows/Linux) and must be uploaded prior to being specified in a Workflow
-
-<br>
 
 ## Adding a Script
 
@@ -54,8 +50,6 @@ The following information must then be entered:
 Click **Add**
 
 The script will now be available as an optional script in [Workflows](workflows.html) and [Tasks](tasks.html)
-
-<br>
 
 ### Logging
 
@@ -85,8 +79,6 @@ The log entries available via the UI (and API) contain fewer details (not the sc
 2026-07-02 10:03:00 Running script 'Import from ADCS'. Command: powershell.exe -File C:\certdog\scripts\57892009024066169511.ps1 -apiToken [APITOKEN] -apiUrl https://cd.cromer.org/certdog/api/
 ```
 
-<br>
-
 ### Editing/Deleting Scripts
 
 From the menu, select **Scripts**:
@@ -105,8 +97,6 @@ The script may be edited directly in the *Script* section or a new script upload
 
 When done, click **Update**
 
-<br>
-
 ### Notes on Developing Scripts
 
 Whether activated via a Workflow or Task, scripts will be run by the same account that is running the Certdog service. In Windows this will, by default be LOCAL SYSTEM (the account the Certdog Service is running under). On Linux this will be whatever account has been configured to run the service
@@ -115,11 +105,7 @@ Therefore, the scripts will only have the same permissions as those accounts
 
 The scripts execute under the LOCAL SYSTEM account and therefore inherit its restricted environment. Because the SYSTEM PATH is limited, any calls to external utilities or components may require fully qualified paths. Failures arising from incomplete PATH resolution may appear as scripts running successfully for an interactive user but failing when executed within certdog
 
-<br>
-
 When uploading scripts be sure to examine contents and satisfy yourself that the script will be safe to run before committing. Especially if uploading one not developed by trusted parties. The purpose of scripts being uploaded in this way is intentional, to force a review and prevent scripts from being tampered with or swapped (e.g. if they were held on the file system)
-
-<br>
 
 When a script is specified in a Workflow or Task, several parameters may be passed. E.g.
 
@@ -133,8 +119,6 @@ When a script is specified in a Workflow or Task, several parameters may be pass
 etc.
 
 What parameters are available depend on if running as a Script or Workflow. See [Parameters](parameters.html) for the full list
-
-<br>
 
 For example, if our PowerShell script accepted the following parameters:
 
@@ -154,8 +138,6 @@ These parameters could be passed in the correct order. e.g. ``[CERTID] [CERTSUBJ
 Alternatively parameter names can also be specified, in which case the order would not matter e.g. ``-certId [CERTID] -caller "Workflows" -certSubject [CERTSUBJECT]``
 
 See [Workflows](workflows.html) for more information on configuring scripts to run as part of a workflow and [Scripts](scripts.html) for running regular tasks
-
-<br>
 
 You can also use the [Certdog PowerShell Module](powershell_module.html) within a script. The module is always written to the `scripts` folder before a PowerShell script is run, so you can import the module using a relative path.
 
@@ -178,6 +160,3 @@ When using the PowerShell module you can override this URL as described in the [
 ```powershell
 Set-ApiUrl -url "https://path/to/your/api/"
 ```
-
-<br>
-

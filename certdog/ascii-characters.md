@@ -9,8 +9,6 @@ grand_parent: Certdog
 
 Keystore passwords used within Certdog must be ASCII
 
-<br>
-
 They may contain numbers:
 
 ```asciiarmor
@@ -30,13 +28,8 @@ And the following special characters:
 ! " # $ % & ' ( ) * + , - . / : ; < = > ? @ [ \ ] ^ _ ` { | } ~
 ```
 
-<br>
-
 Note this does not include characters such as:
 
 ```asciiarmor
 £ € ₡ ©
 ```
-
-
-

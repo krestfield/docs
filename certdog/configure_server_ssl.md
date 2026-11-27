@@ -6,23 +6,17 @@ grand_parent: Certdog
 ---
 # Configuring the Server's TLS Certificates
 
- 
-
 The system uses TLS server certificates to protect the UI and API end-points  
 
 Once installed, the system will be configured with a default SSL certificate issued under a test CA with the subject ``CN=127.0.0.1``  
 
 With this certificate in place, you will see warning when accessing via a browser and REST API calls may fail  
 
-
-
 You may temporarily, install the associated root certificate, located here:
 
 ``[Install Dir]\config\sslcerts\dbssl_root.cer``
 
 into the Local Machines' **Trusted Root Certification Authorities** store. This will remove the obvious browser errors.  But this is a temporary measure and you should replace this certificate by following the steps below 
-
-
 
 ### Create a New SSL Certificate
 
@@ -61,6 +55,3 @@ If you have chosen a strong password and/or changed the filename, perform the fo
 3. Set **keystoreFile** to point to your new p12 file and set **keystorePass** to be the new password
 4. Save ``server.xml``
 5. Restart the application
-
-
-

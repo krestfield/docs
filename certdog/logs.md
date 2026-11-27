@@ -22,8 +22,6 @@ Set a time span and optionally, username and source. Click **Search**
 
 When *Search* is clicked the **Download** button will appear. Click this button to download the current filtered logs to a JSON file
 
-<br>
-
 ## Additional Logs
 
 ### log4j2
@@ -40,8 +38,6 @@ This file is configured to rollover every day or when the file reaches 100Mb. Th
 
 This file may be updated as required. Refer to the [log4j2.xml documentation](https://logging.apache.org/log4j/2.x/) for more information
 
-<br>
-
 ### Container Log
 
 The default container used by Certdog is Apache Tomcat. This outputs several logs to ``[certdog install]\apache\logs``
@@ -49,10 +45,3 @@ The default container used by Certdog is Apache Tomcat. This outputs several log
 The most useful in debugging Certdog related issues is the ``catalina.* `` log file (e.g. catalina.out or catalina.2021-12-22.log etc)
 
 Refer to Tomcat documentation should you wish to configure this logging further
-
-
-
-
-
-
-

@@ -11,22 +11,15 @@ keywords: ["install", "setup", "Windows Server"]
 
 > From version: 1.8.0
 
-<br>
-
 The following steps outline the steps required to install the Certdog on a single system
 
 If the pre-requisites are in place, the entire installation should not take more than 10 minutes  
 
-<br>
-
 If you don't want to read any details  right now and just want to quickly download to try things out - see the [Quick Installation Guide](quick_installation_guide.html) or the [Demo Quickstart](demo_quickstart.html) (which will install with default login details, for testing purposes)
-
-<br>
 
 ### Pre-requisites
 
 The system may be installed on the following operating systems:  
-
 
 * Windows Server 2019
 
@@ -36,30 +29,19 @@ The system may be installed on the following operating systems:
 
 * Windows 11 [^1]
 
-<br>
-
 The following components are required:
 
 * .NET 4.8 Runtime
 
 * Visual C++ Runtime (this will be installed by the installer if not present)
 
-<br>
-
 You must have local Administrator privileges on the system
 
-<br>
-
 It is recommended to install on a clean system. But if this is not possible the system must not already have an instance of MongoDB running as this will conflict with the standard installer. If you wish to use an existing MongoDB instance, contact support@krestfield.com for details
-
-
-
 
 ### 1.  Download the Installer
 
 See [here](download-locations.html) for download locations
-
-<br>
 
 ### 1.1 Unzip
 
@@ -79,8 +61,6 @@ f:\apps\certdog
 c:\program files\krestfield\certdog
 ```
 
-<br>
-
 Open a PowerShell prompt as **Administrator** and navigate to this folder e.g.
 
 ```powershell
@@ -90,8 +70,6 @@ Copyright (C) Microsoft Corporation. All rights reserved.
 PS C:\WINDOWS\system32> cd "C:\certdog"
 PS C:\certdog>
 ```
-
-<br>
 
 Run ``dir`` and check the file structure looks something like the following:
 
@@ -110,8 +88,6 @@ d-----        06/01/2021     15:48                tomcat
 ```
 
 If you don't see the ``install`` directory, the unzipping process may have failed. Check that you have the correct permissions, then delete the *certdog* folder and attempt the unzip process again
-
-<br>
 
 ### 2. Run the Installer
 
@@ -135,8 +111,6 @@ Whichever is chosen, the following information will be required:
   * This can be provided as the following switch ``-installAdcsAgent``
 * Acceptance of the End User License Agreement
   * This can be accepted by providing the following switch ``-acceptEula`` to the script
-
-<br>
 
 From the PowerShell prompt, navigate into the ``install`` directory and either just run the ``.\install.ps1`` script and follow the prompts:
 
@@ -162,15 +136,9 @@ $adminPassword='password'
 
 Note: If you see the message ``Do you want to run software from this untrusted publisher?`` type **A** to always run. The scripts are signed with a publicly trusted CA, but depending on your security settings, there may still be a requirement to recognise the signer
 
-<br>
-
 If  your system does not have the Visual C++ Redistributable packages installed, this installer will begin. Complete this installation and when complete, return and re-start the ``.\install.ps1`` script
 
-<br>
-
 If  you do not have the .NET 4.8 Runtime installed, the installer will recognise this and end. Install the .NET 4.8 Runtime then restart the ``.\install.ps1`` script
-
-<br>
 
 The installer will start and display some initial information. e.g.
 
@@ -188,13 +156,9 @@ By continuing and installing the software you accept the terms of this license a
 
 Download and read the EULA and if happy to accept the agreement, type ``y`` to proceed with the install
 
-<br>
-
 If the script has been run without any parameters then follow the prompts when prompted  
 
 If the script has been run with parameters the installer will run through the process without any prompting
-
-<br>
 
 At the end of installation you should see a message as follows:
 
@@ -208,8 +172,6 @@ This file **MUST** be securely backed up and it is **strongly recommended** that
 
 You may need this secret if you re-install the main Certdog service, change the account the service runs under or attempt to start individual services manually. Normally, after install it is not required, but if lost all credentials stored within the system will be unrecoverable and must be re-configured
 
-<br>
-
 ### 3. Verify the Installation
 
 Sometimes the Certdog service takes a while to initialise. In the first instance check the Services snapin and search for the following services and check they are running
@@ -220,16 +182,12 @@ Sometimes the Certdog service takes a while to initialise. In the first instance
 
 If not, attempt to start manually
 
-<br>
-
 If the services are not starting, check the installation log files for any errors
 
 * installlog.out
 * installlog.txt
 
 If no errors were shown during the installation these files should just contain audit information
-
-<br>
 
 From the PowerShell prompt, navigate to the ``..\bin`` folder and type ``.\is-db-running.ps1``:
 
@@ -253,8 +211,6 @@ The message ``API is running`` should be seen
 
 If either the database or API are not running, see the Troubleshooting guide [here](install_troubleshooting.html)
 
-<br>
-
 Next, open a browser and navigate to ``https://[Your IP Address]/certdog``. Note: Internet Explorer is not supported
 
 Where ``[Your IP Address]`` is the address chosen during the installation e.g.
@@ -276,8 +232,6 @@ Enter the **username** and **password** for the First Admin User that you provid
 You should be logged in OK.  The initial view will be ***Certificates***, but at this stage there are none to show    
 
 A successful login indicates that the installation was completed OK  
-
-<br>
 
 ### 4. SSL Configuration
 
@@ -307,13 +261,9 @@ You should still continue to create a valid SSL certificate for the server, as d
 
 As well as a valid SSL certificate to protect the database traffic, as described [here](update_the_db_certificate.html)
 
-<br>
-
 ## 5. Post Installation
 
 See [here for post installation](post-Installation.html) configuration steps
-
-<br>
 
 ### Windows Services
 
@@ -322,8 +272,6 @@ See [here for post installation](post-Installation.html) configuration steps
 This service will be installed by the install script
 
 This service is the database and appears in the services snapin as **Krestfield Certdog Database**
-
-<br>
 
 **Application Service**  
 
@@ -335,20 +283,13 @@ This service starts and stops the system
 
 In the services snapin, this service is called **Krestfield Certdog Service**
 
-<br>
 **AD Certificate Services Agent**  
 
 This service interfaces with your Microsoft ADCS instance.  More details on this service can be found [here](adcsdriver.html)  
 
 In the services snapin, this service is called **Krestfield Adcs Driver**
 
-
-
 [^1]: If installing on Windows 10 and you require access to a Microsoft ADCS Certificate Authority the RSAT (Remote Server Administration Tools) for Windows 10 are also required  
-
-<br>
-
-<br>
 
 <hr>
 
@@ -502,6 +443,3 @@ API is running
 
 Installation is complete
 ```
-
-
-

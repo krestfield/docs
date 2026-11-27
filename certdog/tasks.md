@@ -9,8 +9,6 @@ grand_parent: Certdog
 
 > This feature is available from Certdog 1.17
 
-<br>
-
 Certdog supports the running of regularly scheduled or one-off tasks using [Scripts](scripts.html)
 
 These tasks can be used to carry out operations which do not have a specific event associated with them. In cases where a script should be run in response to an event, use [Workflows](workflows.html)
@@ -23,8 +21,6 @@ Some examples of Task operations include:
 * Checking another system for queued requests and processing
 
 * Producing weekly reports detailing all certificates issued during that time
-
-<br>
 
 ## Adding a Task
 
@@ -72,8 +68,6 @@ The following information must then be entered:
 
 Click **Add**
 
-<br>
-
 ## Editing/Deleting Tasks
 
 From the menu, select **Tasks**:
@@ -90,12 +84,8 @@ To delete, click **Delete**. To edit click **View/Edit**:
 
 When done, click **Update**
 
-<br>
-
 ## Notes on Repeating Tasks
 
 When a Task is set to repeat, it is run every interval after the start time. To prevent multiple APIs from running the same task at once, the Task is locked when the associated script is started. The lock lasts the same amount of time as the configured script **Time Limit** (see [Settings](settings.html)). As a result, Tasks are only able to run as often as the script **Time Limit** allows.
 
 While repeating Tasks should only run once every repeat interval (irrespective of success status), you are encouraged to design your Tasks to gracefully handle being called multiple times within their repeat intervals.
-
-<br>

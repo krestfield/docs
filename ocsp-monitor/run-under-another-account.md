@@ -7,8 +7,6 @@ nav_order: 90
 
 # CRL OCSP Monitor - Run under Another Account
 
-<br>
-
 By default, when the service is installed it runs under the Local System account. This is normally sufficient for most cases but you may wish to run the service under a dedicated service account. This will allow, for example, the setting of permissions on any applications or scripts that may be called by the service. Where you would set execute permissions on these scripts/applications for the same account the service is running under (or group it is a members of)
 
 from windows, click **Start** and type **Services**. Select the **Services** app

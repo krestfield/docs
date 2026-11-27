@@ -9,8 +9,6 @@ grand_parent: Certdog
 
 > From version 1.8.0
 
-<br>
-
 ## Overview
 
 Safetronic is often configured to use an IdenTrust OCSP Revocation Checker  
@@ -25,13 +23,9 @@ Another deviation is that OCSP server signing certificates are issued from the R
 
 This extra complexity means some additional configuration needs to be made in certdog to cater for this
 
-<br>
-
 ### Configuration Steps
 
 This is assuming a typical three tier PKI (Root CA, Intermediate CA and End-Entity certificates) with CAs and OCSP responders all hosted in certdog
-
-
 
 In certdog you should have the two CAs configured e.g.:
 
@@ -40,8 +34,6 @@ In certdog you should have the two CAs configured e.g.:
 * Issuing CA
 
 For each of these, you may just check the **Create OCSP Server** option when configuring as this will create OCSP Servers and other required artefacts (Certificate Issuer, User etc.). But you can also create from scratch if preferred
-
-<br>
 
 Once created, the OCSP servers for these CAs should be configured as follows:
 
@@ -62,8 +54,6 @@ An OCSP compliant Certificate Profile should include:
 - **Include OCSP No Check** should be enabled
 
 It's lifetime can be whatever you choose (certdog will handle the renewal of these certificates anyway)
-
-
 
 Items that may need to be updated:
 
@@ -88,8 +78,6 @@ The following should be configured:
   * Note the *Certificate Profile* name then edit that profile ensuring that **Include OCSP No Check** is disabled. This is required so that this OCSP signing certificate will also be checked for revocation
   * Go back to the Issuing CA OCSP Server by choosing **Edit/View** and check the **Bypass Issuer Check** option. If this is not checked, next time any changes are made to the OCSP server you will receive an error (as by default the signing certificate should be issued from the associated CA - not the Root CA)  
 
-
-
 You may also again, update the **Signing Cert DN** and if using older versions of Safetronic, also set the **Hash Algorithm** to **SHA1**
 
 Set **Requests must be Signed** to **True**
@@ -98,11 +86,7 @@ Set **Requests must be Signed** to **True**
 
 <hr>
 
-<br>
-
 Once the changes have been made you may force the OCSP signing certificates to be renewed by checking the **Renew Certificate** option in the OCSP configuration
-
-<br>
 
 ## Other Considerations
 
@@ -111,6 +95,3 @@ IdenTrust also host OCSP servers at https addresses (rather than the standard ht
 From your certdog installation, locate the ``.\tomcat\crlwebapps`` folder and move the certdog.war file to the ``.\tomcat\webapps`` folder  
 
 The OCSP services will then be available via the same https address  
-
-
-

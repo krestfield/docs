@@ -31,8 +31,6 @@ Making sure you don't have any other instances of IIS, Apache or Tomcat listenin
 
 Login with username: **admin** password: **password**  
 
-
-
 ### Issue a Certificate
 
 The image comes pre-configured with a Local CA and profiles for TLS and Code Signing - more can be easily added  
@@ -48,8 +46,3 @@ Enter a value for the **DN** and enter a **password** (the issuer and CSR genera
 Click **Download PKCS12** and save the file. Then click **More** to view further details about the certificate  
 
 Browse the other documentation to set up more CAs, add users etc. Remember all operations can also be carried out via the REST API for scripting common tasks
-
-
-
-
-

@@ -16,15 +16,9 @@ Emails can be configured to be sent when:
 * A certificate is issued
 * A certificate is nearing its expiry date
 
-
-
 But before any emails can be sent you must configure your email server settings. This is the SMTP server that will send the emails to the recipients
 
-
-
 > If this is the first time you are testing emails - ensure you have created a new user or have updated the default admin user's email address. Otherwise emails will be sent to the default bogus email address 
-
-<br>
 
 ### Server Settings
 
@@ -55,8 +49,6 @@ Populate the following settings
   * The email address you want emails to appear to have been sent from
   * You may have to register this with your SMTP provider
 
-<br>
-
 **System URL**
 
 *From version 1.17 onwards this has been moved to [Settings](settings.html)*
@@ -81,15 +73,11 @@ So now the *System URL* would be:
 
 https://certdog.corpdomain.com/certdog
 
-<br>
-
 ### Send Emails on Certificate Issue
 
 Check this box if you want an email to be sent whenever a certificate is issued  
 
 <img src=".\images\send_emails_on_issue.png" alt="Send On Issue" style="zoom:80%;" />
-
-
 
 You can set the email subject and body templates of the emails that will be sent. You can use standard html tags in the body as well as the following additional tags:
 
@@ -113,8 +101,6 @@ You can set the email subject and body templates of the emails that will be sent
 * [DAYSTOEXPIRY]
   * The number of days until the certificate expires
 
-<br>
-
 **Always Send To**
 
 If you wish to send an email to an address (or addresses) in addition to the one being sent to the requester, enter the email address(es) here. For multiple email addresses enter as a comma separated list e.g.
@@ -129,10 +115,6 @@ This option can be used as a notification - when certificates or issued, or as a
 
 Leave this field blank to not send additional emails
 
-<br>
-
-<br>
-
 ### Send Emails on Certificate Expiry
 
 If this option is checked users will get email reminders when certificates are nearing expiry  
@@ -141,26 +123,19 @@ If this option is checked users will get email reminders when certificates are n
 
 Configure the email subject and body templates as before, utilising the available tags  
 
-<br>
-
 **Send Notification on Days**  
 
 This value is simply a comma separated list which indicates how many days before expiry a reminder will be sent e.g. 5,10,15 indicates that reminders will be sent when certificates are expiring in 5, 10, or 15 days
 
 See [Certificate Expiry Reminders](certificate_expiry_reminders.html) for more details
 
-  <br>
-
 **Always Send To**
 
 As above, for every reminder email sent, the same email will be sent to these additional addresses. This can be useful for another team to also obtain reminders for all certificates or as an audit to validate that emails are being sent
 
-  
-
 Once all settings have been configured click **Update**  
 
 When emails are sent, logs will be added. It is a good idea to set emails to be sent on issue and then issue a test certificate to confirm all of the SMTP server settings etc. are correct. If there are any issues, check the logs and then verify your settings
-<br>
 
 ### Suppression
 
@@ -170,7 +145,6 @@ Expiry monitoring can be disabled for a specific certificate. This means no expi
 
 A Team can suppress *cert issued* and *cert expiring* emails. If a certificate is within a team that has one of both of these items checked, emails will not be sent for that certificate. See the [teams documentation](teams.html) for more information
 
-<br>
 ### Password Reset Email Details
 
 If the *Generate random password and email* option is set for a user account then an email is sent containing the users logon details  
@@ -180,8 +154,6 @@ The content and subject of this email can be set here:
 <img src=".\images\email_settings_password.png" alt="Reset Password Email" style="zoom:80%;" />
 
 Configure the email subject and body templates, utilising the available tags  
-
-<br>
 
 ### Additional Settings
 
@@ -202,8 +174,6 @@ email.thisserver.send=false
 ```
 
 Once restarted, the server will no longer send any emails
-
-<br>
 
 If the sending of an email fails (due to incorrect SMTP server configuration or connectivity issues etc.), an attempt to re-send the same email will be made at a a later time. This time is set to 6 hours (360 minutes) by default. If you wish to change this period, edit the ``application.properties`` file and update the following
 

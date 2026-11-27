@@ -7,15 +7,11 @@ grand_parent: Certdog
 
 # Updating the Database SSL Certificate
 
-
-
 A default database certificate is provided with the installation which protects the local database traffic  
 
 This certificate is bound to the 127.0.0.1 IP address  
 
 If you wish to cluster the database, or access it from another certdog installation then this certificate will need to be updated so that it is correctly associated with the host server  
-
-<br>
 
 Note: If the database is remaining on the same server as the certdog services and the database network interface is still bound to 127.0.0.1 e.g. ``.\certdog\mongodb\bin\mongod.cfg`` includes:
 
@@ -27,8 +23,6 @@ net:
 Then the database cannot be accessed externally and no traffic to the database will leave the local network stack.
 
 In this case there is not real requirement to implement TLS. However, it is configured by default as an added layer of protection and to avoid an alteration to the bindIp value that would allow the database to be externally available. The default configuration would prevent this.
-
-<br>
 
 ### Steps
 
@@ -54,15 +48,11 @@ For the Subject Alternative Names, add the [Database Server FQDN] as a DNS entry
 
 If you will continue to access the database locally at ``127.0.0.1`` ensure that is added as a **IP Address SAN**
 
-<br>
-
 Issue the certificate then click **More** to view all the certificate details. At the bottom of the view, click **Technical Details**:
 
 <img src=".\images\cert-id.png" alt="Cert ID" style="zoom: 50%;" />
 
 Click on the value displayed next to **Certificate ID**. This will copy the value to the clipboard. You will need this value in the next steps
-
-<br>
 
 **STEP 2: Configure the SSL Certificate on the Database**
 
@@ -103,8 +93,6 @@ You must restart the Krestfield Certdog Database and the Krestfield Certdog Serv
 for these changes to take effect
 ```
 
-<br>
-
 Next open the Services snapin and stop the services in this order:
 
 1. Krestfield Adcs Driver
@@ -117,23 +105,15 @@ Then starting in this order:
 2. Krestfield Certdog Service
 3. Krestfield Adcs Driver
 
-<br>
-
 **STEP 3: Configure the SSL Certificate on the Database**
 
 If using the ADCS Driver (i.e. interfacing to Microsoft CAs), ensure that the root and intermediate CA certificates that issued the new database certificate have been imported into the Windows store.
 
 You can obtain these by navigating to the issued certificate in STEP 1 and choosing the **Actions** - **Go To Issuer** option. Then downloading the certificates (ensuring you download all CA certificates, including the root) and importing into the Intermediate or Trusted Roots store (depending whether the certificate is a root CA or not). 
 
-<br>
-
-<br>
-
 ## Troubleshooting
 
 To confirm that an issue is certificate related, you may first disable TLS (temporarily), to ensure that without any certificates the connection to the database is OK. See [Disable TLS](#disable-tls) below.
-
-<br>
 
 **The database certificate has expired**
 
@@ -147,11 +127,7 @@ The certdog logs (``[certdog install]\logs\certdog.log``) will show ``Certificat
 
 As certdog needs the database to issue a new certificate, first [Disable TLS](#disable-tls), start certdog and issue the new certificate, then re-enable TLS as described in [Re-enable TLS](#re-enable-tls).
 
-<br>
-
 If the service does not start. Attempt a restart again ensuring that the stop and start order is carried out correctly.
-
-<br>
 
 Next, analyse the following log file:
 
@@ -178,8 +154,6 @@ PKIX path building failed: sun.security.provider.certpath.SunCertPathBuilderExce
 And indicates that the certdog service does not trust the DB TLS certificate.
 
 This may be because it was not imported correctly, is not being referenced by the database correctly or does not have the correct attributes. We can check all of these manually next:
-
-<br>
 
 <u>Verify the certificate</u>
 
@@ -209,11 +183,7 @@ spring.data.mongodb.uri=mongodb://certmanuser:eZAqMcOcVu58RLdoyBb9@127.0.0.1/cer
 
 Ensure that whatever DNS name or IP address appears after the @ symbol is included in the certificate as a DNS or IP SAN. E.g. in this case ``127.0.0.1`` appears after the @ symbol and we have an IP SAN of 127.0.0.1, which is correct.
 
-
-
 Under **Technical Details**, ensure that the Certificate ID is the one that was specified to the script above.
-
-<br>
 
 <u>Confirm certificate has been imported into the database</u>
 
@@ -236,8 +206,6 @@ net:
 ```
 
 The browser should navigate to the address and may show a security warning. From the browser, inspect the certificate protecting this TLS end point. It should match that as generated in STEP 1 above.
-
-<br>
 
 <u>Confirm certificate has been imported into the JKS store</u>
 
@@ -272,8 +240,6 @@ These certificates (certdog1 and certdog2) should be the chain certificates. Tha
 
 Verify these are present and as expected. I.e. examine the issuers for the certificate created in STEP 1 above within certdog, comparing the Issuers and Serial Numbers.
 
-<br>
-
 When running the command above the only output is the following:
 
 ```
@@ -281,8 +247,6 @@ certdogtlsroot, 10 Oct 2025, trustedCertEntry,
 ```
 
 This indicates that the new CA certificates have not been imported correctly. Try re-running the ``set-dbsslcert.ps1`` script again, or import manually as described below.
-
-<br>
 
 <u>Manually Add to JKS Store</u>
 
@@ -298,11 +262,7 @@ For each of these certificates, run the following command:
 
 Providing an alias (which can be anything that will help identify the certificate) and the certificate file e.g. certdogca1.cer.
 
-<br>
-
 Once any changes have been made ensure that services are restarted.
-
-<br>
 
 ## Disable TLS
 
@@ -313,16 +273,12 @@ TLS on the database can be disabled temporarily. For example:
 
 If the database is bound to ``127.0.0.1`` only (the default - see the note at the top of this page), running without TLS for a short time is low risk as the database cannot be reached from outside the server.
 
-<br>
-
 **The following changes are required. If any one of them is missed, the database, the certdog service or the ADCS Driver will not start or connect:**
 
 1. Comment out the ``tls:`` section in ``mongod.cfg``
 2. Comment out the ``clusterAuthMode: x509`` line in ``mongod.cfg``
 3. Remove ``?tls=true`` from the database URI in ``application.properties``
 4. If the ADCS Driver is installed (i.e. you issue certificates from Microsoft CAs), run ``configure-adcs-service.ps1`` so that the driver uses the new (non-TLS) database URI. Restarting the driver service on its own is **not** enough
-
-<br>
 
 ### 1. Stop the services
 
@@ -331,8 +287,6 @@ Open the Services snapin and stop the services in this order:
 1. Krestfield Adcs Driver
 2. Krestfield Certdog Service
 3. Krestfield Certdog Database
-
-<br>
 
 ### 2. Edit mongod.cfg
 
@@ -378,8 +332,6 @@ security:
 
 Save the file.
 
-<br>
-
 **Why clusterAuthMode must also be commented out**
 
 ``clusterAuthMode: x509`` tells the database to authenticate replica set members using their TLS certificates. This requires TLS to be enabled. If TLS is disabled but this line is left in place, the database will refuse to start.
@@ -393,8 +345,6 @@ Error 1053: The service did not respond to the start or control request in a tim
 
 Running the database from a console (see [Check the database starts](#3-check-the-database-starts) below) will display the actual error.
 
-<br>
-
 **Notes on editing mongod.cfg**
 
 This file is in YAML format, which is strict about layout:
@@ -404,8 +354,6 @@ This file is in YAML format, which is strict about layout:
 - Save the file in UTF-8 (or ANSI) format, not Unicode
 
 Older installations may not have the ``CAFile`` or ``clusterAuthMode`` lines. If they are not present, there is nothing to change for them.
-
-<br>
 
 ### 3. Check the database starts
 
@@ -423,8 +371,6 @@ As the database logs to a file, very little (or nothing) is displayed when it st
 - **If the command keeps running**, the database has started OK. Leave it running and carry out the checks below from a second PowerShell window. Then press **Ctrl+C** to stop it
 - **If the command exits straight away**, the database has failed to start. Note the error that is displayed and check the [log entries](#log-entries-to-look-for) below
 
-<br>
-
 <u>Check the database is listening</u>
 
 In a second PowerShell window, run:
@@ -440,8 +386,6 @@ TcpTestSucceeded : True
 ```
 
 (If your database uses a different address or port, use the values from the ``net:`` section of ``mongod.cfg``.)
-
-<br>
 
 <u>Check the database is accepting connections without TLS</u>
 
@@ -459,8 +403,6 @@ The output should include:
 ```
 
 This confirms that the database is running without TLS and that the certdog credentials are accepted.
-
-<br>
 
 <u>Check the database log</u>
 
@@ -481,8 +423,6 @@ A successful start includes an entry such as:
 See [Log entries to look for](#log-entries-to-look-for) below for the entries that indicate a problem.
 
 Once the checks are complete, stop the console database with **Ctrl+C**.
-
-<br>
 
 ### 4. Edit application.properties
 
@@ -508,8 +448,6 @@ Change nothing else on this line. If the URI has other options after the ``?`` (
 
 Save the file.
 
-<br>
-
 ### 5. Start the database and certdog services
 
 Start the services in this order:
@@ -524,8 +462,6 @@ Then check that:
 - Both services show as **Running** in the Services snapin
 - You can log in to certdog from a browser
 - The latest entries in ``[certdog install]\logs\certdog.log`` and ``[certdog install]\tomcat\logs\catalina.YYYY-MM-DD.log`` do not contain ``MongoTimeoutException`` or ``Timed out while waiting for a server``
-
-<br>
 
 ### 6. Update the ADCS Driver
 
@@ -561,8 +497,6 @@ Then check that:
 
 See [ADCS Driver](adcsdriver.html#registering-the-service) for more details on this script.
 
-<br>
-
 ### Log entries to look for
 
 The tables below list the entries most commonly seen in each log, and what they mean.
@@ -583,8 +517,6 @@ Select-String -Path "C:\certdog\mongodb\mongod.log" -Pattern '"s":"F"','"s":"E"'
 | ``"codeName":"InvalidSSLConfiguration"`` | TLS is enabled but the certificate file cannot be read. See [Database Fails to Start after SSL Configuration](errors%20v%20solutions.html) |
 | No new entries after a failed start | The database stopped before opening its log, usually because of a configuration error. Check that ``clusterAuthMode: x509`` is commented out and that the file has no tabs or indentation errors. Run the database from a console (step 3) to see the error |
 
-<br>
-
 <u>Certdog logs: [certdog install]\logs\certdog.log and [certdog install]\tomcat\logs\catalina.YYYY-MM-DD.log</u>
 
 All of the following appear inside a ``Timed out while waiting for a server`` message. The ``caused by`` part shows the reason:
@@ -597,8 +529,6 @@ All of the following appear inside a ``Timed out while waiting for a server`` me
 | ``PKIX path building failed`` | TLS is enabled and certdog does not trust the database certificate. See [Troubleshooting](#troubleshooting) above |
 | ``Exception authenticating`` or ``Authentication failed`` | The database is running, but the username or password in the URI is wrong. Check the ``spring.data.mongodb.uri`` line was not changed apart from removing ``?tls=true`` |
 
-<br>
-
 <u>ADCS Driver</u>
 
 If ``configure-adcs-service.ps1`` reports ``Unable to start the service``, or the agent does not appear in certdog:
@@ -608,13 +538,9 @@ If ``configure-adcs-service.ps1`` reports ``Unable to start the service``, or th
 
 The most common cause is that the driver is still using the old URI. Re-run ``configure-adcs-service.ps1`` from the ``install`` directory, after checking ``application.properties`` has been updated.
 
-<br>
-
 ### Re-enable TLS
 
 Once certdog is running without TLS, issue the new database certificate and switch the database, certdog and the ADCS Driver back to TLS.
-
-<br>
 
 <u>1. Issue and install the new certificate</u>
 
@@ -624,8 +550,6 @@ Follow STEP 1 at the top of this page to issue the new certificate from certdog,
 
 If you use the ADCS Driver, also import the root and intermediate CA certificates that issued the new certificate into the Windows certificate stores, as described in STEP 3. The ADCS Driver will not be able to connect to the database over TLS if it does not trust the new certificate.
 
-<br>
-
 <u>2. Stop the services</u>
 
 Stop the services in this order:
@@ -633,8 +557,6 @@ Stop the services in this order:
 1. Krestfield Adcs Driver
 2. Krestfield Certdog Service
 3. Krestfield Certdog Database
-
-<br>
 
 <u>3. Restore mongod.cfg</u>
 
@@ -644,8 +566,6 @@ Restore your backup of ``[certdog install]\mongodb\bin\mongod.cfg``, or remove t
 - The ``clusterAuthMode: x509`` line is restored under ``security:``
 - The indentation matches the original file and no tab characters have been added
 
-<br>
-
 <u>4. Restore application.properties</u>
 
 Restore your backup of ``[certdog install]\config\application.properties``, or add ``?tls=true`` back to the end of the ``spring.data.mongodb.uri`` line. E.g.:
@@ -654,15 +574,11 @@ Restore your backup of ``[certdog install]\config\application.properties``, or a
 spring.data.mongodb.uri=mongodb://certmanuser:eZAqMcOcVu58RLdoyBb9@127.0.0.1/certman?tls=true
 ```
 
-<br>
-
 <u>5. Check the database starts with TLS</u>
 
 As in step 3 of [Disable TLS](#disable-tls), you can first start the database from a console (``.\mongod.exe --config .\mongod.cfg`` from ``[certdog install]\mongodb\bin``) to confirm it starts, then press **Ctrl+C**.
 
 ``mongod.log`` should now contain ``"msg":"Waiting for connections"`` with ``"ssl":"on"``. You can also browse to ``https://127.0.0.1:27017`` and check that the certificate shown is the new one (see [Troubleshooting](#troubleshooting)).
-
-<br>
 
 <u>6. Start the database and certdog services</u>
 
@@ -672,8 +588,6 @@ Start the services in this order:
 2. Krestfield Certdog Service
 
 Check you can log in to certdog. If the certdog service does not start, search ``catalina.YYYY-MM-DD.log`` and ``certdog.log`` for ``PKIX path building failed`` and see [Troubleshooting](#troubleshooting) above.
-
-<br>
 
 <u>7. Update the ADCS Driver</u>
 
@@ -685,7 +599,5 @@ cd [certdog install]\install
 ```
 
 This also starts the Krestfield Adcs Driver service. Check the service is running, the agent is approved under **Administration > Agents** and that a test certificate can be issued from a Microsoft CA. If the driver cannot connect, check that the CA certificates were imported into the Windows stores (step 1 above) and see the [ADCS Driver](#log-entries-to-look-for) log checks above.
-
-<br>
 
 To avoid the database certificate expiring unexpectedly in future, note its expiry date. You may also want to choose a longer validity period for the new certificate.

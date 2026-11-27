@@ -8,8 +8,6 @@ has_children: true
 
 # Certificate Issuers
 
-
-
 Certificate Issuers are a combination of 
 
 * A Certificate Authority
@@ -17,8 +15,6 @@ Certificate Issuers are a combination of
 * A Certificate Profile (called a Certificate Template in Microsoft AD CS) 
 
 * And *optionally*, [DN Restrictions](dn_restrictions.html)
-
-
 
 Certificate Issuers enable you to combine these items in order to make certificate issuance simpler and to control what types of certificates can be issued  
 
@@ -33,6 +29,3 @@ For more information on creating certificate issuers click one of the following 
 * [Create a Local Certificate Issuer](create_local_certificate_issuer.html#3-create-a-certificate-issuer)
 * [Create a Microsoft AD CS Certificate Issuer](create_adcs_certificate_issuer.html#2-create-a-certificate-issuer)
 * [Create an EJBCA Certificate Issuer](create_ejbca_issuer.html#configure-ejbca-issuer)
-
-
-

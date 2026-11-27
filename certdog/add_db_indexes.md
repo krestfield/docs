@@ -8,15 +8,11 @@ grand_parent: Certdog
 
 # Add Database Indexes
 
-
-
 From certdog version 1.6, the required indexes are applied to the database at install  
 
 However, if you are running a previous version of certdog (or have upgraded from a previous version), your database will not have the latest indexes configured  
 
 For low numbers of certificates (less than 5000) this should not effect performance. But if you are experiencing slow certificate searches you may perform the following steps to apply indexes  
-
-<br>
 
 ### Option 1: Automatic Update (if you have upgraded to version 1.6 or above)
 
@@ -33,8 +29,6 @@ Run the following script:
 ```
 
 This script essentially carries out the manual steps detailed below
-
-<br>
 
 ### Option 2: Manually Applying Indexes
 
@@ -69,8 +63,6 @@ security:
 Save the ``mongod.cfg`` file
 
 Start the **Krestfield Certdog Service**
-
-<br>
 
 Open either a PowerShell or cmd prompt as Administrator and navigate to:
 
@@ -127,15 +119,11 @@ exit
 
 *See the Full Output below for an example*
 
-<br>
-
 Next stop the **Krestfield Certdog Service**
 
 Either replace the ``mongod.cfg`` file with the backed up version or just uncomment the lines commented out above
 
 Start the **Krestfield Certdog Service**
-
-<br>
 
 ### Other Options
 
@@ -179,8 +167,6 @@ And to drop all indexes (this will not drop the default *_id* index - only those
 }
 ```
 
-<br>
-
 #### Full Output
 
 ```powershell
@@ -210,8 +196,3 @@ switched to db certman
 > exit
 bye
 ```
-
-
-
-
-

@@ -7,13 +7,9 @@ grand_parent: Certdog
 
 # Creating Custom Extensions Data
 
-<br>
-
 > This section requires some low level data manipulation. Contact [krestfield support](mailto:support@krestfield.com) if any assistance is needed to create the required data
 >
 > This functionality is available from version 1.10 onwards
-
-<br>
 
 A custom certificate extension can be added to a certificate profile. To add a custom extension you require the OID (Object Identifier), whether the extension should be marked critical or not and the data for the extension  
 
@@ -42,8 +38,6 @@ If you are fluent in building ASN.1 you can craft the required data. However, it
 
 In this example we will build a Name Constraint extension using this method  
 
-<br>
-
 ## 1. Obtain example data 
 
 Locate a certificate with an extension with data as similar to what you require  
@@ -65,4 +59,3 @@ And choose **Save selected node as...** and save to a file
 Open this file using a HEX editor or similar that can convert binary data to an ASCII HEX string e.g. [Free Hex Editor Neo](https://www.hhdsoftware.com/free-hex-editor). In this tool you can simply select all and copy  
 
 This data is your new extension's ASN.1 data and should be provided as the *Data* element when adding the custom extension  
-

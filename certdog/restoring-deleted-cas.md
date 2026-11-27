@@ -24,13 +24,9 @@ deleteditems.purge.afterdays=30
 
 If you need to adjust this value, change the number of days and then restart the Certdog services
 
-<br>
-
 ### Restoring Deleted Items
 
 If a Local CA, Key Store or Certificate Issuer have been accidentally deleted, they can be restored using the REST API or PowerShell scripts
-
-<br> 
 
 **<u>REST API</u>**
 
@@ -62,8 +58,6 @@ Where ID is the ID of the item to be restored e.g.
 POST https://certdog1.com/api/admin/localca/restore/60f07d2f40eb186c96aed6b3
 ```
 
-<br>
-
 Perform similar operations to obtain and restore deleted Key Stores:
 
 ```http
@@ -77,8 +71,6 @@ And certificate issuers:
 GET [Base URL]/api/admin/ca/deleted
 POST [BASE URL]/api/admin/ca/restore/{id}
 ```
-
-<br>
 
 **<u>PowerShell</u>**
 
@@ -132,8 +124,6 @@ Get-DeletedCertIssuers
 Restore-DeletedCertIssuer -id 6182e1020e70e9747d622d52
 ```
 
-<br>
-
 ### To Force Delete
 
 If you do not want to retain any material associated with a deleted Key Store or Local CA either set the property in ``application.properties`` to zero:
@@ -167,6 +157,3 @@ And Certificate Issuers
 ```http
 DELETE [Base URL]/api/admin/ca/{cert issuer id}/force
 ```
-
-
-

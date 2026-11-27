@@ -10,35 +10,25 @@ keywords: ["SSO", "single sign-on", "OpenID Connect"]
 
 > This feature is available from certdog 1.15
 
-<br>
-
 Certdog supports authorization and authentication of users via OAuth 2.0 and OIDC services, including processing of group membership.
 
 Currently, the following provider(s) are supported:
 - Microsoft Entra ID (formerly Azure AD)
 - Keycloak
 
-<br>
-
 Enabling OAuth support does not disable the use of local or Active Directory accounts. I.e. all three authentication options can be enabled at the same time.
 
 Details on how to enable this with Entra ID are given below. The steps are detailed but still, some familiarity with Entra ID is needed. If in any doubt, contact [Krestfield Support](mailto:support@krestfield.com) who can assist with the setup process.
 
-<br>
-
 ## Before Starting
 
 Access to Azure Entra ID is required, with permissions to create an App Registration. If another team manages that configuration, they can follow the [Create an App Registration in Microsoft Entra ID](#create-an-app-registration-in-microsoft-entra-id) instructions below and provide the required values (e.g. [REDIRECT-URI]) for importing into certdog.
-
-<br>
 
 Ensure that the correct URL has been configured for certdog (as described [here](post-Installation.html)) and ideally the final TLS certificates have been installed (as described [here](installation.html#4-ssl-configuration)).
 
 This is required as we will need to configure redirect URLs within Entra ID. These should be the final URLs that all users will access the system from. 
 
 When certdog is initially installed you may access at 127.0.0.1. But when completing the steps above you may configure a DNS entry to point to the certdog server. When you would access as something like https://certdog.domain.local. This would then be the URL to configure in the Entra ID settings below.
-
-<br>
 
 ## Configuring OAuth
 
@@ -56,19 +46,13 @@ To enable OAuth and OIDC support you must:
 
 These steps are detailed in the next sections.
 
-<br>
-
 ## Create an App Registration in Microsoft Entra ID
 
 From Azure, click on **Microsoft Entra ID** and navigate to **App registrations**
 
-<br>
-
 #### Create a New App Registration
 
 Ensure you have the correct hostname for the certdog server. E.g. https://certdog.intserver.local as discussed in the [Before Starting](#before-starting) section above.
-
-<br>
 
 1. Click **+ New registration**
 
@@ -91,8 +75,6 @@ NOTE: This MUST be the URL you will be accessing the certdog server from. If it 
 7. Note this value as it is the **[REDIRECT-URI]** and will be required later
 8. Click **Register**
 
-<br>
-
 If you will be accessing certdog from multiple URLs - in addition to the one set in Step 4 above (e.g. if you have several DNS aliases configured or will also be accessing a local at 127.0.0.1). Add the additional locations as follows:
 
 From the newly created app registration click on **Authentication** (under the *Manage* section). In the *Single-page application* section, click the **Add URL** link and enter any other possible URLs. E.g.
@@ -101,8 +83,6 @@ From the newly created app registration click on **Authentication** (under the *
 
 Click **Save**
 
-<br>
-
 #### Expose the API
 
 1. From the new app registration, navigate to **Owners** (under the *Manage* section) and add your own account as an owner if not already listed
@@ -110,8 +90,6 @@ Click **Save**
    <img src="./images/image-20250926081431396.png" alt="image-20250926081431396" style="zoom:67%;" />
 
 2. Next, navigate to **Expose an API** and click the **Add** link to the right of *Application ID URI* and click **Save** accepting the default value for the Application ID URI
-
-   
 
 3. Click **+ Add a scope** and for 
 
@@ -133,8 +111,6 @@ Click **Save**
 
 6. Click **Add scope**
 
-<br>
-
 #### Add Permissions
 
 1. Navigate to **API permissions** (under the *Manage* section)
@@ -153,15 +129,11 @@ Click **Save**
 
 <img src="./images/image-20250912163322074.png" alt="image-20250912163322074" style="zoom:67%;" />
 
-<br>
-
 #### Enable the claims for user identification and group support
 
 1. From the app registration, navigate to **Token Configuration** (under the *Manage* section)
 19. Click **+ Add optional claim**, select **Access** and check **upn**. Click **Add**
 20. Click **+ Add groups claim**, select **Security groups**, then click **Add**
-
-<br>
 
 #### Enable OAuth 2.0 Support
 
@@ -169,8 +141,6 @@ Click **Save**
 19. Search for (CTRL-F) **requestedAccessTokenVersion** and change the value from **null** to **2** and click **Save**
 
 <img src="./images/image-20250926082537567.png" alt="image-20250926082537567" style="zoom:67%;" />
-
-<br>
 
 #### Obtain Required Values
 
@@ -181,8 +151,6 @@ Click **Save**
    E.g. ``e02d66e2-ae76-479c-8383-dbd209088538``
 
 3. This is the **[CLIENT-ID]** value we will need below
-
-   <br>
 
 7. From the top menu click on **Endpoints**
 
@@ -196,13 +164,9 @@ Click **Save**
 
 10. This is your **[ISSUER-URI]** value we will need below
 
-    <br>
-
 11. The **[REDIRECT-URL]** should have been noted in the setup steps above 
 
 12. The **[API-SCOPE]** should also have been noted in the setup steps above
-
-<br>
 
 The Azure EntraID Configuration is now complete. Ensure you have noted the values for:
 
@@ -214,8 +178,6 @@ The Azure EntraID Configuration is now complete. Ensure you have noted the value
   * e.g. ``94d1a7c9-d364-4513-83c4-55d982eb6c8c``
 * [ISSUER-URI] 
   * e.g. ``https://login.microsoftonline.com/0d285301-66f1-496e-9915-2008a8603591/v2.0``
-
-<br>
 
 ## Update the API properties file
 
@@ -242,8 +204,6 @@ spring.security.oauth2.resourceserver.jwt.audiences=e02d66e2-ae76-479c-8383-dbd2
 ```
 
 Save the file
-
-<br>
 
 ## Update the UI config file
 
@@ -294,21 +254,15 @@ E.g.
 }
 ```
 
-<br>
-
 ## Restart Certdog
 
 On windows open the Services snapin, locate and stop the **Krestfield Certdog Service**. When showing as not running Start the service.
 
 On Linux, run the ``./shutdown-certdog.sh`` script followed by the ``./start-certdog.sh`` from the bin directory
 
-<br>
-
 If certdog has already been operating, any browsers used to access the system may have cached previous settings. This cache must be cleared or an alternative browser may be used (e.g. Chrome instead of Edge). 
 
 Clearing of the cache is browser dependant but for Chrome, click the![image-20250918133149933](./images/image-20250918133149933.png)menu and choose **Settings**. From the left menu select **Privacy and security**. Then click on **Delete browsing data**. Select **Cached images and files** and **Cookies and other site data**, then click **Delete data**. The keyboard combination of CTRL-SHIFT-DELETE can also be used to bring up the delete browsing data dialog.
-
-<br>
 
 ## Verify Setup
 
@@ -322,8 +276,6 @@ If you don't see this. Check the ``config.json`` file as configured above, ensur
 
 At this point, clicking the **OAuth** button will fail as no groups have yet been mapped. This needs to be configured first, as described in the next section.
 
-<br>
-
 ## Map Entra ID Groups to Certdog Teams
 
 Before certdog will authenticate users (using their Entra ID credentials) they must be mapped to a certdog Team.
@@ -331,8 +283,6 @@ Before certdog will authenticate users (using their Entra ID credentials) they m
 This will define what permissions the user has within certdog.
 
 This is achieved by mapping the users Security Groups to a one or more certdog Teams.
-
-<br>
 
 ### Create Groups in Entra ID
 
@@ -362,8 +312,6 @@ From the *Groups Overview* page, select **All groups** and click on the group ju
 
 Click the Copy Symbol ![image-20250918113235092](./images/image-20250918113235092.png) to the right of the **Object ID** value and retain. We now need to set this value in certdog.
 
-<br>
-
 ### Map Groups in Certdog
 
 Log into certdog using a local (or AD, if configured) administrator account. In this case you will have to navigate to:
@@ -384,13 +332,9 @@ Make any other updates to the team as required and click **Add** (or Update for 
 
 Users that are a member of the team created in Entra ID will now have the permissions provided by that certdog team.
 
-<br>
-
 Note that when an Entra ID user authenticates, their account will then appear in the *Users list* in Certdog.
 This will show what Certdog Teams the user is a member of (based on their Entra ID group membership).
 None of the details for Entra ID accounts can be managed via Certdog - they continue to be managed via Entra ID only.
-
-<br>
 
 ## Logging in Options
 
@@ -410,8 +354,6 @@ You may enter username and password details for local or AD users and click **Lo
 
 Clicking the **OAuth** button will always ask you to confirm what account you wish to use. This is intentional to allow the switching of accounts.
 
-<br>
-
 ## Mapping alternative User ID claims
 
 By default, the ``upn`` claim (as used by Azure) is used to identify the user.  This claim will contain the username used by certdog  
@@ -426,8 +368,6 @@ oauth.username.claim=userPrincipalName
 
 Restart the certdog service
 
-<br>
-
 ## Common Issues
 
 ### Sorry, but we're having trouble signing you in
@@ -439,8 +379,6 @@ If you see the following error during login:
 This indicates that the redirectUrl value contained in the config.json file does not match the URL that certdog is being accessed via. OR that the redirect URL configured in the Entra ID App registration is not correct.
 
 To check which this is, perform the following:
-
-<br>
 
 <u>Check the config.json file</u>
 
@@ -470,8 +408,6 @@ In the case above it is set to ``https://certdg.org.local/certdog/ui/`` but it s
 
 If different, save the file and restart as per the [Restart Certdog](#restart-certdog) above. 
 
-<br>
-
 <u>Check the Entra ID App Registration Redirect URL</u>
 
 Navigate to the **App registration** in Entra ID. Expand the *Manage* section and click on **Authentication**.
@@ -482,15 +418,11 @@ Check the values for *Redirect URIs* under the *Single-page application* section
 
 In this case the certdog service is being accessed from https://certdog.org.local but the redirect URL only has an entry for https://certdogtest.org.local. Correct this and save the Authentication.
 
-<br>
-
 ### After updating the OAuth configuration, the changes don't seem to take effect
 
 When the configuration has been updated, the services must be restarted. If the same browser accessed certdog when the previous settings were enabled, it may cache some of the configuration. Effectively, this prevents the changes from being used.
 
 Ensure the Certdog Service has been restarted and the browser cache has been delete. Refer to the [Restart Certdog](#restart-certdog) above for details.
-
-<br>
 
 ### Redirected back to Login screen after authentication
 
@@ -507,8 +439,6 @@ This usually indicates that the authentication has failed at the certdog side. C
 Indicates that the user is not part of a group that has been mapped to a certdog Team. See section [Map Entra ID Groups to Certdog Teams](#map-entra-id-groups-to-certdog-teams) for details on how to do this.
 
 Or the App registrations in Entra ID are not including the correct claims. See [Enable the claims for user identification and group support](#enable-the-claims-for-user-identification-and-group-support) for details how to enable this.
-
-<br>
 
 <u>Untrusted Certificates</u>
 
@@ -531,8 +461,3 @@ To rectify, download the later JKS trust file from here: [dbssltrust.jks](https:
 Backup your existing JKS file here: ``[certdog install]\config\sslcerts\dbssltrust.jks`` (e.g. to ``dbssltrust.jks.backup``) and copy the downloaded file to the same location, replacing the old file.
 
 Restart the Krestfield Certdog Service
-
-
-
-
-

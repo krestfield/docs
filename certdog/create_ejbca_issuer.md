@@ -7,8 +7,6 @@ grand_parent: Certdog
 
 # Create an EJBCA Issuer
 
-
-
 To configure certdog to be able to request certificates from EJBCA, the following is  required:
 
 * The Web Service option is enabled in EJBCA
@@ -19,13 +17,9 @@ To configure certdog to be able to request certificates from EJBCA, the followin
 * A certificate profile must be configured to allow *Subject DN Override by CSR* and *Allow Extension Override*. See [EJBCA - Sample TLS Certificate Profile](ejbca_sample_tls_profile.html) fore more details
 * An end-entity profile must be configured with no subject DN attributes and set to allow *User Generated* tokens. See [EJBCA - Sample End Entity Profile](ejbca_sample_end_entity_profile.html) for more details
 
-
-
 ### 1. Obtaining the User KeyStore
 
 If you are already familiar with EJBCA and issuing certificates for administrator access, skip this section and just ensure that you obtain a password protected JKS with a certificate that has RA Administration privileges
-
-
 
 There are several ways in which this can be obtained e.g. via the Admin Web console, the RA (Registration Authority) console or the CLI (Command Line Interface). The following details the RA process  
 
@@ -52,10 +46,6 @@ You can leave *Email* empty
 Scroll down to the *Confirm request* section and click **Download JKS**
 
 Save this **file** and retain the **username** and **password** (Enrollment code) entered above - these are required for the certdog configuration  
-
-
-
-
 
 ### 2. Set Administrator Permissions
 
@@ -87,31 +77,21 @@ For CA, select **ManagementCA**, select **Match with Serial Number (recommended)
 
 Note: You can obtain this serial number by choosing **Search** in the RA, then click **Certificates**  and type the certificate name (e.g. certdog). Copy the serial number and paste into the **Match Value** above
 
-
-
 From the administrative console (/adminweb), under **System Functions**, select Administrator Roles
 
 Locate the role (e.g. Certdog RA Administrators) and select **Access Rules**
 
 For the *Role Template*, ensure it says **RA Administrators**, select it if not. Check CAs selected are as required and click **Save**
 
-
-
 ### 3. Certificate Profile
 
 Whichever profiles you wish to use with certdog - you must **check** the **Allow Subject DN Override by CSR** and **Allow Extension Override** options. For details on how to configure a sample profile for TLS, see [EJBCA - Sample TLS Certificate Profile](ejbca_sample_tls_profile.html)
-
-
-
 
 ### 4. End Entity Profile
 
 It is recommended that a new End Entity profile be created for certdog. Ensure that under the *Main certificate data* section, the **User Generated** option is selected in *Available Tokens*. This is because certdog will be generating the CSRs (or they will be provided)
 
 For an example on setting up an end-entity profile, see [EJBCA - Sample End Entity Profile](ejbca_sample_end_entity_profile.html)
-
-
-
 
 ## certdog Configuration
 
@@ -133,8 +113,6 @@ Before starting this, ensure you have the following:
 * If an un-trusted TLS certificate is used to protect the RA Web Services URL, you will also need to download the JKS for the CA that issued this certificate - this will be the **Trust KeyStore**
   * This can be obtained by navigating to the **RA Web**, selecting **CA Certificates and CRLs** from the top menu then downloading the *Certificate chain* as **JKS** for the CA. You will need to provide a password that will protect this JKS - this will be required in the configuration below.
 
-
-
 ### Set Credentials
 
 First we need to set some credentials. Credentials are password stores that are then referenced by a name. We will need one for the User KeyStore (JKS file) and optionally, one for the Trust KeyStore
@@ -150,8 +128,6 @@ Choose a name then enter the password. Note for the User KeyStore, this password
 Click **Add**
 
 If required, create another credential for the Trust KeyStore (i.e. the keystore downloaded from the CA). This default password for this keystore will be displayed by EJBCA when you download
-
-
 
 ### Configure EJBCA Issuer
 
@@ -178,11 +154,7 @@ Enter the details as follows:
 
 Click **Add**
 
-
-
 If all is correct you will get a success confirmation. If any of the details or are incorrect you may get errors such as:
-
-
 
 <img src="./images/image-20241114144101711.png" alt="image-20241114144101711" style="zoom: 80%;" />
 
@@ -196,27 +168,14 @@ the full URL contains two ``ejbcaws`` entries. I.e.
 
 ``http://ejbca.krestfield.local/ejbca/ejbcaws/ejbcaws``
 
-
-
-
-
 <img src=".\images\ejbca_error1.png" alt="image-20210205165350575" style="zoom: 80%;" />
 
 This error is most likely due to the User Key Store password being incorrect.  Reset the password in the credential and try again
-
-
-
-
 
 <img src=".\images\ejbca_error2.png" alt="image-20210205165642593" style="zoom:80%;" />
 
 The most likely cause is that the certificate included in the User KeyStore does not have RA Administrative permissions. Go back to EJBCA and check the Administrator Roles
 
-
-
-
-
 <img src=".\images\ejbca_error3.png" alt="image-20210205170327789" style="zoom:80%;" />
 
 The Web Service URL is most likely protected with a TLS certificate that is not trusted.  Identify the CA that issued the TLS certificate and download its certificate chain as a JKS - then upload as outlined above
-

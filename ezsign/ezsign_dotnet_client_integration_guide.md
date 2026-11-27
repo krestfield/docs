@@ -8,8 +8,6 @@ keywords: ["C#", "dotnet"]
 ---
 # EzSign .NET Client Integration Guide
 
-<br>
-
 ## Introduction
 
 The Krestfield EzSign Client is a lightweight .NET library which interfaces with the EzSign Server, enabling applications to quickly generate and verify digital signatures, encrypt and decrypt data and generate random data without the need for complex programming
@@ -22,8 +20,6 @@ This guide details the steps required to integrate the client into applications 
 
 For server side setup, please refer to the [Server Configuration](ezsign_server.html) and, for the REST API, the [REST API](ezsign_rest_api.html) guide
 
-<br>
-
 ## Library
 
 The client consists of the following library files:
@@ -35,8 +31,6 @@ The client consists of the following library files:
 These are located at ``[installation folder]\DotNetClient\lib``, where ``[installation folder]`` is the location the server was installed
 
 Add a reference to ``EzSignClient.dll`` from your project to use the client, and to ``EzSignClientUtils.dll`` to use the utilities
-
-<br>
 
 ### Choosing the Build
 
@@ -59,8 +53,6 @@ or, in Visual Studio, install it with **Manage NuGet Packages**
 
 The libraries are code signed by Krestfield Ltd
 
-<br>
-
 ## Client API
 
 The API to the EzSign client has intentionally been kept simple. Decisions on which keys to use, what certificates to include in signatures and what hashing algorithms to use are configured at the server level
@@ -72,8 +64,6 @@ There are two client classes, both in the ``com.krestfield.ezsign.client`` names
 * ``EzSignRestClient`` - uses the REST API (EzSign server 4.6.0 or later)
 
 Both provide the same operations (``signData``, ``verifySignature``, ``verifyRawSignature``, ``encryptData``, ``decryptData`` and ``generateRandomBytes``), which are described under [Operations](#operations) below
-
-<br>
 
 ### The Socket API
 
@@ -122,8 +112,6 @@ namespace App1
 
 To protect the communications between the client and server, an Authentication Code and/or TLS may be used
 
-<br>
-
 <u>Authentication Code</u>
 
 The Authentication Code is provided by using one of the following constructors:
@@ -141,8 +129,6 @@ This will result in the encryption of the traffic between the client and server
 There are no restrictions on what Authentication Code can be used, but a longer more complex code will increase security
 
 The same Authentication Code must also be configured on the server. See [Set Authentication Code](ezsign_management_tool.html#set-authentication-code) in the Management Tool guide
-
-<br>
 
 <u>Using TLS</u>
 
@@ -170,8 +156,6 @@ EzSignClient client = new EzSignClient("ezsign.example.com", 5656)
 
 TLS 1.2 or TLS 1.3 is used, as the operating system supports. TLS and an Authentication Code can be used together
 
-<br>
-
 ### The REST API
 
 From version 4.6.0 the client can use the server's REST API with the ``EzSignRestClient`` class. The REST API must be enabled on the server, and a REST API user must be created for the application using the [Management Tool](ezsign_management_tool.html). The user must be granted the operations and channels the application uses, see [Authentication and Permissions](ezsign_rest_api.html#authentication-and-permissions)
@@ -186,8 +170,6 @@ Where ``baseUrl`` is the scheme, host and REST API port (``server.restapi.port``
 
 The client then authenticates with an API token, a client certificate, or both (the server uses the token if both are sent). These options, and the others below, are set when the client is created, before its first request
 
-<br>
-
 <u>API Token</u>
 
 ``withApiToken()`` provides the API token issued for the REST API user (``ezsign-manage users add-token``). It is sent in the ``Authorization: Bearer`` header:
@@ -200,8 +182,6 @@ EzSignRestClient client = new EzSignRestClient("https://ezsign.example.com:8443"
 
 The token should be held securely by the application, for example in a protected configuration file or a secrets store, and not written in the source code
 
-<br>
-
 <u>Client Certificate</u>
 
 ``withClientCertificate()`` provides a TLS client certificate and its private key, in a PFX (PKCS#12) file. The certificate must be one the REST API user has been configured with:
@@ -212,8 +192,6 @@ EzSignRestClient client = new EzSignRestClient("https://ezsign.example.com:8443"
 ```
 
 An ``X509Certificate2`` with its private key, for example from the Windows certificate store, can be passed instead of the file name and password
-
-<br>
 
 <u>Trusting the Server's Certificate</u>
 
@@ -229,8 +207,6 @@ EzSignRestClient client = new EzSignRestClient("https://ezsign.example.com:8443"
 
 If the server's REST API has TLS turned off (``server.restapi.useTls=false``), use an ``http://`` URL. The API token is then sent unencrypted, so this is only suitable when the client and server are on the same machine
 
-<br>
-
 <u>Timeout</u>
 
 The default timeout for each request is 30 seconds. It can be changed with ``withTimeout()``, in milliseconds:
@@ -238,8 +214,6 @@ The default timeout for each request is 30 seconds. It can be changed with ``wit
 ```csharp
 EzSignRestClient client = new EzSignRestClient(url).withApiToken(apiToken).withTimeout(10000);
 ```
-
-<br>
 
 <u>Using the Client</u>
 
@@ -267,8 +241,6 @@ The REST client also provides:
 
 * ``getStatusJson()`` - returns the server status as JSON. The user needs the ``status`` permission
 
-<br>
-
 <u>REST API Errors</u>
 
 A failed operation throws the same exceptions as the socket API, described for each operation below. Other errors throw a ``KEzSignRestException``, which is a ``KEzSignException`` with these properties:
@@ -282,8 +254,6 @@ A failed operation throws the same exceptions as the socket API, described for e
 * ``IsBusy`` - *true* if the server was busy (503), and the request can be tried again later
 
 Errors connecting to the server, including a server certificate that is not trusted, throw a ``KEzSignConnectException``
-
-<br>
 
 ### Switching Between the Socket and REST APIs
 
@@ -303,15 +273,11 @@ EzSignClient client = new EzSignClient("ezsign.example.com", 5656, authCode);
 EzSignRestClient client = new EzSignRestClient("https://ezsign.example.com:8443").withApiToken(apiToken);
 ```
 
-<br>
-
 ## Operations
 
 The following operations are provided by both ``EzSignClient`` and ``EzSignRestClient``. With the REST API, the user needs the permission named for each operation on the channel used
 
 The exception classes are separate classes (none derives from another, apart from ``KEzSignRestException``), so they can be caught in any order
-
-<br>
 
 ### Generate Signature Methods
 
@@ -346,13 +312,11 @@ byte[] dataToSign = Encoding.UTF8.GetBytes("Data to sign");
 byte[] signature = client.signData("SIGNCHANNEL", dataToSign, false);
 ```
 
-<br>
-
 ### Verify PKCS#7 Signature Methods
 
 The following methods are used to verify a PKCS#7 signature and will perform the required path building and revocation checking as configured at the server (REST API permission: ``verify``)
 
-<br> <u>Verifying Signature 1</u>
+<u>Verifying Signature 1</u>
 
 ```csharp
 public void verifySignature(String channelName, byte[] signature, byte[] contentBytes, bool dataIsDigest)
@@ -414,8 +378,6 @@ catch (KEzSignException generalEx)
 }
 ```
 
-<br>
-
 <u>Verifying Signature 2</u>
 
 This method allows for the by-passing of revocation checking and the by-passing of path building i.e. only a simple verification check will be performed to confirm the data was signed by the certificate specified in the signature and has not been altered
@@ -431,15 +393,11 @@ With the REST API, bypassing either check also needs the ``verify.bypass`` permi
 
 This method throws the same exceptions as Verifying Signature 1
 
-<br>
-
 ### Verify Raw Signature Methods
 
 The following methods are used to verify raw (e.g. PKCS#1) signatures and will perform the required path building and revocation checking as configured at the server (REST API permission: ``verify``)
 
 As a raw signature does not contain the signer certificate, this must be provided
-
-<br>
 
 <u>Verifying Raw Signature 1</u>
 
@@ -452,8 +410,6 @@ public void verifyRawSignature(String channelName, byte[] signature, byte[] cont
 
 This method throws the same exceptions as Verifying Signature 1
 
-<br>
-
 <u>Verifying Raw Signature 2</u>
 
 This method accepts the signer certificate as well as other certificates in the path. Path building and revocation checking (if configured at the server) will be performed
@@ -464,8 +420,6 @@ public void verifyRawSignature(String channelName, byte[] signature, byte[] cont
 ```
 
 This method throws the same exceptions as Verifying Signature 1
-
-<br>
 
 <u>Verifying Raw Signature 3</u>
 
@@ -492,8 +446,6 @@ X509Certificate2 signerCert = KCertificateFiles.LoadCertificate(@"C:\certs\signe
 client.verifyRawSignature("RAWCHANNEL", signature, dataToVerify, false, signerCert);
 ```
 
-<br>
-
 ### Generate Random Number Methods
 
 The following method is called to generate random data (REST API permission: ``random``):
@@ -513,8 +465,6 @@ This method throws the following exceptions:
 * KEzSignException
 
   There was another error
-
-<br>
 
 ### Encrypt/Decrypt Methods
 
@@ -587,13 +537,9 @@ catch (KEzSignException generalEx)
 }
 ```
 
-<br>
-
 ## Client Utils API
 
 The utilities are contained in the ``EzSignClientUtils.dll`` file and held in the ``com.krestfield.ezsign.client.utils`` namespace
-
-<br>
 
 <u>KHash</u>
 
@@ -629,8 +575,6 @@ public void reset()
 
 This resets the internal buffer allowing the same object to be used to calculate a hash over fresh data
 
-<br>
-
 <u>KSignatureParser</u>
 
 This class reads the details of a PKCS#7 signature. It is created with the signature, as bytes or base64:
@@ -642,13 +586,9 @@ public KSignatureParser(String b64Signature)
 
 And provides methods including ``getSignerCertificate()``, ``getSignersSubjectDn()``, ``getSignersIssuerDn()``, ``getCertificates()``, ``getSignatureAlgorithmName()`` and ``includesSignedAttributes()``
 
-<br>
-
 <u>KConvert</u>
 
 This class converts data: ``ToBase64String()``, ``B64StringToBytes()``, ``BytesToHexStr()`` and ``HexStrToBytes()``
-
-<br>
 
 ## Sample
 
@@ -742,8 +682,6 @@ public class TestClient
 }
 ```
 
-<br>
-
 ## Upgrading to Version 4.6.0
 
 Existing applications do not need to change to use version 4.6.0 with the socket API. However, note the following changes in behaviour:
@@ -753,8 +691,6 @@ Existing applications do not need to change to use version 4.6.0 with the socket
 * Methods no longer return ``null`` when the server returns an unexpected response. A ``KEzSignException`` is thrown instead
 * Large responses, such as signatures over large data or with many certificates, are now always read in full
 * The client connects over IPv4 or IPv6, as the server's host name resolves
-
-<br>
 
 ## Support
 

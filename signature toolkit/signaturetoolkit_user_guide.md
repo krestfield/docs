@@ -8,13 +8,9 @@ keywords: ["PQC", "post-quantum", "verify signature", "CMS", "PKCS7", "p7s"]
 
 # Signature Toolkit - User Guide
 
-<br>
-
 The Krestfield Signature Toolkit lets you look inside PKCS#7 and CMS (Cryptographic Message Syntax) signature files, verify the signatures they contain, inspect certificates and certificate paths, and generate new signatures.
 
 This guide covers version 2.0 and above.
-
-<br>
 
 ## Key Features
 
@@ -29,8 +25,6 @@ This guide covers version 2.0 and above.
 * Generation of PKCS#7/CMS compliant signatures using certificates from the Windows certificate store or a PKCS#12 file
 
 * Data Viewer and Type Converter, including a built-in ASN.1 viewer
-
-<br>
 
 ## Contents
 
@@ -50,8 +44,6 @@ This guide covers version 2.0 and above.
 * [Support](#support)
 * [Appendix](#appendix)
 
-<br>
-
 ## Installation
 
 ### Pre-requisites
@@ -66,13 +58,9 @@ The Signature Toolkit may be installed on the following operating systems (64-bi
 
 * Windows Server 2025
 
-<br>
-
 No other components are required. The .NET runtime the tool needs is included in the installer.
 
 You must have local Administrator privileges on the system to install.
-
-<br>
 
 ### Install
 
@@ -84,8 +72,6 @@ Click **Next**, accept the default folder, or click **Change...** to choose anot
 
 Click **Install**, and then **Finish** once the installation completes
 
-<br>
-
 The installer will:
 
 * Install the tool to ``C:\Program Files\Krestfield\Signature Toolkit``
@@ -96,11 +82,7 @@ The installer will:
 
 * Associate the **p7s**, **p7b** and **p7c** file types with the tool
 
-<br>
-
 **Note**: If an earlier version of the Signature Toolkit is installed, it will be replaced. There is no need to uninstall it first.
-
-<br>
 
 ## Opening Signature Files
 
@@ -120,11 +102,7 @@ To open a file, do any of the following:
 
 * Choose a previously opened file from **File** > **Open Recent**
 
-<br>
-
 Dragging multiple files onto the application will open the first file in the current window and each of the others in a new window.
-
-<br>
 
 The following file types are offered when opening a file:
 
@@ -138,13 +116,9 @@ The following file types are offered when opening a file:
 
 * **cer**, **crt**, **pem**, **der** – X.509 certificates
 
-<br>
-
 Files with any other extension may also be opened (choose *All files* in the open dialog). The contents of the file, not its extension, determine whether it can be displayed.
 
 The data within the file may be binary (DER), PEM, Base64 or hexadecimal. The format is detected automatically.
-
-<br>
 
 ### Importing Data
 
@@ -157,8 +131,6 @@ Click **Import** on the toolbar, or choose **File** > **Import Base64 or PEM...*
 Paste the data into the window (or click **Paste**) and click **Import**.
 
 PEM, Base64 and hexadecimal data are accepted. PEM headers, line breaks and URL encoding are removed automatically.
-
-<br>
 
 ## Viewing Details
 
@@ -182,8 +154,6 @@ The left hand pane displays the items contained within the signature file as a t
 
 Timestamps and counter signatures, where present, are shown beneath the signer they belong to.
 
-<br>
-
 The right hand pane displays the details of the item selected in the left pane.
 
 Click any row in the right hand pane to show its full value in the preview area at the bottom of the window. From here:
@@ -194,13 +164,9 @@ Click any row in the right hand pane to show its full value in the preview area 
 
 Right clicking a row provides further options, including *Copy All Rows*.
 
-<br>
-
 Where an action is available for the selected item (such as viewing a certificate or verifying a signature) a button is shown at the top right of the details pane. The same actions are available by right clicking the item in the tree.
 
 The status bar at the bottom of the window shows a summary of the file: whether the signature is attached or detached, the number of signers and certificates, and the signature algorithms used.
-
-<br>
 
 ### Post-Quantum Signatures
 
@@ -209,8 +175,6 @@ Signatures and certificates that use the post-quantum **ML-DSA** and **SLH-DSA**
 When such an algorithm is selected (for example, the *Signature Algorithm* item beneath a signer) the details pane also shows the algorithm family, the standard it is defined in, the parameter set, the NIST security category and the expected public key and signature sizes.
 
 ![image-20261112161257735](./images/image-20261112161257735.png)
-
-<br>
 
 ## Data Viewer
 
@@ -221,8 +185,6 @@ The Data Viewer displays a chosen item of data so that it can be easily viewed, 
 To view the whole signature file, click **View Data** on the toolbar or choose **View** > **Signature Data...**
 
 To view a single value, double click it in the details pane.
-
-<br>
 
 Use the **Show as** buttons at the top of the window to convert between the following types:
 
@@ -241,13 +203,9 @@ Use the **Show as** buttons at the top of the window to convert between the foll
 * **ASN.1**  
   A display of the ASN.1 structure (if the data is valid ASN.1). Known object identifiers, including those of the post-quantum algorithms, are shown with their names
 
-<br>
-
 Click **Copy** to copy the displayed text to the clipboard.
 
 Click **Save...** to save the data. In the save dialog choose either *Binary data*, to save the raw bytes, or *As displayed*, to save the text exactly as it is shown.
-
-<br>
 
 ## Type Converter
 
@@ -267,8 +225,6 @@ Either paste or type data into the window, click **Open...** to load a file from
 
 Use the **Show as** buttons to convert between types, as with the Data Viewer.
 
-<br>
-
 If text that is typed or pasted in looks like Base64 or hexadecimal data, a prompt appears above the text:
 
 ``This looks like Base64. Treat it as Base64``
@@ -276,8 +232,6 @@ If text that is typed or pasted in looks like Base64 or hexadecimal data, a prom
 Click the link to have the data decoded. If the text is not encoded data (for example, it is a normal text string that happens to be valid Base64) simply ignore the prompt.
 
 Click **New** to clear the window and start again.
-
-<br>
 
 ## Viewing Certificates
 
@@ -293,15 +247,9 @@ Certificates shown in the left hand pane may be viewed by selecting the certific
 
 Choosing any of these options will bring up the Microsoft Windows certificate viewer where all certificate details will be displayed.
 
-<br>
-
 To view the certificate of a particular signer, select the **Signer ID** item beneath that signer and click **View Signer Certificate** (or double click the *Signer ID* item).
 
-<br>
-
 The details of a certificate can also be seen without leaving the tool. Selecting a certificate in the tree shows its subject, issuer, validity, key usage and thumbprints in the details pane. Expand the certificate to see its **Public Key**, **Extensions** and **Signature**.
-
-<br>
 
 ## Certificate Path Display
 
@@ -312,8 +260,6 @@ Alternatively choose the **View** > **Certificate Path...** menu item.
 To display the path of a specific certificate, select it in the tree and click the **Certificate path** button at the top right of the details pane.
 
 ![image-20261113092055105](./images/image-20261113092055105.png)
-
-<br>
 
 This window displays the certificate path from a root certificate (at the top) down to the end entity certificate. It will display certificates whether trusted or not.
 
@@ -331,8 +277,6 @@ Any problem found with a certificate (for example, that it has expired or is not
 
 Click a certificate to see its details, including where it was found. Double click a certificate, or click **View certificate...**, to open it in the Windows certificate viewer.
 
-<br>
-
 The tool uses certificates from the signature file and from the Windows *Intermediate Certification Authorities* and *Trusted Root Certification Authorities* stores (current user and local machine).
 
 If you would prefer paths to be built only from the certificates within the signature file, this can be changed in the [Options](#options-and-logging).
@@ -341,11 +285,7 @@ If a path does not complete it is probably due to a certificate not being availa
 
 To rectify this import the required certificates to the Windows store. See the section in the [Appendix](#appendix) at the end of this document.
 
-<br>
-
 **Note**: Certificates are not downloaded from the location given in the AIA (Authority Information Access) extension, and revocation is not checked.
-
-<br>
 
 ## Verifying Signatures
 
@@ -365,15 +305,9 @@ If there is an error with the signature a results pane is displayed:
 
 This view, will display likely causes for the signature failure assisting with any analysis.
 
-
-
 Click **Certificate path...** to display the certificate path of the selected signer.
 
-<br>
-
 **Note**: Verification confirms that the signature is cryptographically valid, that is, that the content has not been altered and was signed with the key belonging to the signer's certificate. It does not check whether the certificate is trusted in the environment it is intended for or has been revoked. Use the [Certificate Path Display](#certificate-path-display) to inspect the certificate chain.
-
-<br>
 
 ### Verifying an Individual Signature
 
@@ -382,8 +316,6 @@ Signatures may also be verified individually, e.g. if there are multiple signers
 Select the signer (or the **Signature** item beneath it) in the tree view and click the **Verify This Signature** button at the top right of the details pane.
 
 Counter signatures can be verified in the same way.
-
-<br>
 
 ### Detached Signatures
 
@@ -405,17 +337,11 @@ If you have the digest (hash) of the content rather than the content itself, tic
 
 Click **Verify**.
 
-<br>
-
 Once content that verifies has been supplied it is remembered until another file is opened, so it only needs to be provided once.
-
-<br>
 
 ### Verifying a CRL
 
 If the file contains a Certificate Revocation List, select the CRL in the tree and click **Verify CRL Signature**. The signature on the CRL is verified using the certificates in the file and, if enabled, the Windows certificate stores.
-
-<br>
 
 ## Generating Signatures
 
@@ -424,8 +350,6 @@ A signature may be generated by clicking **Generate Signature** on the toolbar, 
 The following window will be shown:
 
 ![image-20261112162228930](./images/image-20261112162228930.png)
-
-<br>
 
 ### 1. Signing certificate
 
@@ -443,8 +367,6 @@ For a PKCS#12 file, you will be prompted to choose the file and enter its passwo
 
 Select the required certificate from the list. The type of key held by each certificate (e.g. RSA, ECDSA, ML-DSA-65) is shown in the **Key** column.
 
-<br>
-
 ### 2. Data to sign
 
 Choose the data you wish to sign. Either:
@@ -454,8 +376,6 @@ Choose the data you wish to sign. Either:
 * Select **Text** and type (or paste) the text to be signed
 
 A file is signed exactly as it is stored on disk. Text is signed as UTF-8.
-
-<br>
 
 ### 3. Signature options
 
@@ -474,8 +394,6 @@ A file is signed exactly as it is stored on disk. Text is signed as UTF-8.
 * **Include the issuing CA certificates**  
   Includes the certificates of the CAs that issued the signing certificate, where they can be found. The root certificate is not included
 
-<br>
-
 ### 4. Save signature as
 
 Enter, or click **Browse...** to choose, the location for the resulting signature file. If no extension is provided a p7s extension will be added to the file.
@@ -490,23 +408,17 @@ Choose the **Format** of the file:
 
 If you wish to view the generated signature on completion tick **Open the signature when finished**.
 
-<br>
-
 The algorithm that will be used is shown at the bottom of the window, for example:
 
 ``Will sign using ML-DSA-65 (pure mode)``
 
 Click **Generate** and the signature will be generated using the private key associated with the certificate chosen.
 
-<br>
-
 ### Post-Quantum Signing Keys
 
 ML-DSA and SLH-DSA signatures can be generated on any supported version of Windows when the certificate and key are held in a PKCS#12 file.
 
 To sign with an ML-DSA or SLH-DSA key held in the Windows certificate store, the version of Windows must itself support these algorithms (Windows 11 version 24H2 or Windows Server 2025, with current updates). If it does not, an error will be displayed explaining this when **Generate** is clicked.
-
-<br>
 
 ## Saving Certificates
 
@@ -516,11 +428,7 @@ Click **Save Certificates** on the toolbar, or choose **File** > **Save All Cert
 
 Each certificate is saved as a PEM encoded **.cer** file, named after the subject of the certificate. The folder is opened once the certificates have been saved.
 
-<br>
-
 Certificates can also be saved automatically every time a file is opened. See [Options](#options-and-logging) below.
-
-<br>
 
 ## Options and Logging
 
@@ -537,8 +445,6 @@ Choose **Tools** > **Options...** to change the following settings:
 * **Write a log of verification and signing activity**  
   When ticked (the default) details of the operations performed are written to a log file
 
-<br>
-
 ### Viewing the Log
 
 The log records the steps taken when files are opened, signatures are verified and signatures are generated. It is the first place to look if a file fails to open or a signature fails to verify.
@@ -550,8 +456,6 @@ From this window the log may be refreshed, copied or cleared. Click **Open folde
 The log file is stored at:
 
 ``%LocalAppData%\Krestfield\Signature Toolkit\SignatureToolkit.log.txt``
-
-<br>
 
 ## Keyboard Shortcuts
 
@@ -567,8 +471,6 @@ The log file is stored at:
 | Ctrl+T | Open the Type Converter |
 | F1 | Open the user guide |
 
-<br>
-
 ## Uninstalling
 
 Open the Windows **Settings**
@@ -579,8 +481,6 @@ Locate **Signature Toolkit**
 
 Click the **...** button, choose **Uninstall** and confirm when asked
 
-<br>
-
 ## Support
 
 Please send all support issues to the following email address:
@@ -588,8 +488,6 @@ Please send all support issues to the following email address:
 [support@krestfield.com](mailto:support@krestfield.com)
 
 Our support team will be happy to help with any queries you may have.
-
-<br>
 
 ## Appendix
 
@@ -605,8 +503,6 @@ Press the **Windows** key, type ``certmgr.msc`` or ``certlm.msc`` (to view Machi
 
 You may navigate between the folders to inspect what certificates are stored. For a path to be reported as trusted, the issuing root certificate must be held within the *Trusted Root Certification Authorities* store. Certificates of intermediate CAs are held within the *Intermediate Certification Authorities* store.
 
-<br>
-
 If the Certificate Path Display reports:
 
 ``Complete path, but the root is not in the trusted root store``
@@ -621,11 +517,7 @@ In the *Certificate Import Wizard* choose **Place all certificates in the follow
 
 A Security Warning window will be displayed and you must choose **Yes** to install the certificate into the Windows root certificate store.
 
-<br>
-
 **Note**: Once a root certificate is installed in this way it will be trusted by the operating system and all its components from then on. Ensure that only trusted roots are installed.
-
-<br>
 
 ### Obtaining Signing Certificates
 
@@ -634,7 +526,5 @@ A signing certificate may be obtained from a CA (Certificate Authority).
 Your organisation may have a CA already in place for issuing certificates to users.
 
 If this is not the case then there are several CAs that may be set up to issue certificates, such as Microsoft Active Directory Certificate Services, available with Windows Server platforms, or [Krestfield Certdog](https://www.krestfield.com/certdog).
-
-<br>
 
 Need more info? Contact us at <support@krestfield.com>

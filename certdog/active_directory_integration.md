@@ -7,15 +7,11 @@ grand_parent: Certdog
 
 # Active Directory Integration
 
-<br>
-
 Certdog supports authentication of active directory users and the processing of group membership (including nested groups)  
 
 Active directory users do not need to be specifically added to Certdog. Their permissions are managed by their Active Directory group membership. To achieve this, the AD Groups must be configured against Teams in Certdog  
 
 Note that the machine hosting Certdog does not need to be a member of the domain but it does need to be able to reach the Domain Controller LDAP address. E.g. If you were running Certdog on Linux it could still be configured to recognise Active Directory users  
-
-<br>
 
 ### Initial Configuration
 
@@ -31,8 +27,6 @@ Before AD integration will operate you need to to configure the following inform
   * For example: ``OU=USERS,OU=PKI,DC=certdog,DC=local``
   * See the [Locating the Search Base](#locating-the-search-base) section below if you are unsure of what to put here
   
-
-
 * The Group Search Base
   * The level in the directory at which the groups that you want to reference are stored
   * For example: ``OU=GROUPS,OU=PKI,DC=certdog,DC=local``
@@ -41,8 +35,6 @@ Before AD integration will operate you need to to configure the following inform
 * A Credential
   * This should be an AD account that has read-only permissions and should not have any other rights
   * Ideally it should be a service account
-
-<br>
 
 Other Info
 
@@ -54,17 +46,11 @@ Other Info
   * The maximum time (in milliseconds) to wait for a query or search to return
   * If your connection is very slow and you experience timeouts, consider increasing this value
 
-<br>
-
 To configure these settings, from the left hand menu, click **Settings** then **Active Directory Settings**
 
 <img src=".\images\ad_settings.png" alt="image-Active Directory Settings" style="zoom:80%;" />
 
-
-
 Enter the required values and click **Update**
-
-<br>
 
 ### Granting Permissions
 
@@ -82,15 +68,11 @@ Note that when an AD user authenticates their account will then appear in the *U
 
 If an AD user is not a member of any group mapped to a Team, they can still login to Certdog but will have no access to any Certificate Issuers. If the Setting *Users can see* is set to **All Certificates** then they will also be able to view certificates in the system but will not be able to carry out any operations on them
 
-<br>
-
 ### Configuring the Active Directory Credential
 
 Follow the guide for creating a Username/Password [credential](credentials.html) specifying the account name as the Service Principal e.g. ``aduser@certdog.local``  
 
 This account should only have read permissions and ideally be configured as a Service Account that is denied local logon and whose password does not expire  
-
-<br>
 
 ### Locating the Domain Controller
 
@@ -130,11 +112,7 @@ or
 ldaps://krestdc007.krestfield.local
 ```
 
-<br>
-
 Note that this is only one way to obtain the LDAP address. Your organisation may have many Domain Controllers and there may be a preferred DC to target for your environment
-
-<br>
 
 ### Locating the Search Base
 
@@ -145,8 +123,6 @@ For small directories it is possible to set this as the base or top-level of you
 For example, if your organisation domain is ``someorg.com`` then the search base may be: ``DC=someorg,DC=com``  
 
 This could be configured for both user and group search bases. This means whenever Certdog searches for a user or group it will start from that location. As directories grow this becomes inefficient and it is then better to target the specific OUs where these details are stored  
-
-<br>
 
 You may get an idea of the search base that user accounts are in by running a PowerShell command such as: ``Get-ADUser <username>`` on your own (or another known) account e.g.
 
@@ -167,8 +143,6 @@ UserPrincipalName : certdoguser@certdog.local
 
 In this example we can see that user accounts are stored here: ``OU=USERS,OU=PKI,DC=certdog,DC=local``
 
-<br>
-
 If the ``Get-ADUser`` command is not found you may need to enable the *Active Directory PowerShell* feature
 
 Run the following to install:
@@ -176,8 +150,6 @@ Run the following to install:
 ```
 Install-WindowsFeature RSAT-AD-PowerShell
 ```
-
-<br>
 
 Searching for the location of a specific group can be obtained by running: ``Get-AdGroup <Group Name>`` e.g.
 
@@ -195,8 +167,6 @@ SID               : S-1-5-21-3549443890-123274070-2723549285-1106
 ```
 
 Groups are contained within ``OU=GROUPS,OU=PKI,DC=certdog,DC=local``  
-
-<br>
 
 In the above examples you could then set your user base to:
 
@@ -216,11 +186,7 @@ This would be the most efficient way but it would also be possible to set both b
 OU=PKI,DC=certdog,DC=local
 ```
 
-<br>
-
 If there are any errors whilst performing searches for groups or authenticating to Active Directory, check the logs as these will contain more information than what is displayed via the UI. If you see errors such as ``Timelimit Exceeded`` you may increase the Time Limit but often this is due to inefficient searches being made. Consider restricting the search bases further to limit the amount of searching performed
-
-<br>
 
 ### Using Ldaps
 
@@ -249,7 +215,7 @@ To enable this trust, obtain the root certificate of the CA that issued the LDAP
 
 (note: To determine what certificate the server is returning, you can run a tool such as openssl e.g. ``openssl s_client -connect dc1.organisation.com:636`` which will return server's ldaps certificate)
 
-<br>Open a command prompt and navigate to ``[Certdog Install]\config\sslcerts`` then run the following:
+Open a command prompt and navigate to ``[Certdog Install]\config\sslcerts`` then run the following:
 
 ```
 C:\certdog\config\sslcerts>..\..\java\bin\keytool -import -alias "Krestfield Root" -file root.cer -keystore dbssltrust.jks
@@ -264,8 +230,6 @@ Enter keystore password:
 ```
 
 Enter the password for the JKS file. If you have not changed this it will be held within the README.txt in the same folder e.g. ``C:\certdog\config\sslcert\README.txt``
-
-
 
 The certificate details will be displayed. Ensure they are correct and when prompted ``Trust this certificate? [no]:`` type ``yes`` and press Enter
 
@@ -286,7 +250,4 @@ Trust this certificate? [no]:  yes
 Certificate was added to keystore
 ```
 
-
-
 Restart the Certdog service and you should now be able to access the domain controller using LDAPS
-

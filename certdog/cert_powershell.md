@@ -13,13 +13,9 @@ CSRs are generated on the machine hosting the script and certificates stored in 
 
 You can obtain the script from github [here](https://github.com/krestfield/certdog-cert)
 
-
-
 ## Pre-requisites
 
 An instance of certdog is required. See [here](get_certdog.html) for options
-
-
 
 ## Overview
 
@@ -28,8 +24,6 @@ The script can generate a local CSR (stored in the Local Machine certificate sto
 This can be processed by the certdog application, and the issued certificate installed  
 
 The script can also create a scheduled task which will, by default, run every day and check the expiry of the certificates created and monitored via this script. When nearing expiry, the certificate will be automatically renewed
-
-
 
 ## Get the Script
 
@@ -42,8 +36,6 @@ You should have the following files:
 * settings.json
 
 Save these to a local folder on the machine hosting the IIS instance
-
-
 
 ## Settings (settings.json)
 
@@ -106,13 +98,9 @@ This is the Event Log ID that will be assigned to entries the script adds. If mo
 
 This is the Event Log ID that will be assigned to entries the script adds when errors occur. If monitoring error events, you may need to note this value. It can also be updated here
 
-
-
 ## Running
 
 Open a PowerShell window as Administrator
-
-
 
  Simple run options:
 
@@ -122,15 +110,11 @@ Open a PowerShell window as Administrator
 
 This will prompt for all information including the certdog login as well as the binding and certificate details. See the sample output below for more details
 
-
-
 To provide the certdog authentication details (and not be prompted for username/password), run:
 
 ```powershell
 .\certdog-cert.ps1 -new -username [certdoguser] -password [certdogpassword]
 ```
-
-  
 
 To provide all required information (removing all prompting):
 
@@ -144,10 +128,6 @@ For example, to generate a certificate with a DN of ``CN=test.com,O=Org,C=GB``, 
 .\certdog-cert.ps1 -new -username certdoguser -password password -sans "EMAIL=user@domain.com,DNS=server2.com" -dn "CN=test.com,O=Org,C=GB" -saveCreds y -createTask y -taskUsername "domain\user1" -taskPassword "password"
 ```
 
-
-
-
-
  Once the above has been performed the script saves the required information. Running:
 
 ```powershell
@@ -156,17 +136,11 @@ For example, to generate a certificate with a DN of ``CN=test.com,O=Org,C=GB``, 
 
 Will check and process any renewals required for the sites and bindings configured when the ``-new`` switch was used
 
-  
-
 As above, this can be run with the username and password options:
 
 ```powershell
 .\certdog-cert.ps1 -renew -username [certdoguser] -password [certdogpassword]
 ```
-
- 
-
-
 
  To list what bindings are being monitored:
 
@@ -174,15 +148,11 @@ As above, this can be run with the username and password options:
 .\certdog-cert.ps1 -list
 ```
 
-   
-
  To create a scheduled task that runs the ``.\certdog-iis.ps1 -renew`` script daily, run
 
 ```powershell
 .\certdog-cert.ps1 -taskonly
 ```
-
-
 
 To override the certdog URL as specified in the ``settings.json`` file, use ``-certdogUrl`` e.g.
 
@@ -190,25 +160,15 @@ To override the certdog URL as specified in the ``settings.json`` file, use ``-c
 .\certdog-cert.ps1 -new -certdogUrl https://certdog.org.com/certdog/api
 ```
 
-   
-
 To ignore any SSL errors (if the certdog URL is not protected with a trusted cert), use ``-ignoreSslErrors`` e.g.
 
 ```powershell
 .\certdog-cert.ps1 -new -ignoreSslErrors
 ```
 
-
-
-
-
-
-
 ## Logging
 
 When configuring the script (i.e. running with the ``-new`` option), all output is to the console  
-
-
 
 When checking for renewals (when running with the ``-renew`` option) output is to a log file and the Windows Event Log. This is because this option will usually be run from a Scheduled Task (or other scheduler)
 
@@ -220,11 +180,7 @@ e.g.
 
 ``20210509T140645_certdogrenew.log``
 
-
-
 Entries are added to the Windows event log. With the ID (``eventLogId``) as specified in ``settings.json``. If an error occurs an error log entry will be added with the ID ``errorLogId`` - again, this is specified in ``settings.json``
-
-
 
 ## Credentials
 
@@ -242,8 +198,6 @@ If you wish to run the scheduled task under the LOCAL SYSTEM account you may use
 
 These will then be accessible by the LOCAL SYSTEM account
 
-
-
 ## Tips
 
 It is a good idea to test that the renewal actually works as expected. This is easy to confirm with certdog as we can create an internal CA with a short lifetime certificate profile  for testing. Then we can set the ``renewalDays`` period to be short and confirm everything works as expected  
@@ -254,4 +208,3 @@ It is a good idea to test that the renewal actually works as expected. This is e
 4. The task, by default, should run that night (or early next morning). You can run the task on demand before this. Monitor the Event Log for events from source ``certdog`` and event ID's as configured in ``settings.json`` (these are 5280 and 5281 by default)
 5. If everything gets renewed OK you know the accounts etc. are all good
 6. Now update ``settings.json`` to point to the chosen Certificate Issuer and update the ``renewalDays`` to be a reasonable time before your certificates expire and you want them renewed
-

@@ -6,17 +6,11 @@ nav_order: 70
 grand_parent: EzSign
 ---
 
-
-
 # EzSign Java Versions
-
-
 
 The latest versions of EzSign operate on java versions from 8 upwards  
 
 Java SE and OpenJDK versions are supported
-
-
 
 If you are using a PKCS#11 token (including Thales Luna, nCipher and Utimaco) then the following restrictions apply:
 
@@ -25,11 +19,6 @@ If you are using a PKCS#11 token (including Thales Luna, nCipher and Utimaco) th
 
 * EzSign versions **4.1.2** and later require Java **8u241** or later
 
-
-
 For other key stores, including the Thales PayShield and Software key stores, this does not apply  
 
-
-
 For more information contact Krestfield Support: [support@krestfield.com](mailto:support@krestfield.com)
-

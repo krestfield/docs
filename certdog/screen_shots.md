@@ -6,10 +6,7 @@ nav_order: 50
 grand_parent: Certdog
 ---
 
-
 # Certdog Screen Shots
-
-
 
 ### Dashboard
 
@@ -17,16 +14,11 @@ An overview of the certificate estate
 
 ![image-20250605135056151](./images/image-20250605135056151.png)
 
-
-
 ### Certificates
 
 Filter views of certificates
 
-
 ![image-20250605164102861](./images/image-20250605164102861.png)
-
-
 
 ### Certificate Search
 
@@ -34,15 +26,11 @@ A wide range of search options and the ability to save specific searches
 
 <img src=".\images\cert_search_ss.png" alt="image-20210319174314375" style="zoom:67%;" />
 
-
-
 ### Certificate Details
 
 View certificate details and history
 
 ![image-20250605140052284](./images/image-20250605140052284.png)
-
-
 
 ### Request a Certificate with a DN
 
@@ -50,23 +38,17 @@ Request a certificate by providing a Distinguished Name
 
 <img src=".\images\dn_request_ss.png" alt="image-20210319174524532" style="zoom:67%;" />
 
-
-
 ### Request a Certificate from a CSR
 
 Request a certificate from a Certificate Signing Request
 
 <img src=".\images\cert_req_csr_ss.png" alt="image-20210222091553114" style="zoom:67%;" />
 
-
-
 ### Download Options
 
 If the system generates the keys (as when requesting using a DN), the certificate and keys are available in several formats, including JKS and PKCS#12
 
 <img src=".\images\download_options_ss.png" alt="image-20210222091304432" style="zoom:67%;" />
-
-
 
 ### Teams
 
@@ -76,15 +58,11 @@ Permissions on specific Certificate Issuers are managed via Teams
 
 <img src=".\images\teams2_ss.png" alt="image-20210222091923483" style="zoom:67%;" />
 
-
-
 ### Certificate Issuers
 
 Support for multiple issuers from the same system, including Microsoft ADCS and PrimeKey EJBCA
 
 <img src=".\images\cert_issuers_ss.png" alt="image-20210222151503850" style="zoom:67%;" />
-
-
 
 ### Email Settings
 
@@ -93,4 +71,3 @@ Emails can be sent on issue and also as reminders of upcoming expiry
 <img src=".\images\email_settings_ss.png" alt="image-20210222151615899" style="zoom:67%;" />
 
 Contact [Krestfield Support](mailto:support@krestfield.com) for more details
-

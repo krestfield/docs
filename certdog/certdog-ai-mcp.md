@@ -6,25 +6,17 @@ grand_parent: Certdog
 keywords: ["Model Context Protocol", "AI assistant", "LLM"]
 ---
 
-<br>
-
 # AI MCP Setup with Claude
-
-<br>
 
 This guide demonstrates how to configure the certdog MCP server with claude code and desktop. This will then allow the use of natural language to gather data on the certificate estate and the certdog configuration
 
 All of the commands are read-only. If you wish to also allow certificate requests, renewals and revocations then the optional write tools can also be enabled
-
-<br>
 
 ## Obtain the MCP server
 
 Contact support to obtain the ``certdog-mcp.jar``
 
 Copy this file to your certdog installation or ideally a folder with no spaces in the path e.g. ``c:\certdog-mcp``
-
-<br>
 
 ## Obtain API Keys and Certdog Details
 
@@ -40,8 +32,6 @@ Create the required API tokens by following the guide [here](users.html#api-toke
 
 The API keys obtained are referred to as ``{API TOKEN}`` and ``{USER API TOKEN}`` in the steps below
 
-<br>
-
 The following information is also required:
 
 * Full path to the MCP Server jar
@@ -52,8 +42,6 @@ The following information is also required:
   * The URL to the API
   * E.g. https://certdog.svr.local/certdog/api
   * This is ``{API URL}``below
-
-<br>
 
 ## TLS Configuration
 
@@ -90,8 +78,6 @@ If the trusted certificates were included in a pkcs#12 store:
 -Djavax.net.ssl.trustStorePassword=...
 ```
 
-<br>
-
 These changes will alter the configuration set below. E.g. if the JKS file were used then the ``args`` section below would look something like this:
 
 ```properties
@@ -104,17 +90,11 @@ These changes will alter the configuration set below. E.g. if the JKS file were 
       ]
 ```
 
-<br>
-
 ## Setup with Claude Desktop
 
 Note that Java 21 or later is required. This must be configured on the environment (via JAVA_HOME and path settings) so that Claude Desktop picks up the correct version when starting
 
-<br>
-
 From *Claude Desktop*, click **your account** (usually bottom left) and select **Settings**. Click **Developer** from the left hand options and choose **Edit Config**. Open the file referenced (``claude_desktop_config.json``), if not opened automatically, and edit
-
-<br>
 
 Add the following ``mcpServers`` section at the top of the config, ensuring that you substitute in the correct values for ``{MCP JAR PATH}``, ``{API URL}``and ``{API TOKEN}``:
 
@@ -165,8 +145,6 @@ E.g. so it looks something like this:
 
 Note that the ``coworkUserFilesPath``, ``preferences`` (as shown above) and ``other sections`` will already be present in the config
 
-<br>
-
 If you want to enable write operations (certificate requests, revocation etc.) then also add ``"CERTDOG_WRITE_TOOLS" : true`` to the ``env`` section e.g.
 
 ```json
@@ -191,8 +169,6 @@ If you want to enable write operations (certificate requests, revocation etc.) t
   ...
 }
 ```
-
-<br>
 
 If you have created a dedicated account for write operations (certificate requests, revocation etc.) and you only want that account to be used for write operations, then add a second certdog instance such as ``certdog-write``, giving that accounts API key. For example:
 
@@ -229,11 +205,7 @@ If you have created a dedicated account for write operations (certificate reques
 
 This will ensure that any write operations are carried out with that user (whose API key is ``{USER API TOKEN}``),  whereas read operations are carried out by an admin user
 
-<br>
-
 Restart Claude Desktop. Close the window and right click the start bar running icon and click **Exit**. Then start
-
-<br>
 
 ## Setup with Claude Code
 
@@ -244,8 +216,6 @@ java -version
 ```
 
 ![image-20261022150008509](./images/image-20261022150008509.png)
-
-<br>
 
 Start Claude Code from the command line or Desktop app
 
@@ -275,8 +245,6 @@ claude mcp add certdog
 
 (Note, the new lines are added for readability and will need to be removed before running)
 
-<br>
-
 As above, to allow write operations, also provide the ``CERTDOG_WRITE_TOOLS=true`` environment variable:
 
 ```
@@ -288,8 +256,6 @@ claude mcp add certdog
 	-- java -Djavax.net.ssl.trustStoreType=Windows-ROOT 
 	-jar c:\certdog\certdog-mcp.jar
 ```
-
-<br>
 
 And if you want to only allow the write operations to be carried out by a restricted user, you may add a second MCP configuration, providing that user's API token:
 
@@ -303,8 +269,6 @@ claude mcp add certdog-write
 	-jar {MCP JAR PATH}
 ```
 
-<br>
-
 From the prompt type:
 
 ```
@@ -315,13 +279,8 @@ The instance should show as connected. If not, select and choose reconnect
 
 Failure to start is often due to the API not being reachable (certdog service not running), the API key being incorrect or the wrong java version being used. Check these settings if connection fails
 
-<br>
-
 To remove an MCP server run:
 
 ```
 claude mcp remove certdog
 ```
-
-
-

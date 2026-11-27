@@ -8,19 +8,13 @@ keywords: ["installation error", "install fails", "setup problem"]
 
 # Certdog Installation Troubleshooting
 
-
-
 If you hit issues during the installation they can usually be resolved quite easily. You won't normally have to re-download the database or java files to resolve
-
-
 
 ### Unable to start database
 
 If the installation outputs that it was unable to start the database and checking the ``installlog.out`` file shows it has trouble connecting, this is most likely because the Visual C++ Redistributable package is missing
 
 Install **VC_redist.x64.exe** which is contained within the ``.\install`` directory. A check is made by the installer to determine if this is present but there may be mismatched versions on the system
-
-
 
 If you still see issues starting the database, perform the following:
 
@@ -31,8 +25,6 @@ Type **y** to confirm
 Run the ``install-db.ps1`` script and enter the details as before (note: passwords and account details do not need to be the same as they would have been removed as part of the reset above)
 
 When complete, open the services snapin and start the **Krestfield Certdog Service**
-
-
 
 ### Unable to start service
 
@@ -64,8 +56,6 @@ Then locate and start the following services in the services snapin (if not runn
 
 * Krestfield Adcs Driver (if installed)
 
-
-
 ### Other Failures
 
 If any of the scripts failed to execute fully, the configuration may not be complete. In these cases it is often easier to delete the ``certdog`` directory (where the files were unzipped) and attempt the installation again, checking that the account being used has Administrator level permissions on the system  
@@ -82,13 +72,9 @@ Open the **Windows Event Viewer** and navigate to **Windows Logs  > Application*
 
 <img src="./images/event_viewer_ezcertservice.png" alt="image-20210108161039972" style="zoom:80%;" />
 
-
-
 Search for entries with Source = **Krestfield Certdog Service**
 
 Check if there are any error entries that may indicate issues starting the system
-
-
 
 If the service is still not operating, open a PowerShell script as an Administrator and navigate to the installation directory e.g.  
 
@@ -119,8 +105,6 @@ Starting C:\temp\certdog\tomcat\bin\catalina.bat please wait...
 Testing https://127.0.0.1/certdog/api...
 Application is running
 ```
-
-
 
 But if there is an issue, you will see something like:
 

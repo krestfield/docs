@@ -7,16 +7,11 @@ nav_order: 10
 
 # CRL OCSP Monitor - Installation
 
-<br>
-
 The following steps outline the steps required to install the CRL OCSP Monitor
-
-<br>
 
 Pre-requisites
 
 The system may be installed on the following operating systems:  
-
 
 * Windows Server 2019
 
@@ -26,26 +21,17 @@ The system may be installed on the following operating systems:
 
 * Windows 10/11
 
-<br>
-
 The following components are required:
 
 * .NET 4.8 Runtime
 
-<br>
-
 You must have local Administrator privileges on the system
-
-<br>
-
 
 ### 1.  Download
 
 Download the free version from [here](https://krestfield.s3.eu-west-2.amazonaws.com/trial/SetupOCSPMonitorFreeV2.0.msi)  
 
 For the supported version, you will be sent details on how to download
-
-<br>
 
 ### 1.1 Install
 
@@ -66,4 +52,3 @@ Click **Next**
 <img src="./images/image-20250425084518530.png" alt="image-20250425084518530" style="zoom:67%;" />
 
 Click **Close**
-

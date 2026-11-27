@@ -6,17 +6,11 @@ nav_order: 30
 grand_parent: EzSign
 ---
 
-
-
 # EzSign: Checking the HSM Configuration
-
-
 
 Before configuring EzSign with an HSM it is worth performing a quick check that everything is working as expected and all libraries and passwords are correct 
 
 The steps below outline some steps that can be taken to verify everything is ready to go  
-
- 
 
 ### HSM Status
 
@@ -36,8 +30,6 @@ On windows:
 C:\Program Files (x86)\nCipher\nfast\bin
 ```
 
- 
-
 First run the enquiry command e.g. On Unix from a shell run:
 
 ```bash
@@ -49,10 +41,6 @@ On Windows, from a Command Prompt, run:
 ```bash
 enquiry.exe
 ```
-
-
-
- 
 
 The output will be split into several sections:
 
@@ -74,14 +62,9 @@ And if there is more than one module configured you will also see headings for t
 ```
  etc.
 
-
-
-
 The key things to note are that each of the module entries are showing:
 
 **mode   operational**
-
- 
 
 If there are no entries beneath the Server heading, first try starting the hardserver. On Unix:
 
@@ -89,17 +72,11 @@ If there are no entries beneath the Server heading, first try starting the hards
 /opt/nfast/sbin/init.d-ncipher start
 ```
 
- 
-
 On Windows, start the **nFast Server** service
-
- 
 
 ### HSM Test Tool
 
 If all looks OK, download the Krestfield HSM Test tool from **[here](https://krestfield.s3.eu-west-2.amazonaws.com/trial/hsmtest2.zip)**
-
- 
 
 Run the tool as follows:
 
@@ -109,15 +86,11 @@ From a UNIX shell:
 ./hsmtest.sh
 ```
 
-
-
 From a Windows Command Prompt:
 
 ```bash
 hsmtest.bat
 ```
-
- 
 
 ```
 Krestfield HSM Test Tool
@@ -157,8 +130,6 @@ Enter HSM OCS Passphrase > <-- Enter the operator cardset password and press ent
   Logged in OK. Configuration is good
 ```
 
-
-
 This tool performs the same operations to connect to the HSM as EzSign. Therefore, if you see this success message, translating the values entered above into the following properties: 
 
 ```properties
@@ -177,11 +148,7 @@ channel.1.token.pkcs11.library=/opt/nfast/toolkits/pkcs11/libcknfast-64.so
 channel.1.token.pkcs11.slot=1
 ```
 
-
-
 Should result in a successful HSM setup
-
-
 
 ### Possible Errors
 
@@ -209,10 +176,6 @@ Or something similar such as:
 etc.
 
 This indicates that you are either running a 64 bit JVM and attempting to load a 32 bit library - or vice versa. It could also indicate a corrupt library file. If the file cannot be read at all, this may indicate a permissions issue   
-
-  
-
-  
 
 And if you see the following output:
 

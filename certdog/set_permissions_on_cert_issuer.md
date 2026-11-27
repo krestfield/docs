@@ -5,21 +5,13 @@ parent: Certificate Issuers
 grand_parent: Certdog
 ---
 
-
-
 # Set Permissions on a Certificate Issuer
-
-
 
 This guide details how you set permissions for a user on a *Certificate Issuer*  
 
 A user that has permissions on an issuer is able to request and revoke certificates from that issuer  
 
-
-
 You must be an Administrator to perform this step. If you are not then you must request that an Administrator update your account with the required permissions, as detailed below
-
-
 
 Permissions on Certificate Issuers are granted via Teams. There are two options to gain the required permissions:
 
@@ -33,9 +25,6 @@ Permissions on Certificate Issuers are granted via Teams. There are two options 
 
 3. Update an existing Team to include the Certificate Issuer, then add the user to this team. Details on this are below:
 
-
-
-
 Click **Teams** from the menu
 
 <img src=".\images\teams3.png" alt="image-20210223091633663" style="zoom:67%;" />
@@ -47,6 +36,3 @@ Click on the *team* you wish to update and click **Edit**
 Select the required **Certificate Issuers** from the *Permitted Certificate Issuers* section and click **Update**
 
 Now any members of this team will be able to manage certificates (request and revoke) for the certificate issuers chosen  
-
-
-

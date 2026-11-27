@@ -12,13 +12,9 @@ grand_parent: EzSign
 >
 > January 2021
 
-
-
 The EzSign service is installed using the **.msi** installer package  
 
 But, if automating a build, it can also be installed silently using the ``msiexec`` command, as outlined below  
-
-
 
 ### Pre-Requisites
 
@@ -29,13 +25,10 @@ Before installing EzSign, ensure that the following are in place:
 * If you are storing your logs and/or keystore files in a location other than the defaults - ensure these folders have been created and the permissions on the folders are correct (to permit write from the service)
 * If re-using any previous EzSign property files, ensure they are available
   
-  
-
 ### Installation
 
 * Step 1  
   
-
   Open or start a PowerShell instance as Administrator
 
 * Step 2  
@@ -73,9 +66,6 @@ To install in a specific directory (other than ``C:\Program Files`` etc.), add t
   ------   ----               -----------
   Running  Krestfield EzSi... Krestfield EzSign Service
   ```
-
-  
-
 
 ### Configuration
 
@@ -119,11 +109,7 @@ The files that may need to be copied are:
 
   Note: If you are creating new keys and certificates it is not required to copy the contents or sub-directories across. But the folder (C:\keystores) should be present
 
-
-
 Once all relevant files are in place you can continue to start the Service as outlined in step 3 above  
-
-
 
 ### Uninstall
 
@@ -132,4 +118,3 @@ To uninstall silently, the following command may be run
 ```
 msiexec /x EzSignServiceInstallerV1.4.msi /qn
 ```
-

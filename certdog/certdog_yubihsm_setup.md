@@ -7,11 +7,7 @@ keywords: ["Yubico", "HSM"]
 ---
 # Certdog YubiHSM 2 Configuration
 
-<br>
-
 From version 1.10 certdog supports the Yubi HSM 2. Here we outline the steps to configure certdog to use this device as a key store
-
-<br>
 
 ## YubiHSM Setup
 
@@ -36,8 +32,6 @@ port=12345
 
 If the status shows ``no device`` this indicates the USB HSM has not been detected. Refer to the YubiHSM documentation to resolve
 
-<br>
-
 ### PKCS11 Configuration
 
 Certdog uses the PKCS#11 interface to communicate with the YubiHSM 2. Follow the Yubi documentation to configure this, but essentially it involves creating a file named ``yubihsm_pkcs11.conf`` with the following content:
@@ -48,8 +42,6 @@ connector = http://127.0.0.1:12345
 ```
 
 Note that this file may already be present when you installed the YubiHSM software (e.g. on windows, it may be located here: ``C:\ProgramData\YubiHSM\yubihsm_pkcs11.conf``), but if not, create it 
-
-<br>
 
 Next create an environment variable ``YUBIHSM_PKCS11_CONF`` that references this file e.g.
 
@@ -63,19 +55,13 @@ or, for Linux
 export YUBIHSM_PKCS11_CONF=/opt/yubihsm/yubihsm_pkcs11.conf
 ```
 
-<br>
-
 You may also wish to add the YubiHSM Shell *bin* directory to your path to enable you to start the yubihsm shell from any location e.g. On windows you could add ``C:\Program Files\Yubico\YubiHSM Shell\bin`` to your path
-
-<br>
 
 ### Authentication Keys
 
 It is recommended to create an authentication key specifically for certdog. This essentially creates a login for certdog with limited capabilities  
 
 Note: It is also recommended to replace the default, fully privileged authentication key (or at least change the password), but for the purposes of these instructions we will use the default settings (authentication key ID: 1, default password: password)
-
-<br>
 
 Start the YubiHSM Shell:
 
@@ -136,8 +122,6 @@ You should see:
 Stored Authentication key 0x0002
 ```
 
-<br>
-
 ## Certdog KeyStore Setup
 
 From Certdog, under *Local CAs*, select **Key Stores**. Click **Add New Key Store**
@@ -178,17 +162,4 @@ Leave Use Module Protection un-checked
 
 Click **Create**
 
-<br>
-
 You can now select this Key Store when creating a new CA
-
-
-
-
-
-
-
-
-
-
-

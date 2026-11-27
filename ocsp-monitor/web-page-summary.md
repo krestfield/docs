@@ -7,8 +7,6 @@ nav_order: 40
 
 # CRL OCSP Monitor - Web Page Summary
 
-<br>
-
 For high level monitoring an html status page can be configured to display status information which is continually updated. An example of this is shown below:
 
 ![image-20250425090443980](./images/image-20250425090443980.png)

@@ -7,8 +7,6 @@ grand_parent: EzSign
 ---
 # EzSign Client
 
-<br>
-
 The EzSign client is a lightweight java (or .NET) component which exposes a simple interface enabling applications to quickly utilise the PKI and encryption functions offered by the EzSign Server
 
 The client can communicate with the server using either of the server's interfaces:
@@ -35,8 +33,6 @@ When the REST API is used:
 * Each application authenticates as its own REST API user, with an API token or a TLS client certificate
 * Each user is only permitted the operations and channels it has been granted
 
-<br>
 For further details see the [Client Integration Guide](ezsign_client_integration_guide.html)
 
 For the .NET client. See the [.Net Client Integration Guide](ezsign_dotnet_client_integration_guide.html)
-

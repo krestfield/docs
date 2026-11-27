@@ -10,8 +10,6 @@ grand_parent: Certdog
 
 You will only need to perform this step when instructed to by Krestfield support. If unsure, contact us here: [support@krestfield.com](mailto:support@krestfield.com) 
 
-<br>
-
 ### Steps
 
 <u>Step 1</u>
@@ -24,8 +22,6 @@ E.g.
 c:\certdog\install\upgrade-tomcat.ps1
 ```
 
-<br>
-
 <u>Step 2</u>
 
 Open a PowerShell window as Administrator, navigate to ``.\certdog\install`` and run:
@@ -33,8 +29,6 @@ Open a PowerShell window as Administrator, navigate to ``.\certdog\install`` and
 ```	powershell
 .\upgrade-tomcat.ps1
 ```
-
-<br>
 
 The latest Tomcat version will be downloaded and installed:
 
@@ -58,8 +52,6 @@ A backup of the previous Tomcat installation is located at: C:\certdog\install\.
 ```
 
 Note that the previous Tomcat version is backed up to a timestamped folder mentioned in the output.
-
-<br>
 
 If you do not have an internet connection from this server, the script will report the following:
 
@@ -93,8 +85,6 @@ Continue using Tomcat files found at tomcat.new (y/n)? : y
 
 And continue with the upgrade
 
-<br>
-
 ### Rollback
 
 If any errors do occur then the upgrade may be rolled back. To do this, stop the certdog service. Delete the ``.\certdog\tomcat`` folder. Note the backup location that was output from the script e.g. 
@@ -111,8 +101,6 @@ C:\certdog\tomcat.bak.20260421-1252 --> C:\certdog\tomcat
 ```
 
 Start the certdog service.
-
-<br>
 
 ### Cleanup
 

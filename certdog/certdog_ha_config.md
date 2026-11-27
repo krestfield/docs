@@ -11,8 +11,6 @@ keywords: ["HA", "failover", "cluster", "load balancer"]
 
 > From Version: 1.16.0
 
-<br>
-
 The following steps outline a sample how to deploy a multi-instance Certdog installation for high availability use cases.
 
 This is achieved by using a MongoDB replica set to maintain data consistency across all instances. This provides automatic failover of the database.
@@ -32,8 +30,6 @@ The following is the example setup described in this guide:
 
 Note that this is the initial setup. The databases will adopt the Primary or Secondary roles as required.
 
-<br>
-
 ### Pre-requisites
 
 This configuration is supported on Certdog from version 1.16 onwards.
@@ -44,8 +40,6 @@ It is recommended to have a DNS record for each server, as this allows the clust
 
 The same version of Certdog must be installed on all nodes.
 
-<br>
-
 ### 1. Install certdog on each system
 
 Install certdog on the first node (e.g. node1.krestfield.local). Ensure this is running as expected.
@@ -53,8 +47,6 @@ Install certdog on the first node (e.g. node1.krestfield.local). Ensure this is 
 When that installation is stable, install certdog onto node2 and node3 using the same passwords as for node1.
 
 Backup node1 by stopping the Krestfield services and making a copy of the entire installation (e.g. ``c:\certdog``). Once backed up, restart the services.
-
-<br>
 
 For node2 and node3 perform the following additional steps:
 
@@ -87,8 +79,6 @@ For node2 and node3 perform the following additional steps:
     ```
 
 Note: node2 and node3 will not be operational until we synchronise the databases.
-
-<br>
 
 ### 2. Update the Database Config
 
@@ -133,11 +123,7 @@ net:
    bindIp: 127.0.0.1,node3.krestfield.local
 ```
 
-<br>
-
 Once applied to all nodes and saved, restart the *Krestfield Certdog Database* service.
-
-<br>
 
 <u>Optional: Test the Connection</u>
 
@@ -193,8 +179,6 @@ In this case examine the firewall settings and confirm that port 27017 is open.
 
 Type ``exit`` to close the shell.
 
-<br>
-
 ### 3. Update the DB Certificates
 
 <u>Certificate Requirements</u>
@@ -225,8 +209,6 @@ A single certificate can be issued, including all servers in the cluster within 
 
 These certificate requirements can be found in the [Mongo DB documentation](https://www.mongodb.com/docs/manual/tutorial/configure-x509-member-authentication/#certificate-requirements)
 
-<br>
-
 <u>Issuing a Certificate</u>
 
 In this example, we will issue a single certificate, deploy to node1 then copy to the other nodes
@@ -234,8 +216,6 @@ In this example, we will issue a single certificate, deploy to node1 then copy t
 Note: If issuing from a Certdog CA, then a profile created from the *TLS (Client and Server Auth)* common profile can be used 
 
 Ensure the CA this certificate is issued from is trusted by all machines in the cluster
-
-<br>
 
 From certdog on node1, place a DN request for a certificate with the following details:
 
@@ -247,8 +227,6 @@ Enter a strong password and issue the certificate
 
 Follow the [guide here](https://krestfield.github.io/docs/certdog/update_the_db_certificate.html) to set this as the new DB certificate. This will create the files ``dbssl.pem``, ``dbssl_root.pem`` and update ``dbssl_trust.jks``
 
-
-
 From node1, copy the following files located in ``.\certdog\config\tlscerts\`` :
 
 * dbssl.pem
@@ -258,8 +236,6 @@ From node1, copy the following files located in ``.\certdog\config\tlscerts\`` :
 * dbssl_trust.jks
 
 To node2 and node3 at the same location
-
-<br>
 
 ### 4. Prepare the primary
 
@@ -323,8 +299,6 @@ There may be errors seen in the output (concerning connectivity to the other nod
 
 For an example of output see Appendix A - Primary DB Output below.
 
-<br>
-
 ### 5. Prepare the secondaries 
 
 For node2 and node3, stop the *Krestfield Certdog Database* service and delete the contents of this folder:
@@ -336,8 +310,6 @@ For node2 and node3, stop the *Krestfield Certdog Database* service and delete t
 Do not delete the folder itself, only the contents.
 
 Start the *Krestfield Certdog Database* service on node2 and node3.
-
-<br>
 
 ### 6. Update the database URIs
 
@@ -361,11 +333,7 @@ spring.data.mongodb.uri=mongodb://certmanuser:hkZ2IoHSkQiLAroe3SLA@node1.krestfi
 
 Ensuring your server FQDNs are used.
 
-<br>
-
 Copy this URL to the ``.\certdog\config\application.properties`` file on node2 and node3 so that all nodes are now using the same database URL.
-
-<br>
 
 If you are using the ADCS driver, open a PowerShell window as Administrator, navigate to ``.\certdog\install`` and run:
 
@@ -374,8 +342,6 @@ configure-adcs-service.ps1
 ```
 
 This configures the ADCS service to use the same URL as just configured.
-
-<br>
 
 ## Final Steps
 
@@ -387,25 +353,13 @@ On node3 stop and disable the following services:
 
 This will leave node1 and node2 as the Certdog instances providing the API and UI services with node3 acting as the database node only.
 
-<br>
-
 If using the AD CS driver with a Microsoft CA you will now have two drivers available. Register them both and allow both to be used by the Certificate Issuer
-
-<br>
 
 If any other custom setup steps have been performed on node1 (e.g. OAUTH), then ensure those same settings are replicated across to node2
 
-<br>
-
 If using email notifications, see [here](https://krestfield.github.io/docs/certdog/certdog_ha_config.html). This setting may be required if you notice multiple emails being sent. However, this is not always the case. This is a known issue and will be resolved such that multiple servers will handle this better
 
-<br>
-
-
-
 ---
-
-<br>
 
 ## Appendix A - Primary DB Output
 
@@ -668,4 +622,3 @@ replocal [direct: primary] admin> db.revokeRolesFromUser("certmanadmin", [{ role
 }
 replocal [direct: primary] admin>
 ```
-

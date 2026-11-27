@@ -10,8 +10,6 @@ grand_parent: EzSign
 
 The following lists the possible error codes that may be returned by the Thales PayShield (HSM 9000/10k)  when utilised by EzSign
 
-<br>
-
 | Code   | Description                                                  |
 | ------ | ------------------------------------------------------------ |
 | **00** | No error                                                     |
@@ -102,5 +100,3 @@ The following lists the possible error codes that may be returned by the Thales 
 | **BC** | Repeated optional block                                      |
 | **BD** | Incompatible key types                                       |
 | **BE** | Invalid keyblock header ID                                   |
-
- 

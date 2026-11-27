@@ -10,11 +10,7 @@ grand_parent: Certdog
 
 > From Version: 1.16.0
 
-<br>
-
 If running the databases in a cluster (using the setup described [here](certdog_ha_config.html)) and have been instructed to update the database then follow the steps below
-
-<br>
 
 ## Pre-requisites
 
@@ -81,8 +77,6 @@ Ensure that the health of all nodes is 1
 
 Note that the environment will be out of service during this upgrade
 
-<br>
-
 ## Steps
 
 We will be performing the following steps:
@@ -100,8 +94,6 @@ We will be performing the following steps:
 7. On the primary node, re-enable authentication
 8. Start the other nodes
 9. Start the Certdog Service on all nodes
-
-<br>
 
 ### 1. Obtain the new database binaries
 
@@ -130,8 +122,6 @@ You should have a file structure something like this:
 			...
 ```
 
-<br>
-
 ### 2. Identify the primary node in the cluster
 
 From any node, open a command prompt as Admin and navigate to ``.\certdog\mongodb.new\mongodb\bin``. Run the following command:
@@ -159,8 +149,6 @@ replocal [direct: primary] admin>
 Then you are on the primary server and we can continue with this connection. Skip to **3. Grant the clusterAdmin role** below
 
 NOTE: For the purposes of this document, we will assume that **node1.krestfield.local is the *primary* node**, with node2.krestfield.local and node3.krestfield.local being the *secondary* nodes
-
-<br>
 
 If the prompt shows:
 
@@ -207,8 +195,6 @@ Type ``exit`` to exit this connection and reconnect to the primary node e.g. in 
 
 Now continue to **3. Grant the clusterAdmin role** below
 
-<br>
-
 ### 3. Grant the clusterAdmin role
 
 From the mongosh prompt, run the following to grant the cluster admin role:
@@ -219,15 +205,11 @@ db.grantRolesToUser("certmanadmin", [ { role: "clusterAdmin", db: "admin" } ])
 
 Type ``exit`` to exit the connection
 
-<br>
-
 ### 4. Shutdown the Certdog Service on all nodes
 
 From each of node, stop the **Krestfield Certdog Service** service:
 
 <img src="./images/image-20260916163403396.png" alt="image-20260916163403396" style="zoom:67%;" />
-
-<br>
 
 ### 5. Take a dump of the current data from the primary node
 
@@ -241,8 +223,6 @@ Ensuring you enter your primary server instead of node1.krestfield.local
 
 This should create a folder under ``mongodb.new`` called ``dump``
 
-<br>
-
 ### 6. Stop all database service on all nodes and upgrade the binaries
 
 Starting with secondary and  finishing on the primary node, stop the **Krestfield Certdog Database** service on all servers
@@ -253,11 +233,7 @@ Then copy ``.\certdog\mongodb.new\mongodb`` to ``.\certdog\mongodb``
 
 This places the new binaries at the correct location
 
-<br>
-
 Copy the ``mongod.cfg`` file from the backup to the new files location i.e. copy ``.\certdog\mongodb.bak\bin\mongod.cfg`` to ``.\certdog\mongodb\bin\mongod.cfg``
-
-<br>
 
 ### 7. On the primary node, disable database authentication and re-create the cluster
 
@@ -284,11 +260,7 @@ replication:
 
 Save the file
 
-<br>
-
 Start the database on this node
-
-<br>
 
 Open a command prompt and connect using mongosh (now located in ``.\certdog\mongodb\bin``) but this time, we connecting to the localhost (``127.0.0.1``) address and authentication is not required:
 
@@ -316,8 +288,6 @@ rs.status()
 
 And then type ``exit`` to close the connection
 
-<br>
-
 ### 8. On the primary node, restore the data
 
 Navigate to ``.\certdog\mongodb\dbtools\bin`` and run:
@@ -331,8 +301,6 @@ There will be a lot of output but the final line should report something such as
 ```
 2026-09-11T23:17:46.770+0100    8740 document(s) restored successfully. 0 document(s) failed to restore.
 ```
-
-<br>
 
 ### 9. On the primary node, re-enable authentication
 
@@ -392,8 +360,6 @@ members: [
   ]
 ```
 
-<br>
-
 Run the following commands ensuring that the specified node (node1) is the primary:
 
 ```
@@ -403,8 +369,6 @@ rs.reconfig(cfg)
 ```
 
 This updates the node in the cluster to use the FQDN, as other nodes will need to connect. You can confirm the changes by running ``rs.status()`` again
-
-<br>
 
 ### 10. Start the other nodes
 
@@ -454,17 +418,12 @@ This time, under members you should see all three nodes with one is showing as t
   ]
 ```
 
-<br>
-
 ### 11. Start the Certdog Service on all nodes
 
 On each node, start the Krestfield Certdog Service
-
-<br>
 
 Optionally, you may revoke the clusterAdmin from the certmanadmin user (that was added at the start of this process), using the following command from mongosh:
 
 ```
 db.revokeRolesFromUser("certmanadmin", [{ role: "clusterAdmin", db: "admin" }])
 ```
-

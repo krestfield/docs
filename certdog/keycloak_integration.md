@@ -10,29 +10,19 @@ keywords: ["SSO", "single sign-on", "OpenID Connect"]
 
 > This feature is available from certdog 1.15
 
-<br>
-
 Certdog supports authorization and authentication of users via OAuth 2.0 and OIDC services, including processing of group membership.
 
 This document describes how to configure certdog to use **Keycloak** as the OAuth 2.0 and OIDC provider. For Microsoft Entra ID (formerly Azure AD), see [OAuth 2.0 and OIDC Integration](oauth_integration.html).
-
-<br>
 
 Enabling OAuth support does not disable the use of local or Active Directory accounts. I.e. all three authentication options can be enabled at the same time.
 
 Details on how to enable this with Keycloak are given below. The steps are detailed but still, some familiarity with Keycloak is needed. If in any doubt, contact [Krestfield Support](mailto:support@krestfield.com) who can assist with the setup process.
 
-<br>
-
 ## Before Starting
 
 Access to a Keycloak server is required, with an administrator account that can create a Realm (or permissions to manage clients, client scopes, groups and users within an existing Realm). If another team manages Keycloak, they can follow the [Configure Keycloak](#configure-keycloak) instructions below and provide the required values (e.g. [ISSUER-URI]) for importing into certdog.
 
-<br>
-
 The Keycloak server **must** be accessed over HTTPS. Both the certdog UI (via the browser) and the certdog service must trust the Keycloak server's TLS certificate, as they each retrieve the issuer configuration from Keycloak. See [Trust the Keycloak TLS Certificate](#trust-the-keycloak-tls-certificate) for details.
-
-<br>
 
 Ensure that the correct URL has been configured for certdog (as described [here](post-Installation.html)) and ideally the final TLS certificates have been installed (as described [here](installation.html#4-ssl-configuration)).
 
@@ -40,11 +30,7 @@ This is required as we will need to configure redirect URLs within Keycloak. The
 
 When certdog is initially installed you may access at 127.0.0.1. But when completing the steps above you may configure a DNS entry to point to the certdog server. When you would access as something like https://certdog.domain.local. This would then be the URL to configure in the Keycloak settings below.
 
-<br>
-
 If you do not have a Keycloak server and would like to evaluate this feature, see [Running a Keycloak Test Instance](#running-a-keycloak-test-instance) at the end of this document.
-
-<br>
 
 ## Configuring OAuth
 
@@ -64,8 +50,6 @@ To enable OAuth and OIDC support you must:
 
 These steps are detailed in the next sections.
 
-<br>
-
 ## Configure Keycloak
 
 The following steps are carried out from the Keycloak admin console, which is located at:
@@ -77,8 +61,6 @@ E.g. ``https://keycloak.intserver.local:8443/admin``
 Sign in with your Keycloak administrator credentials:
 
 <img src="./images/keycloak_sign_in.png" alt="keycloak_sign_in" style="zoom:67%;" />
-
-<br>
 
 #### Create a Realm
 
@@ -104,15 +86,11 @@ A Realm manages a set of users, groups and clients. A dedicated Realm for certdo
 
 All of the following steps must be carried out within this Realm.
 
-<br>
-
 #### Create the Client
 
 The client represents the certdog application within Keycloak.
 
 Ensure you have the correct hostname for the certdog server. E.g. https://certdog.intserver.local as discussed in the [Before Starting](#before-starting) section above.
-
-<br>
 
 1. From the left menu click **Clients**
 
@@ -158,13 +136,9 @@ NOTE: This MUST be the URL you will be accessing the certdog server from. If it 
 
 9. Click **Save**
 
-<br>
-
 If you will be accessing certdog from multiple URLs - in addition to the one set in Step 6 above (e.g. if you have several DNS aliases configured or will also be accessing a local at 127.0.0.1). Add the additional locations as follows:
 
 From the **Clients** list, click on the **certdog** client. On the *Settings* tab, under *Access settings*, click the **Add valid redirect URIs** link and enter any other possible URLs. Click **Save**
-
-<br>
 
 #### Create the Client Scope
 
@@ -188,8 +162,6 @@ From the **Clients** list, click on the **certdog** client. On the *Settings* ta
 
 7. Note the scope name as it is the **[API-SCOPE]** and will be required later
 
-<br>
-
 #### Add the Scope to the Client
 
 1. From the left menu click **Clients** and select the **certdog** client
@@ -210,8 +182,6 @@ From the **Clients** list, click on the **certdog** client. On the *Settings* ta
 
    (certdog always explicitly requests this scope, so **Optional** may also be selected)
 
-<br>
-
 #### Enable the claims for user identification and group support
 
 Certdog requires the following from the access token issued by Keycloak:
@@ -221,8 +191,6 @@ Certdog requires the following from the access token issued by Keycloak:
 * A ``groups`` claim containing the user's group membership
 
 These are added via mappers on the client's dedicated scope.
-
-<br>
 
 <u>Add the Audience Mapper</u>
 
@@ -247,8 +215,6 @@ These are added via mappers on the client's dedicated scope.
    <img src="./images/keycloak_new_mapper_audience.png" alt="keycloak_new_mapper_audience" style="zoom:67%;" />
 
 7. Click **Save**
-
-<br>
 
 <u>Add the User Identification (upn) Mapper</u>
 
@@ -276,8 +242,6 @@ These are added via mappers on the client's dedicated scope.
 
 The user's email address will now be used as their certdog username. If you would prefer to use a different user property (e.g. **username**), enter that for *Property* instead. Alternatively, certdog can be configured to read a different claim - see [Mapping alternative User ID claims](#mapping-alternative-user-id-claims).
 
-<br>
-
 <u>Add the Groups Mapper</u>
 
 1. Return to the **certdog-dedicated** scope, click **Add mapper** and select **By configuration**
@@ -298,8 +262,6 @@ The user's email address will now be used as their certdog username. If you woul
 
 7. Click **Save**
 
-<br>
-
 #### Obtain Required Values
 
 1. The **[ISSUER-URI]** takes the form:
@@ -316,8 +278,6 @@ The user's email address will now be used as their certdog username. If you woul
 
 4. The **[API-SCOPE]** should also have been noted in the setup steps above
 
-<br>
-
 The Keycloak Configuration is now complete. Ensure you have noted the values for:
 
 * [REDIRECT-URI]
@@ -329,19 +289,13 @@ The Keycloak Configuration is now complete. Ensure you have noted the values for
 * [ISSUER-URI]
   * e.g. ``https://keycloak.intserver.local:8443/realms/certdog``
 
-<br>
-
 ## Trust the Keycloak TLS Certificate
 
 Both the browser (running the certdog UI) and the certdog service connect to Keycloak to retrieve its configuration. Both must therefore trust the Keycloak server's TLS certificate.
 
-<br>
-
 <u>Browser</u>
 
 If the Keycloak TLS certificate was issued by a CA that is already trusted by your users' machines (e.g. your organisation's internal CA) no action is required. Otherwise, the issuing root CA certificate must be distributed to the browsers' trust stores.
-
-<br>
 
 <u>Certdog Service</u>
 
@@ -353,7 +307,7 @@ Obtain the root certificate of the CA that issued the Keycloak TLS certificate. 
 
 (note: To determine what certificate the server is returning, you can run a tool such as openssl e.g. ``openssl s_client -connect keycloak.intserver.local:8443 -showcerts``)
 
-<br>Open a command prompt and navigate to ``[Certdog Install]\config\sslcerts`` then run the following:
+Open a command prompt and navigate to ``[Certdog Install]\config\sslcerts`` then run the following:
 
 ```
 C:\certdog\config\sslcerts>..\..\java\bin\keytool -import -alias "Keycloak Root" -file keycloakroot.cer -keystore dbssltrust.jks
@@ -372,8 +326,6 @@ Enter the password for the JKS file. If you have not changed this it will be hel
 The certificate details will be displayed. Ensure they are correct and when prompted ``Trust this certificate? [no]:`` type ``yes`` and press Enter
 
 The certdog service must be restarted for this to take effect. This will be done in the [Restart Certdog](#restart-certdog) step below.
-
-<br>
 
 ## Update the API properties file
 
@@ -400,8 +352,6 @@ spring.security.oauth2.resourceserver.jwt.audiences=certdog
 ```
 
 Save the file
-
-<br>
 
 ## Update the UI config file
 
@@ -452,21 +402,15 @@ E.g.
 }
 ```
 
-<br>
-
 ## Restart Certdog
 
 On windows open the Services snapin, locate and stop the **Krestfield Certdog Service**. When showing as not running Start the service.
 
 On Linux, run the ``./shutdown-certdog.sh`` script followed by the ``./start-certdog.sh`` from the bin directory
 
-<br>
-
 If certdog has already been operating, any browsers used to access the system may have cached previous settings. This cache must be cleared or an alternative browser may be used (e.g. Chrome instead of Edge).
 
 Clearing of the cache is browser dependant but for Chrome, click the![image-20250918133149933](./images/image-20250918133149933.png)menu and choose **Settings**. From the left menu select **Privacy and security**. Then click on **Delete browsing data**. Select **Cached images and files** and **Cookies and other site data**, then click **Delete data**. The keyboard combination of CTRL-SHIFT-DELETE can also be used to bring up the delete browsing data dialog.
-
-<br>
 
 ## Verify Setup
 
@@ -480,8 +424,6 @@ If you don't see this. Check the ``config.json`` file as configured above, ensur
 
 At this point, clicking the **OAuth** button will fail as no groups have yet been mapped. This needs to be configured first, as described in the next section.
 
-<br>
-
 ## Map Keycloak Groups to Certdog Teams
 
 Before certdog will authenticate users (using their Keycloak credentials) they must be mapped to a certdog Team.
@@ -489,8 +431,6 @@ Before certdog will authenticate users (using their Keycloak credentials) they m
 This will define what permissions the user has within certdog.
 
 This is achieved by mapping the users Keycloak Groups to one or more certdog Teams.
-
-<br>
 
 ### Create Groups in Keycloak
 
@@ -511,8 +451,6 @@ If the required groups already exist in the Realm, skip to [Add Users to Groups]
 4. Click **Create**
 
 The group's full path is the group name prefixed with ``/`` (e.g. ``/CERTDOG_ADMINS``). If the group is created as a child of another group, the path will include the parent group(s) e.g. ``/IT/CERTDOG_ADMINS``. Note this value as we now need to set this in certdog.
-
-<br>
 
 ### Add Users to Groups
 
@@ -542,8 +480,6 @@ To create a new user:
 
    <img src="./images/keycloak_new_user.png" alt="keycloak_new_user" style="zoom:67%;" />
 
-<br>
-
 If the user's credentials are not provided by an external source (such as a federated LDAP or Active Directory) a password must be set:
 
 1. From the user's details, select the **Credentials** tab
@@ -561,8 +497,6 @@ If the user's credentials are not provided by an external source (such as a fede
 4. Click **Save** and then **Save password** to confirm
 
    <img src="./images/keycloak_user_credentials_confirm.png" alt="keycloak_user_credentials_confirm" style="zoom:67%;" />
-
-<br>
 
 ### Map Groups in Certdog
 
@@ -586,13 +520,9 @@ Make any other updates to the team as required and click **Add** (or Update for 
 
 Users that are a member of the group created in Keycloak will now have the permissions provided by that certdog team.
 
-<br>
-
 Note that when a Keycloak user authenticates, their account will then appear in the *Users list* in Certdog.
 This will show what Certdog Teams the user is a member of (based on their Keycloak group membership).
 None of the details for Keycloak accounts can be managed via Certdog - they continue to be managed via Keycloak only.
-
-<br>
 
 ## Logging in Options
 
@@ -612,8 +542,6 @@ You may enter username and password details for local or AD users and click **Lo
 
 Clicking the **OAuth** button will always ask you to confirm what account you wish to use. This is intentional to allow the switching of accounts.
 
-<br>
-
 ## Mapping alternative User ID claims
 
 By default, the ``upn`` claim is used to identify the user. The Keycloak configuration above adds this claim by mapping the user's email address to it.
@@ -627,8 +555,6 @@ oauth.username.claim=preferred_username
 (substitute ``preferred_username`` for whatever claim you wish to use)
 
 Restart the certdog service
-
-<br>
 
 ## Common Issues
 
@@ -644,8 +570,6 @@ Invalid parameter: redirect_uri
 This indicates that the redirectUri value contained in the config.json file does not match the URL that certdog is being accessed via. OR that the redirect URL configured in the Keycloak client is not correct.
 
 To check which this is, perform the following:
-
-<br>
 
 <u>Check the config.json file</u>
 
@@ -675,8 +599,6 @@ In the case above it is set to ``https://certdg.org.local/certdog/ui/`` but it s
 
 If different, save the file and restart as per the [Restart Certdog](#restart-certdog) above.
 
-<br>
-
 <u>Check the Keycloak Client Redirect URIs</u>
 
 From the Keycloak admin console, ensure the correct Realm is selected, click **Clients** and select the **certdog** client.
@@ -685,21 +607,15 @@ On the *Settings* tab, under *Access settings*, check the values for *Valid redi
 
 Ensure there is an entry that exactly matches the URL certdog is being accessed from (e.g. ``https://certdog.org.local/certdog/ui/``). Correct this and click **Save**.
 
-<br>
-
 ### Client not found
 
 If Keycloak reports ``Client not found`` during login, the ``clientId`` value in the ``config.json`` file does not match the *Client ID* of the client in Keycloak, or the ``server`` value refers to a different Realm. Check both values and restart as per the [Restart Certdog](#restart-certdog) above.
-
-<br>
 
 ### After updating the OAuth configuration, the changes don't seem to take effect
 
 When the configuration has been updated, the services must be restarted. If the same browser accessed certdog when the previous settings were enabled, it may cache some of the configuration. Effectively, this prevents the changes from being used.
 
 Ensure the Certdog Service has been restarted and the browser cache has been delete. Refer to the [Restart Certdog](#restart-certdog) above for details.
-
-<br>
 
 ### Redirected back to Login screen after authentication
 
@@ -717,8 +633,6 @@ Indicates that the access token issued by Keycloak does not include the required
 
 If no such entry is present, the user may not be part of a group that has been mapped to a certdog Team. See section [Map Keycloak Groups to Certdog Teams](#map-keycloak-groups-to-certdog-teams) for details on how to do this, and ensure the full group path (including the leading ``/``) has been entered.
 
-<br>
-
 <u>Incorrect Audience</u>
 
 If the log contains an entry such as:
@@ -728,8 +642,6 @@ A user failed to authenticate via OAuth token: ... The aud claim is not valid
 ```
 
 The access token does not contain the expected audience. Ensure the audience mapper has been added as described in [Enable the claims for user identification and group support](#enable-the-claims-for-user-identification-and-group-support) and that the ``spring.security.oauth2.resourceserver.jwt.audiences`` value in ``application.properties`` matches the [CLIENT-ID].
-
-<br>
 
 <u>Untrusted Certificates</u>
 
@@ -747,13 +659,9 @@ Caused by: org.springframework.web.client.ResourceAccessException: I/O error on 
 
 This indicates that the certdog service does not trust the Keycloak server's TLS certificate. Follow the steps in [Trust the Keycloak TLS Certificate](#trust-the-keycloak-tls-certificate) and restart the Krestfield Certdog Service.
 
-<br>
-
 ## Running a Keycloak Test Instance
 
 If you would like to evaluate Keycloak integration and do not have an existing Keycloak server, a test instance can be run using Docker. This is for evaluation only and should not be used in production. Refer to the [Keycloak documentation](https://www.keycloak.org/guides) for production deployment guidance.
-
-<br>
 
 As noted above, Keycloak must be accessed over HTTPS. For a quick test on the certdog server itself, the TLS certificate supplied with certdog may be used. The following command (run from PowerShell) mounts the certdog ``sslcerts`` folder into the container and starts Keycloak on port 8443:
 
@@ -776,13 +684,9 @@ Where:
 
 Alter ``C:\certdog`` to your own certdog installation location.
 
-<br>
-
 The Keycloak admin console will then be available at ``https://127.0.0.1:8443/admin`` and the [ISSUER-URI] for a Realm named *certdog* will be ``https://127.0.0.1:8443/realms/certdog``.
 
 As this uses the same certificate as certdog, the browser will already trust it if it trusts the certdog server. The certdog service must still be configured to trust the issuing CA, as described in [Trust the Keycloak TLS Certificate](#trust-the-keycloak-tls-certificate).
-
-<br>
 
 The container is given a name so that it can be restarted later without creating a new one:
 

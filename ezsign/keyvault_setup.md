@@ -7,19 +7,13 @@ grand_parent: EzSign
 keywords: ["Azure", "AKV", "Microsoft Azure"]
 ---
 
-
-
 # Azure Key Vault Configuration
 
 > From version 4.1.3
 
 Note: For previous versions contact [support](mailto:support@krestfield.com)
 
-<br>
-
 This document gives a brief overview of the installation and setup steps required to support Azure Key Vaults from EzSign
-
-<br>
 
 ## Pre-Requisites
 
@@ -36,8 +30,6 @@ You must have registered an application and have the following information avail
 
 See the [Registering a Client Application](#registering-a-client-application) section below for an example of how to obtain these values
 
-<br>
-
 ## Configuring the Software
 Navigate to 
 
@@ -53,8 +45,6 @@ azurekv.properties
 
 Update the following properties:  
 
-
-
 <u>keyStoreDir</u>  
 
 This is where EzSign stores its key components. When using an HSM of any kind, these components only ever contain references to keys stored on the HSMs  
@@ -66,8 +56,6 @@ e.g.
 ```
 keyStoreDir=/opt/ezsign/EzSignV4.1.0/EzSignServer/keystores
 ```
-
-<br>
 
 <u>channel.1.token.azureKeyVault</u>  
 
@@ -106,8 +94,6 @@ channel.1.signature.keyId=
 
 Note that none of the values are surrounded by quotes. Quotes are not required
 
-<br>
-
 Next, open a terminal, shell or command prompt and navigate to  
 
 ```
@@ -127,8 +113,6 @@ For the Master Password, enter any strong password. This password will be requir
 For the Token Password enter the **Azure Client Secret** or **password**, without any enclosing quotes. This is the password/secret that would have been obtained when registering the client application in Azure  
 
 Re-enter then say **yes** when asked if you wish to update the properties file  
-
-<br>
 
 ## Importing Existing Keys  
 
@@ -194,8 +178,6 @@ To verify, check the keyStores folder configured above. There should now be a su
 
 If no keys are shown, check your settings and that there are actually existing, enabled keys in the key vault. Checking the logs at ``./EzSignServer/logs/ezsign.log`` will help identify which of these issues have occurred  
 
-
-
 ## Making Calls from your Java Application
 
 Normally, EzSign is run as a server application called via the Krestfield Client API or a REST API. This is the simplest option and enables local configuration that does not need to be connected to or managed by your application  
@@ -205,8 +187,6 @@ However, if you choose to call the java directly, from your java application, ad
 ```powershell
 [EzSign Installation Dir]/EzSignV[Version]/EzSignServer/lib/ezsign-[Version].jar  
 ```
-
-
 
 In your application, set the following imports:  
 
@@ -247,16 +227,11 @@ catch (KSigningException e)
 }
 ```
 
-
-<br>
-
 ## Registering a Client Application 
 
 A key vault is required to perform the following steps. The key vault must be in the *Premium* pricing tier as this is the only tier that supports HSM backed keys. This option is set at creation, so if your existing target Key Vault is on the *Standard* pricing tier you will need to create a new Key Vault
 
 We will register an application in Azure Active Directory, then create a service principal (SPN) for this application. This will provide us with authentication credentials. Finally we set a policy which allows this application to manage keys and certificates in our key vault
-
-<br>
 
 From the Azure Console navigate to **Azure Active Directory** and select **App Registrations** from the left hand menu  
 
@@ -292,8 +267,6 @@ Extract and retain the following:
 * tenant
   * This must be configured in EzSign as the ``channel.1.azureKeyVault.tenantId`` property
 
-<br>
-
 We need to configure these values as environment variables in the Azure Shell so we can set further permissions  
 
 From the shell run the following commands:
@@ -313,8 +286,6 @@ Or, if using PowerShell:
 ```
 $AZURE_CLIENT_ID="fd94f971-ebd9-4a32-a56e-97427655429e"
 ```
-
-
 
 Then run the following command (all on one line) to set the permissions for this application on the Key Vault: 
 
@@ -355,7 +326,6 @@ To verify all is OK, in the **Azure Console**, navigate to the **Key Vault** and
 
 Note: To obtain the Key Vault URL – this is shown as the DNS name when viewing the Overview details for the Key Vault
          
-
 ## Troubleshooting
 
 When signing if you see this an error such as: 
@@ -368,7 +338,7 @@ The user, group or application 'appid=7f464c48-906f-462f-b0fd-79d904297ee8;oid=7
 
 Go to the **Key Vault**, under **Settings** select **Access policies** and under the drop down for **Key Permissions**, check the **Sign** permission 
 
-<br>If you see an error such as:
+If you see an error such as:
 
 ```
 2022-11-24 10:31:40.391 [main] ERROR EzSignLog - Max retries 3 times exceeded. Error Details: AADSTS7000222: The provided client secret keys for app '7412f649-8e14-471f-bfc1-733b36a42705' are expired

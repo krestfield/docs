@@ -13,8 +13,6 @@ With nCipher HSMs keys are separated by interface, such that those generated usi
 
 Essentially, the key is migrated from a the Microsoft application (mscapi/caping) to the pkcs11 application type, thus allowing the PKCS#11 interface (which certdog uses) to make use of the keys
 
-<br>
-
 Obtain the CA cert e.g. ``ca.cer``
 
 Open a command prompt as Administrator and navigate to 
@@ -44,8 +42,6 @@ The *AppName* specifies what interface was used to create the keys. In the examp
 
 ADCS keys are created using the *caping* application  
 
-<br>
-
 To find the actual keys that are associated with the CA certificate we use the nCipher command:
 
 ``pub key-find.exe`` 
@@ -72,8 +68,6 @@ ident machine--d085239508f9d1890989497b38aef757494cf329
 
 Which you will see matches an item in the list when we ran ``nfkminfo`` above
 
-<br>
-
 We now need to retarget this key so it is accessible via the pkcs11 interface, which is the interface Certdog uses. We will use the ``generate key.exe --retarget pkcs11`` command to create a copy of the key which will then be accessible via pkcs11:
 
 ```
@@ -98,8 +92,6 @@ from-ident: Source key identifier?
 ```
 
 Just hit enter to accept the default. Otherwise enter the *ident* of the key we located when we ran ``pubkey-find.exe`` above (in the form: ``machine--d085239508f9d1890989497b38aef757494cf329``)  
-
-<br>
 
 Next we need to give the new key a name. This is the name Certdog will reference the key by in its configuration when we import it. So ensure that this is a unique name (e.g. you could add the time and/or date to the key name such as ``20220814_krestfield_root_ca``):
 
@@ -132,9 +124,4 @@ Key successfully retargetted.
 Path to key: C:\ProgramData\nCipher\Key Management Data\local\key_pkcs11_uc7c99e43e627c3a62933bc1c16f559db862978952-17af2072c8e48350d68ec693fa10f0700d7523d6
 ```
 
-<br>
-
 This key can now be imported into Certdog
-
-
-

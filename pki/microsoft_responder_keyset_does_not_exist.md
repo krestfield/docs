@@ -7,13 +7,9 @@ nav_order: 30
 
 # Microsoft Online Responder - NTE_BAD_KEYSET
 
-
-
 If you have configured your Responder to manually select a signing certificate (rather than having the responder enrol by itself) and you have imported a certificate into the Machine certificate store. Everything looks good but your responder is still complaining with:
 
 **Bad signing certificate on Array controller**
-
-
 
 And taking a look in the event logs you are seeing:
 
@@ -26,11 +22,7 @@ The Online Responder Service could not locate a signing certificate for configur
 
 This could be a permissions issue
 
-
-
 The Online Responder Service runs under the local **NETWORK SERVICE** account. It is this account that requires permissions on the key
-
-
 
 ### Set the Permissions
 
@@ -58,4 +50,3 @@ You can sort by *Date modified* if you have an idea when you imported the key, o
 7. Click **OK** to commit the change
 
 8. Restart the **Online Responder** service
-

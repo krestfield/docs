@@ -8,11 +8,7 @@ grand_parent: Certdog
 
 # Certdog Post Installation Configuration
 
-<br>
-
 Once certdog has been installed, there are a few key pieces of configuration that should be carried out.
-
-<br>
 
 ## Set the system URL
 
@@ -32,8 +28,6 @@ Update the value for **System URL** to be the URL containing the **DNS FQDN** at
 
 Click **Update** to save the setting
 
-<br>
-
 ## Set the logon timer
 
 Initially a user will be logged out after 900 seconds and will then have to re-authenticate. To alter this, navigate to **Settings** then **Settings**. Update these values:
@@ -45,8 +39,6 @@ Initially a user will be logged out after 900 seconds and will then have to re-a
   * This is the period of inactivity, after which a user will be logged out. E.g. if this were set to 300 the user will be logged out if they are inactive for 5 minutes
 
 Click **Update** once the chosen values have been set
-
-<br>
 
 ## Set the private key retention period
 
@@ -64,8 +56,6 @@ To set this key retention period, from **Settings** update the **Private Key Ret
 
 Click **Update** to save.
 
-<br>
-
 ## Create some CAs
 
 To start issuing certificates, certdog either needs to host its own CAs. Or interface to an external CA  
@@ -82,8 +72,6 @@ And to interface to an external EJBCA CA, follow this one:
 
 [Create an EJBCA Issuer](https://krestfield.github.io/docs/certdog/create_ejbca_issuer.html)
 
-<br>
-
 ## Set the SSL certificate
 
 The server should have a trusted SSL certificate installed, associated with the server DNS name, so that the site is trusted by users  
@@ -92,15 +80,11 @@ Follow the steps below to configure this:
 
 [Configure Server's SSL Certificate](https://krestfield.github.io/docs/certdog/configure_server_ssl.html#configuring-the-servers-tls-certificates)
 
-<br>
-
 ## Set up email reminders
 
 To configure email reminders, you need to configure the Email Server settings, then the email details and frequency. See below on how to do this:
 
 [Configure Email Settings](https://krestfield.github.io/docs/certdog/email_settings.html)
-
-<br>
 
 ## Update the Database SSL certificate
 

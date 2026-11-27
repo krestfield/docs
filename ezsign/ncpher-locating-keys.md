@@ -8,8 +8,6 @@ grand_parent: EzSign
 
 # Locating Keys on nCipher HSMs
 
-
-
 EzSign stores references to keys on an HSM locally within the channel folder of the keystore directory.  A typical listing of files in a channel folder may yield:
 
 >   **15acca536498950**.cer  
@@ -19,10 +17,7 @@ EzSign stores references to keys on an HSM locally within the channel folder of 
 >   15adcb5fb0e2532.cer  
 >   15adcb61fef5373.cer   
 
-
 (The bold text is explained later)
-
- 
 
 The Thales nCipher HSM stores keys within its own local keystore on the filesystem e.g. at ``/opt/nfast/kmdata/local/`` and a listing of files in this directory will show many files e.g.:
 
@@ -43,11 +38,7 @@ The Thales nCipher HSM stores keys within its own local keystore on the filesyst
 
 (Note the bold section)
 
-
-
 It is possible to determine what each file in the keystore relates to what key on the HSM by running the following commands
-
- 
 
 ## Commands
 To determine what key an HSM file contains run this command from the ``nfast/bin`` directory:
@@ -63,8 +54,6 @@ C:\Program Files (x86)\nCipher\nfast\bin\cklist.exe
 ```
 
 You will be prompted to enter the operator cardset passphrase (if using an operator cardset)
-
- 
 
 This will output a list of keys together with their details (the output can be quite long)
 
@@ -96,8 +85,6 @@ This will output a list of keys together with their details (the output can be q
 > { 85CF8C06 525BD109 584983CF 89AE8B75 A31B67B7 }  
 > ...  
 
-
-
 Notice that the CKA_LABEL values match the EzSign channel keystore filenames i.e.
 
 > **15acca536498950**.cer  
@@ -107,8 +94,6 @@ Notice that the CKA_LABEL values match the EzSign channel keystore filenames i.e
 And the CAK_NFKM_ID text matches the filenames in the ``/kmdata/local`` directory i.e.
 
 >  key_pkcs11_**uc725e1d27135c1b5dbb296f63be079fa827cf65fd-c17a0a33699c0f123c25525ce741cee8aeaca9bd**  
-
-
 
 ### Making the Connection 
 
@@ -134,8 +119,6 @@ This indicates that this is the signing certificate - the certificate which is a
 
 The other files may relate to other certificates (e.g. intermediate CA and root CA certificates) that would have also been imported  
 
- 
-
 ## Verifying Keystores 
 
 You can use this method to confirm that your local nCipher installation includes all of the required keys that are being referenced by EzSign  
@@ -147,8 +130,6 @@ ERROR EzSignLog - There was an error checking a certificate for an associated ke
 Could not get public key.  There was an error obtaining the public key.  
 Could not locate stored key ID on the HSM.  The key object may have been removed from the HSM  
 ```
-
-
 
 Using the filenames from the example above, this would indicate that EzSign has the following files in its keystore e.g.   
 
@@ -164,9 +145,6 @@ Is not present (has not been copied across or been deleted)
 
 This can also be caused when generating a CSR on one machine and attempting to import the certificate into another without first copying the nCipher files across
 
- 
-
 To avoid errors such as this, always backup or copy the EzSign keystore files together with the nCipher security world files
 
 When migrating to another machine, ensure it references the same HSM or the HSM is in the same Security World
-

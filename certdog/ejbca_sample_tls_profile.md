@@ -7,8 +7,6 @@ grand_parent: Certdog
 
 # EJBCA - TLS Certificate Profile Setup  
 
-
-
 This example demonstrates how to create a TLS profile in EJBCA for use within certdog
 
 Most of the settings mentioned for a profile are optional, depending on the requirements. But to function with certdog correctly, the following must be configured:
@@ -20,19 +18,13 @@ Most of the settings mentioned for a profile are optional, depending on the requ
 
 More information on these settings is given below
 
-
-
 ---
-
-
 
 Navigate to the Administration console (e.g. https://myhostname:8443/ejbca/adminweb)  
 
 Under ***CA Functions***, select **Certificate Profiles**  
 
 Enter a name for this profile e.g. **CERTDOG_TLS** and click **Add**, then click **Edit**  
-
-
 
 For the *Type*, choose **End Entity**  
 
@@ -69,8 +61,6 @@ For ***Extended Key Usage***, set:
 
 <img src=".\images\ejbca_cert_profile3.png" alt="image-20210205095745952" style="zoom:80%;" />
 
-
-
 Scroll down to *Other Data* and optionally, uncheck the box for
 
 * **LDAP DN Order**
@@ -78,8 +68,6 @@ Scroll down to *Other Data* and optionally, uncheck the box for
 * Select the **CA** you wish to be able to issue these certificates  
 
 <img src=".\images\ejbca_cert_profile4.png" alt="image-20210205095912354" style="zoom:80%;" />
-
-
 
 Click **Save**   
 

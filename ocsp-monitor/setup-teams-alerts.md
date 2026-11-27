@@ -7,11 +7,7 @@ nav_order: 100
 
 # Setting up Microsoft Teams Alerts
 
-<br>
-
 The CRL OCSP Monitor can be configured to run a script when a test case fails. In this example we'll go through the steps to create a simple PowerShell script that will call a webhook to send an Alert to a channel  in Microsoft Teams.
-
-<br>
 
 ### Step 1: Create the webhook in Teams
 
@@ -34,8 +30,6 @@ Click **Save**
 <img src="./images/image-20260513103424764.png" alt="image-20260513103424764" style="zoom:67%;" />
 
 The webhook will be created. Click the Copy webhook link and save to a text file as we'll need it in the following steps.
-
-<br>
 
 ### Step 2: Create the PowerShell script
 
@@ -80,8 +74,6 @@ E.g.
 $script:TeamsWebhookUrl = "https://krestfield.webhook.office.com/webhookb2/08c30e55-d4c1-42b3-9c01-dce32f50fb0e@0e285201-65f1-296e-1915-2008a8864591/IncomingWebhook/dceb0b5e720a44eaa9aee56f01a60947/830c24b9-f442-4cfc-9081-71c172765395/V2u6ysB6am72GTuLXwNW9onoU3S311DvdGLz0M2PmAvtf1"
 ```
 
-<br>
-
 ### Step 3: Test the Script
 
 To ensure the webhook is operating OK, open a PowerShell window and navigate to the location of the Send-TeamsAlert.ps1 script
@@ -97,8 +89,6 @@ In the *Teams channel* you should see:
 ![image-20260513110435403](./images/image-20260513110435403.png)
 
 If there are any failures they should be output to the screen or written to the ``teamsalertlog.txt`` file
-
-<br>
 
 ### Step 4: Configure the CRL OCSP Monitor Test Case
 
@@ -127,8 +117,6 @@ The message can be whatever you want. The tags: can be used but  are not require
 
 Click **OK** the **Apply** back on the main screen
 
-<br>
-
 ### Step 5: Test
 
 In the test case, make a change on the *OCSP Settings* (or *CRL Settings*) to force the test case to fail. E.g:
@@ -152,8 +140,6 @@ You should get a Teams alert such as:
 This proves that the alert is working as expected
 
 Revert the change made above
-
-<br>
 
 ## Expanding Messages
 
@@ -218,8 +204,3 @@ And the version changed to 1.4. So the full output would be:
     }
 }
 ```
-
-
-
-
-

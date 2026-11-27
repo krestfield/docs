@@ -13,8 +13,6 @@ You can obtain the client from GitHub [here](https://github.com/krestfield/certd
 
 Or the dll from [here](https://krestfield.s3.eu-west-2.amazonaws.com/certdog/certdognet.dll)
 
-
-
 ## Usage
 
 Add **certdognet** as a reference to your project  
@@ -44,8 +42,6 @@ Where:
 
   **certDogPassword**: Is the password of the user  
 
-
-
 For example, to obtain a certificate from the demo environment and save the response to a local PFX file you could do the following:
 
 ```c#
@@ -60,19 +56,11 @@ using (BinaryWriter binWriter = new BinaryWriter(File.Open("C:\\temp\\test.pfx",
 	binWriter.Write(p12BinaryData);
 ```
 
-
-
 You also have the option of storing the certdog credentials in the Windows Credential Manager (see Setting Credentials below for details on storing these). You can then simplify the call further:
 
 ```c#
 String p12Base64Data = Certdog.GetCert(certDogUrl, certIssuer, requestedDn, csrGenerator, p12Password, sans);
 ```
-
-
-
-
-
-
 
 ## Setting Credentials
 
@@ -89,15 +77,11 @@ cmdkey /generic:CERTDOGCREDS /user:certdogusername /pass:certdogpassword
 ```
 3. Setting the required username and password for **certdogusername** and **certdogpassword**
 
-
-
 To list the updates, type the following:
 
 ```shell
 cmdkey /list:CERTDOGCREDS
 ```
-
-
 
 ### Running as Local System
 
@@ -120,6 +104,3 @@ psexec -i -s cmd.exe
 A new command prompt will open - running under the LOCAL SYSTEM account  
 
 Now run the cmdkey steps above. This will result in these credentials being accessible by an application running under the LOCAL SYSTEM account
-
-
-

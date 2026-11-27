@@ -8,11 +8,7 @@ keywords: ["restore", "disaster recovery"]
 
 # Backup
 
-
-
 The certdog architecture means that the majority of data is stored within the database with very few static configuration options stored outside of this
-
-
 
 ### Database
 
@@ -28,8 +24,6 @@ And it is these files that must regularly be backed up
 
 If the server's files system (where certdog is running) is also backed up, ensure this folder is included in that backup
 
-<br>
-
 <u>Manual Backup</u>
 
 * Open the Services snapin, and locate the **Krestfield Certdog Database** service
@@ -44,8 +38,6 @@ If the server's files system (where certdog is running) is also backed up, ensur
 
 * Start the service
 
-<br>
-
 <u>Manual Restore</u>
 
 * Open the Services snapin, and locate the **Krestfield Certdog Database** service
@@ -59,13 +51,7 @@ If the server's files system (where certdog is running) is also backed up, ensur
 * Copy the folder from the backup to ``[certdog installation]\mongodb\dbfiles``
 * Start the service
 
-<br>
-
 This will restore the database to the state when the backup was taken and overwrite any changes that would have been made since then. A more granular approach can achieved using the mongodump and mongorestore tools...
-
-<br>
-
-
 
 <u>Using mongodump and mongorestore</u>
 
@@ -93,8 +79,6 @@ In production TLS is used to secure the link to the database, if using the free 
 mongodump --db certman --username certmanuser --password [db password] --archive=c:\dbbackups\bk1.zip --gzip
 ```
 
-<br>
-
 To restore, the ``mongorestore`` command is used.  As for ``mongodump``, there are many options but two approaches are discussed here:
 
 * Restore only deleted items
@@ -103,8 +87,6 @@ To restore, the ``mongorestore`` command is used.  As for ``mongodump``, there a
 * Restore the entire database and overwrite
   * This option drops the database and recovers from the backup
   * This option is useful if you wish to revert back to the database at the point the backup was taken. New and changed items will be removed and reverted to their state at the backup point
-
-<br>
 
 To restore only deleted items a command such as the following may be used:
 
@@ -118,8 +100,6 @@ For the free version the TLS options may be omitted e.g.
 mongorestore --db certman --username certmanuser --password [db password] --gzip --archive=c:\dbbackups\bk1.zip
 ```
 
-<br>
-
 To restore the entire database and overwrite:
 
 ```sh
@@ -127,8 +107,6 @@ mongorestore --db certman --username certmanuser --password [db password] --gzip
 ```
 
 I.e. the ``--drop`` switch has been added
-
-<br>
 
 ### Application Configuration
 
@@ -143,8 +121,6 @@ This folder contains some static configuration data (such as the database URL to
 You should backup this folder but these settings will change infrequently and so only need backing up after initial setup and whenever a change is made (to the application TLS certificates or database location)  
 
 If you carry out a machine or image backup, ensure this folder is included in that backup
-
-<br>
 
 ### Logs
 
@@ -166,8 +142,6 @@ The majority of the entries in these logs are duplicates of the database logs. T
 
 All events are always stored to the database
 
-<br>
-
 <u>Container Logs</u>
 
 The host container (Tomcat) also produces log files. By default these will be located here:  
@@ -178,7 +152,4 @@ The host container (Tomcat) also produces log files. By default these will be lo
 
 These logs contain debug or system level entries relevant to the container
 
-<br>
-
 If any snapshot or system level backup is already being performed, this location should be included in those backups. Otherwise, if these logs also need to be retained ensure these locations are included in your backup plan
-

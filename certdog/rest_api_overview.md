@@ -14,13 +14,11 @@ These functions are described in the Swagger UI
 
 See [here for examples of calling the API](rest_api_example.html)
 
-
-
 ### Swagger
 
 The available REST API functions can be viewed using the Swagger UI as follows:  
 
- <br> Ensure that certdog is running. Open a browser and navigate to:  
+ Ensure that certdog is running. Open a browser and navigate to:  
 
 ​    https://*endpoint*/certdog/api/swagger-ui/index.html  
 
@@ -38,21 +36,13 @@ E.g.
 
 ​    (Previously: [https://127.0.0.1/certdog/api/swagger-ui.html](https://127.0.0.1/certdog/api/swagger-ui.html))
 
-
-
-
-
 If you see something like the following: 
 
 <img src=".\images\swaggere_main.png" alt="Swagger API" style="zoom:80%;" />
 
-
-
 Then everything should be working OK  
 
 Scroll down and all of the API methods should be presented
-
-
 
 ### Trying out the API
 

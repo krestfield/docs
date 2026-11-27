@@ -11,13 +11,9 @@ tagline: Vulnerability notices
 
 # Security Advisories
 
-<br>
-
 This section lists publicly disclosed vulnerabilities that may affect Krestfield products, together with the steps you should take
 
 Each advisory states which products and versions are affected, which are **not** affected, and what to do. Advisories are updated as new information becomes available. Check the revision history at the bottom of each page
-
-<br>
 
 ## Current Advisories
 
@@ -28,13 +24,9 @@ Each advisory states which products and versions are affected, which are **not**
 | [CVE-2026-58062 (Bouncy Castle)](cve-2026-58062.html) | EzSign (before 4.6.0) | Critical | Not exploitable | 19th November 2026 |
 | [CVE-2026-49844 (Log4j)](cve-2026-49844.html) | EzSign (before 4.6.0) | Medium | Not exploitable | 19th November 2026 |
 
-<br>
-
 ## Subscribe
 
 To be notified of new and updated advisories, subscribe to the [RSS feed]({{ site.baseurl }}/security/feed.xml)
-
-<br>
 
 ### More Information
 

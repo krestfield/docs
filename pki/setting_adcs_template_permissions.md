@@ -7,8 +7,6 @@ nav_order: 10
 
 # Setting Microsoft ADCS CA and Template Permissions
 
-<br>
-
 ### Permissions on the CA
 
 In order to be able to issue certificates from your Microsoft CA via Certdog, the correct user-permissions must be set on the CA and certificate templates  
@@ -27,8 +25,6 @@ To enable a user to perform the following additional operations:
 
 Then the user must also have the **Issue and Manage Certificates** permission set to **Allow**
 
-<br>
-
 In Certdog, a service account is usually provisioned that is a member of a group set with *Allow* permissions for:
 
 * Read
@@ -45,10 +41,6 @@ This enables that account to be used (set as the Credential to use in the Micros
 
 This user/group is then configured in the templates that you wish Certdog to be able to issue certificates from, as per the instructions below
 
-<br>
-
-<br>
-
 ### Permissions on Templates
 
 In order to be able to issue a certificate from a specific template, the user or group being used must have the following permissions set to Allow:
@@ -61,10 +53,6 @@ If the template has the **CA certificate manager approval** option set (as confi
 
 The Certdog ADCS agent will attempt to automatically approve this request. However, in order for this to succeed the account the agent is running under (as configured as the Credential in the Microsoft Certificate Issuer) must also have the **Issue and Manage Certificates** permissions set to **Allow** on the CA (as mentioned above)
 
-<br>
-
-<br>
-
 ### Configuring Permissions on the CA
 
 Right click the **CA node** (e.g. Certdog in the example below) and choose **Properties**
@@ -76,8 +64,6 @@ From the *Properties* dialog, select the **Security** tab
 Click **Add...** and start typing the name of the **user or group** you wish to add permissions for. Click **Check Names** to perform a search based on the entered text. Select the **user or group** from the list. Click **OK**  
 
 Select the **user or group** and check the required permissions. Click **OK**  
-
-<br>
 
 ### Configuring Template Permissions
 
@@ -108,4 +94,3 @@ Back on the **Certificate Authority snapin**, right click the **Certificate Temp
 <img src=".\images\template-to-issue.png" alt="Enable Templates" style="zoom:80%;" />
 
 Select the **template** and click **OK**  
-

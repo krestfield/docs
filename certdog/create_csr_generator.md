@@ -17,8 +17,3 @@ To create a CSR Generator:
 2. Provide a name for the generator and specify the algorithm, key size (or curve if ECDSA is chosen) and the hash algorithm  
 <img src=".\images\csr_generator.png" alt="image-20210116150109796" style="zoom:67%;" />   
 3. Click **Add**
-
-
-
-
-

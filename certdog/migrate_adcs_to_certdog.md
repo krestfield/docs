@@ -21,15 +21,11 @@ You may choose to do this for reasons such as:
 
 * As a backup for an existing Microsoft CA  
 
-<br>
-
 Migration can be achieved by following a few simple steps:
 
 1. Migrate the CA key and certificate to Certdog
 2. Import the issued certificates from the Microsoft CA database
 3. Configure Certdog to operate in the same way as the Microsoft CA (CRL generation periods etc.)
-
-<br>
 
 ### Step 1: Import the CA Certificate and CA Keys
 
@@ -38,8 +34,6 @@ If the CA to be imported is not a Root CA then the Root CA Certificate (and any 
 In Certdog, select **Certificates** from the menu 
 
 Click the **Import Certificate** button and import the Root Certificate and any other Issuing CA certificates of the CA to be imported 
-
-<br>
 
 Next we need to import the CA keys and certificate
 
@@ -54,8 +48,6 @@ If your keys are not marked as exportable, [see the guide here](https://krestfie
 If your keys are stored on an EnTrust nCipher HSM, we first need to re-target the keys (from the Microsoft format - CSP/CNG to the certdog format - PKCS11) [as described here](retarget_adcs_ncipher_keys.html)
 
 Configure a PKCS#11 key store to reference the HSM. [Follow the steps here](keystores.html) to create the key store
-
-<br>
 
 Obtain the CA certificate (from the section above) as a PEM formatted file (e.g. ``ca.cer``) as we will need this for the next steps
 
@@ -91,8 +83,6 @@ id                       name                             keyStoreType
 
 And note the id of the one you created above. i.e. the key store that references the same HSM as the Microsoft CA (e.g. ``616f205944736e513d32fb34``)
 
-<br>
-
 Now we will import the CAs keys into certdog. We need to provide a name for this new CA, the CA certificate (ca.cer) and the key store id we obtained from the step above. E.g.
 
 ```powershell
@@ -113,15 +103,11 @@ This indicates that either
 * The CA Key has not been migrated. [Follow the guide here](retarget_adcs_ncipher_keys) to do this
 * The Key does not reside on this HSM or Security World. If you are performing this on a new server to which you have copied the Security World, check all files in the ``Key Management Data\local`` folder are present (have been copied from the old server)
 
-<br>
-
 ### Step 2: Import the CA database
 
 We need to extract the certificates from the Microsoft database and then imported into Certdog. This ensures that all previously issued certificates and their status (whether revoked or active) will be available in Certdog  
 
 [Follow the instructions here](import_adcs_database.html) on how to export and import the CA database
-
-<br>
 
 ### Step 3: Complete the Configuration
 
@@ -145,15 +131,11 @@ For the **CRL Distribution Point (CDP)** extension, note the http and file locat
 
 option is ticked  
 
-
-
 For the **Authority Information Access (AIA)** extension note all entries where the following options are ticked
 
 > **Include in the AIA extension of issued certificates**
 
 > **Include in the online certificate status protocol (OCSP) extension**
-
-
 
 From Certdog, locate your imported Local CA by navigating to **Local CAs > CA Configuration** from the menu, then clicking your CA and click **View/Edit**  
 
@@ -165,12 +147,8 @@ If you have any entries for *Include in the CDP extension of issued certificates
 
 For the CRL Filename, ensure that the filename matches that from the CDP extension  
 
-<br>
-
 From your Microsoft CA, click the **Revoked Certificates** folder and note the **CRL Publication Interval**. Set this to be the **CRL Lifetime** in Certdog  
 
 Set the **CRL Generation Period** to be a value less than this period. This could be 10% less or more to ensure there is adequate overlap of when a new CRL will be available before the old CRL expires
-
-<br>
 
 Once all configuration is complete. Click **Update** to apply the settings

@@ -10,8 +10,6 @@ grand_parent: Certdog
 
 > From version: 1.8.0
 
- <br>
-
 ## Pre-Requisites
 
 * An internet connection (as additional components may be downloaded)
@@ -19,8 +17,6 @@ grand_parent: Certdog
 * Administrator privileges  
 * Windows Server 2019/2022/2025
 * Windows 11
-
-<br>
 
 ## Download
 
@@ -30,13 +26,9 @@ grand_parent: Certdog
 
 3. Unzip to a location on your drive e.g. if you unzip to ``C:\`` you will end up with a directory **C:\certdogfree** (but you can place this anywhere on your system)
 
-<br>
-
 For RedHat install instructions, see the steps [here](https://krestfield.github.io/docs/certdog/redhat_install.html)
 
 For Debian install instructions, see the steps [here](https://krestfield.github.io/docs/certdog/debian_install.html)
-
-<br>
 
 ## Installation
 
@@ -46,19 +38,10 @@ Open a PowerShell as **Administrator**, navigate to the **certdogfree\install** 
 .\install-demo.ps1
 ```
 
-<br>
-
 Login with the *username* and *password* that will be displayed at the end of the installation
-
-<br>
 
 Note that a default TLS certificate is configured for 127.0.0.1. You can issue a new TLS certificate to replace this or temporarily install the root from here: ``.\certdogfree\config\sslcerts\dbssl_root.cer`` 
 
-<br>
-
 If you hit any issues, see the troubleshooting guide [here](install_troubleshooting.html)
 
-<br>
-
 Full Documentation: [https://krestfield.github.io/docs/certdog/certdog.html](https://krestfield.github.io/docs/certdog/certdog.html)
-

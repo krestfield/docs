@@ -12,8 +12,6 @@ Whilst Certdog allows for certificates to be provisioned as PFX files (as well a
 
 In this example, we will generate a CSR (marking it as exportable), submit the request and obtain the certificate, then export as a PFX
 
-<br>
-
 ### Create the INF File
 
 Create a .inf file as follows:
@@ -99,11 +97,7 @@ The key items to edit here are:
 
   * You can specify the template when submitting to the CA later as well
 
-    
-
 Update as required and save the .inf file
-
-<br>
 
 ### Generate the CSR
 
@@ -114,8 +108,6 @@ certreq -new request.inf cert.csr
 ```
 
 The request will be generated and saved to ``cert.csr``
-
-<br>
 
 ### Submit the CSR for Processing
 
@@ -134,8 +126,6 @@ certreq -attrib "CertificateTemplate:SubCA" cert.csr
 You will be prompted to choose the CA to send the request to
 
 The certificate will be issued. Download this to the same location as the .inf file. E.g. ``cert.cer``
-
-<br>
 
 ### Import the Certificate
 
@@ -159,8 +149,6 @@ Installed Certificate:
 ```
 
 But in some cases no output is observed. As long as no errors are received, things should be OK
-
-<br>
 
 ### Export as a PFX
 
@@ -194,11 +182,7 @@ And then export the certificate and keys as a PFX to a file:
 Export-PfxCertificate -Cert $certificate -FilePath cert.pfx -Password $password
 ```
 
-<br>
-
 More info on certreq can be found [here](https://docs.microsoft.com/en-us/windows-server/administration/windows-commands/certreq_1) for more info
-
-<br>
 
 ### Using Certdog
 
@@ -215,5 +199,3 @@ Set-Content -Path cert.pfx -Value $resp.p12Data
 ...and that is all you need to do...
 
 See [here](https://krestfield.github.io/docs/certdog/issuing-a-certificate.html) for issuing certs via the UI
-
-<br>

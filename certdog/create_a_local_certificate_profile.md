@@ -18,15 +18,11 @@ As well as the options set in the profile, the issued certificate will also cont
 * CDP (CRL Distribution Points)
   * This extension contains the locations of CRLs
 
-<br>
-
 ### Creating a Certificate Profile
 
 Select **Local CA** > **Profiles** from the menu and click **Add New Profile**
 
 <img src=".\images\new_localca_profiles2.png" alt="image-20211110065538884" style="zoom:80%;" />
-
-
 
 * Enter a **Profile Name**
 
@@ -62,11 +58,6 @@ You may select a policy type of **OID Only**, **User Notice** or **CPS**. Select
 
 Enter the OID for the extension and the Base64 or ASCII hex encoded data. See [here](creating_custom_extensions.html) for details on how to obtain this data. Click **Set as Critical** if the extension is to be marked as critical and click **Add**. You may add further extensions as required
 
-<br>
-
 When the settings are complete, click **Add**  
 
-<br>
-
 See [RFC5280](https://tools.ietf.org/html/rfc5280) for more details on certificate attributes and extensions
-

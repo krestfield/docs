@@ -9,8 +9,6 @@ keywords: ["Azure", "AKV", "token expired", "credentials expired"]
 
 # Refresh Azure Key Vault Credentials
 
-<br>
-
 If when using an Azure Key Vault Token type, you receive an error such as:
 
 ```powershell
@@ -19,8 +17,6 @@ If when using an Azure Key Vault Token type, you receive an error such as:
 
 This indicates that your credentials have expired. These can be refreshed as follows:
 
-<br>
-
 ## Refresh the Token in Azure
 
 Login to the Azure Portal and from the console, navigate to **Azure Active Directory** and select **App Registrations** from the left hand menu  
@@ -28,8 +24,6 @@ Login to the Azure Portal and from the console, navigate to **Azure Active Direc
 Click **All applications** and locate the application configured in EzSign
 
 <img src=".\images\azure-apps.png" alt="Azure Apps" style="zoom:80%;" />
-
-
 
 This will have the same **Application (client) ID** as specified in the EzSign ``channel.1.token.azureKeyVault.clientId`` property  
 
@@ -59,19 +53,8 @@ This will output new credentials e.g.
 
 All the settings should be the same as previously configured, except the password entry would have changed  
 
-<br>
-
 ## Set the new password in EzSign
 
 Now, start the ``ezsign-manage.sh`` utility, choose the **Set Passwords** option and set this password as the new Token password for the channel. Note that you must enter the password minus the quotes i.e. enter ``nScc7-6T.gOI7.ugHawFRRoUbwUA_agrC-`` and not ``"nScc7-6T.gOI7.ugHawFRRoUbwUA_agrC-"``  
 
 Restart the EzSign server and authentication to Azure should now complete OK
-
-
-
-
-
-
-
-
-

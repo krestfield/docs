@@ -5,15 +5,11 @@ parent: API & Automation
 grand_parent: Certdog
 ---
 
-
-
 # REST API Examples
 
 The following demonstrate how to make a simple API calls to obtain certificates and view certificate details  
 
 For the full API refer to the documentation [here](rest_api_overview.html)
-
-
 
 The online version of the API documentation (available 8am - 8pm UK time) is available [here](https://certdog.net/certdog/api/swagger-ui/index.html)
 
@@ -22,8 +18,6 @@ You may test against this version, using the following credentials:
 * Username: ``certdogtest``
 
 * Password: ``password``
-
-
 
 ### Login
 
@@ -58,8 +52,6 @@ e.g.
 Authorization: Bearer eyJhbGciOiJIUzUxMiJ9....sdUfWLrtZPRGiQSA
 ```
 
-<br>
-
 To run this via the Swagger UI available [here](https://certdog.net/certdog/api/swagger-ui/index.html), perform the following:
 
 Locate the **login-controller** and click on the "**POST** ``/certdog/api/login``" entry. Click **Try it out**
@@ -75,8 +67,6 @@ Click the **Execute** button. In the *Server response* section below, you will s
 Copy the value for *token* (without the enclosing quotes), go to the top of the page and click **Authorize** and enter this value as the JWT (apiKey). Click **Authorize**, then **Close**.
 
 Now you can go to any of the other API calls and click **Try it out**. E.g. go to certificates-controller, click "**GET** ``/certdog/api/certs``" and click **Execute**. This will return all certs in the system
-
-<br>
 
 ### Get a Cert as PKCS12
 
@@ -113,8 +103,6 @@ POST: https://certdog.net/certdog/api/certs/request
 * **extraEmails** is optional. If included these email addresses will also be sent reminder emails
 * **extraInfo** is optional
 
-<br>
-
 <u>Returns</u>
 
 ```json
@@ -126,8 +114,6 @@ POST: https://certdog.net/certdog/api/certs/request
 ```
 
 The p12Data contains the keys and certificates, encrypted under the password provided in the call (p12Password), base64 encoded
-
-<br>
 
 ### Get a Cert from a CSR
 
@@ -144,7 +130,7 @@ POST: https://certdog.net/certdog/api/certs/requestp10
 * **caName** is the Certificate Issuer as displayed in the UI
 * **teamName** must be provided if the authenticated user is a member of more than one team. If only a member of one team then the certificate will be associated with that team
 * **csr** is the PEM CSR data or base64 encoded CSR data
-<br>
+
 <u>Returns</u>
 
 ```json
@@ -153,8 +139,6 @@ POST: https://certdog.net/certdog/api/certs/requestp10
     "pemCert": "-----BEGIN CERTIFICATE-----MIIDVTCCA...RCMOT4=-----END CERTIFICATE-----\r\n"
 }
 ```
-
-<br>
 
 ### Get Certificate Details
 
@@ -225,4 +209,3 @@ Returns
     "daysToExpiry": 364.99988
 }
 ```
-

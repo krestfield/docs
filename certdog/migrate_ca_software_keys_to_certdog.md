@@ -12,8 +12,6 @@ Any CA that uses software keys that can be exported as a PFX/PKCS#12 file can be
 
 This is the case for Microsoft (ADCS) CAs that store their keys in software but is also applicable for other CAs (such as the RSA Certificate Manager)
 
-<br>
-
 ### Step 1 - Export the CA Keys
 
 Depending on the CA being used, the steps to export the CA keys as a PFX/PKCS#12 file may differ. For a Microsoft CA, the following can be performed:
@@ -42,8 +40,6 @@ Depending on the CA being used, the steps to export the CA keys as a PFX/PKCS#12
 Note: If the option **Yes, export the private key** is greyed out, this is because the keys are marked as *not exportable*
 
 These can still be exported. [See the guide here](https://krestfield.github.io/docs/pki/exporting_a_nonexportable_certificate.html) for details on how this can be performed
-
-<br>
 
 ### Step 2 - Import to Certdog
 
@@ -118,4 +114,3 @@ You can also specify the following attributes at this point, or they can be set 
   * The period between each CRL generation
 * -crlFilename
   * The local filename of the CRL
-

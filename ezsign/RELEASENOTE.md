@@ -9,15 +9,11 @@ nav_order: 900
 
 ### EzSign - Digital Signing Server
 
-
-
 Documentation: [https://krestfield.github.io/docs/ezsign/ezsign.html](https://krestfield.github.io/docs/ezsign/ezsign.html)
 
 Support: [support@krestfield.com](mailto:support@krestfield.com)
 
 Web: [https://www.krestfield.com](https://www.krestfield.com)
-
-<br>
 
 ------------------------------------------------------------------------------
 > Version: 4.5.0
@@ -31,7 +27,6 @@ Changes:
 
 Fixes:
 * Addressed: CVE-2026-5588 (https://nvd.nist.gov/vuln/detail/CVE-2026-5588)  
-<br>
 
 ------------------------------------------------------------------------------
 > Version: 4.4.0
@@ -42,8 +37,7 @@ Changes:
 
 Fixes:
 * Dependencies updated to latest versions to remove reported vulnerabilities  
-  <br>
-  
+
 ------------------------------------------------------------------------------
 
 > **Version: 4.3.0**
@@ -53,8 +47,6 @@ Changes:
 * Server can now be configured with a server side TLS certificate to secure communications from the client.
 * Client can now be configured with a client-side TLS certificate to authenticate to the Server and client-side TLS can be enforced at the Server side.
 
-
-
 ------------------------------------------------------------------------------
 
 > **Version: 4.2.3**
@@ -63,9 +55,6 @@ Changes:
 Changes:
 * Thales payShield 10k support added including support for TLS.
 
-
-
-
 ------------------------------------------------------------------------------
 
 > **Version: 4.2.2**
@@ -73,8 +62,6 @@ Changes:
 
 Changes:
 * Update to relax the PKCS#7 signature's Encryption Algorithm checking, to allow sha256WithRSA etc. Extracting the signature part from this.
-
-
 
 ------------------------------------------------------------------------------
 
@@ -109,9 +96,6 @@ Fixes:
 
 * Translate keys temp directory naming fixed on Solaris
 
-  
-
-
 ------------------------------------------------------------------------------
 > **Version: 4.2.0**
 > Release Date:  06 June 2022
@@ -126,7 +110,6 @@ Changes:
 
 Fixes:
 * None
-
 
 ---
 > **Version: 4.1.3**
@@ -332,7 +315,6 @@ Changes:
 * Transaction Id added to logs
 * Added test certificates to initial setup
   
-
 Fixes:
 * None      
   
@@ -366,7 +348,6 @@ Changes:
 * OCSP timeout values are now configurable
 * Generate random number function added    
   
-
 Fixes:
 * When control tool used to alter logging level, socket closed when under load
 * PKCS#11 failed to locate a key when under load
@@ -396,5 +377,3 @@ Changes:
 
 Changes:
 * Initial Release
-
-  

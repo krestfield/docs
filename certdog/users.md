@@ -23,8 +23,6 @@ Click **Add New User**
 
 <img src=".\images\users3.png" alt="New User" style="zoom:80%;" />
 
-
-
 Enter a **Username**  and an **Email Address**  
 
 For the password, you can choose a password for the user or you can click **Generate random password and email**.  This will generate a strong password and email to the email address configured. By default, the user will also have to change this password on first use  
@@ -79,13 +77,9 @@ This value must then be included in the Authorization header when making REST AP
 
 Note, it is linked with the user account so has the same permissions (access to Certificate Issuers) and restrictions (IP Addresses)  
 
-<br>
-
 If a token is no longer required or has been compromised, it may be revoked  
 
 To do this, simply select the token from the list of *Current Tokens* and click Revoke. Click Yes to confirm revocation.
-
-<br>
 
 #### Users: Managing own Tokens
 

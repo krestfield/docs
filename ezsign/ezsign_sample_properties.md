@@ -37,10 +37,7 @@ I.e. the encrypted password has been added
 
 At this point the server can be started. Although, to be of any real use you would need import your certificates and generate CSR's for any signing certificates etc.
 
-
-
 Further details of the available properties can be found in the sample below. For more details on each of the options, refer to the guide [here](ezsign_properties.html)
-
 
 ```properties
 ###############################################################################
@@ -567,4 +564,3 @@ channel.1.revocationChecker.crl.proxyUsername=user1
 # If proxyAuthRequired=true set the password here
 channel.1.revocationChecker.crl.proxyPassword=password
 ```
-

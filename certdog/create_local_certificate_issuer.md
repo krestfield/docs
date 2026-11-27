@@ -6,22 +6,16 @@ grand_parent: Certdog
 ---
 # Create a Local Certificate Issuer
 
-
-
 A Local Certificate Issuer enables you to issue certificates from a certdog controlled CA
 
 A Certificate Issuer combines a Local CA (Certificate Authority) and a Certificate Profile  
 
 Before creating a CA you must have configured a Key Store. See [here](keystores.html) for instructions on how to create one
 
-<br>  
-
 ### 1. Create a Local CA Configuration  
    Select **Local CA** > **CA Configuration** from the menu and click **Add New CA**
 
 <img src=".\images\new-local-ca.png" alt="image-20230414135649435" style="zoom:67%;" />
-
-
 
 Complete the following details:  
 
@@ -61,11 +55,6 @@ Complete the following details:
   
 * **Sequential Serial Numbers**: If left unchecked, serial numbers are generated randomly and are ensured of uniqueness. They will not be predictable. If checked, serial numbers will be incremented by one for each certificate issued from this CA and are thus predictable. In this case the starting serial number will be randomly generated
   
-
-<br>
-
-<br>
-
 If you chose to *Issue From* an **External CA** above, the following options (*Policies*, *Extensions* and *CRL Generation*) will not be available. This is because it will be the issuing CA that will decide on these values when it issues the certificate
 
 <u>Policies</u>  
@@ -90,11 +79,7 @@ For Policy type, choose from:
 
 Populate the fields and click Add. You may add as many policy entries as required
 
-<br>
-
 Once the CA is configured, the above options (main details and policies) are fixed and cannot then be changed. You may delete and re-issue a CA but you cannot change its lifetime, algorithm, policies etc. as they are part of the CA certificate  
-
-<br>
 
 <u>Extensions</u>  
 
@@ -140,15 +125,11 @@ Click **Create**
 
 If you chose to *Issue From* an **External CA** above, the option will be **Create CSR**. See the section [Processing a CSR from an External CA](#processing-a-csr-from-an-external-ca) below for details on processing this CSR 
 
-<br>
-
 ### 2. Create a Certificate Profile
 
 Select **Local CA** > **Profiles** from the menu and click **Add New Profile**
 
 See [Create a Local Certificate Profile](create_a_local_certificate_profile.html) for details on creating profiles
-
-<br>
 
 ### 3. Create a Certificate Issuer
 
@@ -172,11 +153,7 @@ Select the **Team**(s) that will be authorised to use this issuer. Members of th
 
 Click **Add**  
 
-<br>
-
 If you wish to request a certificate by just providing a DN i.e. with certdog generating the CSR on your behalf, then a CSR Generator must be available.  See [Create a CSR Generator](create_csr_generator.html)
-
-<br>
 
 ### Notes on the CRL Filename and CRL Distribution Points
 
@@ -187,8 +164,6 @@ When you enable the **Generate CRLs** option a default *CRL Distribution Point* 
 If you do not wish to accept the defaults they can be changed, but note the following:  
 
 The *CRL Filename* and *CRL Distribution Points* entries must align. i.e. they must reference the same file and the location referenced by the *CRL Distribution Point* must be where the *CRL Filename* is served from  
-
-<br>
 
 By default, CRLs are hosted on the filesystem here:  
 
@@ -208,8 +183,6 @@ Note that this URL will default to 127.0.0.1 (e.g. ``http://127.0.0.1/certdog/cr
 
 **Note**: Some systems fail to recognise the file system correctly, so check that the pre-populated file location is correct e.g. ensure the folder exists and is below the tomcat directory. If this is not the case, the web server will fail to serve the CRL
 
-<br>
-
 But if you wanted to change this you could add another folder under the ``crlwebapps`` location e.g.  
 
 ```
@@ -228,11 +201,7 @@ Which would result in a *CRL Distribution Point* of
 http://certdog.krestfield.com/certdog/crl/myca/ca1.crl
 ```
 
-<br>
-
 You also have the option of hosting the CRL on another host server. In this case, set your *CRL Filename* to a location of your choice and configure a scheduled task (or similar) to copy the generated CRL to your host. Just ensure that whatever the host resolves to is set as the *CRL Distribution Point*
-
-<br>
 
 ### Configuring the AIA Issuer Cert Location
 
@@ -243,8 +212,6 @@ To reference the CA certificate, export the certificate and place it at a locati
 This can also be hosted on the certdog server itself (e.g. you could place the CA certificate ``ca1.cer`` at ``[certdog install]\tomcat\myca``). Then set the AIA Location to the URL that can access this location e.g. ``http://certdog.krestfield.com/myca/ca1.cer``
 
 Note that the issuing certificate is not usually provided in this way for root CAs, as end systems should already have the root CA certificate installed in order to trust it  
-
-<br>
 
 ### Processing a CSR from an External CA
 

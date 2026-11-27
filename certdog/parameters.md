@@ -7,8 +7,6 @@ grand_parent: Certdog
 
 # Available Parameters
 
-<br>
-
 Tasks and Workflows can execute scripts and pass parameters
 
 Emails and Webhooks can also be passed parameters
@@ -16,8 +14,6 @@ Emails and Webhooks can also be passed parameters
 These available parameters are listed below
 
 (Note: All parameters are passed as strings)
-
-<br>
 
 * **[APITOKEN]**
   * A temporary API token that is generated immediately before being passed to the script and deleted once the script has finished
@@ -65,5 +61,3 @@ These available parameters are listed below
 
 * **[CERTSUBJECT]**
   * The DN of the certificate e.g. ``CN=Server Cert,O=Certdog,C=GB``
-
-<br>

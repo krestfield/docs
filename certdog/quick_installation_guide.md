@@ -11,13 +11,9 @@ keywords: ["install", "quick start", "setup"]
 
 > From version: 1.8.0
 
- <br>
-
 See [here](download-locations.html) for download locations and instructions
 
 See [here](demo_quickstart.html) for the demo installation (which will install with a single command using default values for the admin user)
-
-<br>
 
 Open a PowerShell window as Administrator and navigate to the installation directory, e.g.:
 
@@ -47,8 +43,6 @@ $adminUsername = $adminUser.UserName
 $adminPassword = [System.Runtime.InteropServices.Marshal]::PtrToStringAuto([System.Runtime.InteropServices.Marshal]::SecureStringToBSTR($adminUser.Password))
 ```
 
-<br>
-
 Run the installation as follows:
 
 ```powershell
@@ -62,4 +56,3 @@ Run the installation as follows:
 	-listeningPort 443 `
 	-installAdcsAgent
 ```
-

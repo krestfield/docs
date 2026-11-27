@@ -8,15 +8,9 @@ grand_parent: Certdog
 
 # Installing the ADCS Agent on another machine
 
-  
-
 The free version of certdog assumes that all components will be installed on the same machine. But if you wish to connect to a Microsoft CA on another domain (or from a non-domain connected machine), you will need to install the ADCS driver separately
 
 To do this, you need to make some changes to the free version's installation. We will re-install the database to make it accessible to external servers then install the ADCS driver on the new machine and configure it with the database URI
-
-  
-
-  
 
 ### Un-install the Database
 
@@ -34,14 +28,11 @@ From your certdog installation
 
    When prompted, choose **y** to continue	
 
-<br>
 <hr>
 
 ### Edit Files with the new IP Address
 
 Obtain the IP address of the server's externally visible interface. This is the IP address that the external ADCS Agent will connect to. On Windows you can run ``ifconfig`` to get this information. You will need this IP Address to plug-in to files in the next steps
-
-
 
 Edit ``.\certdogfree\install\js\createreplicateset.js``
 
@@ -62,8 +53,6 @@ rs.status()
 ```
 
 Save the file  
-
-<br>  
 
 2. Edit: ``certdogfree\install\templates\mongod.template.nossl.cfg``
 
@@ -86,8 +75,6 @@ net:
 ```
 
 Save the file  
-
-  <br>
 
 <hr>
 
@@ -127,8 +114,6 @@ spring.data.mongodb.uri=mongodb://certmanuser:bFhvqunuZRdvCZK@127.0.0.1/certman
 ```
 
 We need the URI to configure the ADCS driver in the next step
-
-
 
 Extract the string after the equals sign and replace the ``127.0.0.1`` IP address with your server's IP address. For example, if your server's IP address was ``192.55.13.17`` the string we want would be as follows:
 
@@ -185,10 +170,6 @@ Service started OK
 If the database URL changes, re-run this script
 ```
 
-
-
-  
-
 The certdog database will now be able to accept connections from the ADCS agent. Note: Firewall restrictions must allow the port **27017**  
 
 If the ADCS agent does not register, attempt to telnet from the server to the certdog server IP address on port 27017 e.g.
@@ -198,6 +179,3 @@ telnet 192.55.13.17 27017
 ```
 
 If this fails to connect, there is most likely a firewall restriction in place, at the network layer or on the server hosts. This must be relaxed for this port
-
-
-

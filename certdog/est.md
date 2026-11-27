@@ -10,15 +10,11 @@ keywords: ["Enrollment over Secure Transport", "enrolment"]
 
 > This feature is available from certdog 1.18
 
-<br>
-
 Certdog supports the EST protocol - Enrollment over Secure Transport ([RFC7030](https://datatracker.ietf.org/doc/html/rfc7030))
 
 EST lets devices such as routers, switches, firewalls and IoT devices request and renew their own certificates over HTTPS. Many network devices support EST natively, and it is the recommended replacement for SCEP
 
 Multiple EST services can be created - each with a different configuration. This allows for multiple setups that may provide different certificate types, from different CAs, to different groups of devices
-
-<br>
 
 ## Overview
 
@@ -43,8 +39,6 @@ The following EST operations are supported:
 | ``/serverkeygen`` | certdog generates the key and returns it with the certificate (when enabled) |
 | ``/csrattrs`` | Returns the attributes devices should include in their requests (when configured) |
 
-<br>
-
 ### The EST Port
 
 EST is served by its own HTTPS connector, on port **8443** by default (or the next free port if certdog itself uses 8443). This connector asks devices for a TLS client certificate, which is how devices authenticate when they renew, without affecting the certdog console or API
@@ -52,8 +46,6 @@ EST is served by its own HTTPS connector, on port **8443** by default (or the ne
 Make sure devices can reach this port, e.g. open it on any firewalls between the devices and certdog
 
 > Note that the EST URL is always at the root of the server (``/.well-known/est``) as required by RFC 7030. It is not under ``/certdog``
-
-<br>
 
 ## Configuration
 
@@ -64,8 +56,6 @@ From the menu, select **Interfaces** and then choose **EST**
 Click **Add New EST Service**
 
 The recommended settings are already selected. In most cases you only need to enter a name and alias and choose the certificate issuer
-
-<br>
 
 ### Service and Certificates
 
@@ -78,8 +68,6 @@ The recommended settings are already selected. In most cases you only need to en
 * **EST URL**. This is calculated from the Server Address and Alias, and is the URL to configure on devices. Click it to copy it
 * **Certificate Issuer**. The issuer that issues certificates to devices. Devices receive this issuer's CA certificates from ``/cacerts``
 * **Additional Certificate Information**. Optional. Any information entered here is added to the certificates issued, to help find them in certdog
-
-<br>
 
 ### How Devices Authenticate
 
@@ -95,8 +83,6 @@ The recommended settings are already selected. In most cases you only need to en
 * **Issue Authenticated Requests Without Approval**. Recommended. Requests from authenticated devices are issued straight away, without waiting for any approval [Workflows](workflows.html)
 * **Allow Plain HTTP**. EST requires HTTPS. Only enable this for testing, or when HTTPS is handled by a proxy in front of certdog, as secrets and passwords would otherwise be sent unencrypted
 
-<br>
-
 ### Renewal and Server Key Generation
 
 <img src="./images/est_new_3.png" alt="New EST Service - Renewal and Server Key Generation" style="zoom:67%;" />
@@ -105,8 +91,6 @@ The recommended settings are already selected. In most cases you only need to en
 * **Allow Renewal With the Same Key**. By default a device must use a new key when it renews. Enable this for devices that cannot generate a new key
 * **Allow Server Key Generation**. For devices that cannot generate their own keys. certdog generates the key and returns it with the certificate (``/serverkeygen``). These requests must be authenticated
 * **CSR Generator**. Shown when server key generation is enabled. The [CSR Generator](create_csr_generator.html) that sets the type and size of the keys generated
-
-<br>
 
 ### Advanced
 
@@ -118,11 +102,7 @@ The recommended settings are already selected. In most cases you only need to en
 * **Retry Time (seconds)**. How long a device is told to wait before checking again on a request that is waiting for approval. The default is 300
 * **CSR Attributes**. Optional. OIDs (one per line) that devices are told to include in their requests (``/csrattrs``), e.g. ``1.2.840.113549.1.9.7`` for the challengePassword. Leave empty if not needed
 
-<br>
-
 Click **Add**
-
-<br>
 
 ## Managing Devices
 
@@ -141,8 +121,6 @@ Each device has a **Status**:
 | **Disabled** | The secret cannot be used. Edit the device to enable it |
 
 Click a device to see more details, including a link to the certificate it obtained
-
-<br>
 
 ### Adding a Device
 
@@ -165,8 +143,6 @@ Click **Add**. The device's secret is displayed:
 
 Configure the device with the **EST URL**, the device ID as the **username** and the secret as the **password**
 
-<br>
-
 ### Adding Many Devices
 
 To add several devices at once, click **Add Many Devices**
@@ -179,21 +155,15 @@ The secrets for all of the devices are displayed. Click **Download (CSV)** to sa
 
 Restrictions on the subject or DNS names can be added to each device afterwards, with **Edit**
 
-<br>
-
 ### Generating a New Secret
 
 To onboard a device again (e.g. after it has been reset, or if its secret was lost), select the device and choose **New Secret**. A new secret is generated and displayed, and the previous secret stops working
-
-<br>
 
 ### Editing and Deleting Devices
 
 Select the device and choose **Edit** to change whether it is enabled, single use, its expiry or its restrictions
 
 Select the device and choose **Delete** to remove it. Its secret stops working. A certificate it has already obtained is not affected (revoke it in certdog if needed)
-
-<br>
 
 ## Unauthenticated Requests
 
@@ -202,8 +172,6 @@ When **Allow Requests Without Authentication** is enabled, any device that can r
 When the service is created, a workflow is created that requires an administrator to approve these requests (**Create Approval Workflow**). Alternatively, uncheck this and choose an existing [Workflow](workflows.html). Without an approval workflow, unauthenticated requests would be issued without approval
 
 Approve or reject the requests from the **Approvals** menu. The device obtains its certificate the next time it retries after the request is approved
-
-<br>
 
 ## Editing a Service
 
@@ -222,8 +190,6 @@ In the **Advanced** section, the team and user the service uses are shown:
 
 Click **Update** to save the new settings
 
-<br>
-
 ### Disabling a Service
 
 From the EST menu, select the service and choose **View/Edit**
@@ -232,8 +198,6 @@ Uncheck **Enabled** and click **Update**
 
 All requests to a disabled service are rejected. Its devices and their secrets are kept
 
-<br>
-
 ### Deleting a Service
 
 From the EST menu, select the service and choose **Delete**
@@ -241,8 +205,6 @@ From the EST menu, select the service and choose **Delete**
 Click **Yes** to confirm
 
 Devices can no longer enroll with the service, and its devices and their secrets are deleted. Certificates already issued are not affected
-
-<br>
 
 ## Testing a Service
 
@@ -275,8 +237,6 @@ curl --cacert cacerts.pem --cert router.pem --key router.key -H "Content-Type: a
 ```
 
 The issued certificates can be found in certdog under the service's team
-
-<br>
 
 ## REST API
 

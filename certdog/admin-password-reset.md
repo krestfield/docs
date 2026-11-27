@@ -7,13 +7,9 @@ keywords: ["forgotten password", "locked out", "admin login"]
 ---
 # Administrator Password Reset
 
-<br>
-
 If an administrator password has been lost or forgotten, another administrator can still login to certdog and reset the password  
 
 However, if no administrators are able to login then their password may be reset by following the instructions below  
-
-<br>
 
 ### Pre-Requisites
 
@@ -22,8 +18,6 @@ This process requires access to the host machine where the database is running
 You must also have the database administrator password. This is the password that would have been set during the installation step  *Database User Admin Account Setup*. The username for this account is ``certmanadmin``  
 
 If you have also lost this password and you have a support agreement in place, contact [support](mailto:support@krestfield.com)
-
-<br>
 
 ### Steps
 
@@ -49,8 +43,6 @@ $2a$10$rPSQZhmM2wlTA6Ke29I85e14Q7GgXDX8iq2DNoDLI2GcqsbwcITVq
 
 Copy this value e.g. copy and paste into a text document for the time being, as we will need it in the steps below
 
-<br>
-
 Next, navigate to:
 
 ```
@@ -71,8 +63,6 @@ If this fails, try running the following:
 .\mongo.exe -tls -tlsAllowInvalidCertificates
 ```
 
-
-
 <u>For Linux Deployments</u>
 
 Type:
@@ -86,8 +76,6 @@ In the following steps. use the following hashed password:
 ```
 $2a$10$GNiVPV88Zb/HKOt3NSnACufrPt4cj7XhpTB7oTkeRRnZQwbAMBeO.
 ```
-
-
 
 <u>All Deployments</u>
 
@@ -120,8 +108,6 @@ Exit from the shell by typing ``exit``
 You should now be able to login using the new password  
 
 For Linux deployments, login with a password of ``password`` and immediately change via the UI
-
-<br>
 
 ### Complete Output
 
@@ -238,4 +224,3 @@ certman> db.users.updateOne({username:"admin"}, {$set:{enabled:true, nextAllowed
 
 certman> exit
 ```
-

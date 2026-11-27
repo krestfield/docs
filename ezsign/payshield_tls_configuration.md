@@ -6,11 +6,7 @@ nav_order: 80
 grand_parent: EzSign
 ---
 
-  
-
 # payShield 10k TLS Configuration
-
-
 
 ## Overview
 
@@ -20,8 +16,6 @@ EzSign requires the client side certificate to be provided as a PKCS#12 or JKS f
 
 The following is an example on how to configure this. Note that it is always advisable to follow the vendor specific documentation. The details given here are as a guide only. 
 
-
-
 The high-level steps are:
 
 1. Generate a CSR on the payShield
@@ -30,13 +24,9 @@ The high-level steps are:
 4. Import the certificates onto the payShield and configure for TLS
 5. Configure EzSign to use TLS
 
-  
-
 The following guide (available from Thales) may also be followed: **payShield TLS Host Port V3_5-6-23.pdf**
 
 Although any CA can be used (it doesn't have to be an OpenSSL CA as specified in that tech note).
-
-  
 
 #### Step 1: Generate a CSR
 
@@ -92,8 +82,6 @@ Secure>
 
 If you choose **Y** to save the CSR to a filename, you will be prompted to enter a USB disk (FAT32 formatted) into the rear of the HSM and a file with the name specified will be saved there. If you choose **N** the CSR will be displayed on the screen and you can just copy and paste into a local file.
 
-
-
 #### Step 2: Issuing a server side certificate from this CSR
 
 You can follow the **payShield TLS Host Port V3_5-6-23.pdf** guide to create an openSSL CA but we created a Root CA in certdog and configured a Cert Issuer (that included this CA and a client/server SSL profile).
@@ -102,15 +90,11 @@ The CSR generated above was then issued from this Root CA and named **payshield1
 
 Also download the root CA certificate. This was named **root.crt**.
 
-
-
 #### Step 3: Issuing a client side certificate and obtaining as a PKCS#12
 
 From the same payShield Cert Issuer in Certdog, issue a client certificate with details such as: ``CN=payshieldclient,O=Krestfield,ST=Kensington,L=London,O=Engineering,C=GB``
 
 And download this as a PKCS#12 named **payshieldclient.p12**. Also download the certificate itself and name **payshieldclient.crt**.
-
-
 
 #### Step 4: Importing these certificates onto the HSM
 
@@ -142,8 +126,6 @@ Do you wish to import another certificate? Y <Return>
 
 ...and do this for all three certificates. Once the final certificate has been imported you should see a message such as ``Chain of Trust validated``.
 
-
-
 Or do this via the **payShield Manager**, as follows:
 
 Navigate to **Configuration** > **Host Settings** and choose the **TLS** tab. Click **Enable TLS** (if this option is not available you are not in Secure state).
@@ -160,8 +142,6 @@ Subject: payShield1
         subject: PayShield Root
 ```
 
-
-
 You can check that the server side certificate is working as expected using using openssl, as follows:
 
 ```
@@ -169,8 +149,6 @@ openssl s_client -connect 192.168.0.211:2500
 ```
 
 This should show the server certificate. You can also verify the client authentication part. Refer to the Thales guide: **payShield TLS Host Port V3_5-6-23.pdf** for more info.
-
-
 
 ### Trusting SSL Certificates
 
@@ -185,11 +163,7 @@ You can configure this as follows:
 1. Obtain all the CA certificates in the chain as files (e.g. **root.crt**, **ca.crt**)
 2. These certificates must then be imported into the Trust Store. You can import into the Java Runtime's default trust store (i.e. the *cacerts* file) or you can create a custom trust store 
 
-
-
 It is usually preferred to follow option 1. But you can choose option 2 if the Java Runtime is shared between other applications (and you do not want those other applications to also trust these certificates) or you want to limit trust to specific certificates (the *cacerts* file will contain many other trusted certificates by default).
-
-
 
 #### Option 1: Add the CA certificate to the Java Runtimes cacerts trust store
 
@@ -211,8 +185,6 @@ Supplying the password of ``changeit`` (unless this has previously been altered)
 
 There is no need to set the EzSign ``tls.trustStore`` settings in this instance.
 
-
-
 #### Option 2: Create a custom trust store file
 
 Decide on the location and name for the dedicated trust store file. E.g. this could be contained within the ``./keystores`` folder of the EzSign installation. In this example the trust store is named ``payshield.jks``
@@ -227,8 +199,6 @@ You will be asked for a password and whether you want to trust this certificate.
 
 The EzSign ``tls.trustStore`` settings must be configured to reference this key store (see the next section below).
 
-
-
 ### 
 
 Note that if there are also intermediate CA certificates in your chain, these may also be imported into the trust stores using the same commands as above. Just ensure that a different alias is used. e.g.
@@ -236,12 +206,6 @@ Note that if there are also intermediate CA certificates in your chain, these ma
 ```shell
 keytool -import -trustcacerts -alias ca -file ca.crt -keystore payshield.jks
 ```
-
-
-
-
-
-
 
 ### Configuring EzSign
 
@@ -275,8 +239,6 @@ tls.clientKeyStore.password=zijFhJ+BMAO8B3bYw9XD0AZlOYt4eYACY4zW9UXtZk2EC7hl+dge
 
 Note that ``tls.clientKeyStore.password`` must be set via the *Management Utility* and is the same password for the PKCS12 file generated in the steps above. Run *EzSign Manage*, selecting the **Set TLS Client Keystore Password** option.
 
-
-
 If using a custom trust store (i.e. *Option 2: Create a custom trust store file* above) the following properties also need to be set to use this custom store:
 
 * tls.trustStore.type
@@ -293,7 +255,4 @@ tls.trustStore.password=igjFhJ+H0MAO8bYw9XD0AZlOYt4eYACY4zW9UXt542EC7hl+egevV==
 
 Note that ``tls.trustStore.password`` must be set via the *Management Utility* and is the same password for the custom trust store JKS file, as generated above.  Run *EzSign Manage* and selecting the **Set TLS Trust Keystore Password** option.
 
-
-
 When all items are configured, restart the EzSign daemon. Refer to [payShield 10k Support](payshield10k_support.html) for more information on setup and troubleshooting.
-

@@ -7,8 +7,6 @@ grand_parent: EzSign
 ---
 # EzSign Server
 
-<br>
-
 The EzSign Server is a multi-channel, digital signature and encryption processing application capable of interfacing with Hardware Security Modules for secure signature generation and validation or encryption/decryption operations
 
 The Server supports several different key stores including a software key store (useful for non-production or systems that do not require a high level of security) and hardware key stores
@@ -16,8 +14,6 @@ The Server supports several different key stores including a software key store 
 Hardware key stores support any HSM (Hardware Security Module) which exposes the industry standard PKCS#11 interface (including the nCipher range of HSMs).  It also supports several cloud based HSMs and the Thales PayShield HSMs
 
 The Server makes use of a properties file for its configuration.  Certain operations such as the setting of passwords, generation of CSRs (Certificate Signing Requests) and importing of issued certificates are carried out via the Management utility
-
-<br>
 
 ### Channels
 
@@ -30,8 +26,6 @@ There are two types of channel
 
 * **PKI**: Performs digital signature generation and verification
 * **Symmetric**: Provides encryption an decryption operations
-
-<br>
 
 ### Key Store Files
 
@@ -50,8 +44,6 @@ These files are encrypted by the server and may contain encrypted key informatio
 Access to these files should be controlled such that only the server is able to access them as although they are encrypted, accidental deletion or corruption may prevent the server from operating correctly
 
 The account used to run the server must have read/write permissions to the keystore location
-
-<br>
 
 ### Logging
 
@@ -85,8 +77,6 @@ LOGCONFIG=/opt/ezsign/server1/log4j2.xml
 
 Refer to the Apache documentation for more information on the configuration options
 
-<br>
-
 ### The Thread Pool
 
 When the server starts it creates a pool of channels.  Each channel loads its keys and certificates and creates a connection to the HSM (if required)
@@ -94,7 +84,6 @@ When the server starts it creates a pool of channels.  Each channel loads its ke
 The size of the pool is configured via the threadPoolSize property and defaults to 1 if omitted.  Larger sizes will allow for greater parallelism but may result in slower start up times.  Some degree of experimentation with a particular setup may be required to find the optimum value.  Usually, a good starting point is to set this value to the number of clients (or client threads) expected to connect to the server at any one time
 
 As each request arrives the next available free channel instance processes the request.  If no free instance is available the server will wait a short time and then check again whether any instances have become free.  It will do this until the waitTimeoutIfAllBusy value has been reached at which point an error will be returned to the client.  This prevents hanging if, for example external OCSP servers were running particularly slowly.  The client may choose to try again if this does occur
-
 
 Properties Configuration
 The server’s configuration is contained within a properties file.   The properties file must be passed to the server (as a parameter) at start up.  The server will then load the properties and then wait for client requests
@@ -108,8 +97,6 @@ For detailed information about the available properties, refer to the following:
 A sample properties file can be found here:
 
 [EzSign Sample Properties](ezsign_sample_properties.html)
-
-<br>
 
 ### Certificate Path Checking
 
@@ -217,8 +204,6 @@ These checks follow RFC 5280. Relaxing them may be needed where certificates wer
 
 Where possible, prefer the narrowest setting, e.g. list the one extension in ``allowedCriticalExtensions`` or the one extra purpose in ``allowedExtendedKeyUsages`` rather than relaxing the whole check
 
-<br>
-
 ### Custom Certificate Path Checking
 
 Specific checks may be performed on certificate paths by developing a custom java class.  You may develop the custom class yourself following the details below, or Krestfield can develop one to your specific requirements.  Custom path checking may be required, if for example you wish to check a certificate has been registered, check custom extensions or any other specific certificate checks your system may require
@@ -261,8 +246,6 @@ channel.N.verify.pathCheckClass=com.myorg.ezsign.pathcheck.MyCustomPathChecker
 
 Note: If a custom path checker is implemented, the default checks will not be performed.  If you require any of the custom checks to be implemented, Krestfield can supply source code snippets to assist with this
 
-<br>
-
 <u>Implement the loadProperties Method</u>
 
 This method is passed the channel number and the properties object – which is the loaded server properties
@@ -285,14 +268,10 @@ mypathchecker.validityTimeDays=30
 
 If there is a failure to load any properties, throw an KEzSignException
 
-<br>
-
 <u>Implement the check Method</u>
 
 All certificates in the path are included in the ArrayList, index 0 is always the end-entity (signer) certificate, other certificates are CA certificates and the last certificate in the list will be the root
 Perform the required checks on these certificates and throw a ``KPathException`` if there are any failures or rejections
-
-<br>
 
 ### Start Scripts
 The server is started by calling the ``ezsign-daemon-start`` script located in the ``EzSignServer/bin`` directory.  This starts the server managing process (the daemon) and also starts the server listening on the interface and port configured
@@ -330,8 +309,6 @@ To stop the main daemon process run the following script
 ezsign-daemon-stop
 ```
 
-<br>
-
 ### Overriding Properties
 
 The following properties can be overridden by system properties
@@ -355,8 +332,6 @@ The following properties can be overridden by system properties
 - server.ctrl.bindIpAddress
 
 - server.ctrl.allowedSourceIpAddresses
-
-  
 
 If included as –D parameters at server start up, they will override any settings configured within the properties file
 
@@ -395,8 +370,6 @@ java -Dserver.port=$1 -cp $CLASSPATH com.krestfield.ezsign.server.EzSignServer $
 ```
 
 This functionality allows for the dynamic control of the server which may be of use to automate multi-instance deployments
-
-<br>
 
 ### Passwords
 

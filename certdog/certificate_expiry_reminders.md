@@ -16,8 +16,6 @@ Refer to [Email Settings](email_settings.html) for more information on configuri
 
 Note: From version 1.17 expiry reminders can also be configured from [Workflows](workflows.html). Via workflows, emails may also be sent, but other actions (such as sending Teams messages or running scripts) can also be performed
 
-
-
 ### Reminder Days
 
 You can configure how many days before expiry a user is notified  
@@ -28,11 +26,7 @@ In this case, in the Email Settings, you would set the *Send Notification on Day
 
 With this configuration a user will receive one email when their certificate has 30 days left before expiring and then no others
 
-
-
 If you also wanted to reminder them closer the time e.g. 10 days before expiry, you would set *Send Notification on Day(s)* value to **30,10**
-
-
 
 ### Check Schedule
 
@@ -59,9 +53,6 @@ Some knowledge of cron settings is required but as an example to change this to 
 certexpirycheck.cron=0 15 10 * * ?
 ```
 
-
-
 > Do not set the cron value to run more than once per day as this will result in multiple emails being sent per day
 
 > Always double check and verify any changes. Incorrect changes can result in missed reminders or many unwanted emails being sent
-

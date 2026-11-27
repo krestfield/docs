@@ -7,17 +7,11 @@ grand_parent: EzSign
 keywords: ["SSL", "mutual TLS", "mTLS", "two-way TLS", "client authentication"]
 ---
 
-  
-
 # TLS Configuration
-
-
 
 Client-server communications between the EzSign Client and Server may be protected using TLS.
 
 You can configure the EzSign Server with a server side certificate only or you may also, optionally configure two-way TLS where the client also authenticates to the server with a client side certificate.  
-
-
 
 ## Requirements
 
@@ -26,8 +20,6 @@ You can configure the EzSign Server with a server side certificate only or you m
 * It is possible to use same certificate for both client and server side TLS, in this case the certificate must have both the *Client Authentication* and *Server Authentication* extended key usage
 * The certificates can be packaged as either a PKCS12 or JKS file 
 * Ideally, both the server and client side certificate are issued from the same CA. If this is not the case you may need to trust both CA chains as outlined in the [3. Configure the JRE's Trust](#3-configure-the-jres-trust) below
-
-
 
 ## Server Side TLS Configuration
 
@@ -40,15 +32,11 @@ There are four things that must be done to implement server side TLS:
 
 These steps are detailed below:
 
-
-
 ### 1. Create a Server JKS or PKCS12 file
 
 Use *keytool* or similar to generate your CSR and obtain the server side TLS certificate for the server.  
 
 When the CA issues the certificate, ensure that it meets the requirements as outlined in the [Requirements](#requirements) section above.
-
-
 
 ### 2. Configure the Server Properties
 
@@ -57,8 +45,6 @@ Obtain the following pieces of information:
 * The full path to the PKCS12 or JKS file containing the server side TLS certificate
 * The password used to protect the file
 * Whether the file is a JKS or PKCS12
-
-
 
 In the server properties file (e.g. ``ezsign.properties``), you must set the following properties:
 
@@ -97,8 +83,6 @@ tls.clientKeyStore.filename=/opt/ezsign/keystores/ezsign_server.jks
 tls.clientKeyStore.password=CSMFimWkKvuIwfriyRvDzeNwthjH5gGxBWAiRWsL73xHZSkJaPXgCA==
 ```
 
-
-
 After a restart the server will now only accept connections over TLS.  
 
 You can confirm that the server is now providing a valid TLS certificate by using the ``openssl`` tool. See the [Validating the TLS Configuration](#validating-the-tls-configuration) section below for details how to do this.  
@@ -106,8 +90,6 @@ You can confirm that the server is now providing a valid TLS certificate by usin
 If any errors are seen during server start up or connection from the client, refer to the [Common TLS Configuration Errors](#common-tls-configuration-errors) section below.
 
 Proceed to the next section.
-
-
 
 ### 3. Configure the JRE's Trust
 
@@ -118,7 +100,6 @@ You can add the trusted root (and any intermediate certificates), to the JRE's t
    2. ca.cer
 2. Identify the java instance running the application that is using the EzSign Client and locate the *cacerts* file (e.g. ``C:\Program Files\java\jdk-18.0.1.1\lib\security\cacerts``)
 3. Run the following keytool commands to import the root and optionally any intermediate certificates:
-
 
 ```shell
 keytool -import -trustcacerts -alias krestfieldroot -file root.cer -keystore "C:\Program Files\java\jdk-18.0.1.1\lib\security\cacerts"
@@ -135,10 +116,6 @@ C:\Program Files\java\jdk-18.0.1.1\jre\lib\security\cacerts
 4. The default password for the keystore is usually ``changeit`` 
 5. Identify the java instance running the EzSign Server and update its cacerts file in the same way
 
-
-
-
-
 ### 4. Code Client to use TLS
 
 In order to update the client to use TLS, the ``useTls()`` option is required. E.g.
@@ -152,15 +129,9 @@ The client will now attempt to connect to the server using TLS.
 
 From client version 4.6.0, the client checks that the server's certificate is valid for the host name (or IP Address) used to connect, so the certificate must include a matching SAN as described in the [Requirements](#requirements) section. The CA certificates to trust may also be supplied with the ``useTrustStore()`` option instead of updating the JRE's ``cacerts`` file. See the [Client Integration Guide](ezsign_client_integration_guide.html) for details
 
-
-
 ## Client Side TLS Configuration
 
 Note that it is advisable to validate that the server side configuration is correct by following the steps in [Validating the TLS Configuration](#validating-the-tls-configuration) before proceeding to configure the client side.
-
-
-
-
 
 There are three things that must be done to implement client side TLS:
 
@@ -170,15 +141,11 @@ There are three things that must be done to implement client side TLS:
 
 3. From within the application calling the EzSign Client, update the code to provide the Key Store containing the client side certificate
 
-   
-
 ### 1. Create a Client JKS or PKCS12 file
 
 Use *keytool* or similar to generate your CSR and obtain the client-side TLS certificate for the client. 
 
 When the CA issues the certificate, ensure that it meets the requirements as outlined in the [Requirements](#requirements) section above for the client-side.
-
-
 
 ### 2. Configure the Server Properties
 
@@ -189,8 +156,6 @@ server.useClientTls=true
 ```
 
 This indicates to the server that any connecting client must authenticate with a client side TLS certificate.
-
-
 
 ### 3. Code Client to use Client TLS
 
@@ -204,9 +169,6 @@ In order to update the client to use client TLS, the ``useClientTls()`` option i
   * This is the password that protects the keystore file
 * ``keyStoreType`` - The Keystore Type
   * This can be "JKS" or "PKCS12"
-
-
-
 
 I.e.
 
@@ -229,12 +191,6 @@ EzSignClient client = new EzSignClient(
 The client will now attempt to connect to the server using TLS and will now also provide the certificate supplied in the specified PKCS12 file.
 
  Refer to the [Common TLS Configuration Errors](#common-tls-configuration-errors) for details of common issues.
-
-
-
-
-
-
 
 ## Setting TLS Passwords
 
@@ -317,13 +273,6 @@ Proceed? (y/n): y
 
 The properties file will be updated with the encrypted TLS Client Password and a backup saved in case you need to revert back.
 
-
-
-
-
-
-
-
 ## Validating the TLS Configuration
 
 When server side TLS has been configured, re-start the server. On startup the following command can be used to confirm that the server is now using TLS and returning a TLS certificate:
@@ -341,8 +290,6 @@ E.g.
 ```shell
 openssl s_client 127.0.0.1:5656
 ```
-
-
 
 If setup has been successful, you should see something like the following:
 
@@ -392,8 +339,6 @@ issuer=C = GB, O = Krestfield, CN = Certdog Test Issuing CA
 
 Ensure you see the ``Server certificate`` and the details (e.g. the ``subject``) match what you expect.
 
-
-
 If you see output such as the following:
 
 ```
@@ -427,11 +372,7 @@ no peer certificate available
 
 Then there was no valid TLS found
 
-
-
 ## Common TLS Configuration Errors
-
-
 
 ### Client Error Messages
 
@@ -446,8 +387,6 @@ PKIX path building failed: sun.security.provider.certpath.SunCertPathBuilderExce
 ```
 
 Which indicates that the correct root and intermediate certificates have not been added to the JRE trust store correctly. Check the steps outlined in step 3 of the [Server Side TLS Configuration](#server-side-tls-configuration) section
-
-
 
 If the error message contains:
 
@@ -467,8 +406,6 @@ In the EzSign Server logs, you may also see an entry such as:
 2024-08-29 15:43:56.289 [pool-2-thread-1] ERROR EzSignServerLog - Failed to process message from client as there was a TLS error. Error Details: No available authentication scheme
 ```
 
-
-
 If the error message contains:
 
 ```
@@ -477,8 +414,6 @@ Remote host terminated the handshake
 
 This indicates that the client is attempting to use TLS but the server is not configured to use it. Check that ``server.useTls=true`` is present in the server properties file.
 
-
-
 If the error message  contains:
 
 ```
@@ -486,8 +421,6 @@ Response received from the server was not valid
 ```
 
 This indicates that the server is configured for TLS but the client is not. Ensure the client is using the ``useTls()`` option when being created.
-
-
 
 If the error message  contains:
 
@@ -503,10 +436,6 @@ This is often accompanied by the following server error message:
 Error Details: null cert chain
 ```
 
-
-
-
-
 ### Server Error Messages
 
 If the following is seen in the Server logs:
@@ -517,8 +446,6 @@ If the following is seen in the Server logs:
 
 It could be that the server does not trust the client-side TLS certificate provided by the client. Ensure the ``cacerts`` file for the JRE running the server includes the full chain (root and ca certificates) of the client TLS certificate.
 
-
-
 If your client TLS certificate does not have the correct Client Authentication enhanced key usage, you will see an error as follows:
 
 ```
@@ -526,8 +453,3 @@ If your client TLS certificate does not have the correct Client Authentication e
 ```
 
 To resolve, re-issue the client TLS certificate with the correct enhanced key usage.
-
-
-
-
-

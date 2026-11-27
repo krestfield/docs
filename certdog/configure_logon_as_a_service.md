@@ -6,11 +6,7 @@ nav_order: 80
 grand_parent: Certdog
 ---
 
-
-
 # Configuring Logon as a Service
-
-  
 
 When configuring a Microsoft CA (ADCS), a credential is required. This credential is used by the ADCS Driver to request certificates from the CA. It must have the correct permissions on the CA and certificate templates in order to provision the certificates. See [here](https://krestfield.github.io/docs/pki/setting_adcs_template_permissions.html) for configuring permissions on a certificate template  
 
@@ -19,8 +15,6 @@ You will normally use a Service Account for this purpose. This account requires 
 If your organisation has an account management process in place, simply requesting a service account will be sufficient, but to configure this yourself you may use the following instructions  
 
 Note that everyone's domain will be configured differently and there may be processes or automation already in place to handle this, so this is for guidance only
-
-<br>
 
 ### Summary
 
@@ -36,7 +30,6 @@ In summary the steps to create an account that can then be used as the Credentia
 5. Add the account created in step 1 into this group
 5. We can add this account to other groups that have permissions on the CA and required CA Templates to issue certificates (e.g. you may have a CERT_ISSUERS group configured for this purpose)
 6. The account can then be configured in certdog as a Credential, this can be referenced when configuring a Microsoft CA Issuer
-<br>
 
 ### Steps
 
@@ -64,11 +57,7 @@ Scroll down to **Logon as a service** and double click
 
 Check **Define these policy settings** and add the group e.g. **SERVICE_ACCOUNTS**
 
-<br>
-
 Run ``gpupdate /force`` on all machines for a quick update. <u>Remember to include the CA machine</u>
-
-<br>
 
 To verify that the setting has taken effect locally, run ``rsop.msc`` (Resultant Set of Policy). under Computer Configuration, navigate to:
 
@@ -78,7 +67,4 @@ To verify that the setting has taken effect locally, run ``rsop.msc`` (Resultant
 
 And verify the changes are present
 
-<br>
-
 Note, this will set these settings for the entire domain. If you want to restrict this for a certain OU perform this in the correct GPO. To create a new GPO, right click the selected OU and choose **Create a GPO in this domain and link it here**
-

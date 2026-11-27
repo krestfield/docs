@@ -7,8 +7,6 @@ grand_parent: EzSign
 ---
 # EzSign Installation
 
-<br>
-
 The software is delivered as either a zip or gzip (tar.gz) file. Unzip and unpack the installation file to a location of your choice
 
 The installation files are organised as follows:
@@ -20,8 +18,6 @@ The installation files are organised as follows:
 
 (Where X.Y.Z is the version number e.g. EzSignV4.4.0)
 
-
-
 The EzSignClient folder (or just the kezsign-client-X.Y.Z.jar file) should be copied to all clients that will be accessing the server
 
  Within the EzSignClient folder there are the following directories
@@ -29,8 +25,6 @@ The EzSignClient folder (or just the kezsign-client-X.Y.Z.jar file) should be co
 * /doc – contains EzSignClient documentation
 * /lib – contains the EzSignClient jar files
 * /samples – contains client samples
-
-
 
  Within the EzSignServer folder there are the following directories
 
@@ -46,21 +40,15 @@ The EzSignClient folder (or just the kezsign-client-X.Y.Z.jar file) should be co
 
 * /samples – contains sample configurations
 
- 
-
 The product is bundled with a Java runtime but if you prefer to use your own, edit the envs.sh file in the EzSignServer/bin directory and edit the JAVA_HOME parameter so that it points to your JDK/JRE installation folder e.g. 
 
 ```
 JAVA_HOME=/fs01/app/jdk1.8.0_251
 ```
 
- 
-
 The account used to run the server must have permissions to access the ``EzSignServer`` folder and be able to execute the scripts (located in the /bin directory) and jar files (located in the ``/lib`` directory). The account must also have read/write access to the keystore location (see the Key Store Files section later)
 
 Client applications must be able to access the jar files located in the ``EzSignClient/lib`` folder
-
-<br>
 
 ### The lib folder and upgrades
 

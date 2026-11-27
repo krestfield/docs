@@ -7,8 +7,6 @@ grand_parent: Certdog
 
 # Issuing a Certificate
 
-
-
 ### From the UI
 
 From the menu, select **Request**  
@@ -16,8 +14,6 @@ From the menu, select **Request**
 If you have already generated a CSR, choose **CSR Request**  
 
 If you want certdog to generate the request on your behalf and return a PKCS#12 (JKS or PEM) file, choose **DN Request**  
-
-
 
 ---
 
@@ -37,19 +33,11 @@ You may then enter text as Extra Information (e.g. "This certificate resides on 
 
 Click **Request Certificate**
 
-
-
-
-
 ---
 
 **DN Request**
 
-
-
 <img src=".\images\dn_request2.png" alt="DN Request" style="zoom: 67%;" />
-
-
 
 For the **Subject DN** enter the name required e.g. *CN=domain.com,O=organisation*  
 
@@ -91,8 +79,6 @@ Note that the PKCS#12, JKS and PEM options will only function whilst the key dat
 
 If this is set to 0 (zero), key data will not be retained, though you will still be able to download the PKCS#12 file immediately following issuance
 
-
-
 ### From PowerShell
 
 Obtain the certdog powershell module from the krestfield website or github. If unable to locate this, contact [support](mailto:support@krestfield.com)  
@@ -106,8 +92,6 @@ And populate with the location of the API URL e.g.
 ``https://127.0.0.1/certdog/api``
 
 Save the file  
-
-  
 
 Open a PowerShell window  
 
@@ -144,8 +128,6 @@ certId  : 6009da2a2c7b373bdc95bcbe
 p12Data : MIIN7wIBAzCC....
 ```
 
-
-
 ### Using a shell script and cURL
 
 Obtaining JSON data within shell scripts is messy. This example uses **jq** to carry out the parsing. On Mac machines, this can simply be installed by running the following:
@@ -160,8 +142,6 @@ On Ubuntu:
 sudo apt install jq
 ```
 
-
-
 Below is an example using cURL to login and request a certificate:
 
 ```bash
@@ -173,14 +153,3 @@ p12Data=$(curl --data '{ "caName":"Certdog TLS Issuer", "dn":"CN=testcert.com", 
 
 echo $p12Data
 ```
-
-
-
-
-
-
-
-
-
-
-

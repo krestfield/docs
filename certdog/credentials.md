@@ -7,8 +7,6 @@ grand_parent: Certdog
 
 # Credentials
 
-
-
 A credential is a secure store of an account or password.  It may be an account on a system that has the required permissions to request certificates from a Microsoft CA in which case it will be Microsoft Windows domain account  
 
 When you configure a Microsoft Certificate Issuer you must either specify a credential or select *No Credential*  
@@ -35,8 +33,3 @@ To create a new Credential:
 ---
 
 Credentials are encrypted and then stored in the database
-
-
-
-
-

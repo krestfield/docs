@@ -7,8 +7,6 @@ grand_parent: Certdog
 ---
 # Deployment Options
 
-
-
 certdog can be deployed on
 
 * Windows Server 2016
@@ -19,11 +17,7 @@ certdog can be deployed on
 * A Docker Image
 * A Kubernetes Cluster
 
-<br>
-
 However, the ADCS agent (the interface to the Microsoft CA) can only be deployed on the Windows Server platforms
-
-
 
 ### Single Server Installation
 
@@ -31,11 +25,7 @@ There are several options available when deploying certdog, the simplest is to i
 
 <img src=".\images\deployment1.png" alt="image-20210226152239356" style="zoom:67%;" />
 
-
-
 This is the default installation and if the host is in the same domain as your Microsoft CA, then the ADCS Agent will be able to access it. Other CAs (e.g. PrimeKey EJBCA) will also be accessible as long as network rules allow  
-
-<br>
 
 ### Single Server - Multiple ADCS Instances
 
@@ -48,8 +38,6 @@ In this example, the host could be a Linux machine.  Domains 1 and 2 would be tw
 For each domain, an ADCS agent would be deployed onto a server that is in the same domain as the CA i.e. Server 1 and Server 2 in this example 
 
 Outgoing ports (by default these are 27017,27018 and 27019) from the servers (Server 1 and Server 2) would need to be opened to the Linux host
-
-<br>
 
 ### Multi Server Load Balanced
 
@@ -65,8 +53,6 @@ The database can be clustered and hosted across multiple servers...or in the clo
 
 For steps to configure a setup such as this, see [here](certdog_ha_config.html)
 
-<br>
-
 ### Cloud and On Premises
 
 The examples given above can be applied to cloud as well as on-premises and other hosted services, for example:
@@ -79,8 +65,6 @@ You could run other services in AWS  including the API or UI or, as shown above,
 
 This could connect back to your on-premises CAs, via the ADCS agent and you could use other hosted services such as those offered by PrimeKey for EJBCA
 
-
-
 ## Summary
 
 Deployment of certdog is flexible in order to fit in with any environment, options are not limited to those mentioned above  
@@ -88,4 +72,3 @@ Deployment of certdog is flexible in order to fit in with any environment, optio
 If you wish to discuss your requirements with us, drop us a line at 
 
 [support@krestfield.com](mailto:support@krestfield.com)
-

@@ -5,14 +5,9 @@ parent: General PKI
 nav_order: 60
 ---
 
-
 # Publishing CA Certs to Active Directory
 
-
-
 When you create CAs in certdog you may want them to be trusted in your Windows domain. One way to achieve this is outlined below
-
-<br>
 
 ### Root CA Certificates
 
@@ -49,8 +44,6 @@ Once complete the certificate (rootca.cer) will be published to the *Trusted Roo
 
 ![image-20220324160409079](./images/publishedcert.png)
 
- <br>
-
 ### Intermediate CA Certificates
 
 Although intermediate CA certificates can be made available via http links which are configured in end entity certificates as part of the AIA extension, they can also be published to Active Directory if required  
@@ -66,6 +59,3 @@ certutil –dspublish -f ca.cer SubCA
 Where ``ca.cer`` is the CA certificate downloaded from certdog  
 
 Again, *Domain Admins* or *Enterprise Admins* permissions are usually required
-
-
-

@@ -8,11 +8,7 @@ keywords: ["error", "error message", "problem", "fix", "troubleshooting"]
 
 # Certdog Errors and Solutions
 
-<br>
-
 The following contains some common errors that may be experienced when using Certdog together with their solutions  
-<br>
-<br>
 
 ### There are no CA issuers that can process a request. This may be because you do not have permissions on any of the configured CA issuers
 
@@ -32,8 +28,6 @@ Next to *Permitted Certificate Issuers*, select the issuers that you wish this t
 
 Re-attempt the certificate issuance
 
-
-
 <hr>
 
 ### A CSR generator must be configured before you can request a certificate from a DN
@@ -47,8 +41,6 @@ Solution
 If you want to request a certificate by only supplying the DN, Certdog must also create the CSR (Certificate Signing Request) on your behalf. In order to do this a CSR Generator is required  
 
 To create a new CSR generator follow the steps outlined [here](create_csr_generator.html)
-
-
 
 <hr>
 
@@ -84,8 +76,6 @@ Arrange for the correct permissions and assignments to be added to the user. See
 
 You may also try running the ADCS Agent service under this account and setting the credential in the Microsoft Certificate Issuer to be *No Credential (use local agent account)*. See [here](adcsdriver.html) for more details  
 
-
-
 <hr>
 
 ### Login screen runs slow
@@ -112,8 +102,6 @@ This is due to the login screen background. This can be removed as follows:
 
 If your browser is still showing the background this will be because of the browser cache. Try closing the browser or performing a full refresh (e.g. CTRL-F5 on Chrome)
 
-
-
 <hr>
 
 ### Cannot stop Krestfield CertDog Service
@@ -136,8 +124,6 @@ Right click and select **Go to details**
 
 Click **certman-service.exe** and click **End task**
 
-
-
 <hr>
 
 ### The request to obtain the certificate failed. Reason: Failed to process request. Index was outside the bounds of the array
@@ -152,10 +138,7 @@ If running the Krestfield ADCS Service under a specific Service Account and you 
 
 Set the Krestfield ADCS Service to run under the Local System account and set the service account (that has permissions on the CA) as a Credential in Certdog. For your Microsoft Certificate Issuer - select this credential
 
-
-
 <hr>
-
 
 ### Creating a CA using an AWS CloudHSM Key Store fails
 
@@ -182,8 +165,6 @@ If you only have a single HSM configured this will never be the case
 
 Switch off the key availability check as follows
 
-
-
 For Windows:
 
 Open a command prompt, as Administrator. Navigate to the bin directory (as below) and then run the following command:
@@ -194,8 +175,6 @@ C:\Program Files\Amazon\CloudHSM\bin>configure-pkcs11.exe --disable-key-availabi
 
 Restart the Certdog service
 
-
-
 For Linux, from a shell run the following:
 
 ```
@@ -203,8 +182,6 @@ sudo /opt/cloudhsm/bin/configure-pkcs11 --disable-key-availability-check
 ```
 
 Restart the Tomcat service
-
-
 
 <hr/>
 
@@ -238,8 +215,6 @@ Run the following command
 
 When prompted enter the Master Secret/Password. This is the passphrase that would have initially been saved to ``MasterSecret.txt`` at installation
 
-
-
 <hr/>
 
 ### Database Fails to Start after SSL Configuration
@@ -259,8 +234,6 @@ Checking the log file here ``[certdog install]\mongodb\mongod.log`` there is an 
 <u>Solution</u>
 
 The database is very sensitive to file formats. If the certificate PEM file (``[certdog install]\config\sslcerts\dbssl.pem``) was saved as UNICODE, the database will not read it correctly. Open the certificate file and save as UTF-8 using a suitable text editor
-
-
 
 <hr/>
 
@@ -284,8 +257,6 @@ The database TLS certificate (``[certdog install]\config\sslcerts\dbssl.pem``) h
 
 Follow the steps in [Updating the Database SSL Certificate - Disable TLS](update_the_db_certificate.html#disable-tls). Note that the ``clusterAuthMode: x509`` line in ``mongod.cfg`` must be commented out as well as the ``tls:`` section, otherwise the database will still fail to start
 
-
-
 <hr/>
 
 ### Get "CA does not have any certificates configured" when requesting a certificate
@@ -302,15 +273,11 @@ There was an error whilst attempting to retrieve the CA certificates from the CA
 
 which is reported from the agent when the Certificate Issuer is configured
 
-
-
 <u>Solution</u>
 
 This is a permissions issue. The account used by the agent does not have the correct permissions on the CA. To rectify, follow the guide here: https://krestfield.github.io/docs/pki/setting_adcs_template_permissions.html and also ensure that the account has **Issue and Manage Certificates** and **Request Certificates** permissions on the CA itself (managed via Properties)
 
 One the permissions have been updated, delete the issuer and re-create. Check the logs for errors
-
-
 
 <hr/>
 
@@ -324,10 +291,6 @@ After creating a PKCS11 Key Store, attempting to create a CA gives an error stat
 There was an error initialising: Token Exception: PKCS#11 Token: Unable to login to Token. CKR_DEVICE_REMOVED
 ```
 
-
-
-
-
 <u>Solution</u>
 
 This usually means that the hardware device (e.g. HSM) is not currently online or may not been configured correctly for this server  
@@ -339,8 +302,6 @@ Run the vendor tools to confirm the device has been configured correctly and all
 Ensure any environment variables have been set e.g. for Utimaco the ``CS_PKCS11_R3_CFG`` environment variable must be set. If you set this ensure you restart the services to pick up the change
 
 If after making changes the error still occurs, stop and start the Krestfield CertDog Service as underlying processes can cache failed attempts and this cache can only be cleared via a restart
-
-
 
 <hr/>
 
@@ -355,7 +316,6 @@ Configure a DN restriction to Deny Wildcard Domains but domains such as *.org.co
 Domains are not restricted in the Common Name field as this field is not checked to validate domains (for TLS certificates), rather this processing is carried out on the Subject Alternative Name extension
 
 The CA Browser Forum Baseline Requirements have required the presence of the Subject Alternative Name extension since 2012, and use of the subject common name was deprecated in RFC 2818
-
 
 <hr/>
 
@@ -385,8 +345,6 @@ It is recommended that DNS domain names are used in place of IP addresses
 
 ---
 
-
-
 ### Unable to login
 
 <u>Error Details</u>
@@ -399,11 +357,7 @@ If an admin is able to login still, check the logs for the failure reason. From 
 
 If the locked out user is the administrator. See [here](admin-password-reset.html) for how to reset the admin password manually.  
 
-
-
 ---
-
-
 
 ### The password you entered is incorrect
 
@@ -421,8 +375,6 @@ There are a few options available to overcome this issue:
 2. Import the PKCS#12 file into a newer version of windows (e.g. Windows Server 2022 or Windows 11), marking it as exportable. Then export, ensuring you choose ``TripleDES-SHA1`` as the *Encryption* option.
 3. Update the start script to revert certdog to use legacy algorithms for PKCS#12 files
 
-
-
 <u>To use OpenSSL</u>
 
 The following example is for an initial PKCS12 file (generated by certdog) called **strong.p12**, protected with a password of **password**. This outputs a weakly protected PKCS#12 version called **legacy.p12** under a password of **password**. Update the values as required:
@@ -434,8 +386,6 @@ openssl pkcs12 -export -certpbe PBE-SHA1-3DES -keypbe PBE-SHA1-3DES -nomac -inke
 ```
 
 Delete the key.pem file after the conversion as this file contains the private key in clear text.
-
-
 
 <u>To Revert to Legacy Algorithms</u>
 
@@ -461,11 +411,7 @@ Save the file
 
 Restart the **Krestfield CertDog Service**
 
-<br>
-
 ---
-
-<br>
 
 ### Forbidden when accessing from remote machine 
 
@@ -488,10 +434,3 @@ For a more granular approach, press F12 to bring up the developer tools. Choose 
 <img src="./images/image-20260618095425492.png" alt="image-20260618095425492"  />
 
 In the right hand pane, select **config** and press **Delete**. Now attempt to navigate back to the certdog page
-
-
-
-
-
-
-

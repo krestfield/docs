@@ -8,8 +8,6 @@ grand_parent: Certdog
 
 # Certdog RedHat Installation
 
-<br>
-
 ## Pre-Requisites
 
 * A RedHat 8 installation. Note that other versions may work but this version is confirmed
@@ -18,12 +16,7 @@ grand_parent: Certdog
 
 * The ability to install mongodb community edition
 
-
-<br>
-
 It is recommended that a separate, dedicated user be created which will run the certdog application, although it can be run under an existing account
-
-<br>
 
 ## Install Mongo DB
 
@@ -62,8 +55,6 @@ And start the database with the following command:
 sudo systemctl start mongod
 ```
 
-<br>
-
 Confirm mongo DB is running by typing:
 
 ```
@@ -71,8 +62,6 @@ mongosh
 ```
 
 and ensure you connect and get the mongo db prompt. Type ``exit``, to exit the prompt
-
-<br>
 
 Note, by default the mongo configuration is here:
 
@@ -86,15 +75,9 @@ and mongo database files here:
 /var/lib/mongo
 ```
 
-<br>
-
-<br>
-
 ## Get Certdog
 
 See [here](download-locations.html) for the download locations
-
-<br>
 
 ## Installation
 
@@ -140,8 +123,6 @@ Other logs, including the application (certdog.log) and startup/shutdown logs ar
 ./certdog/logs
 ```
 
-<br>
-
 ## Starting/Stopping
 
 Navigate to:
@@ -164,16 +145,12 @@ And this command to stop:
 
 You may examine these scripts, or configure such that the application starts on boot following standard processes for your OS
 
-<br>
-
 To start and stop the mongo database you may use the following commands:
 
 ```
 sudo systemctl start mongod
 sudo systemctl stop mongod
 ```
-
-<br>
 
 By default, certdog will be available on ``127.0.0.1`` on port **1443** e.g.:
 
@@ -187,10 +164,6 @@ Follow the steps below to configure the firewall to forward the standard ports o
 
 Note that until you configure a trusted SSL certificate you will be presented with browser warnings when navigating to this address. See the [Post Install](#post-install) section below to configure this and other items
 
-<br>
-
-<br>
-
 ### Port Forwarding
 
 If using the firewall, running the following commands will forward port 443 to the internal port 1443 and port 80 to the internal port 1480
@@ -203,10 +176,6 @@ firewall-cmd --runtime-to-permanent
 
 Note that this port forwarding may not work from the local machine but should be available when calling this machine using its IP address/FQDN
 
-<br>
-
-<br>
-
 ## Post Install
 
 Open a browser on the server and navigate to:
@@ -215,13 +184,7 @@ https://127.0.0.1:1443/certdog
 
 Login with the initial username and password as displayed at the end of the installer. These are temporary credentials - as soon as you first login you will be forced to set a new password
 
-<br>
-
 See the [Post Install Steps](post-Installation.html) to continue with the server configuration.
-
-<br>
-
-<br>
 
 ## Troubleshooting and Known Issues
 
@@ -244,7 +207,6 @@ db.dropUser("certmanuser")
 db.dropDatabase()
 exit
 ```
-<br>
 
 #### CRL Locations
 
@@ -266,8 +228,6 @@ http://certdog.mysystem.com/certdog/crl/test.crl
 
 This is the value that will be embedded in certificates issued from the CA and the URL clients will therefore follow in order to obtain the CRL.
 
-<br>
-
 Also note that when initially accessing CRLs locally, until you forward the ports, the CRL will only be available at the 1440 port and not the 1443 port that may be displayed in the CA configuration
 
 To test the CRL can be downloaded you can run the following command:
@@ -275,8 +235,6 @@ To test the CRL can be downloaded you can run the following command:
 ```
 wget http://127.0.0.1:1480/certdog/crl/test.crl
 ```
-
-<br>
 
 When creating a new CA and setting **Generate CRLs** you may get the error: ``The CRL filename must be a complete path. The path in the filename specified: [path to CRL file] does not exist``
 
@@ -299,8 +257,6 @@ But may be displayed as something like the following:
 ```
 
 Just update the to the correct path manually.
-
-<br>
 
 #### OCSP API End Point URL
 
@@ -330,8 +286,6 @@ https://127.0.0.1:1443/certdog/api
 
 Monitor the logs and OCSP server configuration and confirm that a certificate is then generated
 
-<br>
-
 #### Other Troubleshooting
 
 Examine the log files as mentioned above  to see if anything obvious appears  
@@ -340,10 +294,4 @@ Attempt to stop and start certdog using the ``./shutdown-certdog.sh`` and ``star
 
 Try restarting the database then restarting certdog  
 
-<br>
-
-
 Full Certdog Documentation can be found here: [https://krestfield.github.io/docs/certdog/certdog.html](https://krestfield.github.io/docs/certdog/certdog.html)
-
-
-

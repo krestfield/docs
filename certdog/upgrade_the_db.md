@@ -12,19 +12,13 @@ DO NOT PERFORM THIS STEP ON VERSIONS 1.17 OR LATER
 
 Contact [Krestfield Support](mailto:support@krestfield.com) if you are unsure whether this step needs to be carried out
 
-<br>
-
 These instructions relate to versions 1.16 and earlier and result in a newer database being installed
 
 These steps MUST be carried out before upgrading from version 1.16 as all future versions utilise the later database formats
 
-<br>
-
 ### Pre-requisites
 
 You will need the database admin password. This is the password that was entered when the server was first installed.
-
-<br>
 
 The database must use a TLS connection. If you are using the full version, TLS is enabled by default. 
 
@@ -33,8 +27,6 @@ For the free version before 1.16, this was not enabled.
 To verify, check the ``[CERTDOG INSTALL]\config\application.properties`` file and locate the line starting ``spring.data.mongodb.uri``. If this ends with ``tls=true`` then TLS is in use  
 
 If the URL ends with ``certman`` only, then carry out the following steps to enable TLS, otherwise skip to the next section (Backup)
-
-<br>
 
 <u>To Enable TLS</u>
 
@@ -49,8 +41,6 @@ Update so it looks like this:
 ```
 spring.data.mongodb.uri=mongodb://certmanuser:1TPEwGJ2h1CBcoG0suUX@127.0.0.1/certman?tls=true
 ```
-
-<br>
 
 Next edit ``[CERTDOG INSTALL]\mongodb\bin\mongod.cfg`` adding the following to the ``net`` section:
 
@@ -91,8 +81,6 @@ Ensuring that your path names are correct. E.g. in this example we use ``c:\cert
 
 Verify the server still starts and operates after these changes have been made
 
-<br>
-
 ### Backup
 
 Open the services snapin and stop the following services:
@@ -104,11 +92,7 @@ Open the services snapin and stop the following services:
 
 (To open the services snapin - click **Start**, type **services** and select the **Services App**)
 
-<br>
-
 Backup the current installation by copying the entire install folder. E.g. if the installation resides at ``c:\certdog`` copy (or zip up) the entire folder
-
-<br>
 
 ### Upgrade the database
 
@@ -122,8 +106,6 @@ Alternatively, the latest version of the script is also available [here](https:/
 
 Wherever the script is obtained from, place it in the current installations ``[CERTDOG INSTALL]\install`` folder e.g.  ``C:\certdog\install`` 
 
-<br>
-
 <u>Run the Script</u>
 
 Open a PowerShell window as administrator
@@ -136,21 +118,15 @@ Navigate to ``[CERTDOG INSTALL]\install`` e.g.  ``C:\certdog\install`` and run:
 
 This script will ask for the database admin password then perform the update
 
-<br>
-
 **<u>Note</u>**
 
 The script is unaware of what updates have been made to the TLS certificates. It replaces them all with versions it knows will operate correctly  
 
 If you have have made changes to your TLS certificates - server or database, they are copied to: ``.\certdog\config\sslcerts.bak[TIMESTAMP]`` e.g. ``.\certdog\config\sslcerts.bak.20260226-1012`` and they must then be manually coped back to the ``.\sslcerts`` folder 
 
-<br>
-
 <u>Validating</u>
 
 Once complete, ensure that all operations, including logging on and requesting certificates are operating correctly. Restart the AD CS Driver is this is in use. This component must trust the database certificate and will fail to connect back if any of the replaced certificates are untrusted.
-
-<br>
 
 ### Troubleshooting
 
@@ -164,8 +140,6 @@ Verify that the admin password for the database is correct
 
 Verify that you meet the pre-requisites mentioned at the top of this page
 
-<br>
-
 The script outputs the following files (located in the ``.\certdog\install`` folder:
 
 * upgradedblog.txt
@@ -173,8 +147,6 @@ The script outputs the following files (located in the ``.\certdog\install`` fol
 * upgradedblog.out
 
 Any errors during the process will be available in these files
-
-<br>
 
 ---
 
@@ -201,8 +173,6 @@ Alternatively, ensure that the following certificate:
 ```
 
 Is added to the Trusted Root Certificates store, then restart the *Krestfield Adcs Driver* service
-
-<br>
 
 ---
 
@@ -272,10 +242,6 @@ Save the ``mongod.cfg`` file and attempt to start the services in this order:
 1. Krestfield CertDog Database
 2. Krestfield Certdog Service
 
-<br>
-
 ---
-
-<br>
 
 If the upgrade does fail and cannot be recovered, rollback the installation by stopping the services and re-placing the install with the backed up files (as carried out in the Backup section above). Once restored, re-start the services

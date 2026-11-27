@@ -9,19 +9,13 @@ keywords: ["update", "new version", "patch"]
 
 # Upgrading Certdog
 
-<br>
-
 **NOTE: When upgrading from versions up to 1.16 to version 1.17, please first update the database as described [here](upgrade_the_db.html)**  
 
 This must be carried out before the steps below are followed. This is a one-time operation for the update to version 1.17
 
-<br>
-
 ### Step 1: Download
 
 Download the new installer zip as per the details [given here](download-locations.html)
-
-<br>
 
 ### Step 2: Stop the services
 
@@ -33,8 +27,6 @@ Open the services snapin and stop the following services:
 ![Certdog Services](./images/upgrade_services.png)
 
 (To open the services snapin - click **Start**, type **services** and select the **Services App**)
-
-<br>
 
 ### Step 3: Backup current installation
 
@@ -56,8 +48,6 @@ c:\certdog.bak
 
 Make a note of this new location e.g. ``c:\certdog.bak`` as it is required in step 4 below
 
-<br>
-
 ### Step 4: Extract the new version
 
 Extract the contents of the new zip file to the original location. For example:
@@ -65,8 +55,6 @@ Extract the contents of the new zip file to the original location. For example:
 ```powershell
 c:\certdog
 ```
-
-<br>
 
 ### Step 5: Run the upgrade
 
@@ -121,8 +109,6 @@ Starting certdog...
 Upgrade Complete!
 ```
 
-<br>
-
 If a message such as the following is seen:
 
 ```powershell
@@ -130,8 +116,6 @@ The Krestfield CertDog Service service could not be started.
 ```
 
 This may be because the service is taking longer than expected to start the first time. Wait a short period then attempt to access the URL (e.g. https://127.0.0.1/certdog) anyway. If running OK, then the upgrade has succeeded. 
-
-<br>
 
 ### Step 6: Upgrade the ADCS Driver
 
@@ -142,7 +126,6 @@ If you are using the ADCS Driver to interface with the Microsoft CA. You should 
 
   This will install the new version of the driver  
   
-
 If after the upgrade, the driver shows as unregistered in the Certdog UI, re-register as follows:    
 
 * Open a PowerShell window as Administrator and navigate to the ``.\install `` directory e.g. ``c:\certdog\install`` and run the following command:  ``.\configure-adcs-service.ps1``
@@ -150,10 +133,6 @@ If after the upgrade, the driver shows as unregistered in the Certdog UI, re-reg
 * Next, from Certdog, select the **Agents** menu and approve the agent  
 
 * For each of your Microsoft Certificate issuers, click **Edit** and select the Permitted Agents (which in most cases will just be the one agent)
-
-<br>
-
-<br>
 
 ## Rollback
 
@@ -186,5 +165,3 @@ c:\certdog
 ```
 
 **Step 4**: Start the services
-
-<br>

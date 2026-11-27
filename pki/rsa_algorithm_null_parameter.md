@@ -19,8 +19,6 @@ The hash identifier is given in the form of an OID (Object Identifier) and for S
 For these object identifiers, the parameters field of the digestAlgorithm value should be NULL
 ```
 
-<br>
-
 What you should end up with in ASN1 is something like the following:
 
 ```
@@ -66,8 +64,6 @@ AlgorithmIdentifier algId = new AlgorithmIdentifier(algorithmOid);
 
 Resulting in an incorrectly specified Digest Information
 
-<br>
-
 Why does this matter? You may ask. I mean the hash has been identified correctly (by the OID) and the hash is the same - it should still work right?
 
 Well, the wording in the RFCs referenced are: 
@@ -76,8 +72,6 @@ Well, the wording in the RFCs referenced are:
 * SHOULD which means RECOMMENDED (there may exist valid reasons in particular circumstances to ignore a particular item, but the full implications must be understood and carefully weighed before choosing a different course)
 
 Which essentially mean it is often implemented as expected and will reject signatures that do not include it. As mentioned at the start - these standards need to be followed precisely to ensure interoperability.  This is the rule and so it is best to follow it 
-
-
 
 ### Snippet from RFC 3279
 
@@ -107,4 +101,3 @@ Which essentially mean it is often implemented as expected and will reject signa
 >   When any of these three OIDs appears within the ASN.1 type
 >    AlgorithmIdentifier, the parameters component of that type SHALL be
 >    the ASN.1 type NULL.
-

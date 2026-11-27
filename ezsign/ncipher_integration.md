@@ -7,11 +7,7 @@ grand_parent: EzSign
 keywords: ["Entrust nShield", "nShield", "Security World"]
 ---
 
-
-
 # EzSign: nCipher HSM - Integration
-
-
 
 EzSign can make use of any HSM that supports the PKCS#11 interface.  The steps to configure EzSign for use with an HSM are simple and are outlined below but before any configuration takes place, the following pre-requisites must be in place: 
 
@@ -26,8 +22,6 @@ C:\nCipher\nfast\bin\enquiry.exe
 ```
 
 This will output details about the HSM, card sets and the status
-
- 
 
 ### EzSign Server Configuration
 
@@ -64,8 +58,6 @@ The value for ``token.pkcs11.slot`` depends on how your HSM has been setup.  Usu
 
 Other options can be altered as required  
 
- 
-
 ### Configure Passwords
 
 Next start the EzSign Management utility
@@ -88,8 +80,6 @@ This will result in the ``token.password`` setting being populated with the encr
 
 Exit the utility  
 
- 
-
 ### Generate CSR
 
 When ready to generate a CSR, start the Management utility and choose option 
@@ -103,8 +93,6 @@ This will be the same process as when software CSRs are generated.  Note, that t
 Once the CSR has been generated, send this to the CA and obtain the certificates as .cer files.  Obtain the entire chain (issued end-entity certificate plus any intermediates and the root).  Import via the Management utility using option 4  
 
 When the end-entity certificate has been imported you will be prompted whether you wish to set this as the signing key.  Choose yes, and the properties file will be updated, populating the ``signature.keyId`` value  
-
- 
 
 ### Run the Server
 

@@ -10,8 +10,6 @@ keywords: ["CRL", "OCSP", "revocation check"]
 
 > This feature is available from certdog 1.18
 
-<br>
-
 The Revocation Monitor continually checks the OCSP responders and CRLs (Certificate Revocation Lists) that your certificates depend on, and alerts you when they fail
 
 If an OCSP responder stops responding, or a CRL is not republished before it expires, relying parties can no longer check whether certificates have been revoked. Depending on the application, certificates may then be rejected (causing an outage) or accepted without a revocation check. The Revocation Monitor detects these problems early - usually before the CRL or OCSP response actually expires
@@ -19,8 +17,6 @@ If an OCSP responder stops responding, or a CRL is not republished before it exp
 It can monitor any OCSP responder or CRL: those provided by certdog's own [Local CAs](create_local_certificate_issuer.html) and [OCSP servers](ocsp.html), Microsoft AD CS, public CAs and partner CAs
 
 > This replaces the stand-alone [CRL OCSP Monitor](../ocsp-monitor/ocsp-monitor.html) Windows application
-
-<br>
 
 ## Overview
 
@@ -34,8 +30,6 @@ Every check is recorded, so the **history** of each monitor can be viewed - for 
 When a monitor starts failing, and again when it recovers, **alerts** can be sent by email, by webhook (e.g. to Microsoft Teams or Slack) and as certdog **notifications**
 
 Both RSA, EC and post-quantum (ML-DSA, SLH-DSA) signatures are supported
-
-<br>
 
 ## Viewing Monitors
 
@@ -55,15 +49,11 @@ Click a monitor (anywhere on its row) to show its actions:
 * **Disable** / **Enable** - stop or restart its checks. A disabled monitor is not checked and sends no alerts
 * **Delete** - delete the monitor and its history
 
-<br>
-
 ## Creating a Monitor
 
 From the Revocation Monitors page, click **Add Monitor**
 
 Only the certificate and issuer (OCSP) or the CRL location (CRL) are required. Everything else starts with sensible defaults
-
-<br>
 
 ### 1. What to Monitor - OCSP
 
@@ -76,8 +66,6 @@ Only the certificate and issuer (OCSP) or the CRL location (CRL) are required. E
 * **Issuer certificate**. The CA certificate that issued the certificate to check
 * **Expected result**. The status the responder should return for the certificate: **Good**, **Revoked**, **Unknown** or **Try later**. For example, to check that revocations are being published, monitor a test certificate that has been revoked on purpose and expect *Revoked*
 * **Responder URL**. Leave this empty to use the OCSP URL in the certificate (its AIA extension). Enter a URL to check a specific responder, e.g. one node behind a load balancer
-
-<br>
 
 #### Choosing Certificates From Certdog
 
@@ -100,8 +88,6 @@ When the certificate to check is chosen, certdog also:
 
 > When a monitor is saved, certdog checks that the issuer certificate really issued the certificate to check (by its signature). If not, the monitor is not saved and an error is shown
 
-<br>
-
 ### 1. What to Monitor - CRL
 
 <img src="./images/revmon_add_crl.png" alt="Add Monitor - CRL" style="zoom:67%;" />
@@ -113,8 +99,6 @@ When the certificate to check is chosen, certdog also:
 * **Verify the CRL signature**. Checks that the CRL is signed by this issuer and names it as the issuer. This is recommended
 * **Check a certificate is on the CRL**. Optional. Choose the certificate to look for and whether it should be **Revoked (listed)** or **Good (not listed)**. For example, a test certificate revoked on purpose proves the CRL is current
 
-<br>
-
 ### 2. Schedule
 
 <img src="./images/revmon_schedule.png" alt="Schedule" style="zoom:67%;" />
@@ -124,8 +108,6 @@ When the certificate to check is chosen, certdog also:
 * **Timeout**. How long to wait for a response. Leave empty for the default (30 seconds for OCSP, 60 for CRLs)
 * **Skip weekends**. No checks are run on Saturday or Sunday (server time)
 * **Use proxy**. The check is made through the proxy set in the Revocation Monitor [Settings](#settings). Use this for responders and CRLs on the internet when certdog cannot reach them directly
-
-<br>
 
 ### 3. Checks
 
@@ -157,8 +139,6 @@ Under **Advanced: request format, clock skew, trusted responders**:
 * **CRL size**. Fail if the CRL is larger (or smaller) than this. An unexpectedly small CRL can indicate a problem with publishing
 * **Allowed clock skew**. Under **Advanced: clock skew**
 
-<br>
-
 ### 4. Alerts
 
 <img src="./images/revmon_alerts.png" alt="Alerts" style="zoom:67%;" />
@@ -188,15 +168,11 @@ Under **Customise email text and webhook payload**, the email subjects and bodie
 * **Webhook payload**. The JSON sent to the webhooks. If empty, a default JSON payload with the details of the check is sent
 * **Send the payload as a JSON string**. Sends the payload as a single JSON string value (for services that expect this)
 
-<br>
-
 ### 5. History
 
 <img src="./images/revmon_history_settings.png" alt="History settings" style="zoom:67%;" />
 
 * **Keep results for**. How long this monitor's results are kept. **System default** uses the server setting (90 days by default, see [Settings](#settings)). Choose **Custom** to keep this monitor's results for a different number of days
-
-<br>
 
 ### Testing and Saving
 
@@ -206,13 +182,9 @@ Click **Test** to run the check once, with the settings entered, without saving 
 
 Click **Save monitor** to save it. The first check runs straight away
 
-<br>
-
 ## Monitors for Local CAs
 
 Monitors can be created for certdog's own [Local CAs](create_local_certificate_issuer.html), with the details filled in from the CA
-
-<br>
 
 ### When Creating a CA
 
@@ -224,8 +196,6 @@ When the CA is created, a CRL monitor is added for each of its CRL distribution 
 
 > This option is not available for an intermediate CA whose certificate is requested from an external CA (CSR). Add the monitor from the CA's page (below) once its certificate has been accepted
 
-<br>
-
 ### For an Existing CA
 
 From **Local CAs**, choose **CA Configuration**, select the CA and choose **Edit**. The **Revocation monitoring** section shows the monitors that already watch the CA's CRL and OCSP URLs:
@@ -235,8 +205,6 @@ From **Local CAs**, choose **CA Configuration**, select the CA and choose **Edit
 * **Create CRL monitor**. Adds a CRL monitor for each of the CA's CRL distribution points that is not already monitored
 * **Create OCSP monitor**. Opens a new OCSP monitor with the name, issuer and OCSP URL filled in from the CA. Choose the certificate to check, from the list of certificates the CA has issued, and click **Save monitor**. This is only available once the CA has issued at least one certificate, as an OCSP check needs a real certificate from the CA
 
-<br>
-
 ## Editing, Disabling and Deleting a Monitor
 
 **Editing**. From the Revocation Monitors page, select the monitor and choose **Edit** (or click **Edit** on its history page). Change the settings and click **Save monitor**. The monitor is checked straight away with the new settings
@@ -244,8 +212,6 @@ From **Local CAs**, choose **CA Configuration**, select the CA and choose **Edit
 **Disabling**. Select the monitor and choose **Disable**. It is not checked and sends no alerts until it is enabled again. Its history is kept. Alternatively, uncheck **Enabled** when editing the monitor
 
 **Deleting**. Select the monitor and choose **Delete**, then click **Yes** to confirm. The monitor and all of its history are deleted. Any notification it raised is removed
-
-<br>
 
 ## Monitoring History
 
@@ -275,8 +241,6 @@ The charts show:
 
 On the history page you can also **Run now**, **Edit** the monitor, or **Clear history** (delete all of its results)
 
-<br>
-
 ### Check Details
 
 Each check's details show why it failed, the details of the check and of the response, and the full transcript of the check:
@@ -287,23 +251,17 @@ For failed checks the raw OCSP response is kept, and can be copied (base64) or d
 
 > By default the transcript and raw response are kept for failures and for checks where the monitor changed between passing and failing. The pass/fail result, response time, size and validity of every check are always kept. See *Detail kept* in [Settings](#settings)
 
-<br>
-
 ## Alerts
 
 Alerts are sent when a monitor starts failing (once the **Alert after** number of checks in a row have failed) and, if **Alert on recovery** is set, when it passes again. With **Alert on every failed check** set, an alert is sent for each failed check
 
 All alerts are also written to the certdog log
 
-<br>
-
 ### Email
 
 Emails are sent to each of the **Email recipients**. The default email includes the monitor's name and type, how many times it has failed in a row, the URL, when and by which server it was checked, the expected and received status, and why it failed. The recovery email includes the response time
 
 The email text can be changed with the tokens listed [above](#4-alerts). Email is sent using certdog's [Email Settings](email_settings.html)
-
-<br>
 
 ### Webhooks
 
@@ -325,8 +283,6 @@ A JSON message is posted to each webhook URL. By default this contains:
 
 The ``event`` is ``failure`` or ``recovery``. Use a custom **Webhook payload** for services that need a particular format, such as Microsoft Teams or Slack
 
-<br>
-
 ### Notifications
 
 A certdog notification can be sent to **Everyone**, to chosen **Teams**, or to chosen **Users**. It appears in the notification bell at the top of the certdog console
@@ -341,15 +297,11 @@ Each update shows as unread again. The notification is removed when the monitor 
 
 <img src="./images/image-20261121135823186.png" alt="image-20261121135823186" style="zoom: 80%;" />
 
-<br>
-
 ## The Dashboard
 
 Administrators see the Revocation Monitor on the certdog **Dashboard**: a summary of passing and failing monitors, and the status of each monitor over the last 24 hours (one square per hour), with what expires next and recent changes:
 
 <img src="./images/revmon_dashboard.png" alt="Revocation monitoring on the Dashboard" style="zoom:67%;" />
-
-<br>
 
 ## Settings
 
@@ -379,8 +331,6 @@ From the Revocation Monitors page, click **Settings**
 | ``revmon.proxy.host`` / ``.port`` / ``.username`` / ``.password`` | | A proxy to use when none is set on the Settings page |
 
 Restart certdog after changing these settings
-
-<br>
 
 ## REST API
 

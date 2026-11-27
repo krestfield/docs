@@ -8,8 +8,6 @@ keywords: ["compliance", "ISMS", "audit"]
 
 # EzSign Alignment to ISO 27001
 
-<br>
-
 ISO/IEC 27001 certifies an organisation's Information Security Management System (ISMS), not individual products. There is therefore no "ISO 27001 mode" in EzSign, and installing EzSign does not by itself make a system compliant
 
 What EzSign does provide are the settings needed to meet the technical controls in Annex A of ISO/IEC 27001:2022 that apply to a signing and encryption service. This page lists those controls, the EzSign settings that support each one and the configuration we recommend
@@ -19,8 +17,6 @@ The final decisions (e.g. which networks may connect, how long logs are kept, ho
 The settings below are in the server properties file. Replace ``channel.N`` with the number of your channel. For full details of each setting see [EzSign Properties](ezsign_properties.html)
 
 Some settings are only available from version **4.6.0**. These are marked where they appear
-
-<br>
 
 ## Summary
 
@@ -40,8 +36,6 @@ Some settings are only available from version **4.6.0**. These are marked where 
 | 8.11, 8.12 | Data masking and data leakage prevention | Message logging off by default |
 
 Each control is described below
-
-<br>
 
 ## 8.24 Use of Cryptography
 
@@ -65,8 +59,6 @@ channel.N.token.googleKms.keyProtectionLevel=HSM
 
 If using a PKCS#11 HSM, ``channel.N.token.useModuleProtection=true`` means no operator logon is needed to use the keys. Consider whether this is acceptable under your key management policy before enabling it
 
-<br>
-
 **Use current algorithms**
 
 Set the algorithm and key size for each channel (see [EzSign Algorithms](ezsign-algorithms.html)) e.g.
@@ -85,8 +77,6 @@ We recommend:
 * SHA-256 or stronger for the signature hash. Do not use **SHA1** for new signatures
 * SHA-256 or stronger for signed OCSP requests (``channel.N.revocationChecker.ocsp.signatureHash``)
 
-<br>
-
 **Verify signatures fully**
 
 Enable revocation checking on channels that verify signatures:
@@ -98,8 +88,6 @@ channel.N.revocationChecker.type=ANY
 Avoid ``NONE`` in production. From version 4.6.0 certificate path checks follow RFC 5280 and RFC 6960 closely. Leave the ``relax...`` settings (e.g. ``channel.N.verify.relaxAllCertExtensionChecks``) at their default of **false** unless there is a documented reason. See [Certificate Path Checking](ezsign_server.html#the-risks-of-relaxing-these-checks)
 
 Keep ``channel.N.revocationChecker.ocsp.ignoreSSLErrors`` and ``channel.N.revocationChecker.crl.ignoreSSLErrors`` set to **false**, so that revocation information is only fetched from trusted servers
-
-<br>
 
 ## 8.20, 8.21, 8.22 Network Security
 
@@ -113,8 +101,6 @@ server.restapi.bindIpAddress=10.100.15.32
 server.ctrl.bindIpAddress=127.0.0.1
 ```
 
-<br>
-
 **Restrict which hosts can connect**
 
 List the application servers that may connect. If these are omitted, any host can connect to the socket interface and the REST API:
@@ -126,8 +112,6 @@ server.ctrl.allowedSourceIpAddresses=127.0.0.1
 ```
 
 Also restrict these ports with host or network firewalls, as a second layer
-
-<br>
 
 **Encrypt traffic**
 
@@ -152,13 +136,9 @@ For a Thales payShield, enable TLS between EzSign and the HSM with ``channel.N.t
 
 See [Configuring TLS](configuring_tls.html) for setting up the certificates
 
-<br>
-
 **Separate the service**
 
 Place the EzSign Server and its HSMs on a network segment that only the applications that use them can reach. Use separate channels (each with its own keys) to keep different applications or data classifications apart
-
-<br>
 
 ## 5.15, 8.3 Access Control and Information Access Restriction
 
@@ -174,8 +154,6 @@ Every REST API user is given roles, and each role grants operations on named cha
 
 Grant each application only the operations and channels it needs. A user with no roles can authenticate but cannot do anything. See [REST API Users File](rest_api_users_properties.html)
 
-<br>
-
 **Socket interface**
 
 Set an authentication code so that only clients holding it can use the server. Set it with the [Management Tool](ezsign_management_tool.html):
@@ -186,8 +164,6 @@ server.authCode=...
 
 The client must pass the same code to the ``EzSignClient`` constructor. Without it, messages are sent in the clear
 
-<br>
-
 **Control interface**
 
 The Control interface can pause, resume and stop the server. Bind it to ``127.0.0.1`` (or a management network), restrict it with ``server.ctrl.allowedSourceIpAddresses`` and set an authentication code:
@@ -197,8 +173,6 @@ server.ctrl.authCode=...
 ```
 
 See [EzSign Control](ezsign_control.html)
-
-<br>
 
 ## 8.5 Secure Authentication
 
@@ -213,8 +187,6 @@ The REST API trust store should hold only the CA(s) that issue your client certi
 
 If API tokens are used, generate them with the Management Tool (they are 32 random bytes), give each system its own token and label it, so that one can be removed without affecting others
 
-<br>
-
 ## 5.17 Authentication Information
 
 * Set all passwords (master, token, key store and trust store) with the [Management Tool](ezsign_management_tool.html). They are stored in the properties file encrypted with the master password, not in the clear
@@ -222,8 +194,6 @@ If API tokens are used, generate them with the Management Tool (they are 32 rand
 * Change passwords and API tokens in line with your password policy, and when someone who knew them leaves
 * REST API tokens are stored only as SHA-256 hashes, and the Management Tool shows a new token only once. Store it securely when it is shown
 * If proxy authentication is used for OCSP or CRL downloads, use a service account that has no other access
-
-<br>
 
 ## 8.2 Privileged Access Rights
 
@@ -239,16 +209,12 @@ Someone who can edit the users file then cannot give themselves access without a
 
 Run the EzSign service under a dedicated service account with no interactive logon, rather than as root or an administrator
 
-<br>
-
 ## 8.9 Configuration Management
 
 * Treat the properties file, ``log4j2.xml``, the users file and its ``.sig`` file as controlled configuration items
 * Restrict file permissions on these files and on ``keyStoreDir`` to the service account and administrators
 * Keep a reviewed, versioned baseline of the configuration, and compare against it after changes
 * Document any ``relax...`` setting that has been enabled, and why
-
-<br>
 
 ## 8.15, 8.16 Logging and Monitoring
 
@@ -275,8 +241,6 @@ Configure ``log4j2.xml`` to keep logs for the period your policy requires and to
 
 Use the ``status`` action of EzSign Control for health monitoring. If this is polled often, ``server.ctrl.logStatusMessages=false`` stops it filling the logs
 
-<br>
-
 ## 8.11, 8.12 Data Masking and Data Leakage Prevention
 
 Message logging records the data being signed, encrypted or decrypted. Keep it off in production:
@@ -289,8 +253,6 @@ This is the default from version 4.6.0 (before 4.6.0 it defaulted to **true**, s
 
 Set ``server.restapi.maxRequestSize`` to the largest request your applications need
 
-<br>
-
 ## 8.8 Management of Technical Vulnerabilities
 
 * Keep EzSign up to date. Release notes are in [RELEASENOTE](RELEASENOTE.html)
@@ -298,16 +260,12 @@ Set ``server.restapi.maxRequestSize`` to the largest request your applications n
 * Keep HSM firmware and client software patched, following your HSM vendor's guidance
 * Check our [Security Advisories](../security/) for guidance on vulnerabilities that affect EzSign
 
-<br>
-
 ## 8.13 Information Backup
 
 * Back up the properties file, ``log4j2.xml``, the users file and its signature
 * If using the software key store, back up ``keyStoreDir`` and protect the backup as you would the keys
 * For HSM keys, use your HSM vendor's secure backup mechanism (e.g. nCipher Security World backups, Luna backup HSMs). Cloud KMS keys are protected by the provider
 * Test restoring to a non-production server
-
-<br>
 
 ## 8.32 Change Management
 
@@ -319,8 +277,6 @@ server.failOnClasspathConflicts=true
 ```
 
 * See [Upgrading to 4.6](ezsign_upgrading_to_4.6.html) for the checks introduced in that version
-
-<br>
 
 ## Checklist
 
@@ -342,8 +298,6 @@ A quick check of a production server:
 | Log level records events | ``log.level=3`` |
 | Logs forwarded to SIEM | ``log4j2.xml`` |
 | EzSign and Java are up to date | |
-
-<br>
 
 <hr>
 

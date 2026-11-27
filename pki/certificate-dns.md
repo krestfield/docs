@@ -7,8 +7,6 @@ nav_order: 40
 
 # Certificate DNs
 
-
-
 DNs (Distinguished Names) and their comparison (or lookup) often causes confusion as there are cases where DNs are in fact equal, when they look different  
 
 It’s best to start with an explanation of what a DN really is:  
@@ -50,21 +48,15 @@ The value associated with the OID is usually in a string format, although there 
 
    **CN=User One, OU=Engineering, O=Krestfield Ltd, C=GB**
 
-
-
 How do we know that 2.5.4.3 should be displayed as CN though? Well, there are some specifications indicating how to represent these OIDs. It turns out a DN originates from X500 LDAP specifications such as this one:
 
 X500 User Schema for LDAPv3: [https://www.ietf.org/rfc/rfc2256.txt](https://www.ietf.org/rfc/rfc2256.txt)
 
 Which links several of the OID values to string representations
 
-
-
 There is also a specification detailing specifically how DNs should be represented as strings:
 
 LDAP String Representation of DNs: [https://tools.ietf.org/html/rfc2253  ](https://tools.ietf.org/html/rfc2253)
-
-
 
 So pretty well worked out? Not really. These specifications do not cover every OID value available to use within a DN (in theory you can use any), nor do they infer that the string representations should be formatted strictly (e.g. spaces after a comma or not). What they give are details on how to represent an encoded DN as a String  
 
@@ -78,8 +70,6 @@ What this means is that this DN:
 
 i.e. no spaces after the commas
 
-
-
 And, if you start to include other less common fields, such as *email*.  Then this DN:  
 
   **CN=User One, E=[userone@krestfield.com](mailto:userone@krestfield.com), O=Krestfield Ltd, S=London, C=GB**
@@ -87,8 +77,6 @@ And, if you start to include other less common fields, such as *email*.  Then th
 Could also be represented as:
 
   **CN=User One,EMAIL=[userone@krestfield.com](mailto:userone@krestfield.com),O=Krestfield Ltd,ST=London,C=GB**
-
-
 
 These DNs are the same, in that their base representation (the list of OIDs against values) is the same. It is just their formatted string representations that are different  
 
@@ -101,8 +89,6 @@ These DNs are the same, in that their base representation (the list of OIDs agai
 * Do not allow users to type or paste in the DN from say, the certificate viewed in Microsoft. The best way to register such details would be to extract the DN from the certificate itself (e.g. by allowing a certificate to be uploaded so that the same code can be used to extract the DN as a string)
 
 * Use the Krestfield method: dnsAreEquivalent included in KCertUtils in the Client Utilities when comparing DNs as strings
-
- 
 
 Note: That the correct way to uniquely reference a certificate is using its *serial number* and *issuer DN* – not subject DN. Also there are other certificate fields which are also available to reference a certificate such as the thumbprint (a hash over the certificate data), the public key, subject key identifier etc. I.e. use decimal or byte values when possible rather than strings  
 

@@ -10,13 +10,9 @@ keywords: ["Let's Encrypt", "automatic renewal"]
 
 > This feature is available from certdog 1.16
 
-<br>
-
 Certdog supports the ACME protocol ([RFC8555](https://datatracker.ietf.org/doc/html/rfc8555)) including External Account Binding (EAB)
 
 Multiple ACME end points can be created - each with a different configuration. This allows for multiple setups that may provide different certificate types from different CAs
-
-<br>
 
 ## Configuration
 
@@ -50,11 +46,7 @@ Click **Add New ACME Service**:
 * **Log Protected Section of Payload**. The text logs will log every message received and returned. If this is not checked, the protected part of the message will not be logged. The Protected section contains public key data, the account identifier (key ID), algorithm used, URLs and NONCE values. It does not contain any passwords or private keys
 * **Enforce Strict Payload**. According to RFC8555, the payload should be empty for certain requests (such as get-challenge), some ACME clients do not adhere to this (including certbot). If this option is checked it will reject requests that do not contain an empty payload. Leave unchecked for clients that do not strictly adhere to the RFC
 
-<br>
-
 Click **Add**
-
-<br>
 
 If all has been created correctly, you should be able to open a Browser and navigate to the Directory URL. You should see JSON returned similar to the following:
 
@@ -72,8 +64,6 @@ If all has been created correctly, you should be able to open a Browser and navi
 }
 ```
 
-<br>
-
 ### Editing a Service
 
 To edit a service, click the service and choose **View/Edit**:
@@ -86,8 +76,6 @@ The information previously entered will be displayed and can be edited. Note tha
 
 Click **Update** to save the new settings
 
-<br>
-
 ### Disabling a Service
 
 From the ACME menu, select the service and choose **View/Edit**
@@ -96,15 +84,11 @@ Uncheck the **Enabled** button
 
 If a client makes a request when the service is disabled the initial request will be rejected with an HTTP Forbidden response, the error message detailing that the service has been disabled
 
-<br>
-
 ### Deleting a Service
 
 From the ACME menu, select the service and choose **Delete**
 
 Click **Yes** to confirm
-
-<br>
 
 ## Viewing and Revoking Accounts
 
@@ -118,15 +102,11 @@ All accounts will be displayed:
 
 The IP Address indicates the client IP address. The contact details are provided by the user when running the client. If EAB is used, the contact details are extract from the user that the initial EAB key are associated with (see External Account Binding below)
 
-<br>
-
 ## External Account Binding
 
 Use this if you want to pre-authorise clients, assigning the authorisation to an existing certdog user. Note that as an EAB key is associated with a user, the user must be present in certdog. The account can be local, Active Directory or Entra ID based
 
 When EAB is enabled, only clients with a valid Key and Key Identifier will be permitted to create an ACME account on the server. This setting is per service i.e. one ACME service endpoint may require EAB, whilst another may allow auto account creation with no pre-authorisation
-
-<br>
 
 ### Creating an EAB
 
@@ -152,8 +132,6 @@ The *EAB MAC Key* and *KID* will be displayed. Click to copy the values and secu
 
 The client will need to supply the *EAB MAC Key* and *KID* to their ACME client. The client will then supply these details when requesting an ACME account. Certdog will validate the credentials, also checking that the associated user exists in certdog and is enabled. The client will then be permitted to create an ACME account. Once this has been created it will be used to authenticate to the server from then on
 
-<br>
-
 ### Deleting an EAB
 
 From the ACME Services page, click on the service and choose **Manage EABs**:
@@ -161,8 +139,6 @@ From the ACME Services page, click on the service and choose **Manage EABs**:
 <img src=".\images\image-20260130133619207.png" alt="image-20260130133619207" style="zoom:67%;" />
 
 Select the *KID* to delete and click **Delete**
-
-<br>
 
 ## Troubleshooting
 
@@ -180,11 +156,7 @@ And:
 HTTPSConnectionPool(host='certdog.xserver.local', port=443): Max retries exceeded with url: /certdog/acme/alias1/directory (Caused by SSLError(SSLError("bad handshake: Error([('SSL routines', 'tls_process_server_certificate', 'certificate verify failed')])")))
 ```
 
-<br>
-
 To configure the certdog server with a TLS certificate, follow the steps [here](https://krestfield.github.io/docs/certdog/configure_server_ssl.html#configuring-the-servers-tls-certificates)
-
-<br>
 
 To add the required trust to the ACME client is to ensure that the root certificate from the chain that issued the certdog server TLS certificate is included in the trusted store of the ACME client machine
 

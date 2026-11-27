@@ -7,17 +7,11 @@ grand_parent: EzSign
 keywords: ["Thales", "HSM"]
 ---
 
-
-
 # EzSign payShield 10k Support
 
 > Supported from version 4.2.3
 
-
-
 EzSign supports the Thales payShield 10k HSM for RSA PKI operations (sign, verify) and random number generation.  
-
-
 
 ## Changes from version 4.4.0
 
@@ -35,8 +29,6 @@ If **useTls** is **true** then the following server properties may also need to 
 * tls.clientKeyStore.password
 
 These are discussed in the EzSign Configuration section below.
-
-<br>
 
 For versions **4.2.3** to **4.3.0** the available settings are:
 
@@ -56,15 +48,11 @@ For versions **4.2.3** to **4.3.0** the available settings are:
 
 * channel.N.token.**payShield**.useTls
 
-<br>
-
 ## payShield Configuration
 
 The HSM must be configured correctly, including host settings and at least one LMK loaded. EzSign supports both Variant and KeyBlock LMKs.  
 
 Communications between EzSign and the HSM must be in place.  
-
-
 
 ### Enabling Commands
 
@@ -94,8 +82,6 @@ To enable these commands you may refer to the steps below, although it is always
 
 * Set the state back to **Online**.
 
-
-
 ### Authorising Commands
 
 The **EI** command (Generate Public/Private Key Pair) needs to be authorised on the payShield.  
@@ -114,15 +100,9 @@ To authorise this command you may refer to the steps below, although it is alway
 
 Note: If performing via the *Console* then **generate.rsa.host** needs to be authorised.  
 
-
-
 ### TLS Configuration
 
 If you wish to secure the communications between EzSign and the payShield using TLS. Refer to the [payShield TLS Configuration](payshield_tls_configuration.html) guide.
-
-  
-
-
 
 ## EzSign Configuration
 
@@ -148,8 +128,6 @@ The following properties are used to configure a payShield within EzSign:
   * If using TLS to communicate with the HSM, set this to true. Defaults to **false** if not set
   * Refer to [payShield TLS Configuration](payshield_tls_configuration.html) for more detailed information on configuring TLS
 
-
-
 If ``useTls=true`` then the following may also need to be set:
 
 * tls.trustStore.filename
@@ -158,33 +136,21 @@ If ``useTls=true`` then the following may also need to be set:
 * tls.trustStore.type
   * The Trust Store can be supplied as a JKS or PKCS12 file. Specify either **jks** or **pkcs12**
 
-
 * tls.trustStore.password
 
     * The Trust Store is password protected. Use the Management Utility to configure this password - choosing the *Set TLS Trust Keystore Password* option
-
-
-
 
 * tls.clientKeyStore.filename
 
     * The payShield requires a client certificate. This must be held within a password protected file. The full path to this file must be set here. E.g. ``/opt/stores/payshield_client.p12``
 
-
-
 * tls.clientKeyStore.type
 
     * The client key store can be provided as a JKS or PKCS12 file. Specify either **jks** or **pkcs12**
 
-
-
 * tls.clientKeyStore.password
 
     * The Client Key Store is password protected. Use the Management Utility to configure this password - choosing the *Set TLS Client Keystore Password* option.
-
-
-
-
 
 An example configuration using TLS is shown below:
 
@@ -209,8 +175,6 @@ tls.clientKeyStore.filename=/opt/stores/payshieldclient.p12
 tls.clientKeyStore.password=FGchg3Kv516z3o3hvkq+bUECtJ/rHTTTYLhuI9Ifijpc+lFlW7Ycsg==
 ```
 
-
-
 If TLS is not required, the configuration would simplify to the following:
 
 ```properties
@@ -224,13 +188,9 @@ channel.1.token.payShield.lmkId=0
 channel.1.token.payShield.useTls=false
 ```
 
-
-
 ## Common Errors
 
 The following are some common errors that may be seen in the EzSign logs when configuring EzSign with a payShield:
-
-
 
 ```
 Token Exception: Failed to connect to HSM at IP Address/server: 192.168.0.211 port: 1500. Error: Connection refused (Connection refused)
@@ -238,25 +198,17 @@ Token Exception: Failed to connect to HSM at IP Address/server: 192.168.0.211 po
 
 The HSM cannot be accessed over the network. Check you have configured the correct port and IP Address. Check that you can connect to the HSM at that port (e.g. run ``telnet 192.168.0.211 1500``). Also check that the HSM state is *Online* (if set to Offline or Secure it will not be accepting traffic).
 
-
-
 ```
 Token Exception: Failed to connect to HSM at IP Address/server: 192.168.0.211 port: 2500. Error: java.security.NoSuchAlgorithmException: Error constructing implementation (algorithm: Default, provider: SunJSSE, class: sun.security.ssl.SSLContextImpl$DefaultSSLContext)
 ```
 
-
 This error is seen when configuring TLS. It is seen when the incorrect password is provided for either the trust or client key stores. Verify the passwords are correct and reset using the Management Utility.
-
-
 
 ```
 Token Exception: There was an error sending the message. Connection reset
 ```
 
-
 This error is seen when non-TLS traffic is sent to the TLS port or the TLS settings are not correct. Check the TLS port configuration on the HSM and ensure you match this with the EzSign settings. If targeting the TLS port, ensure that **useTls** is *true* e.g. ``channel.1.token.payShield.useTls=true``.
-
-
 
 ```
 Token Exception: Failed to connect to HSM at IP Address/server: 192.168.0.211 port: 2500. Error: PKIX path building failed: sun.security.provider.certpath.SunCertPathBuilderException: unable to find valid certification path to requested target
@@ -264,11 +216,8 @@ Token Exception: Failed to connect to HSM at IP Address/server: 192.168.0.211 po
 
 This error indicates that the HSM's TLS server certificate is not trusted by EzSign. Add the CA certificates to the trust store and specify this in the *tls* settings i.e. ``tls.trustStore.type``, ``tls.trustStore.filename`` and ``tls.trustStore.password``.
 
-
-
 ```
 ...Token Exception: Failed to connect to HSM at IP Address/server: 192.168.0.211 port: 2500. Error: an established connection was aborted by the software in your host machine
 ```
 
 This is seen when the client TLS certificate is not configured, not trusted or not being accepted by the HSM due to a configuration issue. Refer to the [payShield TLS Configuration](payshield_tls_configuration.html) guide to set the client certificate correctly.
-

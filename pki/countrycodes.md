@@ -9,7 +9,6 @@ keywords: ["ISO 3166", "country"]
 
 When entering a DN, the country field (C) must be one of the following codes:
 
-
 | Code | Country |
 | ---- | ---- |
 | AF | Afghanistan |

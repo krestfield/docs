@@ -6,13 +6,9 @@ grand_parent: Certdog
 ---
 # Running a JKS (Java Key Store) Scan
 
-  <br>
-
 Certificates can be discovered and imported into the certdog inventory from JKS files residing on Linux environments.
 
 This can be done by running a local PowerShell script which will analyse JKS files residing on the remote servers.
-
-<br>
 
 ## Overview of Operation
 
@@ -21,8 +17,6 @@ The PowerShell script uses the SSH protocol to run a remote script on each of th
 It can target individual JKS files or scan a directory and all sub -directories.
 
 The script running on the remote server will call the certdog API to import any discovered certificates.
-
-<br>
 
 ## Pre-Requisites
 
@@ -40,8 +34,6 @@ The script running on the remote server will call the certdog API to import any 
 
 * The remote servers require curl and keytool to be available.
 
-<br>
-
 The script will require the following information:
 
 - Remote IP Addresses (of the Linux servers)
@@ -58,13 +50,7 @@ The script will require the following information:
 
 - The password to access the target JKS files
 
-  
-
 We will see how to obtain these values in the next section.
-
-<br>
-
-<br>
 
 ## Quick Start
 
@@ -114,17 +100,11 @@ Edit ``run-jks-scan.ps1`` editing the values for:
   * The password of the account above
   * E.g. ``password``
 
-<br>
-
 NOTE: It is not recommended to hardcode any sensitive values except for testing purposes. The ``run-jks-scan.ps1`` script has some recommendations for protecting these values.
-
-<br>
 
 Execute the ``./run-jks-scan.ps1`` script
 
 The script will run and for each file a log file will be produced e.g. ``output-192.168.50.223.log`` which can be viewed to observe any errors.
-
-<br>
 
 ### The jks-scan.ps1 Script
 
@@ -135,8 +115,6 @@ The script essentially performs three operations for each of the specified Linux
 1. Copy the ``jks-scan.sh`` script to the remote server's ``/tmp`` directory
 2. Execute the script with the parameters provided (JKS file, password, certdog URL etc.)
 3. Copy the produced log file back to the calling server
-
-<br>
 
 ### The jks-scan.sh Script
 
@@ -152,8 +130,6 @@ This data is then imported to certdog via the REST API. Curl is used during this
 
 A log file is produced, which the calling script will collect at the end of the processing.
 
-<br>
-
 ## Certdog Setup
 
 Decide what user and team you wish the certificates to be associated with. 
@@ -162,8 +138,6 @@ Either choose an existing user or create a new user for this specific purpose. F
 
 To setup a dedicated user and team, follow Appendix A below.   
 
-<br>
-
 #### Obtain the User and Team ID
 
 From certdog, as an Administrator, navigate to **Users** under the *ADMINISTRATION* section. Select the chosen user and click **View/Edit**. 
@@ -171,8 +145,6 @@ From certdog, as an Administrator, navigate to **Users** under the *ADMINISTRATI
 The user ID is displayed. You can click to copy this value.
 
 <img src="./images/copy_user_id.png" alt="image-20250314115834215" style="zoom: 67%;" />
-
-
 
 For older versions (1.11 and earlier) the URL in the browser will contain the ID. This is the number at the end of the URL. 
 
@@ -190,10 +162,6 @@ Do the same for the Team you wish the certificates to be associated with. Note: 
 
 You can also use the PowerShell module to obtain the user and team IDs. See [Appendix C]()
 
-<br>
-
-<br>
-
 #### Obtain an API Token
 
 As an Administrator navigate to **Users** under the *ADMINISTRATION* section. Select the chosen user and click **View/Edit**. 
@@ -206,17 +174,9 @@ Retain the value as it will be required by the PowerShell script.
 
 <img src="./images/image-20250314163205098.png" alt="image-20250314163205098" style="zoom:67%;" />
 
-<br>
-
-<br>
-
 #### Certdog API URL
 
 This is simply the hostname or IP Address where the certdog server resides. E.g. ``https://certdog.krestfield.local`` or ``https://192.168.55.42`` 
-
-<br>
-
-<br>
 
 ### Appendix A: Creating a dedicated User and Team
 
@@ -225,8 +185,6 @@ See here: [https://krestfield.github.io/docs/certdog/teams.html](https://krestfi
 Do not set the team to be an Administrator and there is no need to specify any Certificate Issuers. The Team will not need any specific permissions.
 
 See here: [https://krestfield.github.io/docs/certdog/users.html](https://krestfield.github.io/docs/certdog/users.html) for details on how to add a new user. Add this user to the team created above. 
-
-<br>
 
 ### Appendix C: User and Team IDs
 
@@ -275,4 +233,3 @@ ipWhiteList            :
 ```
 
 The IDs are displayed.
-

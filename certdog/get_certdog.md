@@ -7,8 +7,6 @@ grand_parent: Certdog
 ---
 # Get the Dog
 
-
-
 Certdog can be downloaded for free and installed in minutes  
 
 [See here](download-locations.html) for the download locations
@@ -23,13 +21,4 @@ Further instructions can be found at the following locations:
 
 * [Debian Installation](debian_install.html)
 
-
-
 Certdog can also be provided as a [Docker Image](get_the_docker_image.html)
-
-
-
-  
-
-
-

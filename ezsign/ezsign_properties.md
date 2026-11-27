@@ -9,15 +9,11 @@ keywords: ["config file", "configuration", "settings", "properties file"]
 
 # EzSign Properties
 
-
-
 The server’s configuration is contained within a properties file. The properties file must be passed to the server (as a parameter) at start up. The server loads the properties and waits for client requests  
 
 Essentially the properties file contains information about the IP Addresses and Ports to listen on, the key store location, logging settings and channel configurations. These are contained in a single properties file. The description below breaks out the sections for easier reading
 
 Click [here](ezsign_sample_properties.html) to view a sample properties file
-
-<br>
 
 ## Server Properties
 
@@ -53,8 +49,6 @@ The following settings dictate what ports and interfaces the server listens on a
 | tls.clientKeyStore.type |This specifies the trust store type referenced above. Options are **jks** or **pkcs12**|pkcs12|
 | tls.clientKeyStore.password |The encrypted password that protects the key store referenced above. Use the Management Utility to set this password|FGchg3Kv...Ycsg==|
 
-<br>
-
 ## REST API Properties
 
 From version 4.6.0 the server can also offer a REST API. These settings configure it. See [REST API](ezsign_rest_api.html) for details
@@ -82,8 +76,6 @@ From version 4.6.0 the server can also offer a REST API. These settings configur
 | server.restapi.tls.clientAuth|Whether clients present a TLS certificate: **none**, **optional** (a certificate or an API token can be used) or **required**. *If omitted defaults to optional if a trust store is set, otherwise none*|optional|
 | server.restapi.tls.protocols|The TLS protocols enabled. *If omitted defaults to TLSv1.3,TLSv1.2*|TLSv1.3,TLSv1.2|
 
-<br>
-
 ## Generic Channel Properties
 
 The properties file may have multiple channels specified. Each channel must have a number assigned e.g.
@@ -101,8 +93,6 @@ channel.3.name=AnotherChannel
 
 This number is represented by ``N`` in the following sections. There is no limit on the number of channels
 
-
-
 | Property                             | Description                                                  | Example      |
 | ------------------------------------ | ------------------------------------------------------------ | ------------ |
 | channel.N.name|The name of the channel.  This will also be used as the folder name where the keys and certificates for this channel will be stored|CHAN1|
@@ -112,8 +102,6 @@ This number is represented by ``N`` in the following sections. There is no limit
 | channel.N.token.password|The token password required for all token types and will be used to encrypt key store objects. This must be set by running the ezsign-manange script. If tokenType=PKCS11 this is the PIN or Passphrase.  For nCipher devices this will be the operator smartcard passphrase|zijFhJ....vA==|
 | channel.N.defaultKeyLabel|Relates to symmetric channels only (type=SYM). Specifies the default AES key label to use if none is passed to the client|key1|
 | channel.N.saveObjectsToDisk |If this is true, files will not be written to the keystore folder. Use this option if you are passing properties to EzSign and managing key storage externally e.g. in a database|true|
-
-<br>
 
 ## PKCS11 Token Properties
 
@@ -127,12 +115,9 @@ If  ``channel.N.tokenType=PKCS11`` is set then the following properties must als
 | channel.N.token.pkcs11.model | The particular HSM model. Options are:  **Generic**, **NCipher**, **Luna**, **AWSCloudHSM**, **Utimaco**, **YubiHSM**, **Custom** | Utimaco |
 | channel.N.token.pkcs11.customTemplateClass | If the model above is **Custom**, then the class containing the customised templates must be specified here. See [here](https://krestfield.github.io/docs/ezsign/custom_pkcs11_templates.html) for more details.  Version 4.2.1 onwards | NewHsmTemplates |
 
-<br>
-
 ## GoogleKMS Token Properties
 
 If ``channel.N.tokenType=GOOGLEKMS`` is set then the following properties must also be configured. You will obtain these from your Google KMS configuration
-
 
 | Property                             | Description                                                  | Example      |
 | ------------------------------------ | ------------------------------------------------------------ | ------------ |
@@ -144,20 +129,15 @@ If ``channel.N.tokenType=GOOGLEKMS`` is set then the following properties must a
 | channel.N.token.googleKms.keyImportVersion|If using imported keys that are not at version 1 set this to the version of the keys you use to be imported|1|
 | channel.N.token.googleKms.keyProtectionLevel |Can be HSM or SOFTWARE. Defines the protection level for keys at creation (e.g. when generating a CSR).|HSM|
 
-<br>
-
 ## Azure KeyVault Token Properties
 
 If ``channel.N.tokenType=AZUREKEYVAULT`` is set  then the following properties must also be configured. Refer to your Azure KeyVault configuration for details
-
 
 | Property                             | Description                                                  | Example      |
 | ------------------------------------ | ------------------------------------------------------------ | ------------ |
 | channel.N.token.azureKeyVault.clientId|The client ID as configured on the Azure platform|eb1739f5-6dd2-43b1-9bf7-266717a24cf4|
 | channel.N.token.azureKeyVault.tenantId|The Tenant ID as configured on the Azure platform|d12c3e45-350c-4413-2bb3-34514a35407c|
 | channel.N.token.azureKeyVault.keyVault|The full DNS name of the Key Vault e.g. https://yourvault.vault.azure.net/|https://yourvault.vault.azure.net/|
-
-<br>
 
 ## PayShield Token Properties
 
@@ -177,8 +157,6 @@ Note properties named hsm9000 (e.g. ``channel.N.token.hsm9000.port``) are still 
 | channel.N.token.payShield.useTls |Whether communications between the client and HSM are protected using TLS. Options are **true** or **false**. If true then the **tls** server properties must also be set to configure the client key store (and optionally the trust store). See *Server Properties* above.|false|
 
 **Note**: All settings except for **useTls** are still named **hsm9000** for versions **4.2.3** to **4.3.0.** E.g. ``channel.N.token.hsm9000.ipAddress``
-
-<br>
 
 ## Signature Generation and Verification Properties
 
@@ -215,8 +193,6 @@ There are various options when generating and verifying signatures. The followin
 | channel.N.allowExpiredCerts|Whether to permit expired certificates.  This MUST only be set to true in extreme circumstances (such as to maintain a live service) where other checks can be performed that ensure the certificate would otherwise still be valid|false|
 | channel.N.allowExpiredCertsForDays|If allow ExpiredCerts=true then the number of days permitted to all an expired certificate for e.g. if set to 5 a certificate will be permitted for 5 days after it has expired|5|
 
-<br>
-
 ## Revocation Checker Properties
 
 The revocation check options are configured with the following settings. If nothing is specified, no revocation checking will be performed
@@ -232,8 +208,6 @@ If **CRL** is chosen, refer to the CRL Specific Properties below
 If **OCSP** is chosen, refer to the OCSP Specific Properties below  
 
 If **ANY** is chosen, both the CRL and OCSP specific properties will be applied
-
-<br>
 
 ### OCSP Specific Properties
 
@@ -264,8 +238,6 @@ if ``revocationChecker.type=OCSP`` then the following settings can be applied
 | channel.N.revocationChecker.ocsp.proxyAuthRequired|If useProxy=true and the server requires authentication set this to true and specify the username and password below|false|
 | channel.N.revocationChecker.ocsp.proxyUsername|If proxyAuthRequired=true set the *username* here|user1|
 | channel.N.revocationChecker.ocsp.proxyPassword|If proxyAuthRequired=true set the *password* here|password|
-
-<br>
 
 ### CRL Specific Properties
 

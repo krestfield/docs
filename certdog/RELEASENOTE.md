@@ -5,13 +5,9 @@ parent: Certdog
 nav_order: 900
 ---
 
-
-
 # RELEASE NOTE
 
 ### Certdog - Certificate Management and Automation System
-
-
 
 Documentation: [https://krestfield.github.io/docs/certdog/certdog.html](https://krestfield.github.io/docs/certdog/certdog.html)
 
@@ -19,13 +15,8 @@ Support: [support@krestfield.com](mailto:support@krestfield.com)
 
 Web: [https://www.krestfield.com](https://www.krestfield.com)
 
-
-<br>
-
 > **Version 1.17.0**
 > **Release Date**: 7th September 2026
-
-
 
 **Updates**
 
@@ -53,7 +44,6 @@ Web: [https://www.krestfield.com](https://www.krestfield.com)
 
 * Multiple Tomcat vulnerabilities resolved (present in versions prior to 10.1.55):
 
-
 **Fixes** 
 
 * Approval rejection didn't URL encode reason.
@@ -67,15 +57,10 @@ Web: [https://www.krestfield.com](https://www.krestfield.com)
 * Newlines for ACME returned certs now consistent for all CAs.
 * OCSP ML-DSA signatures corrected.
 
-<br>
-
-
 ---
 
 > **Version 1.16.0**
 > **Release Date**: 26th January 2026
-
-
 
 **Updates**
 
@@ -93,15 +78,10 @@ Web: [https://www.krestfield.com](https://www.krestfield.com)
 * Fixed issue where a KeyVault CA failed to process a CSR 
 * Fixed issue where emails were not being sent
 
-<br>
-
-
 ---
 
 > **Version 1.15.1**
 > **Release Date**: 9th October 2025
-
-
 
 **Updates**
 
@@ -115,15 +95,10 @@ Web: [https://www.krestfield.com](https://www.krestfield.com)
 
 * Fix for when Idp returns empty number once.
 
-<br>
-
-
 ---
 
 > **Version 1.15.0**
 > **Release Date**: 26th September 2025
-
-
 
 **Updates**
 
@@ -138,17 +113,10 @@ Web: [https://www.krestfield.com](https://www.krestfield.com)
 
 * Fix for when, in certain circumstances the UI would not navigate to the issuer (c20-160).
 
-
-
-
-
-
 ---
 
 > **Version 1.14.0**
 > **Release Date**: 8th June 2025
-
-
 
 **Updates**
 
@@ -156,31 +124,18 @@ Web: [https://www.krestfield.com](https://www.krestfield.com)
 * A new Dashboard has been added
 * The main certificate view now also shows the certificate status
   
-
 **Security Updates**
 
 * None
-
 
 **Fixes** 
 * Users can now revoke their own API tokens (but cannot create). This was preventing the user from viewing their own profile in some cases.
 * Introduced at V12 - OCSP server failed to renew certificate as was running a version behind main server. Now corrected.
 
-
-
-
-
-
 ---
-
-
-
-
 
 > **Version 1.12.0**
 > **Release Date**: 8th May 2025
-
-
 
 **Updates**
 
@@ -201,24 +156,15 @@ Web: [https://www.krestfield.com](https://www.krestfield.com)
 * If an approval is required when requesting via a CSR a red dialog was shown. This is now grey
 * Only 10 SAN entries were being displayed in the UI. Now can display an unlimited number
 
-
-
-
 ---
-
-
-
 
 > **Version 1.11.1**
 > **Release Date**: 26th July 2024
-
-
 
 **Updates**
 
 * None
   
-
 **Security Updates**
 
 * None
@@ -228,17 +174,10 @@ Web: [https://www.krestfield.com](https://www.krestfield.com)
 * In certificate details, *Renewed By* and *Renews* links had stopped working 
 * Corrected revocation approval where approval notification appeared when none was required
 
-
-
 ---
-
-
-
 
 > **Version 1.11.0**
 > **Release Date**: 24th May 2024
-
-
 
 **Updates**
 
@@ -248,13 +187,9 @@ Web: [https://www.krestfield.com](https://www.krestfield.com)
 
 * UI improvements
 
-  
-
 **Security Updates**
 
 * None
-
-
 
 **Fixes** 
 
@@ -272,12 +207,7 @@ Web: [https://www.krestfield.com](https://www.krestfield.com)
 
 * When requesting a certificate, if you entered a SAN before the DN the request button was not enabled. Now operates correctly.
 
-  
-
-
 <hr>
-<br>
-
 
 > **Version 1.10.0**
 > **Release Date**: 28th July 2023
@@ -304,19 +234,12 @@ Web: [https://www.krestfield.com](https://www.krestfield.com)
 
 * Cert issuers can now be configured to allow only specific CSR generators
 
-  
-
 **Security Updates**
 
 * Additional logging added indicating changes made to user accounts and teams
 * IP address restrictions enforced for every API call (previously only at logon) and can be updated dynamically
 
-
-
 <hr>
-<br>
-
-
 
 > **Version 1.9.0**
 > **Release Date**: 23 February 2023
@@ -328,25 +251,15 @@ Web: [https://www.krestfield.com](https://www.krestfield.com)
 * OCSP server supports other CAs if CRL location is provided
 * Now have the option to 'go to issuer cert' for all certificates
 
-
-
 **Security Updates**
 
 * None
-
-
 
 **Fixes** 
 
 * If you chose to download the issuer of a CA cert you would get the same CA certificate. Now get the correct issuer
 
-
-
-
-
 <hr>
-<br>
-
 
 > **Version 1.8.0**
 > **Release Date**: 21 November 2022
@@ -361,13 +274,9 @@ Web: [https://www.krestfield.com](https://www.krestfield.com)
 * OCSP server added for local CAs
 * P7 data now downloaded in PEM format (previously base64 with no headers)
 
-
-
 **Security Updates**
 
 * None
-
-
 
 **Fixes** 
 
@@ -381,11 +290,7 @@ Web: [https://www.krestfield.com](https://www.krestfield.com)
 
 * OK button not enabled until name changed when adding a Microsoft Issuer
 
-
-
-
 <hr>
-<br>
 
 > **Version 1.7.0**
 > **Release Date**: 5 May 2022
@@ -406,14 +311,10 @@ Web: [https://www.krestfield.com](https://www.krestfield.com)
 
 * Updated to support jdk17
 
-  
-
 **Security Updates**
 
 * SpringBoot updated to version 2.6.6 (CVE-2022-22965)
 * Log4J updated to version 2.17.2
-
-
 
 **Fixes** 
 
@@ -423,13 +324,7 @@ Web: [https://www.krestfield.com](https://www.krestfield.com)
 
 * Log search did not show a time stamp for log entries from the ADCS Agent (though were present when exported and in the main log view)
 
-  
-
-
 ---
-
-
-
 
 > **Version 1.6.0**
 > **Release Date**: 14 February 2022
@@ -473,8 +368,6 @@ Web: [https://www.krestfield.com](https://www.krestfield.com)
   * Log4j2 version upped to 2.17.1
   * User disable and delay added for failed login attempts
 
-  
-
 **Fixes** 
 
 * When Active selected in search - all certificates were returned
@@ -485,11 +378,7 @@ Web: [https://www.krestfield.com](https://www.krestfield.com)
 * Import Cert for a user (not admin) would produce an unauthorised response
 * ADCS driver required a credential with local logon. This is no longer needed
 
-
-
 ---
-
-
 
 > **Version 1.5.0**
 > **Release Date**: 15 November 2021
@@ -518,12 +407,7 @@ Web: [https://www.krestfield.com](https://www.krestfield.com)
 * If a certificate had no team an error was sometimes thrown when searching for certificates
 * Certificate default search was set to not default when saved. Setting now retained
 
-
-
 ---
-
-
-
 
 > **Version 1.4.1**
 > **Release Date**: 6 August 2021
@@ -537,13 +421,7 @@ Web: [https://www.krestfield.com](https://www.krestfield.com)
 
 * None
 
-
-
-
 ---
-
-
-
 
 > **Version 1.4.0**
 > **Release Date**: 19 July 2021
@@ -562,13 +440,7 @@ Web: [https://www.krestfield.com](https://www.krestfield.com)
 
 * None
 
-
-
-
 ---
-
-
-
 
 > **Version 1.3.0**
 > **Release Date**: 17 June 2021
@@ -588,13 +460,7 @@ Web: [https://www.krestfield.com](https://www.krestfield.com)
 
 * If email server settings were incorrect there would be a delay in obtaining a certificate (whilst the connection timed out). Emails are now sent in a separate queue
 
-
-
-
 ---
-
-
-
 
 > **Version 1.2.0**
 >
@@ -611,13 +477,7 @@ Web: [https://www.krestfield.com](https://www.krestfield.com)
 * Logout would log out all sessions from the same IP
 * Key retention could not be set to zero
 
-
-
-
 ---
-
-
-
 
 > **Version 1.1.0**
 >
@@ -640,13 +500,7 @@ Web: [https://www.krestfield.com](https://www.krestfield.com)
 * CSR is now accepted even if it does not contain the correct PEM headers
 * Corrected a bug in the email sending logic
 
-
-
-
 ---
-
-
-
 
 > **Version 1.0.0**
 >

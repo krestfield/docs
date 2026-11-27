@@ -7,11 +7,7 @@ grand_parent: EzSign
 ---
 # EzSign Management Tool
 
-<br>
-
 > Note: The configuration UI, the command line interface (CLI) option and REST API Users configuration are only available in version 4.6.0 onwards
-
-<br>
 
 The Management utility enables the following operations:
 
@@ -32,8 +28,6 @@ The Management utility enables the following operations:
 - Setting the REST API TLS Passphrases
 - Changing the Master Password
 
-<br>
-
 The tool can be run in three ways:
 
 - **As an interactive menu**
@@ -45,11 +39,7 @@ The tool can be run in three ways:
 
 All carry out the same operations on the same files.  Each section below describes the menu option and then the same operation via the CLI
 
-<br>
-
 The server will not start until the token passwords have been set and you will be unable to sign or verify signatures until the required keys and certificates have been generated and imported.  Encrypting and decrypting requires an AES key to be generated.  Therefore, the Management tool must usually be run before the server can be started (if you are duplicating configurations there is no need to re-run the tool)
-
-<br>
 
 ## Starting
 
@@ -71,8 +61,6 @@ The script runs the tool with all the jars in the ``EzSignServer/lib`` folder. T
 
 Once the script starts you will be asked to enter the Master Password before being able to proceed
 
-<br>
-
 ```
   Krestfield EzSign Management
   ----------------------------
@@ -90,8 +78,6 @@ ezsign-manage.sh ../config/serverconfig.properties MyMasterPassword
 ```
 
 With ``-f`` the password is read from the first line of the file.  If neither is given, the ``EZMASTERPASS`` environment variable is used if set, otherwise the password is prompted for.  Note that a password given as a parameter can be seen by other users in the process list, so the file or the prompt is preferred
-
-<br>
 
 ### Checking the Master Password
 
@@ -120,8 +106,6 @@ If the master password is not correct, you can try again, continue or exit:
 Choose **2** only if the master password has been lost and the passwords are to be set again (see [Changing the Master Password](#changing-the-master-password))
 
 The server makes the same check when it starts.  If the properties file has a ``masterPassword.check`` value and the master password does not match it, the server logs *The master password is incorrect* and does not start
-
-<br>
 
 Once the master password has been entered, the menu is displayed:
 
@@ -174,8 +158,6 @@ When an option asks for the channel, the channel chosen last is shown as the def
 
 Select Channel Number (1. SIGNING):
 ```
-
-<br>
 
 ### Starting the CLI
 
@@ -270,8 +252,6 @@ accident. Prompts for the token password
   -V, --version      Print version information and exit.
 ```
 
-<br>
-
 **Passwords**
 
 Passwords are never passed to the CLI as parameters, so they are never visible in the process list or the shell history:
@@ -285,8 +265,6 @@ If the CLI is run without a terminal (e.g. from a script with its input redirect
 ```
 ezsign-manage.sh ../config/serverconfig.properties aes-keys generate ENCRYPTION --label key1 -f master.txt < token.txt
 ```
-
-<br>
 
 **Leaving out the Properties File**
 
@@ -310,19 +288,13 @@ A properties file given on the command line is always used instead.  The command
 
 To set a default for every session, remove the comment from the ``EZSIGN_CONFIG`` line in the ``ezsign-manage.sh`` or ``ezsign-manage.bat`` script and set the file.  As written, the path is relative to the ``bin`` folder.  A value already set in the environment is used instead of the script's
 
-<br>
-
 **Output and Exit Codes**
 
 Results (such as lists and CSRs) are written to the standard output and messages to the standard error, so the results can be captured or redirected.  The exit code is 0 on success.  Anything else is an error, with the reason given on the standard error
 
-<br>
-
 ## The Configuration UI
 
 The configuration UI is a browser-based editor for the whole server configuration.  As well as everything the menu and CLI can do, it edits the server, REST API, Control Interface and channel settings, checking each value as it is entered, and shows the changes before they are saved
-
-<br>
 
 ### Starting the UI
 
@@ -368,7 +340,6 @@ Then open the link in the browser on that machine.  Note that a free port is cal
 
 The UI stops when the browser tab is closed, after the idle time, with **Stop**, or with Ctrl+C
 
-<br>
 ### Opening a Configuration
 
 <img src="./images/image-20261105133732926.png" alt="image-20261105133732926" style="zoom:80%;" />
@@ -377,7 +348,6 @@ If no properties file has been specified. the first screen asks for the properti
 
 Changes are held in the UI until they are saved, so nothing is written to the properties file until **Review & save** is used
 
-<br>
 ### The Sections
 
 The menu on the left contains the following:
@@ -388,89 +358,73 @@ The menu on the left contains the following:
 
 A summary of the configuration: the channels, the token types used, the errors and warnings found, and the result of the last verification.  It also shows whether the running server can be reached through its Control Interface, with **Reload** to have the server apply the saved configuration
 
-<br>
 **Server settings**
 
 ![image-20261105134009322](./images/image-20261105134009322.png)
 
 The settings that apply to the whole server, such as the key store folder, the log level and the TLS key stores used to connect to HSMs
 
-<br>
 **REST API**
 
 ![image-20261105134020248](./images/image-20261105134020248.png)
 
 The REST API listener: its address and port, TLS, client certificate authentication, the users file and the admin certificates that sign it
 
-<br>
 **Socket API (Legacy)**
 
 The socket listener used by the EzSign Java and .NET clients before the REST API
 
-<br>
 **Control Interface**
 
 The interface used by the server control tool and by the UI to check the status of the server and reload it: its address, port, the addresses allowed to connect and the authentication code
 
-<br>
 **Channels**
 
 ![image-20261105134200176](./images/image-20261105134200176.png)
 
-<br>
-
 The list of channels, with options to add, duplicate, enable, disable and delete them.  Each channel has tabs for its settings:
-<br>
+
 - **General**
 
 ![image-20261105134653626](./images/image-20261105134653626.png)
 
   The channel's name, type and whether it is enabled
 
-<br>
 - **Token** 
 
 ![image-20261105134518381](./images/image-20261105134518381.png)
 
 where the keys are held (software, PKCS#11 HSM, payShield, Google KMS or Azure Key Vault) and the token password.  For PKCS#11, **Detect slots** lists the slots the library reports
 
-<br>
 - **Signature**, **Verification** and **Revocation**
 
 ![image-20261105134415024](./images/image-20261105134415024.png)
 
 How the channel signs and verifies, and how certificates are checked for revocation
 
-<br>
 - **Keys & certificates**
 
 ![image-20261105134257696](./images/image-20261105134257696.png)
 
 The keys and certificates in the channel's token: generating CSRs, importing certificates and chains, importing existing HSM keys, setting the signing key, and generating and deleting AES keys
 
-<br>
 **Other properties**
 
 Properties that are not shown elsewhere, such as properties the UI does not recognise.  A property with a misspelt name, which the server would ignore, is reported with the option to rename it
 
-<br>
 **REST API users**
 
 ![image-20261105134932407](./images/image-20261105134932407.png)
 
 The users file: the users, their API tokens and certificates, and the roles that give them their permissions.  The **Signature & history** tab signs the file with the admin key and lists the previous versions, any of which can be restored.  See [EzSign REST API Users File](rest_api_users_properties.html) for the format of the file
 
-<br>
 **Review changes**
 
 The changes that have not been saved, grouped by section and showing the old and new values, together with any errors and warnings.  The configuration cannot be saved while it has errors.  When saving, the properties file is backed up first, and the server can be reloaded so the changes take effect.  Changes to the listeners' addresses, ports and TLS need the server to be restarted
 
-<br>
 **Verify configuration**
 
 Loads the chosen channels as the server would, logging in to their tokens, and reports whether each one would start.  This finds problems such as a wrong token password or a missing key before the server is restarted.  Verification only runs when requested, as it connects to the HSMs
-
-<br>
 
 ## Setting Master and Token Passwords
 
@@ -533,8 +487,6 @@ Token Password:
 
 The token password must then be entered to proceed.  It is only asked for once per channel while the menu is running
 
-<br>
-
 ### Setting the Token Password via the CLI
 
 ```
@@ -556,8 +508,6 @@ When the CLI prompts for a channel's token password, it names the channel:
 ```
 Token password for channel SIGNING:
 ```
-
-<br>
 
 ## Generating a CSR
 
@@ -601,8 +551,6 @@ UHwa6nARtpDVymI1+VBBo5IJYNFnj0Y=
 
 The CSR should then be processed by the CA who will issue the certificate.  Once the certificate has been issued the Import Certificate option can be chosen to import the certificates
 
-<br>
-
 ### Generating a CSR via the CLI
 
 ```
@@ -617,8 +565,6 @@ A new key pair was generated in channel SIGNING. Import the issued certificate w
 ```
 
 Without ``-o`` the CSR is written to the standard output.  An existing file is not overwritten unless ``--force`` is given
-
-<br>
 
 ## Importing Certificates
 
@@ -674,8 +620,6 @@ Choosing y will result in the properties file being updated.  If you do not wish
 
 Note that for signing certificates, all certificates in the path must be imported
 
-<br>
-
 ### Importing Certificates via the CLI
 
 ```
@@ -711,8 +655,6 @@ Imported C=GB,O=Krestfield Ltd,CN=Krestfield Root CA into channel SIGNING
 Reload the server's configuration with the server control tool, or restart the server, to apply the change
 ```
 
-<br>
-
 ## Importing Existing Keys and Certificates
 
 If you are using a PKCS#11 HSM which has been used by another system you may import these objects into EzSign.  To do this choose option **4.Import Existing HSM Keys**
@@ -736,8 +678,6 @@ Objects imported from the HSM OK
 
 The objects imported can be examined by running the **Display Certificates** or **Display all Channel Objects** options.  The signing key can be selected by running the **Set Signing Key** option
 
-<br>
-
 ### Importing Existing Keys and Certificates via the CLI
 
 ```
@@ -752,8 +692,6 @@ Reload the server's configuration with the server control tool, or restart the s
 ```
 
 The objects imported can then be examined with ``certs list`` or ``objects list`` and the signing key set with ``signing-key set``
-
-<br>
 
 ## Setting the Signing Key
 
@@ -789,8 +727,6 @@ Proceed? (y/n): y
 
   The properties file ../config/serverconfig.properties has been updated successfully.
 ```
-
-<br>
 
 ### Setting the Signing Key via the CLI
 
@@ -842,8 +778,6 @@ Reload the server's configuration with the server control tool, or restart the s
 
 Thumbprints may be given with colons or spaces, in upper or lower case (e.g. as copied from the Windows certificate viewer).  In scripts, a thumbprint is preferred as it cannot change between commands
 
-<br>
-
 ## Displaying and Deleting Certificates
 
 **Options 6, 7 and 8** are used to delete and display the available certificates.  When certificates are displayed they are shown in the following format
@@ -883,8 +817,6 @@ The first section displays the *Current Signing Certificates*.  This is based on
 The second sections displays all other certificates which are stored but not included in the current signing path
 
 Option 7 also displays each certificate's data (base64 encoded).  Option 8 displays the certificates and asks for the number of the certificate to delete
-
-<br>
 
 ### Displaying and Deleting Certificates via the CLI
 
@@ -937,8 +869,6 @@ Deleted C=GB,O=Krestfield Ltd,CN=Finance App (serial number 6de730050c7e13a2d99d
 Reload the server's configuration with the server control tool, or restart the server, to apply the change
 ```
 
-<br>
-
 ## Generating AES Keys
 
 Choose **option 9** to generate an AES key.  Enter the key size and the key label as follows:
@@ -951,8 +881,6 @@ Enter a unique label for this key: key1
 ```
 
 Once the key has been created it can be used to encrypt and decrypt data via the client, where the label set above must be specified to select this key
-
-<br>
 
 ### Generating AES Keys via the CLI
 
@@ -968,8 +896,6 @@ Reload the server's configuration with the server control tool, or restart the s
 ```
 
 The key size is 256 bits unless ``--size`` is given e.g. ``--size 128``
-
-<br>
 
 ## Displaying and Deleting AES Keys
 
@@ -987,8 +913,6 @@ AES keys can be displayed and deleted by choosing **options 10 and 11**
 Key details will be shown including the key size, date created and associated label
 
 Note: AES keys cannot be deleted from software tokens
-
-<br>
 
 ### Displaying and Deleting AES Keys via the CLI
 
@@ -1023,8 +947,6 @@ For a software token, this reports the following error, as for the menu:
 Error: deleteAESKey has not been implemented for this token type
 ```
 
-<br>
-
 ## Translate KeyStore Objects
 
 If you wish to translate keystore objects from one token password to another.  For example, when refreshing passwords for software tokens or if an HSM’s objects have been translated to another operator cardset, choose **option 12**
@@ -1054,8 +976,6 @@ The objects will be translated and re-encrypted under the new password.  The pre
 
 Note: objects can only be translated in PKI channels
 
-<br>
-
 ### Translating KeyStore Objects via the CLI
 
 ```
@@ -1073,8 +993,6 @@ Reload the server's configuration with the server control tool, or restart the s
 ```
 
 Note the difference between the two token password commands.  ``token-password set`` only stores a token password in the properties file (as for option 1), whereas ``token-password change`` re-encrypts the objects with a new token password and then stores it (as for option 12)
-
-<br>
 
 ## Display KeyStore Objects
 
@@ -1112,8 +1030,6 @@ All objects details will be displayed indicating what type of object they are (i
   Filename : 1a1872b65402461.cer
 ```
 
-<br>
-
 ### Displaying KeyStore Objects via the CLI
 
 ```
@@ -1141,8 +1057,6 @@ Type     : CERTIFICATE
 Filename : 1a1872dcb454046.cer
 ...
 ```
-
-<br>
 
 ## Set Authentication Code
 
@@ -1189,8 +1103,6 @@ Enter Choice: 3
 
 The server configuration will be updated and a backup made
 
-<br>
-
 ### Setting the Authentication Code via the CLI
 
 Use ``--server`` to set the server authentication code, ``--ctrl`` to set the server control authentication code, or both:
@@ -1206,8 +1118,6 @@ Retype the new authentication code:
 Set server.authCode, server.ctrl.authCode, encrypted with the master password. Backup saved to serverconfig.properties.2026.10.29.10.22.07.683
 Reload the server's configuration with the server control tool, or restart the server, to apply the change
 ```
-
-<br>
 
 ## Setting TLS Keystore Passwords
 
@@ -1247,8 +1157,6 @@ Proceed? (y/n): y
   The properties file ../config/serverconfig.properties has been updated successfully.
 ```
 
-<br>
-
 ### Setting TLS Keystore Passwords via the CLI
 
 Give the key store whose password is to be set:
@@ -1272,8 +1180,6 @@ Set server.restapi.tls.keyStore.password, encrypted with the master password. Ba
 Reload the server's configuration with the server control tool, or restart the server, to apply the change
 ```
 
-<br>
-
 ## REST API Users
 
 The users that may call the REST API are held in a users file, set by ``server.restapi.usersFile`` in the server properties.  The format of the file and of its signature is described in [EzSign REST API Users File](rest_api_users_properties.html).  Each user has one or more roles and one or more credentials:
@@ -1289,8 +1195,6 @@ The ``status`` permission, given on its own without a channel, allows the server
 ezsign-manage.sh ../config/serverconfig.properties roles set monitor -p status
 ezsign-manage.sh ../config/serverconfig.properties users add monitoring -d "Monitoring" -r monitor
 ```
-
-<br>
 
 ### Signing the Users File
 
@@ -1308,8 +1212,6 @@ server.restapi.usersFile.signerCerts=../config/users-admin.cer
 ```
 
 When ``signerCerts`` is set, the server only loads a users file that is signed by one of these certificates.  An unsigned, changed or older users file is refused
-
-<br>
 
 ### Managing REST API Users via the Menu
 
@@ -1435,8 +1337,6 @@ To save the changes, choose **option 13**.  The current users file is backed up,
 The signature is written to ``users.json.sig``.  Then reload the server's users with the server control tool, or restart the server
 
 **Option 16** lists the backups of previous versions and restores the one chosen.  The restored file is saved as a new version, because the server refuses a signed users file with a lower version than the one it has loaded.  The current file is backed up first, so a revert can itself be undone
-
-<br>
 
 ### Managing REST API Users via the CLI
 
@@ -1629,8 +1529,6 @@ roles set <role> -p <permission> [-p <permission>]...
 roles delete <role>
 ```
 
-<br>
-
 ### Signing on Another Machine
 
 So that the admin key can be kept off the server, the users file can be signed on another machine.  Copy ``users.json`` to that machine and run the following, which does not need the server properties file:
@@ -1647,8 +1545,6 @@ Signed users.json (version 8, 1 user(s)) with CN=EzSign Users Admin,O=Krestfield
 Then copy ``users.json`` and ``users.json.sig`` back to the server.  Passing the admin certificate with ``--trusted-cert`` checks that you are signing with the key the server trusts
 
 To change the admin key, add the new certificate to ``signerCerts`` (comma separated), sign with the new key, then remove the old certificate
-
-<br>
 
 ## Changing the Master Password
 
@@ -1682,8 +1578,6 @@ If the master password has been lost, it cannot be changed this way.  Instead, s
     2. Make this the master password (reset). The values it does not decrypt must be set again
   Choice:
 ```
-
-<br>
 
 ### Changing the Master Password via the CLI
 

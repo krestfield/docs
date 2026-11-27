@@ -7,8 +7,6 @@ grand_parent: Certdog
 
 # Teams
 
-
-
 Teams manage permissions to *Certificate Issuers*.  Users that are members of these teams inherit these permissions (in the same way as Groups and members of groups work in Active Directory)  
 
 Teams can also restrict members from specific IP Addresses (or ranges of IP Addresses) and suppress email sending to its members  
@@ -23,8 +21,6 @@ You may add, remove or edit teams as per your requirements and make users member
 
 If you have configured Active Directory (so that users can authenticate to Certdog with their domain accounts), then you can also map Active Directory groups to a team (see more below)  
 
-<br>
-
 ---
 
 ### Add a Team
@@ -33,15 +29,11 @@ Select **Teams** from the menu, click **Add New  Team**
 
 <img src=".\images\teams1.png" alt="New Team" style="zoom:80%;" />
 
-
-
 Enter a **name** and optionally, a **description**  
 
 Select the **Certificate Issuers** that you want to be available to members of this team 
 
 If you wish to make everyone in this team an administrator, select the **Administrator** option
-
-<br>
 
 **Active Directory Groups**
 
@@ -65,8 +57,6 @@ To remove a group mapping, simply select the group and click **Remove**
 
 Note: The *Domain Users* group (or whatever is configured as the Primary Group) will not be recognised. All AD users can login to Certdog once the AD Settings have been configured (even if they are not a member of any mapped groups), but they will not have access to any Certificate Issuers. To allow users to have permissions on certificate issuers, they must be added to a specific AD group (other than the primary, default group) which is mapped to a Team (as described above)
 
-<br>
-
 **OAuth Groups**
 
 If OAuth has been configured you will also see the following option:
@@ -83,15 +73,11 @@ To remove a group mapping, simply select the group and click **Remove**
 
 See [here](oauth_integration.html#map-entra-id-groups-to-certdog-teams) for details on how to configure groups in Entra ID and obtain these IDs
 
-<br>
-
 **Email Suppression**
 
 When certificates are issued, they are associated with a Team. If your [email settings](email_settings.html) are set to send emails upon certificate issuance, an email is sent to the requestor whenever a certificate is issued. If you wish to prevent these emails being sent out for this team, check the **Suppress Cert Issued Emails** option
 
 If you wish to prevent reminder emails being sent for certificates associated with this team, check the **Suppress Expiry Reminder Emails** option
-
-<br>
 
 **Permitted IPs**
 
@@ -115,8 +101,6 @@ These can be combined by separating with commas e.g.
 
 See [IP Address Restricting](ip_restricting.html) for more details
 
-
-
 Click **Add**  
 
 ---
@@ -133,15 +117,11 @@ Select the teams from the *Teams* list. Multiple teams may be selected (in windo
 
 Note that if a user is already a member of any teams their resulting permissions will be displayed beside *Current Certificate Issuers*. This view is only updated once the user has been added to a team (it will not change as you select the teams from the list)  
 
-
-
 If you wish  to change *your ow*n permissions
 
 1. Click the ![image-20210109153916067](./images/user_icon.png) icon and select **Profile**   
 
 2. Select the *Teams* you wish to be a member of 
 3. Click **Update**
-
-
 
 If a user is not a member of any Team, they will be able to logon to the system and view certificates but not request certificates nor make any changes to the system

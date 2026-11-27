@@ -15,11 +15,7 @@ An Internal (Local) CA can be revoked if it meets the following criteria:
 * It is a Subordinate CA. I.e. not a Root CA. 
   * Root CAs cannot be revoked as these CAs are self-signed. Hence, there is no issuer from where valid revocation status can be obtained.
 
-<br>
-
 CA revocation is a last resort operation, normally only employed in cases such as CA key compromise. Once performed all certificates issued under this CA will fail validation
-
-<br>
 
 When a CA is revoked, the following occurs:
 
@@ -27,11 +23,7 @@ When a CA is revoked, the following occurs:
 
 * The CA will be disabled and no further certificates can be issued from the CA.
 
-<br>
-
 <p align="center"><b>WARNING: This operation cannot be undone!</b></p>
-
-<br>
 
 ## Steps to Revoke
 
@@ -59,8 +51,6 @@ To revoke a CA perform the following steps:
 The CA is now revoked
 
 <img src="./images/image-20250605161319187.png" alt="image-20250605161319187" style="zoom:80%;" />
-
-<br>
 
 ## Final Steps
 

@@ -26,8 +26,6 @@ Before starting this guide, you will need the following
 * A running cluster with cert-manager
 * `kubectl` to deploy the issuer resource
 
-<br>
-
 ## Creating an ACME issuer
 
 To create an ACME issuer linked to Certdog, simply create a cert-manager Issuer resource with the URL of the ACME service you want to use to issue certificates
@@ -77,13 +75,9 @@ spec:
 
 See the [cert-manager documentation](https://cert-manager.io/docs/configuration/acme/) for more details.
 
-<br>
-
 ## Using the ACME issuer
 
 Certificates can be requested from the ACME issuer as with any other cert-manager issuer
-
-<br>
 
 ## Issuing certificates from an internal Certdog instance
 

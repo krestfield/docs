@@ -14,8 +14,6 @@ While attempting to export you will see the following:
 
 <img src="./images/export_private_greyed_out.png" alt="image-20211104102655013" style="zoom:80%;" />
 
-
-
 I.e. The **Yes, export the private key** is greyed out
 
 However, we can still export these keys...but we need to make use of a tool - called mimikatz that will circumvent the Microsoft protection  
@@ -23,8 +21,6 @@ However, we can still export these keys...but we need to make use of a tool - ca
 This tool is also able to obtain passwords etc. and is used as an offensive hacking tool. Widely known, everything will bark at you when attempting to download/use, including your browser and Windows Defender (and any anti-virus software) 
 
 The steps below provide details on how to temporarily disable these protections. You need administrator privileges and to be able to override your security settings. This should all be performed at your own risk. If in any doubt research the mimikatz tool and if a customer, feel free to contact [Krestfield support](mailto:support@krestfield.com) for more details or assistance  
-
-<br>
 
 ### Step 1: Obtain the Tool
 
@@ -53,8 +49,6 @@ You can still check the status of the download by right-clicking the zip and cli
 Follow the link to find out more about Mimikatz. You may see a page as follows which provides more information:
 
 <img src="./images/mimikatz_ms_info.png" alt="image-20211104110408227" style="zoom:80%;" /> 
-
-<br>
 
 ### Step 2: Run
 
@@ -146,8 +140,6 @@ mimikatz # crypto::certificates /systemstore:local_machine /store:my /export
         Private export : OK - 'local_machine_my_1_Certdog.pfx'
 ```
 
-<br>
-
 ### Step 3: Clean Up
 
 Once you have the PFX file you require 
@@ -161,4 +153,3 @@ Once you have the PFX file you require
 For peace of mind, run a scan:
 
 <img src="./images/end_scan.png" alt="image-20211104113034854" style="zoom:67%;" />
-

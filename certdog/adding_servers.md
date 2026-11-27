@@ -8,27 +8,19 @@ grand_parent: Certdog
 
 # Adding Additional Servers
 
-
-
 You may add additional servers to the base configuration for redundancy or load-balancing  
 
 The Certdog architecture essentially consists of Certdog Servers (offering API, services such as ACME and UI access) and a database  
 
 The database may be replicated to provide redundancy or you may simply add additional Certdog servers to point to the same database. For example, you may have a large server hosting the database and simply wish to add additional Certdog servers that are accessible from other networks  
 
-<br>
-
 **Note: As of version 1.16, the following steps have been superseded by the steps detailed [here](certdog_ha_config.html).**
-
-<br>
 
 ### Add Additional Certdog Servers
 
 To add an additional Certdog server you must first have configured the database with a TLS certificate which is associated with the server the database is hosted on. This is required as the default certificate is tied to localhost (127.0.0.1) so will not be accepted by a remote server  
 
 To do this, [follow the instructions here](update_the_db_certificate.html)
-
-<br>
 
 **Backup**
 
@@ -38,8 +30,6 @@ We will be making some changes to configuration files, so backup the following f
 [certdog install]\config
 [certdog install]\mongodb\bin\mongod.cfg
 ```
-
-<br>
 
 **Update Database Configuration**
 
@@ -78,8 +68,6 @@ spring.data.mongodb.uri=mongodb://certmanuser:kFW8PypSqTF10cr9Z@10.15.37.5/certm
 
 Note: You do not have to do this if you set ``bindIp to 0.0.0.0`` as this will include ``127.0.0.1``
 
-<br>
-
 **Check Firewall**
 
 From any additional servers, check you can access the primary server over port ``27017``. On Windows this can be checked by opening a Command Prompt and typing the following
@@ -89,8 +77,6 @@ telnet [primary hostname or IP Address] 27017
 ```
 
 And ensuring it connects. If it doesn't, check the primary server's firewall settings - to allow incoming connections over port ``27017`` and that the additional servers are also allowing outgoing connections to the same
-
-<br>
 
 **Configure Additional Server**
 
@@ -122,19 +108,13 @@ Or if using the FQDN:
 spring.data.mongodb.uri=mongodb://certmanuser:kFW8PypSqTF10cr9Z@server1.certdog.local/certman?tls=true
 ```
 
-<br>
-
 Now restart the Krestfield Certdog Service and ensure it starts OK and you are able to login etc. Once logged in, confirm that a change made on the primary server (e.g. issuing a certificate or adding a user) is seen on the secondary. This will confirm that both servers are using the same database
-
-<br>
 
 ### Replicate the Database
 
 The mongo DB can be replicated across several nodes. To do this, we simply copy the configuration across to the new server, install the DB as a service there, then back on the original server configure these new servers as additional nodes  
 
 Connectivity from the original server to the new server(s) over port 27017 is required for this to operate  
-
-<br>
 
 From your current installation copy the following folder:
 
@@ -143,8 +123,6 @@ From your current installation copy the following folder:
 ```
 
 To the server(s) where you wish to replicate the database to. This may be the same server as configured above, or it could be a different server
-
-<br>
 
 Open a command prompt (or shell) and navigate to:
 
@@ -159,8 +137,6 @@ mongod.exe --install --config .\mongod.cfg --serviceName "CertdogDB" --serviceDi
 ```
 
 Open the Services snapin and start the **Krestfield Certdog Database**
-
-<br>
 
 Back on the original server, remove authorisation whilst we configure the replica set
 
@@ -180,8 +156,6 @@ Commenting out the following lines (with the ``#`` character) and saving:
 ```
 
 Note: You will need sudo permissions to action this on Linux
-
-<br>
 
 Next start the mongo DB shell:
 
@@ -257,6 +231,3 @@ You should see
 ```
 
 If the setup was successful. If not, analyse the error message and verify that you have connectivity between the original server and new server over port 27017
-
-
-

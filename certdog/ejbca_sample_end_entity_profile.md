@@ -7,15 +7,9 @@ grand_parent: Certdog
 
 # EJBCA - End Entity Profile Setup  
 
-
-
 This example demonstrates how to create an End Entity profile for use with certdog
 
-
-
 ---
-
-
 
 Navigate to the EJBCA Administration console (e.g. https://myhostname:8443/ejbca/adminweb)  
 
@@ -27,8 +21,6 @@ Ensure that at least the **Common Name** subject attribute is present, but set a
 
 <img src=".\images\ejbca_ee_profile3.png" alt="image-20210208114139733" style="zoom: 67%;" />
 
-
-
 Under *Main certificate data*, select the certificate profile(s) (e.g. CERTDOG_TLS) and the CA(s) you wish to issue your certificates
 
 For available tokens, leave at the defaults  
@@ -38,4 +30,3 @@ For information, when certdog calls EJBCA, certdog creates the CSR - this requir
 <img src=".\images\ejbca_ee_profile2.png" alt="image-20210206091121351" style="zoom: 67%;" />
 
 Scroll to the bottom and click **Save**
-

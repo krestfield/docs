@@ -18,13 +18,8 @@ Certificates can be issued via the Console, REST API or PowerShell scripts. The 
 
 Certificates are managed throughout their entire lifecycle, with configurable alerts when nearing expiry and the ability to renew
 
-<br>
-
 See the [YouTube channel here](https://www.youtube.com/@krestfield) for some examples of what can be achieved
-
-<br>
 
 Need more info? Contact us at <support@krestfield.com>  
 
 Or take a look at our website: <https://www.krestfield.com/certdog>
-

@@ -10,13 +10,9 @@ keywords: ["Microsoft Teams", "webhook", "alerts"]
 
 > From Version: 1.17.0
 
-<br>
-
 Certdog can be configured to send notifications to a Teams channel using [Microsoft Teams Workflows](https://support.microsoft.com/en-us/office/overview-of-workflows-in-microsoft-teams-4998095c-8b72-4b0e-984c-f2ad39e6ba9a) using Certdog's own Workflows
 
 The following describes how to configure Certdog to send a Microsoft Teams message when a certificate is issued but the same steps will work for other events (e.g. certificate expiring)
-
-<br>
 
 ### Step 1: Create the webhook in Teams
 
@@ -39,8 +35,6 @@ Click **Save**
 <img src="./images/image-20260513103424764.png" alt="image-20260513103424764" style="zoom:67%;" />
 
 The webhook will be created. Click the **Copy webhook link** and save to a text file as we'll need it in the following steps
-
-<br>
 
 ## 2. Create a Certdog Workflow
 
@@ -74,8 +68,6 @@ When a certificate is issued, a Teams message will then be sent e.g.
 
 <img src="./images/image-20260625114133258.png" alt="image-20260625114133258" style="zoom:80%;" />
 
-<br>
-
 For more control, for *Template*, **None** can be selected. In this case a raw message must be entered, formatted as per the [Microsoft Connector Documentation](https://learn.microsoft.com/en-us/connectors/teams/?tabs=text1%2Cdotnet#microsoft-teams-webhook)  
 
 An example using this option, that will result in the same Teams message being sent is given below:
@@ -102,8 +94,6 @@ Certdog."
   }]
 }
 ```
-
-<br>
 
 You can also include more advanced formatting options using Microsoft Adaptive Cards. See [Adaptive Cards Documentation](https://adaptivecards.microsoft.com/) for full details. Microsoft provides a [Designer](https://adaptivecards.microsoft.com/designer.html), that can be used to create more elaborate cards.
 
@@ -154,8 +144,6 @@ On execution this will produce a Teams post as follows:
 
 <img src="./images/image-20260625121015513.png" alt="image-20260625121015513" style="zoom:80%;" />
 
-<br>
-
 ## 3. Test Your Workflow
 
 To test your workflow, simply carry out the action matching the workflow's trigger (such as issuing a certificate)
@@ -175,4 +163,3 @@ Note, if using Adaptive cards and the version is not changed to 1.4. No error wi
 <img src="./images/image-20260625130026429.png" alt="image-20260625130026429" style="zoom:80%;" />
 
 Due to Teams not understanding the version
-

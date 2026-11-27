@@ -6,11 +6,7 @@ nav_order: 10
 grand_parent: EzSign
 ---
 
-
-
 # EzSign Installation & Configuration
-
-<br>
 
 Follow these links for instructions:
 
@@ -28,8 +24,6 @@ Follow these links for instructions:
 
 [Control](ezsign_control.html)
 
-<br>
-
 The following documents are also available by clicking the links:
 
 * [EzSignV4.2.1InstallationandConfigurationGuide.pdf](https://krestfield.s3.eu-west-2.amazonaws.com/EzSignV4.2.1InstallationandConfigurationGuide.pdf)
@@ -38,13 +32,4 @@ The following documents are also available by clicking the links:
 
 * [EzSignDotNetClientIntegrationGuideV4.0.pdf](https://krestfield.s3.eu-west-2.amazonaws.com/EzSignDotNetClientIntegrationGuideV4.0.pdf)
 
-
-
-
-
-
-
-
-
 For more information contact Krestfield Support: [support@krestfield.com](mailto:support@krestfield.com)
-

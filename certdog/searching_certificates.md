@@ -10,8 +10,6 @@ The default *Certificates* view shows all certificates issued in the last day. Y
 
 ![image-20210122133824835](./images/search_headings.png)
 
-
-
 For more advanced searches, click the Certificate Search bar:  
 
 ![image-20210122133945462](./images/search_bar.png)
@@ -26,8 +24,6 @@ The other items will always be included in the search but if left empty (or set 
 
 The resulting query is an **AND** of all items (not an **OR**). For example, if  you selected *expiring in the next 5 days* and *subject contains CN=test* the search would be for all certificates that are expiring in the next 5 days that have a subject with contains *CN=test*  
 
-
-
 ### Examples
 
 * Certificates expiring in the next 5 days:
@@ -38,13 +34,9 @@ The resulting query is an **AND** of all items (not an **OR**). For example, if 
 
 ​      Choose 5 days from the drop down and click Search
 
-
-
 * Certificates issued by the issuer **CN=Certdog Test CA,O=Krestfield** with a subject containing **CN=mydomain**
 
 <img src=".\images\issuer_and_subject_filter.png" alt="image-20210122135124788" style="zoom:67%;" />
-
-
 
 * Certificate Expiring in 2023
 
@@ -53,8 +45,6 @@ The resulting query is an **AND** of all items (not an **OR**). For example, if 
 ​      Check **Expiring between** and set the dates as follows
 
 ![image-20210122135430648](./images/expiring_2023.png)
-
-
 
 ## Saving Searches
 

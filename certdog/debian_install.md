@@ -6,9 +6,7 @@ nav_order: 40
 grand_parent: Certdog
 ---
 
-# Certdog Debian Installation <br>
-
-<br>
+# Certdog Debian Installation
 
 ## Pre-Requisites
 
@@ -18,11 +16,7 @@ grand_parent: Certdog
 
 * The ability to install mongodb community edition
 
-  
-
 It is recommended that a separate, dedicated user be created which will run the certdog application, although it can be run under an existing account
-
-<br>
 
 ## Install Mongo DB
 
@@ -38,8 +32,6 @@ mongosh
 
 and ensure you connect and get the mongo db prompt. Type ``exit``, to exit the prompt
 
-<br>
-
 ## Get Certdog
 
 1. Download Certdog from [here](https://krestfield.s3.dualstack.eu-west-2.amazonaws.com/certdog/debian/certdog-free-linux-v1.17.tar.gz)
@@ -53,8 +45,6 @@ e.g.
 ```shell
 curl https://krestfield.s3.dualstack.eu-west-2.amazonaws.com/certdog/debian/certdog-free-linux-v1.17.tar.gz --output certdog.tar.gz
 ```
-
-<br>
 
 ## Installation
 
@@ -102,15 +92,11 @@ Other logs, including the mongodb, application (certdog.log) and startup/shutdow
 ./certdog/logs
 ```
 
-<br>
-
 If all is good you can navigate to the console from the same machine at: [https://127.0.0.1:1443](https://127.0.0.1:1443) -  **NOTE the 1443 port**
 
 Accept any TLS browser errors that will be present which will occur due to the default, initial TLS certificate.
 
 ---
-
-<br>
 
 #### Allowing External Access over Standard Ports
 
@@ -129,8 +115,6 @@ This will redirect incoming traffic on port 443 to the internal 1443 port and po
 
 Note: If the ``iptables`` command is not available, you can install using ``sudo apt-get install iptables``
 
-<br>
-
 You may need to open firewall rules to allow ports 80 and 443, e.g.
 
 ```
@@ -138,8 +122,6 @@ sudo iptables -I INPUT -p tcp -m tcp --dport 443 -j ACCEPT
 sudo iptables -I INPUT -p tcp -m tcp --dport 80 -j ACCEPT
 sudo iptables-save
 ```
-
-<br>
 
 To confirm that the application is listening on ports 1443 and 1480, you may use 
 
@@ -160,8 +142,6 @@ tcp6       0      0 :::1443                 :::*                    LISTEN      
 
 Which indicates port 1443 is listening in all interfaces
 
-<br>
-
 Note that on Debian, iptables may not be persisted at reboots. After running the above commands you can persist the changes across reboots by installing the iptables-persistent package, as follows:
 
 ```
@@ -177,11 +157,7 @@ sudo apt-get purge iptables-persistent
 
 Then make the iptables updates and re-install
 
-<br>
-
 Enable any other firewall rules that may be in place to allow ports 80 and 443 to the server e.g. in Azure Networking or AWS Security Groups
-
-<br>
 
 ## Post Install
 
@@ -199,11 +175,7 @@ You will observe a browser SSL error which is due to the initial default SSL cer
 
 Login with the initial username and password as displayed at the end of the installer. These are temporary credentials - as soon as you first login with these details you will be forced to set a new password
 
-<br>
-
 Next follow the [Post Install Steps](post-Installation.html) to complete the initial configuration  
-
-
 
 ## Starting/Stopping
 
@@ -220,16 +192,12 @@ There are two scripts:
 
 You may examine these scripts, or configure such that the application starts on boot following standard processes for your OS
 
-<br>
-
 To start and stop the mongo database you may use the following commands:
 
 ```
 sudo systemctl start mongod
 sudo systemctl stop mongod
 ```
-
-
 
 ### Start on Boot
 
@@ -253,8 +221,6 @@ Then enter the following line (after the comments and any other cron entries):
 
 (replace the ``/home/certdoguser`` location with wherever your installation resides)
 
-<br>
-
 ## Troubleshooting/Re-install
 
 Examine the log files as mentioned above  to see if anything obvious appears  
@@ -262,8 +228,6 @@ Examine the log files as mentioned above  to see if anything obvious appears
 Attempt to stop and start certdog using the ``./shutdown-certdog.sh`` and ``start-certdog.sh`` scripts  
 
 Try restarting the database then restarting certdog  
-
-
 
 To attempt a re-install, perform the following:
 
@@ -284,8 +248,6 @@ db.dropDatabase()
 exit
 ```
 
-
-
 Remove the files created within the install:
 
 ```
@@ -295,8 +257,6 @@ rm -f MASTERPASSWORD.txt
 rm -f application.properties
 rm -f ./pwd/*
 ```
-
-
 
 Ensure no rogue processes are running, such as java:
 
@@ -310,10 +270,6 @@ And for each entry, kill the process, forcibly:
 kill -9 [Process ID]
 ```
 
-
-
 Then from the ``install`` directory, re-run the ``./configure.sh`` script
-
-<br>
 
 Full Certdog Documentation can be found here: [https://krestfield.github.io/docs/certdog/certdog.html](https://krestfield.github.io/docs/certdog/certdog.html)

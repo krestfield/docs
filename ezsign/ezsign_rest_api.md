@@ -9,15 +9,11 @@ keywords: ["HTTP", "JSON"]
 
 # REST API
 
-<br>
-
 From version 4.6.0 the EzSign Server can offer a REST API alongside the socket interface.  Applications can sign, verify, encrypt, decrypt and generate random data by calling the server over HTTPS with JSON, without the EzSign client
 
 The REST API runs inside the server process.  No separate web server or additional software is needed
 
 **[Open the REST API Reference](rest-api/index.html)** for every endpoint, request and response field, error code and example.  The reference can also be downloaded as an [OpenAPI 3.1 file](rest-api/openapi.yaml), which can be imported into Postman, Swagger Editor or other OpenAPI tools
-
-<br>
 
 ## Endpoints
 
@@ -35,8 +31,6 @@ The REST API runs inside the server process.  No separate web server or addition
 Request and response bodies are JSON, with binary values (data, signatures and certificates) base64 encoded.  Requests must have the header ``Content-Type: application/json``
 
 Every response includes an ``X-Transaction-Id`` header.  The same ID is written to the server log, so a request can be traced from the client to the server
-
-<br>
 
 ## Enabling the REST API
 
@@ -63,8 +57,6 @@ The REST API is configured in the server properties file:
 
 Client certificates are only checked against the configured trust store, never the Java ``cacerts`` file
 
-<br>
-
 ## Authentication and Permissions
 
 Each request is authenticated with either:
@@ -73,8 +65,6 @@ Each request is authenticated with either:
 * **A TLS client certificate** - presented when the connection is made.  The certificate must be issued by a CA in the server's trust store
 
 The users, their API tokens and certificates, and their roles are held in the users file and managed with the [Management Tool](ezsign_management_tool.html).  A user's permissions are those of their roles.  A permission takes the form ``operation:channel/NAME`` e.g. ``sign:channel/FINANCE`` or ``verify:channel/*``
-
-<br>
 
 ## Example
 
@@ -101,8 +91,6 @@ If the request fails, the response contains an error code and message, e.g.
 ```
 
 The error codes are listed in the [REST API Reference](rest-api/index.html)
-
-<br>
 
 ## Java Applications
 

@@ -6,17 +6,11 @@ grand_parent: Certdog
 ---
 # Running a Microsoft Cert Store Scan
 
-  <br>
-
 Certificates can be discovered and imported into the certdog inventory from Microsoft Machine Certificate Stores. This enables searching and expiry monitoring of those certificates. This can also assist with locating unknown or unexpected certificates (including self-signed instances).
 
 The scan operates via a PowerShell script that can be run within your own infrastructure. The script requires no special privileges to run and it will perform the scan and upload discovered certificates to certdog. 
 
-<br>
-
 You may run this script from multiple machines and multiple times. Certificates already imported into certdog will not be re-imported.
-
-<br>
 
 ## Overview of Operation
 
@@ -26,8 +20,6 @@ The servers to be scanned can be provided as a list, or the script can pull out 
 
 The script then makes a rest API call on the certdog server, to import each of the discovered certificates. The certificates are associated with a certdog user and team. Additional information can be stored with the imported certificates.
 
-<br>
-
 ## Pre-Requisites
 
 * A server in your environment that has access to the end points you wish to scan
@@ -36,8 +28,6 @@ The script then makes a rest API call on the certdog server, to import each of t
 * The server must be able to communicate with servers being scanned over the WinRM ports (5985 or 5986 if using SSL)
 * The server must have access to the certdog server over port 443
 * The ability to download and run the PowerShell script
-
-<br>
 
 The script will require the following information:
 
@@ -56,13 +46,7 @@ The script will require the following information:
   - The details of the **OU in Active Directory** to scan
     - If neither the server names or the OU are provided, the script will scan all machines registered in Active Directory
 
-
-
 We will see how to obtain these values in the next section.
-
-<br>
-
-<br>
 
 ## Quick Start
 
@@ -99,13 +83,7 @@ Run the script:
 .\ms-keystore-scan.ps1
 ```
 
-<br>
-
 Continue reading for detailed information on setting up these details.
-
-<br>
-
-<br>
 
 ## Certdog Setup
 
@@ -115,8 +93,6 @@ Either choose an existing user or create a new user for this specific purpose. F
 
 To setup a dedicated user and team, follow Appendix A below.   
 
-<br>
-
 #### Obtain the User and Team ID
 
 From certdog, as an Administrator, navigate to **Users** under the *ADMINISTRATION* section. Select the chosen user and click **View/Edit**. 
@@ -124,8 +100,6 @@ From certdog, as an Administrator, navigate to **Users** under the *ADMINISTRATI
 The user ID is displayed. You can click to copy this value.
 
 <img src="./images/copy_user_id.png" alt="image-20250314115834215" style="zoom: 67%;" />
-
-
 
 For older versions (1.11 and earlier) the URL in the browser will contain the ID. This is the number at the end of the URL. 
 
@@ -143,10 +117,6 @@ Do the same for the Team you wish the certificates to be associated with. Note: 
 
 You can also use the PowerShell module to obtain the user and team IDs. See [Appendix C]()
 
-<br>
-
-<br>
-
 #### Obtain an API Token
 
 As an Administrator navigate to **Users** under the *ADMINISTRATION* section. Select the chosen user and click **View/Edit**. 
@@ -159,17 +129,9 @@ Retain the value as it will be required by the PowerShell script.
 
 <img src="./images/image-20250314163205098.png" alt="image-20250314163205098" style="zoom:67%;" />
 
-<br>
-
-<br>
-
 #### Certdog Server Name
 
 This is simply the hostname or IP Address where the certdog server resides. E.g. ``certdog.krestfield.local`` or ``192.168.55.42`` 
-
-<br>
-
-<br>
 
 ## Running the Script
 
@@ -217,8 +179,6 @@ Details stored. The script will use these credentials when it is next run.
 
 Note that credentials are secured under the same account running the ``-setCredentials`` command. Therefore only that account can access the credentials. I.e. the same account must be used to set the credentials as running the command in the future.  
 
-
-
 #### Script Parameters
 
 The script requires the following parameters
@@ -261,11 +221,6 @@ The script requires the following parameters
 
   - If credentials are not stored locally (as described in the previous section) the API key must be provided via this parameter (or extracted from settings.json - see below)
 
-
-
-
-
-
 #### settings.json
 
 You may provide the settings mentioned above by creating a ``settings.json`` file.  
@@ -286,13 +241,9 @@ To do this, create a file as follows and save as ``settings.json`` at the same l
 }
 ```
 
-
-
 The script can then be run without any need to pass these parameters. However, if any parameters are provided they take precedence over any provided in the ``settings.json`` file.
 
 Note: That ``certdogApiToken`` is the credential that allows access to the CertDog API. If you have used the ``-setCredentials`` option then this does not need to be provided here (nor as a parameter) and it will be securely stored, locally. If present in this file (or provided as a parameter) ensure access to it is restricted. 
-
-
 
 ### Examples
 
@@ -308,8 +259,6 @@ But any parameters can be overridden. E.g. to alter only the extraInfo data:
 .\get-remote-certs.ps1 -extraInfo "Second scan of Microsoft Keystores"
 ```
 
-  
-
 If no settings.json file has been configured, then at a minimum the ``certdogServer``, ``userId`` and ``teamId`` parameters are required. E.g.:
 
 ```powershell
@@ -318,25 +267,17 @@ If no settings.json file has been configured, then at a minimum the ``certdogSer
 
 In this example, all servers that can be retrieved from Active Directory will be scanned.
 
-
-
 To scan a specific set of servers, provide the ``scanTestServers`` parameter. E.g.
 
 ```powershell
 .\get-remote-certs.ps1 -scanTheseServers @("s1.k.local", "s2.kd.local", "s10.k.local")
 ```
 
-
-
 To ignore SSL errors 
 
 ```powershell
 .\get-remote-certs.ps1 -ignoreSslErrors
 ```
-
-
-
-
 
 To view the servers that would be scanned
 
@@ -347,8 +288,6 @@ To view the servers that would be scanned
 ```powershell
 .\get-remote-certs.ps1 -scanThisOU "OU=VACluster,OU=Machines,OU=PKI,DC=krestfield,DC=local" -getServerList
 ```
-
-
 
 Passing parameters:
 
@@ -362,8 +301,6 @@ Passing parameters:
 	-ignoreSslErrors
 	-useTls
 ```
-
-<br>
 
 ## Logging
 
@@ -382,10 +319,6 @@ E.g.
 
 The log.txt file contains errors and event information from the run. The failed-servers.txt file contains a list of all servers that could not be contacted and hence, no certificates could be extracted. These servers may be offline or there may be network connectivity issues. The script could be re-run against these specific servers if required.
 
-<br>
-
-<br>
-
 ### Appendix A: Creating a dedicated User and Team
 
 See here: [https://krestfield.github.io/docs/certdog/teams.html](https://krestfield.github.io/docs/certdog/teams.html) for details on how to add a new team.  
@@ -394,19 +327,11 @@ Do not set the team to be an Administrator and there is no need to specify any C
 
 See here: [https://krestfield.github.io/docs/certdog/users.html](https://krestfield.github.io/docs/certdog/users.html) for details on how to add a new user. Add this user to the team created above. 
 
-<br>
-
-<br>
-
 ### Appendix B: Installing PowerShell on Non-Microsoft Operating Systems
 
 Instructions on how to install PowerShell on other operating systems can be found here:
 
 https://learn.microsoft.com/en-us/powershell/scripting/install/installing-powershell?view=powershell-7.4
-
-<br>
-
-<br>
 
 ### Appendix C: User and Team IDs
 
@@ -455,4 +380,3 @@ ipWhiteList            :
 ```
 
 The IDs are displayed.
-

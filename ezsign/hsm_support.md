@@ -7,19 +7,13 @@ grand_parent: EzSign
 keywords: ["Hardware Security Module", "PKCS11", "Thales Luna", "Entrust nShield"]
 ---
 
-
-
 # EzSign Key Store and HSM Support
 
 > From version 4.2.1
 
 Note: For previous versions contact [support](mailto:support@krestfield.com)
 
-
-
 EzSign supports the following HSMs and Key Stores:
-
-
 
 ### Via the PKCS#11 Interface
 
@@ -56,9 +50,6 @@ The following HSMs are supported via the [pkcs#11](http://docs.oasis-open.org/pk
 
     *Tested: YubiHSM 2 FIPS*
 
-
-
-
 ### Bespoke Interfaces
 
 - Google KMS
@@ -75,10 +66,6 @@ The following HSMs are supported via the [pkcs#11](http://docs.oasis-open.org/pk
 
     *Tested: payShield 10k*
     
-    
-
 Refer to the installation and configuration guide for details on configuring EzSign for these key stores
 
 Note that the tested instances are confirmed. Backwards compatibility should be maintained by the vendors for the PKCS#11 interface for later versions
-
-

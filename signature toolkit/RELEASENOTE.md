@@ -9,19 +9,14 @@ nav_order: 1
 
 ### Signature Toolkit  
 
-
-
 Support: [support@krestfield.com](mailto:support@krestfield.com)
 
 Web: [https://www.krestfield.com](https://www.krestfield.com)
 
 ---
 
-
 > **Version 2.0.0**
 > **Release Date**: 12th November 2026
-
-<br>
 
 **Updates**
 
@@ -44,8 +39,6 @@ Web: [https://www.krestfield.com](https://www.krestfield.com)
 * The ASN.1 view is now built in and names the object identifiers it recognises
 
 * New installer. Installing replaces any earlier version
-  <br>
-  
 
 **Fixes** 
 
@@ -55,70 +48,46 @@ Web: [https://www.krestfield.com](https://www.krestfield.com)
 * Signatures produced by some older signing products and smart cards, which previously failed to verify, are now verified
 * A successful CRL signature verification is now reported
 * Files are opened based on their content, whatever their file extension
-<br>
 
 **Changes**
 
 * Verifying a signature checks that it is cryptographically valid. Certificate trust is no longer evaluated as part of verification; use the Certificate Path display to inspect the certificate chain
 * Issuer certificates are no longer downloaded from AIA (Authority Information Access) locations when building certificate paths
-<br>
-
 
 ---
 
-
 > **Version 1.5.0**
 > **Release Date**: 12th January 2024
-
-
 
 **Updates**
 
 * None
   
-
-
-
 **Fixes** 
 
 * ASN1 view failed if data was not imported as binary. Now works for Base64 and HEX
 
-
-
 ---
-
 
 > **Version 1.4.0**
 > **Release Date**: 23rd June 2022
-
-
 
 **Updates**
 
 * .NET Framework increased to 4.8
   
-
-
-
 **Fixes** 
 
 * Improved CSR generation
 
-
-
 ---
-
 
 > **Version 1.3.9**
 > **Release Date**: 10th February 2021
 
-
-
 **Updates**
 
 * .NET Framework increased to 4.7.2
-
-
 
 **Fixes** 
 
@@ -126,14 +95,10 @@ Web: [https://www.krestfield.com](https://www.krestfield.com)
 * Corrected issue showing NULL when no key usage specified in a certificate
 * Corrected an ASN1 generation issue - where this would fail if data had been pasted in 
 
-
-
 ---
 
 > **Version 1.3.8**
 > **Release Date**: 17th November 2016
-
-
 
 **Updates**
 
@@ -145,32 +110,19 @@ Web: [https://www.krestfield.com](https://www.krestfield.com)
 
 * Removed the license tool
 
-  
-
 **Fixes** 
 
 * None
-
-
 
 ---
 
 > **Version 1.3.6**
 > **Release Date**: 30th November 2015
 
-
-
 **Updates**
 
 * First official release
 
-  
-
 **Fixes** 
 
 * None
-
-
-
-  <br>
-

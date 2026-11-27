@@ -9,8 +9,6 @@ keywords: ["upgrade", "update", "4.6.0"]
 
 # Upgrading to EzSign 4.6
 
-<br>
-
 Version 4.6.0 makes signature verification and revocation checking follow the standards (RFC 5280 for certificates, RFC 6960 for OCSP) more closely. As a result, some signatures, certificates, CRLs or OCSP responses that were accepted before may now be refused. This page lists the issues you are most likely to see after upgrading, the error you will see, and what to do
 
 Each new check can be switched off with a setting in the server properties file. Before switching a check off, consider why it failed: the check is there because accepting the certificate or response carries a risk. Switching a check off is a decision for your organisation. The risks of each are described in [Certificate Path Checking](ezsign_server.html#the-risks-of-relaxing-these-checks)
@@ -19,15 +17,11 @@ In the settings below, replace ``channel.1`` with the number of your channel
 
 This page will be updated as more is learnt from upgrades
 
-<br>
-
 ## Before upgrading
 
 * **Replace the whole ``EzSignServer/lib`` folder** with the new one. Do not copy the new jars into the existing folder (see [Jar or class errors](#jar-or-class-errors) below)
 * Keep a copy of your current properties file and ``lib`` folder, so you can go back if needed
 * Test signature verification with a sample of your real signatures and certificates before upgrading production. Most of the issues below show up the first time a signature is verified
-
-<br>
 
 ## Jar or class errors
 
@@ -56,8 +50,6 @@ To stop the server starting at all when there is a conflict, set:
 server.failOnClasspathConflicts=true
 ```
 
-<br>
-
 ## Signer certificates with an extended key usage that does not permit signing
 
 **What you see**
@@ -84,8 +76,6 @@ channel.1.verify.relaxExtendedKeyUsageChecks=true
 
 See [Allowed extended key usages](ezsign_server.html#allowed-extended-key-usages)
 
-<br>
-
 ## Certificates with a critical extension EzSign does not process
 
 **What you see**
@@ -110,8 +100,6 @@ channel.1.verify.relaxCriticalExtensionChecks=true
 
 See [Allowed critical extensions](ezsign_server.html#allowed-critical-extensions)
 
-<br>
-
 ## Certificates that break a CA's name constraints
 
 **What you see**
@@ -128,8 +116,6 @@ The certificate CN=... breaks the name constraints of its issuing CA. ... Set re
 channel.1.verify.relaxNameConstraints=true
 ```
 
-<br>
-
 ## A CA certificate used as the signer
 
 **What you see**
@@ -145,8 +131,6 @@ The signer certificate CN=... is a CA certificate (basic constraints CA is true)
 ```
 channel.1.verify.relaxCaSignerCheck=true
 ```
-
-<br>
 
 ## CRL problems
 
@@ -177,8 +161,6 @@ CRL obtained was not valid.  It expired on ... Allow expired CRLs is true but th
 ```
 
 Before 4.6.0, when ``allowExpiredCrl=true`` was set, **any** expired CRL was accepted, however long ago it expired, because of a bug in the check. ``allowExpiredCrlForDays`` is now applied correctly. If you see this error, the CRL has been out of date for longer than you allowed: fix the CRL publication, or (temporarily) increase the number of days
-
-<br>
 
 ## OCSP problems
 
@@ -216,8 +198,6 @@ Before 4.6.0, setting ``checkOcspSigningCertUsage=true`` also refused responses 
 
 Before 4.6.0, ``ignoreSSLErrors=true`` on an OCSP or CRL checker changed the TLS settings for the whole Java process, so it also (silently) applied to every other HTTPS connection, including other channels. It now only applies to that checker's own connections. If another channel's OCSP or CRL downloads start failing with TLS certificate errors after the upgrade, they were relying on this side effect: set ``ignoreSSLErrors`` on that channel too, or better, trust the server's certificate
 
-<br>
-
 ## Signatures that are now refused
 
 **Raw signatures using SHA-1 or MD5**
@@ -232,8 +212,6 @@ The hash used in raw RSA signatures was not checked before. It is now checked as
 channel.1.verify.denyWeakSignatureHash=false
 ```
 
-<br>
-
 ## Server and socket interface changes
 
 These do not need any action, but may be noticed:
@@ -242,6 +220,3 @@ These do not need any action, but may be noticed:
 * **Large messages are refused** - messages longer than ``server.maxMessageSize`` (64M characters, about 48MB of data) are refused with an error. Increase the setting if you send larger data
 * **An empty allowed address list now allows every client** - if ``server.allowedSourceIpAddresses`` is present but empty, every client can connect (as when it is omitted). Before 4.6.0 an empty value refused every client. IPv6 addresses in the list now also work
 * **Clients receive error replies** - some errors (e.g. a request that could not be parsed) used to close the connection without a reply. The client now receives the error. Existing clients handle this without changes
-
-<br>
-

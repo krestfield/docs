@@ -7,8 +7,6 @@ keywords: ["ADCS", "AD CS", "Microsoft CA", "Active Directory Certificate Servic
 ---
 # Create an ADCS Certificate Issuer
 
-  
-
 This guide describes how to create a Certificate Issuer for a Microsoft ADCS (Active Directory Certificate Services) instance  
 
 A Certificate Issuer ties the following configuration items together, such that a user can then request certificates by just specifying the Issuer name:  
@@ -20,11 +18,7 @@ A Certificate Issuer ties the following configuration items together, such that 
 4. An ADCS Instance  
    The actual Microsoft CA instance that will issue the certificate
 
-  
-
 Once these items have been configured as a Certificate Issuer, users with permissions may then request certificates from the UI or API  
-
-
 
 ### Pre-Requisites
 
@@ -41,8 +35,6 @@ Once these items have been configured as a Certificate Issuer, users with permis
 
    If the certdog system is all installed on the same machine, this will be in place. If you have installed the ADCS Driver separately, you need to ensure that port 27017 (the default database port) is open. Refer to the [ADCS Driver](adcsdriver.html)  document for further details
 
-<br>
-
 ### 1. Create a Credential
 
    Skip this step if you already have a credential created.  If not, follow the guide on creating a credential [here](credentials.html)  
@@ -50,8 +42,6 @@ Once these items have been configured as a Certificate Issuer, users with permis
    The credential you create must be for an account that has the correct permissions on the CA and template. See [Setting Microsoft ADCS Template Permissions](https://krestfield.github.io/docs/pki/setting_adcs_template_permissions.html)  
 
    The account should also be a service account. See [here](https://krestfield.github.io/docs/certdog/configure_logon_as_a_service.html) for details on assigning the correct permissions for a service account  
-
-<br>
 
 ### 2. Create a Certificate Issuer
 
@@ -72,7 +62,6 @@ Enter a **Name** for this issuer - this will be the name referenced when request
 Enter the CA **Configuration**. This is the value returned for Config when ``certutil`` is run on a machine in the same domain as the CA. E.g. Opening a command prompt and typing ``certutil`` will return something like the following:  
 
 ![image-20210620094957527](./images/ms-ca-certutil.png)
-
 
 In this case the value that would be entered for **Configuration** is ``IssuingCA.int.krestfield.com\Krestfield CA``  
 
@@ -107,4 +96,3 @@ The Certificate Issuer is now ready to issue certificates. Selecting one of the 
 If you do not see the Issuer as an option, check that you are a member of the Team that has access. See [here](teams.html) for more information on managing teams
 
 If you wish to request a certificate by just providing a DN i.e. with certdog generating the CSR on your behalf, then a *CSR Generator* must also be available. See [Create a CSR Generator](create_csr_generator.html) for more details
-

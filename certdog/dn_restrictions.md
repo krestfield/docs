@@ -7,21 +7,13 @@ grand_parent: Certdog
 
 # Certdog - DN Restrictions
 
-
-
 > From version 1.9
-
-
 
 The requested DN (Distinguished Name) can be restricted such that only permitted DNs can be issued from a Certificate Issuer  
 
 A DN Restriction can be created which will include rules such as what domain names can be requested or which country codes are permitted etc. These restrictions can then be applied to one or more Certificate Issuers  
 
-
-
 To create a DN Restriction, click on the **DN Restrictions** menu item and click **Add New DN Restriction**  
-
-
 
 Enter a name for the restriction set  
 

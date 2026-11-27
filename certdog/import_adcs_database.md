@@ -20,8 +20,6 @@ You may wish to do this for reasons such as:
 
 * As part of a migration of ADCS to Certdog (where you are also importing the ADCS keys into Certdog)
 
-<br>
-
 ### Quick Overview
 
 Export the certificates from the Microsoft CA to a file by running the following script from a command prompt:
@@ -45,16 +43,9 @@ PS C:\> Import-Module .\certdog-module.psm1
 PS C:\> login
 ```
 
-
 Then run commands such as ``users`` (to obtain the ``ownerId``), ``teams``(to obtain the ``teamId``) and ``cas`` (to obtain the ``certIssuerId``)
 
-<br>
-
-<br>
-
 For a more in-depth explanation keep reading...
-
-<br>
 
 ### Step 1 - Prepare for the import
 
@@ -74,8 +65,6 @@ You can read how to manage users [here](users.html)
 
 The import into Certdog itself will require an Certdog administrator account
 
-
-
 **NOTE:** If the import is part of an ADCS migration, in that you are also importing the CA keys and you wish to be able to revoke these certificates and ensure that those already revoked will appear in any generated CRLs. Then, you must have first performed the following:
 
 * Imported the CA keys into Certdog following the guide here
@@ -83,8 +72,6 @@ The import into Certdog itself will require an Certdog administrator account
 * Created an Issuer from this CA
 
 This will then create the link from the certificates to the issuer
-
-<br>
 
 ### Step 2 - Export from the Microsoft CA
 
@@ -103,8 +90,6 @@ To obtain the value for ``server\ca name``, from a command prompt run ``certutil
 Extract the ``certs.txt`` file (or whatever you decided to call it) as this must then be transferred to the Certdog instance
 
 Note, for instances that contain a large number of certificates, this may take a while to complete. It could impact the performance of the CA so if this will be an issue, run when the impact will be minimal
-
-<br>
 
 You may export the database in chunks if preferred. This can be achieved by altering this section of the command:
 
@@ -134,8 +119,6 @@ Which would export the next 1000. Then
 
 Would export the next 1000. And so on. This operation could be scripted
 
-<br>
-
 You may also export based on validFrom dates. For example, if you only wanted to export certificates issued from a certain date (e.g. yesterday) you would set this property as:
 
 ```powershell
@@ -145,8 +128,6 @@ You may also export based on validFrom dates. For example, if you only wanted to
 A command such as this could be run every day, incrementing the date. Each export could then be imported into Certdog
 
 Just note, that the date format must match what your CA is configured for. E.g. this may be UK (day/month/year) or US (month/day/year) etc.
-
-<br>
 
 ### Step 3 - Import into Certdog
 
@@ -192,8 +173,6 @@ As the time ends with AM it is a 12  hour format. If there is no AM or PM the ti
 
 If it is not clear what the format is e.g. you have a data such as ``1/2/2022`` check other entries in the file for a hint. Otherwise, it is quite likely the CA will follow your local format (e.g. if you are US based, it will likely be using a US format)
 
-<br>
-
 <u>Run the Script</u>
 
 On the machine where Certdog is installed, open a PowerShell window as Administrator  
@@ -201,8 +180,6 @@ On the machine where Certdog is installed, open a PowerShell window as Administr
 Navigate to the ``[certdog installation]\bin\utils`` directory e.g. ``c:\certdog\bin\utils``
 
 Copy the exported certificates file (``certs.txt`` in the example above) to this directory  
-
-<br>
 
 We will be using the ``import-adcs-certs.ps1`` script to import the certificates contained in the ``certs.txt`` file into Certdog. This script has the following parameters:
 
@@ -276,8 +253,6 @@ We will be using the ``import-adcs-certs.ps1`` script to import the certificates
 
   * Specifying this switch parses the cert import file but does not import into Certdog. This can be used to verify the file is correct and how many entries it contains
 
-<br>
-
 **Examples**
 
 Import all certificates contained in the ``certs.txt`` file. Associating them with the owner, team and cert issuer whose IDs are specified:
@@ -286,15 +261,11 @@ Import all certificates contained in the ``certs.txt`` file. Associating them wi
 .\import-adcs-certs.ps1 -certsFilename certs.txt -ownerId 6131fe2fb6b0c54c13c59935 -teamId 617aae4d91b6ab12b829237f -certIssuerId 617a6c684eaeb271fa97d556 -username certdogadmin -password password -dateFormat UK -timeFormat 24
 ```
 
-  
-
 As above but start processing from row 200
 
 ```powershell
 .\import-adcs-certs.ps1 -certsFilename certs.txt -ownerId 6131fe2fb6b0c54c13c59935 -teamId 617aae4d91b6ab12b829237f -certIssuerId 617a6c684eaeb271fa97d556 -username certdogadmin -password password -fromLastNum 200 -dateFormat UK -timeFormat 24
 ```
-
-  
 
 If the script had been run previously then a new ``certs.txt`` file was generated containing additional certificates. We can just import the new entries by providing the ``-fromLastRow`` switch:
 
@@ -302,15 +273,11 @@ If the script had been run previously then a new ``certs.txt`` file was generate
 .\import-adcs-certs.ps1 -certsFilename certs.txt -ownerId 6131fe2fb6b0c54c13c59935 -teamId 617aae4d91b6ab12b829237f -certIssuerId 617a6c684eaeb271fa97d556 -username certdogadmin -password password -fromLastRow -dateFormat UK -timeFormat 24
 ```
 
-
-
 Only import certs that have been issued by the Web Server template:
 
 ```powershell
 .\import-adcs-certs.ps1 -certsFilename certs.txt -ownerId 6131fe2fb6b0c54c13c59935 -teamId 617aae4d91b6ab12b829237f -certIssuerId 617a6c684eaeb271fa97d556 -username certdogadmin -password password -template "Web Server" -dateFormat UK -timeFormat 24
 ```
-
-  
 
 Save credentials
 
@@ -318,17 +285,11 @@ Save credentials
 .\import-adcs-certs.ps1 -saveCreds
 ```
 
-  
-
 Run the script with these saved credentials:
 
 ```powershell
 .\import-adcs-certs.ps1 -certsFilename certs.txt -ownerId 6131fe2fb6b0c54c13c59935 -teamId 617aae4d91b6ab12b829237f -certIssuerId 617a6c684eaeb271fa97d556 -issuerId 1631fe2ef6b6c54c34c56530 -useSavedCreds -dateFormat UK -timeFormat 24
 ```
-
-<br>
-
-<br>
 
 **Script Execution**
 
@@ -382,16 +343,12 @@ PBEc8JdAbTIsmw==
 
 The failure is since the certificate has already been imported. You can avoid re-importing certificates by using the ``-fromRowNum`` parameter or the ``fromLastRow`` switch
 
-
-
 If incorrect user, team or certIssuerIds are provided, you will see errors such as the following:
 
 ```powershell
 @{timestamp=2021-10-31T14:56:00.245+00:00; status=422; error=Unprocessable Entity; message=Failed to import certificate. 422 UNPROCESSABLE_ENTITY "The provided certIssuerId (617a6c684eaeb271fa97d596) does not exist. Either pass in a valid issuer ID or you may re-create the issuer referencing the correct local CA that issued this certificate"; path=/api/certs/import}
 
 ```
-
-
 
 ### Step 4 - Verifying
 
@@ -434,15 +391,11 @@ catch {
 }
 ```
 
-<br>
-
 ## Example Uses
 
 ### Managing Large Files
 
 If you have a large file, you may wish to import in sections. This can be achieved by importing by template (importing one template at a time), or by using the ``-fromRowNum``, ``-toRowNum`` and ``-fromLastRow`` options
-
-<br>
 
 <u>Importing Per Template</u>
 
@@ -463,8 +416,6 @@ I.e. you would run a command with the following option:
 ```
 
 Also consider, associating templates with Teams for easier searching and separation. E.g. you could associate the *Web Server* template certificates with the *Networks* team  
-
-<br>
 
 <u>Importing in Stages</u>
 
@@ -489,8 +440,6 @@ Then run with the following option:
 ```
 
 As the last row would be 1000, this would import the next 1000 certificates. And so on
-
-<br>
 
 ### Automating Import
 

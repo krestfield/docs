@@ -10,8 +10,6 @@ keywords: ["cmdlets", "automation", "scripting"]
 
 This module allows management of the certdog application from the command line, or can be integrated with your own scripts 
 
-<br>
-
 ### Running from the Command Line
 
 Open a PowerShell window as Administrator  
@@ -24,15 +22,11 @@ Import the module:
 Import-Module .\certdog-module.psm1
 ```
 
-<br>
-
 To view the available commands run:
 
 ```powershell
 Get-Command -Module certdog-module
 ```
-
-<br>
 
 Login with:
 
@@ -42,8 +36,6 @@ login -username [username] -password [password]
 
 Or just type ``login`` to be prompted
 
-
-
 Alternatively, provide an API key:
 
 ```
@@ -51,8 +43,6 @@ Set-ApiToken -token [API Token]
 ```
 
 See [here](https://krestfield.github.io/docs/certdog/users.html#api-tokens) for details on obtaining an API token
-
-<br>
 
 ### Examples
 
@@ -68,15 +58,11 @@ or
 Get-Cas | Format-Table
 ```
 
-<br>
-
 <u>Show available CSR Generators</u>
 
 ```powershell
 Get-CsrGenerators
 ```
-
-<br>
 
 <u>Request a certificate from a CSR (provided as a file)</u>
 
@@ -86,8 +72,6 @@ Request-CertP10 -caName "Microsoft TLS" -csrFilename C:\Downloads\server22.certd
 
 Where caName is the issuer name as configured within Certdog. This is the name that will be displayed when the ``cas`` command is run (above)
 
-<br>
-
 <u>Request a certificate from a CSR (provided as data within a variable)</u>
 
 ```powershell
@@ -96,8 +80,6 @@ $csrData = Get-Content C:\Downloads\server22.certdog.local.csr
 # Send to Certdog
 Request-CertP10 -caName "Microsoft TLS" -csr $csrData
 ```
-
-<br>
 
 <u>Request a certificate with Certdog creating the CSR</u>
 
@@ -110,8 +92,6 @@ Then save as a PFX
 ```powershell
 Set-Content -Path C:\Downloads\powershell.pfx -Value $cert.p12Data
 ```
-
-<br>
 
 <u>Search for certificates</u>
 
@@ -152,6 +132,3 @@ $nowStr = $now.ToString("yyyy-MM-ddTHH:mm")
 $30daysAgoStr = $now.AddDays(-30).ToString("yyyy-MM-ddTHH:mm")
 $certs = search -validFromFrom $30daysAgoStr -validFromTo $nowStr -status "active"
 ```
-
-
-

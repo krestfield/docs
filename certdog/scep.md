@@ -10,15 +10,11 @@ keywords: ["Intune", "MDM", "NDES", "mobile device enrolment", "enrollment"]
 
 > This feature is available from certdog 1.16
 
-<br>
-
 Certdog supports the SCEP protocol ([RFC8894](https://datatracker.ietf.org/doc/html/rfc8894)) 
 
 Multiple SCEP end points can be created - each with a different configuration. This allows for multiple setups that may provide different certificate types from different CAs.
 
 Only RSA issuers are supported currently.
-
-<br>
 
 ## Configuration
 
@@ -34,8 +30,6 @@ Click **Add New SCEP Service**:
 * **Alias**. This is what will define the specific URL for this service, that clients will target for SCEP calls. It is simply appended to the URL to make it unique. It should not contain spaces
 * **Service URL**. This is value will be calculated from the Base URL and Alias. This is the value should be provided to clients
 
-<br>
-
 <img src="./images/image-20260130144838939.png" alt="image-20260130144838939" style="zoom:67%;" />
 
 * **Bypass Issuer Check**. If this is checked, Certdog will reject the configuration if the two issuers (certificate and RA) are not connected to the same certificate authority
@@ -47,15 +41,11 @@ Click **Add New SCEP Service**:
 * **Auto Renew RA Certificate**. If you want certdog to automatically renew the RA certificate, check this box
 * **Renew At**. If the above option is checked, set the percentage of life remaining to renew the RA certificate
 
-<br>
-
 <img src="./images/image-20260130145038108.png" alt="image-20260130145038108" style="zoom:67%;" />
 
 * **Certdog API URL**: This will be pre-populated but should be the URL to the certdog API that will provide the certificates. If certdog is clustered then this may be different to what is automatically populated and should be updated manually
 
 * **Auto Generate Credentials**. If this is checked (the default), then a new user and team will be created, dedicated for this SCEP service. All certificates issued from the service will be associated with this user and team. If this is unchecked then the Certdog Team ID and Certdog User ID fields will be made available and you can enter the values for an existing user and team
-
-<br>
 
 <img src="./images/image-20260130145128414.png" alt="image-20260130145128414" style="zoom:67%;" />
 
@@ -85,8 +75,6 @@ Click **Add New SCEP Service**:
 
 * **Allow Issue With Past Certs**. If enabled alongside **Allow Auth Via Certs**, clients are allowed to request *new* certificates using a trusted certificate without a shared secret, instead of just being able to renew certificates
 
-<br>
-
 <img src="./images/image-20260130145147652.png" alt="image-20260130145147652" style="zoom:67%;" />
 
 * **Supported Signature Algorithms**. Signing algorithms that must be used by the client
@@ -96,11 +84,7 @@ Click **Add New SCEP Service**:
 * **Encryption Algorithm**. The encryption algorithm used by the server for responses encrypted with certificates
 * **KEK Encryption Algorithm**. The encryption algorithm used by the server for responses encrypted with the challenge password
 
-<br>
-
 Click **Add**
-
-<br>
 
 ### Editing a Service
 
@@ -114,8 +98,6 @@ The information previously entered will be displayed and can be edited. Note tha
 
 Click **Update** to save the new settings
 
-<br>
-
 ### Disabling a Service
 
 From the SCEP menu, select the service and choose **View/Edit**
@@ -124,15 +106,11 @@ Uncheck the **Enabled** button
 
 If a client makes a request when the service is disabled all requests will be rejected
 
-<br>
-
 ### Deleting a Service
 
 From the SCEP menu, select the service and choose **Delete**
 
 Click **Yes** to confirm
-
-<br>
 
 ## Handling Unauthorised Requests
 
@@ -152,8 +130,6 @@ You can edit the auto-created workflow after the SCEP service is created, or you
 When **Allow Unauthorised Requests** is enabled, pre-authorised requests (those using secrets or trusted certificates) indicate to Certdog that workflows which could interrupt this request should be bypassed. For added security, a user must be explicitly given the ability by checking the **Can Bypass Interruptible Workflows** option. The auto-created user for SCEP has this option enabled, but if you are using your own user, you must enable it yourself. If this is not enabled for the SCEP user, all pre-authorised requests will also go through the workflows, often preventing them from being issued or requiring approval for all of them
 
 This does mean that you cannot run interruptible (obtain approval or script-as-approval) workflows on pre-authorised requests when **Allow Unauthorised Requests** is enabled. There may be alternative solutions depending on your use case. For example, if you can use two different aliases, you can split your SCEP server into two parts - one for authorised requests, and one for unauthorised requests
-
-<br>
 
 ## Managing Secrets
 
@@ -179,8 +155,6 @@ This value will not be displayed again and must be securely passed to the client
 
 Once copied, click **Add Secret**
 
-<br>
-
 ### Deleting Secrets
 
 Select the SCEP service and choose **Manage Secrets**:
@@ -188,8 +162,6 @@ Select the SCEP service and choose **Manage Secrets**:
 <img src="./images/image-20260130150717907.png" alt="image-20260130150717907" style="zoom:67%;" />
 
 Select the secret to delete and click **Delete**
-
-<br>
 
 ## Trusted Certificates
 
@@ -213,8 +185,6 @@ Select the SCEP service:
 
 Click Upload and navigate to a PEM formatted certificate, then click Add Trusted Certificate
 
-<br>
-
 ### Delete a Trusted Certificate
 
 Select the SCEP service and choose **Manage Trusted Certs**:
@@ -223,15 +193,11 @@ Select the SCEP service and choose **Manage Trusted Certs**:
 
 Select the certificate to be deleted and click **Delete**
 
-<br>
-
 ## Troubleshooting
 
 Some common issue(s) are listed below to help if you are having problems with your SCEP server.
 
 If none of these fix your issue, please contact support for help.
-
-<br>
 
 ### Authorised Requests Still Require Approvals
 
@@ -241,8 +207,6 @@ This can happen if your SCEP user does not have the required permissions to bypa
 
 To fix this, select **Users** from the menu, select your user, click **View/Edit**, check **Can Bypass Interruptible Workflows**, and then click "Update".
 
-<br>
-
 ### Unauthorised Requests Do Not Require Approvals
 
 When the **Allow Unauthorised Requests** option is enabled by itself, all requests will be accepted. You must rely on Workflows to capture unauthorised requests if you want to use approvals or run further checks.
@@ -250,5 +214,3 @@ When the **Allow Unauthorised Requests** option is enabled by itself, all reques
 When **Auto Create Workflow** is enabled, a Workflow is created which matches the SCEP user and requires approval from any admin.
 
 If no such Workflow exists, or it is configured incorrectly, you can create one or update the current one to run on **Certificate Requested**, match your SCEP user, and use **Obtain Approval** as its action.
-
-<br>

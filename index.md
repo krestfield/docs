@@ -5,7 +5,7 @@ nav_order: 1
 hero:
   eyebrow: Krestfield Documentation
   title: Guides and references for Krestfield products
-  text: Install, configure and integrate Certdog, EzSign and our PKI tools, with API references and fixes for known errors.
+  text: Install, configure and integrate Certdog, EzSign and our PKI tools.
 popular_searches:
   - Install Certdog
   - ACME

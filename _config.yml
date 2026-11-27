@@ -1,4 +1,9 @@
 remote_theme: krestfield/just-the-docs
+# Plugins the theme needs (all supported by GitHub Pages)
+plugins:
+  - jekyll-remote-theme
+  - jekyll-include-cache
+  - jekyll-seo-tag
 title: Krestfield Knowledge
 description: All product guides and documents
 color_scheme: krestfield

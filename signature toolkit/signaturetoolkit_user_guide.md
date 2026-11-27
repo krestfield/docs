@@ -275,7 +275,17 @@ The coloured bar at the top of the window summarises the result:
 
 Any problem found with a certificate (for example, that it has expired or is not marked as a certificate authority) is shown next to it.
 
-Click a certificate to see its details, including where it was found. Double click a certificate, or click **View certificate...**, to open it in the Windows certificate viewer.
+Each certificate is followed by its source in brackets, showing whether it was included in the signature or retrieved from the Windows certificate store, for example:
+
+``Demo Root CA   [from the Windows Trusted Root store (Local Machine)]  -  trusted root``
+
+``Issuing CA   [from the Windows Intermediate CA store (Current User)]``
+
+``Bank A Signer   [from the signature]``
+
+A line beneath the coloured bar gives the totals, e.g. *1 certificate from the signature, 2 from the Windows certificate store*.
+
+Click a certificate to see its details, including its source. Double click a certificate, or click **View certificate...**, to open it in the Windows certificate viewer.
 
 The tool uses certificates from the signature file and from the Windows *Intermediate Certification Authorities* and *Trusted Root Certification Authorities* stores (current user and local machine).
 
@@ -295,9 +305,36 @@ The result will be displayed:
 
 ![image-20261112162023413](./images/image-20261112162023413.png)
 
+The coloured bar at the top of the window gives the overall result:
+
+* **Green – The signature is valid**  
+  The signature value is correct and nothing is wrong with the signature
+
+* **Amber – The signature verifies, but problems were found**  
+  The signature value is correct, but the signature breaks a rule of the standards that other verifiers may enforce. The details explain what is wrong
+
+* **Red – The signature is NOT valid**  
+  The signature does not verify. The details explain why, and list the probable causes
+
 The window lists each signer together with the result, the signature algorithm, the signing time and whether the signer's certificate was within its validity period.
 
-Select a signer to see the detail of what was checked in the lower part of the window. If a signature could not be verified, the reason is given here. Click **Copy details** to copy this information to the clipboard.
+Select a signer to see the full report in the lower part of the window. The report is divided into the following sections:
+
+* **RESULT** – a one line summary, for example *Signature verified. No signed attributes were included.*
+
+* **SIGNER** – the signer's certificate, where it was found, the signature algorithm and the signing time
+
+* **PROBLEMS** – anything that is wrong. For a signature that fails, this gives the reason and the probable causes
+
+* **WARNINGS** – items that are not wrong but are worth knowing
+
+* **NOTES** – other facts about the signature
+
+* **CERTIFICATE PATH** – the signer's certificate path, with the source of each certificate
+
+* **STEPS** – a record of each check that was made
+
+Click **Copy report** to copy the report for all signers to the clipboard, or **Save report...** to save it to a text file, for example to attach to a support ticket.
 
 If there is an error with the signature a results pane is displayed:
 
@@ -307,7 +344,61 @@ This view, will display likely causes for the signature failure assisting with a
 
 Click **Certificate path...** to display the certificate path of the selected signer.
 
-**Note**: Verification confirms that the signature is cryptographically valid, that is, that the content has not been altered and was signed with the key belonging to the signer's certificate. It does not check whether the certificate is trusted in the environment it is intended for or has been revoked. Use the [Certificate Path Display](#certificate-path-display) to inspect the certificate chain.
+### Checks Performed
+
+In addition to verifying the signature value against the content, the following are checked and reported:
+
+| Check | Reported as |
+| ----- | ----------- |
+| The parameters of the signature algorithm identifier. For RSA the NULL parameter must be present. For ML-DSA, SLH-DSA, ECDSA and DSA the parameters must be absent | Problem |
+| The content type and message digest signed attributes are present and correct | Problem |
+| The signature algorithm is one that the key in the signer's certificate can produce | Problem |
+| The signer's certificate was within its validity period at the signing time | Problem |
+| The signing certificate attribute, if present, identifies the certificate that was used | Problem |
+| The size of an ML-DSA or SLH-DSA signature value | Problem |
+| The signed attributes are DER encoded | Warning |
+| The signer's certificate is included in the signature | Warning |
+| The certificate path is complete and ends in a trusted root | Warning |
+| The key usage of the signer's certificate allows signing | Warning |
+| Weak algorithms: MD5 or SHA-1 digests, RSA keys shorter than 2048 bits | Warning |
+| Whether signed attributes were included | Note |
+
+Where one of these checks fails but the signature value itself is correct, this is stated. For example, if the NULL parameter is missing from an RSA signature algorithm identifier the report will show:
+
+```
+PROBLEMS
+  * The NULL parameter is missing from the signature algorithm identifier
+    Algorithm: SHA-256 with RSA (1.2.840.113549.1.1.11)
+    Parameters found: absent
+    Parameters required: NULL
+    RFC 8017 (PKCS #1) and RFC 3370 require the parameters of RSA signature algorithms to be NULL.
+    If this is ignored, the signature is otherwise valid: the signature value verifies against the
+    content with the signer's certificate. Verifiers that enforce the rule will reject the signature.
+```
+
+### When a Signature Fails
+
+If a signature does not verify, the report identifies which part failed and lists the probable causes. The main cases are:
+
+* **The content does not match the digest that was signed**  
+  The digest of the content and the digest recorded in the signed attributes are both shown. This means the content being checked is not the content that was signed. Typical causes are changed or corrupt data, changed line endings (CR LF / LF), a different character encoding, or, for a detached signature, the wrong file being supplied
+
+* **The signature value does not verify with the signer's certificate**  
+  The content is correct but the signature value is not. Typical causes are the data being signed with a different private key from the one belonging to the certificate in the signature (for example, after a certificate renewal), or the signature value being damaged in transit.  
+  For RSA signatures the report also states whether the signature value was produced by the key matching the certificate at all, and shows the hash it contains
+
+* **The signature was made with a different certificate's key**  
+  The signature verifies with another certificate in the file, not the one identified by the Signer ID
+
+* **The digest algorithm stated is not the one that was used**  
+  For example, the signature states SHA-512 but was produced using SHA-256
+
+* **The signer's certificate could not be found**  
+  The report shows the issuer and serial number (or subject key identifier) of the certificate that is needed
+
+**Note**: If the signer's certificate is not included in the signature, the Windows certificate stores (*Personal*, *Other People* and *Intermediate Certification Authorities*) are searched for it. If found, the signature is verified and a warning is shown stating where the certificate was found. This can be turned off in the [Options](#options-and-logging).
+
+**Note**: Revocation is not checked.
 
 ### Verifying an Individual Signature
 
@@ -440,7 +531,7 @@ Choose **Tools** > **Options...** to change the following settings:
   When ticked, the certificates from every file opened are saved to the folder specified
 
 * **Use the Windows certificate stores to complete certificate paths**  
-  When ticked (the default) the Windows intermediate and trusted root stores are used when building certificate paths and verifying CRLs. When unticked only the certificates within the signature file are used
+  When ticked (the default) the Windows certificate stores are used when building certificate paths, verifying CRLs and locating a signer's certificate that is not included in the signature. When unticked only the certificates within the signature file are used
 
 * **Write a log of verification and signing activity**  
   When ticked (the default) details of the operations performed are written to a log file

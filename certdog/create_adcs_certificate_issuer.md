@@ -3,6 +3,7 @@ layout: default
 title: Create an ADCS Certificate Issuer
 parent: Certificate Issuers
 grand_parent: Certdog
+keywords: ["ADCS", "AD CS", "Microsoft CA", "Active Directory Certificate Services", "Windows CA"]
 ---
 # Create an ADCS Certificate Issuer
 

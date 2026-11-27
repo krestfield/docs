@@ -3,6 +3,7 @@ layout: default
 title: End Point Monitoring
 parent: Discovery & Monitoring
 grand_parent: Certdog
+keywords: ["endpoint", "monitor", "expiry alert"]
 ---
 
 <br>

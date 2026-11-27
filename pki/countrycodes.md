@@ -3,6 +3,7 @@ layout: default
 title: Country Codes
 parent: General PKI
 nav_order: 90
+keywords: ["ISO 3166", "country"]
 ---
 # ISO 3166 Country Codes
 

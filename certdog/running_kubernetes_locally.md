@@ -4,6 +4,7 @@ title: Running on Kubernetes Locally
 parent: Containers & Kubernetes
 nav_order: 40
 grand_parent: Certdog
+keywords: ["k8s"]
 ---
 
 # Running Certdog on Kubernetes Locally

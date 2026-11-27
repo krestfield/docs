@@ -3,6 +3,7 @@ layout: default
 title: MS Teams Notifications
 parent: Configuration
 grand_parent: Certdog
+keywords: ["Microsoft Teams", "webhook", "alerts"]
 ---
 
 # Sending MS Teams Notifications

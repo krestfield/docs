@@ -3,6 +3,7 @@ layout: default
 title: SCEP
 parent: Protocols
 grand_parent: Certdog
+keywords: ["Intune", "MDM", "NDES", "mobile device enrolment", "enrollment"]
 ---
 
 # SCEP

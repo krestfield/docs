@@ -3,6 +3,7 @@ layout: default
 title: Revocation Monitor
 parent: Discovery & Monitoring
 grand_parent: Certdog
+keywords: ["CRL", "OCSP", "revocation check"]
 ---
 
 # Revocation Monitor

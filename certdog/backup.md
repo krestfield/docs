@@ -3,6 +3,7 @@ layout: default
 title: Backup
 parent: Administration
 grand_parent: Certdog
+keywords: ["restore", "disaster recovery"]
 ---
 
 # Backup

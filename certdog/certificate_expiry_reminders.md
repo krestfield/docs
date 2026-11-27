@@ -3,6 +3,7 @@ layout: default
 title: Certificate Expiry Reminders
 parent: Configuration
 grand_parent: Certdog
+keywords: ["expiry", "expiration", "expiring certificates", "renewal reminder", "notification"]
 ---
 
 # Certificate Expiry Reminders

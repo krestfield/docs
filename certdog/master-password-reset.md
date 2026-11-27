@@ -3,6 +3,7 @@ layout: default
 title: Master Password Reset
 parent: Administration
 grand_parent: Certdog
+keywords: ["forgotten master password", "lost master password"]
 ---
 # Master Password Reset
 

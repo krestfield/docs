@@ -3,6 +3,7 @@ layout: default
 title: Create a PFX
 parent: General PKI
 nav_order: 20
+keywords: ["PKCS12", "p12"]
 ---
 
 # Create a PFX

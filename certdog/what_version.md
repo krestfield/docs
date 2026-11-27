@@ -3,6 +3,7 @@ layout: default
 title: What Version of Certdog
 parent: Administration
 grand_parent: Certdog
+keywords: ["version number", "check version", "which version"]
 ---
 
 # What Version of Certdog am I Running

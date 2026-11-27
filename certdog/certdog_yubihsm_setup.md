@@ -3,6 +3,7 @@ layout: default
 title: YubiHSM 2 Configuration
 parent: Certificate Issuers
 grand_parent: Certdog
+keywords: ["Yubico", "HSM"]
 ---
 # Certdog YubiHSM 2 Configuration
 

@@ -4,6 +4,7 @@ title: TLS Configuration
 parent: Server Configuration
 nav_order: 30
 grand_parent: EzSign
+keywords: ["SSL", "mutual TLS", "mTLS", "two-way TLS", "client authentication"]
 ---
 
   

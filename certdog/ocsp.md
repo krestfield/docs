@@ -3,6 +3,7 @@ layout: default
 title: OCSP
 parent: Protocols
 grand_parent: Certdog
+keywords: ["OCSP responder", "revocation status", "RFC 6960"]
 ---
 # OCSP
 

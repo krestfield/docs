@@ -3,6 +3,7 @@ layout: default
 title: Logs
 parent: Administration
 grand_parent: Certdog
+keywords: ["logging", "log files", "debug", "diagnostics"]
 ---
 
 # Logs

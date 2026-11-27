@@ -4,6 +4,7 @@ title: Security Advisories
 nav_order: 90
 has_children: true
 permalink: /security/
+keywords: ["vulnerability", "CVE", "advisory", "security bulletin"]
 ---
 
 # Security Advisories

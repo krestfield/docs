@@ -3,6 +3,7 @@ layout: default
 title: User Guide
 parent: Signature Toolkit
 nav_order: 2
+keywords: ["PQC", "post-quantum", "verify signature", "CMS", "PKCS7", "p7s"]
 ---
 
 # Signature Toolkit - User Guide

@@ -4,6 +4,7 @@ title: Google KMS Configuration
 parent: HSMs & Key Stores
 nav_order: 120
 grand_parent: EzSign
+keywords: ["GCP", "Google Cloud", "Cloud KMS"]
 ---
 # Google KMS Configuration
 

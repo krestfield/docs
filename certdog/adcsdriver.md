@@ -4,6 +4,7 @@ title: ADCS Driver
 parent: Installation
 nav_order: 60
 grand_parent: Certdog
+keywords: ["ADCS", "AD CS", "Microsoft CA", "Active Directory Certificate Services", "Windows CA"]
 ---
 # Certdog ADCS (Microsoft CA) Driver
 

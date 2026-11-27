@@ -4,6 +4,7 @@ title: Customising with Helm
 parent: Containers & Kubernetes
 nav_order: 60
 grand_parent: Certdog
+keywords: ["Helm chart", "k8s"]
 ---
 
 # Customising Certdog on Kubernetes with Helm

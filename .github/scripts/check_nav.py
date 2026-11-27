@@ -8,6 +8,7 @@ Fails (exit code 1) if:
   - a page with children is missing `has_children: true`
   - two pages under the same parent share a `nav_order` or a title
   - `nav_order` is not a number
+  - `keywords` is not a list of words/phrases (or a single string)
 
 Run from the repository root:  python3 .github/scripts/check_nav.py
 """
@@ -46,6 +47,11 @@ def main():
             if fm is None:
                 errors.append(f"{path}: no front matter (would be published as raw text)")
                 continue
+            kw = fm.get("keywords")
+            if kw is not None and not (isinstance(kw, str) or
+                                       (isinstance(kw, list) and all(isinstance(k, str) for k in kw))):
+                errors.append(f"{path}: keywords must be a list of strings, "
+                              'e.g. keywords: ["AD CS", "Microsoft CA"]')
             fm["_path"] = path
             pages.append(fm)
 

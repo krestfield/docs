@@ -4,6 +4,7 @@ title: Refresh Azure Key Vault Credentials
 parent: HSMs & Key Stores
 nav_order: 110
 grand_parent: EzSign
+keywords: ["Azure", "AKV", "token expired", "credentials expired"]
 ---
 
 # Refresh Azure Key Vault Credentials

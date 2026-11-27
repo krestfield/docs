@@ -4,6 +4,7 @@ title: Deploying to Kubernetes
 parent: Containers & Kubernetes
 nav_order: 30
 grand_parent: Certdog
+keywords: ["k8s", "container"]
 ---
 
 # Deploying Certdog to Kubernetes

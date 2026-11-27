@@ -3,6 +3,7 @@ layout: default
 title: Errors and Solutions
 parent: Troubleshooting
 grand_parent: Certdog
+keywords: ["error", "error message", "problem", "fix", "troubleshooting"]
 ---
 
 # Certdog Errors and Solutions

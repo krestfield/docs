@@ -3,6 +3,7 @@ layout: default
 title: Alignment to ISO 27001
 parent: Security & Compliance
 grand_parent: EzSign
+keywords: ["compliance", "ISMS", "audit"]
 ---
 
 # EzSign Alignment to ISO 27001

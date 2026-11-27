@@ -4,6 +4,7 @@ title: Quick Windows Installation
 parent: Installation
 nav_order: 10
 grand_parent: Certdog
+keywords: ["install", "quick start", "setup"]
 ---
 
 # Certdog Quick Windows Installation

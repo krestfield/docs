@@ -4,6 +4,7 @@ title: Upgrading Certdog
 parent: Upgrading
 nav_order: 10
 grand_parent: Certdog
+keywords: ["update", "new version", "patch"]
 ---
 
 # Upgrading Certdog

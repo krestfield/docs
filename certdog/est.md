@@ -3,6 +3,7 @@ layout: default
 title: EST
 parent: Protocols
 grand_parent: Certdog
+keywords: ["Enrollment over Secure Transport", "enrolment"]
 ---
 
 # EST

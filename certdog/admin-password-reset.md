@@ -3,6 +3,7 @@ layout: default
 title: Administrator Password Reset
 parent: Administration
 grand_parent: Certdog
+keywords: ["forgotten password", "locked out", "admin login"]
 ---
 # Administrator Password Reset
 

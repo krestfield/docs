@@ -3,6 +3,7 @@ layout: default
 title: PowerShell Module
 parent: API & Automation
 grand_parent: Certdog
+keywords: ["cmdlets", "automation", "scripting"]
 ---
 
 # PowerShell Module

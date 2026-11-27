@@ -3,6 +3,7 @@ layout: default
 title: Key Stores
 parent: Certificate Issuers
 grand_parent: Certdog
+keywords: ["HSM", "Hardware Security Module", "PKCS11", "Entrust nShield"]
 ---
 # Key Stores
 

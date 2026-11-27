@@ -4,6 +4,7 @@ title: payShield 10k Support
 parent: HSMs & Key Stores
 nav_order: 70
 grand_parent: EzSign
+keywords: ["Thales", "HSM"]
 ---
 
 

@@ -3,6 +3,7 @@ layout: default
 title: Installation Troubleshooting
 parent: Troubleshooting
 grand_parent: Certdog
+keywords: ["installation error", "install fails", "setup problem"]
 ---
 
 # Certdog Installation Troubleshooting

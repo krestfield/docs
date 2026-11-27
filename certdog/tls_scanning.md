@@ -3,6 +3,7 @@ layout: default
 title: Running a TLS Scan
 parent: Discovery & Monitoring
 grand_parent: Certdog
+keywords: ["discovery", "network scan", "find certificates", "SSL scan"]
 ---
 # Running a TLS Scan
 

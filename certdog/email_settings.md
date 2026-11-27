@@ -3,6 +3,7 @@ layout: default
 title: Email Settings
 parent: Configuration
 grand_parent: Certdog
+keywords: ["SMTP", "mail server", "email notifications"]
 ---
 # Email Settings
 

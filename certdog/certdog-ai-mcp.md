@@ -3,6 +3,7 @@ layout: default
 title: MCP AI Setup
 parent: API & Automation
 grand_parent: Certdog
+keywords: ["Model Context Protocol", "AI assistant", "LLM"]
 ---
 
 <br>

@@ -3,6 +3,7 @@ layout: default
 title: Migrate ADCS to Certdog
 parent: Migrating from ADCS
 grand_parent: Certdog
+keywords: ["ADCS", "AD CS", "Microsoft CA", "Active Directory Certificate Services", "Windows CA", "replace ADCS", "CA migration"]
 ---
 # Migrate an ADCS instance to Certdog
 

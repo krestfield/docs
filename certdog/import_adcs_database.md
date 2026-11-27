@@ -3,6 +3,7 @@ layout: default
 title: Import ADCS Database
 parent: Migrating from ADCS
 grand_parent: Certdog
+keywords: ["ADCS", "AD CS", "Microsoft CA", "Active Directory Certificate Services", "Windows CA", "CA database"]
 ---
 
 # Import the ADCS Database into Certdog

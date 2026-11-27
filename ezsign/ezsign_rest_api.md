@@ -4,6 +4,7 @@ title: REST API
 parent: Integration & APIs
 nav_order: 30
 grand_parent: EzSign
+keywords: ["HTTP", "JSON"]
 ---
 
 # REST API

@@ -4,6 +4,7 @@ title: High Availability Configuration
 parent: Installation
 nav_order: 100
 grand_parent: Certdog
+keywords: ["HA", "failover", "cluster", "load balancer"]
 ---
 
 # High Availability Configuration

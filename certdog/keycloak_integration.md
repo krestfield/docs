@@ -3,6 +3,7 @@ layout: default
 title: Keycloak OAuth 2.0 and OIDC Integration
 parent: Users & Security
 grand_parent: Certdog
+keywords: ["SSO", "single sign-on", "OpenID Connect"]
 ---
 
 # Keycloak OAuth 2.0 and OIDC Integration

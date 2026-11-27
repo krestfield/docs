@@ -4,6 +4,7 @@ title: Deploying to GKE
 parent: Containers & Kubernetes
 nav_order: 50
 grand_parent: Certdog
+keywords: ["k8s", "Google Kubernetes Engine", "GCP"]
 ---
 
 # Deploying Certdog to Google Kubernetes Engine

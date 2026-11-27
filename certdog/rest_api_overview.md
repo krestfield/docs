@@ -3,6 +3,7 @@ layout: default
 title: REST API
 parent: API & Automation
 grand_parent: Certdog
+keywords: ["OpenAPI", "REST", "HTTP API", "JSON"]
 ---
 
 # The Certdog REST API

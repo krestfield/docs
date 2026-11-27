@@ -4,6 +4,7 @@ title: Windows Installation
 parent: Installation
 nav_order: 20
 grand_parent: Certdog
+keywords: ["install", "setup", "Windows Server"]
 ---
 
 # Certdog Windows Installation

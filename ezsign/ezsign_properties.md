@@ -4,6 +4,7 @@ title: Properties
 parent: Server Configuration
 nav_order: 10
 grand_parent: EzSign
+keywords: ["config file", "configuration", "settings", "properties file"]
 ---
 
 # EzSign Properties

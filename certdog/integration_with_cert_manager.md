@@ -4,6 +4,7 @@ title: Integration with cert-manager
 parent: Containers & Kubernetes
 nav_order: 70
 grand_parent: Certdog
+keywords: ["cert-manager", "ClusterIssuer", "k8s"]
 ---
 
 # Integration with cert-manager

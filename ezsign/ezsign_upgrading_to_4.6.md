@@ -4,6 +4,7 @@ title: Upgrading to 4.6
 parent: Installation & Upgrading
 nav_order: 60
 grand_parent: EzSign
+keywords: ["upgrade", "update", "4.6.0"]
 ---
 
 # Upgrading to EzSign 4.6

@@ -8,6 +8,10 @@ tagline: CRL and OCSP monitoring
 ---
 # CRL OCSP Monitor
 
+> This product has been replaced the [Revocation Monitor functionality now available in certdog]([Revocation Monitor - Certdog | Krestfield Knowledge](https://krestfield.github.io/docs/certdog/revocation_monitor.html))
+>
+> Existing customers will be offered a certdog license as a replacement from 2027
+
 The Krestfield CRL OCSP Monitor tracks and monitors the health of your revocation checking end points, alerting you to issues before there is any impact to your services.  
 
 CRLs hosted on http and ldap end points can be monitored for validity, correctness, size and latency.  
